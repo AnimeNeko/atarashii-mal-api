@@ -5,25 +5,8 @@
  * @copyright 2013
  */
  
- $totaljson = '[';
-function parse($string,$first,$second){
-    $startsAt = strpos($string, $first);
-    $endsAt = strpos($string, $second, $startsAt);
-    $parse = substr($string, $startsAt, $endsAt - $startsAt);
-    $parsed = str_replace($first, '', $parse);
-    return($parsed);
-}
-
-function str_replace_first($search, $replace, $subject) {
-    $pos = strpos($subject, $search);
-    if ($pos !== false) {
-        $subject = substr_replace($subject, $replace, $pos, strlen($search));
-    }
-    return $subject;
-}
-
 include('../Requesthandler.php');
-include('../Encrypt-Decrypt.php');
+include('../Methodes.php');
 
 //connect database
 $username="u232407816_cache";
@@ -60,6 +43,7 @@ if (empty($page) == false && time() > ($time + 120)){
     if (strpos($Mal,'Failed to find the specified user, please try again') !== false) {
         $totaljson = 'Page: '.$page.' has no data!';
     }else{
+		$totaljson = '[';
         //isolate the table
         $startsAt = strpos($Mal,'<div class="majorPad">') + strlen('<div class="majorPad">');
         $endsAt = strpos($Mal, '</div></div></div>  </td>', $startsAt);

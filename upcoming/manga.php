@@ -5,22 +5,7 @@
  * @copyright 2013
  */
  
-function parse($string,$first,$second){
-    $startsAt = strpos($string, $first);
-    $endsAt = strpos($string, $second, $startsAt);
-    $parse = substr($string, $startsAt, $endsAt - $startsAt);
-    $parsed = str_replace($first, '', $parse);
-    return($parsed);
-}
-
-function str_replace_first($search, $replace, $subject) {
-    $pos = strpos($subject, $search);
-    if ($pos !== false) {
-        $subject = substr_replace($subject, $replace, $pos, strlen($search));
-    }
-    return $subject;
-}
-
+include('../Methodes.php');
 include('../Requesthandler.php');
 
 //connect database
