@@ -13,7 +13,7 @@ Options +FollowSymlinks
 	RewriteRule		^justadded/anime/(.*)$ justadded/anime.php?p=$1 [L]
 	RewriteRule		^justadded/manga/(.*)$ justadded/manga.php?p=$1 [L]
 	# Friend list
-	RewriteRule		^profile/friends/(.*)$ profile/friends.php?p=$1 [L]
+	RewriteRule		^user/friends/(.*)$ user/friends.php?p=$1 [L]
 
 # DO NOT REMOVE THIS LINE AND THE LINES BELOW ERRORPAGEID:yMaBuN
 ErrorDocument 404 /404.html
