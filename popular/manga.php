@@ -21,15 +21,7 @@ function str_replace_first($search, $replace, $subject) {
     return $subject;
 }
 
-function url($url) {
-    $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, $url);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($curl, CURLOPT_HEADER, false);
-    $data = curl_exec($curl);
-    curl_close($curl);
-    return ($data);
-}
+include('../Requesthandler.php');
 
 //connect database
 $username="u232407816_cache";

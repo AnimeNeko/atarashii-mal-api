@@ -22,15 +22,7 @@ function str_replace_first($search, $replace, $subject) {
     return $subject;
 }
 
-function url($url) {
-    $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, $url);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($curl, CURLOPT_HEADER, false);
-    $data = curl_exec($curl);
-    curl_close($curl);
-    return ($data);
-}
+include('../Requesthandler.php');
 
 function Encrypt($sValue){
     return rtrim(base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256,"Atarashii19 codec18 password12",$sValue,MCRYPT_MODE_ECB,mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256,MCRYPT_MODE_ECB),MCRYPT_RAND))), "\0");
