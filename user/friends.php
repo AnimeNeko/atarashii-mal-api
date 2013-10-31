@@ -4,8 +4,6 @@
  * @author ratan12
  * @copyright 2013
  */
- 
-include('../Requesthandler.php');
 include('../Methodes.php');
 
 //connect database

@@ -6,7 +6,6 @@
  */
  
 include('../Methodes.php');
-include('../Requesthandler.php');
 
 //connect database
 $username="u232407816_cache";
