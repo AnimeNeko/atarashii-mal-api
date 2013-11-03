@@ -40,6 +40,8 @@ if (empty($page) == false && time() > ($time + 120)){
 
     if (strpos($Mal,'Failed to find the specified user, please try again') !== false) {
         $totaljson = 'Page: '.$page.' has no data!';
+	}elseif (strpos($Mal,'No friends found') !== false){
+		$totaljson = 'Our dear '.$page.' has no friends!';
     }else{
 		$totaljson = '[';
         //isolate the table
