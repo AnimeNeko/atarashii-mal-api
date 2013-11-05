@@ -18,5 +18,5 @@ Options +FollowSymlinks
 	RewriteRule		^user/mangalist/(.*)$ user/mangalist.php?p=$1 [L]
 
 # DO NOT REMOVE THIS LINE AND THE LINES BELOW ERRORPAGEID:yMaBuN
-ErrorDocument 404 /404.html
+ErrorDocument 404 /404.php
 # DO NOT REMOVE THIS LINE AND THE LINES ABOVE yMaBuN:ERRORPAGEID
