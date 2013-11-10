@@ -1,0 +1,3 @@
+atarashii_api:
+    resource: "@AtarashiiAPIBundle/Resources/config/routing.yml"
+    prefix:   /

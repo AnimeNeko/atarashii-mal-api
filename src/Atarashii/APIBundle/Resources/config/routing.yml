@@ -1,0 +1,21 @@
+atarashii_api_homepage:
+    path:  /
+    defaults: { _controller: AtarashiiAPIBundle:Default:index }
+
+atarashii_api_animelist:
+    path:  /animelist/{username}
+    defaults: { _controller: AtarashiiAPIBundle:AnimeList:get, _format: json }
+    requirements:
+        _method: GET
+
+atarashii_api_mangalist:
+    path:  /mangalist/{username}
+    defaults: { _controller: AtarashiiAPIBundle:MangaList:get, _format: json }
+    requirements:
+        _method: GET
+
+atarashii_api_userprofile:
+    path:  /profile/{username}
+    defaults: { _controller: AtarashiiAPIBundle:User:getProfile, _format: json }
+    requirements:
+        _method: GET
