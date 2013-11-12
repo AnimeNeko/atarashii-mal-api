@@ -24,9 +24,12 @@ class UserController extends FOSRestController
 		$downloader = $this->get('atarashii_api.downloader');
 		$profilecontent = $downloader->fetch('/profile/' . $username);
 
- 		$userprofile = new User();
-  		$userprofile->parse($profilecontent);
-
+		if (strpos($profilecontent,'Failed to find') !== false){
+			$userprofile = 'Failed to find the specified user, please try again.';
+		}else{
+			$userprofile = new User();
+			$userprofile->parse($profilecontent);
+		}
  		return $userprofile;
 	}
 
