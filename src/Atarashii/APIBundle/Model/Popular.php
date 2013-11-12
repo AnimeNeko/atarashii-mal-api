@@ -13,13 +13,13 @@ class Popular {
 		
 		//decides which type it is.
 		if (strpos($type,'anime') !== false){
-			return ($this->parseAnime($maincontent));
+			return ($this->parserecord($maincontent,'Anime'));
 		}else{
-			$this->anime_stats = $this->parseStats($maincontent);
+			return ($this->parserecord($maincontent,'Manga'));
 		}
 	}
 
-	private function parseAnime($content) {
+	private function parserecord($content,$typeserie) {
 
 	$elements = $content->filterXPath('//table[1]')->filter('tr');
 	$array = array();
@@ -38,22 +38,28 @@ class Popular {
 			$info = trim($crawler->filterXPath('//td[3]//div[2]')->text());
 			//Get the type
 			$type = 'Error';
-			if (strpos($info,'TV') !== false){
-				$type = 'TV';
-			}elseif (strpos($info,'OVA') !== false){
-				$type = 'OVA';
-			}elseif (strpos($info,'Movie') !== false){
-				$type = 'Movie';
-			}elseif (strpos($info,'Special') !== false){
-				$type = 'Special';
-			}elseif (strpos($info,'ONA') !== false){
-				$type = 'ONA';
-			}elseif (strpos($info,'Music') !== false){
-				$type = 'Music';
+			if (strpos($typeserie,'Anime') !== false){
+				if (strpos($info,'TV') !== false){
+					$type = 'TV';
+				}elseif (strpos($info,'OVA') !== false){
+					$type = 'OVA';
+				}elseif (strpos($info,'Movie') !== false){
+					$type = 'Movie';
+				}elseif (strpos($info,'Special') !== false){
+					$type = 'Special';
+				}elseif (strpos($info,'ONA') !== false){
+					$type = 'ONA';
+				}elseif (strpos($info,'Music') !== false){
+					$type = 'Music';
+				}			
+				//Get the episodes number & score
+				$episodes = $this->parsestring($info,$type.', ',' eps,');
+				$score = str_replace($members_count.' members','',str_replace($type.', '.$episodes.' eps, scored ','',$info));
+			}else{
+				$episodes = substr($info, 0, strpos($info, ' volumes'));// $this->parsestring($info,'',' volumes,');
+				$score = str_replace($members_count.' members','',str_replace($episodes.' volumes, scored ','',$info));
+				$type = 'Unknown';
 			}
-			//Get the episodes number & score
-			$episodes = $this->parsestring($info,$type.', ',' eps,');
-			$score = str_replace($members_count.' members','',str_replace($type.', '.$episodes.' eps, scored ','',$info));
 			
 			//Setting up the AnimeDetails
 			$key ='id';$details->$key = $id;

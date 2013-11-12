@@ -37,7 +37,7 @@ class PopularController extends FOSRestController
 		$mangacontent = $downloader->fetch('/topmanga.php?type=bypopularity&limit='.(($page*30)-30));
 
  		$popularmanga = new Popular();
-  		$popularmanga->parse($mangacontent,'manga');
+  		$popularmanga = $popularmanga->parse($mangacontent,'manga');
 
  		return $popularmanga;
 	}
