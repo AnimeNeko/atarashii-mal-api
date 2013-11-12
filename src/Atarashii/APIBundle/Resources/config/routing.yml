@@ -19,3 +19,9 @@ atarashii_api_userprofile:
     defaults: { _controller: AtarashiiAPIBundle:User:getProfile, _format: json }
     requirements:
         _method: GET
+
+atarashii_api_popular:
+    path:  /anime/popular/{page}
+    defaults: { _controller: AtarashiiAPIBundle:Popular:getAnime, _format: json }
+    requirements:
+        _method: GET
