@@ -26,26 +26,33 @@ class User {
 
 		$this->avatar_url = $leftside->filter('img')->attr('src');
 
-		$maincontent = $crawler->filter('#horiznav_nav')->nextAll();
+		$maincontent = iterator_to_array($crawler->filter('#horiznav_nav')->nextAll()->filterXPath('./div/table/tr/td'));
 
-		$this->details = $this->parseDetails($maincontent);
-		$this->anime_stats = $this->parseStats($maincontent, 'anime');
-		$this->manga_stats = $this->parseStats($maincontent, 'manga');
+		$userdetails = $maincontent[0];
+		$animestats = $maincontent[2];
+		$mangastats = $maincontent[3];
+
+		$this->details = $this->parseDetails($userdetails);
+		$this->anime_stats = $this->parseStats($animestats);
+		$this->manga_stats = $this->parseStats($mangastats);
 	}
 
 	private function parseDetails($content) {
 
 		$details = new UserDetails();
 
-		//XPath was found by trial and error. Be careful if you change it.
-		$elements = $content->filterXPath('//table[1]//table[1]')->filter('tr');
+		$elements = new Crawler($content);
+		$elements = $elements->filter('tr');
 
 		foreach ($elements as $content) {
 
 			$crawler = new Crawler($content);
+			$crawler = $crawler->filter('td');
 
-			$key = trim(str_replace(' ', '_', strtolower($crawler->filter('td')->text())));
-			$value = trim($crawler->filter('td')->siblings()->text());
+			$values = iterator_to_array($crawler);
+
+			$key = trim(str_replace(' ', '_', strtolower($values[0]->textContent)));
+			$value = trim($values[1]->textContent);
 
 			//We have to do some casting and manipulation for certain values so we return them as the right type
 			switch ($key) {
@@ -60,38 +67,42 @@ class User {
 					break;
 			}
 
-			$details->$key = $value;
+			if(property_exists($details, $key)) {
+				$details->$key = $value;
+			}
+
 		}
 
 		return $details;
 	}
 
-	private function parseStats($content, $type) {
+	private function parseStats($content) {
+		$stats = array();
 
-		switch($type) {
-			case "anime":
-				$elements = $content->filterXPath('//table[4]//table[1]')->filter('tr');
-				break;
-			case "manga":
-				$elements = $content->filterXPath('//table[4]//table[2]')->filter('tr');
-				break;
-		}
+		$elements = new Crawler($content);
+		$elements = $elements->filter('tr');
 
 		foreach ($elements as $content) {
 
 			$crawler = new Crawler($content);
+			$crawler = $crawler->filter('td');
+
+			$values = iterator_to_array($crawler);
+
+			$key = trim($values[0]->textContent);
+			$value = trim($values[1]->textContent);
 
 			//Some of the key values have parenthesis. This is messy, but we need to
 			//extract only letters to properly transform the names for our output.
 			//The regex was found at http://stackoverflow.com/questions/16426976
-			$key = $crawler->filter('td')->text();
-			$key = trim(preg_replace('~[^\p{L}]++~u', ' ', $key));
+			$key = trim(preg_replace('~[^\p{L}]++~u', ' ', $values[0]->textContent));
 			$key = str_replace(' ', '_', strtolower($key));
 
-			$value = trim($crawler->filter('td')->siblings()->text());
+			$value = trim($values[1]->textContent);
 
 			$stats[$key] = (float) $value;
 		}
+
 		return $stats;
 	}
 
