@@ -28,6 +28,7 @@ class AnimeListController extends FOSRestController
 			$animelist = 'Failed to find the specified user, please try again.';
 		}else{
 			$animelistxml = new SimpleXMLElement($animelistcontent);
+			$alist = array();
 
 			$i = 0;
 			foreach ($animelistxml->anime as $anime) {

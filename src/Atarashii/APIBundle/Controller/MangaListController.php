@@ -25,6 +25,7 @@ class MangaListController extends FOSRestController {
 			$mangalist = 'Failed to find the specified user, please try again.';
 		}else{
 			$mangalistxml = new SimpleXMLElement($mangalistcontent);
+			$mlist = array();
 
 			$i = 0;
 			foreach ($mangalistxml->manga as $manga) {
