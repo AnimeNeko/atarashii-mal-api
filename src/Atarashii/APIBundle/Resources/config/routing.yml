@@ -20,6 +20,12 @@ atarashii_api_userprofile:
     requirements:
         _method: GET
 
+atarashii_api_userprofile_friends:
+    path:  /friends/{username}
+    defaults: { _controller: AtarashiiAPIBundle:User:getFriends, _format: json }
+    requirements:
+        _method: GET
+
 atarashii_api_popular_anime:
     path:  /anime/popular/{page}
     defaults: { _controller: AtarashiiAPIBundle:Popular:getAnime, _format: json }
