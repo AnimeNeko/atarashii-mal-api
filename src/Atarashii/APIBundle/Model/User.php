@@ -63,7 +63,8 @@ class User {
 					$value = (int) $value;
 					break;
 				case 'website':
-					$value = 'http://' . $value;
+					//Display value is truncated if it's too long, so get the href value instead.
+					$value = $values[1]->firstChild->getAttribute('href');
 					break;
 			}
 
