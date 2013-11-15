@@ -49,3 +49,15 @@ atarashii_api_top_manga:
     defaults: { _controller: AtarashiiAPIBundle:Top:getManga, _format: json }
     requirements:
         _method: GET
+
+atarashii_api_search_anime:
+    path:  /anime/search/{page}
+    defaults: { _controller: AtarashiiAPIBundle:Search:getAnime, _format: json }
+    requirements:
+        _method: GET
+
+atarashii_api_search_manga:
+    path:  /manga/search/{page}
+    defaults: { _controller: AtarashiiAPIBundle:Search:getManga, _format: json }
+    requirements:
+        _method: GET
