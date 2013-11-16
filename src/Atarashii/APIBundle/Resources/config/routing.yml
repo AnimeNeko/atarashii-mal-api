@@ -50,6 +50,18 @@ atarashii_api_top_manga:
     requirements:
         _method: GET
 
+atarashii_api_just_anime:
+    path:  /anime/just_added
+    defaults: { _controller: AtarashiiAPIBundle:Justadded:getAnime, _format: json }
+    requirements:
+        _method: GET
+
+atarashii_api_just_manga:
+    path:  /manga/just_added
+    defaults: { _controller: AtarashiiAPIBundle:Justadded:getManga, _format: json }
+    requirements:
+        _method: GET
+
 atarashii_api_search_anime:
     path:  /anime/search
     defaults: { _controller: AtarashiiAPIBundle:Search:getAnime, _format: json }
