@@ -62,6 +62,18 @@ atarashii_api_just_manga:
     requirements:
         _method: GET
 
+atarashii_api_upcoming_anime:
+    path:  /anime/upcoming
+    defaults: { _controller: AtarashiiAPIBundle:Upcoming:getAnime, _format: json }
+    requirements:
+        _method: GET
+
+atarashii_api_upcoming_manga:
+    path:  /manga/upcoming
+    defaults: { _controller: AtarashiiAPIBundle:Upcoming:getManga, _format: json }
+    requirements:
+        _method: GET
+
 atarashii_api_search_anime:
     path:  /anime/search
     defaults: { _controller: AtarashiiAPIBundle:Search:getAnime, _format: json }
