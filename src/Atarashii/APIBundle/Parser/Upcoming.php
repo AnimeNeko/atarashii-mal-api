@@ -1,5 +1,5 @@
 <?php
-namespace Atarashii\APIBundle\Model;
+namespace Atarashii\APIBundle\Parser;
 
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\CssSelector\CssSelector;
