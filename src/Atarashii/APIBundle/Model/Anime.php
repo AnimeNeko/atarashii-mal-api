@@ -4,7 +4,7 @@ namespace Atarashii\APIBundle\Model;
 class Anime {
 	public $id; //The anime ID.
 	public $title; //The anime title.
-	public $other_titles; //A hash/dictionary containing other titles this anime has.
+	public $other_titles = array(); //A hash/dictionary containing other titles this anime has.
 	public $rank; //Global rank of this anime. Not available in /animelist requests.
 	public $popularity_rank; //Rank of this anime based on its popularity, i.e. number of users that have added this anime. Not available in /animelist requests.
 	public $image_url; //URL to an image for this anime.
@@ -33,12 +33,6 @@ class Anime {
 	public $watched_episodes; //Number of episodes already watched by the user.
 	public $score; //User's score for the anime, from 1 to 10.
 	public $listed_anime_id; //For internal use. This is not listed as a public part of the returned list and it seems to only be used internally in the Ruby API.
-
-	function __construct() {
-		//This is used to force other_titles to be an object.
-		//We need to do this so the proper JSON is returned if it's empty.
-		$this->other_titles = new \stdClass();
-	}
 
 	public static function parseAnimeType($typeid) {
 		switch($typeid) {

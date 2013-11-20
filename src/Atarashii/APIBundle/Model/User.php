@@ -6,16 +6,9 @@ use Symfony\Component\CssSelector\CssSelector;
 
 class User {
 	public $avatar_url; //URL to user's avatar (This should be under details, not out here, but Ruby API does it this way)
-	public $details; //user's general (not anime/manga-specific) details.
-	public $anime_stats; //user's anime statistics.
-	public $manga_stats; //user's manga statistics.
-
-	//We set the types of the values to the correct ones that we need for output.
-	function __construct() {
-		$this->details = new \stdClass();
-		$this->anime_stats = new \stdClass();
-		$this->manga_stats = new \stdClass();
-	}
+	public $details = array(); //user's general (not anime/manga-specific) details.
+	public $anime_stats = array(); //user's anime statistics.
+	public $manga_stats = array(); //user's manga statistics.
 
 	public function parse($contents) {
 

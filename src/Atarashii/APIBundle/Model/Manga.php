@@ -4,7 +4,7 @@ namespace Atarashii\APIBundle\Model;
 class Manga {
 	public $id; //The manga ID.
 	public $title; //The manga title.
-	public $other_titles; //A hash/dictionary containing other titles this manga has.
+	public $other_titles = array(); //A hash/dictionary containing other titles this manga has.
 	public $rank; //Global rank of this manga. Not available in /mangalist requests.
 	public $popularity_rank; //Rank of this manga based on its popularity, i.e. number of users that have added this manga. Not available in /mangalist requests.
 	public $image_url; //URL to an image for this manga.
@@ -26,10 +26,6 @@ class Manga {
 	public $volumes_read; //Number of volumes already read by the user.
 	public $score; //User's score for the manga, from 1 to 10.
 	public $listed_manga_id; //For internal use. This is not listed as a public part of the returned list and it seems to only be used internally in the Ruby API.
-
-	function __construct() {
-		$this->other_titles = new \stdClass();
-	}
 
 	public static function parseMangaType($typeid) {
 		switch($typeid) {
