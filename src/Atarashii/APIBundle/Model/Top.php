@@ -3,6 +3,7 @@ namespace Atarashii\APIBundle\Model;
 
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\CssSelector\CssSelector;
+use Atarashii\APIBundle\Model\Anime;
 
 class Top {
 
@@ -10,7 +11,7 @@ class Top {
 		$crawler = new Crawler();
 		$crawler->addHTMLContent($contents, 'UTF-8');
 		$maincontent = $crawler->filter('#horiznav_nav')->nextAll();
-		
+
 		//decides which type it is.
 		if (strpos($type,'anime') !== false){
 			return ($this->parserecord($maincontent,'Anime'));
@@ -23,17 +24,17 @@ class Top {
 
 	$elements = $content->filterXPath('//table[1]')->filter('tr');
 	$array = array();
-	
+
 		foreach ($elements as $content) {
 
 			$crawler = new Crawler($content);
-			$details = new AnimeDetails();
+			$details = new Anime();
 			$id = str_replace('#area','',$crawler->filter('a')->attr('id'));
 			$title = trim($crawler->filter('strong')->text());
 			//I removed the 't' because it will return a little image
 			$image_url = str_replace('t.j','.j',$crawler->filter('img')->attr('src'));
 			$members_count = str_replace(' members','',trim($crawler->filterXPath('//td[3]')->filter('span')->text()));
-			
+
 			//Info contains: TV, 37 eps, scored 8.82
 			$info = trim($crawler->filterXPath('//td[3]//div[2]')->text());
 			//Get the type
@@ -51,7 +52,7 @@ class Top {
 					$type = 'ONA';
 				}elseif (strpos($info,'Music') !== false){
 					$type = 'Music';
-				}			
+				}
 				//Get the episodes number & score
 				$episodes = $this->parsestring($info,$type.', ',' eps,');
 				$score = str_replace($members_count.' members','',str_replace($type.', '.$episodes.' eps, scored ','',$info));
@@ -60,7 +61,7 @@ class Top {
 				$score = str_replace($members_count.' members','',str_replace($episodes.' volumes, scored ','',$info));
 				$type = 'Unknown';
 			}
-			
+
 			//Setting up the AnimeDetails
 			$key ='id';$details->$key = $id;
 			$key ='title';$details->$key = $title;
@@ -69,12 +70,12 @@ class Top {
 			$key ='type';$details->$key = $type;
 			$key ='episodes';$details->$key = $episodes;
 			$key ='score';$details->$key = $score;
-			
+
 			array_push($array, $details);
 		}
 		return $array;
 	}
-	
+
 	// $string = the string wich contains the text, $first = before the text, $second = after the text
 	function parsestring($string,$first,$second){
 		$startsAt = strpos($string, $first);
@@ -83,14 +84,4 @@ class Top {
 		$parsed = str_replace($first, '', $parse);
 		return($parsed);
 	}
-}
-
-Class AnimeDetails {
-	public $id;
-	public $title;
-	public $image_url;
-	public $members_count;
-	public $type;
-	public $episodes;
-	public $score;
 }
