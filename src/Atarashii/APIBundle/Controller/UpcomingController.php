@@ -21,7 +21,12 @@ class UpcomingController extends FOSRestController
 	{
 		#http://myanimelist.net/anime.php?sd=#{day}&sm=#{month}&sy=#{year}&em=0&ed=0&ey=0&o=2&w=&c[]=a&c[]=d&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=1&show=#{page}
 
-		$page = $request->query->get('page');
+		$page = (int) $request->query->get('page');
+
+		if ($page <= 0)
+		{
+			$page = 1;
+		}
 
 		$downloader = $this->get('atarashii_api.downloader');
 		$animecontent = $downloader->fetch('/anime.php?sd='.date("j").'&sm='.date("n").'&sy='.date("y").'&em=0&ed=0&ey=0&o=2&w=&c[]=a&c[]=d&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=1&show='.(($page*20)-20));
@@ -32,9 +37,14 @@ class UpcomingController extends FOSRestController
 
 	public function getMangaAction(Request $request)
 	{
-		$page = $request->query->get('page');
-
 		#http://myanimelist.net/manga.php?sd=#{day}&sm=#{month}&sy=#{year}&em=0&ed=0&ey=0&o=2&w=&c[]=a&c[]=d&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=1&show=#{page}
+
+		$page = (int) $request->query->get('page');
+
+		if ($page <= 0)
+		{
+			$page = 1;
+		}
 
 		$downloader = $this->get('atarashii_api.downloader');
 		$mangacontent = $downloader->fetch('/manga.php?sd='.date("j").'&sm='.date("n").'&sy='.date("y").'&em=0&ed=0&ey=0&o=2&w=&c[]=a&c[]=d&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=1&show='.(($page*20)-20));

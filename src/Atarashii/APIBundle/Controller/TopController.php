@@ -21,7 +21,12 @@ class TopController extends FOSRestController
 	{
 		#http://myanimelist.net/topanime.php?type=&limit=#{0}
 
-		$page = $request->query->get('page');
+		$page = (int) $request->query->get('page');
+
+		if ($page <= 0)
+		{
+			$page = 1;
+		}
 
 		$downloader = $this->get('atarashii_api.downloader');
 		$animecontent = $downloader->fetch('/topanime.php?type=&limit='.(($page*30)-30));
@@ -35,7 +40,12 @@ class TopController extends FOSRestController
 	{
 		#http://myanimelist.net/topmanga.php?type=&limit=#{0}
 
-		$page = $request->query->get('page');
+		$page = (int) $request->query->get('page');
+
+		if ($page <= 0)
+		{
+			$page = 1;
+		}
 
 		$downloader = $this->get('atarashii_api.downloader');
 		$mangacontent = $downloader->fetch('/topmanga.php?type=&limit='.(($page*30)-30));

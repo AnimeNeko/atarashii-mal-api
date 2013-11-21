@@ -21,7 +21,12 @@ class JustaddedController extends FOSRestController
 	{
 		#http://myanimelist.net/anime.php?o=9&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=2&w=1&show=#{page}
 
-		$page = $request->query->get('page');
+		$page = (int) $request->query->get('page');
+
+		if ($page <= 0)
+		{
+			$page = 1;
+		}
 
 		$downloader = $this->get('atarashii_api.downloader');
 		$animecontent = $downloader->fetch('/anime.php?o=9&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=2&w=1&show='.(($page*20)-20));
@@ -33,9 +38,14 @@ class JustaddedController extends FOSRestController
 
 	public function getMangaAction(Request $request)
 	{
-		$page = $request->query->get('page');
-
 		#http://myanimelist.net/anime.php?o=9&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=2&w=1&show=#{page}
+
+		$page = (int) $request->query->get('page');
+
+		if ($page <= 0)
+		{
+			$page = 1;
+		}
 
 		$downloader = $this->get('atarashii_api.downloader');
 		$mangacontent = $downloader->fetch('/manga.php?o=9&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=2&w=1&show='.(($page*20)-20));

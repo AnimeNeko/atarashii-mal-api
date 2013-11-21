@@ -21,7 +21,12 @@ class PopularController extends FOSRestController
 	{
 		#http://myanimelist.net/topanime.php?type=bypopularity&limit=#{0}
 
-		$page = $request->query->get('page');
+		$page = (int) $request->query->get('page');
+
+		if ($page <= 0)
+		{
+			$page = 1;
+		}
 
 		$downloader = $this->get('atarashii_api.downloader');
 		$animecontent = $downloader->fetch('/topanime.php?type=bypopularity&limit='.(($page*30)-30));
@@ -33,9 +38,14 @@ class PopularController extends FOSRestController
 
 	public function getMangaAction(Request $request)
 	{
-		$page = $request->query->get('page');
-
 		#http://myanimelist.net/topmanga.php?type=bypopularity&limit=#{0}
+
+		$page = (int) $request->query->get('page');
+
+		if ($page <= 0)
+		{
+			$page = 1;
+		}
 
 		$downloader = $this->get('atarashii_api.downloader');
 		$mangacontent = $downloader->fetch('/topmanga.php?type=bypopularity&limit='.(($page*30)-30));
