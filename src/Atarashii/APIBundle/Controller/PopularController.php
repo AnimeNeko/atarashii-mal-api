@@ -31,8 +31,7 @@ class PopularController extends FOSRestController
 		$downloader = $this->get('atarashii_api.downloader');
 		$animecontent = $downloader->fetch('/topanime.php?type=bypopularity&limit='.(($page*30)-30));
 
- 		$popularanime = new Popular();
-  		$popularanime = $popularanime->parse($animecontent,'anime');
+ 		$popularanime = Popular::parse($animecontent,'anime');;
  		return $popularanime;
 	}
 
@@ -50,8 +49,7 @@ class PopularController extends FOSRestController
 		$downloader = $this->get('atarashii_api.downloader');
 		$mangacontent = $downloader->fetch('/topmanga.php?type=bypopularity&limit='.(($page*30)-30));
 
- 		$popularmanga = new Popular();
-  		$popularmanga = $popularmanga->parse($mangacontent,'manga');
+ 		$popularmanga = Popular::parse($mangacontent,'manga');
 
  		return $popularmanga;
 	}

@@ -4,84 +4,58 @@ namespace Atarashii\APIBundle\Parser;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\CssSelector\CssSelector;
 use Atarashii\APIBundle\Model\Anime;
+use Atarashii\APIBundle\Model\Manga;
 
 class Popular {
 
-	public function parse($contents,$type) {
+	public static function parse($contents, $type) {
 		$crawler = new Crawler();
 		$crawler->addHTMLContent($contents, 'UTF-8');
-		$maincontent = $crawler->filter('#horiznav_nav')->nextAll();
 
-		//decides which type it is.
-		if (strpos($type,'anime') !== false){
-			return ($this->parserecord($maincontent,'Anime'));
-		}else{
-			return ($this->parserecord($maincontent,'Manga'));
+		//Filter into a set of tds from the source HTML table
+		$mediaitems = $crawler->filter('#horiznav_nav')->nextAll()->filterXPath('./div/table/tr');
+
+		foreach($mediaitems as $item) {
+			$resultset[] = self::parseRecord($item, $type);
 		}
+
+		return $resultset;
 	}
 
-	private function parserecord($content,$typeserie) {
+	private static function parseRecord($item, $type) {
+		$crawler = new Crawler($item);
 
-	$elements = $content->filterXPath('//table[1]')->filter('tr');
-	$array = array();
-
-		foreach ($elements as $content) {
-
-			$crawler = new Crawler($content);
-			$details = new Anime();
-			$id = str_replace('#area','',$crawler->filter('a')->attr('id'));
-			$title = trim($crawler->filter('strong')->text());
-			//I removed the 't' because it will return a little image
-			$image_url = str_replace('t.j','.j',$crawler->filter('img')->attr('src'));
-			$members_count = str_replace(' members','',trim($crawler->filterXPath('//td[3]')->filter('span')->text()));
-
-			//Info contains: TV, 37 eps, scored 8.82
-			$info = trim($crawler->filterXPath('//td[3]//div[2]')->text());
-			//Get the type
-			$type = 'Error';
-			if (strpos($typeserie,'Anime') !== false){
-				if (strpos($info,'TV') !== false){
-					$type = 'TV';
-				}elseif (strpos($info,'OVA') !== false){
-					$type = 'OVA';
-				}elseif (strpos($info,'Movie') !== false){
-					$type = 'Movie';
-				}elseif (strpos($info,'Special') !== false){
-					$type = 'Special';
-				}elseif (strpos($info,'ONA') !== false){
-					$type = 'ONA';
-				}elseif (strpos($info,'Music') !== false){
-					$type = 'Music';
-				}
-				//Get the episodes number & score
-				$episodes = $this->parsestring($info,$type.', ',' eps,');
-				$score = str_replace($members_count.' members','',str_replace($type.', '.$episodes.' eps, scored ','',$info));
-			}else{
-				$episodes = substr($info, 0, strpos($info, ' volumes'));// $this->parsestring($info,'',' volumes,');
-				$score = str_replace($members_count.' members','',str_replace($episodes.' volumes, scored ','',$info));
-				$type = 'Unknown';
-			}
-
-			//Setting up the AnimeDetails
-			$key ='id';$details->$key = $id;
-			$key ='title';$details->$key = $title;
-			$key ='image_url';$details->$key = $image_url;
-			$key ='members_count';$details->$key = $members_count;
-			$key ='type';$details->$key = $type;
-			$key ='episodes';$details->$key = $episodes;
-			$key ='score';$details->$key = $score;
-
-			array_push($array, $details);
+		//Initialize our object based on the record type we were passed.
+		switch($type) {
+			case 'anime':
+				$media = new Anime();
+				break;
+			case 'manga':
+				$media = new Manga();
+				break;
 		}
-		return $array;
-	}
 
-	// $string = the string wich contains the text, $first = before the text, $second = after the text
-	function parsestring($string,$first,$second){
-		$startsAt = strpos($string, $first);
-		$endsAt = strpos($string, $second, $startsAt);
-		$parse = substr($string, $startsAt, $endsAt - $startsAt);
-		$parsed = str_replace($first, '', $parse);
-		return($parsed);
+		//Pull out all the common parts
+		$media->id = (int) str_replace('#area','',$crawler->filter('a')->attr('id'));
+		$media->title = trim($crawler->filter('strong')->text());
+		$media->image_url = str_replace('t.jpg','.jpg',$crawler->filter('img')->attr('src')); //Convert thumbnail to full size image by stripping the "t" in the filename
+		$media->members_count = (int) trim(str_replace(',', '', str_replace('members', '', $crawler->filter('div.spaceit_pad span.lightLink')->text())));
+
+		//Anime and manga have different details, so we grab an array of the list and then process based on the type
+		$details = explode(', ', str_replace($crawler->filter('div.spaceit_pad span')->text(), '', $crawler->filter('div.spaceit_pad')->text()));
+
+		switch($type) {
+			case 'anime':
+				$media->type = trim($details[0]);
+				$media->episodes = (strstr($details[1], '?') ? null : (int) trim(str_replace('eps', '', $details[1])));
+				$media->members_score = (float) trim(str_replace('scored', '', $details[2]));
+				break;
+			case 'manga':
+				$media->volumes = (strstr($details[0], '?') ? null : (int) trim(str_replace('volumes', '', $details[0])));
+				$media->members_score = (float) trim(str_replace('scored', '', $details[1]));
+				break;
+		}
+
+		return $media;
 	}
 }
