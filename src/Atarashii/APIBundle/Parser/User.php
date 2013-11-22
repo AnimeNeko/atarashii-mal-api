@@ -1,23 +1,24 @@
 <?php
-namespace Atarashii\APIBundle\Model;
+namespace Atarashii\APIBundle\Parser;
 
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\CssSelector\CssSelector;
+use Atarashii\APIBundle\Model\Profile;
+use \SimpleXMLElement;
+use \DateTime;
 
 class User {
-	public $avatar_url; //URL to user's avatar (This should be under details, not out here, but Ruby API does it this way)
-	public $details = array(); //user's general (not anime/manga-specific) details.
-	public $anime_stats = array(); //user's anime statistics.
-	public $manga_stats = array(); //user's manga statistics.
 
-	public function parse($contents) {
+	public static function parse($contents) {
+
+		$user = new Profile();
 
 		$crawler = new Crawler();
 		$crawler->addHTMLContent($contents, 'UTF-8');
 
 		$leftside = $crawler->filter('#content .profile_leftcell');
 
-		$this->avatar_url = $leftside->filter('img')->attr('src');
+		$user->avatar_url = $leftside->filter('img')->attr('src');
 
 		$maincontent = iterator_to_array($crawler->filter('#horiznav_nav')->nextAll()->filterXPath('./div/table/tr/td'));
 
@@ -25,14 +26,14 @@ class User {
 		$animestats = $maincontent[2];
 		$mangastats = $maincontent[3];
 
-		$this->details = $this->parseDetails($userdetails);
-		$this->anime_stats = $this->parseStats($animestats);
-		$this->manga_stats = $this->parseStats($mangastats);
+		$user->details = self::parseDetails($userdetails, $user->details); //Details is an object, so we need to pass it to the function.
+		$user->anime_stats = self::parseStats($animestats);
+		$user->manga_stats = self::parseStats($mangastats);
+
+		return $user;
 	}
 
-	private function parseDetails($content) {
-
-		$details = new UserDetails();
+	private static function parseDetails($content, $details) {
 
 		$elements = new Crawler($content);
 		$elements = $elements->filter('tr');
@@ -70,7 +71,7 @@ class User {
 		return $details;
 	}
 
-	private function parseStats($content) {
+	private static function parseStats($content) {
 		$stats = array();
 
 		$elements = new Crawler($content);
@@ -100,21 +101,39 @@ class User {
 		return $stats;
 	}
 
-}
+	public static function parseFriends($contents) {
+		$crawler = new Crawler();
+		$crawler->addHTMLContent($contents, 'UTF-8');
+		$maincontent = $crawler->filter('.friendHolder');
 
-Class UserDetails {
-	public $last_online;
-	public $gender;
-	public $birthday;
-	public $location;
-	public $website;
-	public $join_date;
-	public $access_rank;
-	public $anime_list_views = 0;
-	public $manga_list_views = 0;
-	public $forum_posts = 0;
-	public $aim;
-	public $comments = 0;
-	public $msn;
-	public $yahoo;
+		//Empty array so we return something non-null if the list is empty.
+		$friendlist = array();
+
+		foreach($maincontent as $friendentry) {
+			$crawler = new Crawler($friendentry);
+
+			//All the data extraction.
+			$friendavatar = $crawler->filter('.friendIcon')->filterXPath('./div/a/img');
+			$friendname = $crawler->filterXPath('//div[@class="friendBlock"]/div[2]/a')->text();
+			$lastonline = $crawler->filterXPath('./div/div/div[3]')->text();
+			$friendssince = str_replace('Friends since ', '', $crawler->filterXPath('./div/div/div[4]')->text());
+
+			//Remove the tumbnail portions from the URL to get the full image.
+			$friendavatar = str_replace('thumbs/', '', str_replace('_thumb', '', $friendavatar->attr('src')));
+
+			//Sometimes this value doesn't exist, so it should be set as null. Otherwise, format the time to RFC3389.
+			if($friendssince != '') {
+				$friendssince = DateTime::createFromFormat('m-d-y, g:i A', $friendssince)->format(DateTime::RFC3339);
+			}
+			else {
+				$friendssince = null;
+			}
+
+			$friendlist[$friendname]['avatar_url'] = $friendavatar;
+			$friendlist[$friendname]['last_online'] = $lastonline;
+			$friendlist[$friendname]['friend_since'] = $friendssince;
+		}
+		return $friendlist;
+
+	}
 }
