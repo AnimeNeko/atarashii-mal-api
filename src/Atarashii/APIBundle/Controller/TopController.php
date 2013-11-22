@@ -11,13 +11,7 @@ use \SimpleXMLElement;
 class TopController extends FOSRestController
 {
 
-    /**
-     * Top get action
-     * @return array
-     *
-     * @Rest\View()
-     */
-	public function getAnimeAction(Request $request)
+	public function getTopAnimeAction(Request $request)
 	{
 		#http://myanimelist.net/topanime.php?type=&limit=#{0}
 
@@ -31,12 +25,11 @@ class TopController extends FOSRestController
 		$downloader = $this->get('atarashii_api.downloader');
 		$animecontent = $downloader->fetch('/topanime.php?type=&limit='.(($page*30)-30));
 
- 		$topanime = new top();
-  		$topanime = $topanime->parse($animecontent,'anime');
+ 		$topanime = Top::parse($animecontent,'anime');;
  		return $topanime;
 	}
 
-	public function getMangaAction(Request $request)
+	public function getTopMangaAction(Request $request)
 	{
 		#http://myanimelist.net/topmanga.php?type=&limit=#{0}
 
@@ -50,10 +43,43 @@ class TopController extends FOSRestController
 		$downloader = $this->get('atarashii_api.downloader');
 		$mangacontent = $downloader->fetch('/topmanga.php?type=&limit='.(($page*30)-30));
 
- 		$topmanga = new top();
-  		$topmanga = $topmanga->parse($mangacontent,'manga');
-
+ 		$topmanga = Top::parse($mangacontent,'manga');
  		return $topmanga;
 	}
 
+	public function getPopularAnimeAction(Request $request)
+	{
+		#http://myanimelist.net/topanime.php?type=bypopularity&limit=#{0}
+
+		$page = (int) $request->query->get('page');
+
+		if ($page <= 0)
+		{
+			$page = 1;
+		}
+
+		$downloader = $this->get('atarashii_api.downloader');
+		$animecontent = $downloader->fetch('/topanime.php?type=bypopularity&limit='.(($page*30)-30));
+
+ 		$popularanime = Top::parse($animecontent,'anime');;
+ 		return $popularanime;
+	}
+
+	public function getPopularMangaAction(Request $request)
+	{
+		#http://myanimelist.net/topmanga.php?type=bypopularity&limit=#{0}
+
+		$page = (int) $request->query->get('page');
+
+		if ($page <= 0)
+		{
+			$page = 1;
+		}
+
+		$downloader = $this->get('atarashii_api.downloader');
+		$mangacontent = $downloader->fetch('/topmanga.php?type=bypopularity&limit='.(($page*30)-30));
+
+ 		$popularmanga = Top::parse($mangacontent,'manga');
+ 		return $popularmanga;
+	}
 }

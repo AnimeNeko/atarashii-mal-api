@@ -28,25 +28,25 @@ atarashii_api_userprofile_friends:
 
 atarashii_api_popular_anime:
     path:  /anime/popular
-    defaults: { _controller: AtarashiiAPIBundle:Popular:getAnime, _format: json }
+    defaults: { _controller: AtarashiiAPIBundle:Top:getPopularAnime, _format: json }
     requirements:
         _method: GET
 
 atarashii_api_popular_manga:
     path:  /manga/popular
-    defaults: { _controller: AtarashiiAPIBundle:Popular:getManga, _format: json }
+    defaults: { _controller: AtarashiiAPIBundle:Top:getPopularManga, _format: json }
     requirements:
         _method: GET
 
 atarashii_api_top_anime:
     path:  /anime/top
-    defaults: { _controller: AtarashiiAPIBundle:Top:getAnime, _format: json }
+    defaults: { _controller: AtarashiiAPIBundle:Top:getTopAnime, _format: json }
     requirements:
         _method: GET
 
 atarashii_api_top_manga:
     path:  /manga/top
-    defaults: { _controller: AtarashiiAPIBundle:Top:getManga, _format: json }
+    defaults: { _controller: AtarashiiAPIBundle:Top:getTopManga, _format: json }
     requirements:
         _method: GET
 
