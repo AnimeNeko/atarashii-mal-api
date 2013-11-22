@@ -113,25 +113,31 @@ class User {
 			$crawler = new Crawler($friendentry);
 
 			//All the data extraction.
-			$friendavatar = $crawler->filter('.friendIcon')->filterXPath('./div/a/img');
-			$friendname = $crawler->filterXPath('//div[@class="friendBlock"]/div[2]/a')->text();
+			$avatar = $crawler->filter('.friendIcon')->filterXPath('./div/a/img');
+			$name = $crawler->filterXPath('//div[@class="friendBlock"]/div[2]/a')->text();
 			$lastonline = $crawler->filterXPath('./div/div/div[3]')->text();
 			$friendssince = str_replace('Friends since ', '', $crawler->filterXPath('./div/div/div[4]')->text());
 
 			//Remove the tumbnail portions from the URL to get the full image.
-			$friendavatar = str_replace('thumbs/', '', str_replace('_thumb', '', $friendavatar->attr('src')));
+			$avatar = str_replace('thumbs/', '', str_replace('_thumb', '', $avatar->attr('src')));
 
 			//Sometimes this value doesn't exist, so it should be set as null. Otherwise, format the time to RFC3389.
 			if($friendssince != '') {
-				$friendssince = DateTime::createFromFormat('m-d-y, g:i A', $friendssince)->format(DateTime::RFC3339);
+				$friendssince = DateTime::createFromFormat('m-d-y, g:i A', $friendssince)->format(DateTime::ISO8601);
 			}
 			else {
 				$friendssince = null;
 			}
 
-			$friendlist[$friendname]['avatar_url'] = $friendavatar;
-			$friendlist[$friendname]['last_online'] = $lastonline;
-			$friendlist[$friendname]['friend_since'] = $friendssince;
+			$friendinfo['name'] = $name;
+			$friendinfo['friend_since'] = $friendssince;
+
+			//Fill out a profile object for this user with what information we can extract
+			$friendinfo['profile'] = new Profile();
+			$friendinfo['profile']->avatar_url = $avatar;
+			$friendinfo['profile']->details->last_online = $lastonline;
+
+			$friendlist[] = $friendinfo;
 		}
 		return $friendlist;
 
