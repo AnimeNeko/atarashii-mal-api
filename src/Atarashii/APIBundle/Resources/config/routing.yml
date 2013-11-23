@@ -52,25 +52,25 @@ atarashii_api_top_manga:
 
 atarashii_api_just_anime:
     path:  /anime/just_added
-    defaults: { _controller: AtarashiiAPIBundle:Justadded:getAnime, _format: json }
+    defaults: { _controller: AtarashiiAPIBundle:Upcoming:getAnimeJustadded, _format: json }
     requirements:
         _method: GET
 
 atarashii_api_just_manga:
     path:  /manga/just_added
-    defaults: { _controller: AtarashiiAPIBundle:Justadded:getManga, _format: json }
+    defaults: { _controller: AtarashiiAPIBundle:Upcoming:getMangaJustadded, _format: json }
     requirements:
         _method: GET
 
 atarashii_api_upcoming_anime:
     path:  /anime/upcoming
-    defaults: { _controller: AtarashiiAPIBundle:Upcoming:getAnime, _format: json }
+    defaults: { _controller: AtarashiiAPIBundle:Upcoming:getAnimeUpcoming, _format: json }
     requirements:
         _method: GET
 
 atarashii_api_upcoming_manga:
     path:  /manga/upcoming
-    defaults: { _controller: AtarashiiAPIBundle:Upcoming:getManga, _format: json }
+    defaults: { _controller: AtarashiiAPIBundle:Upcoming:getMangaUpcoming, _format: json }
     requirements:
         _method: GET
 
