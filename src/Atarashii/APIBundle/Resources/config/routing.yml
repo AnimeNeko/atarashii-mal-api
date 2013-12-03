@@ -85,3 +85,9 @@ atarashii_api_search_manga:
     defaults: { _controller: AtarashiiAPIBundle:Search:getManga, _format: json }
     requirements:
         _method: GET
+
+atarashii_api_verify_credentials:
+    path:  /account/verify_credentials
+    defaults: { _controller: AtarashiiAPIBundle:Verify:Verify, _format: json }
+    requirements:
+        _method: GET
