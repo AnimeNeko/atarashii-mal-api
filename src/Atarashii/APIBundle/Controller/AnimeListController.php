@@ -120,7 +120,6 @@ class AnimeListController extends FOSRestController
 		// Verify and send the request.
 		try {
 			$response = $request->send();
-			echo $response->getBody();
 			return $this->view(Array('authorized' => 'OK'), 200);
 		}
 		catch (\Guzzle\Http\Exception\ClientErrorResponseException $e) {
