@@ -3,7 +3,7 @@ namespace Atarashii\APIBundle\Parser;
 
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\CssSelector\CssSelector;
-use Atarashii\APIBundle\Anime;
+use Atarashii\APIBundle\Model\Anime;
 use \DateTime;
 
 class AnimeParser {
@@ -12,24 +12,24 @@ class AnimeParser {
 		$crawler = new Crawler();
 		$crawler->addHTMLContent($contents, 'UTF-8');
 
-		$animerecord = array();
+		$animerecord = new Anime();
 
 		# Anime ID.
 		# Example:
 		# <input type="hidden" name="aid" value="790">
-		$animerecord['id'] = (int) $crawler->filter('input[name="aid"]')->attr('value');
+		$animerecord->id = (int) $crawler->filter('input[name="aid"]')->attr('value');
 
 		# Title and rank.
 		# Example:
 		# <h1><div style="float: right; font-size: 13px;">Ranked #96</div>Lucky ☆ Star</h1>
-		$animerecord['title'] = str_replace($crawler->filter('h1')->children()->text(), '', $crawler->filter('h1')->text());
-		$animerecord['rank'] = (int) str_replace('Ranked #', '', $crawler->filter('h1 div')->text());
+		$animerecord->title = str_replace($crawler->filter('h1')->children()->text(), '', $crawler->filter('h1')->text());
+		$animerecord->rank = (int) str_replace('Ranked #', '', $crawler->filter('h1 div')->text());
 
 
 		# Title Image
 		# Example:
 		# <a href="http://myanimelist.net/anime/16353/Love_Lab/pic&pid=50257"><img src="http://cdn.myanimelist.net/images/anime/12/50257.jpg" alt="Love Lab" align="center"></a>
-		$animerecord['image_url'] = $crawler->filter('div#content tr td div img')->attr('src');
+		$animerecord->image_url = $crawler->filter('div#content tr td div img')->attr('src');
 
 		# Alternative Titles section.
 		# Example:
@@ -43,21 +43,21 @@ class AnimeParser {
 		$extracted = $leftcolumn->filterXPath('//span[text()="English:"]');
 		if(iterator_count($extracted) > 0) {
 			$text = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
-			$animerecord['other_titles']['english'] = explode(', ', $text);
+			$animerecord->other_titles['english'] = explode(', ', $text);
 		}
 
 		# Synonyms:
 		$extracted = $leftcolumn->filterXPath('//span[text()="Synonyms:"]');
 		if(iterator_count($extracted) > 0) {
 			$text = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
-			$animerecord['other_titles']['synonyms'] = explode(', ', $text);
+			$animerecord->other_titles['synonyms'] = explode(', ', $text);
 		}
 
 		# Japanese:
 		$extracted = $leftcolumn->filterXPath('//span[text()="Japanese:"]');
 		if(iterator_count($extracted) > 0) {
 			$text = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
-			$animerecord['other_titles']['japanese'] = explode(', ', $text);
+			$animerecord->other_titles['japanese'] = explode(', ', $text);
 		}
 
 
@@ -88,22 +88,22 @@ class AnimeParser {
 		# Type:
 		$extracted = $leftcolumn->filterXPath('//span[text()="Type:"]');
 		if(iterator_count($extracted) > 0) {
-			$animerecord['type'] = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
+			$animerecord->type = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
 		}
 
 		# Episodes:
 		$extracted = $leftcolumn->filterXPath('//span[text()="Episodes:"]');
 		if(iterator_count($extracted) > 0) {
-			$animerecord['episodes'] = (int) trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
+			$animerecord->episodes = (int) trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
 		}
 		else {
-			$animerecord['episodes'] = null;
+			$animerecord->episodes = null;
 		}
 
 		# Status:
 		$extracted = $leftcolumn->filterXPath('//span[text()="Status:"]');
 		if(iterator_count($extracted) > 0) {
-			$animerecord['status'] = strtolower(trim(str_replace($extracted->text(), '', $extracted->parents()->text())));
+			$animerecord->status = strtolower(trim(str_replace($extracted->text(), '', $extracted->parents()->text())));
 		}
 
 		# Aired:
@@ -119,29 +119,29 @@ class AnimeParser {
 			$daterange = explode(' to ', trim(str_replace($extracted->text(), '', $extracted->parents()->text())));
 
 			//MAL always provides record dates in US-style format. We export to a non-standard format to keep compatibility with the Ruby API.
-			$animerecord['start_date'] = DateTime::createFromFormat('M j, Y', $daterange[0])->format('D M d H:i:s O Y');
+			$animerecord->start_date = DateTime::createFromFormat('M j, Y', $daterange[0])->format('D M d H:i:s O Y');
 
 			//Series not yet to air won't list a range at all while currently airing series will use a "?"
 			//For these, we should return a null
 			if(count($daterange) < 2 || $daterange[1] == '?') {
-				$animerecord['end_date'] = null;
+				$animerecord->end_date = null;
 			}
 			else {
 				//MAL always provides record dates in US-style format. We export to a non-standard format to keep compatibility with the Ruby API.
-				$animerecord['end_date'] = DateTime::createFromFormat('M j, Y', $daterange[1])->format('D M d H:i:s O Y');
+				$animerecord->end_date = DateTime::createFromFormat('M j, Y', $daterange[1])->format('D M d H:i:s O Y');
 			}
 		}
 
 		# Genres:
 		$extracted = $leftcolumn->filterXPath('//span[text()="Genres:"]');
 		if(iterator_count($extracted) > 0) {
-			$animerecord['genres'] = explode(', ', trim(str_replace($extracted->text(), '', $extracted->parents()->text())));
+			$animerecord->genres = explode(', ', trim(str_replace($extracted->text(), '', $extracted->parents()->text())));
 		}
 
 		# Classification:
 		$extracted = $leftcolumn->filterXPath('//span[text()="Rating:"]');
 		if(iterator_count($extracted) > 0) {
-			$animerecord['classification'] = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
+			$animerecord->classification = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
 		}
 
         # Statistics
@@ -165,7 +165,7 @@ class AnimeParser {
 			$extracted = trim(str_replace(strstr($extracted, '('), '', $extracted));
 			//Sometimes there is a superscript number at the end from a note.
 			//Scores are only two decimals, so number_format should chop off the excess, hopefully.
-			$animerecord['members_score'] = (float) number_format($extracted, 2);
+			$animerecord->members_score = (float) number_format($extracted, 2);
 		}
 
 		# Popularity:
@@ -174,7 +174,7 @@ class AnimeParser {
 			$extracted = str_replace($extracted->text(), '', $extracted->parents()->text());
 			//Remove the hash at the front of the string and trim whitespace. Needed so we can cast to an int.
 			$extracted = trim(str_replace('#', '', $extracted));
-			$animerecord['popularity_rank'] = (int) $extracted;
+			$animerecord->popularity_rank = (int) $extracted;
 		}
 
 		# Members:
@@ -183,7 +183,7 @@ class AnimeParser {
 			$extracted = str_replace($extracted->text(), '', $extracted->parents()->text());
 			//PHP doesn't like commas in integers. Remove it.
 			$extracted = trim(str_replace(',', '', $extracted));
-			$animerecord['members_count'] = (int) $extracted;
+			$animerecord->members_count = (int) $extracted;
 		}
 
 		# Members:
@@ -192,7 +192,7 @@ class AnimeParser {
 			$extracted = str_replace($extracted->text(), '', $extracted->parents()->text());
 			//PHP doesn't like commas in integers. Remove it.
 			$extracted = trim(str_replace(',', '', $extracted));
-			$animerecord['favorited_count'] = (int) $extracted;
+			$animerecord->favorited_count = (int) $extracted;
 		}
 
         # Popular Tags
@@ -206,7 +206,7 @@ class AnimeParser {
         # </span>
         $extracted = $leftcolumn->filterXPath('//h2[text()="Popular Tags"]')->nextAll()->filter('a');
         foreach($extracted as $term) {
-        	$animerecord['tags'][] = $term->textContent;
+        	$animerecord->tags[] = $term->textContent;
 		}
 
 
@@ -230,7 +230,7 @@ class AnimeParser {
 		if(iterator_count($extracted) > 0) {
 			$extracted = str_replace($extracted->html(), '', $extracted->parents()->html());
 			$extracted = str_replace('<h2></h2>', '', $extracted);
-			$animerecord['synopsis'] = $extracted;
+			$animerecord->synopsis = $extracted;
 		}
 
 		return $animerecord;
