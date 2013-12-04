@@ -8,6 +8,12 @@ atarashii_api_animelist:
     requirements:
         _method: GET
 
+atarashii_api_animelist:
+    path:  /animelist/anime
+    defaults: { _controller: AtarashiiAPIBundle:AnimeList:post, _format: json }
+    requirements:
+        _method: POST
+
 atarashii_api_mangalist:
     path:  /mangalist/{username}
     defaults: { _controller: AtarashiiAPIBundle:MangaList:get, _format: json }

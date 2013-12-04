@@ -83,6 +83,29 @@ class Anime {
 		}
 	}
 
+	public static function getWatchedStatus($status) {
+		switch($status) {
+			case 'watching':
+				return '1';
+				break;
+			case 'completed':
+				return '2';
+				break;
+			case 'onhold':
+				return '3';
+				break;
+			case 'dropped':
+				return '4';
+				break;
+			case 'plantowatch':
+				return '5';
+				break;
+			default:
+				return '1';
+				break;
+		}
+	}
+
 	public static function parseAnimeStatus($statusid) {
 		switch($statusid) {
 			case 1:
