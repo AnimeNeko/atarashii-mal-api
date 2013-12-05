@@ -8,11 +8,23 @@ atarashii_api_animelist:
     requirements:
         _method: GET
 
-atarashii_api_animelist:
+atarashii_api_animelist_add:
     path:  /animelist/anime
-    defaults: { _controller: AtarashiiAPIBundle:AnimeList:post, _format: json }
+    defaults: { _controller: AtarashiiAPIBundle:AnimeList:aud, _format: json, id:0 }
     requirements:
         _method: POST
+
+atarashii_api_animelist_update:
+    path:  /animelist/anime/{id}
+    defaults: { _controller: AtarashiiAPIBundle:AnimeList:aud, _format: json }
+    requirements:
+        _method: PUT
+
+atarashii_api_animelist_delete:
+    path:  /animelist/anime/{id}
+    defaults: { _controller: AtarashiiAPIBundle:AnimeList:aud, _format: json }
+    requirements:
+        _method: DELETE
 
 atarashii_api_mangalist:
     path:  /mangalist/{username}

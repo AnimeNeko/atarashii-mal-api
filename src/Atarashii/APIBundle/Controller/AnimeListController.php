@@ -54,18 +54,22 @@ class AnimeListController extends FOSRestController
  		return $animelist;
 	}
     /*
-     * Animelist post action (add anime)
+     * aud actions (add/update/delete anime)
      * $username username
      * $password password
      *
-     * anime_id: [animeid]
+     * anime_id: [animeid] (if you use this with a update it will be ignored)
      * status: [1= watching],[2= completed],[3= onhold],[4= dropped],[5= plantowatch] (Default 1).
      * episodes: [episodes]
      * Score: [score] (1/10)
+     *
+     * note: delete does ignore all the body parameters!
      */
-	public function postAction(Request $request)
+	public function audAction(Request $request, $id)
 	{
 		#http://myanimelist.net/api/animelist/add/#{id}.xml
+		#http://myanimelist.net/api/animelist/update/#{id}.xml
+		#http://myanimelist.net/api/animelist/delete/#{id}.xml
 
 		//Get the body send by atarashii
 		$username = $this->getRequest()->server->get('PHP_AUTH_USER');
@@ -81,20 +85,32 @@ class AnimeListController extends FOSRestController
 		$body = str_replace("-", "", $body);
 		$body = str_replace(" ", "", $body);
 
-		//Parse the data
+		//get the REST type & parse the data
 		$status = $this->parse('status','episodes',$body);
 		if ($status == ''){
 			$body = $body.'status';
 		}
-		$id = $this->parse('anime_id','status',$body);
+		if ($request->isMethod('post')){
+			$id = $this->parse('anime_id','status',$body);
+			$type = 'add';
+		}elseif ($request->isMethod('put')){
+			$type = 'update';
+		}elseif ($request->isMethod('delete')){
+			$type = 'delete';
+		}else{
+			return $this->view(Array('error' => 'GET request is not allowed'), 405);
+		}
 		$episode = $this->parse('episodes','score',$body);
-		$score = str_replace('anime_id'.$id.'status'.$status.'episodes'.$episode.'score','',$body);
+		$score = str_replace('anime_id'.$id,'',$body);
+		$score = str_replace('status'.$status,'',$score);
+		$score = str_replace('episodes'.$episode,'',$score);
+		$score = str_replace('score','',$score);
 		$status = Anime::getWatchedStatus($status);
 
 		//Creating request
 		$client = new Client('http://myanimelist.net');
 		$client->setUserAgent('Atarashii');
-		$request = $client->post('/api/animelist/add/'.$id.'.xml');
+		$request = $client->post('/api/animelist/'.$type.'/'.$id.'.xml');
 		$request->setAuth($username, $password);
 
 		//setup of the xml
@@ -114,6 +130,14 @@ class AnimeListController extends FOSRestController
 		}
 	}
 
+     /*
+     * Parse action
+     * $first the text before your string
+     * $second the text after your string
+     * $string the text which contains the wanted string
+     *
+     * note: if the $string doesn't has the $second or $first it will return empty!
+     */
 	public function parse($first,$second,$string)
 	{
 		$startsAt = strpos($string, $first);
