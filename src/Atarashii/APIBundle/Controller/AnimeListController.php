@@ -76,7 +76,7 @@ class AnimeListController extends FOSRestController
 
 		//Remove some stuff we don't need (trim doesn't help always)
 		$body = trim($request->getContent());
-		$body = str_replace("\n  ", "", $body);
+		$body = str_replace("\n", "", $body);
 		$body = str_replace("=", "", $body);
 		$body = str_replace("-", "", $body);
 		$body = str_replace(" ", "", $body);
@@ -98,23 +98,7 @@ class AnimeListController extends FOSRestController
 		$request->setAuth($username, $password);
 
 		//setup of the xml
-		$requestbody = '<?xml version="1.0" encoding="UTF-8"?><entry>';
-		$requestbody = $requestbody.'<episode>'.$episode.'</episode>';
-		$requestbody = $requestbody.'<status>'.$status.'</status>';
-		$requestbody = $requestbody.'<score>'.$score.'</score>';
-		$requestbody = $requestbody.'<downloaded_episodes></downloaded_episodes>';
-		$requestbody = $requestbody.'<storage_type></storage_type>';
-		$requestbody = $requestbody.'<storage_value></storage_value>';
-		$requestbody = $requestbody.'<times_rewatched></times_rewatched>';
-		$requestbody = $requestbody.'<rewatch_value></rewatch_value>';
-		$requestbody = $requestbody.'<date_start></date_start>';
-		$requestbody = $requestbody.'<date_finish></date_finish>';
-		$requestbody = $requestbody.'<priority></priority>';
-		$requestbody = $requestbody.'<enable_discussion></enable_discussion>';
-		$requestbody = $requestbody.'<enable_rewatching></enable_rewatching>';
-		$requestbody = $requestbody.'<comments></comments>';
-		$requestbody = $requestbody.'<fansub_group></fansub_group>';
-		$requestbody = $requestbody.'<tags></tags></entry>';
+		$requestbody= Anime::setxmlAnime($episode,$status,$score);
 		$request->setPostField('data',$requestbody);
 
 		// Verify and send the request.
