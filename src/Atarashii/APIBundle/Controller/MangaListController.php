@@ -144,7 +144,7 @@ class MangaListController extends FOSRestController {
 		$string = $string.'=';
 
 		//parsing
-		for( $i = 0; $i < 4; $i += 1) {
+		for( $i = 0; $i < 5; $i += 1) {
 			$first = current(explode("=", $string));
 			$second = current(explode("=",str_replace($first.'=','',$string)));
 
