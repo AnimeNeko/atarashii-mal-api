@@ -32,6 +32,24 @@ atarashii_api_mangalist:
     requirements:
         _method: GET
 
+atarashii_api_mangalist_add:
+    path:  /mangalist/manga
+    defaults: { _controller: AtarashiiAPIBundle:MangaList:aud, _format: json , id:0}
+    requirements:
+        _method: POST
+
+atarashii_api_mangalist_update:
+    path:  /mangalist/manga/{id}
+    defaults: { _controller: AtarashiiAPIBundle:MangaList:aud, _format: json }
+    requirements:
+        _method: PUT
+
+atarashii_api_mangalist_delete:
+    path:  /mangalist/manga/{id}
+    defaults: { _controller: AtarashiiAPIBundle:MangaList:aud, _format: json }
+    requirements:
+        _method: DELETE
+
 atarashii_api_userprofile:
     path:  /profile/{username}
     defaults: { _controller: AtarashiiAPIBundle:User:getProfile, _format: json }

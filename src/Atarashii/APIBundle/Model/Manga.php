@@ -96,4 +96,48 @@ class Manga {
 		}
 	}
 
+	public static function getReadStatus($status) {
+		switch($status) {
+			case 'reading':
+				return '1';
+				break;
+			case 'completed':
+				return '2';
+				break;
+			case 'onhold':
+				return '3';
+				break;
+			case 'dropped':
+				return '4';
+				break;
+			case 'plantoread':
+				return '6';
+				break;
+			default:
+				return '1';
+				break;
+		}
+	}
+
+	public static function setxmlManga($chapter,$volume,$status,$score) {
+		$requestbody = '<?xml version="1.0" encoding="UTF-8"?><entry>';
+		$requestbody = $requestbody.'<chapter>'.$chapter.'</chapter>';
+		$requestbody = $requestbody.'<volume>'.$volume.'</volume>';
+		$requestbody = $requestbody.'<status>'.$status.'</status>';
+		$requestbody = $requestbody.'<score>'.$score.'</score>';
+		$requestbody = $requestbody.'<downloaded_chapters></downloaded_chapters>';
+		$requestbody = $requestbody.'<times_reread></times_reread>';
+		$requestbody = $requestbody.'<reread_value></reread_value>';
+		$requestbody = $requestbody.'<date_start></date_start>';
+		$requestbody = $requestbody.'<date_finish></date_finish>';
+		$requestbody = $requestbody.'<priority></priority>';
+		$requestbody = $requestbody.'<enable_discussion></enable_discussion>';
+		$requestbody = $requestbody.'<enable_rereading></enable_rereading>';
+		$requestbody = $requestbody.'<comments></comments>';
+		$requestbody = $requestbody.'<scan_group></scan_group>';
+		$requestbody = $requestbody.'<retail_volumes></retail_volumes>';
+		$requestbody = $requestbody.'<tags></tags></entry>';
+		return $requestbody;
+	}
+
 }
