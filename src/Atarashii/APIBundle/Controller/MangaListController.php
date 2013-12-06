@@ -81,17 +81,13 @@ class MangaListController extends FOSRestController {
 		//Remove some stuff we don't need (trim doesn't help always)
 		$body = trim($request->getContent());
 		$body = str_replace("\n", "", $body);
-		$body = str_replace("=", "", $body);
 		$body = str_replace("-", "", $body);
 		$body = str_replace(" ", "", $body);
+		$bodyarray = $this->parse($body);
 
 		//get the REST type & parse the data
-		$status = $this->parse('status','chapters',$body);
-		if (empty($status)){
-			$body = $body.'status';
-		}
 		if ($request->isMethod('post')){
-			$id = $this->parse('manga_id','status',$body);
+			$id = $bodyarray[1];
 			$type = 'add';
 		}elseif ($request->isMethod('put')){
 			$type = 'update';
@@ -100,22 +96,10 @@ class MangaListController extends FOSRestController {
 		}else{
 			return $this->view(Array('error' => 'GET request is not allowed'), 405);
 		}
-		$volumes  = $this->parse('volumes','score',$body);
-		if (strpos($volumes,'manga_id') !== false){
-			$chapters = $this->parse('chapters','score',$body);
-			$volumes = '0';
-		}else{
-			$chapters = $this->parse('chapters','volumes',$body);
-		}
-		if (strpos($chapters,'manga_id') !== false){
-			$chapters = '0';
-		}
-		$score = str_replace('manga_id'.$id,'',$body);
-		$score = str_replace('status'.$status,'',$score);
-		$score = str_replace('chapters'.$chapters,'',$score);
-		$score = str_replace('volumes'.$volumes,'',$score);
-		$score = str_replace('score','',$score);
-		$status = Manga::getReadStatus($status);
+		$status = $bodyarray[2];
+		$chapters = $bodyarray[3];
+		$volumes = $bodyarray[4];
+		$score = $bodyarray[5];
 
 		//Creating request
 		$client = new Client('http://myanimelist.net');
@@ -142,18 +126,53 @@ class MangaListController extends FOSRestController {
 
      /*
      * Parse action
-     * $first the text before your string
-     * $second the text after your string
-     * $string the text which contains the wanted string
+     * $string body
+     * Returns an array.
      *
-     * note: if the $string doesn't has the $second or $first it will return empty!
+     * note: if the $string doesn't has the parameter it will return empty!
      */
-	public function parse($first,$second,$string)
+	public function parse($string)
 	{
-		$startsAt = strpos($string, $first);
-		$endsAt = strpos($string, $second, $startsAt);
-		$parse = substr($string, $startsAt, $endsAt - $startsAt);
-		$parsed = str_replace($first, '', $parse);
-		return($parsed);
+		//Default values
+		$manga_id = 0;
+		$status = '';
+		$chapters = 0;
+		$volumes = 0;
+		$score = 0;
+
+		//tricky methode to get the last string
+		$string = $string.'=';
+
+		//parsing
+		for( $i = 0; $i < 4; $i += 1) {
+			$first = current(explode("=", $string));
+			$second = current(explode("=",str_replace($first.'=','',$string)));
+
+			if (strpos($second,'manga_id') !== false){
+				$second = str_replace('manga_id','',$second);
+			}elseif (strpos($second,'status') !== false){
+				$second = str_replace('status','',$second);
+			}elseif (strpos($second,'chapters') !== false){
+				$second = str_replace('chapters','',$second);
+			}elseif (strpos($second,'volumes') !== false){
+				$second = str_replace('volumes','',$second);
+			}elseif (strpos($second,'score') !== false){
+				$second = str_replace('score','',$second);
+			}
+
+			if (strpos($first,'manga_id') !== false){
+				$manga_id = $second;
+			}elseif (strpos($first,'status') !== false){
+				$status = Manga::getReadStatus($second);
+			}elseif (strpos($first,'chapters') !== false){
+				$chapters = $second;
+			}elseif (strpos($first,'volumes') !== false){
+				$volumes = $second;
+			}elseif (strpos($first,'score') !== false){
+				$score = $second;
+			}
+			$string = str_replace($first.'='.$second,'',$string);
+		}
+		return array(1 => $manga_id, 2 => $status, 3 => $chapters, 4 => $volumes, 5 => $score);
 	}
 }

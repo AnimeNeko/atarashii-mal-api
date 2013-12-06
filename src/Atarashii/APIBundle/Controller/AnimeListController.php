@@ -81,17 +81,13 @@ class AnimeListController extends FOSRestController
 		//Remove some stuff we don't need (trim doesn't help always)
 		$body = trim($request->getContent());
 		$body = str_replace("\n", "", $body);
-		$body = str_replace("=", "", $body);
 		$body = str_replace("-", "", $body);
 		$body = str_replace(" ", "", $body);
+		$bodyarray = $this->parse($body);
 
 		//get the REST type & parse the data
-		$status = $this->parse('status','episodes',$body);
-		if ($status == ''){
-			$body = $body.'status';
-		}
 		if ($request->isMethod('post')){
-			$id = $this->parse('anime_id','status',$body);
+			$id = $bodyarray[1];
 			$type = 'add';
 		}elseif ($request->isMethod('put')){
 			$type = 'update';
@@ -100,16 +96,9 @@ class AnimeListController extends FOSRestController
 		}else{
 			return $this->view(Array('error' => 'GET request is not allowed'), 405);
 		}
-
-		$episode = $this->parse('episodes','score',$body);
-		if (strpos($episode,'anime_id') !== false){
-			$episode = '0';
-		}
-		$score = str_replace('anime_id'.$id,'',$body);
-		$score = str_replace('status'.$status,'',$score);
-		$score = str_replace('episodes'.$episode,'',$score);
-		$score = str_replace('score','',$score);
-		$status = Anime::getWatchedStatus($status);
+		$status = $bodyarray[2];
+		$episode = $bodyarray[3];
+		$score = $bodyarray[3];
 
 		//Creating request
 		$client = new Client('http://myanimelist.net');
@@ -136,18 +125,48 @@ class AnimeListController extends FOSRestController
 
      /*
      * Parse action
-     * $first the text before your string
-     * $second the text after your string
-     * $string the text which contains the wanted string
+     * $string body
+     * Returns an array.
      *
-     * note: if the $string doesn't has the $second or $first it will return empty!
+     * note: if the $string doesn't has the parameter it will return empty!
      */
-	public function parse($first,$second,$string)
+	public function parse($string)
 	{
-		$startsAt = strpos($string, $first);
-		$endsAt = strpos($string, $second, $startsAt);
-		$parse = substr($string, $startsAt, $endsAt - $startsAt);
-		$parsed = str_replace($first, '', $parse);
-		return($parsed);
+		//Default values
+		$anime_id = 0;
+		$status = '';
+		$episodes = 0;
+		$score = 0;
+
+		//tricky methode to get the last string
+		$string = $string.'=';
+
+		//parsing
+		for( $i = 0; $i < 4; $i += 1) {
+			$first = current(explode("=", $string));
+			$second = current(explode("=",str_replace($first.'=','',$string)));
+
+			if (strpos($second,'anime_id') !== false){
+				$second = str_replace('anime_id','',$second);
+			}elseif (strpos($second,'status') !== false){
+				$second = str_replace('status','',$second);
+			}elseif (strpos($second,'episodes') !== false){
+				$second = str_replace('episodes','',$second);
+			}elseif (strpos($second,'score') !== false){
+				$second = str_replace('score','',$second);
+			}
+
+			if (strpos($first,'anime_id') !== false){
+				$anime_id = $second;
+			}elseif (strpos($first,'status') !== false){
+				$status = Anime::getWatchedStatus($second);
+			}elseif (strpos($first,'episodes') !== false){
+				$episodes = $second;
+			}elseif (strpos($first,'score') !== false){
+				$score = $second;
+			}
+			$string = str_replace($first.'='.$second,'',$string);
+		}
+		return array(1 => $anime_id, 2 => $status, 3 => $episodes, 4 => $score);
 	}
 }
