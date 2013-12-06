@@ -98,7 +98,7 @@ class AnimeListController extends FOSRestController
 		}
 		$status = $bodyarray[2];
 		$episode = $bodyarray[3];
-		$score = $bodyarray[3];
+		$score = $bodyarray[4];
 
 		//Creating request
 		$client = new Client('http://myanimelist.net');
