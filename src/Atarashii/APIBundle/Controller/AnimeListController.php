@@ -60,7 +60,7 @@ class AnimeListController extends FOSRestController
      *
      * anime_id: [animeid] (if you use this with a update it will be ignored)
      * status: [1= watching],[2= completed],[3= onhold],[4= dropped],[5= plantowatch] (Default 1).
-     * episodes: [episodes]
+     * episodes: [episodes] (default 0)
      * Score: [score] (1/10)
      *
      * note: delete does ignore all the body parameters!
@@ -100,7 +100,11 @@ class AnimeListController extends FOSRestController
 		}else{
 			return $this->view(Array('error' => 'GET request is not allowed'), 405);
 		}
+
 		$episode = $this->parse('episodes','score',$body);
+		if (strpos($episode,'anime_id') !== false){
+			$episode = '0';
+		}
 		$score = str_replace('anime_id'.$id,'',$body);
 		$score = str_replace('status'.$status,'',$score);
 		$score = str_replace('episodes'.$episode,'',$score);

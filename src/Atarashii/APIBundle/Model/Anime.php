@@ -98,7 +98,7 @@ class Anime {
 				return '4';
 				break;
 			case 'plantowatch':
-				return '5';
+				return '6';
 				break;
 			default:
 				return '1';
