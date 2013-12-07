@@ -83,6 +83,7 @@ class AnimeListController extends FOSRestController
 		$body = str_replace("\n", "", $body);
 		$body = str_replace("-", "", $body);
 		$body = str_replace(" ", "", $body);
+		$body = str_replace("&", "", $body);
 		$bodyarray = $this->parse($body);
 
 		//get the REST type & parse the data
