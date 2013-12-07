@@ -120,7 +120,8 @@ class MangaListController extends FOSRestController {
 			return $this->view(Array('error' => 'unauthorized'), 401);
 		}
 		catch (\Guzzle\Http\Exception\ServerErrorResponseException $e) {
-			return $this->view(Array('error' => 'not-found'), 500);
+			$details = Array('id' => $id, 'status' => $status, 'chapters' => $chapters, 'volumes' => $volumes, 'score' => $score, 'body' => $body, 'command' => $type);
+			return $this->view(Array('error' => 'not-found','received details' => $details), 500);
 		}
 	}
 
@@ -135,7 +136,7 @@ class MangaListController extends FOSRestController {
 	{
 		//Default values
 		$manga_id = 0;
-		$status = '';
+		$status = '1';
 		$chapters = 0;
 		$volumes = 0;
 		$score = 0;
