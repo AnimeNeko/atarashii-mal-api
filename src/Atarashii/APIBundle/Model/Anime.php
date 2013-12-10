@@ -123,25 +123,15 @@ class Anime {
 		}
 	}
 
-	public static function setxmlAnime($episode,$status,$score) {
-		$requestbody = '<?xml version="1.0" encoding="UTF-8"?><entry>';
-		$requestbody = $requestbody.'<episode>'.$episode.'</episode>';
-		$requestbody = $requestbody.'<status>'.$status.'</status>';
-		$requestbody = $requestbody.'<score>'.$score.'</score>';
-		$requestbody = $requestbody.'<downloaded_episodes></downloaded_episodes>';
-		$requestbody = $requestbody.'<storage_type></storage_type>';
-		$requestbody = $requestbody.'<storage_value></storage_value>';
-		$requestbody = $requestbody.'<times_rewatched></times_rewatched>';
-		$requestbody = $requestbody.'<rewatch_value></rewatch_value>';
-		$requestbody = $requestbody.'<date_start></date_start>';
-		$requestbody = $requestbody.'<date_finish></date_finish>';
-		$requestbody = $requestbody.'<priority></priority>';
-		$requestbody = $requestbody.'<enable_discussion></enable_discussion>';
-		$requestbody = $requestbody.'<enable_rewatching></enable_rewatching>';
-		$requestbody = $requestbody.'<comments></comments>';
-		$requestbody = $requestbody.'<fansub_group></fansub_group>';
-		$requestbody = $requestbody.'<tags></tags></entry>';
-		return $requestbody;
+	public function MALApiXml($anime) {
+		//For now, just add in the parameters we will use. The MAL API will handle missing items just fine.
+		$xml = new \SimpleXMLElement('<entry/>');
+
+		$xml->addChild('episode', $anime->watched_episodes);
+		$xml->addChild('status', $anime->watched_status);
+		$xml->addChild('score', $anime->score);
+
+		return $xml->asXML();
 	}
 
 }

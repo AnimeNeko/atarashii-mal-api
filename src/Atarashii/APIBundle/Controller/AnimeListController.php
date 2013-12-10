@@ -53,68 +53,34 @@ class AnimeListController extends FOSRestController
 		}
  		return $animelist;
 	}
-    /*
-     * aud actions (add/update/delete anime)
-     * $username username
-     * $password password
-     *
-     * anime_id: [animeid] (if you use this with a update it will be ignored)
-     * status: [1= watching],[2= completed],[3= onhold],[4= dropped],[5= plantowatch] (Default 1).
-     * episodes: [episodes] (default 0)
-     * Score: [score] (1/10)
-     *
-     * note: delete does ignore all the body parameters!
-     */
-	public function audAction(Request $request, $id)
-	{
-		#http://myanimelist.net/api/animelist/add/#{id}.xml
-		#http://myanimelist.net/api/animelist/update/#{id}.xml
-		#http://myanimelist.net/api/animelist/delete/#{id}.xml
 
-		//Get the body send by atarashii
+	public function addAction(Request $request) {
+		#http://myanimelist.net/api/animelist/add/#{id}.xml
+
+		//get the credentials we received
 		$username = $this->getRequest()->server->get('PHP_AUTH_USER');
 		$password = $this->getRequest()->server->get('PHP_AUTH_PW');
+
+		//Don't bother making a request if the user didn't send any authentication
 		if($username == null) {
-			return $this->view(Array('error' => 'unauthorized'), 401);
+			$view = $this->view(Array('error' => 'unauthorized'), 401);
+			$view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
+			return $view;
 		}
 
-		//Remove some stuff we don't need (trim doesn't help always)
-		$body = trim($request->getContent());
-		$body = str_replace("\n", "", $body);
-		$body = str_replace("-", "", $body);
-		$body = str_replace(" ", "", $body);
-		$body = str_replace("&", "", $body);
-		$bodyarray = $this->parse($body);
+		$anime = new Anime();
+		$anime->id = $request->request->get('anime_id');
+		$anime->watched_status = $request->request->get('status');
+		$anime->watched_episodes = $request->request->get('episodes');
+		$anime->score = $request->request->get('score');
 
-		//get the REST type & parse the data
-		if ($request->isMethod('post')){
-			$id = $bodyarray[1];
-			$type = 'add';
-		}elseif ($request->isMethod('put')){
-			$type = 'update';
-		}elseif ($request->isMethod('delete')){
-			$type = 'delete';
-		}else{
-			return $this->view(Array('error' => 'GET request is not allowed'), 405);
-		}
-		$status = $bodyarray[2];
-		$episode = $bodyarray[3];
-		$score = $bodyarray[4];
+		$xmlcontent = $anime->MALApiXml($anime);
 
-		//Creating request
-		$client = new Client('http://myanimelist.net');
-		$client->setUserAgent('Atarashii');
-		$request = $client->post('/api/animelist/'.$type.'/'.$id.'.xml');
-		$request->setAuth($username, $password);
+		$connection = $this->get('atarashii_api.communicator');
 
-		//setup of the xml
-		$requestbody= Anime::setxmlAnime($episode,$status,$score);
-		$request->setPostField('data',$requestbody);
-
-		// Verify and send the request.
 		try {
-			$response = $request->send();
-			return $this->view(Array('authorized' => 'OK'), 200);
+			$result = $connection->sendXML('/api/animelist/add/' . $anime->id . '.xml', $xmlcontent, $username, $password);
+			return $this->view('ok', 201);
 		}
 		catch (\Guzzle\Http\Exception\ClientErrorResponseException $e) {
 			return $this->view(Array('error' => 'unauthorized'), 401);
@@ -125,50 +91,69 @@ class AnimeListController extends FOSRestController
 		}
 	}
 
-     /*
-     * Parse action
-     * $string body
-     * Returns an array.
-     *
-     * note: if the $string doesn't has the parameter it will return empty!
-     */
-	public function parse($string)
-	{
-		//Default values
-		$anime_id = 0;
-		$status = '1';
-		$episodes = 0;
-		$score = 0;
+	public function updateAction(Request $request, $id) {
+		#http://myanimelist.net/api/animelist/update/#{id}.xml
 
-		//tricky methode to get the last string
-		$string = $string.'=';
+		//get the credentials we received
+		$username = $this->getRequest()->server->get('PHP_AUTH_USER');
+		$password = $this->getRequest()->server->get('PHP_AUTH_PW');
 
-		//parsing
-		for( $i = 0; $i < 4; $i += 1) {
-			$first = current(explode("=", $string));
-			$second = current(explode("=",str_replace($first.'=','',$string)));
-
-			if (strpos($second,'anime_id') !== false){
-				$second = str_replace('anime_id','',$second);
-			}elseif (strpos($second,'status') !== false){
-				$second = str_replace('status','',$second);
-			}elseif (strpos($second,'episodes') !== false){
-				$second = str_replace('episodes','',$second);
-			}elseif (strpos($second,'score') !== false){
-				$second = str_replace('score','',$second);
-			}
-
-			if (strpos($first,'anime_id') !== false){
-				$anime_id = $second;
-			}elseif (strpos($first,'status') !== false){
-				$status = Anime::getWatchedStatus($second);
-			}elseif (strpos($first,'episodes') !== false){
-				$episodes = $second;
-			}elseif (strpos($first,'score') !== false){
-				$score = $second;
-			}
-			$string = str_replace($first.'='.$second,'',$string);
+		//Don't bother making a request if the user didn't send any authentication
+		if($username == null) {
+			$view = $this->view(Array('error' => 'unauthorized'), 401);
+			$view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
+			return $view;
 		}
-		return array(1 => $anime_id, 2 => $status, 3 => $episodes, 4 => $score);
+
+		$anime = new Anime();
+		$anime->id = $id;
+		$anime->watched_status = $request->request->get('status');
+		$anime->watched_episodes = $request->request->get('episodes');
+		$anime->score = $request->request->get('score');
+
+		$xmlcontent = $anime->MALApiXml($anime);
+
+		$connection = $this->get('atarashii_api.communicator');
+
+		try {
+			$result = $connection->sendXML('/api/animelist/update/' . $anime->id . '.xml', $xmlcontent, $username, $password);
+			return $this->view('ok', 200);
+		}
+		catch (\Guzzle\Http\Exception\ClientErrorResponseException $e) {
+			return $this->view(Array('error' => 'unauthorized'), 401);
+		}
+		catch (\Guzzle\Http\Exception\ServerErrorResponseException $e) {
+			$details = Array('id' => $id, 'status' => $status, 'episodes' => $episode, 'score' => $score, 'body' => $body, 'command' => $type);
+			return $this->view(Array('error' => 'not-found','received details' => $details), 500);
+		}
+	}
+
+	public function deleteAction(Request $request, $id) {
+		#http://myanimelist.net/api/animelist/delete/#{id}.xml
+
+		//get the credentials we received
+		$username = $this->getRequest()->server->get('PHP_AUTH_USER');
+		$password = $this->getRequest()->server->get('PHP_AUTH_PW');
+
+		//Don't bother making a request if the user didn't send any authentication
+		if($username == null) {
+			$view = $this->view(Array('error' => 'unauthorized'), 401);
+			$view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
+			return $view;
+		}
+
+		$connection = $this->get('atarashii_api.communicator');
+
+		try {
+			$result = $connection->sendXML('/api/animelist/delete/' . $id . '.xml', '', $username, $password);
+			return $this->view('ok', 200);
+		}
+		catch (\Guzzle\Http\Exception\ClientErrorResponseException $e) {
+			return $this->view(Array('error' => 'unauthorized'), 401);
+		}
+		catch (\Guzzle\Http\Exception\ServerErrorResponseException $e) {
+			$details = Array('id' => $id, 'status' => $status, 'episodes' => $episode, 'score' => $score, 'body' => $body, 'command' => $type);
+			return $this->view(Array('error' => 'not-found','received details' => $details), 500);
+		}
 	}
 }
