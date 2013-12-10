@@ -20,7 +20,7 @@ class MangaListController extends FOSRestController {
 	public function getAction($username) {
 		#http://myanimelist.net/malappinfo.php?u=#{username}&status=all&type=manga
 
-		$downloader = $this->get('atarashii_api.downloader');
+		$downloader = $this->get('atarashii_api.communicator');
 		$mangalistcontent = $downloader->fetch('/malappinfo.php?u=' . $username . '&status=all&type=manga');
 
 		if (strpos($mangalistcontent,'Invalid username') !== false){

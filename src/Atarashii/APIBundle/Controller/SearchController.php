@@ -27,7 +27,7 @@ class SearchController extends FOSRestController {
 		$page = (int) $request->query->get('page',1);
                 $query = $request->query->get('q');
 
-		$downloader = $this->get('atarashii_api.downloader');
+		$downloader = $this->get('atarashii_api.communicator');
 		$animecontent = $downloader->fetch('/anime.php?c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&q='.$query.'&show='.(($page*20)-20));
 
  		$searchanime = Upcoming::parse($animecontent,'anime');
@@ -42,7 +42,7 @@ class SearchController extends FOSRestController {
 		$page = (int) $request->query->get('page',1);
                 $query = $request->query->get('q');
 
-		$downloader = $this->get('atarashii_api.downloader');
+		$downloader = $this->get('atarashii_api.communicator');
 		$mangacontent = $downloader->fetch('/manga.php?c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&q='.$query.'&show='.(($page*20)-20));
 
  		$searchmanga = Upcoming::parse($mangacontent,'manga');

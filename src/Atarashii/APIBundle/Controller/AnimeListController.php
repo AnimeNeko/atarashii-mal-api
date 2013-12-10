@@ -23,7 +23,7 @@ class AnimeListController extends FOSRestController
 	{
 		#http://myanimelist.net/malappinfo.php?u=#{username}&status=all&type=anime
 
-		$downloader = $this->get('atarashii_api.downloader');
+		$downloader = $this->get('atarashii_api.communicator');
 		$animelistcontent = $downloader->fetch('/malappinfo.php?u=' . $username . '&status=all&type=anime');
 
 		if (strpos($animelistcontent,'Invalid username') !== false){

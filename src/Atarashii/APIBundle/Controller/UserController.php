@@ -19,7 +19,7 @@ class UserController extends FOSRestController
 	{
 		#http://myanimelist.net/profile/#{username}
 
-		$downloader = $this->get('atarashii_api.downloader');
+		$downloader = $this->get('atarashii_api.communicator');
 		$profilecontent = $downloader->fetch('/profile/' . $username);
 
 		if (strpos($profilecontent,'Failed to find') !== false){
@@ -34,7 +34,7 @@ class UserController extends FOSRestController
 	{
 		#http://myanimelist.net/profile/#{username}/friends
 
-		$downloader = $this->get('atarashii_api.downloader');
+		$downloader = $this->get('atarashii_api.communicator');
 		$friendscontent = $downloader->fetch('/profile/' . $username . '/friends');
 
 		if (strpos($friendscontent,'Failed to find') !== false){

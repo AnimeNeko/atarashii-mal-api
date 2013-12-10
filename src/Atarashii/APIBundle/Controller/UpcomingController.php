@@ -27,7 +27,7 @@ class UpcomingController extends FOSRestController
 			$page = 1;
 		}
 
-		$downloader = $this->get('atarashii_api.downloader');
+		$downloader = $this->get('atarashii_api.communicator');
 		$animecontent = $downloader->fetch('/anime.php?sd='.date("j").'&sm='.date("n").'&sy='.date("y").'&em=0&ed=0&ey=0&o=2&w=&c[]=a&c[]=d&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=1&show='.(($page*20)-20));
  		
 		$Upcominganime = Upcoming::parse($animecontent,'anime');
@@ -44,7 +44,7 @@ class UpcomingController extends FOSRestController
 			$page = 1;
 		}
 
-		$downloader = $this->get('atarashii_api.downloader');
+		$downloader = $this->get('atarashii_api.communicator');
 		$mangacontent = $downloader->fetch('/manga.php?sd='.date("j").'&sm='.date("n").'&sy='.date("y").'&em=0&ed=0&ey=0&o=2&w=&c[]=a&c[]=d&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=1&show='.(($page*20)-20));
 
  		$Upcomingmanga = Upcoming::parse($mangacontent,'manga');
@@ -68,7 +68,7 @@ class UpcomingController extends FOSRestController
 			$page = 1;
 		}
 
-		$downloader = $this->get('atarashii_api.downloader');
+		$downloader = $this->get('atarashii_api.communicator');
 		$animecontent = $downloader->fetch('/anime.php?o=9&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=2&w=1&show='.(($page*20)-20));
 
   		$Justaddedanime = Upcoming::parse($animecontent,'anime');
@@ -85,7 +85,7 @@ class UpcomingController extends FOSRestController
 			$page = 1;
 		}
 
-		$downloader = $this->get('atarashii_api.downloader');
+		$downloader = $this->get('atarashii_api.communicator');
 		$mangacontent = $downloader->fetch('/manga.php?o=9&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=2&w=1&show='.(($page*20)-20));
 
  		$Justaddedmanga = Upcoming::parse($mangacontent,'manga');

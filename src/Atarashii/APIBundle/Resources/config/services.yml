@@ -1,9 +1,9 @@
 parameters:
-    atarashii_api.downloader.class: Atarashii\APIBundle\Service\Downloader
-    atarashii_api.downloader.user_agent: Atarashii
-    atarashii_api.downloader.base_url: http://myanimelist.net
+    atarashii_api.comm.class: Atarashii\APIBundle\Service\Communicator
+    atarashii_api.comm.user_agent: Atarashii
+    atarashii_api.comm.base_url: http://myanimelist.net
 
 services:
-    atarashii_api.downloader:
-        class: %atarashii_api.downloader.class%
-        arguments: [%atarashii_api.downloader.base_url%, %atarashii_api.downloader.user_agent%]
+    atarashii_api.communicator:
+        class: %atarashii_api.comm.class%
+        arguments: [%atarashii_api.comm.base_url%, %atarashii_api.comm.user_agent%]

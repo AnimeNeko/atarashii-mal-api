@@ -22,7 +22,7 @@ class TopController extends FOSRestController
 			$page = 1;
 		}
 
-		$downloader = $this->get('atarashii_api.downloader');
+		$downloader = $this->get('atarashii_api.communicator');
 		$animecontent = $downloader->fetch('/topanime.php?type=&limit='.(($page*30)-30));
 
  		$topanime = Top::parse($animecontent,'anime');;
@@ -40,7 +40,7 @@ class TopController extends FOSRestController
 			$page = 1;
 		}
 
-		$downloader = $this->get('atarashii_api.downloader');
+		$downloader = $this->get('atarashii_api.communicator');
 		$mangacontent = $downloader->fetch('/topmanga.php?type=&limit='.(($page*30)-30));
 
  		$topmanga = Top::parse($mangacontent,'manga');
@@ -58,7 +58,7 @@ class TopController extends FOSRestController
 			$page = 1;
 		}
 
-		$downloader = $this->get('atarashii_api.downloader');
+		$downloader = $this->get('atarashii_api.communicator');
 		$animecontent = $downloader->fetch('/topanime.php?type=bypopularity&limit='.(($page*30)-30));
 
  		$popularanime = Top::parse($animecontent,'anime');;
@@ -76,7 +76,7 @@ class TopController extends FOSRestController
 			$page = 1;
 		}
 
-		$downloader = $this->get('atarashii_api.downloader');
+		$downloader = $this->get('atarashii_api.communicator');
 		$mangacontent = $downloader->fetch('/topmanga.php?type=bypopularity&limit='.(($page*30)-30));
 
  		$popularmanga = Top::parse($mangacontent,'manga');
