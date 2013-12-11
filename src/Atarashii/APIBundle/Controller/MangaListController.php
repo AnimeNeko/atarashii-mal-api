@@ -52,129 +52,107 @@ class MangaListController extends FOSRestController {
 		}
  		return $mangalist;
 	}
-    /*
-     * aud actions (add/update/delete manga)
-     * $username username
-     * $password password
-     *
-     * manga_id: [mangaid] (if you use this with a update it will be ignored)
-     * status: [1= reading],[2= completed],[3= onhold],[4= dropped],[6= plantoread] (Default 1).
-     * chapters: [chapters] default 0)
-     * volumes: [volumes] (default 0)
-     * Score: [score] (1/10)
-     *
-     * note: delete does ignore all the body parameters!
-     */
-	public function audAction(Request $request, $id)
-	{
-		#http://myanimelist.net/api/mangalist/add/#{id}.xml
-		#http://myanimelist.net/api/mangalist/update/#{id}.xml
-		#http://myanimelist.net/api/mangalist/delete/#{id}.xml
 
-		//Get the body send by atarashii
+	public function addAction(Request $request) {
+		#http://mymangalist.net/api/mangalist/add/#{id}.xml
+
+		//get the credentials we received
 		$username = $this->getRequest()->server->get('PHP_AUTH_USER');
 		$password = $this->getRequest()->server->get('PHP_AUTH_PW');
+
+		//Don't bother making a request if the user didn't send any authentication
 		if($username == null) {
-			return $this->view(Array('error' => 'unauthorized'), 401);
+			$view = $this->view(Array('error' => 'unauthorized'), 401);
+			$view->setHeader('WWW-Authenticate', 'Basic realm="mymangalist.net"');
+			return $view;
 		}
 
-		//Remove some stuff we don't need (trim doesn't help always)
-		$body = trim($request->getContent());
-		$body = str_replace("\n", "", $body);
-		$body = str_replace("-", "", $body);
-		$body = str_replace(" ", "", $body);
-		$body = str_replace("&", "", $body);
-		$bodyarray = $this->parse($body);
+		$manga = new Manga();
+		$manga->id = $request->request->get('manga_id');
+		$manga->read_status = $request->request->get('status');
+		$manga->chapters_read = $request->request->get('chapters');
+		$manga->volumes_read = $request->request->get('volumes');
+		$manga->score = $request->request->get('score');
 
-		//get the REST type & parse the data
-		if ($request->isMethod('post')){
-			$id = $bodyarray[1];
-			$type = 'add';
-		}elseif ($request->isMethod('put')){
-			$type = 'update';
-		}elseif ($request->isMethod('delete')){
-			$type = 'delete';
-		}else{
-			return $this->view(Array('error' => 'GET request is not allowed'), 405);
-		}
-		$status = $bodyarray[2];
-		$chapters = $bodyarray[3];
-		$volumes = $bodyarray[4];
-		$score = $bodyarray[5];
+		$xmlcontent = $manga->MALApiXml($manga);
 
-		//Creating request
-		$client = new Client('http://myanimelist.net');
-		$client->setUserAgent('Atarashii');
-		$request = $client->post('/api/mangalist/'.$type.'/'.$id.'.xml');
-		$request->setAuth($username, $password);
+		$connection = $this->get('atarashii_api.communicator');
 
-		//setup of the xml
-		$requestbody= Manga::setxmlManga($chapters,$volumes,$status,$score);
-		$request->setPostField('data',$requestbody);
-
-		// Verify and send the request.
 		try {
-			$response = $request->send();
-			return $this->view(Array('authorized' => 'OK'), 200);
+			$result = $connection->sendXML('/api/mangalist/add/' . $manga->id . '.xml', $xmlcontent, $username, $password);
+			return $this->view('ok', 201);
 		}
 		catch (\Guzzle\Http\Exception\ClientErrorResponseException $e) {
 			return $this->view(Array('error' => 'unauthorized'), 401);
 		}
 		catch (\Guzzle\Http\Exception\ServerErrorResponseException $e) {
-			$details = Array('id' => $id, 'status' => $status, 'chapters' => $chapters, 'volumes' => $volumes, 'score' => $score, 'body' => $body, 'command' => $type);
-			return $this->view(Array('error' => 'not-found','received details' => $details), 500);
+			return $this->view(Array('error' => 'not-found'), 500);
 		}
 	}
 
-     /*
-     * Parse action
-     * $string body
-     * Returns an array.
-     *
-     * note: if the $string doesn't has the parameter it will return empty!
-     */
-	public function parse($string)
-	{
-		//Default values
-		$manga_id = 0;
-		$status = '1';
-		$chapters = 0;
-		$volumes = 0;
-		$score = 0;
+	public function updateAction(Request $request, $id) {
+		#http://mymangalist.net/api/mangalist/update/#{id}.xml
 
-		//tricky methode to get the last string
-		$string = $string.'=';
+		//get the credentials we received
+		$username = $this->getRequest()->server->get('PHP_AUTH_USER');
+		$password = $this->getRequest()->server->get('PHP_AUTH_PW');
 
-		//parsing
-		for( $i = 0; $i < 5; $i += 1) {
-			$first = current(explode("=", $string));
-			$second = current(explode("=",str_replace($first.'=','',$string)));
-
-			if (strpos($second,'manga_id') !== false){
-				$second = str_replace('manga_id','',$second);
-			}elseif (strpos($second,'status') !== false){
-				$second = str_replace('status','',$second);
-			}elseif (strpos($second,'chapters') !== false){
-				$second = str_replace('chapters','',$second);
-			}elseif (strpos($second,'volumes') !== false){
-				$second = str_replace('volumes','',$second);
-			}elseif (strpos($second,'score') !== false){
-				$second = str_replace('score','',$second);
-			}
-
-			if (strpos($first,'manga_id') !== false){
-				$manga_id = $second;
-			}elseif (strpos($first,'status') !== false){
-				$status = Manga::getReadStatus($second);
-			}elseif (strpos($first,'chapters') !== false){
-				$chapters = $second;
-			}elseif (strpos($first,'volumes') !== false){
-				$volumes = $second;
-			}elseif (strpos($first,'score') !== false){
-				$score = $second;
-			}
-			$string = str_replace($first.'='.$second,'',$string);
+		//Don't bother making a request if the user didn't send any authentication
+		if($username == null) {
+			$view = $this->view(Array('error' => 'unauthorized'), 401);
+			$view->setHeader('WWW-Authenticate', 'Basic realm="mymangalist.net"');
+			return $view;
 		}
-		return array(1 => $manga_id, 2 => $status, 3 => $chapters, 4 => $volumes, 5 => $score);
+
+		$manga = new Manga();
+		$manga->id = $id;
+		$manga->read_status = $request->request->get('status');
+		$manga->chapters_read = $request->request->get('chapters');
+		$manga->volumes_read = $request->request->get('volumes');
+		$manga->score = $request->request->get('score');
+
+		$xmlcontent = $manga->MALApiXml($manga);
+
+		$connection = $this->get('atarashii_api.communicator');
+
+		try {
+			$result = $connection->sendXML('/api/mangalist/update/' . $manga->id . '.xml', $xmlcontent, $username, $password);
+			return $this->view('ok', 200);
+		}
+		catch (\Guzzle\Http\Exception\ClientErrorResponseException $e) {
+			return $this->view(Array('error' => 'unauthorized'), 401);
+		}
+		catch (\Guzzle\Http\Exception\ServerErrorResponseException $e) {
+			return $this->view(Array('error' => 'not-found'), 500);
+		}
 	}
+
+	public function deleteAction(Request $request, $id) {
+		#http://mymangalist.net/api/mangalist/delete/#{id}.xml
+
+		//get the credentials we received
+		$username = $this->getRequest()->server->get('PHP_AUTH_USER');
+		$password = $this->getRequest()->server->get('PHP_AUTH_PW');
+
+		//Don't bother making a request if the user didn't send any authentication
+		if($username == null) {
+			$view = $this->view(Array('error' => 'unauthorized'), 401);
+			$view->setHeader('WWW-Authenticate', 'Basic realm="mymangalist.net"');
+			return $view;
+		}
+
+		$connection = $this->get('atarashii_api.communicator');
+
+		try {
+			$result = $connection->sendXML('/api/mangalist/delete/' . $id . '.xml', '', $username, $password);
+			return $this->view('ok', 200);
+		}
+		catch (\Guzzle\Http\Exception\ClientErrorResponseException $e) {
+			return $this->view(Array('error' => 'unauthorized'), 401);
+		}
+		catch (\Guzzle\Http\Exception\ServerErrorResponseException $e) {
+			return $this->view(Array('error' => 'not-found'), 500);
+		}
+	}
+
 }

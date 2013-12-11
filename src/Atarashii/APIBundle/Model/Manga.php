@@ -119,25 +119,16 @@ class Manga {
 		}
 	}
 
-	public static function setxmlManga($chapter,$volume,$status,$score) {
-		$requestbody = '<?xml version="1.0" encoding="UTF-8"?><entry>';
-		$requestbody = $requestbody.'<chapter>'.$chapter.'</chapter>';
-		$requestbody = $requestbody.'<volume>'.$volume.'</volume>';
-		$requestbody = $requestbody.'<status>'.$status.'</status>';
-		$requestbody = $requestbody.'<score>'.$score.'</score>';
-		$requestbody = $requestbody.'<downloaded_chapters></downloaded_chapters>';
-		$requestbody = $requestbody.'<times_reread></times_reread>';
-		$requestbody = $requestbody.'<reread_value></reread_value>';
-		$requestbody = $requestbody.'<date_start></date_start>';
-		$requestbody = $requestbody.'<date_finish></date_finish>';
-		$requestbody = $requestbody.'<priority></priority>';
-		$requestbody = $requestbody.'<enable_discussion></enable_discussion>';
-		$requestbody = $requestbody.'<enable_rereading></enable_rereading>';
-		$requestbody = $requestbody.'<comments></comments>';
-		$requestbody = $requestbody.'<scan_group></scan_group>';
-		$requestbody = $requestbody.'<retail_volumes></retail_volumes>';
-		$requestbody = $requestbody.'<tags></tags></entry>';
-		return $requestbody;
+	public function MALApiXml($manga) {
+		//For now, just add in the parameters we will use. The MAL API will handle missing items just fine.
+		$xml = new \SimpleXMLElement('<entry/>');
+
+		$xml->addChild('chapter', $manga->chapters_read);
+		$xml->addChild('volume', $manga->volumes_read);
+		$xml->addChild('status', $manga->read_status);
+		$xml->addChild('score', $manga->score);
+
+		return $xml->asXML();
 	}
 
 }
