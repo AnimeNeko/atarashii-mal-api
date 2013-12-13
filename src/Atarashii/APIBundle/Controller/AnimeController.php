@@ -5,9 +5,6 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Atarashii\APIBundle\Parser\AnimeParser;
 
-//Temporary for offline testing
-use Symfony\Component\Finder\Finder;
-
 class AnimeController extends FOSRestController
 {
     /**
