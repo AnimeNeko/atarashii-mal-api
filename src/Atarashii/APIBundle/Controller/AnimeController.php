@@ -21,7 +21,7 @@ class AnimeController extends FOSRestController
 	{
 		#http://myanimelist.net/anime/#{id}
 
-		$downloader = $this->get('atarashii_api.downloader');
+		$downloader = $this->get('atarashii_api.communicator');
 		$animedetails = $downloader->fetch('/anime/' . $id);
 
  		$anime = AnimeParser::parse($animedetails);
