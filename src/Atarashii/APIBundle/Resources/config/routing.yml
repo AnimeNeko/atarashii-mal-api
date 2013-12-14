@@ -35,6 +35,13 @@ atarashii_api_animelist_delete:
         _method: DELETE
         id: \d+
 
+atarashii_api_manga:
+    path: /manga/{id}
+    defaults: { _controller: AtarashiiAPIBundle:Manga:get, _format: json }
+    requirements:
+        _method: GET
+        id: \d+
+
 atarashii_api_mangalist:
     path:  /mangalist/{username}
     defaults: { _controller: AtarashiiAPIBundle:MangaList:get, _format: json }
