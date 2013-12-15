@@ -372,7 +372,7 @@ class AnimeParser {
 				}
 
 				#Alternative Versions
-				if(preg_match('/Alternative versions\: ?(<a .+?)\<br/', $relatedcontent, $relateditems)) {
+				if(preg_match('/Alternative versions?\: ?(<a .+?)\<br/', $relatedcontent, $relateditems)) {
 					$relateditems = explode(', ', $relateditems[1]);
 					foreach($relateditems as $item) {
 						if(preg_match('/<a href="(http:\/\/myanimelist.net\/anime\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts))
