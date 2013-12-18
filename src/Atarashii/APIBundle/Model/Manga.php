@@ -119,14 +119,14 @@ class Manga {
 		}
 	}
 
-	public function MALApiXml($manga) {
+	public function MALApiXml() {
 		//For now, just add in the parameters we will use. The MAL API will handle missing items just fine.
 		$xml = new \SimpleXMLElement('<entry/>');
 
-		$xml->addChild('chapter', $manga->chapters_read);
-		$xml->addChild('volume', $manga->volumes_read);
-		$xml->addChild('status', $manga->read_status);
-		$xml->addChild('score', $manga->score);
+		$xml->addChild('chapter', $this->chapters_read);
+		$xml->addChild('volume', $this->volumes_read);
+		$xml->addChild('status', $this->read_status);
+		$xml->addChild('score', $this->score);
 
 		return $xml->asXML();
 	}

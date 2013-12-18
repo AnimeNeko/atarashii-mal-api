@@ -74,7 +74,7 @@ class AnimeListController extends FOSRestController
 		$anime->watched_episodes = $request->request->get('episodes');
 		$anime->score = $request->request->get('score');
 
-		$xmlcontent = $anime->MALApiXml($anime);
+		$xmlcontent = $anime->MALApiXml();
 
 		$connection = $this->get('atarashii_api.communicator');
 
@@ -111,7 +111,7 @@ class AnimeListController extends FOSRestController
 		$anime->watched_episodes = $request->request->get('episodes');
 		$anime->score = $request->request->get('score');
 
-		$xmlcontent = $anime->MALApiXml($anime);
+		$xmlcontent = $anime->MALApiXml();
 
 		$connection = $this->get('atarashii_api.communicator');
 

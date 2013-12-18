@@ -74,7 +74,7 @@ class MangaListController extends FOSRestController {
 		$manga->volumes_read = $request->request->get('volumes');
 		$manga->score = $request->request->get('score');
 
-		$xmlcontent = $manga->MALApiXml($manga);
+		$xmlcontent = $manga->MALApiXml();
 
 		$connection = $this->get('atarashii_api.communicator');
 
@@ -111,7 +111,7 @@ class MangaListController extends FOSRestController {
 		$manga->volumes_read = $request->request->get('volumes');
 		$manga->score = $request->request->get('score');
 
-		$xmlcontent = $manga->MALApiXml($manga);
+		$xmlcontent = $manga->MALApiXml();
 
 		$connection = $this->get('atarashii_api.communicator');
 

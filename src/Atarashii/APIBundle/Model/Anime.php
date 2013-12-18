@@ -123,13 +123,13 @@ class Anime {
 		}
 	}
 
-	public function MALApiXml($anime) {
+	public function MALApiXml() {
 		//For now, just add in the parameters we will use. The MAL API will handle missing items just fine.
 		$xml = new \SimpleXMLElement('<entry/>');
 
-		$xml->addChild('episode', $anime->watched_episodes);
-		$xml->addChild('status', $anime->watched_status);
-		$xml->addChild('score', $anime->score);
+		$xml->addChild('episode', $this->watched_episodes);
+		$xml->addChild('status', $this->watched_status);
+		$xml->addChild('score', $this->score);
 
 		return $xml->asXML();
 	}
