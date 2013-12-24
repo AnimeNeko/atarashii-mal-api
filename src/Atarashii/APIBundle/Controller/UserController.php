@@ -23,11 +23,11 @@ class UserController extends FOSRestController
 		$profilecontent = $downloader->fetch('/profile/' . $username);
 
 		if (strpos($profilecontent,'Failed to find') !== false){
-			$userprofile = 'Failed to find the specified user, please try again.';
+			return $this->view(Array('error' => 'Failed to find the specified user, please try again.'), 404);
 		}else{
 			$userprofile = User::parse($profilecontent);
+			return $userprofile;
 		}
- 		return $userprofile;
 	}
 
 	public function getFriendsAction($username)
@@ -38,11 +38,10 @@ class UserController extends FOSRestController
 		$friendscontent = $downloader->fetch('/profile/' . $username . '/friends');
 
 		if (strpos($friendscontent,'Failed to find') !== false){
-			$friendlist = 'Failed to find the specified user, please try again.';
+			return $this->view(Array('error' => 'Failed to find the specified user, please try again.'), 404);
 		}else{
 			$friendlist = User::parseFriends($friendscontent);
+			return $friendlist;
 		}
- 		return $friendlist;
 	}
-
 }
