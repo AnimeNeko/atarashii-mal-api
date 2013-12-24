@@ -86,7 +86,7 @@ class MangaListController extends FOSRestController {
 			return $this->view(Array('error' => 'unauthorized'), 401);
 		}
 		catch (\Guzzle\Http\Exception\ServerErrorResponseException $e) {
-			return $this->view(Array('error' => 'not-found'), 500);
+			return $this->view(Array('error' => 'not-found'), 404);
 		}
 	}
 
@@ -123,7 +123,7 @@ class MangaListController extends FOSRestController {
 			return $this->view(Array('error' => 'unauthorized'), 401);
 		}
 		catch (\Guzzle\Http\Exception\ServerErrorResponseException $e) {
-			return $this->view(Array('error' => 'not-found'), 500);
+			return $this->view(Array('error' => 'not-found'), 404);
 		}
 	}
 
@@ -151,7 +151,7 @@ class MangaListController extends FOSRestController {
 			return $this->view(Array('error' => 'unauthorized'), 401);
 		}
 		catch (\Guzzle\Http\Exception\ServerErrorResponseException $e) {
-			return $this->view(Array('error' => 'not-found'), 500);
+			return $this->view(Array('error' => 'not-found'), 404);
 		}
 	}
 

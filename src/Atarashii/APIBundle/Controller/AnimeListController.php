@@ -86,8 +86,7 @@ class AnimeListController extends FOSRestController
 			return $this->view(Array('error' => 'unauthorized'), 401);
 		}
 		catch (\Guzzle\Http\Exception\ServerErrorResponseException $e) {
-			$details = Array('id' => $id, 'status' => $status, 'episodes' => $episode, 'score' => $score, 'body' => $body, 'command' => $type);
-			return $this->view(Array('error' => 'not-found','received details' => $details), 500);
+			return $this->view(Array('error' => 'not-found'), 404);
 		}
 	}
 
@@ -123,8 +122,7 @@ class AnimeListController extends FOSRestController
 			return $this->view(Array('error' => 'unauthorized'), 401);
 		}
 		catch (\Guzzle\Http\Exception\ServerErrorResponseException $e) {
-			$details = Array('id' => $id, 'status' => $status, 'episodes' => $episode, 'score' => $score, 'body' => $body, 'command' => $type);
-			return $this->view(Array('error' => 'not-found','received details' => $details), 500);
+			return $this->view(Array('error' => 'not-found'), 404);
 		}
 	}
 
@@ -152,8 +150,7 @@ class AnimeListController extends FOSRestController
 			return $this->view(Array('error' => 'unauthorized'), 401);
 		}
 		catch (\Guzzle\Http\Exception\ServerErrorResponseException $e) {
-			$details = Array('id' => $id, 'status' => $status, 'episodes' => $episode, 'score' => $score, 'body' => $body, 'command' => $type);
-			return $this->view(Array('error' => 'not-found','received details' => $details), 500);
+			return $this->view(Array('error' => 'not-found'), 404);
 		}
 	}
 }
