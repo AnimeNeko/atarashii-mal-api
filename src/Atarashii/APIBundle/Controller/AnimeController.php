@@ -40,8 +40,11 @@ class AnimeController extends FOSRestController
 
 		$animedetails = $downloader->fetch('/anime/' . $id);
 
- 		$anime = AnimeParser::parse($animedetails);
-
- 		return $anime;
+		if (strpos($animedetails,'No series found') !== false){
+			return $this->view(Array('error' => 'No series found, check the series id and try again.'), 404);
+		}else{
+			$anime = AnimeParser::parse($animedetails);
+			return $anime;
+		}
 	}
 }

@@ -40,8 +40,11 @@ class MangaController extends FOSRestController
 
 		$mangadetails = $downloader->fetch('/manga/' . $id);
 
- 		$manga = MangaParser::parse($mangadetails);
-
- 		return $manga;
+		if (strpos($mangadetails,'No manga found') !== false){
+			return $this->view(Array('error' => 'No manga found, check the manga id and try again.'), 404);
+		}else{
+			$manga = MangaParser::parse($mangadetails);
+			return $manga;
+		}
 	}
 }

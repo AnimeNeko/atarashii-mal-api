@@ -30,9 +30,12 @@ class SearchController extends FOSRestController {
 		$downloader = $this->get('atarashii_api.communicator');
 		$animecontent = $downloader->fetch('/anime.php?c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&q='.$query.'&show='.(($page*20)-20));
 
- 		$searchanime = Upcoming::parse($animecontent,'anime');
-
- 		return $searchanime;
+                if (strpos($animecontent,'No titles that matched') !== false){
+                    return $this->view(Array('error' => 'No titles that matched your query were found.'), 404);
+                }else{
+                    $searchanime = Upcoming::parse($animecontent,'anime');
+                    return $searchanime;
+                }
 	}
 
 	public function getMangaAction(Request $request)
@@ -45,8 +48,11 @@ class SearchController extends FOSRestController {
 		$downloader = $this->get('atarashii_api.communicator');
 		$mangacontent = $downloader->fetch('/manga.php?c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&q='.$query.'&show='.(($page*20)-20));
 
- 		$searchmanga = Upcoming::parse($mangacontent,'manga');
-
- 		return $searchmanga;
+                if (strpos($mangacontent,'No titles that matched') !== false){
+                    return $this->view(Array('error' => 'No titles that matched your query were found.'), 404);
+                }else{
+                    $searchmanga = Upcoming::parse($mangacontent,'manga');
+                    return $searchmanga;
+                }
 	}
 }
