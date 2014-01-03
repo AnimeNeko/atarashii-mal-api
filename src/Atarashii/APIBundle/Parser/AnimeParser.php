@@ -417,7 +417,7 @@ class AnimeParser {
 		#Watched Status - Only available when user is authenticated
 		$my_data = $crawler->filter('select#myinfo_status');
 		if(iterator_count($my_data) && iterator_count($my_data->filter('option[selected="selected"]'))) {
-			$animerecord->watched_status = Anime::parseWatchedStatus($my_data->filter('option[selected="selected"]')->attr('value'));
+			$animerecord->setWatchedStatus($my_data->filter('option[selected="selected"]')->attr('value'));
 		}
 
 		#Watched Episodes - Only available when user is authenticated

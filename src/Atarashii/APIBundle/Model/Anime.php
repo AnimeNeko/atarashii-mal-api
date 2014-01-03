@@ -34,101 +34,157 @@ class Anime {
 	public $score; //User's score for the anime, from 1 to 10.
 	public $listed_anime_id; //For internal use. This is not listed as a public part of the returned list and it seems to only be used internally in the Ruby API.
 
-	public static function parseAnimeType($typeid) {
-		switch($typeid) {
+	/**
+	 * Set the type property
+	 *
+	 * @param string|int $type The type of series.
+	 *     Can be 1/TV, 2/OVA, 3/Movie, 4/Special, 5/ONA, or 6/Music. The default is "TV".
+	 *
+	 * @return void
+	 */
+	public function setType($type) {
+		switch($type) {
 			case 1:
-				return 'TV';
+			case 'TV':
+				$this->type = 'TV';
 				break;
 			case 2:
-				return 'OVA';
+			case 'OVA':
+				$this->type = 'OVA';
 				break;
 			case 3:
-				return 'Movie';
+			case 'Movie':
+				$this->type = 'Movie';
 				break;
 			case 4:
-				return 'Special';
+			case 'Special':
+				$this->type = 'Special';
 				break;
 			case 5:
-				return 'ONA';
+			case 'ONA':
+				$this->type = 'ONA';
 				break;
 			case 6:
-				return 'Music';
+			case 'Music':
+				$this->type = 'Music';
 				break;
 			default:
-				return 'TV';
+				$this->type = 'TV';
 				break;
 		}
 	}
 
-	public static function parseWatchedStatus($statusid) {
-		switch($statusid) {
+	/**
+	 * Set the watched_status property
+	 *
+	 * @param string|int $status The input status value of an item.
+	 *     Accepts either integers as defined by the MAL API module, or strings as defined by the Ruby API (mal-api.com).
+	 *
+	 * @return void
+	 */
+	public function setWatchedStatus($status) {
+		switch($status) {
 			case 1:
-				return 'watching';
+			case 'watching':
+				$this->watched_status = 'watching';
 				break;
 			case 2:
-				return 'completed';
+			case 'completed':
+				$this->watched_status = 'completed';
 				break;
 			case 3:
-				return 'on-hold';
+			case 'on-hold':
+			case 'onhold':
+				$this->watched_status = 'on-hold';
 				break;
 			case 4:
-				return 'dropped';
+			case 'dropped':
+				$this->watched_status = 'dropped';
 				break;
 			case 6:
-				return 'plan to watch';
-				break;
-			default:
-				return 'watching';
-				break;
-		}
-	}
-
-	public static function getWatchedStatus($status) {
-		switch($status) {
-			case 'watching':
-				return '1';
-				break;
-			case 'completed':
-				return '2';
-				break;
-			case 'onhold':
-				return '3';
-				break;
-			case 'dropped':
-				return '4';
-				break;
+			case 'plan to watch':
 			case 'plantowatch':
-				return '6';
+				$this->watched_status = 'plan to watch';
 				break;
 			default:
-				return '1';
+				$this->watched_status = 'watching';
 				break;
 		}
 	}
 
-	public static function parseAnimeStatus($statusid) {
-		switch($statusid) {
+	/**
+	 * Get the current value of the watched status.
+	 *
+	 * @param string $type What type you want to get back.
+	 *     Currently accepts either "string" or "int". Defaults to "string".
+	 *
+	 * @return string|int
+	 */
+	public function getWatchedStatus($type = 'string') {
+
+		if($type == 'int') {
+			switch($this->watched_status) {
+				case 'watching':
+					return 1;
+					break;
+				case 'completed':
+					return 2;
+					break;
+				case 'on-hold':
+					return 3;
+					break;
+				case 'dropped':
+					return 4;
+					break;
+				case 'plan to watch':
+					return 6;
+					break;
+				default:
+					return 1;
+					break;
+			}
+		} else {
+			return $this->watched_status;
+		}
+
+	}
+
+	/**
+	 * Set the status property
+	 *
+	 * @param int $status The broadcasting status of series.
+	 *     Can be 1 (currently airing), 2 (finished airing) or 3 (not yet aired). The default is "2".
+	 *
+	 * @return void
+	 */
+	public function setStatus($status) {
+		switch($status) {
 			case 1:
-				return 'currently airing';
+				$this->status = 'currently airing';
 				break;
 			case 2:
-				return 'finished airing';
+				$this->status = 'finished airing';
 				break;
 			case 3:
-				return 'not yet aired';
+				$this->status = 'not yet aired';
 				break;
 			default:
-				return 'finished airing';
+				$this->status = 'finished airing';
 				break;
 		}
 	}
 
+	/**
+	 * Return a formatted XML document for updating MAL
+	 *
+	 * @return string An XML document of anime values as defined at http://myanimelist.net/modules.php?go=api#animevalues
+	 */
 	public function MALApiXml() {
 		//For now, just add in the parameters we will use. The MAL API will handle missing items just fine.
 		$xml = new \SimpleXMLElement('<entry/>');
 
 		$xml->addChild('episode', $this->watched_episodes);
-		$xml->addChild('status', $this->watched_status);
+		$xml->addChild('status', $this->getWatchedStatus('int')); //Use int for the MAL API to eliminate problems with strings.
 		$xml->addChild('score', $this->score);
 
 		return $xml->asXML();

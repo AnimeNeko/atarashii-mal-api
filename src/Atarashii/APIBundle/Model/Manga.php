@@ -27,105 +27,153 @@ class Manga {
 	public $score; //User's score for the manga, from 1 to 10.
 	public $listed_manga_id; //For internal use. This is not listed as a public part of the returned list and it seems to only be used internally in the Ruby API.
 
-	public static function parseMangaType($typeid) {
-		switch($typeid) {
+	/**
+	 * Set the type property
+	 *
+	 * @param int $type The type of series.
+	 *     Can be 1/Manga, 2/Novel, 3/One Shot, 4/Doujin, 5/Manwha, 6/Manhua, or 7/OEL. The default is "Manga".
+	 *
+	 * @return void
+	 */
+	public function setType($type) {
+		switch($type) {
 			case 1:
-				return 'Manga';
+				$this->type = 'Manga';
 				break;
 			case 2:
-				return 'Novel';
+				$this->type = 'Novel';
 				break;
 			case 3:
-				return 'One Shot';
+				$this->type = 'One Shot';
 				break;
 			case 4:
-				return 'Doujin';
+				$this->type = 'Doujin';
 				break;
 			case 5:
-				return 'Manwha'; //Korean comics
+				$this->type = 'Manwha'; //Korean comics
 				break;
 			case 6:
-				return 'Manhua'; //Chinese comics
+				$this->type = 'Manhua'; //Chinese comics
 				break;
 			case 7:
-				return 'OEL'; //Original English Language Manga
+				$this->type = 'OEL'; //Original English Language Manga
 				break;
 			default:
-				return 'Manga';
+				$this->type = 'Manga';
 				break;
 		}
 	}
 
-	public static function parseReadStatus($statusid) {
+	/**
+	 * Set the read_status propery
+	 *
+	 * @param string|int $status The input status value of an item. Accepts either integers as defined
+	 *         by the MAL API module, or strings as defined by the Ruby API (mal-api.com).
+	 *
+	 * @return void
+	 */
+	public function setReadStatus($statusid) {
 		switch($statusid) {
 			case 1:
-				return 'reading';
+			case 'reading':
+				$this->read_status = 'reading';
 				break;
 			case 2:
-				return 'completed';
+			case 'completed':
+				$this->read_status = 'completed';
 				break;
 			case 3:
-				return 'on-hold';
+			case 'on-hold':
+			case 'onhold':
+				$this->read_status = 'on-hold';
 				break;
 			case 4:
-				return 'dropped';
+			case 'dropped':
+				$this->read_status = 'dropped';
 				break;
 			case 6:
-				return 'plan to read';
+			case 'plan to read':
+			case 'plantoread':
+				$this->read_status = 'plan to read';
 				break;
 			default:
-				return 'reading';
+				$this->read_status = 'reading';
 				break;
 		}
 	}
 
-	public static function parseMangaStatus($statusid) {
-		switch($statusid) {
+	/**
+	 * Get the current value of the read status.
+	 *
+	 * @param string $type What type you want to get back. Currently accepts either "string" or "int".
+	 *         Defaults to "string".
+	 *
+	 * @return string|int
+	 */
+	public function getReadStatus($type = 'string') {
+		if($type == 'int') {
+			switch($this->read_status) {
+				case 'reading':
+					return 1;
+					break;
+				case 'completed':
+					return 2;
+					break;
+				case 'on-hold':
+					return 3;
+					break;
+				case 'dropped':
+					return 4;
+					break;
+				case 'plan to read':
+					return 6;
+					break;
+				default:
+					return 1;
+					break;
+			}
+		} else {
+			return $this->read_status;
+		}
+	}
+
+	/**
+	 * Set the status property
+	 *
+	 * @param int $status The publishing status of manga.
+	 *     Can be 1 (publishing), 2 (finished) or 3 (not yet published). The default is "2".
+	 *
+	 * @return void
+	 */
+	public function setStatus($status) {
+		switch($status) {
 			case 1:
-				return 'publishing';
+				$this->status = 'publishing';
 				break;
 			case 2:
-				return 'finished';
+				$this->status = 'finished';
 				break;
 			case 3:
-				return 'not yet published';
+				$this->status = 'not yet published';
 				break;
 			default:
-				return 'finished';
+				$this->status = 'finished';
 				break;
 		}
 	}
 
-	public static function getReadStatus($status) {
-		switch($status) {
-			case 'reading':
-				return '1';
-				break;
-			case 'completed':
-				return '2';
-				break;
-			case 'onhold':
-				return '3';
-				break;
-			case 'dropped':
-				return '4';
-				break;
-			case 'plantoread':
-				return '6';
-				break;
-			default:
-				return '1';
-				break;
-		}
-	}
-
+	/**
+	 * Return a formatted XML document for updating MAL
+	 *
+	 * @return string An XML document of manga values as defined at http://myanimelist.net/modules.php?go=api#mangavalues
+	 */
 	public function MALApiXml() {
 		//For now, just add in the parameters we will use. The MAL API will handle missing items just fine.
 		$xml = new \SimpleXMLElement('<entry/>');
 
 		$xml->addChild('chapter', $this->chapters_read);
 		$xml->addChild('volume', $this->volumes_read);
-		$xml->addChild('status', $this->read_status);
+		$xml->addChild('status', $this->getReadStatus('int')); //Use int for the MAL API to eliminate problems with strings.
 		$xml->addChild('score', $this->score);
 
 		return $xml->asXML();

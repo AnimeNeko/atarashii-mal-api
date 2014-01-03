@@ -37,14 +37,14 @@ class AnimeListController extends FOSRestController
 				$alist[$i] = new Anime();
 				$alist[$i]->id = (int) $anime->series_animedb_id;
 				$alist[$i]->title = (string) $anime->series_title;
-				$alist[$i]->type = Anime::parseAnimeType((int) $anime->series_type);
-				$alist[$i]->status = Anime::parseAnimeStatus((int) $anime->series_status);
+				$alist[$i]->setType((int) $anime->series_type);
+				$alist[$i]->setStatus((int) $anime->series_status);
 				$alist[$i]->episodes = (int) $anime->series_episodes;
 				$alist[$i]->image_url = (string) $anime->series_image;
 				$alist[$i]->listed_anime_id = (int) $anime->my_id;
 				$alist[$i]->watched_episodes = (int) $anime->my_watched_episodes;
 				$alist[$i]->score = (int) $anime->my_score;
-				$alist[$i]->watched_status = Anime::parseWatchedStatus((int) $anime->my_status);
+				$alist[$i]->setWatchedStatus((int) $anime->my_status);
 				$i++;
 			}
 
@@ -70,7 +70,7 @@ class AnimeListController extends FOSRestController
 
 		$anime = new Anime();
 		$anime->id = $request->request->get('anime_id');
-		$anime->watched_status = $request->request->get('status');
+		$anime->setWatchedStatus($request->request->get('status'));
 		$anime->watched_episodes = $request->request->get('episodes');
 		$anime->score = $request->request->get('score');
 
@@ -106,7 +106,7 @@ class AnimeListController extends FOSRestController
 
 		$anime = new Anime();
 		$anime->id = $id;
-		$anime->watched_status = $request->request->get('status');
+		$anime->setWatchedStatus($request->request->get('status'));
 		$anime->watched_episodes = $request->request->get('episodes');
 		$anime->score = $request->request->get('score');
 

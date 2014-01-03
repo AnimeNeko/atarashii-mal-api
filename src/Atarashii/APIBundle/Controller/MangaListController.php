@@ -34,8 +34,8 @@ class MangaListController extends FOSRestController {
 				$mlist[$i] = new Manga();
 				$mlist[$i]->id = (int) $manga->series_mangadb_id;
 				$mlist[$i]->title = (string) $manga->series_title;
-				$mlist[$i]->type = Manga::parseMangaType((int) $manga->series_type);
-				$mlist[$i]->status = Manga::parseMangaStatus((int) $manga->series_status);
+				$mlist[$i]->setType((int) $manga->series_type);
+				$mlist[$i]->setStatus((int) $manga->series_status);
 				$mlist[$i]->chapters = (int) $manga->series_chapters;
 				$mlist[$i]->volumes = (int) $manga->series_volumes;
 				$mlist[$i]->image_url = (string) $manga->series_image;
@@ -43,7 +43,7 @@ class MangaListController extends FOSRestController {
 				$mlist[$i]->volumes_read = (int) $manga->my_read_volumes;
 				$mlist[$i]->chapters_read = (int) $manga->my_read_chapters;
 				$mlist[$i]->score = (int) $manga->my_score;
-				$mlist[$i]->read_status = Manga::parseReadStatus((int) $manga->my_status);
+				$mlist[$i]->setReadStatus($manga->my_status);
 				$i++;
 			}
 

@@ -313,7 +313,7 @@ class MangaParser {
 		#Read Status - Only available when user is authenticated
 		$my_data = $crawler->filter('select#myinfo_status');
 		if(iterator_count($my_data) && iterator_count($my_data->filter('option[selected="selected"]'))) {
-			$mangarecord->read_status = Manga::parseReadStatus($my_data->filter('option[selected="selected"]')->attr('value'));
+			$mangarecord->setReadStatus($my_data->filter('option[selected="selected"]')->attr('value'));
 		}
 
 		#Read Chapters - Only available when user is authenticated
