@@ -35,10 +35,18 @@ class AnimeController extends FOSRestController
 				return $view;
 			}
 
-			$downloader->cookieLogin($username, $password);
+			try {
+				$downloader->cookieLogin($username, $password);
+			} catch (\Guzzle\Http\Exception\CurlException $e) {
+				return $this->view(Array('error' => 'network-error'), 500);
+			}
 		}
 
-		$animedetails = $downloader->fetch('/anime/' . $id);
+		try {
+			$animedetails = $downloader->fetch('/anime/' . $id);
+		} catch (\Guzzle\Http\Exception\CurlException $e) {
+			return $this->view(Array('error' => 'network-error'), 500);
+		}
 
 		if (strpos($animedetails,'No series found') !== false){
 			return $this->view(Array('error' => 'No series found, check the series id and try again.'), 404);

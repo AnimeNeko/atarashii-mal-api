@@ -28,7 +28,11 @@ class SearchController extends FOSRestController {
                 $query = $request->query->get('q');
 
 		$downloader = $this->get('atarashii_api.communicator');
-		$animecontent = $downloader->fetch('/anime.php?c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&q='.$query.'&show='.(($page*20)-20));
+		try {
+			$animecontent = $downloader->fetch('/anime.php?c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&q='.$query.'&show='.(($page*20)-20));
+		} catch (\Guzzle\Http\Exception\CurlException $e) {
+			return $this->view(Array('error' => 'network-error'), 500);
+		}
 
                 if (strpos($animecontent,'No titles that matched') !== false){
                     return $this->view(Array('error' => 'No titles that matched your query were found.'), 404);
@@ -46,7 +50,11 @@ class SearchController extends FOSRestController {
                 $query = $request->query->get('q');
 
 		$downloader = $this->get('atarashii_api.communicator');
-		$mangacontent = $downloader->fetch('/manga.php?c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&q='.$query.'&show='.(($page*20)-20));
+		try {
+			$mangacontent = $downloader->fetch('/manga.php?c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&q='.$query.'&show='.(($page*20)-20));
+		} catch (\Guzzle\Http\Exception\CurlException $e) {
+			return $this->view(Array('error' => 'network-error'), 500);
+		}
 
                 if (strpos($mangacontent,'No titles that matched') !== false){
                     return $this->view(Array('error' => 'No titles that matched your query were found.'), 404);

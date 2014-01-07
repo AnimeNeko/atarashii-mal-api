@@ -23,7 +23,12 @@ class TopController extends FOSRestController
 		}
 
 		$downloader = $this->get('atarashii_api.communicator');
-		$animecontent = $downloader->fetch('/topanime.php?type=&limit='.(($page*30)-30));
+
+		try {
+			$animecontent = $downloader->fetch('/topanime.php?type=&limit='.(($page*30)-30));
+		} catch (\Guzzle\Http\Exception\CurlException $e) {
+			return $this->view(Array('error' => 'network-error'), 500);
+		}
 
  		$topanime = Top::parse($animecontent,'anime');;
  		return $topanime;
@@ -41,7 +46,12 @@ class TopController extends FOSRestController
 		}
 
 		$downloader = $this->get('atarashii_api.communicator');
-		$mangacontent = $downloader->fetch('/topmanga.php?type=&limit='.(($page*30)-30));
+
+		try {
+			$mangacontent = $downloader->fetch('/topmanga.php?type=&limit='.(($page*30)-30));
+		} catch (\Guzzle\Http\Exception\CurlException $e) {
+			return $this->view(Array('error' => 'network-error'), 500);
+		}
 
  		$topmanga = Top::parse($mangacontent,'manga');
  		return $topmanga;
@@ -58,7 +68,12 @@ class TopController extends FOSRestController
 			$page = 1;
 		}
 
-		$downloader = $this->get('atarashii_api.communicator');
+		try {
+			$downloader = $this->get('atarashii_api.communicator');
+		} catch (\Guzzle\Http\Exception\CurlException $e) {
+			return $this->view(Array('error' => 'network-error'), 500);
+		}
+
 		$animecontent = $downloader->fetch('/topanime.php?type=bypopularity&limit='.(($page*30)-30));
 
  		$popularanime = Top::parse($animecontent,'anime');;
@@ -77,7 +92,12 @@ class TopController extends FOSRestController
 		}
 
 		$downloader = $this->get('atarashii_api.communicator');
-		$mangacontent = $downloader->fetch('/topmanga.php?type=bypopularity&limit='.(($page*30)-30));
+
+		try {
+			$mangacontent = $downloader->fetch('/topmanga.php?type=bypopularity&limit='.(($page*30)-30));
+		} catch (\Guzzle\Http\Exception\CurlException $e) {
+			return $this->view(Array('error' => 'network-error'), 500);
+		}
 
  		$popularmanga = Top::parse($mangacontent,'manga');
  		return $popularmanga;

@@ -35,10 +35,19 @@ class MangaController extends FOSRestController
 				return $view;
 			}
 
-			$downloader->cookieLogin($username, $password);
+			try {
+				$downloader->cookieLogin($username, $password);
+			} catch (\Guzzle\Http\Exception\CurlException $e) {
+				return $this->view(Array('error' => 'network-error'), 500);
+			}
 		}
 
-		$mangadetails = $downloader->fetch('/manga/' . $id);
+		try {
+			$mangadetails = $downloader->fetch('/manga/' . $id);
+		} catch (\Guzzle\Http\Exception\CurlException $e) {
+			return $this->view(Array('error' => 'network-error'), 500);
+		}
+
 
 		if (strpos($mangadetails,'No manga found') !== false){
 			return $this->view(Array('error' => 'No manga found, check the manga id and try again.'), 404);

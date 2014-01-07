@@ -20,7 +20,12 @@ class UserController extends FOSRestController
 		#http://myanimelist.net/profile/#{username}
 
 		$downloader = $this->get('atarashii_api.communicator');
-		$profilecontent = $downloader->fetch('/profile/' . $username);
+
+		try {
+			$profilecontent = $downloader->fetch('/profile/' . $username);
+		} catch (\Guzzle\Http\Exception\CurlException $e) {
+			return $this->view(Array('error' => 'network-error'), 500);
+		}
 
 		if (strpos($profilecontent,'Failed to find') !== false){
 			return $this->view(Array('error' => 'Failed to find the specified user, please try again.'), 404);
@@ -35,7 +40,12 @@ class UserController extends FOSRestController
 		#http://myanimelist.net/profile/#{username}/friends
 
 		$downloader = $this->get('atarashii_api.communicator');
-		$friendscontent = $downloader->fetch('/profile/' . $username . '/friends');
+
+		try {
+			$friendscontent = $downloader->fetch('/profile/' . $username . '/friends');
+		} catch (\Guzzle\Http\Exception\CurlException $e) {
+			return $this->view(Array('error' => 'network-error'), 500);
+		}
 
 		if (strpos($friendscontent,'Failed to find') !== false){
 			return $this->view(Array('error' => 'Failed to find the specified user, please try again.'), 404);

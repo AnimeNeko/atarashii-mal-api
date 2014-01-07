@@ -21,7 +21,12 @@ class MangaListController extends FOSRestController {
 		#http://myanimelist.net/malappinfo.php?u=#{username}&status=all&type=manga
 
 		$downloader = $this->get('atarashii_api.communicator');
-		$mangalistcontent = $downloader->fetch('/malappinfo.php?u=' . $username . '&status=all&type=manga');
+
+		try {
+			$mangalistcontent = $downloader->fetch('/malappinfo.php?u=' . $username . '&status=all&type=manga');
+		} catch (\Guzzle\Http\Exception\CurlException $e) {
+			return $this->view(Array('error' => 'network-error'), 500);
+		}
 
 		if (strpos($mangalistcontent,'Invalid username') !== false){
 			$mangalist = 'Failed to find the specified user, please try again.';
@@ -81,13 +86,14 @@ class MangaListController extends FOSRestController {
 		try {
 			$result = $connection->sendXML('/api/mangalist/add/' . $manga->id . '.xml', $xmlcontent, $username, $password);
 			return $this->view('ok', 201);
-		}
-		catch (\Guzzle\Http\Exception\ClientErrorResponseException $e) {
+		} catch (\Guzzle\Http\Exception\ClientErrorResponseException $e) {
 			return $this->view(Array('error' => 'unauthorized'), 401);
-		}
-		catch (\Guzzle\Http\Exception\ServerErrorResponseException $e) {
+		} catch (\Guzzle\Http\Exception\ServerErrorResponseException $e) {
 			return $this->view(Array('error' => 'not-found'), 404);
+		} catch (\Guzzle\Http\Exception\CurlException $e) {
+			return $this->view(Array('error' => 'network-error'), 500);
 		}
+
 	}
 
 	public function updateAction(Request $request, $id) {
@@ -118,13 +124,14 @@ class MangaListController extends FOSRestController {
 		try {
 			$result = $connection->sendXML('/api/mangalist/update/' . $manga->id . '.xml', $xmlcontent, $username, $password);
 			return $this->view('ok', 200);
-		}
-		catch (\Guzzle\Http\Exception\ClientErrorResponseException $e) {
+		} catch (\Guzzle\Http\Exception\ClientErrorResponseException $e) {
 			return $this->view(Array('error' => 'unauthorized'), 401);
-		}
-		catch (\Guzzle\Http\Exception\ServerErrorResponseException $e) {
+		} catch (\Guzzle\Http\Exception\ServerErrorResponseException $e) {
 			return $this->view(Array('error' => 'not-found'), 404);
+		} catch (\Guzzle\Http\Exception\CurlException $e) {
+			return $this->view(Array('error' => 'network-error'), 500);
 		}
+
 	}
 
 	public function deleteAction(Request $request, $id) {
@@ -146,13 +153,12 @@ class MangaListController extends FOSRestController {
 		try {
 			$result = $connection->sendXML('/api/mangalist/delete/' . $id . '.xml', '', $username, $password);
 			return $this->view('ok', 200);
-		}
-		catch (\Guzzle\Http\Exception\ClientErrorResponseException $e) {
+		} catch (\Guzzle\Http\Exception\ClientErrorResponseException $e) {
 			return $this->view(Array('error' => 'unauthorized'), 401);
-		}
-		catch (\Guzzle\Http\Exception\ServerErrorResponseException $e) {
+		} catch (\Guzzle\Http\Exception\ServerErrorResponseException $e) {
 			return $this->view(Array('error' => 'not-found'), 404);
+		} catch (\Guzzle\Http\Exception\CurlException $e) {
+			return $this->view(Array('error' => 'network-error'), 500);
 		}
 	}
-
 }
