@@ -23,22 +23,22 @@ class verifyController extends FOSRestController
 
 		//Don't bother making a request if the user didn't send any authentication
 		if($username == null) {
-			return $this->view(Array('error' => 'unauthorized'), 401);
+			$view = $this->view(Array('error' => 'unauthorized'), 401);
+			$view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
+			return $view;
 		}
 
-		$client = new Client('http://myanimelist.net');
-		$client->setUserAgent('Atarashii');
+		$connection = $this->get('atarashii_api.communicator');
 
-		$request = $client->get('/api/account/verify_credentials.xml');
-		$request->setAuth($username, $password);
-
-		// Verify and send the request.
 		try {
-			$response = $request->send();
+			$response = $connection->fetch('/api/account/verify_credentials.xml', $username, $password);
 			return $this->view(Array('authorized' => 'OK'), 200);
-		}
-		catch (\Guzzle\Http\Exception\ClientErrorResponseException $e) {
-			return $this->view(Array('error' => 'unauthorized'), 401);
+		} catch (\Guzzle\Http\Exception\ClientErrorResponseException $e) {
+			$view = $this->view(Array('error' => 'unauthorized'), 401);
+			$view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
+			return $view;
+		} catch (\Guzzle\Http\Exception\CurlException $e) {
+			return $this->view(Array('error' => 'network-error'), 500);
 		}
 	}
 }
