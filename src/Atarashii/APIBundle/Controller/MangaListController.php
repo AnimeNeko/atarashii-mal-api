@@ -68,7 +68,7 @@ class MangaListController extends FOSRestController {
 		//Don't bother making a request if the user didn't send any authentication
 		if($username == null) {
 			$view = $this->view(Array('error' => 'unauthorized'), 401);
-			$view->setHeader('WWW-Authenticate', 'Basic realm="mymangalist.net"');
+			$view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
 			return $view;
 		}
 
@@ -87,7 +87,9 @@ class MangaListController extends FOSRestController {
 			$result = $connection->sendXML('/api/mangalist/add/' . $manga->id . '.xml', $xmlcontent, $username, $password);
 			return $this->view('ok', 201);
 		} catch (\Guzzle\Http\Exception\ClientErrorResponseException $e) {
-			return $this->view(Array('error' => 'unauthorized'), 401);
+			$view = $this->view(Array('error' => 'unauthorized'), 401);
+			$view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
+			return $view;
 		} catch (\Guzzle\Http\Exception\ServerErrorResponseException $e) {
 			return $this->view(Array('error' => 'not-found'), 404);
 		} catch (\Guzzle\Http\Exception\CurlException $e) {
@@ -106,7 +108,7 @@ class MangaListController extends FOSRestController {
 		//Don't bother making a request if the user didn't send any authentication
 		if($username == null) {
 			$view = $this->view(Array('error' => 'unauthorized'), 401);
-			$view->setHeader('WWW-Authenticate', 'Basic realm="mymangalist.net"');
+			$view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
 			return $view;
 		}
 
@@ -125,7 +127,9 @@ class MangaListController extends FOSRestController {
 			$result = $connection->sendXML('/api/mangalist/update/' . $manga->id . '.xml', $xmlcontent, $username, $password);
 			return $this->view('ok', 200);
 		} catch (\Guzzle\Http\Exception\ClientErrorResponseException $e) {
-			return $this->view(Array('error' => 'unauthorized'), 401);
+			$view = $this->view(Array('error' => 'unauthorized'), 401);
+			$view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
+			return $view;
 		} catch (\Guzzle\Http\Exception\ServerErrorResponseException $e) {
 			return $this->view(Array('error' => 'not-found'), 404);
 		} catch (\Guzzle\Http\Exception\CurlException $e) {
@@ -144,7 +148,7 @@ class MangaListController extends FOSRestController {
 		//Don't bother making a request if the user didn't send any authentication
 		if($username == null) {
 			$view = $this->view(Array('error' => 'unauthorized'), 401);
-			$view->setHeader('WWW-Authenticate', 'Basic realm="mymangalist.net"');
+			$view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
 			return $view;
 		}
 
@@ -154,7 +158,9 @@ class MangaListController extends FOSRestController {
 			$result = $connection->sendXML('/api/mangalist/delete/' . $id . '.xml', '', $username, $password);
 			return $this->view('ok', 200);
 		} catch (\Guzzle\Http\Exception\ClientErrorResponseException $e) {
-			return $this->view(Array('error' => 'unauthorized'), 401);
+			$view = $this->view(Array('error' => 'unauthorized'), 401);
+			$view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
+			return $view;
 		} catch (\Guzzle\Http\Exception\ServerErrorResponseException $e) {
 			return $this->view(Array('error' => 'not-found'), 404);
 		} catch (\Guzzle\Http\Exception\CurlException $e) {

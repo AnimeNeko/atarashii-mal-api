@@ -87,7 +87,9 @@ class AnimeListController extends FOSRestController
 			$result = $connection->sendXML('/api/animelist/add/' . $anime->id . '.xml', $xmlcontent, $username, $password);
 			return $this->view('ok', 201);
 		} catch (\Guzzle\Http\Exception\ClientErrorResponseException $e) {
-			return $this->view(Array('error' => 'unauthorized'), 401);
+			$view = $this->view(Array('error' => 'unauthorized'), 401);
+			$view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
+			return $view;
 		} catch (\Guzzle\Http\Exception\ServerErrorResponseException $e) {
 			return $this->view(Array('error' => 'not-found'), 404);
 		} catch (\Guzzle\Http\Exception\CurlException $e) {
@@ -124,7 +126,9 @@ class AnimeListController extends FOSRestController
 			$result = $connection->sendXML('/api/animelist/update/' . $anime->id . '.xml', $xmlcontent, $username, $password);
 			return $this->view('ok', 200);
 		} catch (\Guzzle\Http\Exception\ClientErrorResponseException $e) {
-			return $this->view(Array('error' => 'unauthorized'), 401);
+			$view = $this->view(Array('error' => 'unauthorized'), 401);
+			$view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
+			return $view;
 		} catch (\Guzzle\Http\Exception\ServerErrorResponseException $e) {
 			return $this->view(Array('error' => 'not-found'), 404);
 		} catch (\Guzzle\Http\Exception\CurlException $e) {
@@ -153,7 +157,9 @@ class AnimeListController extends FOSRestController
 			$result = $connection->sendXML('/api/animelist/delete/' . $id . '.xml', '', $username, $password);
 			return $this->view('ok', 200);
 		} catch (\Guzzle\Http\Exception\ClientErrorResponseException $e) {
-			return $this->view(Array('error' => 'unauthorized'), 401);
+			$view = $this->view(Array('error' => 'unauthorized'), 401);
+			$view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
+			return $view;
 		} catch (\Guzzle\Http\Exception\ServerErrorResponseException $e) {
 			return $this->view(Array('error' => 'not-found'), 404);
 		} catch (\Guzzle\Http\Exception\CurlException $e) {
