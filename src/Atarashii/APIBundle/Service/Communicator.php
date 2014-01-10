@@ -10,6 +10,7 @@ class Communicator {
 	private $baseurl;
 	private $client;
 	private $cookies;
+	private $response;
 
 	function __construct($baseurl, $ua) {
 		$this->useragent = $ua;
@@ -45,10 +46,10 @@ class Communicator {
 		}
 
 		// send request / get response
-		$response = $request->send();
+		$this->response = $request->send();
 
 		// this is the response body from the requested page
-		return $response->getBody();
+		return $this->response->getBody();
 	}
 
 	public function sendXML($url, $content, $username = null, $password = null) {
@@ -65,10 +66,10 @@ class Communicator {
 		$request->setPostField('data', $content);
 
 		// send request / get response
-		$response = $request->send();
+		$this->response = $request->send();
 
 		// this is the response body from the requested page
-		return $response->getBody();
+		return $this->response->getBody();
 	}
 
 }
