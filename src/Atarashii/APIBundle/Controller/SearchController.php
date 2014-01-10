@@ -5,6 +5,8 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\Request;
 use Atarashii\APIBundle\Parser\Upcoming;
+use Atarashii\APIBundle\Parser\AnimeParser;
+use Atarashii\APIBundle\Parser\MangaParser;
 
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\CssSelector\CssSelector;
@@ -34,12 +36,18 @@ class SearchController extends FOSRestController {
 			return $this->view(Array('error' => 'network-error'), 500);
 		}
 
-                if (strpos($animecontent,'No titles that matched') !== false){
-                    return $this->view(Array('error' => 'No titles that matched your query were found.'), 404);
-                }else{
-                    $searchanime = Upcoming::parse($animecontent,'anime');
-                    return $searchanime;
-                }
+		if (strpos($animecontent,'No titles that matched') !== false) {
+			return $this->view(Array('error' => 'No titles that matched your query were found.'), 404);
+		} else {
+			if($downloader->wasRedirected()) {
+				$anime = AnimeParser::parse($animecontent);
+				return Array($anime);
+			} else {
+				$searchanime = Upcoming::parse($animecontent,'anime');
+				return $searchanime;
+			}
+		}
+
 	}
 
 	public function getMangaAction(Request $request)
@@ -56,11 +64,16 @@ class SearchController extends FOSRestController {
 			return $this->view(Array('error' => 'network-error'), 500);
 		}
 
-                if (strpos($mangacontent,'No titles that matched') !== false){
-                    return $this->view(Array('error' => 'No titles that matched your query were found.'), 404);
-                }else{
-                    $searchmanga = Upcoming::parse($mangacontent,'manga');
-                    return $searchmanga;
-                }
+		if (strpos($mangacontent,'No titles that matched') !== false){
+			return $this->view(Array('error' => 'No titles that matched your query were found.'), 404);
+		}else{
+			if($downloader->wasRedirected()) {
+				$manga = MangaParser::parse($mangacontent);
+				return Array($manga);
+			} else {
+				$searchmanga = Upcoming::parse($mangacontent,'manga');
+				return $searchmanga;
+			}
+		}
 	}
 }
