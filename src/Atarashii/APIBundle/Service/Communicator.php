@@ -12,6 +12,12 @@ class Communicator {
 	private $cookies;
 	private $response;
 
+	/**
+	 * Create an instance of the communicator.
+	 *
+	 * @param string $baseurl The base URL for the communications. Do not use a terminating slash.
+	 * @param string $ua User-Agent to send.
+	 */
 	function __construct($baseurl, $ua) {
 		$this->useragent = $ua;
 		$this->cookies = new CookiePlugin(new ArrayCookieJar());
@@ -21,6 +27,14 @@ class Communicator {
 		$this->client->addSubscriber($this->cookies);
 	}
 
+	/**
+	 * Login to the MAL Front-end to get a cookie
+	 *
+	 * @param string $username MAL Username
+	 * @param string $password MAL Password
+	 *
+	 * @return void
+	 */
 	public function cookieLogin($username, $password) {
 		// create a request
 		$request = $this->client->post("/login.php");
@@ -35,8 +49,16 @@ class Communicator {
 		$request->send();
 	}
 
+	/**
+	 * Fetch content from a URL
+	 *
+	 * @param string $url Path to access
+	 * @param string $username Optional MAL Username. Default is null.
+	 * @param string $password Optional MAL Password. Default is null.
+	 *
+	 * @return string Contents of the resource at the supplied path.
+	 */
 	public function fetch($url, $username = null, $password = null) {
-
 		// create a request
 		$request = $this->client->get($url);
 		$request->setHeader('User-Agent', $this->useragent);
@@ -52,8 +74,22 @@ class Communicator {
 		return $this->response->getBody();
 	}
 
+	/**
+	 * Post content to a URL
+	 *
+	 * This function is called sendXML as it's intended to send an XML document to
+	 * MAL's official API and assumes certain requirements. Note that MAL usually
+	 * requires authenticated access for API operations, so you should generally
+	 * supply username and password.
+	 *
+	 * @param string $url Path for posting
+	 * @param string $content Content to post to the $url. Generally an XML document.
+	 * @param string $username Optional MAL Username. Default is null.
+	 * @param string $password Optional MAL Password. Default is null.
+	 *
+	 * @return string Contents of the resource at the supplied path.
+	 */
 	public function sendXML($url, $content, $username = null, $password = null) {
-
 		// create a request
 		$request = $this->client->post($url);
 		$request->setHeader('User-Agent', $this->useragent);
@@ -71,5 +107,4 @@ class Communicator {
 		// this is the response body from the requested page
 		return $this->response->getBody();
 	}
-
 }
