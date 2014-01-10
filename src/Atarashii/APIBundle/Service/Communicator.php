@@ -107,4 +107,17 @@ class Communicator {
 		// this is the response body from the requested page
 		return $this->response->getBody();
 	}
+
+	/**
+	 * Determine if a redirect happened
+	 *
+	 * @return boolean States if a redirect occurred during the operation
+	 */
+	public function wasRedirected() {
+		if ($this->response->getRedirectCount()) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	}
 }
