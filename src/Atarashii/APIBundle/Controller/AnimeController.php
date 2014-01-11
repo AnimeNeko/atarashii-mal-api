@@ -4,6 +4,7 @@ namespace Atarashii\APIBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Atarashii\APIBundle\Parser\AnimeParser;
 
 class AnimeController extends FOSRestController
@@ -52,7 +53,26 @@ class AnimeController extends FOSRestController
 			return $this->view(Array('error' => 'No series found, check the series id and try again.'), 404);
 		}else{
 			$anime = AnimeParser::parse($animedetails);
-			return $anime;
+
+			$response = new Response();
+
+			//Only include cache info if it doesn't include personal data.
+			if(!$usepersonal) {
+				$response->setPublic();
+				$response->setMaxAge(3600); //One hour
+				$response->headers->addCacheControlDirective('must-revalidate', true);
+				$response->setEtag('anime/' . $id);
+
+				//Also, set "expires" header for caches that don't understand Cache-Control
+				$date = new \DateTime();
+				$date->modify('+3600 seconds'); //One hour
+				$response->setExpires($date);
+			}
+
+			$view = $this->view($anime);
+			$view->setResponse($response);
+			$view->setStatusCode(200);
+			return $view;
 		}
 	}
 }

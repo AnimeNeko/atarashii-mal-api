@@ -4,6 +4,7 @@ namespace Atarashii\APIBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Atarashii\APIBundle\Parser\MangaParser;
 
 class MangaController extends FOSRestController
@@ -48,12 +49,30 @@ class MangaController extends FOSRestController
 			return $this->view(Array('error' => 'network-error'), 500);
 		}
 
-
 		if (strpos($mangadetails,'No manga found') !== false){
 			return $this->view(Array('error' => 'No manga found, check the manga id and try again.'), 404);
 		}else{
 			$manga = MangaParser::parse($mangadetails);
-			return $manga;
+
+			$response = new Response();
+
+			//Only include cache info if it doesn't include personal data.
+			if(!$usepersonal) {
+				$response->setPublic();
+				$response->setMaxAge(3600); //One hour
+				$response->headers->addCacheControlDirective('must-revalidate', true);
+				$response->setEtag('manga/' . $id);
+
+				//Also, set "expires" header for caches that don't understand Cache-Control
+				$date = new \DateTime();
+				$date->modify('+3600 seconds'); //One hour
+				$response->setExpires($date);
+			}
+
+			$view = $this->view($manga);
+			$view->setResponse($response);
+			$view->setStatusCode(200);
+			return $view;
 		}
 	}
 }
