@@ -3,6 +3,7 @@ namespace Atarashii\APIBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use Symfony\Component\HttpFoundation\Response;
 use Atarashii\APIBundle\Parser\User;
 
 class UserController extends FOSRestController
@@ -27,11 +28,29 @@ class UserController extends FOSRestController
 			return $this->view(Array('error' => 'network-error'), 500);
 		}
 
+		$response = new Response();
+		$response->setPublic();
+		$response->setMaxAge(900); //15 minutes
+		$response->headers->addCacheControlDirective('must-revalidate', true);
+		$response->setEtag('profile/' . $username);
+
+		//Also, set "expires" header for caches that don't understand Cache-Control
+		$date = new \DateTime();
+		$date->modify('+900 seconds'); //15 minutes
+		$response->setExpires($date);
+
 		if (strpos($profilecontent,'Failed to find') !== false){
-			return $this->view(Array('error' => 'Failed to find the specified user, please try again.'), 404);
+			$view = $this->view(Array('error' => 'not-found'));
+			$view->setResponse($response);
+			$view->setStatusCode(404);
+			return $view;
 		}else{
 			$userprofile = User::parse($profilecontent);
-			return $userprofile;
+
+			$view = $this->view($userprofile);
+			$view->setResponse($response);
+			$view->setStatusCode(200);
+			return $view;
 		}
 	}
 
@@ -47,11 +66,29 @@ class UserController extends FOSRestController
 			return $this->view(Array('error' => 'network-error'), 500);
 		}
 
+		$response = new Response();
+		$response->setPublic();
+		$response->setMaxAge(900); //15 minutes
+		$response->headers->addCacheControlDirective('must-revalidate', true);
+		$response->setEtag('friends/' . $username);
+
+		//Also, set "expires" header for caches that don't understand Cache-Control
+		$date = new \DateTime();
+		$date->modify('+900 seconds'); //15 minutes
+		$response->setExpires($date);
+
 		if (strpos($friendscontent,'Failed to find') !== false){
-			return $this->view(Array('error' => 'Failed to find the specified user, please try again.'), 404);
+			$view = $this->view(Array('error' => 'not-found'));
+			$view->setResponse($response);
+			$view->setStatusCode(404);
+			return $view;
 		}else{
 			$friendlist = User::parseFriends($friendscontent);
-			return $friendlist;
+
+			$view = $this->view($friendlist);
+			$view->setResponse($response);
+			$view->setStatusCode(200);
+			return $view;
 		}
 	}
 }
