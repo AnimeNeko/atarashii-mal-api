@@ -35,8 +35,12 @@ class UpcomingController extends FOSRestController
 			return $this->view(Array('error' => 'network-error'), 500);
 		}
 
-		$Upcominganime = Upcoming::parse($animecontent,'anime');
- 		return $Upcominganime;
+		if (strpos($animecontent,'No titles that matched') !== false){
+			return $this->view(Array('error' => 'not-found'), 404);
+		}else{
+			$Upcominganime = Upcoming::parse($animecontent,'anime');
+			return $Upcominganime;
+		}
 	}
 
 	public function getMangaUpcomingAction(Request $request)
@@ -57,9 +61,12 @@ class UpcomingController extends FOSRestController
 			return $this->view(Array('error' => 'network-error'), 500);
 		}
 
- 		$Upcomingmanga = Upcoming::parse($mangacontent,'manga');
-
- 		return $Upcomingmanga;
+ 		if (strpos($mangacontent,'No titles that matched') !== false){
+			return $this->view(Array('error' => 'not-found'), 404);
+		}else{
+			$Upcomingmanga = Upcoming::parse($mangacontent,'manga');
+			return $Upcomingmanga;
+		}
 	}
 
 	/**
@@ -86,8 +93,12 @@ class UpcomingController extends FOSRestController
 			return $this->view(Array('error' => 'network-error'), 500);
 		}
 
-  		$Justaddedanime = Upcoming::parse($animecontent,'anime');
- 		return $Justaddedanime;
+  		if (strpos($animecontent,'No titles that matched') !== false){
+			return $this->view(Array('error' => 'not-found'), 404);
+		}else{
+			$Justaddedanime = Upcoming::parse($animecontent,'anime');
+			return $Justaddedanime;
+		}
 	}
 
 	public function getMangaJustaddedAction(Request $request)
@@ -108,8 +119,11 @@ class UpcomingController extends FOSRestController
 			return $this->view(Array('error' => 'network-error'), 500);
 		}
 
- 		$Justaddedmanga = Upcoming::parse($mangacontent,'manga');
-
- 		return $Justaddedmanga;
+ 		if (strpos($mangacontent,'No titles that matched') !== false){
+			return $this->view(Array('error' => 'not-found'), 404);
+		}else{
+			$Justaddedmanga = Upcoming::parse($mangacontent,'manga');
+			return $Justaddedmanga;
+		}
 	}
 }

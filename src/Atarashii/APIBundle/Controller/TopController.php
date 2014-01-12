@@ -17,8 +17,7 @@ class TopController extends FOSRestController
 
 		$page = (int) $request->query->get('page');
 
-		if ($page <= 0)
-		{
+		if ($page <= 0)	{
 			$page = 1;
 		}
 
@@ -30,8 +29,12 @@ class TopController extends FOSRestController
 			return $this->view(Array('error' => 'network-error'), 500);
 		}
 
- 		$topanime = Top::parse($animecontent,'anime');;
- 		return $topanime;
+		if (strpos($animecontent,'No anime titles') !== false){
+			return $this->view(Array('error' => 'not-found'), 404);
+		}else{
+			$topanime = Top::parse($animecontent,'anime');;
+			return $topanime;
+		}
 	}
 
 	public function getTopMangaAction(Request $request)
@@ -40,8 +43,7 @@ class TopController extends FOSRestController
 
 		$page = (int) $request->query->get('page');
 
-		if ($page <= 0)
-		{
+		if ($page <= 0)	{
 			$page = 1;
 		}
 
@@ -53,8 +55,12 @@ class TopController extends FOSRestController
 			return $this->view(Array('error' => 'network-error'), 500);
 		}
 
- 		$topmanga = Top::parse($mangacontent,'manga');
- 		return $topmanga;
+ 		if (strpos($mangacontent,'No manga titles') !== false){
+			return $this->view(Array('error' => 'not-found'), 404);
+		}else{
+			$topmanga = Top::parse($mangacontent,'manga');
+			return $topmanga;
+		}
 	}
 
 	public function getPopularAnimeAction(Request $request)
@@ -63,21 +69,24 @@ class TopController extends FOSRestController
 
 		$page = (int) $request->query->get('page');
 
-		if ($page <= 0)
-		{
+		if ($page <= 0)	{
 			$page = 1;
 		}
 
+		$downloader = $this->get('atarashii_api.communicator');
+
 		try {
-			$downloader = $this->get('atarashii_api.communicator');
+			$animecontent = $downloader->fetch('/topanime.php?type=bypopularity&limit='.(($page*30)-30));
 		} catch (\Guzzle\Http\Exception\CurlException $e) {
 			return $this->view(Array('error' => 'network-error'), 500);
 		}
 
-		$animecontent = $downloader->fetch('/topanime.php?type=bypopularity&limit='.(($page*30)-30));
-
- 		$popularanime = Top::parse($animecontent,'anime');;
- 		return $popularanime;
+		if (strpos($animecontent,'No anime titles') !== false){
+			return $this->view(Array('error' => 'not-found'), 404);
+		}else{
+			$popularanime = Top::parse($animecontent,'anime');
+			return $popularanime;
+		}
 	}
 
 	public function getPopularMangaAction(Request $request)
@@ -86,8 +95,7 @@ class TopController extends FOSRestController
 
 		$page = (int) $request->query->get('page');
 
-		if ($page <= 0)
-		{
+		if ($page <= 0)	{
 			$page = 1;
 		}
 
@@ -99,7 +107,11 @@ class TopController extends FOSRestController
 			return $this->view(Array('error' => 'network-error'), 500);
 		}
 
- 		$popularmanga = Top::parse($mangacontent,'manga');
- 		return $popularmanga;
+ 		if (strpos($mangacontent,'No manga titles') !== false){
+			return $this->view(Array('error' => 'not-found'), 404);
+		}else{
+			$popularmanga = Top::parse($mangacontent,'manga');
+			return $popularmanga;
+		}
 	}
 }
