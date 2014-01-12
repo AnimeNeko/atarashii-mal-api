@@ -4,6 +4,8 @@ namespace Atarashii\APIBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+
 use Atarashii\APIBundle\Parser\Upcoming;
 use Atarashii\APIBundle\Parser\AnimeParser;
 use Atarashii\APIBundle\Parser\MangaParser;
@@ -36,16 +38,33 @@ class SearchController extends FOSRestController {
 			return $this->view(Array('error' => 'network-error'), 500);
 		}
 
+		$response = new Response();
+		$response->setPublic();
+		$response->setMaxAge(3600); //One hour
+		$response->headers->addCacheControlDirective('must-revalidate', true);
+		$response->setEtag('anime/search/?q=' . urlencode($query));
+
+		//Also, set "expires" header for caches that don't understand Cache-Control
+		$date = new \DateTime();
+		$date->modify('+3600 seconds'); //One hour
+		$response->setExpires($date);
+
 		if (strpos($animecontent,'No titles that matched') !== false) {
-			return $this->view(Array('error' => 'No titles that matched your query were found.'), 404);
+			$view = $this->view(Array('error' => 'not-found'));
+			$view->setResponse($response);
+			$view->setStatusCode(404);
+			return $view;
 		} else {
 			if($downloader->wasRedirected()) {
-				$anime = AnimeParser::parse($animecontent);
-				return Array($anime);
+				$searchanime = Array(AnimeParser::parse($animecontent));
 			} else {
 				$searchanime = Upcoming::parse($animecontent,'anime');
-				return $searchanime;
 			}
+
+			$view = $this->view($searchanime);
+			$view->setResponse($response);
+			$view->setStatusCode(200);
+			return $view;
 		}
 
 	}
@@ -64,16 +83,33 @@ class SearchController extends FOSRestController {
 			return $this->view(Array('error' => 'network-error'), 500);
 		}
 
+		$response = new Response();
+		$response->setPublic();
+		$response->setMaxAge(3600); //One hour
+		$response->headers->addCacheControlDirective('must-revalidate', true);
+		$response->setEtag('manga/search/?q=' . urlencode($query));
+
+		//Also, set "expires" header for caches that don't understand Cache-Control
+		$date = new \DateTime();
+		$date->modify('+3600 seconds'); //One hour
+		$response->setExpires($date);
+
 		if (strpos($mangacontent,'No titles that matched') !== false){
-			return $this->view(Array('error' => 'No titles that matched your query were found.'), 404);
+			$view = $this->view(Array('error' => 'not-found'));
+			$view->setResponse($response);
+			$view->setStatusCode(404);
+			return $view;
 		}else{
 			if($downloader->wasRedirected()) {
-				$manga = MangaParser::parse($mangacontent);
-				return Array($manga);
+				$searchmanga = Array(MangaParser::parse($mangacontent));
 			} else {
 				$searchmanga = Upcoming::parse($mangacontent,'manga');
-				return $searchmanga;
 			}
+
+			$view = $this->view($searchmanga);
+			$view->setResponse($response);
+			$view->setStatusCode(200);
+			return $view;
 		}
 	}
 }
