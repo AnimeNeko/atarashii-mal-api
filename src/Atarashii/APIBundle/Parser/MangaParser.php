@@ -4,7 +4,6 @@ namespace Atarashii\APIBundle\Parser;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\CssSelector\CssSelector;
 use Atarashii\APIBundle\Model\Manga;
-use \DateTime;
 
 class MangaParser {
 	public static function parse($contents, $mine = false) {

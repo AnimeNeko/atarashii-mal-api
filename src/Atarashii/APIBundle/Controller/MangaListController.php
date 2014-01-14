@@ -4,7 +4,6 @@ namespace Atarashii\APIBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\Request;
-use Guzzle\Http\Client;
 use Atarashii\APIBundle\Model\Manga;
 
 use \SimpleXMLElement;

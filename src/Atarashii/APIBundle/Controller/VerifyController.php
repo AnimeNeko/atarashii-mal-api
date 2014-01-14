@@ -1,12 +1,9 @@
 <?php
 namespace Atarashii\APIBundle\Controller;
 
-use Guzzle\Http\Client;
-
 use FOS\RestBundle\Controller\FOSRestController;
-use FOS\RestBundle\Controller\Annotations as Rest;
 
-class verifyController extends FOSRestController
+class VerifyController extends FOSRestController
 {
 
     /**

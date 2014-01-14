@@ -25,7 +25,6 @@ class AnimeParser {
 		$animerecord->title = str_replace($crawler->filter('h1')->children()->text(), '', $crawler->filter('h1')->text());
 		$animerecord->rank = (int) str_replace('Ranked #', '', $crawler->filter('h1 div')->text());
 
-
 		# Title Image
 		# Example:
 		# <a href="http://myanimelist.net/anime/16353/Love_Lab/pic&pid=50257"><img src="http://cdn.myanimelist.net/images/anime/12/50257.jpg" alt="Love Lab" align="center"></a>
@@ -59,7 +58,6 @@ class AnimeParser {
 			$text = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
 			$animerecord->other_titles['japanese'] = explode(', ', $text);
 		}
-
 
 		# Information section.
 		# Example:

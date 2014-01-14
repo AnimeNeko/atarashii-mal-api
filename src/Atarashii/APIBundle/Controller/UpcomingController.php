@@ -7,8 +7,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Atarashii\APIBundle\Parser\Upcoming;
 
-use \SimpleXMLElement;
-
 class UpcomingController extends FOSRestController {
 
      /*
