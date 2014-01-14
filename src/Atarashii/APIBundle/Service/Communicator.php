@@ -17,7 +17,7 @@ class Communicator
      * Create an instance of the communicator.
      *
      * @param string $baseurl The base URL for the communications. Do not use a terminating slash.
-     * @param string $ua User-Agent to send.
+     * @param string $ua      User-Agent to send.
      */
     public function __construct($baseurl, $ua)
     {
@@ -55,7 +55,7 @@ class Communicator
     /**
      * Fetch content from a URL
      *
-     * @param string $url Path to access
+     * @param string $url      Path to access
      * @param string $username Optional MAL Username. Default is null.
      * @param string $password Optional MAL Password. Default is null.
      *
@@ -86,8 +86,8 @@ class Communicator
      * requires authenticated access for API operations, so you should generally
      * supply username and password.
      *
-     * @param string $url Path for posting
-     * @param string $content Content to post to the $url. Generally an XML document.
+     * @param string $url      Path for posting
+     * @param string $content  Content to post to the $url. Generally an XML document.
      * @param string $username Optional MAL Username. Default is null.
      * @param string $password Optional MAL Password. Default is null.
      *
