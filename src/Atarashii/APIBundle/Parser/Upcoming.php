@@ -9,82 +9,83 @@ use \DateTime;
 
 class Upcoming
 {
-	public static function parse($contents,$type)
-	{
-		$crawler = new Crawler();
-		$crawler->addHTMLContent($contents, 'UTF-8');
-		$menubar = true;
+    public static function parse($contents,$type)
+    {
+        $crawler = new Crawler();
+        $crawler->addHTMLContent($contents, 'UTF-8');
+        $menubar = true;
 
-		//Filter into a set of tds from the source HTML table
-		$mediaitems = $crawler->filter('#horiznav_nav')->nextAll()->filterXPath('./div/table/tr');
+        //Filter into a set of tds from the source HTML table
+        $mediaitems = $crawler->filter('#horiznav_nav')->nextAll()->filterXPath('./div/table/tr');
 
-		foreach ($mediaitems as $item) {
-			//tricky methode to skip the menu bar which is also a <tr></tr>
-			if ($menubar == true) {
-				$menubar = false;
-			} else {
-				$resultset[] = self::parseRecord($item, $type);
-			}
-		}
-		return $resultset;
-	}
+        foreach ($mediaitems as $item) {
+            //tricky methode to skip the menu bar which is also a <tr></tr>
+            if ($menubar == true) {
+                $menubar = false;
+            } else {
+                $resultset[] = self::parseRecord($item, $type);
+            }
+        }
 
-	private static function parserecord($item,$type)
-	{
-		$crawler = new Crawler($item);
-		$check = true;
+        return $resultset;
+    }
 
-		//Get the type record.
-		switch ($type) {
-			case 'anime':
-				$media = new Anime();
-				break;
-			case 'manga':
-				$media = new Manga();
-				break;
-		}
+    private static function parserecord($item,$type)
+    {
+        $crawler = new Crawler($item);
+        $check = true;
 
-		//Pull out all the common parts
-		$media->id = (int) str_replace('#sarea','',$crawler->filter('a')->attr('id'));
-		$media->title = $crawler->filter('strong')->text();
-		//I removed the 't' because it will else return a little image
-		$media->image_url = str_replace('t.j','.j',$crawler->filter('img')->attr('src'));
-		$media->type = trim($crawler->filterXPath('//td[3]')->text());
+        //Get the type record.
+        switch ($type) {
+            case 'anime':
+                $media = new Anime();
+                break;
+            case 'manga':
+                $media = new Manga();
+                break;
+        }
 
-		switch ($type) {
-			case 'anime':
-				//Custom parsing for anime
-				$media->episodes = (int) trim($crawler->filterXPath('//td[4]')->text());
+        //Pull out all the common parts
+        $media->id = (int) str_replace('#sarea','',$crawler->filter('a')->attr('id'));
+        $media->title = $crawler->filter('strong')->text();
+        //I removed the 't' because it will else return a little image
+        $media->image_url = str_replace('t.j','.j',$crawler->filter('img')->attr('src'));
+        $media->type = trim($crawler->filterXPath('//td[3]')->text());
 
-				//TODO add a way to format '?'
-				$start_date = trim($crawler->filterXPath('//td[6]')->text());
-				if (strpos($start_date,'?') == false && $start_date !== '-') {
-					$start_date = DateTime::createFromFormat('m-d-y', $start_date)->format(DateTime::ISO8601);
-				}
-				$media->start_date = $start_date;
+        switch ($type) {
+            case 'anime':
+                //Custom parsing for anime
+                $media->episodes = (int) trim($crawler->filterXPath('//td[4]')->text());
 
-				//TODO add a way to format '?'
-				$end_date = trim($crawler->filterXPath('//td[7]')->text());
-				if (strpos($end_date,'?') == false && $end_date !== '-') {
-					$end_date = DateTime::createFromFormat('m-d-y', $end_date)->format(DateTime::ISO8601);
-				}
-				$media->end_date = $end_date;
-				$media->classification = trim($crawler->filterXPath('//td[9]')->text());
-				$media->members_score = (float) trim($crawler->filterXPath('//td[5]')->text());
-				$media->synopsis = trim($crawler->filterXPath('//td[2]//div[3]')->text());
-				break;
-			case 'manga':
-				//Custom parsing for manga
-				$media->type = trim($crawler->filterXPath('//td[3]')->text());
-				$media->chapters = (int) trim($crawler->filterXPath('//td[5]')->text());
-				$media->volumes = (int) trim($crawler->filterXPath('//td[4]')->text());
-				$media->members_score = (float) trim($crawler->filterXPath('//td[6]')->text());
-				$media->synopsis = trim($crawler->filterXPath('//td[2]//div[2]')->text());
-				//$start_date = trim($crawler->filterXPath('//td[7]')->text());
-				//$end_date = trim($crawler->filterXPath('//td[8]')->text());
-				break;
-			}
+                //TODO add a way to format '?'
+                $start_date = trim($crawler->filterXPath('//td[6]')->text());
+                if (strpos($start_date,'?') == false && $start_date !== '-') {
+                    $start_date = DateTime::createFromFormat('m-d-y', $start_date)->format(DateTime::ISO8601);
+                }
+                $media->start_date = $start_date;
 
-		return $media;
-	}
+                //TODO add a way to format '?'
+                $end_date = trim($crawler->filterXPath('//td[7]')->text());
+                if (strpos($end_date,'?') == false && $end_date !== '-') {
+                    $end_date = DateTime::createFromFormat('m-d-y', $end_date)->format(DateTime::ISO8601);
+                }
+                $media->end_date = $end_date;
+                $media->classification = trim($crawler->filterXPath('//td[9]')->text());
+                $media->members_score = (float) trim($crawler->filterXPath('//td[5]')->text());
+                $media->synopsis = trim($crawler->filterXPath('//td[2]//div[3]')->text());
+                break;
+            case 'manga':
+                //Custom parsing for manga
+                $media->type = trim($crawler->filterXPath('//td[3]')->text());
+                $media->chapters = (int) trim($crawler->filterXPath('//td[5]')->text());
+                $media->volumes = (int) trim($crawler->filterXPath('//td[4]')->text());
+                $media->members_score = (float) trim($crawler->filterXPath('//td[6]')->text());
+                $media->synopsis = trim($crawler->filterXPath('//td[2]//div[2]')->text());
+                //$start_date = trim($crawler->filterXPath('//td[7]')->text());
+                //$end_date = trim($crawler->filterXPath('//td[8]')->text());
+                break;
+            }
+
+        return $media;
+    }
 }

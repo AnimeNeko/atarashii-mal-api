@@ -16,79 +16,83 @@ class UserController extends FOSRestController
      *
      * @Rest\View()
      */
-	public function getProfileAction($username)
-	{
-		#http://myanimelist.net/profile/#{username}
+    public function getProfileAction($username)
+    {
+        #http://myanimelist.net/profile/#{username}
 
-		$downloader = $this->get('atarashii_api.communicator');
+        $downloader = $this->get('atarashii_api.communicator');
 
-		try {
-			$profilecontent = $downloader->fetch('/profile/' . $username);
-		} catch (\Guzzle\Http\Exception\CurlException $e) {
-			return $this->view(Array('error' => 'network-error'), 500);
-		}
+        try {
+            $profilecontent = $downloader->fetch('/profile/' . $username);
+        } catch (\Guzzle\Http\Exception\CurlException $e) {
+            return $this->view(Array('error' => 'network-error'), 500);
+        }
 
-		$response = new Response();
-		$response->setPublic();
-		$response->setMaxAge(900); //15 minutes
-		$response->headers->addCacheControlDirective('must-revalidate', true);
-		$response->setEtag('profile/' . $username);
+        $response = new Response();
+        $response->setPublic();
+        $response->setMaxAge(900); //15 minutes
+        $response->headers->addCacheControlDirective('must-revalidate', true);
+        $response->setEtag('profile/' . $username);
 
-		//Also, set "expires" header for caches that don't understand Cache-Control
-		$date = new \DateTime();
-		$date->modify('+900 seconds'); //15 minutes
-		$response->setExpires($date);
+        //Also, set "expires" header for caches that don't understand Cache-Control
+        $date = new \DateTime();
+        $date->modify('+900 seconds'); //15 minutes
+        $response->setExpires($date);
 
-		if (strpos($profilecontent,'Failed to find') !== false) {
-			$view = $this->view(Array('error' => 'not-found'));
-			$view->setResponse($response);
-			$view->setStatusCode(404);
-			return $view;
-		} else {
-			$userprofile = User::parse($profilecontent);
+        if (strpos($profilecontent,'Failed to find') !== false) {
+            $view = $this->view(Array('error' => 'not-found'));
+            $view->setResponse($response);
+            $view->setStatusCode(404);
 
-			$view = $this->view($userprofile);
-			$view->setResponse($response);
-			$view->setStatusCode(200);
-			return $view;
-		}
-	}
+            return $view;
+        } else {
+            $userprofile = User::parse($profilecontent);
 
-	public function getFriendsAction($username)
-	{
-		#http://myanimelist.net/profile/#{username}/friends
+            $view = $this->view($userprofile);
+            $view->setResponse($response);
+            $view->setStatusCode(200);
 
-		$downloader = $this->get('atarashii_api.communicator');
+            return $view;
+        }
+    }
 
-		try {
-			$friendscontent = $downloader->fetch('/profile/' . $username . '/friends');
-		} catch (\Guzzle\Http\Exception\CurlException $e) {
-			return $this->view(Array('error' => 'network-error'), 500);
-		}
+    public function getFriendsAction($username)
+    {
+        #http://myanimelist.net/profile/#{username}/friends
 
-		$response = new Response();
-		$response->setPublic();
-		$response->setMaxAge(900); //15 minutes
-		$response->headers->addCacheControlDirective('must-revalidate', true);
-		$response->setEtag('friends/' . $username);
+        $downloader = $this->get('atarashii_api.communicator');
 
-		//Also, set "expires" header for caches that don't understand Cache-Control
-		$date = new \DateTime();
-		$date->modify('+900 seconds'); //15 minutes
-		$response->setExpires($date);
+        try {
+            $friendscontent = $downloader->fetch('/profile/' . $username . '/friends');
+        } catch (\Guzzle\Http\Exception\CurlException $e) {
+            return $this->view(Array('error' => 'network-error'), 500);
+        }
 
-		if (strpos($friendscontent,'Failed to find') !== false) {
-			$view = $this->view(Array('error' => 'not-found'));
-			$view->setResponse($response);
-			$view->setStatusCode(404);
-			return $view;
-		} else {
-			$friendlist = User::parseFriends($friendscontent);
+        $response = new Response();
+        $response->setPublic();
+        $response->setMaxAge(900); //15 minutes
+        $response->headers->addCacheControlDirective('must-revalidate', true);
+        $response->setEtag('friends/' . $username);
 
-			$view = $this->view($friendlist);
-			$view->setResponse($response);
-			$view->setStatusCode(200);
-			return $view;
-		}
-	}
+        //Also, set "expires" header for caches that don't understand Cache-Control
+        $date = new \DateTime();
+        $date->modify('+900 seconds'); //15 minutes
+        $response->setExpires($date);
+
+        if (strpos($friendscontent,'Failed to find') !== false) {
+            $view = $this->view(Array('error' => 'not-found'));
+            $view->setResponse($response);
+            $view->setStatusCode(404);
+
+            return $view;
+        } else {
+            $friendlist = User::parseFriends($friendscontent);
+
+            $view = $this->view($friendlist);
+            $view->setResponse($response);
+            $view->setStatusCode(200);
+
+            return $view;
+        }
+    }
 }

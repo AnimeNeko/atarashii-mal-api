@@ -7,123 +7,123 @@ use Guzzle\Plugin\Cookie\CookieJar\ArrayCookieJar;
 
 class Communicator
 {
-	private $useragent;
-	private $baseurl;
-	private $client;
-	private $cookies;
-	private $response;
+    private $useragent;
+    private $baseurl;
+    private $client;
+    private $cookies;
+    private $response;
 
-	/**
-	 * Create an instance of the communicator.
-	 *
-	 * @param string $baseurl The base URL for the communications. Do not use a terminating slash.
-	 * @param string $ua User-Agent to send.
-	 */
-	public function __construct($baseurl, $ua)
-	{
-		$this->useragent = $ua;
-		$this->cookies = new CookiePlugin(new ArrayCookieJar());
+    /**
+     * Create an instance of the communicator.
+     *
+     * @param string $baseurl The base URL for the communications. Do not use a terminating slash.
+     * @param string $ua User-Agent to send.
+     */
+    public function __construct($baseurl, $ua)
+    {
+        $this->useragent = $ua;
+        $this->cookies = new CookiePlugin(new ArrayCookieJar());
 
-		// create http client instance
-		$this->client = new Client($baseurl);
-		$this->client->addSubscriber($this->cookies);
-	}
+        // create http client instance
+        $this->client = new Client($baseurl);
+        $this->client->addSubscriber($this->cookies);
+    }
 
-	/**
-	 * Login to the MAL Front-end to get a cookie
-	 *
-	 * @param string $username MAL Username
-	 * @param string $password MAL Password
-	 *
-	 * @return void
-	 */
-	public function cookieLogin($username, $password)
-	{
-		// create a request
-		$request = $this->client->post("/login.php");
-		$request->setHeader('User-Agent', $this->useragent);
+    /**
+     * Login to the MAL Front-end to get a cookie
+     *
+     * @param string $username MAL Username
+     * @param string $password MAL Password
+     *
+     * @return void
+     */
+    public function cookieLogin($username, $password)
+    {
+        // create a request
+        $request = $this->client->post("/login.php");
+        $request->setHeader('User-Agent', $this->useragent);
 
-		//Add our data transmission - MAL requires the XML content to be in a variable named "data"
-		$request->setPostField('username', $username);
-		$request->setPostField('password', $password);
-		$request->setPostField('sublogin', ' Login ');
+        //Add our data transmission - MAL requires the XML content to be in a variable named "data"
+        $request->setPostField('username', $username);
+        $request->setPostField('password', $password);
+        $request->setPostField('sublogin', ' Login ');
 
-		// send request
-		$request->send();
-	}
+        // send request
+        $request->send();
+    }
 
-	/**
-	 * Fetch content from a URL
-	 *
-	 * @param string $url Path to access
-	 * @param string $username Optional MAL Username. Default is null.
-	 * @param string $password Optional MAL Password. Default is null.
-	 *
-	 * @return string Contents of the resource at the supplied path.
-	 */
-	public function fetch($url, $username = null, $password = null)
-	{
-		// create a request
-		$request = $this->client->get($url);
-		$request->setHeader('User-Agent', $this->useragent);
+    /**
+     * Fetch content from a URL
+     *
+     * @param string $url Path to access
+     * @param string $username Optional MAL Username. Default is null.
+     * @param string $password Optional MAL Password. Default is null.
+     *
+     * @return string Contents of the resource at the supplied path.
+     */
+    public function fetch($url, $username = null, $password = null)
+    {
+        // create a request
+        $request = $this->client->get($url);
+        $request->setHeader('User-Agent', $this->useragent);
 
-		if ($username) {
-			$request->setAuth($username, $password);
-		}
+        if ($username) {
+            $request->setAuth($username, $password);
+        }
 
-		// send request / get response
-		$this->response = $request->send();
+        // send request / get response
+        $this->response = $request->send();
 
-		// this is the response body from the requested page
-		return $this->response->getBody();
-	}
+        // this is the response body from the requested page
+        return $this->response->getBody();
+    }
 
-	/**
-	 * Post content to a URL
-	 *
-	 * This function is called sendXML as it's intended to send an XML document to
-	 * MAL's official API and assumes certain requirements. Note that MAL usually
-	 * requires authenticated access for API operations, so you should generally
-	 * supply username and password.
-	 *
-	 * @param string $url Path for posting
-	 * @param string $content Content to post to the $url. Generally an XML document.
-	 * @param string $username Optional MAL Username. Default is null.
-	 * @param string $password Optional MAL Password. Default is null.
-	 *
-	 * @return string Contents of the resource at the supplied path.
-	 */
-	public function sendXML($url, $content, $username = null, $password = null)
-	{
-		// create a request
-		$request = $this->client->post($url);
-		$request->setHeader('User-Agent', $this->useragent);
+    /**
+     * Post content to a URL
+     *
+     * This function is called sendXML as it's intended to send an XML document to
+     * MAL's official API and assumes certain requirements. Note that MAL usually
+     * requires authenticated access for API operations, so you should generally
+     * supply username and password.
+     *
+     * @param string $url Path for posting
+     * @param string $content Content to post to the $url. Generally an XML document.
+     * @param string $username Optional MAL Username. Default is null.
+     * @param string $password Optional MAL Password. Default is null.
+     *
+     * @return string Contents of the resource at the supplied path.
+     */
+    public function sendXML($url, $content, $username = null, $password = null)
+    {
+        // create a request
+        $request = $this->client->post($url);
+        $request->setHeader('User-Agent', $this->useragent);
 
-		if ($username) {
-			$request->setAuth($username, $password);
-		}
+        if ($username) {
+            $request->setAuth($username, $password);
+        }
 
-		//Add our data transmission - MAL requires the XML content to be in a variable named "data"
-		$request->setPostField('data', $content);
+        //Add our data transmission - MAL requires the XML content to be in a variable named "data"
+        $request->setPostField('data', $content);
 
-		// send request / get response
-		$this->response = $request->send();
+        // send request / get response
+        $this->response = $request->send();
 
-		// this is the response body from the requested page
-		return $this->response->getBody();
-	}
+        // this is the response body from the requested page
+        return $this->response->getBody();
+    }
 
-	/**
-	 * Determine if a redirect happened
-	 *
-	 * @return boolean States if a redirect occurred during the operation
-	 */
-	public function wasRedirected()
-	{
-		if ($this->response->getRedirectCount()) {
-			return TRUE;
-		} else {
-			return FALSE;
-		}
-	}
+    /**
+     * Determine if a redirect happened
+     *
+     * @return boolean States if a redirect occurred during the operation
+     */
+    public function wasRedirected()
+    {
+        if ($this->response->getRedirectCount()) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
 }

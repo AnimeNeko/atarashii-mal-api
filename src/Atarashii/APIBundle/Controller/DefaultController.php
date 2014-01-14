@@ -9,6 +9,6 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-    	return new Response('<html><body><p>API Index</p></body></html>');
+        return new Response('<html><body><p>API Index</p></body></html>');
     }
 }
