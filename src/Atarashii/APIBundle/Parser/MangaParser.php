@@ -5,9 +5,10 @@ use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\CssSelector\CssSelector;
 use Atarashii\APIBundle\Model\Manga;
 
-class MangaParser {
-	public static function parse($contents, $mine = false) {
-
+class MangaParser
+{
+	public static function parse($contents, $mine = false)
+	{
 		$crawler = new Crawler();
 		$crawler->addHTMLContent($contents, 'UTF-8');
 
@@ -44,21 +45,21 @@ class MangaParser {
 
 		# English:
 		$extracted = $leftcolumn->filterXPath('//span[text()="English:"]');
-		if(iterator_count($extracted) > 0) {
+		if (iterator_count($extracted) > 0) {
 			$text = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
 			$mangarecord->other_titles['english'] = explode(', ', $text);
 		}
 
 		# Synonyms:
 		$extracted = $leftcolumn->filterXPath('//span[text()="Synonyms:"]');
-		if(iterator_count($extracted) > 0) {
+		if (iterator_count($extracted) > 0) {
 			$text = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
 			$mangarecord->other_titles['synonyms'] = explode(', ', $text);
 		}
 
 		# Japanese:
 		$extracted = $leftcolumn->filterXPath('//span[text()="Japanese:"]');
-		if(iterator_count($extracted) > 0) {
+		if (iterator_count($extracted) > 0) {
 			$text = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
 			$mangarecord->other_titles['japanese'] = explode(', ', $text);
 		}
@@ -84,51 +85,47 @@ class MangaParser {
 
 		# Type:
 		$extracted = $leftcolumn->filterXPath('//span[text()="Type:"]');
-		if(iterator_count($extracted) > 0) {
+		if (iterator_count($extracted) > 0) {
 			$mangarecord->type = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
 		}
 
 		# Volumes:
 		$extracted = $leftcolumn->filterXPath('//span[text()="Volumes:"]');
-		if(iterator_count($extracted) > 0) {
+		if (iterator_count($extracted) > 0) {
 			$data = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
 
-			if($data != "Unknown") {
+			if ($data != "Unknown") {
 				$mangarecord->volumes = (int) $data;
-			}
-			else {
+			} else {
 				$mangarecord->volumes = null;
 			}
-		}
-		else {
+		} else {
 			$mangarecord->volumes = null;
 		}
 
 		# Chapters:
 		$extracted = $leftcolumn->filterXPath('//span[text()="Chapters:"]');
-		if(iterator_count($extracted) > 0) {
+		if (iterator_count($extracted) > 0) {
 			$data = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
 
-			if($data != "Unknown") {
+			if ($data != "Unknown") {
 				$mangarecord->chapters = (int) $data;
-			}
-			else {
+			} else {
 				$mangarecord->chapters = null;
 			}
-		}
-		else {
+		} else {
 			$mangarecord->chapters = null;
 		}
 
 		# Status:
 		$extracted = $leftcolumn->filterXPath('//span[text()="Status:"]');
-		if(iterator_count($extracted) > 0) {
+		if (iterator_count($extracted) > 0) {
 			$mangarecord->status = strtolower(trim(str_replace($extracted->text(), '', $extracted->parents()->text())));
 		}
 
 		# Genres:
 		$extracted = $leftcolumn->filterXPath('//span[text()="Genres:"]');
-		if(iterator_count($extracted) > 0) {
+		if (iterator_count($extracted) > 0) {
 			$mangarecord->genres = explode(', ', trim(str_replace($extracted->text(), '', $extracted->parents()->text())));
 		}
 
@@ -145,7 +142,7 @@ class MangaParser {
 		//TODO: Rewrite to properly clean up excess tags.
 		# Score:
 		$extracted = $leftcolumn->filterXPath('//span[text()="Score:"]');
-		if(iterator_count($extracted) > 0) {
+		if (iterator_count($extracted) > 0) {
 			$extracted = str_replace($extracted->text(), '', $extracted->parents()->text());
 			//Remove the parenthetical at the end of the string
 			$extracted = trim(str_replace(strstr($extracted, '('), '', $extracted));
@@ -156,7 +153,7 @@ class MangaParser {
 
 		# Popularity:
 		$extracted = $leftcolumn->filterXPath('//span[text()="Popularity:"]');
-		if(iterator_count($extracted) > 0) {
+		if (iterator_count($extracted) > 0) {
 			$extracted = str_replace($extracted->text(), '', $extracted->parents()->text());
 			//Remove the hash at the front of the string and trim whitespace. Needed so we can cast to an int.
 			$extracted = trim(str_replace('#', '', $extracted));
@@ -165,7 +162,7 @@ class MangaParser {
 
 		# Members:
 		$extracted = $leftcolumn->filterXPath('//span[text()="Members:"]');
-		if(iterator_count($extracted) > 0) {
+		if (iterator_count($extracted) > 0) {
 			$extracted = str_replace($extracted->text(), '', $extracted->parents()->text());
 			//PHP doesn't like commas in integers. Remove it.
 			$extracted = trim(str_replace(',', '', $extracted));
@@ -174,7 +171,7 @@ class MangaParser {
 
 		# Members:
 		$extracted = $leftcolumn->filterXPath('//span[text()="Favorites:"]');
-		if(iterator_count($extracted) > 0) {
+		if (iterator_count($extracted) > 0) {
 			$extracted = str_replace($extracted->text(), '', $extracted->parents()->text());
 			//PHP doesn't like commas in integers. Remove it.
 			$extracted = trim(str_replace(',', '', $extracted));
@@ -189,7 +186,7 @@ class MangaParser {
 		#   <a href="http://myanimelist.net/manga.php?tag=slice of life" style="font-size: 11px" title="207 people tagged with slice of life">slice of life</a>
 		# </span>
         $extracted = $leftcolumn->filterXPath('//h2[text()="Popular Tags"]')->nextAll()->filter('a');
-        foreach($extracted as $term) {
+        foreach ($extracted as $term) {
         	$mangarecord->tags[] = $term->textContent;
 		}
 
@@ -208,7 +205,7 @@ class MangaParser {
 
 		//Compatibility Note: We don't convert extended characters to HTML entities, we just
 		//use the output directly from MAL. This should be okay as our return charset is UTF-8.
-		if(iterator_count($extracted) > 0) {
+		if (iterator_count($extracted) > 0) {
 			$extracted = str_replace($extracted->html(), '', $extracted->parents()->html());
 			$extracted = str_replace('<h2></h2>', '', $extracted);
 			$mangarecord->synopsis = $extracted;
@@ -225,15 +222,14 @@ class MangaParser {
 		//NOTE: We don't grab "Alternative Setting" or "Other" titles.
 		if (iterator_count($related)) {
 			//Get all the content between the "Related Anime" h2 and the next h2 tag.
-			if(preg_match('/\<h2\>Related Manga\<\/h2\>(.+?)\<h2\>/', $related->parents()->html(), $relatedcontent)) {
+			if (preg_match('/\<h2\>Related Manga\<\/h2\>(.+?)\<h2\>/', $related->parents()->html(), $relatedcontent)) {
 				$relatedcontent = $relatedcontent[1];
 
 				#Adaptation
-				if(preg_match('/Adaptation\: ?(<a .+?)\<br/', $relatedcontent, $relateditems)) {
+				if (preg_match('/Adaptation\: ?(<a .+?)\<br/', $relatedcontent, $relateditems)) {
 					$relateditems = explode(', ', $relateditems[1]);
-					foreach($relateditems as $item) {
-						if(preg_match('/<a href="(http:\/\/myanimelist.net\/anime\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts))
-						{
+					foreach ($relateditems as $item) {
+						if (preg_match('/<a href="(http:\/\/myanimelist.net\/anime\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
 							$itemarray = array();
 							$itemarray['manga_id'] = $itemparts[2];
 							$itemarray['title'] = $itemparts[3];
@@ -245,11 +241,10 @@ class MangaParser {
 
 				#Related Manga
 				#NOTE: This doesn't seem to work as intended, but matches behavior of the Ruby API
-				if(preg_match('/.+\: ?(<a .+?)\<br/', $relatedcontent, $relateditems)) {
+				if (preg_match('/.+\: ?(<a .+?)\<br/', $relatedcontent, $relateditems)) {
 					$relateditems = explode(', ', $relateditems[1]);
-					foreach($relateditems as $item) {
-						if(preg_match('/<a href="(http:\/\/myanimelist.net\/manga\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts))
-						{
+					foreach ($relateditems as $item) {
+						if (preg_match('/<a href="(http:\/\/myanimelist.net\/manga\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
 							$itemarray = array();
 							$itemarray['manga_id'] = $itemparts[2];
 							$itemarray['title'] = $itemparts[3];
@@ -260,11 +255,10 @@ class MangaParser {
 				}
 
 				#Alternative Versions
-				if(preg_match('/Alternative versions?\: ?(<a .+?)\<br/', $relatedcontent, $relateditems)) {
+				if (preg_match('/Alternative versions?\: ?(<a .+?)\<br/', $relatedcontent, $relateditems)) {
 					$relateditems = explode(', ', $relateditems[1]);
-					foreach($relateditems as $item) {
-						if(preg_match('/<a href="(http:\/\/myanimelist.net\/manga\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts))
-						{
+					foreach ($relateditems as $item) {
+						if (preg_match('/<a href="(http:\/\/myanimelist.net\/manga\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
 							$itemarray = array();
 							$itemarray['anime_id'] = $itemparts[2];
 							$itemarray['title'] = $itemparts[3];
@@ -311,32 +305,32 @@ class MangaParser {
 
 		#Read Status - Only available when user is authenticated
 		$my_data = $crawler->filter('select#myinfo_status');
-		if(iterator_count($my_data) && iterator_count($my_data->filter('option[selected="selected"]'))) {
+		if (iterator_count($my_data) && iterator_count($my_data->filter('option[selected="selected"]'))) {
 			$mangarecord->setReadStatus($my_data->filter('option[selected="selected"]')->attr('value'));
 		}
 
 		#Read Chapters - Only available when user is authenticated
 		$my_data = $crawler->filter('input#myinfo_chapters');
-		if(iterator_count($my_data)) {
+		if (iterator_count($my_data)) {
 			$mangarecord->chapters_read = (int) $my_data->attr('value');
 		}
 
 		#Read Volumes - Only available when user is authenticated
 		$my_data = $crawler->filter('input#myinfo_volumes');
-		if(iterator_count($my_data)) {
+		if (iterator_count($my_data)) {
 			$mangarecord->volumes_read = (int) $my_data->attr('value');
 		}
 
 		#User's Score - Only available when user is authenticated
 		$my_data = $crawler->filter('select#myinfo_score');
-		if(iterator_count($my_data) && iterator_count($my_data->filter('option[selected="selected"]'))) {
+		if (iterator_count($my_data) && iterator_count($my_data->filter('option[selected="selected"]'))) {
 			$mangarecord->score = (int) $my_data->filter('option[selected="selected"]')->attr('value');
 		}
 
 		#Listed ID (?) - Only available when user is authenticated
 		$my_data = $crawler->filterXPath('//a[text()="Edit Details"]');
-		if(iterator_count($my_data)) {
-			if(preg_match('/id=(\d+)/', $my_data->attr('href'), $my_data)) {
+		if (iterator_count($my_data)) {
+			if (preg_match('/id=(\d+)/', $my_data->attr('href'), $my_data)) {
 				$mangarecord->listed_manga_id = (int) $my_data[1];
 			}
 		}

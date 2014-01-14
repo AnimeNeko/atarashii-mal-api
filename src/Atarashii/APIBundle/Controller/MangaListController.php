@@ -8,7 +8,8 @@ use Atarashii\APIBundle\Model\Manga;
 
 use \SimpleXMLElement;
 
-class MangaListController extends FOSRestController {
+class MangaListController extends FOSRestController
+{
     /**
      * Mangalist get action
      * @var string $username username
@@ -16,7 +17,8 @@ class MangaListController extends FOSRestController {
      *
      * @Rest\View()
      */
-	public function getAction($username) {
+	public function getAction($username)
+	{
 		#http://myanimelist.net/malappinfo.php?u=#{username}&status=all&type=manga
 
 		$downloader = $this->get('atarashii_api.communicator');
@@ -27,9 +29,9 @@ class MangaListController extends FOSRestController {
 			return $this->view(Array('error' => 'network-error'), 500);
 		}
 
-		if (strpos($mangalistcontent,'Invalid username') !== false){
+		if (strpos($mangalistcontent,'Invalid username') !== false) {
 			$mangalist = 'Failed to find the specified user, please try again.';
-		}else{
+		} else {
 			$mangalistxml = new SimpleXMLElement($mangalistcontent);
 			$mlist = array();
 
@@ -57,7 +59,8 @@ class MangaListController extends FOSRestController {
  		return $mangalist;
 	}
 
-	public function addAction(Request $request) {
+	public function addAction(Request $request)
+	{
 		#http://mymangalist.net/api/mangalist/add/#{id}.xml
 
 		//get the credentials we received
@@ -65,7 +68,7 @@ class MangaListController extends FOSRestController {
 		$password = $this->getRequest()->server->get('PHP_AUTH_PW');
 
 		//Don't bother making a request if the user didn't send any authentication
-		if($username == null) {
+		if ($username == null) {
 			$view = $this->view(Array('error' => 'unauthorized'), 401);
 			$view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
 			return $view;
@@ -97,7 +100,8 @@ class MangaListController extends FOSRestController {
 
 	}
 
-	public function updateAction(Request $request, $id) {
+	public function updateAction(Request $request, $id)
+	{
 		#http://mymangalist.net/api/mangalist/update/#{id}.xml
 
 		//get the credentials we received
@@ -105,7 +109,7 @@ class MangaListController extends FOSRestController {
 		$password = $this->getRequest()->server->get('PHP_AUTH_PW');
 
 		//Don't bother making a request if the user didn't send any authentication
-		if($username == null) {
+		if ($username == null) {
 			$view = $this->view(Array('error' => 'unauthorized'), 401);
 			$view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
 			return $view;
@@ -137,7 +141,8 @@ class MangaListController extends FOSRestController {
 
 	}
 
-	public function deleteAction(Request $request, $id) {
+	public function deleteAction(Request $request, $id)
+	{
 		#http://mymangalist.net/api/mangalist/delete/#{id}.xml
 
 		//get the credentials we received
@@ -145,7 +150,7 @@ class MangaListController extends FOSRestController {
 		$password = $this->getRequest()->server->get('PHP_AUTH_PW');
 
 		//Don't bother making a request if the user didn't send any authentication
-		if($username == null) {
+		if ($username == null) {
 			$view = $this->view(Array('error' => 'unauthorized'), 401);
 			$view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
 			return $view;

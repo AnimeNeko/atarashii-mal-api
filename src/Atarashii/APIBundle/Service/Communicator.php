@@ -5,7 +5,8 @@ use Guzzle\Http\Client;
 use Guzzle\Plugin\Cookie\CookiePlugin;
 use Guzzle\Plugin\Cookie\CookieJar\ArrayCookieJar;
 
-class Communicator {
+class Communicator
+{
 	private $useragent;
 	private $baseurl;
 	private $client;
@@ -18,7 +19,8 @@ class Communicator {
 	 * @param string $baseurl The base URL for the communications. Do not use a terminating slash.
 	 * @param string $ua User-Agent to send.
 	 */
-	function __construct($baseurl, $ua) {
+	public function __construct($baseurl, $ua)
+	{
 		$this->useragent = $ua;
 		$this->cookies = new CookiePlugin(new ArrayCookieJar());
 
@@ -35,7 +37,8 @@ class Communicator {
 	 *
 	 * @return void
 	 */
-	public function cookieLogin($username, $password) {
+	public function cookieLogin($username, $password)
+	{
 		// create a request
 		$request = $this->client->post("/login.php");
 		$request->setHeader('User-Agent', $this->useragent);
@@ -58,12 +61,13 @@ class Communicator {
 	 *
 	 * @return string Contents of the resource at the supplied path.
 	 */
-	public function fetch($url, $username = null, $password = null) {
+	public function fetch($url, $username = null, $password = null)
+	{
 		// create a request
 		$request = $this->client->get($url);
 		$request->setHeader('User-Agent', $this->useragent);
 
-		if($username) {
+		if ($username) {
 			$request->setAuth($username, $password);
 		}
 
@@ -89,12 +93,13 @@ class Communicator {
 	 *
 	 * @return string Contents of the resource at the supplied path.
 	 */
-	public function sendXML($url, $content, $username = null, $password = null) {
+	public function sendXML($url, $content, $username = null, $password = null)
+	{
 		// create a request
 		$request = $this->client->post($url);
 		$request->setHeader('User-Agent', $this->useragent);
 
-		if($username) {
+		if ($username) {
 			$request->setAuth($username, $password);
 		}
 
@@ -113,7 +118,8 @@ class Communicator {
 	 *
 	 * @return boolean States if a redirect occurred during the operation
 	 */
-	public function wasRedirected() {
+	public function wasRedirected()
+	{
 		if ($this->response->getRedirectCount()) {
 			return TRUE;
 		} else {

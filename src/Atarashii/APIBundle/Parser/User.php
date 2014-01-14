@@ -6,10 +6,10 @@ use Symfony\Component\CssSelector\CssSelector;
 use Atarashii\APIBundle\Model\Profile;
 use \DateTime;
 
-class User {
-
-	public static function parse($contents) {
-
+class User
+{
+	public static function parse($contents)
+	{
 		$user = new Profile();
 
 		$crawler = new Crawler();
@@ -32,8 +32,8 @@ class User {
 		return $user;
 	}
 
-	private static function parseDetails($content, $details) {
-
+	private static function parseDetails($content, $details)
+	{
 		$elements = new Crawler($content);
 		$elements = $elements->filter('tr');
 
@@ -61,7 +61,7 @@ class User {
 					break;
 			}
 
-			if(property_exists($details, $key)) {
+			if (property_exists($details, $key)) {
 				$details->$key = $value;
 			}
 
@@ -70,7 +70,8 @@ class User {
 		return $details;
 	}
 
-	private static function parseStats($content) {
+	private static function parseStats($content)
+	{
 		$stats = array();
 
 		$elements = new Crawler($content);
@@ -100,7 +101,8 @@ class User {
 		return $stats;
 	}
 
-	public static function parseFriends($contents) {
+	public static function parseFriends($contents)
+	{
 		$crawler = new Crawler();
 		$crawler->addHTMLContent($contents, 'UTF-8');
 		$maincontent = $crawler->filter('.friendHolder');
@@ -108,7 +110,7 @@ class User {
 		//Empty array so we return something non-null if the list is empty.
 		$friendlist = array();
 
-		foreach($maincontent as $friendentry) {
+		foreach ($maincontent as $friendentry) {
 			$crawler = new Crawler($friendentry);
 
 			//All the data extraction.
@@ -121,10 +123,9 @@ class User {
 			$avatar = str_replace('thumbs/', '', str_replace('_thumb', '', $avatar->attr('src')));
 
 			//Sometimes this value doesn't exist, so it should be set as null. Otherwise, format the time to RFC3389.
-			if($friendssince != '') {
+			if ($friendssince != '') {
 				$friendssince = DateTime::createFromFormat('m-d-y, g:i A', $friendssince)->format(DateTime::ISO8601);
-			}
-			else {
+			} else {
 				$friendssince = null;
 			}
 

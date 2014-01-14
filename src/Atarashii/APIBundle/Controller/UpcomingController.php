@@ -7,20 +7,21 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Atarashii\APIBundle\Parser\Upcoming;
 
-class UpcomingController extends FOSRestController {
-
+class UpcomingController extends FOSRestController
+{
      /*
      * Upcoming get action
      * @return array
      *
      * @Rest\View()
      */
-	public function getAnimeUpcomingAction(Request $request) {
+	public function getAnimeUpcomingAction(Request $request)
+	{
 		#http://myanimelist.net/anime.php?sd=#{day}&sm=#{month}&sy=#{year}&em=0&ed=0&ey=0&o=2&w=&c[]=a&c[]=d&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=1&show=#{page}
 
 		$page = (int) $request->query->get('page');
 
-		if ($page <= 0)	{
+		if ($page <= 0) {
 			$page = 1;
 		}
 
@@ -43,12 +44,12 @@ class UpcomingController extends FOSRestController {
 		$date->modify('+10800 seconds'); //Three hours
 		$response->setExpires($date);
 
-		if (strpos($animecontent,'No titles that matched') !== false){
+		if (strpos($animecontent,'No titles that matched') !== false) {
 			$view = $this->view(Array('error' => 'not-found'));
 			$view->setResponse($response);
 			$view->setStatusCode(404);
 			return $view;
-		}else{
+		} else {
 			$Upcominganime = Upcoming::parse($animecontent,'anime');
 
 			$view = $this->view($Upcominganime);
@@ -58,12 +59,13 @@ class UpcomingController extends FOSRestController {
 		}
 	}
 
-	public function getMangaUpcomingAction(Request $request) {
+	public function getMangaUpcomingAction(Request $request)
+	{
 		#http://myanimelist.net/manga.php?sd=#{day}&sm=#{month}&sy=#{year}&em=0&ed=0&ey=0&o=2&w=&c[]=a&c[]=d&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=1&show=#{page}
 
 		$page = (int) $request->query->get('page');
 
-		if ($page <= 0)	{
+		if ($page <= 0) {
 			$page = 1;
 		}
 
@@ -86,12 +88,12 @@ class UpcomingController extends FOSRestController {
 		$date->modify('+10800 seconds'); //Three hours
 		$response->setExpires($date);
 
- 		if (strpos($mangacontent,'No titles that matched') !== false){
+ 		if (strpos($mangacontent,'No titles that matched') !== false) {
 			$view = $this->view(Array('error' => 'not-found'));
 			$view->setResponse($response);
 			$view->setStatusCode(404);
 			return $view;
-		}else{
+		} else {
 			$Upcomingmanga = Upcoming::parse($mangacontent,'manga');
 
 			$view = $this->view($Upcomingmanga);
@@ -107,12 +109,13 @@ class UpcomingController extends FOSRestController {
      *
      * @Rest\View()
      */
-	public function getAnimeJustaddedAction(Request $request) {
+	public function getAnimeJustaddedAction(Request $request)
+	{
 		#http://myanimelist.net/anime.php?o=9&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=2&w=1&show=#{page}
 
 		$page = (int) $request->query->get('page');
 
-		if ($page <= 0){
+		if ($page <= 0) {
 			$page = 1;
 		}
 
@@ -135,12 +138,12 @@ class UpcomingController extends FOSRestController {
 		$date->modify('+10800 seconds'); //Three hours
 		$response->setExpires($date);
 
-  		if (strpos($animecontent,'No titles that matched') !== false){
+  		if (strpos($animecontent,'No titles that matched') !== false) {
 			$view = $this->view(Array('error' => 'not-found'));
 			$view->setResponse($response);
 			$view->setStatusCode(404);
 			return $view;
-		}else{
+		} else {
 			$Justaddedanime = Upcoming::parse($animecontent,'anime');
 
 			$view = $this->view($Justaddedanime);
@@ -150,12 +153,13 @@ class UpcomingController extends FOSRestController {
 		}
 	}
 
-	public function getMangaJustaddedAction(Request $request) {
+	public function getMangaJustaddedAction(Request $request)
+	{
 		#http://myanimelist.net/anime.php?o=9&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=2&w=1&show=#{page}
 
 		$page = (int) $request->query->get('page');
 
-		if ($page <= 0){
+		if ($page <= 0) {
 			$page = 1;
 		}
 
@@ -178,12 +182,12 @@ class UpcomingController extends FOSRestController {
 		$date->modify('+10800 seconds'); //Three hours
 		$response->setExpires($date);
 
- 		if (strpos($mangacontent,'No titles that matched') !== false){
+ 		if (strpos($mangacontent,'No titles that matched') !== false) {
 			$view = $this->view(Array('error' => 'not-found'));
 			$view->setResponse($response);
 			$view->setStatusCode(404);
 			return $view;
-		}else{
+		} else {
 			$Justaddedmanga = Upcoming::parse($mangacontent,'manga');
 
 			$view = $this->view($Justaddedmanga);

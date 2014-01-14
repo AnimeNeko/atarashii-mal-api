@@ -7,9 +7,10 @@ use Atarashii\APIBundle\Model\Anime;
 use Atarashii\APIBundle\Model\Manga;
 use \DateTime;
 
-class Upcoming {
-
-	public static function parse($contents,$type) {
+class Upcoming
+{
+	public static function parse($contents,$type)
+	{
 		$crawler = new Crawler();
 		$crawler->addHTMLContent($contents, 'UTF-8');
 		$menubar = true;
@@ -17,23 +18,24 @@ class Upcoming {
 		//Filter into a set of tds from the source HTML table
 		$mediaitems = $crawler->filter('#horiznav_nav')->nextAll()->filterXPath('./div/table/tr');
 
-		foreach($mediaitems as $item) {
+		foreach ($mediaitems as $item) {
 			//tricky methode to skip the menu bar which is also a <tr></tr>
-			if ($menubar == true){
+			if ($menubar == true) {
 				$menubar = false;
-			}else{
+			} else {
 				$resultset[] = self::parseRecord($item, $type);
 			}
 		}
 		return $resultset;
 	}
 
-	private static function parserecord($item,$type) {
+	private static function parserecord($item,$type)
+	{
 		$crawler = new Crawler($item);
 		$check = true;
 
 		//Get the type record.
-		switch($type) {
+		switch ($type) {
 			case 'anime':
 				$media = new Anime();
 				break;
@@ -49,21 +51,21 @@ class Upcoming {
 		$media->image_url = str_replace('t.j','.j',$crawler->filter('img')->attr('src'));
 		$media->type = trim($crawler->filterXPath('//td[3]')->text());
 
-		switch($type) {
+		switch ($type) {
 			case 'anime':
 				//Custom parsing for anime
 				$media->episodes = (int) trim($crawler->filterXPath('//td[4]')->text());
 
 				//TODO add a way to format '?'
 				$start_date = trim($crawler->filterXPath('//td[6]')->text());
-				if(strpos($start_date,'?') == false && $start_date !== '-') {
+				if (strpos($start_date,'?') == false && $start_date !== '-') {
 					$start_date = DateTime::createFromFormat('m-d-y', $start_date)->format(DateTime::ISO8601);
 				}
 				$media->start_date = $start_date;
 
 				//TODO add a way to format '?'
 				$end_date = trim($crawler->filterXPath('//td[7]')->text());
-				if(strpos($end_date,'?') == false && $end_date !== '-') {
+				if (strpos($end_date,'?') == false && $end_date !== '-') {
 					$end_date = DateTime::createFromFormat('m-d-y', $end_date)->format(DateTime::ISO8601);
 				}
 				$media->end_date = $end_date;

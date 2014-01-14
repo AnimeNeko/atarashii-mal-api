@@ -30,9 +30,9 @@ class AnimeListController extends FOSRestController
 			return $this->view(Array('error' => 'network-error'), 500);
 		}
 
-		if (strpos($animelistcontent,'Invalid username') !== false){
+		if (strpos($animelistcontent,'Invalid username') !== false) {
 			$animelist = 'Failed to find the specified user, please try again.';
-		}else{
+		} else {
 			$animelistxml = new SimpleXMLElement($animelistcontent);
 			$alist = array();
 
@@ -58,7 +58,8 @@ class AnimeListController extends FOSRestController
  		return $animelist;
 	}
 
-	public function addAction(Request $request) {
+	public function addAction(Request $request)
+	{
 		#http://myanimelist.net/api/animelist/add/#{id}.xml
 
 		//get the credentials we received
@@ -66,7 +67,7 @@ class AnimeListController extends FOSRestController
 		$password = $this->getRequest()->server->get('PHP_AUTH_PW');
 
 		//Don't bother making a request if the user didn't send any authentication
-		if($username == null) {
+		if ($username == null) {
 			$view = $this->view(Array('error' => 'unauthorized'), 401);
 			$view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
 			return $view;
@@ -97,7 +98,8 @@ class AnimeListController extends FOSRestController
 
 	}
 
-	public function updateAction(Request $request, $id) {
+	public function updateAction(Request $request, $id)
+	{
 		#http://myanimelist.net/api/animelist/update/#{id}.xml
 
 		//get the credentials we received
@@ -105,7 +107,7 @@ class AnimeListController extends FOSRestController
 		$password = $this->getRequest()->server->get('PHP_AUTH_PW');
 
 		//Don't bother making a request if the user didn't send any authentication
-		if($username == null) {
+		if ($username == null) {
 			$view = $this->view(Array('error' => 'unauthorized'), 401);
 			$view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
 			return $view;
@@ -136,7 +138,8 @@ class AnimeListController extends FOSRestController
 
 	}
 
-	public function deleteAction(Request $request, $id) {
+	public function deleteAction(Request $request, $id)
+	{
 		#http://myanimelist.net/api/animelist/delete/#{id}.xml
 
 		//get the credentials we received
@@ -144,7 +147,7 @@ class AnimeListController extends FOSRestController
 		$password = $this->getRequest()->server->get('PHP_AUTH_PW');
 
 		//Don't bother making a request if the user didn't send any authentication
-		if($username == null) {
+		if ($username == null) {
 			$view = $this->view(Array('error' => 'unauthorized'), 401);
 			$view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
 			return $view;

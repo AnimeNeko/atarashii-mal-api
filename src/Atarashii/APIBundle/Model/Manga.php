@@ -1,7 +1,8 @@
 <?php
 namespace Atarashii\APIBundle\Model;
 
-class Manga {
+class Manga
+{
 	public $id; //The manga ID.
 	public $title; //The manga title.
 	public $other_titles = array(); //A hash/dictionary containing other titles this manga has.
@@ -35,8 +36,9 @@ class Manga {
 	 *
 	 * @return void
 	 */
-	public function setType($type) {
-		switch($type) {
+	public function setType($type)
+	{
+		switch ($type) {
 			case 1:
 				$this->type = 'Manga';
 				break;
@@ -72,8 +74,9 @@ class Manga {
 	 *
 	 * @return void
 	 */
-	public function setReadStatus($statusid) {
-		switch($statusid) {
+	public function setReadStatus($statusid)
+	{
+		switch ($statusid) {
 			case 1:
 			case 'reading':
 				$this->read_status = 'reading';
@@ -110,9 +113,10 @@ class Manga {
 	 *
 	 * @return string|int
 	 */
-	public function getReadStatus($type = 'string') {
-		if($type == 'int') {
-			switch($this->read_status) {
+	public function getReadStatus($type = 'string')
+	{
+		if ($type == 'int') {
+			switch ($this->read_status) {
 				case 'reading':
 					return 1;
 					break;
@@ -145,8 +149,9 @@ class Manga {
 	 *
 	 * @return void
 	 */
-	public function setStatus($status) {
-		switch($status) {
+	public function setStatus($status)
+	{
+		switch ($status) {
 			case 1:
 				$this->status = 'publishing';
 				break;
@@ -167,7 +172,8 @@ class Manga {
 	 *
 	 * @return string An XML document of manga values as defined at http://myanimelist.net/modules.php?go=api#mangavalues
 	 */
-	public function MALApiXml() {
+	public function MALApiXml()
+	{
 		//For now, just add in the parameters we will use. The MAL API will handle missing items just fine.
 		$xml = new \SimpleXMLElement('<entry/>');
 

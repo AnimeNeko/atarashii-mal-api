@@ -11,8 +11,8 @@ use Atarashii\APIBundle\Parser\MangaParser;
 
 use \DateTime;
 
-class SearchController extends FOSRestController {
-
+class SearchController extends FOSRestController
+{
      /**
      * Search results
      * $page pagenumber (default 1)
@@ -20,7 +20,8 @@ class SearchController extends FOSRestController {
      *
      * @return array
      */
-	public function getAnimeAction(Request $request){
+	public function getAnimeAction(Request $request)
+	{
 		#http://myanimelist.net/anime.php?c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&q=#{name}&show=#{page}
 
 		$page = (int) $request->query->get('page',1);
@@ -50,7 +51,7 @@ class SearchController extends FOSRestController {
 			$view->setStatusCode(404);
 			return $view;
 		} else {
-			if($downloader->wasRedirected()) {
+			if ($downloader->wasRedirected()) {
 				$searchanime = Array(AnimeParser::parse($animecontent));
 			} else {
 				$searchanime = Upcoming::parse($animecontent,'anime');
@@ -89,13 +90,13 @@ class SearchController extends FOSRestController {
 		$date->modify('+3600 seconds'); //One hour
 		$response->setExpires($date);
 
-		if (strpos($mangacontent,'No titles that matched') !== false){
+		if (strpos($mangacontent,'No titles that matched') !== false) {
 			$view = $this->view(Array('error' => 'not-found'));
 			$view->setResponse($response);
 			$view->setStatusCode(404);
 			return $view;
-		}else{
-			if($downloader->wasRedirected()) {
+		} else {
+			if ($downloader->wasRedirected()) {
 				$searchmanga = Array(MangaParser::parse($mangacontent));
 			} else {
 				$searchmanga = Upcoming::parse($mangacontent,'manga');

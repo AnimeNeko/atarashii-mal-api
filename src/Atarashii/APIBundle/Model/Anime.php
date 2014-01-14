@@ -1,7 +1,8 @@
 <?php
 namespace Atarashii\APIBundle\Model;
 
-class Anime {
+class Anime
+{
 	public $id; //The anime ID.
 	public $title; //The anime title.
 	public $other_titles = array(); //A hash/dictionary containing other titles this anime has.
@@ -42,8 +43,9 @@ class Anime {
 	 *
 	 * @return void
 	 */
-	public function setType($type) {
-		switch($type) {
+	public function setType($type)
+	{
+		switch ($type) {
 			case 1:
 			case 'TV':
 				$this->type = 'TV';
@@ -82,8 +84,9 @@ class Anime {
 	 *
 	 * @return void
 	 */
-	public function setWatchedStatus($status) {
-		switch($status) {
+	public function setWatchedStatus($status)
+	{
+		switch ($status) {
 			case 1:
 			case 'watching':
 				$this->watched_status = 'watching';
@@ -120,10 +123,10 @@ class Anime {
 	 *
 	 * @return string|int
 	 */
-	public function getWatchedStatus($type = 'string') {
-
-		if($type == 'int') {
-			switch($this->watched_status) {
+	public function getWatchedStatus($type = 'string')
+	{
+		if ($type == 'int') {
+			switch ($this->watched_status) {
 				case 'watching':
 					return 1;
 					break;
@@ -157,8 +160,9 @@ class Anime {
 	 *
 	 * @return void
 	 */
-	public function setStatus($status) {
-		switch($status) {
+	public function setStatus($status)
+	{
+		switch ($status) {
 			case 1:
 				$this->status = 'currently airing';
 				break;
@@ -179,7 +183,8 @@ class Anime {
 	 *
 	 * @return string An XML document of anime values as defined at http://myanimelist.net/modules.php?go=api#animevalues
 	 */
-	public function MALApiXml() {
+	public function MALApiXml()
+	{
 		//For now, just add in the parameters we will use. The MAL API will handle missing items just fine.
 		$xml = new \SimpleXMLElement('<entry/>');
 

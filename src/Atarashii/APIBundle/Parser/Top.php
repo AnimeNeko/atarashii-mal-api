@@ -6,27 +6,29 @@ use Symfony\Component\CssSelector\CssSelector;
 use Atarashii\APIBundle\Model\Anime;
 use Atarashii\APIBundle\Model\Manga;
 
-class Top {
-
-	public static function parse($contents, $type) {
+class Top
+{
+	public static function parse($contents, $type)
+	{
 		$crawler = new Crawler();
 		$crawler->addHTMLContent($contents, 'UTF-8');
 
 		//Filter into a set of tds from the source HTML table
 		$mediaitems = $crawler->filter('#horiznav_nav')->nextAll()->filterXPath('./div/table/tr');
 
-		foreach($mediaitems as $item) {
+		foreach ($mediaitems as $item) {
 			$resultset[] = self::parseRecord($item, $type);
 		}
 
 		return $resultset;
 	}
 
-	private static function parseRecord($item, $type) {
+	private static function parseRecord($item, $type)
+	{
 		$crawler = new Crawler($item);
 
 		//Initialize our object based on the record type we were passed.
-		switch($type) {
+		switch ($type) {
 			case 'anime':
 				$media = new Anime();
 				break;
@@ -44,7 +46,7 @@ class Top {
 		//Anime and manga have different details, so we grab an array of the list and then process based on the type
 		$details = explode(', ', str_replace($crawler->filter('div.spaceit_pad span')->text(), '', $crawler->filter('div.spaceit_pad')->text()));
 
-		switch($type) {
+		switch ($type) {
 			case 'anime':
 				$media->type = trim($details[0]);
 				$media->episodes = (strstr($details[1], '?') ? null : (int) trim(str_replace('eps', '', $details[1])));

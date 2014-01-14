@@ -1,19 +1,22 @@
 <?php
 namespace Atarashii\APIBundle\Model;
 
-class Profile {
+class Profile
+{
 	public $avatar_url; //URL to user's avatar (This should be under details, not out here, but Ruby API does it this way)
 	public $details = array(); //user's general (not anime/manga-specific) details.
 	public $anime_stats = array(); //user's anime statistics.
 	public $manga_stats = array(); //user's manga statistics.
 
-	function __construct() {
+	public function __construct()
+	{
 		$this->details = new ProfileDetails();
 	}
 
 }
 
-class ProfileDetails {
+class ProfileDetails
+{
 	public $last_online;
 	public $gender;
 	public $birthday;

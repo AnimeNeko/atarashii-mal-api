@@ -39,12 +39,12 @@ class UserController extends FOSRestController
 		$date->modify('+900 seconds'); //15 minutes
 		$response->setExpires($date);
 
-		if (strpos($profilecontent,'Failed to find') !== false){
+		if (strpos($profilecontent,'Failed to find') !== false) {
 			$view = $this->view(Array('error' => 'not-found'));
 			$view->setResponse($response);
 			$view->setStatusCode(404);
 			return $view;
-		}else{
+		} else {
 			$userprofile = User::parse($profilecontent);
 
 			$view = $this->view($userprofile);
@@ -77,12 +77,12 @@ class UserController extends FOSRestController
 		$date->modify('+900 seconds'); //15 minutes
 		$response->setExpires($date);
 
-		if (strpos($friendscontent,'Failed to find') !== false){
+		if (strpos($friendscontent,'Failed to find') !== false) {
 			$view = $this->view(Array('error' => 'not-found'));
 			$view->setResponse($response);
 			$view->setStatusCode(404);
 			return $view;
-		}else{
+		} else {
 			$friendlist = User::parseFriends($friendscontent);
 
 			$view = $this->view($friendlist);

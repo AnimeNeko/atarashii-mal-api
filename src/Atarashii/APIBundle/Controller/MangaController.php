@@ -24,13 +24,13 @@ class MangaController extends FOSRestController
 
 		$downloader = $this->get('atarashii_api.communicator');
 
-		if($usepersonal) {
+		if ($usepersonal) {
 			//get the credentials we received
 			$username = $this->getRequest()->server->get('PHP_AUTH_USER');
 			$password = $this->getRequest()->server->get('PHP_AUTH_PW');
 
 			//Don't bother making a request if the user didn't send any authentication
-			if($username == null) {
+			if ($username == null) {
 				$view = $this->view(Array('error' => 'unauthorized'), 401);
 				$view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
 				return $view;
@@ -49,15 +49,15 @@ class MangaController extends FOSRestController
 			return $this->view(Array('error' => 'network-error'), 500);
 		}
 
-		if (strpos($mangadetails,'No manga found') !== false){
+		if (strpos($mangadetails,'No manga found') !== false) {
 			return $this->view(Array('error' => 'No manga found, check the manga id and try again.'), 404);
-		}else{
+		} else {
 			$manga = MangaParser::parse($mangadetails);
 
 			$response = new Response();
 
 			//Only include cache info if it doesn't include personal data.
-			if(!$usepersonal) {
+			if (!$usepersonal) {
 				$response->setPublic();
 				$response->setMaxAge(3600); //One hour
 				$response->headers->addCacheControlDirective('must-revalidate', true);

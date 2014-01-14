@@ -7,20 +7,21 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Atarashii\APIBundle\Parser\Top;
 
-class TopController extends FOSRestController {
-
+class TopController extends FOSRestController
+{
      /*
      * Top get action
      * @return array
      *
      * @Rest\View()
      */
-	public function getTopAnimeAction(Request $request) {
+	public function getTopAnimeAction(Request $request)
+	{
 		#http://myanimelist.net/topanime.php?type=&limit=#{0}
 
 		$page = (int) $request->query->get('page');
 
-		if ($page <= 0)	{
+		if ($page <= 0) {
 			$page = 1;
 		}
 
@@ -43,12 +44,12 @@ class TopController extends FOSRestController {
 		$date->modify('+10800 seconds'); //Three hours
 		$response->setExpires($date);
 
-		if (strpos($animecontent,'No anime titles') !== false){
+		if (strpos($animecontent,'No anime titles') !== false) {
 			$view = $this->view(Array('error' => 'not-found'));
 			$view->setResponse($response);
 			$view->setStatusCode(404);
 			return $view;
-		}else{
+		} else {
 			$topanime = Top::parse($animecontent,'anime');
 
 			$view = $this->view($topanime);
@@ -58,12 +59,13 @@ class TopController extends FOSRestController {
 		}
 	}
 
-	public function getTopMangaAction(Request $request) {
+	public function getTopMangaAction(Request $request)
+	{
 		#http://myanimelist.net/topmanga.php?type=&limit=#{0}
 
 		$page = (int) $request->query->get('page');
 
-		if ($page <= 0)	{
+		if ($page <= 0) {
 			$page = 1;
 		}
 
@@ -86,12 +88,12 @@ class TopController extends FOSRestController {
 		$date->modify('+10800 seconds'); //Three hours
 		$response->setExpires($date);
 
- 		if (strpos($mangacontent,'No manga titles') !== false){
+ 		if (strpos($mangacontent,'No manga titles') !== false) {
 			$view = $this->view(Array('error' => 'not-found'));
 			$view->setResponse($response);
 			$view->setStatusCode(404);
 			return $view;
-		}else{
+		} else {
 			$topmanga = Top::parse($mangacontent,'manga');
 
 			$view = $this->view($topmanga);
@@ -107,12 +109,13 @@ class TopController extends FOSRestController {
      *
      * @Rest\View()
      */
-	public function getPopularAnimeAction(Request $request) {
+	public function getPopularAnimeAction(Request $request)
+	{
 		#http://myanimelist.net/topanime.php?type=bypopularity&limit=#{0}
 
 		$page = (int) $request->query->get('page');
 
-		if ($page <= 0)	{
+		if ($page <= 0) {
 			$page = 1;
 		}
 
@@ -135,12 +138,12 @@ class TopController extends FOSRestController {
 		$date->modify('+10800 seconds'); //Three hours
 		$response->setExpires($date);
 
-		if (strpos($animecontent,'No anime titles') !== false){
+		if (strpos($animecontent,'No anime titles') !== false) {
 			$view = $this->view(Array('error' => 'not-found'));
 			$view->setResponse($response);
 			$view->setStatusCode(404);
 			return $view;
-		}else{
+		} else {
 			$popularanime = Top::parse($animecontent,'anime');
 
 			$view = $this->view($popularanime);
@@ -150,12 +153,13 @@ class TopController extends FOSRestController {
 		}
 	}
 
-	public function getPopularMangaAction(Request $request) {
+	public function getPopularMangaAction(Request $request)
+	{
 		#http://myanimelist.net/topmanga.php?type=bypopularity&limit=#{0}
 
 		$page = (int) $request->query->get('page');
 
-		if ($page <= 0)	{
+		if ($page <= 0) {
 			$page = 1;
 		}
 
@@ -178,12 +182,12 @@ class TopController extends FOSRestController {
 		$date->modify('+10800 seconds'); //Three hours
 		$response->setExpires($date);
 
- 		if (strpos($mangacontent,'No manga titles') !== false){
+ 		if (strpos($mangacontent,'No manga titles') !== false) {
 			$view = $this->view(Array('error' => 'not-found'));
 			$view->setResponse($response);
 			$view->setStatusCode(404);
 			return $view;
-		}else{
+		} else {
 			$popularmanga = Top::parse($mangacontent,'manga');
 
 			$view = $this->view($popularmanga);
