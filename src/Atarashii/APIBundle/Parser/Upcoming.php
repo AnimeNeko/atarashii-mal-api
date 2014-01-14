@@ -5,6 +5,7 @@ use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\CssSelector\CssSelector;
 use Atarashii\APIBundle\Model\Anime;
 use Atarashii\APIBundle\Model\Manga;
+use \DateTime;
 
 class Upcoming {
 
@@ -12,10 +13,10 @@ class Upcoming {
 		$crawler = new Crawler();
 		$crawler->addHTMLContent($contents, 'UTF-8');
 		$menubar = true;
-		
+
 		//Filter into a set of tds from the source HTML table
 		$mediaitems = $crawler->filter('#horiznav_nav')->nextAll()->filterXPath('./div/table/tr');
-		
+
 		foreach($mediaitems as $item) {
 			//tricky methode to skip the menu bar which is also a <tr></tr>
 			if ($menubar == true){
@@ -47,13 +48,25 @@ class Upcoming {
 		//I removed the 't' because it will else return a little image
 		$media->image_url = str_replace('t.j','.j',$crawler->filter('img')->attr('src'));
 		$media->type = trim($crawler->filterXPath('//td[3]')->text());
-		
+
 		switch($type) {
 			case 'anime':
 				//Custom parsing for anime
 				$media->episodes = (int) trim($crawler->filterXPath('//td[4]')->text());
-				$media->start_date = trim($crawler->filterXPath('//td[6]')->text());
-				$media->end_date = trim($crawler->filterXPath('//td[7]')->text());
+
+				//TODO add a way to format '?'
+				$start_date = trim($crawler->filterXPath('//td[6]')->text());
+				if(strpos($start_date,'?') == false && $start_date !== '-') {
+					$start_date = DateTime::createFromFormat('m-d-y', $start_date)->format(DateTime::ISO8601);
+				}
+				$media->start_date = $start_date;
+
+				//TODO add a way to format '?'
+				$end_date = trim($crawler->filterXPath('//td[7]')->text());
+				if(strpos($end_date,'?') == false && $end_date !== '-') {
+					$end_date = DateTime::createFromFormat('m-d-y', $end_date)->format(DateTime::ISO8601);
+				}
+				$media->end_date = $end_date;
 				$media->classification = trim($crawler->filterXPath('//td[9]')->text());
 				$media->members_score = (float) trim($crawler->filterXPath('//td[5]')->text());
 				$media->synopsis = trim($crawler->filterXPath('//td[2]//div[3]')->text());
@@ -69,7 +82,7 @@ class Upcoming {
 				//$end_date = trim($crawler->filterXPath('//td[8]')->text());
 				break;
 			}
-		
+
 		return $media;
 	}
 }
