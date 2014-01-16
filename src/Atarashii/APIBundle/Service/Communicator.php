@@ -1,4 +1,13 @@
 <?php
+/**
+* Atarashii MAL API
+*
+* @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
+* @author    Michael Johnson <youngmug@animeneko.net>
+* @copyright 2014 Ratan Dhawtal and Michael Johnson
+* @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
+*/
+
 namespace Atarashii\APIBundle\Service;
 
 use Guzzle\Http\Client;
