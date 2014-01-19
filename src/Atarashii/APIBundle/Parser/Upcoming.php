@@ -2,7 +2,6 @@
 namespace Atarashii\APIBundle\Parser;
 
 use Symfony\Component\DomCrawler\Crawler;
-use Symfony\Component\CssSelector\CssSelector;
 use Atarashii\APIBundle\Model\Anime;
 use Atarashii\APIBundle\Model\Manga;
 use \DateTime;
@@ -60,14 +59,18 @@ class Upcoming
                 //TODO add a way to format '?'
                 $start_date = trim($crawler->filterXPath('//td[6]')->text());
                 if (strpos($start_date,'?') == false && $start_date !== '-') {
-                    $start_date = DateTime::createFromFormat('m-d-y', $start_date)->format(DateTime::ISO8601);
+                    $start_date = DateTime::createFromFormat('m-d-y', $start_date)->format('Y-m-d');
+                } else {
+                    $start_date = null;
                 }
                 $media->start_date = $start_date;
 
                 //TODO add a way to format '?'
                 $end_date = trim($crawler->filterXPath('//td[7]')->text());
                 if (strpos($end_date,'?') == false && $end_date !== '-') {
-                    $end_date = DateTime::createFromFormat('m-d-y', $end_date)->format(DateTime::ISO8601);
+                    $end_date = DateTime::createFromFormat('m-d-y', $end_date)->format('Y-m-d');
+                } else {
+                    $end_date = null;
                 }
                 $media->end_date = $end_date;
                 $media->classification = trim($crawler->filterXPath('//td[9]')->text());
