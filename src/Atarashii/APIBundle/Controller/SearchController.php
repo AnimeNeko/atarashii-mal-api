@@ -13,21 +13,25 @@ use \DateTime;
 
 class SearchController extends FOSRestController
 {
-     /**
-     * Search results
-     * $page pagenumber (default 1)
-     * $query keyword to search
-     *
-     * @return array
-     */
+    /**
+    * Search for an anime
+    *
+    * Uses the contents of the HTTP Request to get the needed data for performing a search.
+    * The "page" and "q" get variables are used in the query for the title.
+    *
+    * @param Request $request The HTTP Request object.
+    *
+    * @return View
+    */
     public function getAnimeAction(Request $request)
     {
         #http://myanimelist.net/anime.php?c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&q=#{name}&show=#{page}
 
-        $page = (int) $request->query->get('page',1);
-                $query = $request->query->get('q');
+        $page = (int) $request->query->get('page', 1);
+        $query = $request->query->get('q');
 
         $downloader = $this->get('atarashii_api.communicator');
+
         try {
             $animecontent = $downloader->fetch('/anime.php?c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&q='.$query.'&show='.(($page*20)-20));
         } catch (\Guzzle\Http\Exception\CurlException $e) {
@@ -45,7 +49,7 @@ class SearchController extends FOSRestController
         $date->modify('+3600 seconds'); //One hour
         $response->setExpires($date);
 
-        if (strpos($animecontent,'No titles that matched') !== false) {
+        if (strpos($animecontent, 'No titles that matched') !== false) {
             $view = $this->view(Array('error' => 'not-found'));
             $view->setResponse($response);
             $view->setStatusCode(404);
@@ -55,7 +59,7 @@ class SearchController extends FOSRestController
             if ($downloader->wasRedirected()) {
                 $searchanime = Array(AnimeParser::parse($animecontent));
             } else {
-                $searchanime = Upcoming::parse($animecontent,'anime');
+                $searchanime = Upcoming::parse($animecontent, 'anime');
             }
 
             $view = $this->view($searchanime);
@@ -67,14 +71,25 @@ class SearchController extends FOSRestController
 
     }
 
+    /**
+    * Search for a manga
+    *
+    * Uses the contents of the HTTP Request to get the needed data for performing a search.
+    * The "page" and "q" get variables are used in the query for the title.
+    *
+    * @param Request $request The HTTP Request object.
+    *
+    * @return View
+    */
     public function getMangaAction(Request $request)
     {
         #http://myanimelist.net/manga.php?c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&q=#{name}&show=#{page}
 
-        $page = (int) $request->query->get('page',1);
-                $query = $request->query->get('q');
+        $page = (int) $request->query->get('page', 1);
+        $query = $request->query->get('q');
 
         $downloader = $this->get('atarashii_api.communicator');
+
         try {
             $mangacontent = $downloader->fetch('/manga.php?c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&q='.$query.'&show='.(($page*20)-20));
         } catch (\Guzzle\Http\Exception\CurlException $e) {
@@ -92,7 +107,7 @@ class SearchController extends FOSRestController
         $date->modify('+3600 seconds'); //One hour
         $response->setExpires($date);
 
-        if (strpos($mangacontent,'No titles that matched') !== false) {
+        if (strpos($mangacontent, 'No titles that matched') !== false) {
             $view = $this->view(Array('error' => 'not-found'));
             $view->setResponse($response);
             $view->setStatusCode(404);
@@ -102,7 +117,7 @@ class SearchController extends FOSRestController
             if ($downloader->wasRedirected()) {
                 $searchmanga = Array(MangaParser::parse($mangacontent));
             } else {
-                $searchmanga = Upcoming::parse($mangacontent,'manga');
+                $searchmanga = Upcoming::parse($mangacontent, 'manga');
             }
 
             $view = $this->view($searchmanga);

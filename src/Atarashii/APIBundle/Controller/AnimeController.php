@@ -2,7 +2,6 @@
 namespace Atarashii\APIBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
-use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Atarashii\APIBundle\Parser\AnimeParser;
@@ -10,12 +9,13 @@ use Atarashii\APIBundle\Parser\AnimeParser;
 class AnimeController extends FOSRestController
 {
     /**
-     * Anime get action
-     * @var integer $id Id of the anime
-     * @return array
-     *
-     * @Rest\View()
-     */
+    * Get the details of an anime
+    *
+    * @param int     $id      The ID of the anime as assigned by MyAnimeList
+    * @param Request $request HTTP Request object
+    *
+    * @return View
+    */
     public function getAction($id, Request $request)
     {
         #http://myanimelist.net/anime/#{id}
@@ -50,7 +50,7 @@ class AnimeController extends FOSRestController
             return $this->view(Array('error' => 'network-error'), 500);
         }
 
-        if (strpos($animedetails,'No series found') !== false) {
+        if (strpos($animedetails, 'No series found') !== false) {
             return $this->view(Array('error' => 'No series found, check the series id and try again.'), 404);
         } else {
             $anime = AnimeParser::parse($animedetails);

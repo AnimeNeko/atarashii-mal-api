@@ -2,7 +2,6 @@
 namespace Atarashii\APIBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
-use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\Request;
 use Atarashii\APIBundle\Model\Anime;
 
@@ -11,13 +10,13 @@ use \SimpleXMLElement;
 class AnimeListController extends FOSRestController
 {
 
-    /*
-     * Animelist get action
-     * @var string $username username
-     * @return array
-     *
-     * @Rest\View()
-     */
+    /**
+    * Get the list of anime stored for a user
+    *
+    * @param string $username The MyAnimeList username of the user whose list you want.
+    *
+    * @return View
+    */
     public function getAction($username)
     {
         #http://myanimelist.net/malappinfo.php?u=#{username}&status=all&type=anime
@@ -30,7 +29,7 @@ class AnimeListController extends FOSRestController
             return $this->view(Array('error' => 'network-error'), 500);
         }
 
-        if (strpos($animelistcontent,'Invalid username') !== false) {
+        if (strpos($animelistcontent, 'Invalid username') !== false) {
             $animelist = 'Failed to find the specified user, please try again.';
         } else {
             $animelistxml = new SimpleXMLElement($animelistcontent);
@@ -56,9 +55,22 @@ class AnimeListController extends FOSRestController
             $animelist['anime'] = $alist;
         }
 
-         return $animelist;
+         return $this->view($animelist);
     }
 
+    /**
+    * Add an anime to a user's list.
+    *
+    * Uses the contents of the HTTP Request to get the needed data for adding a title.
+    * The user must have passed the basic authentication needs and the PHP_AUTH_USER and
+    * PHP_AUTH_PW variables must be set. If so, the get variables of "anime_id", "status",
+    * "episodes", and "score" are checked and used in the creation of an Anime object. The
+    * object is used to make an XML document that is then posted to MyAnimeList.
+    *
+    * @param Request $request Contains all the needed information to add the title.
+    *
+    * @return View
+    */
     public function addAction(Request $request)
     {
         #http://myanimelist.net/api/animelist/add/#{id}.xml
@@ -102,6 +114,20 @@ class AnimeListController extends FOSRestController
 
     }
 
+    /**
+    * Update an anime on a user's list.
+    *
+    * Uses the contents of the HTTP Request to get the needed data for updating the
+    * requested title. The user must have passed the basic authentication needs and the
+    * PHP_AUTH_USER and PHP_AUTH_PW variables must be set. If so, the get variables of
+    * "status", "episodes", and "score" are checked and used in the creation of an Anime
+    * object. The object is used to make an XML document that is then posted to MyAnimeList.
+    *
+    * @param Request $request Contains all the needed information to update the title.
+    * @param int     $id      ID of the anime.
+    *
+    * @return View
+    */
     public function updateAction(Request $request, $id)
     {
         #http://myanimelist.net/api/animelist/update/#{id}.xml
@@ -145,6 +171,19 @@ class AnimeListController extends FOSRestController
 
     }
 
+    /**
+    * Delete an anime from a user's list.
+    *
+    * Uses the contents of the HTTP Request to get the needed data for deleting the
+    * requested title. The user must have passed the basic authentication needs and the
+    * PHP_AUTH_USER and PHP_AUTH_PW variables must be set. If so, an empty document is
+    * then posted to MyAnimeList at the right URL to delete an item.
+    *
+    * @param Request $request Contains all the needed information to delete the title.
+    * @param int     $id      ID of the anime.
+    *
+    * @return View
+    */
     public function deleteAction(Request $request, $id)
     {
         #http://myanimelist.net/api/animelist/delete/#{id}.xml

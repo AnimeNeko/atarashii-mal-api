@@ -2,7 +2,6 @@
 namespace Atarashii\APIBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
-use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Atarashii\APIBundle\Parser\MangaParser;
@@ -10,12 +9,13 @@ use Atarashii\APIBundle\Parser\MangaParser;
 class MangaController extends FOSRestController
 {
     /**
-     * Manga get action
-     * @var integer $id Id of the manga
-     * @return array
-     *
-     * @Rest\View()
-     */
+    * Get the details of a manga
+    *
+    * @param int     $id      The ID of the manga as assigned by MyAnimeList
+    * @param Request $request HTTP Request object
+    *
+    * @return View
+    */
     public function getAction($id, Request $request)
     {
         #http://myanimelist.net/manga/#{id}
@@ -50,7 +50,7 @@ class MangaController extends FOSRestController
             return $this->view(Array('error' => 'network-error'), 500);
         }
 
-        if (strpos($mangadetails,'No manga found') !== false) {
+        if (strpos($mangadetails, 'No manga found') !== false) {
             return $this->view(Array('error' => 'No manga found, check the manga id and try again.'), 404);
         } else {
             $manga = MangaParser::parse($mangadetails);
