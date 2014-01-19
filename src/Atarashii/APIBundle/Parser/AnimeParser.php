@@ -2,7 +2,6 @@
 namespace Atarashii\APIBundle\Parser;
 
 use Symfony\Component\DomCrawler\Crawler;
-use Symfony\Component\CssSelector\CssSelector;
 use Atarashii\APIBundle\Model\Anime;
 use \DateTime;
 
@@ -117,7 +116,12 @@ class AnimeParser
             $daterange = explode(' to ', trim(str_replace($extracted->text(), '', $extracted->parents()->text())));
 
             //MAL always provides record dates in US-style format. We export to a non-standard format to keep compatibility with the Ruby API.
-            $animerecord->start_date = DateTime::createFromFormat('M j, Y', $daterange[0])->format('D M d H:i:s O Y');
+            //Sometimes the startdate doesn't contain any day. For compatibility with the Ruby API I must pass a date, dayname and time.
+            if (strpos($daterange[0],',') == false) {
+                $animerecord->start_date = DateTime::createFromFormat('M Y', $daterange[0])->format('D M d 00:00:00 O Y');
+            } else {
+                $animerecord->start_date = DateTime::createFromFormat('M j, Y', $daterange[0])->format('D M d H:i:s O Y');
+            }
 
             //Series not yet to air won't list a range at all while currently airing series will use a "?"
             //For these, we should return a null
@@ -205,7 +209,6 @@ class AnimeParser
         foreach ($extracted as $term) {
             $animerecord->tags[] = $term->textContent;
         }
-
 
         # -
         # Extract from sections on the right column: Synopsis, Related Anime, Characters & Voice Actors, Reviews
