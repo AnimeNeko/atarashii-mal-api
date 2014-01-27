@@ -127,7 +127,9 @@ class AnimeParser
             //MAL always provides record dates in US-style format. We export to a non-standard format to keep compatibility with the Ruby API.
             //Sometimes the startdate doesn't contain any day. For compatibility with the Ruby API I must pass a date, dayname and time.
             if (strpos($daterange[0],',') == false) {
-                $animerecord->start_date = DateTime::createFromFormat('M Y', $daterange[0])->format('D M d 00:00:00 O Y');
+                if ($daterange[0] !== 'Not available') {
+                    $animerecord->start_date = DateTime::createFromFormat('M Y', $daterange[0])->format('D M d 00:00:00 O Y');
+                }
             } else {
                 $animerecord->start_date = DateTime::createFromFormat('M j, Y', $daterange[0])->format('D M d H:i:s O Y');
             }
