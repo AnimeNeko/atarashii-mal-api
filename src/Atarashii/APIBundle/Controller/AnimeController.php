@@ -27,7 +27,7 @@ class AnimeController extends FOSRestController
     */
     public function getAction($id, Request $request)
     {
-        #http://myanimelist.net/anime/#{id}
+        // http://myanimelist.net/anime/#{id}
 
         $usepersonal = (int) $request->query->get('mine');
 

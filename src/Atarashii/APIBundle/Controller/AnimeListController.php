@@ -28,7 +28,7 @@ class AnimeListController extends FOSRestController
     */
     public function getAction($username)
     {
-        #http://myanimelist.net/malappinfo.php?u=#{username}&status=all&type=anime
+        // http://myanimelist.net/malappinfo.php?u=#{username}&status=all&type=anime
 
         $downloader = $this->get('atarashii_api.communicator');
 
@@ -82,7 +82,7 @@ class AnimeListController extends FOSRestController
     */
     public function addAction(Request $request)
     {
-        #http://myanimelist.net/api/animelist/add/#{id}.xml
+        // http://myanimelist.net/api/animelist/add/#{id}.xml
 
         //get the credentials we received
         $username = $this->getRequest()->server->get('PHP_AUTH_USER');
@@ -139,7 +139,7 @@ class AnimeListController extends FOSRestController
     */
     public function updateAction(Request $request, $id)
     {
-        #http://myanimelist.net/api/animelist/update/#{id}.xml
+        // http://myanimelist.net/api/animelist/update/#{id}.xml
 
         //get the credentials we received
         $username = $this->getRequest()->server->get('PHP_AUTH_USER');
@@ -195,7 +195,7 @@ class AnimeListController extends FOSRestController
     */
     public function deleteAction(Request $request, $id)
     {
-        #http://myanimelist.net/api/animelist/delete/#{id}.xml
+        // http://myanimelist.net/api/animelist/delete/#{id}.xml
 
         //get the credentials we received
         $username = $this->getRequest()->server->get('PHP_AUTH_USER');

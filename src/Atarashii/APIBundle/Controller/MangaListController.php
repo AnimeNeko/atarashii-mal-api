@@ -27,7 +27,7 @@ class MangaListController extends FOSRestController
     */
     public function getAction($username)
     {
-        #http://myanimelist.net/malappinfo.php?u=#{username}&status=all&type=manga
+        // http://myanimelist.net/malappinfo.php?u=#{username}&status=all&type=manga
 
         $downloader = $this->get('atarashii_api.communicator');
 
@@ -83,7 +83,7 @@ class MangaListController extends FOSRestController
     */
     public function addAction(Request $request)
     {
-        #http://mymangalist.net/api/mangalist/add/#{id}.xml
+        // http://mymangalist.net/api/mangalist/add/#{id}.xml
 
         //get the credentials we received
         $username = $this->getRequest()->server->get('PHP_AUTH_USER');
@@ -142,7 +142,7 @@ class MangaListController extends FOSRestController
     */
     public function updateAction(Request $request, $id)
     {
-        #http://mymangalist.net/api/mangalist/update/#{id}.xml
+        // http://mymangalist.net/api/mangalist/update/#{id}.xml
 
         //get the credentials we received
         $username = $this->getRequest()->server->get('PHP_AUTH_USER');
@@ -199,7 +199,7 @@ class MangaListController extends FOSRestController
     */
     public function deleteAction(Request $request, $id)
     {
-        #http://mymangalist.net/api/mangalist/delete/#{id}.xml
+        // http://mymangalist.net/api/mangalist/delete/#{id}.xml
 
         //get the credentials we received
         $username = $this->getRequest()->server->get('PHP_AUTH_USER');

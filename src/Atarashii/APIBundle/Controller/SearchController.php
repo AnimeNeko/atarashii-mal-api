@@ -34,7 +34,7 @@ class SearchController extends FOSRestController
     */
     public function getAnimeAction(Request $request)
     {
-        #http://myanimelist.net/anime.php?c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&q=#{name}&show=#{page}
+        // http://myanimelist.net/anime.php?c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&q=#{name}&show=#{page}
 
         $page = (int) $request->query->get('page', 1);
         $query = $request->query->get('q');
@@ -92,7 +92,7 @@ class SearchController extends FOSRestController
     */
     public function getMangaAction(Request $request)
     {
-        #http://myanimelist.net/manga.php?c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&q=#{name}&show=#{page}
+        // http://myanimelist.net/manga.php?c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&q=#{name}&show=#{page}
 
         $page = (int) $request->query->get('page', 1);
         $query = $request->query->get('q');

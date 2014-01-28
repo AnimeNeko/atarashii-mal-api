@@ -27,7 +27,7 @@ class MangaController extends FOSRestController
     */
     public function getAction($id, Request $request)
     {
-        #http://myanimelist.net/manga/#{id}
+        // http://myanimelist.net/manga/#{id}
 
         $usepersonal = (int) $request->query->get('mine');
 
