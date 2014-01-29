@@ -18,15 +18,15 @@ class UserController extends FOSRestController
 {
 
     /**
-    * Get the details of a Profile
+    * Get the details for a username
     *
-    * @param string  $username The username of the requested profile details
+    * @param string $username The MyAnimeList username of the user.
     *
     * @return View
     */
     public function getProfileAction($username)
     {
-        #http://myanimelist.net/profile/#{username}
+        // http://myanimelist.net/profile/#{username}
 
         $downloader = $this->get('atarashii_api.communicator');
 
@@ -47,7 +47,7 @@ class UserController extends FOSRestController
         $date->modify('+900 seconds'); //15 minutes
         $response->setExpires($date);
 
-        if (strpos($profilecontent,'Failed to find') !== false) {
+        if (strpos($profilecontent, 'Failed to find') !== false) {
             $view = $this->view(Array('error' => 'not-found'));
             $view->setResponse($response);
             $view->setStatusCode(404);
@@ -65,15 +65,18 @@ class UserController extends FOSRestController
     }
 
     /**
-    * Get the friendlist of a specified user
+    * Get a list of friends of the specified username
     *
-    * @param string  $username The username of the requested friendlist
+    * Returns a view of user objects constituting friends of the specified user. Sorting
+    * is MyAnimeList default, in order of the most recently active user.
+    *
+    * @param string $username The MyAnimeList username of the user.
     *
     * @return View
     */
     public function getFriendsAction($username)
     {
-        #http://myanimelist.net/profile/#{username}/friends
+        // http://myanimelist.net/profile/#{username}/friends
 
         $downloader = $this->get('atarashii_api.communicator');
 
@@ -94,7 +97,7 @@ class UserController extends FOSRestController
         $date->modify('+900 seconds'); //15 minutes
         $response->setExpires($date);
 
-        if (strpos($friendscontent,'Failed to find') !== false) {
+        if (strpos($friendscontent, 'Failed to find') !== false) {
             $view = $this->view(Array('error' => 'not-found'));
             $view->setResponse($response);
             $view->setStatusCode(404);

@@ -16,13 +16,18 @@ class VerifyController extends FOSRestController
 {
 
     /**
-     * Verify credentials action
-     * $username username
-     * $password password
-     */
-    public function VerifyAction()
+    * Verify a login works for MyAnimeList
+    *
+    * This call just mirrors the official API to check if a login is valid.
+    * The user must have passed the basic authentication needs and the PHP_AUTH_USER and
+    * PHP_AUTH_PW variables must be set. If not working, an HTTP code of 401 is returned,
+    * while a valid login will cause a code of 200 to be returned.
+    *
+    * @return View
+    */
+    public function verifyAction()
     {
-        #http://http://myanimelist.net/api/account/verify_credentials.xml
+        // http://http://myanimelist.net/api/account/verify_credentials.xml
 
         //get the credentials we received
         $username = $this->getRequest()->server->get('PHP_AUTH_USER');
