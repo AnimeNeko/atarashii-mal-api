@@ -11,7 +11,6 @@
 namespace Atarashii\APIBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
-use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\Response;
 use Atarashii\APIBundle\Parser\User;
 
@@ -19,12 +18,12 @@ class UserController extends FOSRestController
 {
 
     /**
-     * Profile get action
-     * @var string $username username
-     * @return array
-     *
-     * @Rest\View()
-     */
+    * Get the details of a Profile
+    *
+    * @param string  $username The username of the requested profile details
+    *
+    * @return View
+    */
     public function getProfileAction($username)
     {
         #http://myanimelist.net/profile/#{username}
@@ -65,6 +64,13 @@ class UserController extends FOSRestController
         }
     }
 
+    /**
+    * Get the friendlist of a specified user
+    *
+    * @param string  $username The username of the requested friendlist
+    *
+    * @return View
+    */
     public function getFriendsAction($username)
     {
         #http://myanimelist.net/profile/#{username}/friends
