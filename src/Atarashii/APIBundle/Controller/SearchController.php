@@ -51,7 +51,7 @@ class SearchController extends FOSRestController
         $response->setPublic();
         $response->setMaxAge(3600); //One hour
         $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag('anime/search/?q=' . urlencode($query));
+        $response->setEtag('anime/search?q=' . urlencode($query));
 
         //Also, set "expires" header for caches that don't understand Cache-Control
         $date = new \DateTime();
@@ -109,7 +109,7 @@ class SearchController extends FOSRestController
         $response->setPublic();
         $response->setMaxAge(3600); //One hour
         $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag('manga/search/?q=' . urlencode($query));
+        $response->setEtag('manga/search?q=' . urlencode($query));
 
         //Also, set "expires" header for caches that don't understand Cache-Control
         $date = new \DateTime();

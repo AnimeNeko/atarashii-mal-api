@@ -64,7 +64,7 @@ class UpcomingController extends FOSRestController
         $response->setPublic();
         $response->setMaxAge(10800); //Three hours
         $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag('anime/upcoming/?page=' . urlencode($page));
+        $response->setEtag('anime/upcoming?page=' . urlencode($page) . '&amp;start_date=' . urlencode($startYear . $startMonth . $startDay));
 
         //Also, set "expires" header for caches that don't understand Cache-Control
         $date = new \DateTime();
@@ -134,7 +134,7 @@ class UpcomingController extends FOSRestController
         $response->setPublic();
         $response->setMaxAge(10800); //Three hours
         $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag('manga/upcoming/?page=' . urlencode($page));
+        $response->setEtag('manga/upcoming?page=' . urlencode($page) . '&amp;start_date=' . urlencode($startYear . $startMonth . $startDay));
 
         //Also, set "expires" header for caches that don't understand Cache-Control
         $date = new \DateTime();
@@ -191,7 +191,7 @@ class UpcomingController extends FOSRestController
         $response->setPublic();
         $response->setMaxAge(10800); //Three hours
         $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag('manga/just_added/?page=' . urlencode($page));
+        $response->setEtag('manga/just_added?page=' . urlencode($page));
 
         //Also, set "expires" header for caches that don't understand Cache-Control
         $date = new \DateTime();
@@ -248,7 +248,7 @@ class UpcomingController extends FOSRestController
         $response->setPublic();
         $response->setMaxAge(10800); //Three hours
         $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag('manga/just_added/?page=' . urlencode($page));
+        $response->setEtag('manga/just_added?page=' . urlencode($page));
 
         //Also, set "expires" header for caches that don't understand Cache-Control
         $date = new \DateTime();

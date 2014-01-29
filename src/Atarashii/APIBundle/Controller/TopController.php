@@ -46,7 +46,7 @@ class TopController extends FOSRestController
         $response->setPublic();
         $response->setMaxAge(10800); //Three hours
         $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag('anime/top/?page=' . urlencode($page));
+        $response->setEtag('anime/top?page=' . urlencode($page));
 
         //Also, set "expires" header for caches that don't understand Cache-Control
         $date = new \DateTime();
@@ -92,7 +92,7 @@ class TopController extends FOSRestController
         $response->setPublic();
         $response->setMaxAge(10800); //Three hours
         $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag('manga/top/?page=' . urlencode($page));
+        $response->setEtag('manga/top?page=' . urlencode($page));
 
         //Also, set "expires" header for caches that don't understand Cache-Control
         $date = new \DateTime();
@@ -144,7 +144,7 @@ class TopController extends FOSRestController
         $response->setPublic();
         $response->setMaxAge(10800); //Three hours
         $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag('anime/popular/?page=' . urlencode($page));
+        $response->setEtag('anime/popular?page=' . urlencode($page));
 
         //Also, set "expires" header for caches that don't understand Cache-Control
         $date = new \DateTime();
@@ -190,7 +190,7 @@ class TopController extends FOSRestController
         $response->setPublic();
         $response->setMaxAge(10800); //Three hours
         $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag('manga/popular/?page=' . urlencode($page));
+        $response->setEtag('manga/popular?page=' . urlencode($page));
 
         //Also, set "expires" header for caches that don't understand Cache-Control
         $date = new \DateTime();
