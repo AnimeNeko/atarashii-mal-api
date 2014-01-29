@@ -18,15 +18,22 @@ use Atarashii\APIBundle\Parser\Top;
 
 class TopController extends FOSRestController
 {
-     /*
-     * Top get action
-     * @return array
-     *
-     * @Rest\View()
-     */
+    /**
+    * Fetch Top-rated Anime
+    *
+    * Gets a list of the top-rated anime on MyAnimeList. The get variable "page" is used
+    * to select the set of results to return (in a default of 30 items per set). An
+    * invalid or missing value defaults to page 1. The get variable "type" is used to
+    * select the type of anime you want to see and can be one of "tv", "movie", "ova", or
+    * "special". A missing or invalid value defaults to show all types.
+    *
+    * @param Request $request Contains all the needed information to get the list.
+    *
+    * @return View
+    */
     public function getTopAnimeAction(Request $request)
     {
-        #http://myanimelist.net/topanime.php?type=&limit=#{0}
+        // http://myanimelist.net/topanime.php?type=#{type}&limit=#{0}
 
         $page = (int) $request->query->get('page');
 
@@ -70,14 +77,14 @@ class TopController extends FOSRestController
         $date->modify('+10800 seconds'); //Three hours
         $response->setExpires($date);
 
-        if (strpos($animecontent,'No anime titles') !== false) {
+        if (strpos($animecontent, 'No anime titles') !== false) {
             $view = $this->view(Array('error' => 'not-found'));
             $view->setResponse($response);
             $view->setStatusCode(404);
 
             return $view;
         } else {
-            $topanime = Top::parse($animecontent,'anime');
+            $topanime = Top::parse($animecontent, 'anime');
 
             $view = $this->view($topanime);
             $view->setResponse($response);
@@ -87,9 +94,23 @@ class TopController extends FOSRestController
         }
     }
 
+    /**
+    * Fetch Top-rated Manga
+    *
+    * Gets a list of the top-rated manga on MyAnimeList. The get variable "page" is used
+    * to select the set of results to return (in a default of 30 items per set). An
+    * invalid or missing value defaults to page 1. The get variable "type" is used to
+    * select the type of manga you want to see and can be one of "manga", "novels",
+    * "oneshots", "doujin", "manwha", "manhua", or "oels". A missing or invalid value
+    * defaults to show all types.
+    *
+    * @param Request $request Contains all the needed information to get the list.
+    *
+    * @return View
+    */
     public function getTopMangaAction(Request $request)
     {
-        #http://myanimelist.net/topmanga.php?type=&limit=#{0}
+        // http://myanimelist.net/topmanga.php?type=&limit=#{0}
 
         $page = (int) $request->query->get('page');
 
@@ -136,14 +157,14 @@ class TopController extends FOSRestController
         $date->modify('+10800 seconds'); //Three hours
         $response->setExpires($date);
 
-         if (strpos($mangacontent,'No manga titles') !== false) {
+        if (strpos($mangacontent, 'No manga titles') !== false) {
             $view = $this->view(Array('error' => 'not-found'));
             $view->setResponse($response);
             $view->setStatusCode(404);
 
             return $view;
         } else {
-            $topmanga = Top::parse($mangacontent,'manga');
+            $topmanga = Top::parse($mangacontent, 'manga');
 
             $view = $this->view($topmanga);
             $view->setResponse($response);
@@ -153,15 +174,20 @@ class TopController extends FOSRestController
         }
     }
 
-     /*
-     * Popular get action
-     * @return array
-     *
-     * @Rest\View()
-     */
+    /**
+    * Fetch Top-rated Anime by Popularity
+    *
+    * Gets a list of the top-rated anime on MyAnimeList sorted by popularity. The get
+    * variable "page" is used to select the set of results to return (in a default of 30
+    * items per set). An invalid or missing value defaults to page 1.
+    *
+    * @param Request $request Contains all the needed information to get the list.
+    *
+    * @return View
+    */
     public function getPopularAnimeAction(Request $request)
     {
-        #http://myanimelist.net/topanime.php?type=bypopularity&limit=#{0}
+        // http://myanimelist.net/topanime.php?type=bypopularity&limit=#{0}
 
         $page = (int) $request->query->get('page');
 
@@ -188,14 +214,14 @@ class TopController extends FOSRestController
         $date->modify('+10800 seconds'); //Three hours
         $response->setExpires($date);
 
-        if (strpos($animecontent,'No anime titles') !== false) {
+        if (strpos($animecontent, 'No anime titles') !== false) {
             $view = $this->view(Array('error' => 'not-found'));
             $view->setResponse($response);
             $view->setStatusCode(404);
 
             return $view;
         } else {
-            $popularanime = Top::parse($animecontent,'anime');
+            $popularanime = Top::parse($animecontent, 'anime');
 
             $view = $this->view($popularanime);
             $view->setResponse($response);
@@ -205,9 +231,20 @@ class TopController extends FOSRestController
         }
     }
 
+    /**
+    * Fetch Top-rated Manga by Popularity
+    *
+    * Gets a list of the top-rated manga on MyAnimeList sorted by popularity. The get
+    * variable "page" is used to select the set of results to return (in a default of 30
+    * items per set). An invalid or missing value defaults to page 1.
+    *
+    * @param Request $request Contains all the needed information to get the list.
+    *
+    * @return View
+    */
     public function getPopularMangaAction(Request $request)
     {
-        #http://myanimelist.net/topmanga.php?type=bypopularity&limit=#{0}
+        // http://myanimelist.net/topmanga.php?type=bypopularity&limit=#{0}
 
         $page = (int) $request->query->get('page');
 
@@ -234,14 +271,14 @@ class TopController extends FOSRestController
         $date->modify('+10800 seconds'); //Three hours
         $response->setExpires($date);
 
-         if (strpos($mangacontent,'No manga titles') !== false) {
+        if (strpos($mangacontent, 'No manga titles') !== false) {
             $view = $this->view(Array('error' => 'not-found'));
             $view->setResponse($response);
             $view->setStatusCode(404);
 
             return $view;
         } else {
-            $popularmanga = Top::parse($mangacontent,'manga');
+            $popularmanga = Top::parse($mangacontent, 'manga');
 
             $view = $this->view($popularmanga);
             $view->setResponse($response);
