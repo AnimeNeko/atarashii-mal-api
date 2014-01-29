@@ -34,19 +34,36 @@ class TopController extends FOSRestController
             $page = 1;
         }
 
+        switch ($request->query->get('type')) {
+            case 'tv':
+            case 'movie':
+            case 'ova':
+            case 'special':
+                $type = $request->query->get('type');
+                break;
+            default:
+                $type = '';
+                break;
+        }
+
         $downloader = $this->get('atarashii_api.communicator');
 
         try {
-            $animecontent = $downloader->fetch('/topanime.php?type=&limit='.(($page*30)-30));
+            $animecontent = $downloader->fetch('/topanime.php?type=' . $type . '&limit='.(($page*30)-30));
         } catch (\Guzzle\Http\Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
+        }
+
+        $etag = 'anime/top?page=' . urlencode($page);
+        if ($type) {
+            $etag = $etag . '&amp;type=' . urlencode($type);
         }
 
         $response = new Response();
         $response->setPublic();
         $response->setMaxAge(10800); //Three hours
         $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag('anime/top?page=' . urlencode($page));
+        $response->setEtag($etag);
 
         //Also, set "expires" header for caches that don't understand Cache-Control
         $date = new \DateTime();
@@ -80,19 +97,39 @@ class TopController extends FOSRestController
             $page = 1;
         }
 
+        switch ($request->query->get('type')) {
+            case 'manga':
+            case 'novels':
+            case 'oneshots':
+            case 'doujin':
+            case 'manwha':
+            case 'manhua':
+            case 'oels':
+                $type = $request->query->get('type');
+                break;
+            default:
+                $type = '';
+                break;
+        }
+
         $downloader = $this->get('atarashii_api.communicator');
 
         try {
-            $mangacontent = $downloader->fetch('/topmanga.php?type=&limit='.(($page*30)-30));
+            $mangacontent = $downloader->fetch('/topmanga.php?type=' . $type . '&limit='.(($page*30)-30));
         } catch (\Guzzle\Http\Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
+        }
+
+        $etag = 'manga/top?page=' . urlencode($page);
+        if ($type) {
+            $etag = $etag . '&amp;type=' . urlencode($type);
         }
 
         $response = new Response();
         $response->setPublic();
         $response->setMaxAge(10800); //Three hours
         $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag('manga/top?page=' . urlencode($page));
+        $response->setEtag($etag);
 
         //Also, set "expires" header for caches that don't understand Cache-Control
         $date = new \DateTime();
