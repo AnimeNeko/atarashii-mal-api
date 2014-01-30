@@ -36,8 +36,12 @@ class SearchController extends FOSRestController
     {
         // http://myanimelist.net/anime.php?c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&q=#{name}&show=#{page}
 
-        $page = (int) $request->query->get('page', 1);
+        $page = (int) $request->query->get('page');
         $query = $request->query->get('q');
+
+        if ($page <= 0) {
+            $page = 1;
+        }
 
         $downloader = $this->get('atarashii_api.communicator');
 
@@ -94,8 +98,12 @@ class SearchController extends FOSRestController
     {
         // http://myanimelist.net/manga.php?c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&q=#{name}&show=#{page}
 
-        $page = (int) $request->query->get('page', 1);
+        $page = (int) $request->query->get('page');
         $query = $request->query->get('q');
+
+        if ($page <= 0) {
+            $page = 1;
+        }
 
         $downloader = $this->get('atarashii_api.communicator');
 

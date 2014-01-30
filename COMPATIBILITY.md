@@ -16,6 +16,8 @@ Changes
 New Features
 ------------
 * The /friends/ API endpoint has been added.
+* The search endpoints support more than 20 results, just use the page parameter
+  in the URL like in anime and manga upcoming.
 
 Bugfixes
 --------
