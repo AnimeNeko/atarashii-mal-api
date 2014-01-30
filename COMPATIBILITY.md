@@ -18,3 +18,5 @@ Bugfixes
 --------
 * For series with one date, the Ruby API sets this as the end date. This now
   sets it as the start date.
+* For many errors and messages, the output wasn't well-formed. We attempt, to
+  the extent it is possible, to always return a well-formed message.
