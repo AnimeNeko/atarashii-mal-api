@@ -7,8 +7,11 @@ the type of change.
 
 Changes
 -------
-* The Ruby API encodes text with HTML entities. This code uses non-encoded UTF-8.
+* The Ruby API encodes text with HTML entities. This code doesn't encode extended
+  characters and instead returns non-encoded UTF-8 text.
 * The API only outputs JSON. (XML output will be added at a later time.)
+* The verify_credentials endpoint now returns content in the response body. You
+  are free to ignore it and use the HTTP response codes, which are not changed.
 
 New Features
 ------------
