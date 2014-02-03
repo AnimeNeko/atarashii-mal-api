@@ -10,20 +10,56 @@
 
 namespace Atarashii\APIBundle\Model;
 
+/**
+* An instance of this class represents a single user's profile
+*/
 class Profile
 {
-    public $avatar_url; //URL to user's avatar (This should be under details, not out here, but Ruby API does it this way)
-    public $details = array(); //user's general (not anime/manga-specific) details.
-    public $anime_stats = array(); //user's anime statistics.
-    public $manga_stats = array(); //user's manga statistics.
+    /**
+    * Fully qualified URL to the user's avatar image
+    *
+    * @var string
+    */
+    public $avatar_url;
 
+    /**
+    * A ProfileDetails object containing general information on the user
+    *
+    * @var ProfileDetails
+    */
+    public $details;
+
+    /**
+    * An AnimeStats object containing information on the user's anime statistics
+    *
+    * @var AnimeStats
+    */
+    public $anime_stats;
+
+    /**
+    * A MangaStats object containing information on the user's manga statistics
+    *
+    * @var MangaStats
+    */
+    public $manga_stats;
+
+    /**
+    * Create an instance of the object
+    */
     public function __construct()
     {
+        // Initialize the sub classes we use.
         $this->details = new ProfileDetails();
+        $this->anime_stats = new AnimeStats();
+        $this->manga_stats = new MangaStats();
     }
 
 }
 
+/**
+* This class is used within the Profile Class.
+* It contains general user details
+*/
 class ProfileDetails
 {
     public $last_online;
@@ -40,4 +76,34 @@ class ProfileDetails
     public $comments = 0;
     public $msn;
     public $yahoo;
+}
+
+/**
+* This class is used within the Profile Class.
+* It contains statistical information on the user's anime watching.
+*/
+class AnimeStats
+{
+    public $time_days;
+    public $watching;
+    public $completed;
+    public $on_hold;
+    public $dropped;
+    public $plan_to_watch;
+    public $total_entries;
+}
+
+/**
+* This class is used within the Profile Class.
+* It contains statistical information on the user's manga reading.
+*/
+class MangaStats
+{
+    public $time_days;
+    public $reading;
+    public $completed;
+    public $on_hold;
+    public $dropped;
+    public $plan_to_read;
+    public $total_entries;
 }
