@@ -63,9 +63,9 @@ class SearchController extends FOSRestController
         $response->setExpires($date);
 
         if (strpos($animecontent, 'No titles that matched') !== false) {
-            $view = $this->view(Array('error' => 'not-found'));
+            $view = $this->view(array());
             $view->setResponse($response);
-            $view->setStatusCode(404);
+            $view->setStatusCode(200);
 
             return $view;
         } else {
