@@ -3,8 +3,69 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "9c912d7b394469f88c2c51bec7674cd8",
+    "hash": "be89ee4f05481e11d473233abe300671",
     "packages": [
+        {
+            "name": "braincrafted/bootstrap-bundle",
+            "version": "v2.0.0",
+            "target-dir": "Braincrafted/Bundle/BootstrapBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/braincrafted/bootstrap-bundle.git",
+                "reference": "ea12dae03f67cb718c66c50a5b59d523e8ba80a9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/braincrafted/bootstrap-bundle/zipball/ea12dae03f67cb718c66c50a5b59d523e8ba80a9",
+                "reference": "ea12dae03f67cb718c66c50a5b59d523e8ba80a9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "symfony/console": "~2.3",
+                "symfony/finder": "~2.3",
+                "symfony/form": "~2.3",
+                "symfony/framework-bundle": "~2.3",
+                "symfony/twig-bundle": "~2.3"
+            },
+            "require-dev": {
+                "knplabs/knp-menu": "~2.0@alpha",
+                "knplabs/knp-menu-bundle": "~2.0@alpha",
+                "knplabs/knp-paginator-bundle": "dev-master",
+                "mockery/mockery": "0.8.*",
+                "phpunit/phpunit": "3.7.*",
+                "symfony/assetic-bundle": "~2.3"
+            },
+            "suggest": {
+                "knplabs/knp-menu": "Required to use KnpMenuBundle.",
+                "knplabs/knp-menu-bundle": "BraincraftedBootstrapBundle styles the menus provided by KnpMenuBundle.",
+                "knplabs/knp-paginator-bundle": "BraincraftedBootstrapBundle styles the pagination provided by KnpPaginatorBundle.",
+                "twbs/bootstrap": "Twitter Bootstrap provides the assets (images, CSS and JS)"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Braincrafted\\Bundle\\BootstrapBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Florian Eckerstorfer",
+                    "email": "florian@eckerstorfer.co",
+                    "homepage": "http://florianeckerstorfer.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "BraincraftedBootstrapBundle integrates Bootstrap into Symfony2 by providing templates, Twig extensions, services and commands.",
+            "keywords": [
+                "bootstrap"
+            ],
+            "time": "2014-01-02 10:46:25"
+        },
         {
             "name": "doctrine/annotations",
             "version": "v1.1.2",
@@ -858,6 +919,17 @@
             "time": "2013-12-05 14:36:11"
         },
         {
+            "name": "jquery/jquery",
+            "version": "1.10.2",
+            "dist": {
+                "type": "file",
+                "url": "http://code.jquery.com/jquery-1.10.2.js",
+                "reference": null,
+                "shasum": null
+            },
+            "type": "library"
+        },
+        {
             "name": "kriswallsmith/assetic",
             "version": "v1.1.2",
             "source": {
@@ -994,6 +1066,65 @@
                 "psr-3"
             ],
             "time": "2013-11-14 19:48:31"
+        },
+        {
+            "name": "oyejorge/less.php",
+            "version": "v1.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/oyejorge/less.php.git",
+                "reference": "2a18bec4b1753ffe5cad9e7ae1586b7990297316"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/oyejorge/less.php/zipball/2a18bec4b1753ffe5cad9e7ae1586b7990297316",
+                "reference": "2a18bec4b1753ffe5cad9e7ae1586b7990297316",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "bin": [
+                "bin/lessc"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Less": "lib/"
+                },
+                "classmap": [
+                    "lessc.inc.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Matt Agar",
+                    "homepage": "https://github.com/agar"
+                },
+                {
+                    "name": "Martin Jantošovič",
+                    "homepage": "https://github.com/Mordred"
+                },
+                {
+                    "name": "Josh Schmidt",
+                    "homepage": "https://github.com/oyejorge"
+                }
+            ],
+            "description": "PHP port of the Javascript version of LESS http://lesscss.org",
+            "homepage": "http://lessphp.gpeasy.com",
+            "keywords": [
+                "css",
+                "less",
+                "less.js",
+                "lesscss",
+                "php",
+                "stylesheet"
+            ],
+            "time": "2014-03-04 19:02:04"
         },
         {
             "name": "phpcollection/phpcollection",
@@ -1655,6 +1786,48 @@
                 "framework"
             ],
             "time": "2014-02-27 14:55:30"
+        },
+        {
+            "name": "twbs/bootstrap",
+            "version": "v3.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twbs/bootstrap.git",
+                "reference": "a365d8689c3f3cee7f1acf86b61270ecca8e106d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/a365d8689c3f3cee7f1acf86b61270ecca8e106d",
+                "reference": "a365d8689c3f3cee7f1acf86b61270ecca8e106d",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jacob Thornton",
+                    "email": "jacobthornton@gmail.com"
+                },
+                {
+                    "name": "Mark Otto",
+                    "email": "markdotto@gmail.com"
+                }
+            ],
+            "description": "Sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development.",
+            "homepage": "http://getbootstrap.com",
+            "keywords": [
+                "bootstrap",
+                "css"
+            ],
+            "time": "2014-02-13 17:24:59"
         },
         {
             "name": "twig/extensions",

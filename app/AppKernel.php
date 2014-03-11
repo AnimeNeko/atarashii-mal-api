@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new Atarashii\APIBundle\AtarashiiAPIBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle($this),
             new FOS\RestBundle\FOSRestBundle(),
+            new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

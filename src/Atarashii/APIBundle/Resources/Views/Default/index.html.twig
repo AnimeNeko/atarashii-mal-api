@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Atarashii MAL API - Home</title>
+
+    <!-- Bootstrap -->
+    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" media="screen">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js add IE8 support of HTML5 elements and media queries -->
+    {% include 'BraincraftedBootstrapBundle::ie8-support.html.twig' %}
+  </head>
+
+  <body role="document">
+
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{{ path('atarashii_api_homepage') }}">Atarashii MAL API</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container" role="main">
+
+      <h1>Atarashii MAL API</h1>
+      <p>This is an unofficial API for <a href="http://myanimelist.net/">MyAnimeList</a>, a popular site for managing anime you are watching and manga you are reading.</p>
+      <p>This API is intended to act as an enhancement to the <a href="http://myanimelist.net/modules.php?go=api">official API</a> that's offered. In fact, this API uses the official API for communication in as many places as possible. It goes beyond this however, in offering missing features like anime and manga details and access to top/popular/recent anime and manga lists on the site. Additionally, it uses JSON for data output.</p>
+      <p>The code for this service is licensed under the Apache Public License 2.0 and you can <a href="https://bitbucket.org/ratan12/atarashii-api">download it on BitBucket</a>.</p>
+
+    </div> <!-- /container -->
+
+  </body>
+</html>

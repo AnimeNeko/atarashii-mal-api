@@ -1,6 +1,9 @@
 atarashii_api_homepage:
     path:  /
-    defaults: { _controller: AtarashiiAPIBundle:Default:index }
+    defaults:
+      _controller: FrameworkBundle:Template:template
+      template: 'AtarashiiAPIBundle:Default:index.html.twig'
+      maxAge: 10800
 
 atarashii_api_anime:
     path: /anime/{id}

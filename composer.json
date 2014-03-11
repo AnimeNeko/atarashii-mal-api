@@ -23,7 +23,11 @@
         "friendsofsymfony/rest-bundle": "1.0.*",
         "symfony/dom-crawler": "2.3.*",
         "symfony/css-selector": "2.3.*",
-        "guzzle/guzzle": "~3.7"
+        "guzzle/guzzle": "~3.7",
+        "braincrafted/bootstrap-bundle": "~2.0",
+        "twbs/bootstrap": "3.1.*",
+        "oyejorge/less.php": "~1.5",
+        "jquery/jquery": "1.10.*"
     },
     "scripts": {
         "post-install-cmd": [
@@ -31,14 +35,16 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Braincrafted\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::install"
         ],
         "post-update-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Braincrafted\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::install"
         ]
     },
     "config": {
@@ -54,5 +60,18 @@
         "branch-alias": {
             "dev-master": "2.3-dev"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "jquery/jquery",
+                "version": "1.10.2",
+                "dist": {
+                    "url": "http://code.jquery.com/jquery-1.10.2.js",
+                    "type": "file"
+                }
+            }
+        }
+    ]
 }
