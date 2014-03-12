@@ -11,7 +11,6 @@
 namespace Atarashii\APIBundle\Parser;
 
 use Symfony\Component\DomCrawler\Crawler;
-use Symfony\Component\CssSelector\CssSelector;
 use Atarashii\APIBundle\Model\Profile;
 use \DateTime;
 
@@ -62,7 +61,7 @@ class User
                 case 'manga_list_views':
                 case 'anime_list_views':
                 case 'comments':
-                    $value = (int) $value;
+                    $value = (int) str_replace(',', '', $value);
                     break;
                 case 'website':
                     //Display value is truncated if it's too long, so get the href value instead.
