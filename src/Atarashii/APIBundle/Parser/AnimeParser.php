@@ -127,7 +127,9 @@ class AnimeParser
             //MAL always provides record dates in US-style format. We export to a non-standard format to keep compatibility with the Ruby API.
             //Sometimes the startdate doesn't contain any day. For compatibility with the Ruby API I must pass a date, dayname and time.
             if (strpos($daterange[0],',') == false) {
-                if ($daterange[0] !== 'Not available') {
+                if (strlen($daterange[0]) === 4) {
+                    $animerecord->start_date = DateTime::createFromFormat('Y', $daterange[0])->format('D M d 00:00:00 O Y');
+                } elseif ($daterange[0] !== 'Not available') {
                     $animerecord->start_date = DateTime::createFromFormat('M Y', $daterange[0])->format('D M d 00:00:00 O Y');
                 }
             } else {
@@ -136,11 +138,13 @@ class AnimeParser
 
             //Series not yet to air won't list a range at all while currently airing series will use a "?"
             //For these, we should return a null
-            if (count($daterange) < 2 || $daterange[1] == '?') {
-                $animerecord->end_date = null;
-            } else {
+            if (count($daterange) > 1 && $daterange[1] !== '?') {
                 //MAL always provides record dates in US-style format. We export to a non-standard format to keep compatibility with the Ruby API.
-                $animerecord->end_date = DateTime::createFromFormat('M j, Y', $daterange[1])->format('D M d H:i:s O Y');
+                if (strpos($daterange[1],',') == false) {
+                    $animerecord->end_date = DateTime::createFromFormat('M Y', $daterange[1])->format('D M d 00:00:00 O Y');
+                } else {
+                    $animerecord->end_date = DateTime::createFromFormat('M j, Y', $daterange[1])->format('D M d H:i:s O Y');
+                }
             }
         }
 
