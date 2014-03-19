@@ -128,7 +128,7 @@ class AnimeParser
             //Sometimes the startdate doesn't contain any day. For compatibility with the Ruby API I must pass a date, dayname and time.
             if (strpos($daterange[0],',') == false) {
                 if (strlen($daterange[0]) === 4) {
-                    $animerecord->start_date = DateTime::createFromFormat('Y', $daterange[0])->format('D M d 00:00:00 O Y');
+                    $animerecord->start_date = DateTime::createFromFormat('Y', $daterange[0])->format('Y');
                 } elseif ($daterange[0] !== 'Not available') {
                     $animerecord->start_date = DateTime::createFromFormat('M Y', $daterange[0])->format('D M d 00:00:00 O Y');
                 }
