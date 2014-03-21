@@ -1,8 +1,22 @@
-atarashii_api_homepage:
+_homepage:
     path:  /
     defaults:
       _controller: FrameworkBundle:Template:template
       template: 'AtarashiiAPIBundle:Default:index.html.twig'
+      maxAge: 10800
+
+_docs_index:
+    path:  /docs/
+    defaults:
+      _controller: FrameworkBundle:Template:template
+      template: 'AtarashiiAPIBundle:Documentation:index.html.twig'
+      maxAge: 10800
+
+_docs_responses:
+    path:  /docs/responses/
+    defaults:
+      _controller: FrameworkBundle:Template:template
+      template: 'AtarashiiAPIBundle:Documentation:responses.html.twig'
       maxAge: 10800
 
 atarashii_api_anime:
