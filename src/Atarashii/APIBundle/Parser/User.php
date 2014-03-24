@@ -132,7 +132,7 @@ class User
 
             //Sometimes this value doesn't exist, so it should be set as null. Otherwise, format the time to RFC3389.
             if ($friendssince != '') {
-                if (strpos($friendssince, ',') == true) {
+                if (strpos($friendssince, '-') == true) {
                     $friendssince = DateTime::createFromFormat('m-d-y, g:i A', $friendssince)->format(DateTime::ISO8601);
                 }
             } else {
