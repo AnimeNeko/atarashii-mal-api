@@ -238,11 +238,11 @@ class MangaParser
                 if (preg_match('/Adaptation\: ?(<a .+?)\<br/', $relatedcontent, $relateditems)) {
                     $relateditems = explode(', ', $relateditems[1]);
                     foreach ($relateditems as $item) {
-                        if (preg_match('/<a href="(http:\/\/myanimelist.net\/anime\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
+                        if (preg_match('/<a href="(\/anime\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
                             $itemarray = array();
                             $itemarray['manga_id'] = $itemparts[2];
                             $itemarray['title'] = $itemparts[3];
-                            $itemarray['url'] = $itemparts[1];
+                            $itemarray['url'] = 'http://myanimelist.net'.$itemparts[1];
                             $mangarecord->anime_adaptations[] = $itemarray;
                         }
                     }
@@ -253,11 +253,11 @@ class MangaParser
                 if (preg_match('/.+\: ?(<a .+?)\<br/', $relatedcontent, $relateditems)) {
                     $relateditems = explode(', ', $relateditems[1]);
                     foreach ($relateditems as $item) {
-                        if (preg_match('/<a href="(http:\/\/myanimelist.net\/manga\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
+                        if (preg_match('/<a href="(\/manga\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
                             $itemarray = array();
                             $itemarray['manga_id'] = $itemparts[2];
                             $itemarray['title'] = $itemparts[3];
-                            $itemarray['url'] = $itemparts[1];
+                            $itemarray['url'] = 'http://myanimelist.net'.$itemparts[1];
                             $mangarecord->related_manga[] = $itemarray;
                         }
                     }
@@ -267,11 +267,11 @@ class MangaParser
                 if (preg_match('/Alternative versions?\: ?(<a .+?)\<br/', $relatedcontent, $relateditems)) {
                     $relateditems = explode(', ', $relateditems[1]);
                     foreach ($relateditems as $item) {
-                        if (preg_match('/<a href="(http:\/\/myanimelist.net\/manga\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
+                        if (preg_match('/<a href="(\/manga\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
                             $itemarray = array();
                             $itemarray['anime_id'] = $itemparts[2];
                             $itemarray['title'] = $itemparts[3];
-                            $itemarray['url'] = $itemparts[1];
+                            $itemarray['url'] = 'http://myanimelist.net'.$itemparts[1];
                             $mangarecord->alternative_versions[] = $itemarray;
                         }
                     }
