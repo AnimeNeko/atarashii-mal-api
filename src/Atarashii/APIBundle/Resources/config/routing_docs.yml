@@ -1,0 +1,36 @@
+# All Pages under the "/docs/" prefix.
+
+_docs_index:
+    path:  /
+    defaults:
+      _controller: FrameworkBundle:Template:template
+      template: 'AtarashiiAPIBundle:Documentation:index.html.twig'
+      maxAge: 10800
+
+_docs_responses:
+    path:  /responses/
+    defaults:
+      _controller: FrameworkBundle:Template:template
+      template: 'AtarashiiAPIBundle:Documentation:responses.html.twig'
+      maxAge: 10800
+
+_docs_anime:
+    path: /anime/
+    defaults:
+      _controller: FrameworkBundle:Template:template
+      template: 'AtarashiiAPIBundle:Documentation:anime.html.twig'
+      maxAge: 10800
+
+_docs_manga:
+    path: /manga/
+    defaults:
+      _controller: FrameworkBundle:Template:template
+      template: 'AtarashiiAPIBundle:Documentation:manga.html.twig'
+      maxAge: 10800
+
+_docs_user:
+    path: /user/
+    defaults:
+      _controller: FrameworkBundle:Template:template
+      template: 'AtarashiiAPIBundle:Documentation:user.html.twig'
+      maxAge: 10800

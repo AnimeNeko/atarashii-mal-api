@@ -1,337 +1,285 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% set pageTitle = "Docs - Data Response Formats" %}
+{% include "AtarashiiAPIBundle:includes:header.html.twig" %}
 
-    <title>Atarashii MAL API - Docs - Data Response Formats</title>
+<div class="row">
+    <div class="col-md-9">
 
-    <!-- Bootstrap -->
-    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" media="screen">
+        <h1>Data Response Formats</h1>
+        <p>The below sections provide a conceptual description of the data returned by the API.</p>
 
-    <!-- Custom styles for this template -->
-    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+        <a name="anime"></a><br><br><h2>Anime</h2>
+        <p>This is an object that defines an anime. It consists of the following properties.<p>
+        <p class="alert alert-info">Not all properties are provided depending on the type of request made.</p>
 
-    <!-- HTML5 Shim and Respond.js add IE8 support of HTML5 elements and media queries -->
-    {% include 'BraincraftedBootstrapBundle::ie8-support.html.twig' %}
-  </head>
-
-  <body role="document">
-
-    <!-- Fixed navbar -->
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="{{ path('_homepage') }}">Atarashii MAL API</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="{{ app.request.attributes.get('_route') == '_homepage' ? 'active' }}"><a href="{{ path('_homepage') }}">Home</a></li>
-
-            <li class="dropdown">
-              <a href="#" class="{{ app.request.attributes.get('_route') == '_docs_index' ? 'active' }} dropdown-toggle" data-toggle="dropdown">Documentation <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="{{ path('_docs_index') }}">Overview</a></li>
-                <li><a href="{{ path('_docs_responses') }}">Data Response Formats</a></li>
-              </ul>
+        <ul>
+            <li><code>id</code>: The ID of the anime, as assigned by MyAnimeList</dd>
+            <li><code>title</code>: The title of the item</li>
+            <li><code>other_titles</code>
+                <ul>
+                    <li><code>synonyms</code>: Other titles by which this anime may be commonly known. <span class="text-info">Only available in anime detail requests.</span></li>
+                    <li><code>english</code>: The title in English. <span class="text-info">Only available in anime detail requests.</span></li>
+                    <li><code>Japanese</code>: The title in Japanese. <span class="text-info">Only available in anime detail requests.</span></li>
+                </ul>
             </li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
+            <li><code>rank</code>: The global ranking of the title. <span class="text-info">Only available in anime detail requests.</span></li>
+            <li><code>popularity_rank</code>: Rank of the title based on popularity. (number of people adding title to the list) <span class="text-info">Only available in anime detail requests.</span></li>
+            <li><code>image_url</code>: URL to a representative image of the title. Usually a &quot;cover&quot; image.</li>
+            <li><code>type</code>: The type of anime. Values are one of: TV, Movie, OVA, ONA, Special, Music.</li>
+            <li><code>episodes</code>: Total number of episodes. Not returned (null) if unknown.</li>
+            <li><code>status</code>: Current airing status of the title. Values are one of: finished airing, currently airing, not yet aired.</li>
+            <li><code>start_date</code>: Date the anime starts airing. Formatted as &quot;D M d H:i:s O Y&quot;<sup><a href="#foot1">1</a></sup>. Ignore the time values.</li>
+            <li><code>end_date</code>: Date the anime finishes airing. Formatted as &quot;D M d H:i:s O Y&quot;<sup><a href="#foot1">1</a></sup>. Ignore the time values.</li>
+            <li><code>classification</code>: Classification of the title. This is a freeform text field, usually based on the MPAA rating system. <span class="text-info">Only available in anime detail requests.</span></li>
+            <li><code>members_score</code>: A weighted score based on the rating MyAnimeList members have given the title. <span class="text-info">Only available in anime detail requests.</span></li>
+            <li><code>members_count</code>: Number of MyAnimeList members that that added the title to their list. <span class="text-info">Only available in anime detail requests.</span></li>
+            <li><code>favorited_count</code>: The number of MyAnimeList members that have this title on their favorites list. <span class="text-info">Only available in anime detail requests.</span></li>
+            <li><code>synopsis</code>: A short HTML-formatted description of the anime.</li>
+            <li><code>genres</code>: A list of genres for this title. <span class="text-info">Only available in anime detail requests.</span></li>
+            <li><code>tags</code>: Popular tags for the title as assigned by MyAnimeList members. <span class="text-info">Only available in anime detail requests.</span></li>
+            <li><code>manga_adaptations</code>: A list of manga adaptations of this anime, or manga on which this anime is based. <span class="text-info">Only available in anime detail requests.</span> Each list item includes an object with the following items:
+                <ul>
+                    <li><code>manga_id</code>: ID of the manga, as assigned by MyAnimeList</li>
+                    <li><code>title</code>: Title of the manga.</li>
+                    <li><code>url</code>: URL to the MyAnimeList page for this manga.</li>
+                </ul>
+            </li>
+            <li><code>prequels</code>: A list of anime prequels for this title. <span class="text-info">Only available in anime detail requests.</span> Each list item includes an object with the following items:
+                <ul>
+                    <li><code>anime_id</code>: ID of the anime, as assigned by MyAnimeList</li>
+                    <li><code>title</code>: Title of the anime.</li>
+                    <li><code>url</code>: URL to the MyAnimeList page for this anime.</li>
+                </ul>
+            </li>
+            <li><code>sequels</code>: A list of anime sequels for this title. <span class="text-info">Only available in anime detail requests.</span> Each list item includes an object with the following items:
+                <ul>
+                    <li><code>anime_id</code>: ID of the anime, as assigned by MyAnimeList</li>
+                    <li><code>title</code>: Title of the anime.</li>
+                    <li><code>url</code>: URL to the MyAnimeList page for this anime.</li>
+                </ul>
+            </li>
+            <li><code>side_stories</code>: A list of anime side stories for this title. <span class="text-info">Only available in anime detail requests.</span> Each list item includes an object with the following items:
+                <ul>
+                    <li><code>anime_id</code>: ID of the anime, as assigned by MyAnimeList</li>
+                    <li><code>title</code>: Title of the anime.</li>
+                    <li><code>url</code>: URL to the MyAnimeList page for this anime.</li>
+                </ul>
+            </li>
+            <li><code>parent_story</code>: If the anime is a spin-off, the parent story anime for the title. <span class="text-info">Only available in anime detail requests.</span> If it exists, it is an object with the following items:
+                <ul>
+                    <li><code>anime_id</code>: ID of the anime, as assigned by MyAnimeList</li>
+                    <li><code>title</code>: Title of the anime.</li>
+                    <li><code>url</code>: URL to the MyAnimeList page for this anime.</li>
+                </ul>
+            </li>
+            <li><code>character_anime</code>: A list of character animes for this title. <span class="text-info">Only available in anime detail requests.</span> Each list item includes an object with the following items:
+                <ul>
+                    <li><code>anime_id</code>: ID of the anime, as assigned by MyAnimeList</li>
+                    <li><code>title</code>: Title of the anime.</li>
+                    <li><code>url</code>: URL to the MyAnimeList page for this anime.</li>
+                </ul>
+            </li>
+            <li><code>spin_offs</code>: A list of animes that are spin-offs for this title. <span class="text-info">Only available in anime detail requests.</span> Each list item includes an object with the following items:
+                <ul>
+                    <li><code>anime_id</code>: ID of the anime, as assigned by MyAnimeList</li>
+                    <li><code>title</code>: Title of the anime.</li>
+                    <li><code>url</code>: URL to the MyAnimeList page for this anime.</li>
+                </ul>
+            </li>
+            <li><code>summaries</code>: A list of anime summaries for this title. <span class="text-info">Only available in anime detail requests.</span> Each list item includes an object with the following items:
+                <ul>
+                    <li><code>anime_id</code>: ID of the anime, as assigned by MyAnimeList</li>
+                    <li><code>title</code>: Title of the anime.</li>
+                    <li><code>url</code>: URL to the MyAnimeList page for this anime.</li>
+                </ul>
+            </li>
+            <li><code>alternative_versions</code>: A list of alternative anime version for this title. <span class="text-info">Only available in anime detail requests.</span> Each list item includes an object with the following items:
+                <ul>
+                    <li><code>anime_id</code>: ID of the anime, as assigned by MyAnimeList</li>
+                    <li><code>title</code>: Title of the anime.</li>
+                    <li><code>url</code>: URL to the MyAnimeList page for this anime.</li>
+                </ul>
+            </li>
+            <li><code>watched_status</code>: The watched status for the title. Values are one of: watching, completed, on-hold, dropped, plan to watch. <span class="text-warning">Only available for authenticated requests.</span></li>
+            <li><code>watched_episodes</code>: The number of episodes watched for the title. <span class="text-warning">Only available for authenticated requests.</span></li>
+            <li><code>score</code>: The user's rating of the anime. <span class="text-warning">Only available for authenticated requests.</span></li>
+            <li><code>listed_anime_id</code>: This item is no longer used, but kept for compatibility. <span class="text-warning">Only available for authenticated requests.</span></li>
+        </ul>
+
+        <a name="manga"></a><br><br><h2>Manga</h2>
+        <p>This is an object that defines a manga. It consists of the following properties.<p>
+        <p class="alert alert-info">Not all properties are provided depending on the type of request made.</p>
+
+        <ul>
+            <li><code>id</code>: The ID of the manga, as assigned by MyAnimeList</dd>
+            <li><code>title</code>: The title of the item</li>
+            <li><code>other_titles</code>
+                <ul>
+                    <li><code>synonyms</code>: Other titles by which this manga may be commonly known. <span class="text-info">Only available in manga detail requests.</span></li>
+                    <li><code>english</code>: The title in English. <span class="text-info">Only available in manga detail requests.</span></li>
+                    <li><code>Japanese</code>: The title in Japanese. <span class="text-info">Only available in manga detail requests.</span></li>
+                </ul>
+            </li>
+            <li><code>rank</code>: The global ranking of the title. <span class="text-info">Only available in manga detail requests.</span></li>
+            <li><code>popularity_rank</code>: Rank of the title based on popularity. (number of people adding title to the list) <span class="text-info">Only available in manga detail requests.</span></li>
+            <li><code>image_url</code>: URL to a representative image of the title. Usually a &quot;cover&quot; image.</li>
+            <li><code>type</code>: The type of manga. Values are one of: Manga, Novel, One Shot, Doujin, Manwha, Manhua, OEL. <span class="text-muted">Manwha is Korean, Manhua is Chinese, OEL is manga written in English.</span></li>
+            <li><code>chapters</code>: Total number of chapters in the title. Not returned (null) if unknown.</li>
+            <li><code>volumes</code>: Total number of volumes in the title. Not returned (null) if unknown.</li>
+            <li><code>status</code>: Current airing status of the title. Values are one of: finished, publishing, not yet published.</li>
+            <li><code>members_score</code>: A weighted score based on the rating MyAnimeList members have given the title. <span class="text-info">Only available in manga detail requests.</span></li>
+            <li><code>members_count</code>: Number of MyAnimeList members that that added the title to their list. <span class="text-info">Only available in manga detail requests.</span></li>
+            <li><code>favorited_count</code>: The number of MyAnimeList members that have this title on their favorites list. <span class="text-info">Only available in manga detail requests.</span></li>
+            <li><code>synopsis</code>: A short HTML-formatted description of the manga.</li>
+            <li><code>genres</code>: A list of genres for this title. <span class="text-info">Only available in manga detail requests.</span></li>
+            <li><code>tags</code>: Popular tags for the title as assigned by MyAnimeList members. <span class="text-info">Only available in manga detail requests.</span></li>
+            <li><code>anime_adaptations</code>: A list of anime adaptations of this manga, or anime on which this manga is based. <span class="text-info">Only available in manga detail requests.</span> Each list item includes an object with the following items:
+                <ul>
+                    <li><code>anime_id</code>: ID of the anime, as assigned by MyAnimeList</li>
+                    <li><code>title</code>: Title of the manga.</li>
+                    <li><code>url</code>: URL to the MyAnimeList page for this anime.</li>
+                </ul>
+            </li>
+            <li><code>related_manga</code>: A list of manga related to this title. <span class="text-info">Only available in manga detail requests.</span> Each list item includes an object with the following items:
+                <ul>
+                    <li><code>manga_id</code>: ID of the manga, as assigned by MyAnimeList</li>
+                    <li><code>title</code>: Title of the manga.</li>
+                    <li><code>url</code>: URL to the MyAnimeList page for this manga.</li>
+                </ul>
+            </li>
+            <li><code>alternative_versions</code>: A list of alternative versions of manga for this title. <span class="text-info">Only available in manga detail requests.</span> Each list item includes an object with the following items:
+                <ul>
+                    <li><code>manga_id</code>: ID of the manga, as assigned by MyAnimeList</li>
+                    <li><code>title</code>: Title of the manga.</li>
+                    <li><code>url</code>: URL to the MyAnimeList page for this manga.</li>
+                </ul>
+            </li>
+            <li><code>read_status</code>: The watched status for the title. Values are one of reading, completed, on-hold, dropped, plan to read. <span class="text-warning">Only available for authenticated requests.</span></li>
+            <li><code>chapters_read</code>: The number of chapters the user has read. <span class="text-warning">Only available for authenticated requests.</span></li>
+            <li><code>volumes_read</code>: The number of volumes the user has read. <span class="text-warning">Only available for authenticated requests.</span></li>
+            <li><code>score</code>: The user's rating of the manga. <span class="text-warning">Only available for authenticated requests.</span></li>
+        </ul>
+
+
+        <a name="animelist"></a><br><br><h2>Anime List</h2>
+        <p>The Anime List provides a consolidated view of all the anime present on the list of a user.</p>
+
+        <ul>
+            <li><code>statistics</code>: An object containing statistics for the items on the user's list
+                <ul>
+                    <li><code>days</code>: A floating point decimal number representing the number of days spent watching anime.</li>
+                </ul>
+            </li>
+            <li><code>anime</code>: A list of <a href="#anime">anime</a> objects.</li>
+        </ul>
+
+
+        <a name="mangalist"></a><br><br><h2>Manga List</h2>
+        <p>The Manga List provides a consolidated view of all the manga present on the list of a user.</p>
+
+        <ul>
+            <li><code>statistics</code>: An object containing statistics for the items on the user's list
+                <ul>
+                    <li><code>days</code>: A floating point decimal number representing the number of days spent reading manga.</li>
+                </ul>
+            </li>
+            <li><code>manga</code>: A list of <a href="#manga">manga</a> objects.</li>
+        </ul>
+
+
+        <a name="user"></a><br><br><h2>User Details</h2>
+        <p>This data is an overview of a user and their statistics.</p>
+
+        <ul>
+            <li><code>avatar_url</code>: URL to a copy of the user's MyAnimeList user photo. Note that this is <em>not</em> the forum avatar.</li>
+            <li><code>details</code>: An object containing general details on a user, which consist of the following:
+                <ul>
+                    <li><code>last_online</code>: The time the user was last seen online. This may be either a relative time (&quot;1 hour ago&quot;, &quot;now&quot;) or a date formatted as &quot;m-d-y, g:i A&quot;<sup><a href="#foot1">1</a></sup></li>
+                    <li><code>gender</code>: The user's gender as text of either &quot;Male&quot;, &quot;Female&quot;, or &quot;Not specified&quot;</li>
+                    <li><code>birthday</code>: The user's birthday formatted as &quot;F j Y&quot;<sup><a href="#foot1">1</a></sup></li>
+                    <li><code>location</code>: Freeform text of the location that the user specified in their profile</li>
+                    <li><code>website</code>: URL of the user's website</li>
+                    <li><code>join_date</code>: Date of when the user created an account on MyAnimeList, formatted as &quot;F j Y&quot;<sup><a href="#foot1">1</a></sup></li>
+                    <li><code>access_rank</code>: Freeform text specifying the access level the user has on MyAnimeList, as listed on the user's profile. Some examples include &quot;Member&quot;, &quot;Forum Moderator&quot;, and &quot;Anime DB Moderator&quot;, but there are others.</li>
+                    <li><code>anime_list_views</code>: Integer listing the number of unique views of the user's anime list.</li>
+                    <li><code>manga_list_views</code>: Integer listing the number of unique views of the user's manga list.</li>
+                    <li><code>forum_posts</code>: Number of posts the user has made to the MyAnimeList forums.</li>
+                    <li><code>aim</code>: User's AOL Instant Messenger (AIM) screen name.</li>
+                    <li><code>comments</code>: Comments users have left on this user's profile page.</li>
+                    <li><code>msn</code>: User's MSN Messenger account. This isn't an active network anymore, but MAL still allows it to be filled out on profiles, so it is kept for compatibility.</li>
+                    <li><code>yahoo</code>: User's Yahoo! Messenger account.</li>
+                </ul>
+            </li>
+            <li><code>anime_stats</code>: This is an object containing all the public anime statistics about the user. It consists of:
+                <ul>
+                    <li><code>time_days</code>: A floating point decimal number representing the number of days spent watching anime.</li>
+                    <li><code>watching</code>: An integer containing the number of anime the user has flagged as currently watching.</li>
+                    <li><code>completed</code>: An integer of the number of anime the user has marked as have completed.</li>
+                    <li><code>on_hold</code>: An integer containing the number of anime the user has placed in the on-hold status.</li>
+                    <li><code>dropped</code>: The number of anime the user has marked as dropped, as an integer.</li>
+                    <li><code>plan_to_watch</code>: Anime that the user has added as planning to watch, as an integer.</li>
+                    <li><code>total_entries</code>: An integer specifying the total number of anime on the user's list.</li>
+                </ul>
+            </li>
+            <li><code>manga_stats</code>: This is an object containing all the public manga statistics about the user. It consists of:
+                <ul>
+                    <li><code>time_days</code>: A floating point decimal number representing the number of days spent reading manga.</li>
+                    <li><code>reading</code>: An integer containing the number of manga the user has flagged as currently reading.</li>
+                    <li><code>completed</code>: An integer of the number of manga the user has marked as have completed.</li>
+                    <li><code>on_hold</code>: An integer containing the number of manga the user has placed in the on-hold status.</li>
+                    <li><code>dropped</code>: The number of manga the user has marked as dropped, as an integer.</li>
+                    <li><code>plan_to_read</code>: Manga that the user has added as planning to read, as an integer.</li>
+                    <li><code>total_entries</code>: An integer specifying the total number of manga on the user's list.</li>
+                </ul>
+            </li>
+        </ul>
+
+
+        <a name="friend"></a><br><br><h2>Friend Details</h2>
+        <p>The friend details entry is an object that contains a profile along with some unique information on the friend status and the friend's username.</p>
+
+        <ul>
+            <li><code>name</code>: The username of the friend</li>
+            <li><code>friend_since</code>: Date the user became a friend with the specified user. Formatted as a full ISO 8601 date and time<sup><a href="#foot2">2</a></sup>.</li>
+            <li><code>profile</code>: A <a href="#user">user details</a> object.</li>
+        </ul>
+
+
+
+        <a name="errors"></a><br><br><h2>Errors</h2>
+        <p>Errors are normally returned with proper HTTP status codes, so you don't need to process the contents unless needed. Response content will generally consist of an error property with a string describing the problem. While not comprehensive, some of the more commonly used error descriptions follow:</p>
+
+        <ul>
+            <li><code>not-found</code>: Used when an item isn't found (but the API endpoint is correct). This is returned with a 404 error code.</li>
+            <li><code><em>arg</em>-required</code>: The argument &quot;<em>arg</em>&quot; is required, but was not supplied. (This is not currently used.)</li>
+            <li><code>network-error</code>: A communication error occurred with the MyAnimeList website.</li>
+            <li><code>unauthorized</code>: The action requires authentication.</li>
+            <li><code>forbidden</code>: The user authenticated does not have access.</li>
+        </ul>
+
+
+        <hr>
+
+        <p>Footnotes</p>
+        <ol>
+            <li><a name="foot1"></a>For an explanation of the letters, see the <a href="http://www.php.net/manual/en/function.date.php#refsect1-function.date-parameters">PHP Date Format characters</a> reference.</li>
+            <li><a name="foot2"></a>For an explanation of ISO 8601 dates, see <a href="http://wikipedia.org/wiki/ISO_8601">http://wikipedia.org/wiki/ISO_8601</a>.</li>
+        </ol>
     </div>
 
-    <div class="container" role="main">
-
-      <div class="row">
-      <div class="col-md-9">
-
-      <h1>Data Response Formats</h1>
-      <p>The below sections provide a conceptual description of the data returned by the API.</p>
-
-
-      <a name="anime"></a><br><br><h2>Anime</h2>
-      <p>This is an object that defines an anime. It consists of the following properties.<p>
-      <p class="alert alert-info">Not all properties are provided depending on the type of request made.</p>
-
-      <ul>
-        <li><code>id</code>: The ID of the anime, as assigned by MyAnimeList</dd>
-        <li><code>title</code>: The title of the item</li>
-        <li><code>other_titles</code>
-          <ul>
-            <li><code>synonyms</code>: Other titles by which this anime may be commonly known. <span class="text-info">Only available in anime detail requests.</span></li>
-            <li><code>english</code>: The title in English. <span class="text-info">Only available in anime detail requests.</span></li>
-            <li><code>Japanese</code>: The title in Japanese. <span class="text-info">Only available in anime detail requests.</span></li>
-          </ul>
-        </li>
-        <li><code>rank</code>: The global ranking of the title. <span class="text-info">Only available in anime detail requests.</span></li>
-        <li><code>popularity_rank</code>: Rank of the title based on popularity. (number of people adding title to the list) <span class="text-info">Only available in anime detail requests.</span></li>
-        <li><code>image_url</code>: URL to a representative image of the title. Usually a &quot;cover&quot; image.</li>
-        <li><code>type</code>: The type of anime. Values are one of: TV, Movie, OVA, ONA, Special, Music.</li>
-        <li><code>episodes</code>: Total number of episodes. Not returned (null) if unknown.</li>
-        <li><code>status</code>: Current airing status of the title. Values are one of: finished airing, currently airing, not yet aired.</li>
-        <li><code>start_date</code>: Date the anime starts airing. Formatted as &quot;D M d H:i:s O Y&quot;<sup><a href="#foot1">1</a></sup>. Ignore the time values.</li>
-        <li><code>end_date</code>: Date the anime finishes airing. Formatted as &quot;D M d H:i:s O Y&quot;<sup><a href="#foot1">1</a></sup>. Ignore the time values.</li>
-        <li><code>classification</code>: Classification of the title. This is a freeform text field, usually based on the MPAA rating system. <span class="text-info">Only available in anime detail requests.</span></li>
-        <li><code>members_score</code>: A weighted score based on the rating MyAnimeList members have given the title. <span class="text-info">Only available in anime detail requests.</span></li>
-        <li><code>members_count</code>: Number of MyAnimeList members that that added the title to their list. <span class="text-info">Only available in anime detail requests.</span></li>
-        <li><code>favorited_count</code>: The number of MyAnimeList members that have this title on their favorites list. <span class="text-info">Only available in anime detail requests.</span></li>
-        <li><code>synopsis</code>: A short HTML-formatted description of the anime.</li>
-        <li><code>genres</code>: A list of genres for this title. <span class="text-info">Only available in anime detail requests.</span></li>
-        <li><code>tags</code>: Popular tags for the title as assigned by MyAnimeList members. <span class="text-info">Only available in anime detail requests.</span></li>
-        <li><code>manga_adaptations</code>: A list of manga adaptations of this anime, or manga on which this anime is based. <span class="text-info">Only available in anime detail requests.</span> Each list item includes an object with the following items:
-          <ul>
-            <li><code>manga_id</code>: ID of the manga, as assigned by MyAnimeList</li>
-            <li><code>title</code>: Title of the manga.</li>
-            <li><code>url</code>: URL to the MyAnimeList page for this manga.</li>
-          </ul>
-        </li>
-        <li><code>prequels</code>: A list of anime prequels for this title. <span class="text-info">Only available in anime detail requests.</span> Each list item includes an object with the following items:
-          <ul>
-            <li><code>anime_id</code>: ID of the anime, as assigned by MyAnimeList</li>
-            <li><code>title</code>: Title of the anime.</li>
-            <li><code>url</code>: URL to the MyAnimeList page for this anime.</li>
-          </ul>
-        </li>
-        <li><code>sequels</code>: A list of anime sequels for this title. <span class="text-info">Only available in anime detail requests.</span> Each list item includes an object with the following items:
-          <ul>
-            <li><code>anime_id</code>: ID of the anime, as assigned by MyAnimeList</li>
-            <li><code>title</code>: Title of the anime.</li>
-            <li><code>url</code>: URL to the MyAnimeList page for this anime.</li>
-          </ul>
-        </li>
-        <li><code>side_stories</code>: A list of anime side stories for this title. <span class="text-info">Only available in anime detail requests.</span> Each list item includes an object with the following items:
-          <ul>
-            <li><code>anime_id</code>: ID of the anime, as assigned by MyAnimeList</li>
-            <li><code>title</code>: Title of the anime.</li>
-            <li><code>url</code>: URL to the MyAnimeList page for this anime.</li>
-          </ul>
-        </li>
-        <li><code>parent_story</code>: If the anime is a spin-off, the parent story anime for the title. <span class="text-info">Only available in anime detail requests.</span> If it exists, it is an object with the following items:
-          <ul>
-            <li><code>anime_id</code>: ID of the anime, as assigned by MyAnimeList</li>
-            <li><code>title</code>: Title of the anime.</li>
-            <li><code>url</code>: URL to the MyAnimeList page for this anime.</li>
-          </ul>
-        </li>
-        <li><code>character_anime</code>: A list of character animes for this title. <span class="text-info">Only available in anime detail requests.</span> Each list item includes an object with the following items:
-          <ul>
-            <li><code>anime_id</code>: ID of the anime, as assigned by MyAnimeList</li>
-            <li><code>title</code>: Title of the anime.</li>
-            <li><code>url</code>: URL to the MyAnimeList page for this anime.</li>
-          </ul>
-        </li>
-        <li><code>spin_offs</code>: A list of animes that are spin-offs for this title. <span class="text-info">Only available in anime detail requests.</span> Each list item includes an object with the following items:
-          <ul>
-            <li><code>anime_id</code>: ID of the anime, as assigned by MyAnimeList</li>
-            <li><code>title</code>: Title of the anime.</li>
-            <li><code>url</code>: URL to the MyAnimeList page for this anime.</li>
-          </ul>
-        </li>
-        <li><code>summaries</code>: A list of anime summaries for this title. <span class="text-info">Only available in anime detail requests.</span> Each list item includes an object with the following items:
-          <ul>
-            <li><code>anime_id</code>: ID of the anime, as assigned by MyAnimeList</li>
-            <li><code>title</code>: Title of the anime.</li>
-            <li><code>url</code>: URL to the MyAnimeList page for this anime.</li>
-          </ul>
-        </li>
-        <li><code>alternative_versions</code>: A list of alternative anime version for this title. <span class="text-info">Only available in anime detail requests.</span> Each list item includes an object with the following items:
-          <ul>
-            <li><code>anime_id</code>: ID of the anime, as assigned by MyAnimeList</li>
-            <li><code>title</code>: Title of the anime.</li>
-            <li><code>url</code>: URL to the MyAnimeList page for this anime.</li>
-          </ul>
-        </li>
-        <li><code>watched_status</code>: The watched status for the title. Values are one of: watching, completed, on-hold, dropped, plan to watch. <span class="text-warning">Only available for authenticated requests.</span></li>
-        <li><code>watched_episodes</code>: The number of episodes watched for the title. <span class="text-warning">Only available for authenticated requests.</span></li>
-        <li><code>score</code>: The user's rating of the anime. <span class="text-warning">Only available for authenticated requests.</span></li>
-        <li><code>listed_anime_id</code>: This item is no longer used, but kept for compatibility. <span class="text-warning">Only available for authenticated requests.</span></li>
-      </ul>
-
-
-      <a name="manga"></a><br><br><h2>Manga</h2>
-      <p>This is an object that defines a manga. It consists of the following properties.<p>
-      <p class="alert alert-info">Not all properties are provided depending on the type of request made.</p>
-
-      <ul>
-        <li><code>id</code>: The ID of the manga, as assigned by MyAnimeList</dd>
-        <li><code>title</code>: The title of the item</li>
-        <li><code>other_titles</code>
-          <ul>
-            <li><code>synonyms</code>: Other titles by which this manga may be commonly known. <span class="text-info">Only available in manga detail requests.</span></li>
-            <li><code>english</code>: The title in English. <span class="text-info">Only available in manga detail requests.</span></li>
-            <li><code>Japanese</code>: The title in Japanese. <span class="text-info">Only available in manga detail requests.</span></li>
-          </ul>
-        </li>
-        <li><code>rank</code>: The global ranking of the title. <span class="text-info">Only available in manga detail requests.</span></li>
-        <li><code>popularity_rank</code>: Rank of the title based on popularity. (number of people adding title to the list) <span class="text-info">Only available in manga detail requests.</span></li>
-        <li><code>image_url</code>: URL to a representative image of the title. Usually a &quot;cover&quot; image.</li>
-        <li><code>type</code>: The type of manga. Values are one of: Manga, Novel, One Shot, Doujin, Manwha, Manhua, OEL. <span class="text-muted">Manwha is Korean, Manhua is Chinese, OEL is manga written in English.</span></li>
-        <li><code>chapters</code>: Total number of chapters in the title. Not returned (null) if unknown.</li>
-        <li><code>volumes</code>: Total number of volumes in the title. Not returned (null) if unknown.</li>
-        <li><code>status</code>: Current airing status of the title. Values are one of: finished, publishing, not yet published.</li>
-        <li><code>members_score</code>: A weighted score based on the rating MyAnimeList members have given the title. <span class="text-info">Only available in manga detail requests.</span></li>
-        <li><code>members_count</code>: Number of MyAnimeList members that that added the title to their list. <span class="text-info">Only available in manga detail requests.</span></li>
-        <li><code>favorited_count</code>: The number of MyAnimeList members that have this title on their favorites list. <span class="text-info">Only available in manga detail requests.</span></li>
-        <li><code>synopsis</code>: A short HTML-formatted description of the manga.</li>
-        <li><code>genres</code>: A list of genres for this title. <span class="text-info">Only available in manga detail requests.</span></li>
-        <li><code>tags</code>: Popular tags for the title as assigned by MyAnimeList members. <span class="text-info">Only available in manga detail requests.</span></li>
-        <li><code>anime_adaptations</code>: A list of anime adaptations of this manga, or anime on which this manga is based. <span class="text-info">Only available in manga detail requests.</span> Each list item includes an object with the following items:
-          <ul>
-            <li><code>anime_id</code>: ID of the anime, as assigned by MyAnimeList</li>
-            <li><code>title</code>: Title of the manga.</li>
-            <li><code>url</code>: URL to the MyAnimeList page for this anime.</li>
-          </ul>
-        </li>
-        <li><code>related_manga</code>: A list of manga related to this title. <span class="text-info">Only available in manga detail requests.</span> Each list item includes an object with the following items:
-          <ul>
-            <li><code>manga_id</code>: ID of the manga, as assigned by MyAnimeList</li>
-            <li><code>title</code>: Title of the manga.</li>
-            <li><code>url</code>: URL to the MyAnimeList page for this manga.</li>
-          </ul>
-        </li>
-        <li><code>alternative_versions</code>: A list of alternative versions of manga for this title. <span class="text-info">Only available in manga detail requests.</span> Each list item includes an object with the following items:
-          <ul>
-            <li><code>manga_id</code>: ID of the manga, as assigned by MyAnimeList</li>
-            <li><code>title</code>: Title of the manga.</li>
-            <li><code>url</code>: URL to the MyAnimeList page for this manga.</li>
-          </ul>
-        </li>
-        <li><code>read_status</code>: The watched status for the title. Values are one of reading, completed, on-hold, dropped, plan to read. <span class="text-warning">Only available for authenticated requests.</span></li>
-        <li><code>chapters_read</code>: The number of chapters the user has read. <span class="text-warning">Only available for authenticated requests.</span></li>
-        <li><code>volumes_read</code>: The number of volumes the user has read. <span class="text-warning">Only available for authenticated requests.</span></li>
-        <li><code>score</code>: The user's rating of the manga. <span class="text-warning">Only available for authenticated requests.</span></li>
-      </ul>
-
-
-      <a name="animelist"></a><br><br><h2>Anime List</h2>
-      <p>The Anime List provides a consolidated view of all the anime present on the list of a user.</p>
-      <ul>
-        <li><code>statistics</code>: An object containing statistics for the items on the user's list
+    <div class="col-md-3">
+        <div class="affix">
+            <p class="h5">Quick Navigation</p>
             <ul>
-              <li><code>days</code>: A floating point decimal number representing the number of days spent watching anime.</li>
+                <li><a href="#anime">Anime</a></li>
+                <li><a href="#manga">Manga</a></li>
+                <li><a href="#animelist">Anime List</a></li>
+                <li><a href="#mangalist">Manga List</a></li>
+                <li><a href="#user">User Details</a></li>
+                <li><a href="#friend">Friend Details</a></li>
+                <li><a href="#errors">Errors</a></li>
             </ul>
-        </li>
-        <li><code>anime</code>: A list of <a href="#anime">anime</a> objects.</li>
-      </ul>
-
-
-      <a name="mangalist"></a><br><br><h2>Manga List</h2>
-      <p>The Manga List provides a consolidated view of all the manga present on the list of a user.</p>
-      <ul>
-        <li><code>statistics</code>: An object containing statistics for the items on the user's list
-            <ul>
-              <li><code>days</code>: A floating point decimal number representing the number of days spent reading manga.</li>
-            </ul>
-        </li>
-        <li><code>manga</code>: A list of <a href="#manga">manga</a> objects.</li>
-      </ul>
-
-
-      <a name="user"></a><br><br><h2>User Details</h2>
-      <p>This data is an overview of a user and their statistics.</p>
-      <ul>
-        <li><code>avatar_url</code>: URL to a copy of the user's MyAnimeList user photo. Note that this is <em>not</em> the forum avatar.</li>
-        <li><code>details</code>: An object containing general details on a user, which consist of the following:
-          <ul>
-            <li><code>last_online</code>: The time the user was last seen online. This may be either a relative time (&quot;1 hour ago&quot;, &quot;now&quot;) or a date formatted as &quot;m-d-y, g:i A&quot;<sup><a href="#foot1">1</a></sup></li>
-            <li><code>gender</code>: The user's gender as text of either &quot;Male&quot;, &quot;Female&quot;, or &quot;Not specified&quot;</li>
-            <li><code>birthday</code>: The user's birthday formatted as &quot;F j Y&quot;<sup><a href="#foot1">1</a></sup></li>
-            <li><code>location</code>: Freeform text of the location that the user specified in their profile</li>
-            <li><code>website</code>: URL of the user's website</li>
-            <li><code>join_date</code>: Date of when the user created an account on MyAnimeList, formatted as &quot;F j Y&quot;<sup><a href="#foot1">1</a></sup></li>
-            <li><code>access_rank</code>: Freeform text specifying the access level the user has on MyAnimeList, as listed on the user's profile. Some examples include &quot;Member&quot;, &quot;Forum Moderator&quot;, and &quot;Anime DB Moderator&quot;, but there are others.</li>
-            <li><code>anime_list_views</code>: Integer listing the number of unique views of the user's anime list.</li>
-            <li><code>manga_list_views</code>: Integer listing the number of unique views of the user's manga list.</li>
-            <li><code>forum_posts</code>: Number of posts the user has made to the MyAnimeList forums.</li>
-            <li><code>aim</code>: User's AOL Instant Messenger (AIM) screen name.</li>
-            <li><code>comments</code>: Comments users have left on this user's profile page.</li>
-            <li><code>msn</code>: User's MSN Messenger account. This isn't an active network anymore, but MAL still allows it to be filled out on profiles, so it is kept for compatibility.</li>
-            <li><code>yahoo</code>: User's Yahoo! Messenger account.</li>
-          </ul>
-        </li>
-        <li><code>anime_stats</code>: This is an object containing all the public anime statistics about the user. It consists of:
-          <ul>
-            <li><code>time_days</code>: A floating point decimal number representing the number of days spent watching anime.</li>
-            <li><code>watching</code>: An integer containing the number of anime the user has flagged as currently watching.</li>
-            <li><code>completed</code>: An integer of the number of anime the user has marked as have completed.</li>
-            <li><code>on_hold</code>: An integer containing the number of anime the user has placed in the on-hold status.</li>
-            <li><code>dropped</code>: The number of anime the user has marked as dropped, as an integer.</li>
-            <li><code>plan_to_watch</code>: Anime that the user has added as planning to watch, as an integer.</li>
-            <li><code>total_entries</code>: An integer specifying the total number of anime on the user's list.</li>
-          </ul>
-        </li>
-        <li><code>manga_stats</code>: This is an object containing all the public manga statistics about the user. It consists of:
-          <ul>
-            <li><code>time_days</code>: A floating point decimal number representing the number of days spent reading manga.</li>
-            <li><code>reading</code>: An integer containing the number of manga the user has flagged as currently reading.</li>
-            <li><code>completed</code>: An integer of the number of manga the user has marked as have completed.</li>
-            <li><code>on_hold</code>: An integer containing the number of manga the user has placed in the on-hold status.</li>
-            <li><code>dropped</code>: The number of manga the user has marked as dropped, as an integer.</li>
-            <li><code>plan_to_read</code>: Manga that the user has added as planning to read, as an integer.</li>
-            <li><code>total_entries</code>: An integer specifying the total number of manga on the user's list.</li>
-          </ul>
-        </li>
-      </ul>
-
-
-      <a name="friend"></a><br><br><h2>Friend Details</h2>
-      <p>The friend details entry is an object that contains a profile along with some unique information on the friend status and the friend's username.</p>
-      <ul>
-        <li><code>name</code>: The username of the friend</li>
-        <li><code>friend_since</code>: Date the user became a friend with the specified user. Formatted as a full ISO 8601 date and time<sup><a href="#foot2">2</a></sup>.</li>
-        <li><code>profile</code>: A <a href="#user">user details</a> object.</li>
-      </ul>
-
-
-
-      <a name="errors"></a><br><br><h2>Errors</h2>
-      <p>Errors are normally returned with proper HTTP status codes, so you don't need to process the contents unless needed. Response content will generally consist of an error property with a string describing the problem. While not comprehensive, some of the more commonly used error descriptions follow:</p>
-      <ul>
-        <li><code>not-found</code>: Used when an item isn't found (but the API endpoint is correct). This is returned with a 404 error code.</li>
-        <li><code><em>arg</em>-required</code>: The argument &quot;<em>arg</em>&quot; is required, but was not supplied. (This is not currently used.)</li>
-        <li><code>network-error</code>: A communication error occurred with the MyAnimeList website.</li>
-        <li><code>unauthorized</code>: The action requires authentication.</li>
-        <li><code>forbidden</code>: The user authenticated does not have access.</li>
-      </ul>
-
-
-<hr>
-<p>Footnotes</p>
-<ol>
-  <li><a name="foot1"></a>For an explanation of the letters, see the <a href="http://www.php.net/manual/en/function.date.php#refsect1-function.date-parameters">PHP Date Format characters</a> reference.</li>
-  <li><a name="foot2"></a>For an explanation of ISO 8601 dates, see <a href="http://wikipedia.org/wiki/ISO_8601">http://wikipedia.org/wiki/ISO_8601</a>.</li>
-</ol>
-      </div>
-        <div class="col-md-3">
-            <div class="affix">
-                <p class="h5">Quick Navigation</p>
-                <ul>
-                    <li><a href="#anime">Anime</a></li>
-                    <li><a href="#manga">Manga</a></li>
-                    <li><a href="#animelist">Anime List</a></li>
-                    <li><a href="#mangalist">Manga List</a></li>
-                    <li><a href="#user">User Details</a></li>
-                    <li><a href="#friend">Friend Details</a></li>
-                    <li><a href="#errors">Errors</a></li>
-                </ul>
-            </div>
         </div>
-      </div>
+    </div>
+</div>
 
-
-    </div> <!-- /container -->
-
-    <!-- jQuery (necessary for Bootstraps JavaScript plugins) -->
-    <script src="{{ asset('js/jquery.js') }}"></script>
-    <!-- Include all JavaScripts, compiled by Assetic -->
-    <script src="{{ asset('js/bootstrap.js') }}"></script>
-
-  </body>
-</html>
+{% include "AtarashiiAPIBundle:includes:footer.html.twig" %}

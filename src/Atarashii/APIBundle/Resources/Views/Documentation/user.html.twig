@@ -1,0 +1,42 @@
+{% set pageTitle = "Docs - User and Account Methods" %}
+{% include "AtarashiiAPIBundle:includes:header.html.twig" %}
+
+<div class="row">
+    <div class="col-md-9">
+        <h1>User and Account Methods</h1>
+        <p>All the below methods deal with handling account and user data.</p>
+
+        <h2>User Profile</h2>
+        <dl>
+            <dt>URI Format</dt><dd>profile/<em>username</em></dd>
+            <dt>Method</dt><dd>GET</dd>
+            <dt>Authentication</dt><dd>No</dd>
+        </dl>
+        <p>Retrieves a user's profile. Output is a <a href="{{ path('_docs_responses') }}#user">user details object</a>.</p>
+
+        <h2>Friends</h2>
+        <dl>
+            <dt>URI Format</dt><dd>friends/<em>username</em></dd>
+            <dt>Method</dt><dd>GET</dd>
+            <dt>Authentication</dt><dd>No</dd>
+        </dl>
+        <p>Retrieves the friendlist of the specified user. Output is a <a href="{{ path('_docs_responses') }}#friend">friend details object</a>.</p>
+
+        <h2>Login Verification</h2>
+        <dl>
+            <dt>URI Format</dt><dd>account/<em>verify_credentials</em></dd>
+            <dt>Method</dt><dd>GET</dd>
+            <dt>Authentication</dt><dd>Yes</dd>
+        </dl>
+        <p>Tests login via credentials passed via HTTP Basic Authentication. Returns a 200 status code if the login was accepted by MyAnimeList, otherwise returns a 401 error code.</p>
+
+        <hr>
+
+        <p>Footnotes</p>
+        <ol>
+            <li><a name="foot1"></a>Although authentication is not required, additional information such as list status details can be provided if authentication is made.</li>
+        </ol>
+    </div>
+</div>
+
+{% include "AtarashiiAPIBundle:includes:footer.html.twig" %}

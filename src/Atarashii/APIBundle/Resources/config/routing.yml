@@ -5,19 +5,9 @@ _homepage:
       template: 'AtarashiiAPIBundle:Default:index.html.twig'
       maxAge: 10800
 
-_docs_index:
-    path:  /docs/
-    defaults:
-      _controller: FrameworkBundle:Template:template
-      template: 'AtarashiiAPIBundle:Documentation:index.html.twig'
-      maxAge: 10800
-
-_docs_responses:
-    path:  /docs/responses/
-    defaults:
-      _controller: FrameworkBundle:Template:template
-      template: 'AtarashiiAPIBundle:Documentation:responses.html.twig'
-      maxAge: 10800
+_docs:
+    prefix: /docs
+    resource: '@AtarashiiAPIBundle/Resources/config/routing_docs.yml'
 
 atarashii_api_anime:
     path: /anime/{id}
