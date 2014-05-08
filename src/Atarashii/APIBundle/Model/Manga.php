@@ -173,7 +173,7 @@ class Manga
      * Set the type property
      *
      * @param int $type The type of series.
-     *                  Can be 1/Manga, 2/Novel, 3/One Shot, 4/Doujin, 5/Manwha, 6/Manhua, or 7/OEL. The default is "Manga".
+     *     Can be 1/Manga, 2/Novel, 3/One Shot, 4/Doujin, 5/Manwha, 6/Manhua, or 7/OEL. The default is "Manga".
      *
      * @return void
      */
@@ -272,7 +272,7 @@ class Manga
      * Set the status property
      *
      * @param int $status The publishing status of manga.
-     *                    Can be 1 (publishing), 2 (finished) or 3 (not yet published). The default is "2".
+     *     Can be 1 (publishing), 2 (finished) or 3 (not yet published). The default is "2".
      *
      * @return void
      */
@@ -506,7 +506,7 @@ class Manga
      * Set the read_status propery
      *
      * @param string|int $status The input status value of an item. Accepts either integers as defined
-     *                           by the MAL API module, or strings as defined by the Ruby API (mal-api.com).
+     *     by the MAL API module, or strings as defined by the Ruby API (mal-api.com).
      *
      * @return void
      */
@@ -545,7 +545,7 @@ class Manga
      * Get the current value of the read status.
      *
      * @param string $type What type you want to get back. Currently accepts either "string" or "int".
-     *                     Defaults to "string".
+     *     Defaults to "string".
      *
      * @return string|int
      */
