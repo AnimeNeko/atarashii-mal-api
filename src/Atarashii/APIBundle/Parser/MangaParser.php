@@ -11,7 +11,6 @@
 namespace Atarashii\APIBundle\Parser;
 
 use Symfony\Component\DomCrawler\Crawler;
-use Symfony\Component\CssSelector\CssSelector;
 use Atarashii\APIBundle\Model\Manga;
 
 class MangaParser
@@ -26,7 +25,7 @@ class MangaParser
         # Manga ID.
         # Example:
         # <input type="hidden" value="104" name="mid" />
-        $mangarecord->id = (int) $crawler->filter('input[name="mid"]')->attr('value');
+        $mangarecord->setId((int) $crawler->filter('input[name="mid"]')->attr('value'));
 
         # Title and rank.
         # Example:
@@ -34,13 +33,13 @@ class MangaParser
         #   <div style="float: right; font-size: 13px;">Ranked #8</div>Yotsuba&!
         #   <span style="font-weight: normal;"><small>(Manga)</small></span>
         # </h1>
-        $mangarecord->title = trim($title = $crawler->filterXPath('//h1/text()')->text());
-        $mangarecord->rank = (int) str_replace('Ranked #', '', $crawler->filter('h1 div')->text());
+        $mangarecord->setTitle(trim($title = $crawler->filterXPath('//h1/text()')->text()));
+        $mangarecord->setRank((int) str_replace('Ranked #', '', $crawler->filter('h1 div')->text()));
 
         # Title Image
         # Example:
         # <a href="http://myanimelist.net/manga/104/Yotsubato!/pic&pid=90029"><img src="http://cdn.myanimelist.net/images/manga/4/90029.jpg" alt="Yotsubato!" align="center"></a>
-        $mangarecord->image_url = $crawler->filter('div#content tr td div img')->attr('src');
+        $mangarecord->setImageUrl($crawler->filter('div#content tr td div img')->attr('src'));
 
         // Left Column - Alt titles, info, stats, tags
         $leftcolumn = $crawler->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]');
@@ -56,21 +55,24 @@ class MangaParser
         $extracted = $leftcolumn->filterXPath('//span[text()="English:"]');
         if (iterator_count($extracted) > 0) {
             $text = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
-            $mangarecord->other_titles['english'] = explode(', ', $text);
+            $setother_titles['english'] = explode(', ', $text);
+            $mangarecord->setOtherTitles($setother_titles);
         }
 
         # Synonyms:
         $extracted = $leftcolumn->filterXPath('//span[text()="Synonyms:"]');
         if (iterator_count($extracted) > 0) {
             $text = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
-            $mangarecord->other_titles['synonyms'] = explode(', ', $text);
+            $setother_titles['synonyms'] = explode(', ', $text);
+            $mangarecord->setOtherTitles($setother_titles);
         }
 
         # Japanese:
         $extracted = $leftcolumn->filterXPath('//span[text()="Japanese:"]');
         if (iterator_count($extracted) > 0) {
             $text = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
-            $mangarecord->other_titles['japanese'] = explode(', ', $text);
+            $setother_titles['japanese'] = explode(', ', $text);
+            $mangarecord->setOtherTitles($setother_titles);
         }
 
         # Information section.
@@ -95,7 +97,7 @@ class MangaParser
         # Type:
         $extracted = $leftcolumn->filterXPath('//span[text()="Type:"]');
         if (iterator_count($extracted) > 0) {
-            $mangarecord->type = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
+            $mangarecord->setType(trim(str_replace($extracted->text(), '', $extracted->parents()->text())));
         }
 
         # Volumes:
@@ -104,12 +106,12 @@ class MangaParser
             $data = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
 
             if ($data != "Unknown") {
-                $mangarecord->volumes = (int) $data;
+                $mangarecord->setVolumes((int) $data);
             } else {
-                $mangarecord->volumes = null;
+                $mangarecord->setVolumes(null);
             }
         } else {
-            $mangarecord->volumes = null;
+            $mangarecord->setVolumes(null);
         }
 
         # Chapters:
@@ -118,24 +120,24 @@ class MangaParser
             $data = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
 
             if ($data != "Unknown") {
-                $mangarecord->chapters = (int) $data;
+                $mangarecord->setChapters((int) $data);
             } else {
-                $mangarecord->chapters = null;
+                $mangarecord->setChapters(null);
             }
         } else {
-            $mangarecord->chapters = null;
+            $mangarecord->setChapters(null);
         }
 
         # Status:
         $extracted = $leftcolumn->filterXPath('//span[text()="Status:"]');
         if (iterator_count($extracted) > 0) {
-            $mangarecord->status = strtolower(trim(str_replace($extracted->text(), '', $extracted->parents()->text())));
+            $mangarecord->setStatus(strtolower(trim(str_replace($extracted->text(), '', $extracted->parents()->text()))));
         }
 
         # Genres:
         $extracted = $leftcolumn->filterXPath('//span[text()="Genres:"]');
         if (iterator_count($extracted) > 0) {
-            $mangarecord->genres = explode(', ', trim(str_replace($extracted->text(), '', $extracted->parents()->text())));
+            $mangarecord->setGenres(explode(', ', trim(str_replace($extracted->text(), '', $extracted->parents()->text()))));
         }
 
         # Statistics
@@ -157,7 +159,7 @@ class MangaParser
             $extracted = trim(str_replace(strstr($extracted, '('), '', $extracted));
             //Sometimes there is a superscript number at the end from a note.
             //Scores are only two decimals, so number_format should chop off the excess, hopefully.
-            $mangarecord->members_score = (float) number_format($extracted, 2);
+            $mangarecord->setMembersScore((float) number_format($extracted, 2));
         }
 
         # Popularity:
@@ -166,7 +168,7 @@ class MangaParser
             $extracted = str_replace($extracted->text(), '', $extracted->parents()->text());
             //Remove the hash at the front of the string and trim whitespace. Needed so we can cast to an int.
             $extracted = trim(str_replace('#', '', $extracted));
-            $mangarecord->popularity_rank = (int) $extracted;
+            $mangarecord->setPopularityRank((int) $extracted);
         }
 
         # Members:
@@ -175,7 +177,7 @@ class MangaParser
             $extracted = str_replace($extracted->text(), '', $extracted->parents()->text());
             //PHP doesn't like commas in integers. Remove it.
             $extracted = trim(str_replace(',', '', $extracted));
-            $mangarecord->members_count = (int) $extracted;
+            $mangarecord->setMembersCount((int) $extracted);
         }
 
         # Members:
@@ -184,7 +186,7 @@ class MangaParser
             $extracted = str_replace($extracted->text(), '', $extracted->parents()->text());
             //PHP doesn't like commas in integers. Remove it.
             $extracted = trim(str_replace(',', '', $extracted));
-            $mangarecord->favorited_count = (int) $extracted;
+            $mangarecord->setFavoritedCount((int) $extracted);
         }
 
         # Popular Tags
@@ -196,7 +198,7 @@ class MangaParser
         # </span>
         $extracted = $leftcolumn->filterXPath('//h2[text()="Popular Tags"]')->nextAll()->filter('a');
         foreach ($extracted as $term) {
-            $mangarecord->tags[] = $term->textContent;
+            $mangarecord->setTags($term->textContent);
         }
 
         # -
@@ -217,7 +219,7 @@ class MangaParser
         if (iterator_count($extracted) > 0) {
             $extracted = str_replace($extracted->html(), '', $extracted->parents()->html());
             $extracted = str_replace('<h2></h2>', '', $extracted);
-            $mangarecord->synopsis = $extracted;
+            $mangarecord->setSynopsis($extracted);
         }
 
         # Related Manga
@@ -243,7 +245,7 @@ class MangaParser
                             $itemarray['manga_id'] = $itemparts[2];
                             $itemarray['title'] = $itemparts[3];
                             $itemarray['url'] = 'http://myanimelist.net'.$itemparts[1];
-                            $mangarecord->anime_adaptations[] = $itemarray;
+                            $mangarecord->setAnimeAdaptations($itemarray);
                         }
                     }
                 }
@@ -258,7 +260,7 @@ class MangaParser
                             $itemarray['manga_id'] = $itemparts[2];
                             $itemarray['title'] = $itemparts[3];
                             $itemarray['url'] = 'http://myanimelist.net'.$itemparts[1];
-                            $mangarecord->related_manga[] = $itemarray;
+                            $mangarecord->setRelatedManga($itemarray);
                         }
                     }
                 }
@@ -272,7 +274,7 @@ class MangaParser
                             $itemarray['anime_id'] = $itemparts[2];
                             $itemarray['title'] = $itemparts[3];
                             $itemarray['url'] = 'http://myanimelist.net'.$itemparts[1];
-                            $mangarecord->alternative_versions[] = $itemarray;
+                            $mangarecord->setAlternativeVersions($itemarray);
                         }
                     }
                 }
@@ -321,26 +323,26 @@ class MangaParser
         #Read Chapters - Only available when user is authenticated
         $my_data = $crawler->filter('input#myinfo_chapters');
         if (iterator_count($my_data)) {
-            $mangarecord->chapters_read = (int) $my_data->attr('value');
+            $mangarecord->setChaptersRead((int) $my_data->attr('value'));
         }
 
         #Read Volumes - Only available when user is authenticated
         $my_data = $crawler->filter('input#myinfo_volumes');
         if (iterator_count($my_data)) {
-            $mangarecord->volumes_read = (int) $my_data->attr('value');
+            $mangarecord->setVolumesRead((int) $my_data->attr('value'));
         }
 
         #User's Score - Only available when user is authenticated
         $my_data = $crawler->filter('select#myinfo_score');
         if (iterator_count($my_data) && iterator_count($my_data->filter('option[selected="selected"]'))) {
-            $mangarecord->score = (int) $my_data->filter('option[selected="selected"]')->attr('value');
+            $mangarecord->setScore((int) $my_data->filter('option[selected="selected"]')->attr('value'));
         }
 
         #Listed ID (?) - Only available when user is authenticated
         $my_data = $crawler->filterXPath('//a[text()="Edit Details"]');
         if (iterator_count($my_data)) {
             if (preg_match('/id=(\d+)/', $my_data->attr('href'), $my_data)) {
-                $mangarecord->listed_manga_id = (int) $my_data[1];
+                $mangarecord->setListedMangaId((int) $my_data[1]);
             }
         }
 

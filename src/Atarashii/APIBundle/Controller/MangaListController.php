@@ -46,17 +46,17 @@ class MangaListController extends FOSRestController
             $i = 0;
             foreach ($mangalistxml->manga as $manga) {
                 $mlist[$i] = new Manga();
-                $mlist[$i]->id = (int) $manga->series_mangadb_id;
-                $mlist[$i]->title = (string) $manga->series_title;
+                $mlist[$i]->setId((int) $manga->series_mangadb_id);
+                $mlist[$i]->setTitle((string) $manga->series_title);
                 $mlist[$i]->setType((int) $manga->series_type);
                 $mlist[$i]->setStatus((int) $manga->series_status);
-                $mlist[$i]->chapters = (int) $manga->series_chapters;
-                $mlist[$i]->volumes = (int) $manga->series_volumes;
-                $mlist[$i]->image_url = (string) $manga->series_image;
-                $mlist[$i]->listed_manga_id = (int) $manga->my_id;
-                $mlist[$i]->volumes_read = (int) $manga->my_read_volumes;
-                $mlist[$i]->chapters_read = (int) $manga->my_read_chapters;
-                $mlist[$i]->score = (int) $manga->my_score;
+                $mlist[$i]->setChapters((int) $manga->series_chapters);
+                $mlist[$i]->setVolumes((int) $manga->series_volumes);
+                $mlist[$i]->setImageUrl((string) $manga->series_image);
+                $mlist[$i]->setListedMangaId((int) $manga->my_id);
+                $mlist[$i]->setVolumesRead((int) $manga->my_read_volumes);
+                $mlist[$i]->setChaptersRead((int) $manga->my_read_chapters);
+                $mlist[$i]->setScore((int) $manga->my_score);
                 $mlist[$i]->setReadStatus($manga->my_status);
                 $i++;
             }
@@ -98,18 +98,18 @@ class MangaListController extends FOSRestController
         }
 
         $manga = new Manga();
-        $manga->id = $request->request->get('manga_id');
-        $manga->read_status = $request->request->get('status');
-        $manga->chapters_read = $request->request->get('chapters');
-        $manga->volumes_read = $request->request->get('volumes');
-        $manga->score = $request->request->get('score');
+        $manga->setId($request->request->get('manga_id'));
+        $manga->setReadStatus($request->request->get('status'));
+        $manga->setChaptersRead($request->request->get('chapters'));
+        $manga->setVolumesRead($request->request->get('volumes'));
+        $manga->setScore($request->request->get('score'));
 
         $xmlcontent = $manga->MALApiXml();
 
         $connection = $this->get('atarashii_api.communicator');
 
         try {
-            $result = $connection->sendXML('/api/mangalist/add/' . $manga->id . '.xml', $xmlcontent, $username, $password);
+            $result = $connection->sendXML('/api/mangalist/add/' . $manga->getId() . '.xml', $xmlcontent, $username, $password);
 
             return $this->view('ok', 201);
         } catch (\Guzzle\Http\Exception\ClientErrorResponseException $e) {
@@ -157,18 +157,18 @@ class MangaListController extends FOSRestController
         }
 
         $manga = new Manga();
-        $manga->id = $id;
-        $manga->read_status = $request->request->get('status');
-        $manga->chapters_read = $request->request->get('chapters');
-        $manga->volumes_read = $request->request->get('volumes');
-        $manga->score = $request->request->get('score');
+        $manga->setId($id);
+        $manga->setReadStatus($request->request->get('status'));
+        $manga->setChaptersRead($request->request->get('chapters'));
+        $manga->setVolumesRead($request->request->get('volumes'));
+        $manga->setScore($request->request->get('score'));
 
         $xmlcontent = $manga->MALApiXml();
 
         $connection = $this->get('atarashii_api.communicator');
 
         try {
-            $result = $connection->sendXML('/api/mangalist/update/' . $manga->id . '.xml', $xmlcontent, $username, $password);
+            $result = $connection->sendXML('/api/mangalist/update/' . $manga->getId() . '.xml', $xmlcontent, $username, $password);
 
             return $this->view('ok', 200);
         } catch (\Guzzle\Http\Exception\ClientErrorResponseException $e) {

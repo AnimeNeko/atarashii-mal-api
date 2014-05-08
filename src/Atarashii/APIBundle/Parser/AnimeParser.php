@@ -26,18 +26,18 @@ class AnimeParser
         # Anime ID.
         # Example:
         # <input type="hidden" name="aid" value="790">
-        $animerecord->id = (int) $crawler->filter('input[name="aid"]')->attr('value');
+        $animerecord->setId((int) $crawler->filter('input[name="aid"]')->attr('value'));
 
         # Title and rank.
         # Example:
         # <h1><div style="float: right; font-size: 13px;">Ranked #96</div>Lucky ☆ Star</h1>
-        $animerecord->title = str_replace($crawler->filter('h1')->children()->text(), '', $crawler->filter('h1')->text());
-        $animerecord->rank = (int) str_replace('Ranked #', '', $crawler->filter('h1 div')->text());
+        $animerecord->setTitle(str_replace($crawler->filter('h1')->children()->text(), '', $crawler->filter('h1')->text()));
+        $animerecord->setRank((int) str_replace('Ranked #', '', $crawler->filter('h1 div')->text()));
 
         # Title Image
         # Example:
         # <a href="http://myanimelist.net/anime/16353/Love_Lab/pic&pid=50257"><img src="http://cdn.myanimelist.net/images/anime/12/50257.jpg" alt="Love Lab" align="center"></a>
-        $animerecord->image_url = $crawler->filter('div#content tr td div img')->attr('src');
+        $animerecord->setImageUrl($crawler->filter('div#content tr td div img')->attr('src'));
 
         # Alternative Titles section.
         # Example:
@@ -51,21 +51,24 @@ class AnimeParser
         $extracted = $leftcolumn->filterXPath('//span[text()="English:"]');
         if (iterator_count($extracted) > 0) {
             $text = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
-            $animerecord->other_titles['english'] = explode(', ', $text);
+            $other_titles['english'] = explode(', ', $text);
+            $animerecord->setOtherTitles($other_titles);
         }
 
         # Synonyms:
         $extracted = $leftcolumn->filterXPath('//span[text()="Synonyms:"]');
         if (iterator_count($extracted) > 0) {
             $text = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
-            $animerecord->other_titles['synonyms'] = explode(', ', $text);
+            $other_titles['synonyms'] = explode(', ', $text);
+            $animerecord->setOtherTitles($other_titles);
         }
 
         # Japanese:
         $extracted = $leftcolumn->filterXPath('//span[text()="Japanese:"]');
         if (iterator_count($extracted) > 0) {
             $text = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
-            $animerecord->other_titles['japanese'] = explode(', ', $text);
+            $other_titles['japanese'] = explode(', ', $text);
+            $animerecord->setOtherTitles($other_titles);
         }
 
         # Information section.
@@ -95,21 +98,21 @@ class AnimeParser
         # Type:
         $extracted = $leftcolumn->filterXPath('//span[text()="Type:"]');
         if (iterator_count($extracted) > 0) {
-            $animerecord->type = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
+            $animerecord->setType(trim(str_replace($extracted->text(), '', $extracted->parents()->text())));
         }
 
         # Episodes:
         $extracted = $leftcolumn->filterXPath('//span[text()="Episodes:"]');
         if (iterator_count($extracted) > 0) {
-            $animerecord->episodes = (int) trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
+            $animerecord->setEpisodes((int) trim(str_replace($extracted->text(), '', $extracted->parents()->text())));
         } else {
-            $animerecord->episodes = null;
+            $animerecord->setEpisodes(null);
         }
 
         # Status:
         $extracted = $leftcolumn->filterXPath('//span[text()="Status:"]');
         if (iterator_count($extracted) > 0) {
-            $animerecord->status = strtolower(trim(str_replace($extracted->text(), '', $extracted->parents()->text())));
+            $animerecord->setStatus(strtolower(trim(str_replace($extracted->text(), '', $extracted->parents()->text()))));
         }
 
         # Aired:
@@ -128,12 +131,12 @@ class AnimeParser
             //Sometimes the startdate doesn't contain any day. For compatibility with the Ruby API I must pass a date, dayname and time.
             if (strpos($daterange[0],',') == false) {
                 if (strlen($daterange[0]) === 4) {
-                    $animerecord->start_date = DateTime::createFromFormat('Y', $daterange[0])->format('Y');
+                    $animerecord->setStartDate(DateTime::createFromFormat('Y', $daterange[0])->format('Y'));
                 } elseif ($daterange[0] !== 'Not available') {
-                    $animerecord->start_date = DateTime::createFromFormat('M Y', $daterange[0])->format('D M d 00:00:00 O Y');
+                    $animerecord->setStartDate(DateTime::createFromFormat('M Y', $daterange[0])->format('D M d 00:00:00 O Y'));
                 }
             } else {
-                $animerecord->start_date = DateTime::createFromFormat('M j, Y', $daterange[0])->format('D M d H:i:s O Y');
+                $animerecord->setStartDate(DateTime::createFromFormat('M j, Y', $daterange[0])->format('D M d H:i:s O Y'));
             }
 
             //Series not yet to air won't list a range at all while currently airing series will use a "?"
@@ -141,9 +144,9 @@ class AnimeParser
             if (count($daterange) > 1 && $daterange[1] !== '?') {
                 //MAL always provides record dates in US-style format. We export to a non-standard format to keep compatibility with the Ruby API.
                 if (strpos($daterange[1],',') == false) {
-                    $animerecord->end_date = DateTime::createFromFormat('M Y', $daterange[1])->format('D M d 00:00:00 O Y');
+                    $animerecord->setEndDate(DateTime::createFromFormat('M Y', $daterange[1])->format('D M d 00:00:00 O Y'));
                 } else {
-                    $animerecord->end_date = DateTime::createFromFormat('M j, Y', $daterange[1])->format('D M d H:i:s O Y');
+                    $animerecord->setEndDate(DateTime::createFromFormat('M j, Y', $daterange[1])->format('D M d H:i:s O Y'));
                 }
             }
         }
@@ -151,13 +154,13 @@ class AnimeParser
         # Genres:
         $extracted = $leftcolumn->filterXPath('//span[text()="Genres:"]');
         if (iterator_count($extracted) > 0) {
-            $animerecord->genres = explode(', ', trim(str_replace($extracted->text(), '', $extracted->parents()->text())));
+            $animerecord->setGenres(explode(', ', trim(str_replace($extracted->text(), '', $extracted->parents()->text()))));
         }
 
         # Classification:
         $extracted = $leftcolumn->filterXPath('//span[text()="Rating:"]');
         if (iterator_count($extracted) > 0) {
-            $animerecord->classification = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
+            $animerecord->setClassification(trim(str_replace($extracted->text(), '', $extracted->parents()->text())));
         }
 
         # Statistics
@@ -181,7 +184,7 @@ class AnimeParser
             $extracted = trim(str_replace(strstr($extracted, '('), '', $extracted));
             //Sometimes there is a superscript number at the end from a note.
             //Scores are only two decimals, so number_format should chop off the excess, hopefully.
-            $animerecord->members_score = (float) number_format($extracted, 2);
+            $animerecord->setMembersScore((float) number_format($extracted, 2));
         }
 
         # Popularity:
@@ -190,7 +193,7 @@ class AnimeParser
             $extracted = str_replace($extracted->text(), '', $extracted->parents()->text());
             //Remove the hash at the front of the string and trim whitespace. Needed so we can cast to an int.
             $extracted = trim(str_replace('#', '', $extracted));
-            $animerecord->popularity_rank = (int) $extracted;
+            $animerecord->setPopularityRank((int) $extracted);
         }
 
         # Members:
@@ -199,7 +202,7 @@ class AnimeParser
             $extracted = str_replace($extracted->text(), '', $extracted->parents()->text());
             //PHP doesn't like commas in integers. Remove it.
             $extracted = trim(str_replace(',', '', $extracted));
-            $animerecord->members_count = (int) $extracted;
+            $animerecord->setMembersCount((int) $extracted);
         }
 
         # Members:
@@ -208,7 +211,7 @@ class AnimeParser
             $extracted = str_replace($extracted->text(), '', $extracted->parents()->text());
             //PHP doesn't like commas in integers. Remove it.
             $extracted = trim(str_replace(',', '', $extracted));
-            $animerecord->favorited_count = (int) $extracted;
+            $animerecord->setFavoritedCount((int) $extracted);
         }
 
         # Popular Tags
@@ -222,7 +225,7 @@ class AnimeParser
         # </span>
         $extracted = $leftcolumn->filterXPath('//h2[text()="Popular Tags"]')->nextAll()->filter('a');
         foreach ($extracted as $term) {
-            $animerecord->tags[] = $term->textContent;
+            $animerecord->setTags($tags[] = $term->textContent);
         }
 
         # -
@@ -244,7 +247,7 @@ class AnimeParser
         if (iterator_count($extracted) > 0) {
             $extracted = str_replace($extracted->html(), '', $extracted->parents()->html());
             $extracted = str_replace('<h2></h2>', '', $extracted);
-            $animerecord->synopsis = $extracted;
+            $animerecord->setSynopsis($extracted);
         }
 
         # Related Anime
@@ -275,7 +278,7 @@ class AnimeParser
                             $itemarray['manga_id'] = $itemparts[2];
                             $itemarray['title'] = $itemparts[3];
                             $itemarray['url'] = 'http://myanimelist.net'.$itemparts[1];
-                            $animerecord->manga_adaptations[] = $itemarray;
+                            $animerecord->setMangaAdaptations($itemarray);
                         }
                     }
                 }
@@ -289,7 +292,7 @@ class AnimeParser
                             $itemarray['anime_id'] = $itemparts[2];
                             $itemarray['title'] = $itemparts[3];
                             $itemarray['url'] = 'http://myanimelist.net'.$itemparts[1];
-                            $animerecord->prequels[] = $itemarray;
+                            $animerecord->setPrequels($itemarray);
                         }
                     }
                 }
@@ -303,7 +306,7 @@ class AnimeParser
                             $itemarray['anime_id'] = $itemparts[2];
                             $itemarray['title'] = $itemparts[3];
                             $itemarray['url'] = 'http://myanimelist.net'.$itemparts[1];
-                            $animerecord->sequels[] = $itemarray;
+                            $animerecord->setSequels($itemarray);
                         }
                     }
                 }
@@ -317,7 +320,7 @@ class AnimeParser
                             $itemarray['anime_id'] = $itemparts[2];
                             $itemarray['title'] = $itemparts[3];
                             $itemarray['url'] = 'http://myanimelist.net'.$itemparts[1];
-                            $animerecord->side_stories[] = $itemarray;
+                            $animerecord->setSideStories($itemarray);
                         }
                     }
                 }
@@ -331,7 +334,7 @@ class AnimeParser
                             $itemarray['anime_id'] = $itemparts[2];
                             $itemarray['title'] = $itemparts[3];
                             $itemarray['url'] = 'http://myanimelist.net'.$itemparts[1];
-                            $animerecord->parent_story = $itemarray;
+                            $animerecord->setParentStory($itemarray);
                         }
                     }
                 }
@@ -345,7 +348,7 @@ class AnimeParser
                             $itemarray['anime_id'] = $itemparts[2];
                             $itemarray['title'] = $itemparts[3];
                             $itemarray['url'] = 'http://myanimelist.net'.$itemparts[1];
-                            $animerecord->character_anime[] = $itemarray;
+                            $animerecord->setCharacterAnime($itemarray);
                         }
                     }
                 }
@@ -359,7 +362,7 @@ class AnimeParser
                             $itemarray['anime_id'] = $itemparts[2];
                             $itemarray['title'] = $itemparts[3];
                             $itemarray['url'] = 'http://myanimelist.net'.$itemparts[1];
-                            $animerecord->spin_offs[] = $itemarray;
+                            $animerecord->setSpinOffs($itemarray);
                         }
                     }
                 }
@@ -373,7 +376,7 @@ class AnimeParser
                             $itemarray['anime_id'] = $itemparts[2];
                             $itemarray['title'] = $itemparts[3];
                             $itemarray['url'] = 'http://myanimelist.net'.$itemparts[1];
-                            $animerecord->summaries[] = $itemarray;
+                            $animerecord->setSummaries($itemarray);
                         }
                     }
                 }
@@ -387,7 +390,7 @@ class AnimeParser
                             $itemarray['anime_id'] = $itemparts[2];
                             $itemarray['title'] = $itemparts[3];
                             $itemarray['url'] = 'http://myanimelist.net'.$itemparts[1];
-                            $animerecord->alternative_versions[] = $itemarray;
+                            $animerecord->setAlternativeVersions($itemarray);
                         }
                     }
                 }
@@ -429,20 +432,20 @@ class AnimeParser
         #Watched Episodes - Only available when user is authenticated
         $my_data = $crawler->filter('input#myinfo_watchedeps');
         if (iterator_count($my_data)) {
-            $animerecord->watched_episodes = (int) $my_data->attr('value');
+            $animerecord->setWatchedEpisodes((int) $my_data->attr('value'));
         }
 
         #User's Score - Only available when user is authenticated
         $my_data = $crawler->filter('select#myinfo_score');
         if (iterator_count($my_data) && iterator_count($my_data->filter('option[selected="selected"]'))) {
-            $animerecord->score = (int) $my_data->filter('option[selected="selected"]')->attr('value');
+            $animerecord->setScore((int) $my_data->filter('option[selected="selected"]')->attr('value'));
         }
 
         #Listed ID (?) - Only available when user is authenticated
         $my_data = $crawler->filterXPath('//a[text()="Edit Details"]');
         if (iterator_count($my_data)) {
             if (preg_match('/id=(\d+)/', $my_data->attr('href'), $my_data)) {
-                $animerecord->listed_anime_id = (int) $my_data[1];
+                $animerecord->setListedAnimeId((int) $my_data[1]);
             }
         }
 
