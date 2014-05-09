@@ -25,7 +25,7 @@ class User
 
         $leftside = $crawler->filter('#content .profile_leftcell');
 
-        $user->avatar_url = $leftside->filter('img')->attr('src');
+        $user->setAvatarUrl($leftside->filter('img')->attr('src'));
 
         $maincontent = iterator_to_array($crawler->filter('#horiznav_nav')->nextAll()->filterXPath('./div/table/tr/td'));
 
@@ -34,8 +34,8 @@ class User
         $mangastats = $maincontent[3];
 
         $user->details = self::parseDetails($userdetails, $user->details); //Details is an object, so we need to pass it to the function.
-        $user->anime_stats = self::parseStats($animestats);
-        $user->manga_stats = self::parseStats($mangastats);
+        $user->anime_stats = self::parseStats($animestats, $user->anime_stats);
+        $user->manga_stats = self::parseStats($mangastats, $user->manga_stats);
 
         return $user;
     }
@@ -52,14 +52,14 @@ class User
 
             $values = iterator_to_array($crawler);
 
-            $key = trim(str_replace(' ', '_', strtolower($values[0]->textContent)));
+            $key = 'set'.trim(str_replace(' ', '', $values[0]->textContent));
             $value = trim($values[1]->textContent);
 
             //We have to do some casting and manipulation for certain values so we return them as the right type
-            switch ($key) {
-                case 'forum_posts':
-                case 'manga_list_views':
-                case 'anime_list_views':
+            switch (strtolower(str_replace('set', '', $key))) {
+                case 'forumposts':
+                case 'mangalistviews':
+                case 'animelistviews':
                 case 'comments':
                     $value = (int) str_replace(',', '', $value);
                     break;
@@ -68,20 +68,14 @@ class User
                     $value = $values[1]->firstChild->getAttribute('href');
                     break;
             }
-
-            if (property_exists($details, $key)) {
-                $details->$key = $value;
-            }
-
+            $details->$key($value);
         }
 
         return $details;
     }
 
-    private static function parseStats($content)
+    private static function parseStats($content, $stats)
     {
-        $stats = array();
-
         $elements = new Crawler($content);
         $elements = $elements->filter('tr');
 
@@ -91,19 +85,15 @@ class User
             $crawler = $crawler->filter('td');
 
             $values = iterator_to_array($crawler);
-
-            $key = trim($values[0]->textContent);
             $value = trim($values[1]->textContent);
 
             //Some of the key values have parenthesis. This is messy, but we need to
             //extract only letters to properly transform the names for our output.
             //The regex was found at http://stackoverflow.com/questions/16426976
             $key = trim(preg_replace('~[^\p{L}]++~u', ' ', $values[0]->textContent));
-            $key = str_replace(' ', '_', strtolower($key));
+            $key = 'set'.str_replace(' ', '', $key);
 
-            $value = trim($values[1]->textContent);
-
-            $stats[$key] = (float) $value;
+            $stats->$key((float) $value);
         }
 
         return $stats;
@@ -144,8 +134,8 @@ class User
 
             //Fill out a profile object for this user with what information we can extract
             $friendinfo['profile'] = new Profile();
-            $friendinfo['profile']->avatar_url = $avatar;
-            $friendinfo['profile']->details->last_online = $lastonline;
+            $friendinfo['profile']->setAvatarUrl($avatar);
+            $friendinfo['profile']->details->setLastOnline($lastonline);
 
             $friendlist[] = $friendinfo;
         }
