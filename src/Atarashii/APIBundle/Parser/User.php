@@ -143,4 +143,43 @@ class User
         return $friendlist;
 
     }
+
+    public static function parseHistory($contents)
+    {
+        $crawler = new Crawler();
+        $crawler->addHTMLContent($contents, 'UTF-8');
+        $maincontent = $crawler->filter('table')->filter('tr');
+
+        //Empty array so we return something non-null if the list is empty.
+        $historylist = array();
+
+        foreach ($maincontent as $historyentry) {
+            $crawler = new Crawler($historyentry);
+            $historyinfo = array();
+
+            // bypass for the MAL generated strings
+            if (($crawler->filter('a')->count()) > 0){
+
+                $historyinfo['title'] = $crawler->filter('a')->text();
+                $historyinfo['episodes'] = (int) $crawler->filter('strong')->text();
+                $historyinfo['time_updated'] = substr($crawler->filter('td')->eq(1)->text(), 1);
+                if (strpos($historyinfo['time_updated'], '-') == true) {
+                    $historyinfo['time_updated'] = DateTime::createFromFormat('m-d-y, g:i A', $historyinfo['time_updated'])->format(DateTime::ISO8601);
+                }
+
+                if (strpos($crawler->filter('a')->attr('href'), 'anime') == true) {
+                    $historyinfo['type'] = 'anime';
+                } else {
+                    $historyinfo['type'] = 'manga';
+                }
+
+                $historyinfo['id'] = (int) str_replace('/'.$historyinfo['type'].'.php?id=', '', $crawler->filter('a')->attr('href'));
+
+                $historylist[] = $historyinfo;
+            }
+        }
+
+        return $historylist;
+
+    }
 }

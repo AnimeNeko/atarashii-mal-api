@@ -113,4 +113,54 @@ class UserController extends FOSRestController
             return $view;
         }
     }
+
+    /**
+    * Get a list of anime/manga history of the specified username
+    *
+    * Returns a view of history objects constituting history of the specified user. Sorting
+    * is MyAnimeList default, in order of the leastest update.
+    *
+    * @param string $username The MyAnimeList username of the user.
+    *
+    * @return View
+    */
+    public function getHistoryAction($username)
+    {
+        // http://myanimelist.net/history/#{username}
+
+        $downloader = $this->get('atarashii_api.communicator');
+
+        try {
+            $historycontent = $downloader->fetch('/history/' . $username);
+        } catch (\Guzzle\Http\Exception\CurlException $e) {
+            return $this->view(Array('error' => 'network-error'), 500);
+        }
+
+        $response = new Response();
+        $response->setPublic();
+        $response->setMaxAge(900); //15 minutes
+        $response->headers->addCacheControlDirective('must-revalidate', true);
+        $response->setEtag('history/' . $username);
+
+        //Also, set "expires" header for caches that don't understand Cache-Control
+        $date = new \DateTime();
+        $date->modify('+900 seconds'); //15 minutes
+        $response->setExpires($date);
+
+        if (strpos($historycontent, 'No history found') !== false) {
+            $view = $this->view(Array('error' => 'not-found'));
+            $view->setResponse($response);
+            $view->setStatusCode(404);
+
+            return $view;
+        } else {
+            $historylist = User::parseHistory($historycontent);
+
+            $view = $this->view($historylist);
+            $view->setResponse($response);
+            $view->setStatusCode(200);
+
+            return $view;
+        }
+    }
 }

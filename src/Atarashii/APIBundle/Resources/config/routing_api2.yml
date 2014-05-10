@@ -79,6 +79,12 @@ _api2_userprofile_friends:
     requirements:
         _method: GET
 
+_api2_userprofile_history:
+    path: /history/{username}
+    defaults: { _controller: AtarashiiAPIBundle:User:getHistory, _format: json, apiVersion: '2.0' }
+    requirements:
+        _method: GET
+
 _api2_popular_anime:
     path: /anime/popular
     defaults: { _controller: AtarashiiAPIBundle:Top:getPopularAnime, _format: json, apiVersion: '2.0' }
