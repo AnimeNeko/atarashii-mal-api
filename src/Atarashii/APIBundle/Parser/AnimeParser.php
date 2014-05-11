@@ -128,22 +128,24 @@ class AnimeParser
             //Sometimes the startdate doesn't contain any day. For compatibility with the Ruby API I must pass a date, dayname and time.
             if (strpos($daterange[0],',') == false) {
                 if (strlen($daterange[0]) === 4) {
-                    $animerecord->start_date = DateTime::createFromFormat('Y', $daterange[0])->format('Y');
+                    $animerecord->start_date = DateTime::createFromFormat('Y m d', $daterange[0] . ' 01 01')->format('Y');
                 } elseif ($daterange[0] !== 'Not available') {
-                    $animerecord->start_date = DateTime::createFromFormat('M Y', $daterange[0])->format('D M d 00:00:00 O Y');
+                    $animerecord->start_date = DateTime::createFromFormat('M Y d', $daterange[0] . ' 16')->format('D M d 12:00:00 O Y');
                 }
             } else {
-                $animerecord->start_date = DateTime::createFromFormat('M j, Y', $daterange[0])->format('D M d H:i:s O Y');
+                $animerecord->start_date = DateTime::createFromFormat('M j, Y', $daterange[0])->format('D M d 12:00:00 O Y');
             }
 
             //Series not yet to air won't list a range at all while currently airing series will use a "?"
             //For these, we should return a null
             if (count($daterange) > 1 && $daterange[1] !== '?') {
                 //MAL always provides record dates in US-style format. We export to a non-standard format to keep compatibility with the Ruby API.
-                if (strpos($daterange[1],',') == false) {
-                    $animerecord->end_date = DateTime::createFromFormat('M Y', $daterange[1])->format('D M d 00:00:00 O Y');
+                if (strlen($daterange[1]) === 4) {
+                    $animerecord->end_date = DateTime::createFromFormat('Y m d', $daterange[1] . ' 01 01')->format('Y');
+                } elseif (strpos($daterange[1],',') == false) {
+                    $animerecord->end_date = DateTime::createFromFormat('M Y d', $daterange[1] . ' 16')->format('D M d 12:00:00 O Y');
                 } else {
-                    $animerecord->end_date = DateTime::createFromFormat('M j, Y', $daterange[1])->format('D M d H:i:s O Y');
+                    $animerecord->end_date = DateTime::createFromFormat('M j, Y', $daterange[1])->format('D M d 12:00:00 O Y');
                 }
             }
         }
