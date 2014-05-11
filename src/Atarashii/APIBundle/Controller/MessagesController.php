@@ -32,7 +32,6 @@ class MessagesController extends FOSRestController
         $downloader = $this->get('atarashii_api.communicator');
 
         $page = (int) $request->query->get('page');
-
         if ($page <= 0) {
             $page = 1;
         }
@@ -57,7 +56,7 @@ class MessagesController extends FOSRestController
         }
 
         if (strpos($messagesdetails, 'You have 0 messages') !== false) {
-            return $this->view(Array('error' => 'No series found, check the series id and try again.'), 404);
+            return $this->view(Array('error' => 'No messages found.'), 404);
         } else {
             $messages = messagesParser::parse($messagesdetails);
 
@@ -186,6 +185,10 @@ class MessagesController extends FOSRestController
         $downloader = $this->get('atarashii_api.communicator');
 
         $id = (int) $request->request->get('id');
+        if ($id <= 0) {
+            return $this->view(Array('error' => 'Invalid thread ID'), 404);
+        }
+
         $send_username = $request->request->get('username');
         $subject = $request->request->get('subject');
         $message = $request->request->get('message');

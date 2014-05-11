@@ -171,7 +171,6 @@ _api2_messages_send:
     requirements:
         _method: POST
 
-
 _api2_verify_credentials:
     path: /account/verify_credentials
     defaults: { _controller: AtarashiiAPIBundle:Verify:Verify, _format: json, apiVersion: '2.0' }

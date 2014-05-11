@@ -12,12 +12,12 @@ namespace Atarashii\APIBundle\Model;
 
 class Messages
 {
-    public $id; //The message ID.
+    public $id; //The message ID used to send messages.
     public $action_id; //The action ID (used to perform actions like delete).
-    public $thread_id; //The tread ID (used to view the replies).
+    public $thread_id; //The tread ID (used to view/send replies).
     public $username; //username who send the message.
     public $time; //The time when we received the message.
-    public $read; //The time when we received the message.
+    public $read; //The read status (true if you saw the message).
     public $subject; //The subject of a message.
     public $message; //The message.
     public $preview; //The preview message.
