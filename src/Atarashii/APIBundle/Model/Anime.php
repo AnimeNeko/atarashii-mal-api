@@ -115,6 +115,40 @@ class Anime
     private $endDate;
 
     /**
+     * Beginning date from which this anime was/will be aired.
+     *
+     * API 2.0+
+     * This is the starting date of the anime, formatted as an ISO8601-compatible string.
+     * The contents my be formatted as a year, year and month, or year, month and day.
+     * The value is null if the date is unknown.
+     * Example: "2004-10-07", "2004-10", or "2004".
+     *
+     * @TODO: ACTUALLY SET UP THE DATE FORMAT
+     *
+     * @SerializedName("start_date")
+     * @Type("string")
+     * @Since("2.0")
+     */
+    private $startDate2;
+
+    /**
+     * Airing end date for the anime
+     *
+     * API 2.0+
+     * This is the starting date of the anime, formatted as an ISO8601-compatible string.
+     * The contents my be formatted as a year, year and month, or year, month and day.
+     * The value is null if the date is unknown.
+     * Example: "2004-10-07", "2004-10", or "2004".
+     *
+     * @TODO: ACTUALLY SET UP THE DATE FORMAT
+     *
+     * @SerializedName("end_date")
+     * @Type("string")
+     * @Since("2.0")
+     */
+    private $endDate2;
+
+    /**
      * Rating of the anime
      *
      * The rating is a freeform text field with no defined values.
@@ -497,13 +531,34 @@ class Anime
     /**
      * Set the start_date property
      *
-     * @param string $start_date The ISO 8601 start date of series.
+     * @param DateTime $start_date The start date of the series
+     * @param string   $accuracy   To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day".
      *
      * @return void
      */
-    public function setStartDate($start_date)
+    public function setStartDate($start_date, $accuracy = 'day')
     {
-        $this->startDate = $start_date;
+        //For API 1.0 compatibility with the old Ruby API, dates that have an accuracy greater than a year
+        //use a non-standard date format. For month-only accuracy, the day is always the 16th. The time returned
+        //is always 12:00:00, but should be ignored as it's meaningless. For API 2 and greater, we use an ISO8601-compatible
+        //date string with only the accuracy we know.
+
+        switch ($accuracy) {
+            case 'year':
+                $this->startDate = $start_date->format('Y');
+                $this->startDate2 = $start_date->format('Y');
+                break;
+            case 'month':
+                //For compatibility, API 1 always passes the 16th when the day is unknown.
+                $this->startDate = $start_date->format('D M 16 12:00:00 O Y');
+                $this->startDate2 = $start_date->format('Y-m');
+                break;
+            case 'day':
+            default:
+                $this->startDate = $start_date->format('D M d 12:00:00 O Y');
+                $this->startDate2 = $start_date->format('Y-m-d');
+                break;
+        }
     }
 
     /**
@@ -513,19 +568,40 @@ class Anime
      */
     public function getStartDate()
     {
-       return $this->startDate;
+       return $this->startDate2;
     }
 
     /**
      * Set the end_date property
      *
-     * @param string $end_date The ISO 8601 end date of series.
+     * @param DateTime $end_date The start date of the series
+     * @param string   $accuracy To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day".
      *
      * @return void
      */
-    public function setEndDate($end_date)
+    public function setEndDate($end_date, $accuracy = 'day')
     {
-        $this->endDate = $end_date;
+        //For API 1.0 compatibility with the old Ruby API, dates that have an accuracy greater than a year
+        //use a non-standard date format. For month-only accuracy, the day is always the 16th. The time returned
+        //is always 12:00:00, but should be ignored as it's meaningless. For API 2 and greater, we use an ISO8601-compatible
+        //date string with only the accuracy we know.
+
+        switch ($accuracy) {
+            case 'year':
+                $this->endDate = $end_date->format('Y');
+                $this->endDate2 = $end_date->format('Y');
+                break;
+            case 'month':
+                //For compatibility, API 1 always passes the 16th when the day is unknown.
+                $this->endDate = $end_date->format('D M 16 12:00:00 O Y');
+                $this->endDate2 = $end_date->format('Y-m');
+                break;
+            case 'day':
+            default:
+                $this->endDate = $end_date->format('D M d 12:00:00 O Y');
+                $this->endDate2 = $end_date->format('Y-m-d');
+                break;
+        }
     }
 
     /**
@@ -535,7 +611,7 @@ class Anime
      */
     public function getEndDate()
     {
-       return $this->endDate;
+       return $this->endDate2;
     }
 
     /**

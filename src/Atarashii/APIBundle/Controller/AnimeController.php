@@ -74,6 +74,12 @@ class AnimeController extends FOSRestController
                 $serializationContext->setSerializeNull(true);
             }
 
+            //After API 1.0, we don't show the "listed anime id" parameter
+            //Always set it to null to hide it from the output.
+            if ($apiVersion > 1.0) {
+                $anime->setListedAnimeId(null);
+            }
+
             //Only include cache info if it doesn't include personal data.
             if (!$usepersonal) {
                 $response->setPublic();

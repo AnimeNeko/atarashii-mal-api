@@ -16,7 +16,7 @@ use \DateTime;
 
 class AnimeParser
 {
-    public static function parse($contents, $mine = false)
+    public static function parse($contents)
     {
         $crawler = new Crawler();
         $crawler->addHTMLContent($contents, 'UTF-8');
@@ -127,26 +127,25 @@ class AnimeParser
 
             $daterange = explode(' to ', trim(str_replace($extracted->text(), '', $extracted->parents()->text())));
 
-            //MAL always provides record dates in US-style format. We export to a non-standard format to keep compatibility with the Ruby API.
-            //Sometimes the startdate doesn't contain any day. For compatibility with the Ruby API I must pass a date, dayname and time.
+            //MAL always provides record dates in US-style format.
             if (strpos($daterange[0],',') == false) {
                 if (strlen($daterange[0]) === 4) {
-                    $animerecord->setStartDate(DateTime::createFromFormat('Y', $daterange[0])->format('Y'));
+                    $animerecord->setStartDate(DateTime::createFromFormat('Y m d', $daterange[0] . ' 01 01'), 'year'); //Example ID 6535 or 9951
                 } elseif ($daterange[0] !== 'Not available') {
-                    $animerecord->setStartDate(DateTime::createFromFormat('M Y', $daterange[0])->format('D M d 00:00:00 O Y'));
+                    $animerecord->setStartDate(DateTime::createFromFormat('M Y d', $daterange[0] . ' 01'), 'month'); //Example ID 22535 (check upcoming list)
                 }
             } else {
-                $animerecord->setStartDate(DateTime::createFromFormat('M j, Y', $daterange[0])->format('D M d H:i:s O Y'));
+                $animerecord->setStartDate(DateTime::createFromFormat('M j, Y', $daterange[0]), 'day');
             }
 
             //Series not yet to air won't list a range at all while currently airing series will use a "?"
             //For these, we should return a null
             if (count($daterange) > 1 && $daterange[1] !== '?') {
-                //MAL always provides record dates in US-style format. We export to a non-standard format to keep compatibility with the Ruby API.
+                //MAL always provides record dates in US-style format.
                 if (strpos($daterange[1],',') == false) {
-                    $animerecord->setEndDate(DateTime::createFromFormat('M Y', $daterange[1])->format('D M d 00:00:00 O Y'));
+                    $animerecord->setEndDate(DateTime::createFromFormat('M Y d', $daterange[1] . ' 01'), 'month');//->format('D M d 00:00:00 O Y'));
                 } else {
-                    $animerecord->setEndDate(DateTime::createFromFormat('M j, Y', $daterange[1])->format('D M d H:i:s O Y'));
+                    $animerecord->setEndDate(DateTime::createFromFormat('M j, Y', $daterange[1]), 'day');
                 }
             }
         }
