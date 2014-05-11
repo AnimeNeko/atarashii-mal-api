@@ -88,6 +88,32 @@ class Communicator
     }
 
     /**
+    * Send a message on MAL
+    *
+    * @param string $subject Subject of the message
+    * @param string $message body of the message
+    *
+    * @return void
+    */
+    public function sendMessage($url, $subject, $message)
+    {
+        // create a request
+        $request = $this->client->post("http://myanimelist.net/mymessages.php?go=send&".$url);
+        $request->setHeader('User-Agent', $this->useragent);
+
+        //Add our data transmission - MAL requires the XML content to be in a variable named "data"
+        $request->setPostField('subject', $subject);
+        $request->setPostField('message', $message);
+        $request->setPostField('sendmessage', 'Send Message');
+
+        // send request / get response
+        $this->response = $request->send();
+
+        // this is the response body from the requested page
+        return $this->response->getBody();
+    }
+
+    /**
     * Post content to a URL
     *
     * This function is called sendXML as it's intended to send an XML document to
