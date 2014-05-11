@@ -14,35 +14,35 @@ class Anime
 {
     private $id; //The anime ID.
     private $title; //The anime title.
-    private $other_titles = array(); //A hash/dictionary containing other titles this anime has.
+    private $otherTitles = array(); //A hash/dictionary containing other titles this anime has.
     private $rank; //Global rank of this anime. Not available in /animelist requests.
-    private $popularity_rank; //Rank of this anime based on its popularity, i.e. number of users that have added this anime. Not available in /animelist requests.
-    private $image_url; //URL to an image for this anime.
+    private $popularityRank; //Rank of this anime based on its popularity, i.e. number of users that have added this anime. Not available in /animelist requests.
+    private $imageUrl; //URL to an image for this anime.
     private $type; //Type of anime. Possible values: TV, Movie, OVA, ONA, Special, Music.
     private $episodes; //Number of episodes. null is returned if the number of episodes is unknown.
     private $status; //Airing status of this anime. Possible values: finished airing, currently airing, not yet aired.
-    private $start_date; //Beginning date from which this anime was/will be aired.
-    private $end_date; //Ending air date of this anime.
+    private $startDate; //Beginning date from which this anime was/will be aired.
+    private $endDate; //Ending air date of this anime.
     private $classification; //Classification or rating of this anime. This is a freeform text field, with possible values like: R - 17+ (violence & profanity), PG - Children. Not available in /animelist requests.
-    private $members_score; //Weighted score members of MyAnimeList have given to this anime. Not available in /animelist requests.
-    private $members_count; //Number of members who have this anime on their list. Not available in /animelist requests.
-    private $favorited_count; //Number of members who have this anime marked as one of their favorites. Not available in /animelist requests.
+    private $membersScore; //Weighted score members of MyAnimeList have given to this anime. Not available in /animelist requests.
+    private $membersCount; //Number of members who have this anime on their list. Not available in /animelist requests.
+    private $favoritedCount; //Number of members who have this anime marked as one of their favorites. Not available in /animelist requests.
     private $synopsis; //Text describing the anime. Not available in /animelist requests.
     private $genres = array(); //A list of genres for this anime, e.g. ["Action", "Comedy", "Shounen"]. Not available in /animelist requests.
     private $tags = array(); //A list of popular tags for this anime, e.g. ["supernatural", "comedy"]. Not available in /animelist requests.
-    private $manga_adaptations = array(); //A list of manga adaptations of this anime (or conversely, manga from which this anime is adapted). Not available in /animelist requests.
+    private $mangaAdaptations = array(); //A list of manga adaptations of this anime (or conversely, manga from which this anime is adapted). Not available in /animelist requests.
     private $prequels = array(); //A list of anime prequels of this anime. Not available in /animelist requests.
     private $sequels = array(); //A list of anime sequels of this anime. Not available in /animelist requests.
-    private $side_stories = array(); //A list of anime side stories of this anime. Not available in /animelist requests.
-    private $parent_story; //Parent story of this anime. Not available in /animelist requests.
-    private $character_anime = array(); //A list of character anime of this anime. Not available in /animelist requests.
-    private $spin_offs = array(); //A list of spin-offs of this anime. Not available in /animelist requests.
+    private $sideStories = array(); //A list of anime side stories of this anime. Not available in /animelist requests.
+    private $parentStory; //Parent story of this anime. Not available in /animelist requests.
+    private $characterAnime = array(); //A list of character anime of this anime. Not available in /animelist requests.
+    private $spinOffs = array(); //A list of spin-offs of this anime. Not available in /animelist requests.
     private $summaries = array(); //A list of summaries of this anime. Not available in /animelist requests.
-    private $alternative_versions = array(); //A list of alternative versions of this anime. Not available in /animelist requests.
-    private $watched_status; //User's watched status of the anime. This is a string that is one of: watching, completed, on-hold, dropped, plan to watch.
-    private $watched_episodes; //Number of episodes already watched by the user.
+    private $alternativeVersions = array(); //A list of alternative versions of this anime. Not available in /animelist requests.
+    private $watchedStatus; //User's watched status of the anime. This is a string that is one of: watching, completed, on-hold, dropped, plan to watch.
+    private $watchedEpisodes; //Number of episodes already watched by the user.
     private $score; //User's score for the anime, from 1 to 10.
-    private $listed_anime_id; //For internal use. This is not listed as a public part of the returned list and it seems to only be used internally in the Ruby API.
+    private $listedAnimeId; //For internal use. This is not listed as a public part of the returned list and it seems to only be used internally in the Ruby API.
 
     /**
      * Set the id property
@@ -97,7 +97,7 @@ class Anime
      */
     public function setOtherTitles($other_titles)
     {
-        $this->other_titles = $other_titles;
+        $this->otherTitles = $other_titles;
     }
 
     /**
@@ -107,7 +107,7 @@ class Anime
      */
     public function getOtherTitles()
     {
-       return $this->other_titles;
+       return $this->otherTitles;
     }
 
     /**
@@ -141,7 +141,7 @@ class Anime
      */
     public function setPopularityRank($popularity_rank)
     {
-        $this->popularity_rank = $popularity_rank;
+        $this->popularityRank = $popularity_rank;
     }
 
     /**
@@ -151,7 +151,7 @@ class Anime
      */
     public function getPopularityRank()
     {
-       return $this->popularity_rank;
+       return $this->popularityRank;
     }
 
     /**
@@ -163,7 +163,7 @@ class Anime
      */
     public function setImageUrl($image_url)
     {
-        $this->image_url = $image_url;
+        $this->imageUrl = $image_url;
     }
 
     /**
@@ -173,7 +173,7 @@ class Anime
      */
     public function getImageUrl()
     {
-       return $this->image_url;
+       return $this->imageUrl;
     }
 
     /**
@@ -297,7 +297,7 @@ class Anime
      */
     public function setStartDate($start_date)
     {
-        $this->start_date = $start_date;
+        $this->startDate = $start_date;
     }
 
     /**
@@ -307,7 +307,7 @@ class Anime
      */
     public function getStartDate()
     {
-       return $this->start_date;
+       return $this->startDate;
     }
 
     /**
@@ -319,7 +319,7 @@ class Anime
      */
     public function setEndDate($end_date)
     {
-        $this->end_date = $end_date;
+        $this->endDate = $end_date;
     }
 
     /**
@@ -329,7 +329,7 @@ class Anime
      */
     public function getEndDate()
     {
-       return $this->end_date;
+       return $this->endDate;
     }
 
     /**
@@ -363,7 +363,7 @@ class Anime
      */
     public function setMembersScore($members_score)
     {
-        $this->members_score = $members_score;
+        $this->membersScore = $members_score;
     }
 
     /**
@@ -373,7 +373,7 @@ class Anime
      */
     public function getMembersScore()
     {
-        return $this->members_score;
+        return $this->membersScore;
     }
 
     /**
@@ -385,7 +385,7 @@ class Anime
      */
     public function setMembersCount($members_count)
     {
-        $this->members_count = $members_count;
+        $this->membersCount = $members_count;
     }
 
     /**
@@ -395,7 +395,7 @@ class Anime
      */
     public function getMembersCount()
     {
-        return $this->members_count;
+        return $this->membersCount;
     }
 
     /**
@@ -407,7 +407,7 @@ class Anime
      */
     public function setFavoritedCount($favorited_count)
     {
-        $this->favorited_count = $favorited_count;
+        $this->favoritedCount = $favorited_count;
     }
 
     /**
@@ -417,7 +417,7 @@ class Anime
      */
     public function getFavoritedCount()
     {
-        return $this->favorited_count;
+        return $this->favoritedCount;
     }
 
     /**
@@ -495,7 +495,7 @@ class Anime
      */
     public function setMangaAdaptations($manga_adaptations)
     {
-        $this->manga_adaptations[] = $manga_adaptations;
+        $this->mangaAdaptations[] = $manga_adaptations;
     }
 
     /**
@@ -505,7 +505,7 @@ class Anime
      */
     public function getMangaAdaptations()
     {
-        return $this->manga_adaptations;
+        return $this->mangaAdaptations;
     }
 
     /**
@@ -561,7 +561,7 @@ class Anime
      */
     public function setSideStories($side_stories)
     {
-        $this->side_stories[] = $side_stories;
+        $this->sideStories[] = $side_stories;
     }
 
     /**
@@ -571,7 +571,7 @@ class Anime
      */
     public function getSideStories()
     {
-        return $this->side_stories;
+        return $this->sideStories;
     }
 
     /**
@@ -583,7 +583,7 @@ class Anime
      */
     public function setParentStory($parent_story)
     {
-        $this->parent_story = $parent_story;
+        $this->parentStory = $parent_story;
     }
 
     /**
@@ -593,12 +593,12 @@ class Anime
      */
     public function getParentStory()
     {
-        return $this->parent_story;
+        return $this->parentStory;
     }
 
     public function setCharacterAnime($character_anime)
     {
-        $this->character_anime[] = $character_anime;
+        $this->characterAnime[] = $character_anime;
     }
 
     /**
@@ -608,7 +608,7 @@ class Anime
      */
     public function getCharacterAnime()
     {
-        return $this->character_anime;
+        return $this->characterAnime;
     }
 
     /**
@@ -620,7 +620,7 @@ class Anime
      */
     public function setSpinOffs($spin_offs)
     {
-        $this->spin_offs[] = $spin_offs;
+        $this->spinOffs[] = $spin_offs;
     }
 
     /**
@@ -630,7 +630,7 @@ class Anime
      */
     public function getSpinOffs()
     {
-        return $this->spin_offs;
+        return $this->spinOffs;
     }
 
     /**
@@ -664,7 +664,7 @@ class Anime
      */
     public function setAlternativeVersions($alternative_versions)
     {
-        $this->alternative_versions[] = $alternative_versions;
+        $this->alternativeVersions[] = $alternative_versions;
     }
 
     /**
@@ -674,7 +674,7 @@ class Anime
      */
     public function getAlternativeVersions()
     {
-        return $this->alternative_versions;
+        return $this->alternativeVersions;
     }
 
     /**
@@ -690,28 +690,28 @@ class Anime
         switch ($status) {
             case 1:
             case 'watching':
-                $this->watched_status = 'watching';
+                $this->watchedStatus = 'watching';
                 break;
             case 2:
             case 'completed':
-                $this->watched_status = 'completed';
+                $this->watchedStatus = 'completed';
                 break;
             case 3:
             case 'on-hold':
             case 'onhold':
-                $this->watched_status = 'on-hold';
+                $this->watchedStatus = 'on-hold';
                 break;
             case 4:
             case 'dropped':
-                $this->watched_status = 'dropped';
+                $this->watchedStatus = 'dropped';
                 break;
             case 6:
             case 'plan to watch':
             case 'plantowatch':
-                $this->watched_status = 'plan to watch';
+                $this->watchedStatus = 'plan to watch';
                 break;
             default:
-                $this->watched_status = 'watching';
+                $this->watchedStatus = 'watching';
                 break;
         }
     }
@@ -727,7 +727,7 @@ class Anime
     public function getWatchedStatus($type = 'string')
     {
         if ($type == 'int') {
-            switch ($this->watched_status) {
+            switch ($this->watchedStatus) {
                 case 'watching':
                     return 1;
                     break;
@@ -748,7 +748,7 @@ class Anime
                     break;
             }
         } else {
-            return $this->watched_status;
+            return $this->watchedStatus;
         }
 
     }
@@ -762,7 +762,7 @@ class Anime
      */
     public function setWatchedEpisodes($watched_episodes)
     {
-        $this->watched_episodes = $watched_episodes;
+        $this->watchedEpisodes = $watched_episodes;
     }
 
     /**
@@ -772,7 +772,7 @@ class Anime
      */
     public function getWatchedEpisodes()
     {
-        return $this->watched_episodes;
+        return $this->watchedEpisodes;
     }
 
     /**
@@ -806,7 +806,7 @@ class Anime
      */
     public function setListedAnimeId($listed_anime_id)
     {
-        $this->listed_anime_id = $listed_anime_id;
+        $this->listedAnimeId = $listed_anime_id;
     }
 
     /**
@@ -816,7 +816,7 @@ class Anime
      */
     public function getListedAnimeId()
     {
-        return $this->listed_anime_id;
+        return $this->listedAnimeId;
     }
 
     /**
