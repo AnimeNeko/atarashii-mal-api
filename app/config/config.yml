@@ -55,7 +55,7 @@ fos_rest:
     view:
         view_response_listener: force
     serializer:
-        serialize_null: true
+        serialize_null: false
 
 sensio_framework_extra:
     view:    { annotations: false }

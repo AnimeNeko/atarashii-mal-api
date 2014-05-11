@@ -14,6 +14,7 @@ use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Atarashii\APIBundle\Parser\AnimeParser;
+use JMS\Serializer\SerializationContext;
 
 class AnimeController extends FOSRestController
 {
@@ -25,7 +26,7 @@ class AnimeController extends FOSRestController
     *
     * @return View
     */
-    public function getAction($id, Request $request)
+    public function getAction($id, $apiVersion, Request $request)
     {
         // http://myanimelist.net/anime/#{id}
 
@@ -65,6 +66,13 @@ class AnimeController extends FOSRestController
             $anime = AnimeParser::parse($animedetails);
 
             $response = new Response();
+            $serializationContext = SerializationContext::create();
+            $serializationContext->setVersion($apiVersion);
+
+            //For compatibility, API 1.0 explicitly passes null parameters.
+            if($apiVersion == "1.0") {
+                $serializationContext->setSerializeNull(true);
+            }
 
             //Only include cache info if it doesn't include personal data.
             if (!$usepersonal) {
@@ -80,6 +88,8 @@ class AnimeController extends FOSRestController
             }
 
             $view = $this->view($anime);
+
+            $view->setSerializationContext($serializationContext);
             $view->setResponse($response);
             $view->setStatusCode(200);
 
