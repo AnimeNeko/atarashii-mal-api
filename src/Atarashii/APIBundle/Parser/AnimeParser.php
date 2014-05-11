@@ -142,8 +142,10 @@ class AnimeParser
             //For these, we should return a null
             if (count($daterange) > 1 && $daterange[1] !== '?') {
                 //MAL always provides record dates in US-style format.
-                if (strpos($daterange[1],',') == false) {
-                    $animerecord->setEndDate(DateTime::createFromFormat('M Y d', $daterange[1] . ' 01'), 'month');//->format('D M d 00:00:00 O Y'));
+                if (strlen($daterange[1]) === 4) {
+                    $animerecord->setEndDate(DateTime::createFromFormat('Y m d', $daterange[1] . ' 01 01'), 'year'); //Example ID 11836
+                } elseif (strpos($daterange[1],',') == false) {
+                    $animerecord->setEndDate(DateTime::createFromFormat('M Y d', $daterange[1] . ' 01'), 'month'); //Example ID 21275
                 } else {
                     $animerecord->setEndDate(DateTime::createFromFormat('M j, Y', $daterange[1]), 'day');
                 }
