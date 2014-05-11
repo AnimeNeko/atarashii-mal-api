@@ -261,12 +261,15 @@ class Anime
     {
         switch ($status) {
             case 1:
+            case 'currently airing':
                 $this->status = 'currently airing';
                 break;
             case 2:
+            case 'finished airing':
                 $this->status = 'finished airing';
                 break;
             case 3:
+            case 'not yet aired':
                 $this->status = 'not yet aired';
                 break;
             default:
