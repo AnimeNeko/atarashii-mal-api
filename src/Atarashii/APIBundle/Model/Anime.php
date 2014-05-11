@@ -10,39 +10,245 @@
 
 namespace Atarashii\APIBundle\Model;
 
+use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\Since;
+use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\Until;
+
 class Anime
 {
-    private $id; //The anime ID.
-    private $title; //The anime title.
-    private $otherTitles = array(); //A hash/dictionary containing other titles this anime has.
-    private $rank; //Global rank of this anime. Not available in /animelist requests.
-    private $popularityRank; //Rank of this anime based on its popularity, i.e. number of users that have added this anime. Not available in /animelist requests.
-    private $imageUrl; //URL to an image for this anime.
-    private $type; //Type of anime. Possible values: TV, Movie, OVA, ONA, Special, Music.
-    private $episodes; //Number of episodes. null is returned if the number of episodes is unknown.
-    private $status; //Airing status of this anime. Possible values: finished airing, currently airing, not yet aired.
-    private $startDate; //Beginning date from which this anime was/will be aired.
-    private $endDate; //Ending air date of this anime.
-    private $classification; //Classification or rating of this anime. This is a freeform text field, with possible values like: R - 17+ (violence & profanity), PG - Children. Not available in /animelist requests.
-    private $membersScore; //Weighted score members of MyAnimeList have given to this anime. Not available in /animelist requests.
-    private $membersCount; //Number of members who have this anime on their list. Not available in /animelist requests.
-    private $favoritedCount; //Number of members who have this anime marked as one of their favorites. Not available in /animelist requests.
-    private $synopsis; //Text describing the anime. Not available in /animelist requests.
-    private $genres = array(); //A list of genres for this anime, e.g. ["Action", "Comedy", "Shounen"]. Not available in /animelist requests.
-    private $tags = array(); //A list of popular tags for this anime, e.g. ["supernatural", "comedy"]. Not available in /animelist requests.
-    private $mangaAdaptations = array(); //A list of manga adaptations of this anime (or conversely, manga from which this anime is adapted). Not available in /animelist requests.
-    private $prequels = array(); //A list of anime prequels of this anime. Not available in /animelist requests.
-    private $sequels = array(); //A list of anime sequels of this anime. Not available in /animelist requests.
-    private $sideStories = array(); //A list of anime side stories of this anime. Not available in /animelist requests.
-    private $parentStory; //Parent story of this anime. Not available in /animelist requests.
-    private $characterAnime = array(); //A list of character anime of this anime. Not available in /animelist requests.
-    private $spinOffs = array(); //A list of spin-offs of this anime. Not available in /animelist requests.
-    private $summaries = array(); //A list of summaries of this anime. Not available in /animelist requests.
-    private $alternativeVersions = array(); //A list of alternative versions of this anime. Not available in /animelist requests.
-    private $watchedStatus; //User's watched status of the anime. This is a string that is one of: watching, completed, on-hold, dropped, plan to watch.
-    private $watchedEpisodes; //Number of episodes already watched by the user.
-    private $score; //User's score for the anime, from 1 to 10.
-    private $listedAnimeId; //For internal use. This is not listed as a public part of the returned list and it seems to only be used internally in the Ruby API.
+    /**
+     * The ID of the Anime
+     *
+     * @Type("integer")
+     */
+    private $id;
+
+    /**
+     * Title of the anime
+     *
+     * @Type("string")
+     */
+    private $title;
+
+    /**
+     * Map of other titles for the anime
+     *
+     * @Type("array<string, array<string>>")
+     */
+    private $otherTitles = array();
+
+    /**
+     * The global rank of the anime
+     *
+     * @Type("integer")
+     */
+    private $rank;
+
+    /**
+     * Global rank of the anime based on popularity (number of people with the title on the list)
+     *
+     * @Type("integer")
+     */
+    private $popularityRank;
+
+    /**
+     * URL of tan image to the anime
+     *
+     * @Type("string")
+     */
+    private $imageUrl;
+
+    /**
+     * Type of anime
+     *
+     * Defined string from the type of anime. Value will be one of TV, Movie, OVA, ONA, Special, or Music.
+     *
+     * @Type("string")
+     */
+    private $type;
+
+    /**
+     * Total number of episodes of the anime.
+     *
+     * This value is the number of episodes of the anime, or null if unknown.
+     *
+     * @Type("integer")
+     */
+    private $episodes;
+
+    /**
+     * Airing status of the anime
+     *
+     * Defines string of the status of the anime. Value will be one of finished airing, currently airing, or not yet aired.
+     *
+     * @Type("string")
+     */
+    private $status;
+
+    /**
+     * Beginning date from which this anime was/will be aired.
+     *
+     * API 1.0
+     * This is the starting date of the anime, formatted for compatibility with the old Ruby API.
+     * It is formatted as "D M d H:i:s O Y" or just a four-digit year. The time should be ignored.
+     * The value is null if the date is unknown.
+     * Example: "Thu Oct 07 22:28:07 -0700 2004" or "2004".
+     *
+     * @Type("string")
+     * @Until("2.0")
+     */
+    private $startDate;
+
+    /**
+     * Airing end date for the anime
+     *
+     * API 1.0
+     * This is the starting date of the anime, formatted for compatibility with the old Ruby API.
+     * It is formatted as "D M d H:i:s O Y" or just a four-digit year. The time should be ignored.
+     * The value is null if the date is unknown.
+     * Example: "Thu Oct 07 22:28:07 -0700 2004" or "2004".
+     *
+     * @Type("string")
+     * @Until("2.0")
+     */
+    private $endDate;
+
+    /**
+     * Rating of the anime
+     *
+     * The rating is a freeform text field with no defined values.
+     *
+     * @Type("string")
+     */
+    private $classification;
+
+    /**
+     * Weighted score of the anime
+     *
+     * The score is calculated based on the ratings given by members.
+     *
+     * @Type("double")
+     */
+    private $membersScore;
+
+    /**
+     * The number of members that have the anime on the list
+     *
+     * @Type("integer")
+     */
+    private $membersCount;
+
+    /**
+     * The number of members that have the anime marked as a favorite
+     *
+     * @Type("integer")
+     */
+    private $favoritedCount;
+
+    /**
+     * Description of the anime
+     *
+     * An HTML-formatted string describing the anime
+     *
+     * @Type("string")
+     */
+    private $synopsis;
+
+    /**
+     * A list of genres for the anime
+     *
+     * @Type("array<string>")
+     */
+    private $genres = array();
+
+    /**
+     * A list of popular tags for the anime
+     *
+     * @Type("array<string>")
+     */
+    private $tags = array();
+
+    /**
+     * A list of manga adaptations of this anime (or conversely, manga from which this anime is adapted).
+     */
+    private $mangaAdaptations = array();
+
+    /**
+     * A list of anime prequels of this anime.
+     */
+    private $prequels = array();
+
+    /**
+     * A list of anime sequels of this anime.
+     */
+    private $sequels = array();
+
+    /**
+     * A list of anime side stories of this anime.
+     */
+    private $sideStories = array();
+
+    /**
+     * Parent story of this anime.
+     */
+    private $parentStory;
+
+    /**
+     * A list of character anime of this anime.
+     */
+    private $characterAnime = array();
+
+    /**
+     * A list of spin-offs of this anime.
+     */
+    private $spinOffs = array();
+
+    /**
+     * A list of summaries of this anime.
+     */
+    private $summaries = array();
+
+    /**
+     * A list of alternative versions of this anime.
+     */
+    private $alternativeVersions = array();
+
+    /**
+     * Personal watched status of the anime
+     *
+     * Defined string. Value will be one of watching, completed, on-hold, dropped, or plan to watch.
+     *
+     * @Type("string")
+     */
+    private $watchedStatus;
+
+    /**
+     * Number of episodes watched by the user
+     *
+     * @Type("integer")
+     */
+    private $watchedEpisodes;
+
+    /**
+     * Score from 1 to 10 given to the title by the user
+     *
+     * @Type("integer")
+     */
+    private $score;
+
+    /**
+     * ID of the anime as per the user's list
+     *
+     * API 1.0
+     * This used to correspond to a unique ID for the title on the user's list, but is no longer used.
+     *
+     * @TODO: Why won't this disappear with 2.0?
+     *
+     * @Type("integer")
+     * @Until("1.1")
+     */
+    private $listedAnimeId;
 
     /**
      * Set the id property
@@ -283,7 +489,7 @@ class Anime
      *
      * @return string (currently airing/finished airing/not yet aired)
      */
-    public function getstatus()
+    public function getStatus()
     {
        return $this->status;
     }
