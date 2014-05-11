@@ -145,6 +145,33 @@ _api2_search_manga:
     requirements:
         _method: GET
 
+_api2_messages_list:
+    path:  /messages
+    defaults: { _controller: AtarashiiAPIBundle:Messages:get, _format: json, apiVersion: '2.0' }
+    requirements:
+        _method: GET
+
+_api2_messages_view:
+    path:  /messages/{id}
+    defaults: { _controller: AtarashiiAPIBundle:Messages:getMessage, _format: json, apiVersion: '2.0' }
+    requirements:
+        _method: GET
+        id: \d+
+
+_api2_messages_delete:
+    path:  /messages/{id}
+    defaults: { _controller: AtarashiiAPIBundle:Messages:delete, _format: json, apiVersion: '2.0' }
+    requirements:
+        _method: DELETE
+        id: \d+
+
+_api2_messages_send:
+    path:  /messages
+    defaults: { _controller: AtarashiiAPIBundle:Messages:send, _format: json, apiVersion: '2.0' }
+    requirements:
+        _method: POST
+
+
 _api2_verify_credentials:
     path: /account/verify_credentials
     defaults: { _controller: AtarashiiAPIBundle:Verify:Verify, _format: json, apiVersion: '2.0' }
