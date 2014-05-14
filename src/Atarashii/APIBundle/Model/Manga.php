@@ -280,12 +280,15 @@ class Manga
     {
         switch ($status) {
             case 1:
+            case 'publishing':
                 $this->status = 'publishing';
                 break;
             case 2:
+            case 'finished':
                 $this->status = 'finished';
                 break;
             case 3:
+            case 'not yet published':
                 $this->status = 'not yet published';
                 break;
             default:
