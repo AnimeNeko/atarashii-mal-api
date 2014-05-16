@@ -171,6 +171,24 @@ _api2_messages_send:
     requirements:
         _method: POST
 
+_api2_forum_board:
+    path: /forum
+    defaults: { _controller: AtarashiiAPIBundle:Forum:getForumBoard, _format: json, apiVersion: '2.0' }
+    requirements:
+        _method: GET
+
+_api2_forum_topics:
+    path: /forum/{id}
+    defaults: { _controller: AtarashiiAPIBundle:Forum:getForumTopics, _format: json, apiVersion: '2.0' }
+    requirements:
+        _method: GET
+
+_api2_forum_topic:
+    path: /forum/topic/{id}
+    defaults: { _controller: AtarashiiAPIBundle:Forum:getForumTopic, _format: json, apiVersion: '2.0' }
+    requirements:
+        _method: GET
+
 _api2_verify_credentials:
     path: /account/verify_credentials
     defaults: { _controller: AtarashiiAPIBundle:Verify:Verify, _format: json, apiVersion: '2.0' }
