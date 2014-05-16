@@ -85,6 +85,7 @@ class Profile
 class ProfileDetails
 {
     private $last_online;
+    private $status;
     private $gender;
     private $birthday;
     private $location;
@@ -119,6 +120,28 @@ class ProfileDetails
     public function getLastOnline()
     {
        return $this->last_online;
+    }
+
+    /**
+     * Set the status property
+     *
+     * @param string $status The status of an user.
+     *
+     * @return void
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+    /**
+     * Get the status property.
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+       return $this->status;
     }
 
     /**
