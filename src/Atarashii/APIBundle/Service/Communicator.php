@@ -114,6 +114,56 @@ class Communicator
     }
 
     /**
+    * Create a topic on MAL
+    *
+    * @param string $title Subject of the message
+    * @param string $message body of the message
+    *
+    * @return void
+    */
+    public function createTopic($id, $title, $message)
+    {
+        // create a request
+        $request = $this->client->post("http://myanimelist.net/forum/?action=post&boardid=".$id);
+        $request->setHeader('User-Agent', $this->useragent);
+
+        //Add our data transmission - MAL requires the XML content to be in a variable named "data"
+        $request->setPostField('topic_title', $title);
+        $request->setPostField('msg_text', $message);
+        $request->setPostField('submit', 'Post New Topic');
+
+        // send request / get response
+        $this->response = $request->send();
+
+        // this is the response body from the requested page
+        return $this->response->getBody();
+    }
+
+    /**
+    * Create a comment inside a topic on MAL
+    *
+    * @param string $message body of the message
+    *
+    * @return void
+    */
+    public function createComment($id, $message)
+    {
+        // create a request
+        $request = $this->client->post("http://myanimelist.net/forum/?action=message&topic_id=".$id);
+        $request->setHeader('User-Agent', $this->useragent);
+
+        //Add our data transmission - MAL requires the XML content to be in a variable named "data"
+        $request->setPostField('msg_text', $message);
+        $request->setPostField('submit', 'Post Message ');
+
+        // send request / get response
+        $this->response = $request->send();
+
+        // this is the response body from the requested page
+        return $this->response->getBody();
+    }
+
+    /**
     * Post content to a URL
     *
     * This function is called sendXML as it's intended to send an XML document to

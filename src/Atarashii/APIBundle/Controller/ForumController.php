@@ -138,4 +138,85 @@ class ForumController extends FOSRestController
         return $view;
     }
 
+    /**
+    * create a topic on MAL
+    *
+    * @return View
+    */
+    public function newTopicAction(Request $request, $id)
+    {
+        // http://myanimelist.net/forum/?action=post&boardid=#{id}
+
+        $title = $request->request->get('title');
+        $message = $request->request->get('message');
+        if ($title == '' || $message == ''){
+            return $this->view(Array('error' => 'Invalid title or message'), 200);
+        }
+
+        $downloader = $this->get('atarashii_api.communicator');
+
+        //get the credentials we received
+        $username = $this->getRequest()->server->get('PHP_AUTH_USER');
+        $password = $this->getRequest()->server->get('PHP_AUTH_PW');
+
+        //Don't bother making a request if the user didn't send any authentication
+        if ($username == null) {
+            $view = $this->view(Array('error' => 'unauthorized'), 401);
+            $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
+
+            return $view;
+        }
+
+        try {
+            $downloader->cookieLogin($username, $password);
+            $topicdetails = $downloader->createTopic($id, $title , $message);
+        } catch (\Guzzle\Http\Exception\CurlException $e) {
+            return $this->view(Array('error' => 'network-error'), 500);
+        }
+
+        if (strpos($topicdetails, 'successfully entered') !== false) {
+            return $this->view(Array('status' => 'OK'), 200);
+        }
+    }
+
+    /**
+    * create a comment on MAL topics
+    *
+    * @return View
+    */
+    public function newCommentAction(Request $request, $id)
+    {
+        // http://myanimelist.net/forum/?action=message&topic_id=#{id}
+
+        $message = $request->request->get('message');
+        if ($message == ''){
+            return $this->view(Array('error' => 'message'), 200);
+        }
+
+        $downloader = $this->get('atarashii_api.communicator');
+
+        //get the credentials we received
+        $username = $this->getRequest()->server->get('PHP_AUTH_USER');
+        $password = $this->getRequest()->server->get('PHP_AUTH_PW');
+
+        //Don't bother making a request if the user didn't send any authentication
+        if ($username == null) {
+            $view = $this->view(Array('error' => 'unauthorized'), 401);
+            $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
+
+            return $view;
+        }
+
+        try {
+            $downloader->cookieLogin($username, $password);
+            $topicdetails = $downloader->createComment($id, $message);
+        } catch (\Guzzle\Http\Exception\CurlException $e) {
+            return $this->view(Array('error' => 'network-error'), 500);
+        }
+
+        if (strpos($topicdetails, 'Successfully posted') !== false) {
+            return $this->view(Array('status' => 'OK'), 200);
+        }
+    }
+
 }

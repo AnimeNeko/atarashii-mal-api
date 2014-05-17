@@ -189,6 +189,20 @@ _api2_forum_topic:
     requirements:
         _method: GET
 
+_api2_forum_topic_create:
+    path:  /forum/{id}
+    defaults: { _controller: AtarashiiAPIBundle:Forum:newTopic, _format: json, apiVersion: '2.0' }
+    requirements:
+        _method: POST
+        id: \d+
+
+_api2_forum_comment_create:
+    path:  /forum/topic/{id}
+    defaults: { _controller: AtarashiiAPIBundle:Forum:newComment, _format: json, apiVersion: '2.0' }
+    requirements:
+        _method: POST
+        id: \d+
+
 _api2_verify_credentials:
     path: /account/verify_credentials
     defaults: { _controller: AtarashiiAPIBundle:Verify:Verify, _format: json, apiVersion: '2.0' }
