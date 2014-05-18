@@ -165,9 +165,16 @@ class ForumParser
 
             $details = explode("\n\t\t  ", $crawler->filter('td[class="forum_boardrow2"]')->text());
             $topic->setUsername($details[0]);
-            $topic->user->details->setStatus($details[4]);
-            $topic->user->details->setJoinDate(str_replace('Joined: ', '', $details[5]));
             $topic->user->details->setForumPosts(str_replace('Posts: ', '', $details[6]));
+
+            if ($topic->user->details->getForumPosts() == '') {
+                $topic->user->details->setStatus($details[3]);
+                $topic->user->details->setJoinDate(str_replace('Joined: ', '', $details[4]));
+                $topic->user->details->setForumPosts(str_replace('Posts: ', '', $details[5]));
+            } else {
+                $topic->user->details->setStatus($details[4]);
+                $topic->user->details->setJoinDate(str_replace('Joined: ', '', $details[5]));
+            }
 
             # comment.
             # Example:

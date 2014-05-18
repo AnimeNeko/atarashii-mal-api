@@ -19,7 +19,7 @@ class Forum
     private $description; //description (board).
     private $reply; //last reply info (topic).
     private $children; //The children when we received the message (board).
-    private $comment; //Userprofile used in topic.
+    private $comment; //Comment used in topic.
     public $user; //Userprofile used in topic.
 
     /**
