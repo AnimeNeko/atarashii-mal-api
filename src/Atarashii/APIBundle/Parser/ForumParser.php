@@ -153,6 +153,11 @@ class ForumParser
             $topic = new Forum();
             $topic->user = new Profile();
 
+            # message id.
+            # Example:
+            # <div class="forum_border_around" id="forumMsg30902219">...</div>
+            $topic->setid(str_replace('forumMsg', '', $crawler->attr('id')));
+
             # image url.
             # Example:
             # <img src="http://cdn.myanimelist.net/images/useravatars/1901304.jpg" vspace="2" border="0">
