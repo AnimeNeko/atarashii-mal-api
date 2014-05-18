@@ -176,6 +176,8 @@ class ForumController extends FOSRestController
 
         if (strpos($topicdetails, 'successfully entered') !== false) {
             return $this->view(Array('status' => 'OK'), 200);
+        } else {
+            return $this->view(Array('error' => 'unknown'), 200);
         }
     }
 
@@ -190,7 +192,7 @@ class ForumController extends FOSRestController
 
         $message = $request->request->get('message');
         if ($message == ''){
-            return $this->view(Array('error' => 'message'), 200);
+            return $this->view(Array('error' => 'Invalid message'), 200);
         }
 
         $downloader = $this->get('atarashii_api.communicator');
@@ -216,6 +218,8 @@ class ForumController extends FOSRestController
 
         if (strpos($topicdetails, 'Successfully posted') !== false) {
             return $this->view(Array('status' => 'OK'), 200);
+        } else {
+            return $this->view(Array('error' => 'unknown'), 200);
         }
     }
 
@@ -230,7 +234,7 @@ class ForumController extends FOSRestController
 
         $message = $request->request->get('message');
         if ($message == ''){
-            return $this->view(Array('error' => 'message'), 200);
+            return $this->view(Array('error' => 'Invalid message'), 200);
         }
 
         $downloader = $this->get('atarashii_api.communicator');
