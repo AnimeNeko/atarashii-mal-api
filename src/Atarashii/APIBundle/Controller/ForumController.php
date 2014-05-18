@@ -67,6 +67,10 @@ class ForumController extends FOSRestController
         if ($page <= 0) {
             $page = 1;
         }
+        
+        if ((int) $id == '') {
+            return $this->view(Array('error' => 'Invalid board ID'), 200);
+        }
 
         $downloader = $this->get('atarashii_api.communicator');
 
@@ -108,6 +112,9 @@ class ForumController extends FOSRestController
         $page = (int) $request->query->get('page');
         if ($page <= 0) {
             $page = 1;
+        }
+        if ((int) $id == '') {
+            return $this->view(Array('error' => 'Invalid topic ID'), 200);
         }
 
         $downloader = $this->get('atarashii_api.communicator');
@@ -151,6 +158,8 @@ class ForumController extends FOSRestController
         $message = $request->request->get('message');
         if ($title == '' || $message == ''){
             return $this->view(Array('error' => 'Invalid title or message'), 200);
+        } else if ((int) $id == '') {
+            return $this->view(Array('error' => 'Invalid board ID'), 200);
         }
 
         $downloader = $this->get('atarashii_api.communicator');
@@ -193,6 +202,8 @@ class ForumController extends FOSRestController
         $message = $request->request->get('message');
         if ($message == ''){
             return $this->view(Array('error' => 'Invalid message'), 200);
+        } else if ((int) $id == '') {
+            return $this->view(Array('error' => 'Invalid topic ID'), 200);
         }
 
         $downloader = $this->get('atarashii_api.communicator');
@@ -235,6 +246,8 @@ class ForumController extends FOSRestController
         $message = $request->request->get('message');
         if ($message == ''){
             return $this->view(Array('error' => 'Invalid message'), 200);
+        } else if ((int) $id == '') {
+            return $this->view(Array('error' => 'Invalid message ID'), 200);
         }
 
         $downloader = $this->get('atarashii_api.communicator');

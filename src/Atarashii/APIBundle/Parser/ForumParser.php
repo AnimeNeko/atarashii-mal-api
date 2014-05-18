@@ -181,6 +181,10 @@ class ForumParser
                 $topic->user->details->setJoinDate(str_replace('Joined: ', '', $details[5]));
             }
 
+            //to force json array and !objects.
+            $topic->user->manga_stats = null;
+            $topic->user->anime_stats = null;
+
             # comment.
             # Example:
             # <div id="message25496275">...</div>
