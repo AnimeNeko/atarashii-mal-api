@@ -164,6 +164,30 @@ class Communicator
     }
 
     /**
+    * edith a comment inside a topic on MAL
+    *
+    * @param string $message body of the message
+    *
+    * @return void
+    */
+    public function edithComment($id, $message)
+    {
+        // create a request
+        $request = $this->client->post("http://myanimelist.net/forum/?action=message&msgid=".$id);
+        $request->setHeader('User-Agent', $this->useragent);
+
+        //Add our data transmission - MAL requires the XML content to be in a variable named "data"
+        $request->setPostField('msg_text', $message);
+        $request->setPostField('submit', 'Edit Message');
+
+        // send request / get response
+        $this->response = $request->send();
+
+        // this is the response body from the requested page
+        return $this->response->getBody();
+    }
+
+    /**
     * Post content to a URL
     *
     * This function is called sendXML as it's intended to send an XML document to

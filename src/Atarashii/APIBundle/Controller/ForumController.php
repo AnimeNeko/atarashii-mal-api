@@ -219,4 +219,46 @@ class ForumController extends FOSRestController
         }
     }
 
+    /**
+    * edith a comment on MAL topics
+    *
+    * @return View
+    */
+    public function edithCommentAction(Request $request, $id)
+    {
+        // http://myanimelist.net/forum/?action=message&msgid=#{id}
+
+        $message = $request->request->get('message');
+        if ($message == ''){
+            return $this->view(Array('error' => 'message'), 200);
+        }
+
+        $downloader = $this->get('atarashii_api.communicator');
+
+        //get the credentials we received
+        $username = $this->getRequest()->server->get('PHP_AUTH_USER');
+        $password = $this->getRequest()->server->get('PHP_AUTH_PW');
+
+        //Don't bother making a request if the user didn't send any authentication
+        if ($username == null) {
+            $view = $this->view(Array('error' => 'unauthorized'), 401);
+            $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
+
+            return $view;
+        }
+
+        try {
+            $downloader->cookieLogin($username, $password);
+            $topicdetails = $downloader->edithComment($id, $message);
+        } catch (\Guzzle\Http\Exception\CurlException $e) {
+            return $this->view(Array('error' => 'network-error'), 500);
+        }
+
+        if (strpos($topicdetails, 'Successfully edited') !== false) {
+            return $this->view(Array('status' => 'OK'), 200);
+        } else {
+            return $this->view(Array('error' => 'unknown'), 200);
+        }
+    }
+
 }

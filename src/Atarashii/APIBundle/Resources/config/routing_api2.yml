@@ -203,6 +203,13 @@ _api2_forum_comment_create:
         _method: POST
         id: \d+
 
+_api2_forum_comment_edith:
+    path:  /forum/topic/{id}
+    defaults: { _controller: AtarashiiAPIBundle:Forum:edithComment, _format: json, apiVersion: '2.0' }
+    requirements:
+        _method: PUT
+        id: \d+
+
 _api2_verify_credentials:
     path: /account/verify_credentials
     defaults: { _controller: AtarashiiAPIBundle:Verify:Verify, _format: json, apiVersion: '2.0' }
