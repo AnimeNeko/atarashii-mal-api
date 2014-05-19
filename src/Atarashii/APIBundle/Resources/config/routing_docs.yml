@@ -28,6 +28,13 @@ _docs_manga:
       template: 'AtarashiiAPIBundle:Documentation:manga.html.twig'
       maxAge: 10800
 
+_docs_forum:
+    path: /forum/
+    defaults:
+      _controller: FrameworkBundle:Template:template
+      template: 'AtarashiiAPIBundle:Documentation:forum.html.twig'
+      maxAge: 10800
+
 _docs_user:
     path: /user/
     defaults:

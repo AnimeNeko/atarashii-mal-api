@@ -20,7 +20,7 @@ class Forum
     private $reply; //last reply info (topic).
     private $children; //The children when we received the message (board).
     private $comment; //Comment used in topic.
-    public $user; //Userprofile used in topic.
+    public $profile; //Userprofile used in topic.
 
     /**
      * Set the id property

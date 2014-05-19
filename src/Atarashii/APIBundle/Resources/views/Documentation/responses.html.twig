@@ -188,6 +188,7 @@
 
         <a name="user"></a><br><br><h2>User Details</h2>
         <p>This data is an overview of a user and their statistics.</p>
+        <p class="alert alert-info">The 'anime_stats' & 'manga_stats' properties are only provided when an user profile request is made.</p>
 
         <ul>
             <li><code>avatar_url</code>: URL to a copy of the user's MyAnimeList user photo. Note that this is <em>not</em> the forum avatar.</li>
@@ -244,6 +245,27 @@
         </ul>
 
 
+        <a name="forum"></a><br><br><h2>Forum Details</h2>
+        <p>The forum details entry is an object that contains a profile along with some unique information.</p>
+        <p class="alert alert-info">Not all properties are provided depending on the type of request made.</p>
+
+        <ul>
+            <li><code>id</code>: The username of the friend</li>
+            <li><code>name</code>: The topic or board.</li>
+            <li><code>username</code>: The username of the user that created a topic.</li>
+            <li><code>replies</code>: The number of replies.</li>
+            <li><code>description</code>: The description of boards</li>
+            <li><code>reply</code>: The info about the latest post.</li>
+                <ul>
+                    <li><code>username</code>: The user that added the latest comment.</li>
+                    <li><code>time</code>: The time that the latest comment has been created.</li>
+                </ul>
+            <li><code>children</code>: The username of the friend</li>
+            <li><code>comment</code>: The username of the friend</li>
+            <li><code>profile</code>: A <a href="#user">user details</a> object.</li>
+        </ul>
+
+
 
         <a name="errors"></a><br><br><h2>Errors</h2>
         <p>Errors are normally returned with proper HTTP status codes, so you don't need to process the contents unless needed. Response content will generally consist of an error property with a string describing the problem. While not comprehensive, some of the more commonly used error descriptions follow:</p>
@@ -276,6 +298,7 @@
                 <li><a href="#mangalist">Manga List</a></li>
                 <li><a href="#user">User Details</a></li>
                 <li><a href="#friend">Friend Details</a></li>
+                <li><a href="#forum">Forum Details</a></li>
                 <li><a href="#errors">Errors</a></li>
             </ul>
         </div>
