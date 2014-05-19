@@ -137,6 +137,10 @@ class User
             $friendinfo['profile']->setAvatarUrl($avatar);
             $friendinfo['profile']->details->setLastOnline($lastonline);
 
+            //to force json array and !objects.
+            $friendinfo['profile']->manga_stats = null;
+            $friendinfo['profile']->anime_stats = null;
+
             $friendlist[] = $friendinfo;
         }
 
