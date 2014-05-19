@@ -151,7 +151,7 @@ class ForumParser
     {
         $crawler = new Crawler($item);
             $topic = new Forum();
-            $topic->user = new Profile();
+            $topic->profile = new Profile();
 
             # message id.
             # Example:
@@ -163,27 +163,27 @@ class ForumParser
             # <img src="http://cdn.myanimelist.net/images/useravatars/1901304.jpg" vspace="2" border="0">
             //Note: Some MAL users do not have any avatars in the forum!
             try {
-                $topic->user->setAvatarUrl($crawler->filter('img')->attr('src'));
+                $topic->profile->setAvatarUrl($crawler->filter('img')->attr('src'));
             } catch (\InvalidArgumentException $e) {
                 //do nothing
             }
 
             $details = explode("\n\t\t  ", $crawler->filter('td[class="forum_boardrow2"]')->text());
             $topic->setUsername($details[0]);
-            $topic->user->details->setForumPosts(str_replace('Posts: ', '', $details[6]));
+            $topic->profile->details->setForumPosts(str_replace('Posts: ', '', $details[6]));
 
-            if ($topic->user->details->getForumPosts() == '') {
-                $topic->user->details->setStatus($details[3]);
-                $topic->user->details->setJoinDate(str_replace('Joined: ', '', $details[4]));
-                $topic->user->details->setForumPosts(str_replace('Posts: ', '', $details[5]));
+            if ($topic->profile->details->getForumPosts() == '') {
+                $topic->profile->details->setStatus($details[3]);
+                $topic->profile->details->setJoinDate(str_replace('Joined: ', '', $details[4]));
+                $topic->profile->details->setForumPosts(str_replace('Posts: ', '', $details[5]));
             } else {
-                $topic->user->details->setStatus($details[4]);
-                $topic->user->details->setJoinDate(str_replace('Joined: ', '', $details[5]));
+                $topic->profile->details->setStatus($details[4]);
+                $topic->profile->details->setJoinDate(str_replace('Joined: ', '', $details[5]));
             }
 
             //to force json array and !objects.
-            $topic->user->manga_stats = null;
-            $topic->user->anime_stats = null;
+            $topic->profile->manga_stats = null;
+            $topic->profile->anime_stats = null;
 
             # comment.
             # Example:
