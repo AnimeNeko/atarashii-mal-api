@@ -24,7 +24,7 @@
             <dt>Authentication</dt><dd>No</dd>
         </dl>
         <p>Retrieves the topic list of the specified by the id number. Output is an <a href="{{ path('_docs_responses') }}#forum">forum list</a>.</p>
-        <p>The values that can be sent in the post body:</p>
+        <p>The values that can be sent in the get body:</p>
         <ul>
             <li><code>page</code>:  The current set of topics to return. Each set contains at most 20 items. Default value is &quot;1&quot; if not supplied.</li>
         </ul>
@@ -36,7 +36,7 @@
             <dt>Authentication</dt><dd>No</dd>
         </dl>
         <p>Retrieves the topic details (like comments) of the specified by the id number. Output is an <a href="{{ path('_docs_responses') }}#forum">forum list</a>.</p>
-        <p>The values that can be sent in the post body:</p>
+        <p>The values that can be sent in the get body:</p>
         <ul>
             <li><code>page</code>:  The current set of topic details to return. Each set contains at most 20 items. Default value is &quot;1&quot; if not supplied.</li>
         </ul>
@@ -58,7 +58,7 @@
             <li><code>message</code>: The message for the topic.</li>
         </ul>
 
-        <h3>Add Comments</h3>
+        <h3>Adding Comments</h3>
         <dl>
             <dt>URI Format</dt><dd>forum/topic/<em>id</em></dd>
             <dt>Method</dt><dd>POST</dd>
@@ -70,14 +70,14 @@
             <li><code>message</code>: The comment for the topic.</li>
         </ul>
 
-        <h3>Edit Comments</h3>
+        <h3>Editing Comments</h3>
         <dl>
             <dt>URI Format</dt><dd>forum/topic/<em>id</em></dd>
             <dt>Method</dt><dd>PUT</dd>
             <dt>Authentication</dt><dd>Required</dd>
         </dl>
         <p>Edits a comment of the specified topic.</p>
-        <p>The values that can be sent in the post body:</p>
+        <p>The values that can be sent in the put body:</p>
         <ul>
             <li><code>message</code>: The modified comment for the topic.</li>
         </ul>

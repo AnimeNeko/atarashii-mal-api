@@ -266,6 +266,22 @@
         </ul>
 
 
+        <a name="message"></a><br><br><h2>Message Details</h2>
+        <p>This is an object that defines a message. It consists of the following properties.</p>
+        <p class="alert alert-info">Not all properties are provided depending on the type of request made.</p>
+
+        <ul>
+            <li><code>id</code>: The id of the message</li>
+            <li><code>action_id</code>: The id of the message used for deleting it.</li>
+            <li><code>thread_id</code>: The id of the message used for the chat history.</li>
+            <li><code>username</code>: The username of an user.</li>
+            <li><code>time</code>: The time when the message was send</li>
+            <li><code>read</code>: The read status.</li>
+            <li><code>subject</code>: The subject of the message</li>
+            <li><code>message</code>: The message.</li>
+            <li><code>preview</code>: The preview of a message.</li>
+        </ul>
+
 
         <a name="errors"></a><br><br><h2>Errors</h2>
         <p>Errors are normally returned with proper HTTP status codes, so you don't need to process the contents unless needed. Response content will generally consist of an error property with a string describing the problem. While not comprehensive, some of the more commonly used error descriptions follow:</p>
@@ -299,6 +315,7 @@
                 <li><a href="#user">User Details</a></li>
                 <li><a href="#friend">Friend Details</a></li>
                 <li><a href="#forum">Forum Details</a></li>
+                <li><a href="#message">Message Details</a></li>
                 <li><a href="#errors">Errors</a></li>
             </ul>
         </div>

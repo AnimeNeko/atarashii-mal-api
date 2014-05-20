@@ -35,6 +35,13 @@ _docs_forum:
       template: 'AtarashiiAPIBundle:Documentation:forum.html.twig'
       maxAge: 10800
 
+_docs_message:
+    path: /message/
+    defaults:
+      _controller: FrameworkBundle:Template:template
+      template: 'AtarashiiAPIBundle:Documentation:message.html.twig'
+      maxAge: 10800
+
 _docs_user:
     path: /user/
     defaults:
