@@ -521,7 +521,7 @@ class Anime
      * Set the type property
      *
      * @param string|int $type The type of series.
-     *     Can be 1/TV, 2/OVA, 3/Movie, 4/Special, 5/ONA, or 6/Music. The default is "TV".
+     *                         Can be 1/TV, 2/OVA, 3/Movie, 4/Special, 5/ONA, or 6/Music. The default is "TV".
      *
      * @return void
      */
@@ -594,7 +594,7 @@ class Anime
      * Set the status property
      *
      * @param int $status The broadcasting status of series.
-     *     Can be 1 (currently airing), 2 (finished airing) or 3 (not yet aired). The default is "2".
+     *                    Can be 1 (currently airing), 2 (finished airing) or 3 (not yet aired). The default is "2".
      *
      * @return void
      */
@@ -1064,7 +1064,7 @@ class Anime
      * Set the watched_status property
      *
      * @param string|int $status The input status value of an item.
-     *     Accepts either integers as defined by the MAL API module, or strings as defined by the Ruby API (mal-api.com).
+     *                           Accepts either integers as defined by the MAL API module, or strings as defined by the Ruby API (mal-api.com).
      *
      * @return void
      */
@@ -1103,7 +1103,7 @@ class Anime
      * Get the current value of the watched status.
      *
      * @param string $type What type you want to get back.
-     *     Currently accepts either "string" or "int". Defaults to "string".
+     *                     Currently accepts either "string" or "int". Defaults to "string".
      *
      * @return string|int
      */
