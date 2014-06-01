@@ -452,4 +452,163 @@ class AnimeParser
 
         return $animerecord;
     }
+
+    public static function parseExtendedPersonal($contents, $anime)
+    {
+        $crawler = new Crawler();
+        $crawler->addHTMLContent($contents, 'UTF-8');
+
+        #Rewatching
+        #<label><input type="checkbox" name="rewatching" id="rewatchingBox" onclick="checkRewatching();" value="1" > Re-watching</label>
+        $rewatching = $crawler->filter('input[id="rewatchingBox"]')->attr('checked');
+
+        if ($rewatching) {
+            $anime->setRewatching(TRUE);
+        }
+
+        #Personal tags
+        #<td class="borderClass"><textarea name="tags" rows="2" id="tagtext" cols="45" class="textarea">action, sci-fi</textarea></td>
+        $personalTags = $crawler->filter('textarea[name="tags"]')->text();
+
+        if (strlen($personalTags) > 0) {
+            $personalTags = explode(',', $personalTags);
+
+            foreach ($personalTags as $tag) {
+                $tagArray[] = trim($tag);
+            }
+
+            $anime->setPersonalTags($tagArray);
+        }
+
+        #Start and Finish Dates
+        #<tr>
+        #	<td class="borderClass">Start Date</td>
+        #				<td class="borderClass">
+        #	Month:
+        #	<select name="startMonth"  class="inputtext">
+        #		<option value="00">
+        #		<option value="1" >Jan<option value="2" selected>Feb<option value="3" >Mar<option value="4" >Apr<option value="5" >May<option value="6" >Jun<option value="7" >Jul<option value="8" >Aug<option value="9" >Sep<option value="10" >Oct<option value="11" >Nov<option value="12" >Dec			</select>
+        #	Day:
+        #	<select name="startDay"  class="inputtext">
+        #		<option value="00">
+        #		<option value="1" >1<option value="2" selected>2<option value="3" >3<option value="4" >4<option value="5" >5<option value="6" >6<option value="7" >7<option value="8" >8<option value="9" >9<option value="10" >10<option value="11" >11<option value="12" >12<option value="13" >13<option value="14" >14<option value="15" >15<option value="16" >16<option value="17" >17<option value="18" >18<option value="19" >19<option value="20" >20<option value="21" >21<option value="22" >22<option value="23" >23<option value="24" >24<option value="25" >25<option value="26" >26<option value="27" >27<option value="28" >28<option value="29" >29<option value="30" >30<option value="31" >31			</select>
+        #	Year:
+        #	<select name="startYear"  class="inputtext">
+        #		<option value="0000">
+        #		<option value="2014" selected>2014<option value="2013" >2013<option value="2012" >2012<option value="2011" >2011<option value="2010" >2010<option value="2009" >2009<option value="2008" >2008<option value="2007" >2007<option value="2006" >2006<option value="2005" >2005<option value="2004" >2004<option value="2003" >2003<option value="2002" >2002<option value="2001" >2001<option value="2000" >2000<option value="1999" >1999<option value="1998" >1998<option value="1997" >1997<option value="1996" >1996<option value="1995" >1995<option value="1994" >1994<option value="1993" >1993<option value="1992" >1992<option value="1991" >1991<option value="1990" >1990<option value="1989" >1989<option value="1988" >1988<option value="1987" >1987<option value="1986" >1986<option value="1985" >1985<option value="1984" >1984			</select>
+        #	&nbsp;
+        #	<label><input type="checkbox"  onchange="ChangeStartDate();"  name="unknownStart" value="1"> <small>Unknown Date</label><br>Start Date represents the date you started watching the Anime <a href="javascript:setToday(1);">Insert Today</a></small>
+        #	</td>
+        #</tr>
+        #<tr>
+        #	<td class="borderClass">Finish Date</td>
+        #				<td class="borderClass">
+        #	Month:
+        #	<select name="endMonth" class="inputtext" disabled>
+        #		<option value="00">
+        #		<option value="1" >Jan<option value="2" >Feb<option value="3" >Mar<option value="4" >Apr<option value="5" >May<option value="6" >Jun<option value="7" >Jul<option value="8" >Aug<option value="9" >Sep<option value="10" >Oct<option value="11" >Nov<option value="12" >Dec			</select>
+        #	Day:
+        #	<select name="endDay" class="inputtext" disabled>
+        #		<option value="00">
+        #		<option value="1" >1<option value="2" >2<option value="3" >3<option value="4" >4<option value="5" >5<option value="6" >6<option value="7" >7<option value="8" >8<option value="9" >9<option value="10" >10<option value="11" >11<option value="12" >12<option value="13" >13<option value="14" >14<option value="15" >15<option value="16" >16<option value="17" >17<option value="18" >18<option value="19" >19<option value="20" >20<option value="21" >21<option value="22" >22<option value="23" >23<option value="24" >24<option value="25" >25<option value="26" >26<option value="27" >27<option value="28" >28<option value="29" >29<option value="30" >30<option value="31" >31			</select>
+        #	Year:
+        #	<select name="endYear" class="inputtext" disabled>
+        #		<option value="0000">
+        #		<option value="2014" >2014<option value="2013" >2013<option value="2012" >2012<option value="2011" >2011<option value="2010" >2010<option value="2009" >2009<option value="2008" >2008<option value="2007" >2007<option value="2006" >2006<option value="2005" >2005<option value="2004" >2004<option value="2003" >2003<option value="2002" >2002<option value="2001" >2001<option value="2000" >2000<option value="1999" >1999<option value="1998" >1998<option value="1997" >1997<option value="1996" >1996<option value="1995" >1995<option value="1994" >1994<option value="1993" >1993<option value="1992" >1992<option value="1991" >1991<option value="1990" >1990<option value="1989" >1989<option value="1988" >1988<option value="1987" >1987<option value="1986" >1986<option value="1985" >1985<option value="1984" >1984			</select>
+        #	&nbsp;
+        #	<small><label><input type="checkbox" onchange="ChangeEndDate();" checked name="unknownEnd" value="1"> Unknown Date</label><br>Do <u>not</u> fill out the Finish Date unless status is <em>Completed</em> <a href="javascript:setToday(2);">Insert Today</a></small>
+        #	</td>
+        #</tr>
+        $isStarted = $crawler->filter('input[name="unknownStart"]')->attr('checked');
+        $isEnded = $crawler->filter('input[name="unknownEnd"]')->attr('checked');
+
+        if ($isStarted != "checked") {
+            $startMonth = $crawler->filter('select[name="startMonth"] option:selected')->attr('value');
+            $startDay = $crawler->filter('select[name="startDay"] option:selected')->attr('value');
+            $startYear = $crawler->filter('select[name="startYear"] option:selected')->attr('value');
+
+            $anime->setWatchingStart(DateTime::createFromFormat('Y-n-j', "$startYear-$startMonth-$startDay"));
+        }
+
+        if ($isEnded != "checked") {
+            $endMonth = $crawler->filter('select[name="endMonth"] option:selected')->attr('value');
+            $endDay = $crawler->filter('select[name="endDay"] option:selected')->attr('value');
+            $endYear = $crawler->filter('select[name="endYear"] option:selected')->attr('value');
+
+            $anime->setWatchingEnd(DateTime::createFromFormat('Y-n-j', "$endYear-$endMonth-$endDay"));
+        }
+
+        #Fansub Group
+        #<td class="borderClass"><input type="text" name="fansub_group" class="inputtext" value="0" size="50"></td>
+        $fansubGroup = $crawler->filter('input[name="fansub_group"]')->attr('value');
+
+        //If a fansub group isn't set, it's often "0". This will catch that since PHP treats 0 as false and prevents us from setting a group.
+        if ($fansubGroup) {
+            $anime->setFansubGroup($fansubGroup);
+        }
+
+        #Priority
+        #<td class="borderClass"><select name="priority" class="inputtext">
+        #<option value="0" selected>Low<option value="1" >Medium<option value="2" >High			</select>
+        $priority = $crawler->filter('select[name="priority"] option:selected')->attr('value');
+        $anime->setPriority($priority);
+
+        #Storage
+        #
+        #<td class="borderClass" align="left"><select name="storage" id="storage" onchange="StorageBooleanCheck(2);" class="inputtext">
+        #	<option value="0">Select storage type
+        #	<option value="1" >Hard Drive<option value="6" >External HD<option value="7" >NAS<option value="2" >DVD / CD<option value="4" >Retail DVD<option value="5" >VHS<option value="3" >None			</select>
+        #<div style="margin: 3px 0px; display: none;" id="StorageDiv">Total <span id="storageDescription">DvD's</span> <input type="text" name="storageVal" id="storageValue" value="0.00" size="4" class="inputtext"></div>
+        #</td>
+
+        //Note that if storage isn't defined, nothing will be marked as selected. We thus have to get the value in two stages to avoid raising an exception.
+        $storage = $crawler->filter('select[name="storage"] option:selected');
+
+        if (count($storage)) {
+            $anime->setStorage($storage->attr('value'));
+        }
+
+        #Storage Value - Either number of discs or size in GB
+        #<div style="margin: 3px 0px; display: none;" id="StorageDiv">Total <span id="storageDescription">DvD's</span> <input type="text" name="storageVal" id="storageValue" value="1.00" size="4" class="inputtext"></div>
+        $storageval = (float) $crawler->filter('input[name="storageVal"]')->attr('value');
+
+        if ($storageval > 0) {
+            $anime->setStorageValue($storageval);
+        }
+
+        #Episodes Downloaded
+        #<td class="borderClass"><input type="text" name="list_downloaded_eps" id="epDownloaded" value="3" size="4" class="inputtext"> <a href="javascript:void(0);" onclick="incEpDownloadCount();">+</a> <small><a href="javascript:SetDownloadedEps();">Insert Series Eps</a></small></td>
+        $downloaded = $crawler->filter('input[id="epDownloaded"]')->attr('value');
+
+        if ($downloaded > 0) {
+            $anime->setEpsDownloaded($downloaded);
+        }
+
+        #Times Rewatched
+        #<td class="borderClass"><input type="text" name="list_times_watched" value="0" size="4" class="inputtext">
+        $rewatchCount = $crawler->filter('input[name="list_times_watched"]')->attr('value');
+
+        if ($rewatchCount > 0) {
+            $anime->setRewatchCount($rewatchCount);
+        }
+
+        #Rewatch Value
+        #<td class="borderClass"><select name="list_rewatch_value" class="inputtext">
+        #    <option value="0">Select rewatch value<option  value="1">Very Low<option  value="2">Low<option  value="3">Medium<option  value="4">High<option selected value="5">Very High			</select>
+        $rewatchValue = $crawler->filter('select[name="list_rewatch_value"] option:selected');
+
+        if (count($rewatchValue)) {
+            $anime->setRewatchValue($rewatchValue->attr('value'));
+        }
+
+        #Comments
+        #<td class="borderClass"><textarea name="list_comments" rows="5" cols="45" class="textarea"></textarea></td>
+        $comments = trim($crawler->filter('textarea[name="list_comments"]')->text());
+
+        if (strlen($comments)) {
+            $anime->setPersonalComments($comments);
+        }
+
+        return $anime;
+    }
 }

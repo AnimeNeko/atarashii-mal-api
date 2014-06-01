@@ -285,6 +285,107 @@ class Anime
     private $listedAnimeId;
 
     /**
+     * Tags assigned by the user
+     *
+     * @Type("array<string>")
+     * @Since("2.0")
+     */
+    private $personalTags = array();
+
+    /**
+     * The date the user started watching the show
+     *
+     * @Type("DateTime<'Y-m-d'>")
+     * @Since("2.0")
+     */
+    private $watchingStart;
+
+    /**
+     * The date the user finished watching the show
+     *
+     * @Type("DateTime<'Y-m-d'>")
+     * @Since("2.0")
+     */
+    private $watchingEnd;
+
+
+    /**
+     * The fansub group the user used, if any
+     *
+     * @Type("string")
+     * @Since("2.0")
+     */
+    private $fansubGroup;
+
+    /**
+     * Watching priority level for the anime title.
+     *
+     * Integer corresponding to the watching priority of the anime from 0 (low) to 2 (high).
+     *
+     * @Type("integer")
+     * @Since("2.0")
+     */
+    private $priority;
+
+    /**
+     * Storage type for the series
+     *
+     * @Type("integer")
+     * @Since("2.0")
+     */
+    private $storage;
+
+    /**
+     * The value for the storage chosen
+     *
+     * This number may either be the number of discs (for DVDs, VHS, etc) or size in GB for HD types
+     *
+     * @Type("double")
+     * @Since("2.0")
+     */
+    private $storageValue;
+
+    /**
+     * The number of episodes downloaded by the user
+     *
+     * @Type("integer")
+     * @Since("2.0")
+     */
+    private $epsDownloaded;
+
+    /**
+     * Set if the user is rewatching the anime
+     *
+     * @Type("boolean")
+     * @Since("2.0")
+     */
+    private $rewatching;
+
+    /**
+     * The number of times the user has re-watched the title. (Does not include the first time.)
+     *
+     * @Type("integer")
+     * @Since("2.0")
+     */
+    private $rewatchCount;
+
+    /**
+     * How much value the user thinks there is in rewatching the series.
+     *
+     * @Type("integer")
+     * @Since("2.0")
+     */
+    private $rewatchValue;
+
+    /**
+     * The user's personal comments on the title
+     *
+     * @Type("string")
+     * @Since("2.0")
+     */
+    private $personalComments;
+
+    /**
      * Set the id property
      *
      * @param int $id The id of series.
@@ -1099,6 +1200,217 @@ class Anime
     public function getListedAnimeId()
     {
         return $this->listedAnimeId;
+    }
+
+    public function getPersonalTags()
+    {
+        return $this->personalTags;
+    }
+
+    public function setPersonalTags($tags)
+    {
+        $this->personalTags = $tags;
+    }
+
+    public function getWatchingStart()
+    {
+       return $this->watchingStart;
+    }
+
+    public function setWatchingStart($date)
+    {
+        $this->watchingStart = $date;
+    }
+
+    public function getWatchingEnd()
+    {
+       return $this->watchingEnd;
+    }
+
+    public function setWatchingEnd($date)
+    {
+        $this->watchingEnd = $date;
+    }
+
+    public function getFansubGroup()
+    {
+        return $this->fansubGroup;
+    }
+
+    public function setFansubGroup($group)
+    {
+        $this->fansubGroup = $group;
+    }
+
+    /**
+     * Get the current watching priority for the anime title
+     *
+     * @param string $type What type you want to get back.
+     *                     Currently accepts either "string" or "int". Defaults to "int".
+     *
+     * @return string|int
+     */
+    public function getPriority($type = 'int')
+    {
+        if ($type == 'string') {
+            switch ($this->priority) {
+                case 1:
+                    return 'Medium';
+                    break;
+                case 2:
+                    return 'High';
+                    break;
+                default:
+                    return 'Low';
+                    break;
+            }
+        } else {
+            return $this->priority;
+        }
+    }
+
+    public function setPriority($priority)
+    {
+        $this->priority = (int) $priority;
+    }
+
+    /**
+     * Get the current value for the storage type that the anime is on
+     *
+     * @param string $type What type you want to get back.
+     *                     Currently accepts either "string" or "int". Defaults to "int".
+     *
+     * @return string|int
+     */
+    public function getStorage($type = 'int')
+    {
+        if ($type == 'string') {
+            switch ($this->storage) {
+                case 1:
+                    return 'Hard Drive';
+                    break;
+                case 2:
+                    return 'DVD / CD';
+                    break;
+                case 3:
+                    return 'None';
+                    break;
+                case 4:
+                    return 'Retail DVD';
+                    break;
+                case 5:
+                    return 'VHS';
+                    break;
+                case 6:
+                    return 'External HD';
+                    break;
+                case 7:
+                    return 'NAS';
+                    break;
+                default:
+                    return NULL;
+                    break;
+            }
+        } else {
+            return $this->storage;
+        }
+
+    }
+
+    public function setStorage($storage)
+    {
+        $this->storage = $storage;
+    }
+
+    public function getStorageValue()
+    {
+        return $this->storageValue;
+    }
+
+    public function setStorageValue($value)
+    {
+        $this->storageValue = (float) $value;
+    }
+
+    public function getEpsDownloaded()
+    {
+        return $this->epsDownloaded;
+    }
+
+    public function setEpsDownloaded($downloaded)
+    {
+        $this->epsDownloaded = (int) $downloaded;
+    }
+
+    public function getRewatching()
+    {
+        return $this->rewatching;
+    }
+
+    public function setRewatching($rewatching)
+    {
+        $this->rewatching = $rewatching;
+    }
+
+    public function getRewatchCount()
+    {
+        return $this->rewatchCount;
+    }
+
+    public function setRewatchCount($count)
+    {
+        $this->rewatchCount = (int) $count;
+    }
+
+    /**
+     * Get the current watching priority for the anime title
+     *
+     * @param string $type What type you want to get back.
+     *                     Currently accepts either "string" or "int". Defaults to "int".
+     *
+     * @return string|int
+     */
+    public function getRewatchValue($type = 'int')
+    {
+        if ($type == 'string') {
+            switch ($this->rewatchValue) {
+                case 1:
+                    return 'Very Low';
+                    break;
+                case 2:
+                    return 'Low';
+                    break;
+                case 3:
+                    return 'Medium';
+                    break;
+                case 4:
+                    return 'High';
+                    break;
+                case 5:
+                    return 'Very High';
+                    break;
+                default:
+                    return NULL;
+                    break;
+            }
+        } else {
+            return $this->priority;
+        }
+    }
+
+    public function setRewatchValue($value)
+    {
+        $this->rewatchValue = (int) $value;
+    }
+
+    public function getPersonalComments()
+    {
+        return $this->personalComments;
+    }
+
+    public function setPersonalComments($comments)
+    {
+        $this->personalComments = $comments;
     }
 
     /**

@@ -28,7 +28,10 @@ class AnimeController extends FOSRestController
     */
     public function getAction($id, $apiVersion, Request $request)
     {
+        //General information (and basic personal information) at:
         // http://myanimelist.net/anime/#{id}
+        //Detailed personal information at:
+        // http://myanimelist.net/editlist.php?type=anime&id={id}&hideLayout=true
 
         $usepersonal = (int) $request->query->get('mine');
 
@@ -65,12 +68,26 @@ class AnimeController extends FOSRestController
         } else {
             $anime = AnimeParser::parse($animedetails);
 
+            //Parse extended personal details if API 2.0 or better and personal details are requested
+            if ($apiVersion >= "2.0" && $usepersonal) {
+
+                try {
+                    $animedetails = $downloader->fetch('/editlist.php?type=anime&id=' . $id . '&hideLayout=true');
+                } catch (\Guzzle\Http\Exception\CurlException $e) {
+                    return $this->view(Array('error' => 'network-error'), 500);
+                }
+
+                if (strpos($animedetails, 'This is not your entry') === false) {
+                    $anime = AnimeParser::parseExtendedPersonal($animedetails, $anime);
+                }
+            }
+
             $response = new Response();
             $serializationContext = SerializationContext::create();
             $serializationContext->setVersion($apiVersion);
 
             //For compatibility, API 1.0 explicitly passes null parameters.
-            if($apiVersion == "1.0") {
+            if ($apiVersion == "1.0") {
                 $serializationContext->setSerializeNull(true);
             }
 
