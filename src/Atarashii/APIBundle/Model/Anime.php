@@ -123,8 +123,6 @@ class Anime
      * The value is null if the date is unknown.
      * Example: "2004-10-07", "2004-10", or "2004".
      *
-     * @TODO: ACTUALLY SET UP THE DATE FORMAT
-     *
      * @SerializedName("start_date")
      * @Type("string")
      * @Since("2.0")
@@ -139,8 +137,6 @@ class Anime
      * The contents my be formatted as a year, year and month, or year, month and day.
      * The value is null if the date is unknown.
      * Example: "2004-10-07", "2004-10", or "2004".
-     *
-     * @TODO: ACTUALLY SET UP THE DATE FORMAT
      *
      * @SerializedName("end_date")
      * @Type("string")
@@ -630,14 +626,33 @@ class Anime
     }
 
     /**
-     * Set the start_date property
+     * Set the startDate property with the literal value passed and call the setter for startDate2
      *
-     * @param DateTime $start_date The start date of the series
+     * This function is for compatibility with certain parts of API1 where the date format for the start and end dates
+     * is not in a "parsed" format and instead is however is passed by MAL
+     *
+     * @param String   $literalDate The string that should be used as the start date.
+     * @param DateTime $startDate   The start date of the series
+     * @param string   $accuracy    To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day".
+     *
+     * @return void
+     */
+    public function setLiteralStartDate($literalDate, $startDate, $accuracy = 'day')
+    {
+        $this->startDate = $literalDate;
+
+        $this->setStartDate2($startDate, $accuracy);
+    }
+
+    /**
+     * Set the startDate property and call the setter for startDate2
+     *
+     * @param DateTime $startDate  The start date of the series
      * @param string   $accuracy   To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day".
      *
      * @return void
      */
-    public function setStartDate($start_date, $accuracy = 'day')
+    public function setStartDate($startDate, $accuracy = 'day')
     {
         //For API 1.0 compatibility with the old Ruby API, dates that have an accuracy greater than a year
         //use a non-standard date format. For month-only accuracy, the day is always the 16th. The time returned
@@ -646,24 +661,47 @@ class Anime
 
         switch ($accuracy) {
             case 'year':
-                $this->startDate = $start_date->format('Y');
-                $this->startDate2 = $start_date->format('Y');
+                $this->startDate = $startDate->format('Y');
                 break;
             case 'month':
                 //For compatibility, API 1 always passes the 16th when the day is unknown.
-                $this->startDate = $start_date->format('D M 16 12:00:00 O Y');
-                $this->startDate2 = $start_date->format('Y-m');
+                $this->startDate = $startDate->format('D M 16 12:00:00 O Y');
                 break;
             case 'day':
             default:
-                $this->startDate = $start_date->format('D M d 12:00:00 O Y');
-                $this->startDate2 = $start_date->format('Y-m-d');
+                $this->startDate = $startDate->format('D M d 12:00:00 O Y');
+                break;
+        }
+
+        $this->setStartDate2($startDate, $accuracy);
+    }
+
+    /**
+     * Set the startDate2 property
+     *
+     * @param DateTime $startDate  The start date of the series
+     * @param string   $accuracy   To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day".
+     *
+     * @return void
+     */
+    private function setStartDate2($startDate, $accuracy = 'day')
+    {
+        switch ($accuracy) {
+            case 'year':
+                $this->startDate2 = $startDate->format('Y');
+                break;
+            case 'month':
+                $this->startDate2 = $startDate->format('Y-m');
+                break;
+            case 'day':
+            default:
+                $this->startDate2 = $startDate->format('Y-m-d');
                 break;
         }
     }
 
     /**
-     * Get the start_date property
+     * Get the startDate property
      *
      * @return string (ISO 8601)
      */
@@ -673,14 +711,33 @@ class Anime
     }
 
     /**
-     * Set the end_date property
+     * Set the endDate property with the literal value passed and call the setter for endDate2
      *
-     * @param DateTime $end_date The start date of the series
-     * @param string   $accuracy To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day".
+     * This function is for compatibility with certain parts of API1 where the date format for the start and end dates
+     * is not in a "parsed" format and instead is however is passed by MAL
+     *
+     * @param String   $literalDate The string that should be used as the end date.
+     * @param DateTime $endDate     The end date of the series
+     * @param string   $accuracy    To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day".
      *
      * @return void
      */
-    public function setEndDate($end_date, $accuracy = 'day')
+    public function setLiteralEndDate($literalDate, $endDate, $accuracy = 'day')
+    {
+        $this->endDate = $literalDate;
+
+        $this->setendDate2($endDate, $accuracy);
+    }
+
+    /**
+     * Set the endDate property and call the setter for endDate2
+     *
+     * @param DateTime $endDate    The end date of the series
+     * @param string   $accuracy   To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day".
+     *
+     * @return void
+     */
+    public function setEndDate($endDate, $accuracy = 'day')
     {
         //For API 1.0 compatibility with the old Ruby API, dates that have an accuracy greater than a year
         //use a non-standard date format. For month-only accuracy, the day is always the 16th. The time returned
@@ -689,18 +746,41 @@ class Anime
 
         switch ($accuracy) {
             case 'year':
-                $this->endDate = $end_date->format('Y');
-                $this->endDate2 = $end_date->format('Y');
+                $this->endDate = $endDate->format('Y');
                 break;
             case 'month':
                 //For compatibility, API 1 always passes the 16th when the day is unknown.
-                $this->endDate = $end_date->format('D M 16 12:00:00 O Y');
-                $this->endDate2 = $end_date->format('Y-m');
+                $this->endDate = $endDate->format('D M 16 12:00:00 O Y');
                 break;
             case 'day':
             default:
-                $this->endDate = $end_date->format('D M d 12:00:00 O Y');
-                $this->endDate2 = $end_date->format('Y-m-d');
+                $this->endDate = $endDate->format('D M d 12:00:00 O Y');
+                break;
+        }
+
+        $this->setEndDate2($endDate, $accuracy);
+    }
+
+    /**
+     * Set the endDate2 property
+     *
+     * @param DateTime $endDate    The end date of the series
+     * @param string   $accuracy   To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day".
+     *
+     * @return void
+     */
+    private function setEndDate2($endDate, $accuracy = 'day')
+    {
+        switch ($accuracy) {
+            case 'year':
+                $this->endDate2 = $endDate->format('Y');
+                break;
+            case 'month':
+                $this->endDate2 = $endDate->format('Y-m');
+                break;
+            case 'day':
+            default:
+                $this->endDate2 = $endDate->format('Y-m-d');
                 break;
         }
     }
