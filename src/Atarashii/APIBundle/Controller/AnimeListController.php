@@ -12,7 +12,9 @@ namespace Atarashii\APIBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Atarashii\APIBundle\Model\Anime;
+use JMS\Serializer\SerializationContext;
 
 use \SimpleXMLElement;
 
@@ -26,7 +28,7 @@ class AnimeListController extends FOSRestController
     *
     * @return View
     */
-    public function getAction($username)
+    public function getAction($username, $apiVersion)
     {
         // http://myanimelist.net/malappinfo.php?u=#{username}&status=all&type=anime
 
@@ -64,7 +66,22 @@ class AnimeListController extends FOSRestController
             $animelist['anime'] = $alist;
         }
 
-         return $this->view($animelist);
+        $response = new Response();
+        $serializationContext = SerializationContext::create();
+        $serializationContext->setVersion($apiVersion);
+
+        //For compatibility, API 1.0 explicitly passes null parameters.
+        if ($apiVersion == "1.0") {
+            $serializationContext->setSerializeNull(true);
+        }
+
+        $view = $this->view($animelist);
+
+        $view->setSerializationContext($serializationContext);
+        $view->setResponse($response);
+        $view->setStatusCode(200);
+
+        return $view;
     }
 
     /**
