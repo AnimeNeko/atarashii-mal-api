@@ -18,6 +18,8 @@ use Atarashii\APIBundle\Parser\Upcoming;
 use Atarashii\APIBundle\Parser\AnimeParser;
 use Atarashii\APIBundle\Parser\MangaParser;
 
+use JMS\Serializer\SerializationContext;
+
 use \DateTime;
 
 class SearchController extends FOSRestController
@@ -32,7 +34,7 @@ class SearchController extends FOSRestController
     *
     * @return View
     */
-    public function getAnimeAction(Request $request)
+    public function getAnimeAction($apiVersion, Request $request)
     {
         // http://myanimelist.net/anime.php?c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&q=#{name}&show=#{page}
 
@@ -52,6 +54,9 @@ class SearchController extends FOSRestController
         }
 
         $response = new Response();
+        $serializationContext = SerializationContext::create();
+        $serializationContext->setVersion($apiVersion);
+
         $response->setPublic();
         $response->setMaxAge(3600); //One hour
         $response->headers->addCacheControlDirective('must-revalidate', true);
@@ -69,6 +74,12 @@ class SearchController extends FOSRestController
 
             return $view;
         } else {
+
+            //For compatibility, API 1.0 explicitly passes null parameters.
+            if ($apiVersion == "1.0") {
+                $serializationContext->setSerializeNull(true);
+            }
+
             if ($downloader->wasRedirected()) {
                 $searchanime = Array(AnimeParser::parse($animecontent));
             } else {
@@ -76,6 +87,8 @@ class SearchController extends FOSRestController
             }
 
             $view = $this->view($searchanime);
+
+            $view->setSerializationContext($serializationContext);
             $view->setResponse($response);
             $view->setStatusCode(200);
 
@@ -94,7 +107,7 @@ class SearchController extends FOSRestController
     *
     * @return View
     */
-    public function getMangaAction(Request $request)
+    public function getMangaAction($apiVersion, Request $request)
     {
         // http://myanimelist.net/manga.php?c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&q=#{name}&show=#{page}
 
@@ -114,6 +127,9 @@ class SearchController extends FOSRestController
         }
 
         $response = new Response();
+        $serializationContext = SerializationContext::create();
+        $serializationContext->setVersion($apiVersion);
+
         $response->setPublic();
         $response->setMaxAge(3600); //One hour
         $response->headers->addCacheControlDirective('must-revalidate', true);
@@ -131,6 +147,12 @@ class SearchController extends FOSRestController
 
             return $view;
         } else {
+
+            //For compatibility, API 1.0 explicitly passes null parameters.
+            if ($apiVersion == "1.0") {
+                $serializationContext->setSerializeNull(true);
+            }
+
             if ($downloader->wasRedirected()) {
                 $searchmanga = Array(MangaParser::parse($mangacontent));
             } else {
@@ -138,6 +160,8 @@ class SearchController extends FOSRestController
             }
 
             $view = $this->view($searchmanga);
+
+            $view->setSerializationContext($serializationContext);
             $view->setResponse($response);
             $view->setStatusCode(200);
 
