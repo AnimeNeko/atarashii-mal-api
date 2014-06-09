@@ -69,17 +69,40 @@ class Upcoming
 
                 $start_date = trim($crawler->filterXPath('//td[6]')->text());
 
-                if (strpos($start_date, '?') === false && $start_date !== '-') {
-                    $start_date = DateTime::createFromFormat('m-d-y', $start_date)->format('Y-m-d');
+                if ($start_date != '-') {
+                    $start_date = explode('-', trim($start_date));
+
+                    if (strlen($start_date[2]) == 2) {
+                        $start_date[2] = self::fixMalShortYear($start_date[2]);
+                    }
+
+                    if ($start_date[0] == '?' && $start_date[1] == '?') {
+                        $media->setLiteralStartDate(null, DateTime::createFromFormat('Y', $start_date[2]), 'year');
+                    } elseif ($start_date[0] != '?' && $start_date[1] == '?') {
+                        $media->setLiteralStartDate(null, DateTime::createFromFormat('Y m', "$start_date[2] $start_date[0]"), 'month');
+                    } else {
+                        $media->setLiteralStartDate("$start_date[2]-$start_date[0]-$start_date[1]", DateTime::createFromFormat('Y m d', "$start_date[2] $start_date[0] $start_date[1]"), 'day');
+                    }
                 }
-                $media->setStartDate($start_date);
 
                 $end_date = trim($crawler->filterXPath('//td[7]')->text());
-                if (strpos($end_date, '?') === false && $end_date !== '-') {
-                    $end_date = DateTime::createFromFormat('m-d-y', $end_date)->format('Y-m-d');
+
+                if ($end_date != '-') {
+                    $end_date = explode('-', trim($end_date));
+
+                    if (strlen($end_date[2]) == 2) {
+                        $end_date[2] = self::fixMalShortYear($end_date[2]);
+                    }
+
+                    if ($end_date[0] == '?' && $end_date[1] == '?') {
+                        $media->setLiteralEndDate(null, DateTime::createFromFormat('Y', $end_date[2]), 'year');
+                    } elseif ($end_date[0] != '?' && $end_date[1] == '?') {
+                        $media->setLiteralEndDate(null, DateTime::createFromFormat('Y m', "$end_date[2] $end_date[0]"), 'month');
+                    } else {
+                        $media->setLiteralEndDate("$end_date[2]-$end_date[0]-$end_date[1]", DateTime::createFromFormat('Y m d', "$end_date[2] $end_date[0] $end_date[1]"), 'day');
+                    }
                 }
 
-                $media->setEndDate($end_date);
                 $media->setClassification(trim($crawler->filterXPath('//td[9]')->text()));
                 $media->setMembersScore((float) trim($crawler->filterXPath('//td[5]')->text()));
                 $media->setSynopsis(trim($crawler->filterXPath('//td[2]/div[3]')->text()));
