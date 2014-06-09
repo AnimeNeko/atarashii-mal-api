@@ -68,17 +68,32 @@ class Upcoming
 
                 $start_date = trim($crawler->filterXPath('//td[6]')->text());
 
-                if (strpos($start_date, '?') === false && $start_date !== '-') {
-                    $start_date = DateTime::createFromFormat('m-d-y', $start_date)->format('Y-m-d');
+                if ($start_date != '-') {
+                    $start_date = explode('-', trim($start_date));
+
+                    if (strlen($start_date[2]) == 2) {
+                        $start_date[2] = self::fixMalShortYear($start_date[2]);
+                    }
+
+                    if ($start_date[0] != '?') {
+                        $media->start_date = "$start_date[2]-$start_date[0]-$start_date[1]";
+                    }
                 }
-                $media->start_date = $start_date;
 
                 $end_date = trim($crawler->filterXPath('//td[7]')->text());
-                if (strpos($end_date, '?') === false && $end_date !== '-') {
-                    $end_date = DateTime::createFromFormat('m-d-y', $end_date)->format('Y-m-d');
+
+                if ($end_date != '-') {
+                    $end_date = explode('-', trim($end_date));
+
+                    if (strlen($end_date[2]) == 2) {
+                        $end_date[2] = self::fixMalShortYear($end_date[2]);
+                    }
+
+                    if ($end_date[0] != '?') {
+                        $media->end_date = "$end_date[2]-$end_date[0]-$end_date[1]";
+                    }
                 }
 
-                $media->end_date = $end_date;
                 $media->classification = trim($crawler->filterXPath('//td[9]')->text());
                 $media->members_score = (float) trim($crawler->filterXPath('//td[5]')->text());
                 $media->synopsis = trim($crawler->filterXPath('//td[2]//div[3]')->text());
@@ -95,4 +110,19 @@ class Upcoming
 
         return $media;
     }
+
+    private static function fixMalShortYear($year) {
+        //Create a four digit year from MAL's display.
+        //We can't use PHP's built-in date parser as it parses two-digit years
+        //in the range 1970-2069. We need earlier, so have to do it manually.
+        //We use the range 1930-2029, which will create some incorrect dates
+        //for titles from the early part of the 20th century, but it's the best
+        //fix at this point.
+        if($year >= 30) {
+            return '19' . $year;
+        } else {
+            return '20' . $year;
+        }
+    }
+
 }
