@@ -14,6 +14,7 @@ use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Atarashii\APIBundle\Parser\Upcoming;
+use JMS\Serializer\SerializationContext;
 
 class UpcomingController extends FOSRestController
 {
@@ -30,7 +31,7 @@ class UpcomingController extends FOSRestController
     *
     * @return View
     */
-    public function getAnimeUpcomingAction(Request $request)
+    public function getAnimeUpcomingAction($apiVersion, Request $request)
     {
         // http://myanimelist.net/anime.php?sd=#{day}&sm=#{month}&sy=#{year}&em=0&ed=0&ey=0&o=2&w=&c[]=a&c[]=d&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=1&show=#{page}
 
@@ -60,6 +61,14 @@ class UpcomingController extends FOSRestController
         }
 
         $response = new Response();
+        $serializationContext = SerializationContext::create();
+        $serializationContext->setVersion($apiVersion);
+
+        //For compatibility, API 1.0 explicitly passes null parameters.
+        if ($apiVersion == "1.0") {
+            $serializationContext->setSerializeNull(true);
+        }
+
         $response->setPublic();
         $response->setMaxAge(10800); //Three hours
         $response->headers->addCacheControlDirective('must-revalidate', true);
@@ -80,6 +89,8 @@ class UpcomingController extends FOSRestController
             $Upcominganime = Upcoming::parse($animecontent, 'anime');
 
             $view = $this->view($Upcominganime);
+
+            $view->setSerializationContext($serializationContext);
             $view->setResponse($response);
             $view->setStatusCode(200);
 
@@ -100,7 +111,7 @@ class UpcomingController extends FOSRestController
     *
     * @return View
     */
-    public function getMangaUpcomingAction(Request $request)
+    public function getMangaUpcomingAction($apiVersion, Request $request)
     {
         // http://myanimelist.net/manga.php?sd=#{day}&sm=#{month}&sy=#{year}&em=0&ed=0&ey=0&o=2&w=&c[]=a&c[]=d&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=1&show=#{page}
 
@@ -130,6 +141,14 @@ class UpcomingController extends FOSRestController
         }
 
         $response = new Response();
+        $serializationContext = SerializationContext::create();
+        $serializationContext->setVersion($apiVersion);
+
+        //For compatibility, API 1.0 explicitly passes null parameters.
+        if ($apiVersion == "1.0") {
+            $serializationContext->setSerializeNull(true);
+        }
+
         $response->setPublic();
         $response->setMaxAge(10800); //Three hours
         $response->headers->addCacheControlDirective('must-revalidate', true);
@@ -150,6 +169,8 @@ class UpcomingController extends FOSRestController
             $Upcomingmanga = Upcoming::parse($mangacontent, 'manga');
 
             $view = $this->view($Upcomingmanga);
+
+            $view->setSerializationContext($serializationContext);
             $view->setResponse($response);
             $view->setStatusCode(200);
 
@@ -168,7 +189,7 @@ class UpcomingController extends FOSRestController
     *
     * @return View
     */
-    public function getAnimeJustaddedAction(Request $request)
+    public function getAnimeJustaddedAction($apiVersion, Request $request)
     {
         // http://myanimelist.net/anime.php?o=9&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=2&w=1&show=#{page}
 
@@ -187,6 +208,14 @@ class UpcomingController extends FOSRestController
         }
 
         $response = new Response();
+        $serializationContext = SerializationContext::create();
+        $serializationContext->setVersion($apiVersion);
+
+        //For compatibility, API 1.0 explicitly passes null parameters.
+        if ($apiVersion == "1.0") {
+            $serializationContext->setSerializeNull(true);
+        }
+
         $response->setPublic();
         $response->setMaxAge(10800); //Three hours
         $response->headers->addCacheControlDirective('must-revalidate', true);
@@ -207,6 +236,8 @@ class UpcomingController extends FOSRestController
             $Justaddedanime = Upcoming::parse($animecontent, 'anime');
 
             $view = $this->view($Justaddedanime);
+
+            $view->setSerializationContext($serializationContext);
             $view->setResponse($response);
             $view->setStatusCode(200);
 
@@ -225,7 +256,7 @@ class UpcomingController extends FOSRestController
     *
     * @return View
     */
-    public function getMangaJustaddedAction(Request $request)
+    public function getMangaJustaddedAction($apiVersion, Request $request)
     {
         // http://myanimelist.net/anime.php?o=9&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=2&w=1&show=#{page}
 
@@ -244,6 +275,14 @@ class UpcomingController extends FOSRestController
         }
 
         $response = new Response();
+        $serializationContext = SerializationContext::create();
+        $serializationContext->setVersion($apiVersion);
+
+        //For compatibility, API 1.0 explicitly passes null parameters.
+        if ($apiVersion == "1.0") {
+            $serializationContext->setSerializeNull(true);
+        }
+
         $response->setPublic();
         $response->setMaxAge(10800); //Three hours
         $response->headers->addCacheControlDirective('must-revalidate', true);
@@ -264,6 +303,8 @@ class UpcomingController extends FOSRestController
             $Justaddedmanga = Upcoming::parse($mangacontent, 'manga');
 
             $view = $this->view($Justaddedmanga);
+
+            $view->setSerializationContext($serializationContext);
             $view->setResponse($response);
             $view->setStatusCode(200);
 

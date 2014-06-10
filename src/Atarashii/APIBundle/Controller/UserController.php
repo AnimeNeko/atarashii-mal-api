@@ -13,6 +13,7 @@ namespace Atarashii\APIBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Response;
 use Atarashii\APIBundle\Parser\User;
+use JMS\Serializer\SerializationContext;
 
 class UserController extends FOSRestController
 {
@@ -24,7 +25,7 @@ class UserController extends FOSRestController
     *
     * @return View
     */
-    public function getProfileAction($username)
+    public function getProfileAction($apiVersion, $username)
     {
         // http://myanimelist.net/profile/#{username}
 
@@ -37,6 +38,14 @@ class UserController extends FOSRestController
         }
 
         $response = new Response();
+        $serializationContext = SerializationContext::create();
+        $serializationContext->setVersion($apiVersion);
+
+        //For compatibility, API 1.0 explicitly passes null parameters.
+        if ($apiVersion == "1.0") {
+            $serializationContext->setSerializeNull(true);
+        }
+
         $response->setPublic();
         $response->setMaxAge(900); //15 minutes
         $response->headers->addCacheControlDirective('must-revalidate', true);
@@ -57,6 +66,8 @@ class UserController extends FOSRestController
             $userprofile = User::parse($profilecontent);
 
             $view = $this->view($userprofile);
+
+            $view->setSerializationContext($serializationContext);
             $view->setResponse($response);
             $view->setStatusCode(200);
 
@@ -74,7 +85,7 @@ class UserController extends FOSRestController
     *
     * @return View
     */
-    public function getFriendsAction($username)
+    public function getFriendsAction($apiVersion, $username)
     {
         // http://myanimelist.net/profile/#{username}/friends
 
@@ -87,6 +98,14 @@ class UserController extends FOSRestController
         }
 
         $response = new Response();
+        $serializationContext = SerializationContext::create();
+        $serializationContext->setVersion($apiVersion);
+
+        //For compatibility, API 1.0 explicitly passes null parameters.
+        if ($apiVersion == "1.0") {
+            $serializationContext->setSerializeNull(true);
+        }
+
         $response->setPublic();
         $response->setMaxAge(900); //15 minutes
         $response->headers->addCacheControlDirective('must-revalidate', true);
@@ -107,6 +126,8 @@ class UserController extends FOSRestController
             $friendlist = User::parseFriends($friendscontent);
 
             $view = $this->view($friendlist);
+
+            $view->setSerializationContext($serializationContext);
             $view->setResponse($response);
             $view->setStatusCode(200);
 

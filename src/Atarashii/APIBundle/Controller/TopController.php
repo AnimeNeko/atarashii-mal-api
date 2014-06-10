@@ -14,6 +14,7 @@ use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Atarashii\APIBundle\Parser\Top;
+use JMS\Serializer\SerializationContext;
 
 class TopController extends FOSRestController
 {
@@ -30,7 +31,7 @@ class TopController extends FOSRestController
     *
     * @return View
     */
-    public function getTopAnimeAction(Request $request)
+    public function getTopAnimeAction($apiVersion, Request $request)
     {
         // http://myanimelist.net/topanime.php?type=#{type}&limit=#{0}
 
@@ -66,6 +67,14 @@ class TopController extends FOSRestController
         }
 
         $response = new Response();
+        $serializationContext = SerializationContext::create();
+        $serializationContext->setVersion($apiVersion);
+
+        //For compatibility, API 1.0 explicitly passes null parameters.
+        if ($apiVersion == "1.0") {
+            $serializationContext->setSerializeNull(true);
+        }
+
         $response->setPublic();
         $response->setMaxAge(10800); //Three hours
         $response->headers->addCacheControlDirective('must-revalidate', true);
@@ -86,6 +95,8 @@ class TopController extends FOSRestController
             $topanime = Top::parse($animecontent, 'anime');
 
             $view = $this->view($topanime);
+
+            $view->setSerializationContext($serializationContext);
             $view->setResponse($response);
             $view->setStatusCode(200);
 
@@ -107,7 +118,7 @@ class TopController extends FOSRestController
     *
     * @return View
     */
-    public function getTopMangaAction(Request $request)
+    public function getTopMangaAction($apiVersion, Request $request)
     {
         // http://myanimelist.net/topmanga.php?type=&limit=#{0}
 
@@ -146,6 +157,14 @@ class TopController extends FOSRestController
         }
 
         $response = new Response();
+        $serializationContext = SerializationContext::create();
+        $serializationContext->setVersion($apiVersion);
+
+        //For compatibility, API 1.0 explicitly passes null parameters.
+        if ($apiVersion == "1.0") {
+            $serializationContext->setSerializeNull(true);
+        }
+
         $response->setPublic();
         $response->setMaxAge(10800); //Three hours
         $response->headers->addCacheControlDirective('must-revalidate', true);
@@ -166,6 +185,8 @@ class TopController extends FOSRestController
             $topmanga = Top::parse($mangacontent, 'manga');
 
             $view = $this->view($topmanga);
+
+            $view->setSerializationContext($serializationContext);
             $view->setResponse($response);
             $view->setStatusCode(200);
 
@@ -184,7 +205,7 @@ class TopController extends FOSRestController
     *
     * @return View
     */
-    public function getPopularAnimeAction(Request $request)
+    public function getPopularAnimeAction($apiVersion, Request $request)
     {
         // http://myanimelist.net/topanime.php?type=bypopularity&limit=#{0}
 
@@ -203,6 +224,14 @@ class TopController extends FOSRestController
         }
 
         $response = new Response();
+        $serializationContext = SerializationContext::create();
+        $serializationContext->setVersion($apiVersion);
+
+        //For compatibility, API 1.0 explicitly passes null parameters.
+        if ($apiVersion == "1.0") {
+            $serializationContext->setSerializeNull(true);
+        }
+
         $response->setPublic();
         $response->setMaxAge(10800); //Three hours
         $response->headers->addCacheControlDirective('must-revalidate', true);
@@ -223,6 +252,8 @@ class TopController extends FOSRestController
             $popularanime = Top::parse($animecontent, 'anime');
 
             $view = $this->view($popularanime);
+
+            $view->setSerializationContext($serializationContext);
             $view->setResponse($response);
             $view->setStatusCode(200);
 
@@ -241,7 +272,7 @@ class TopController extends FOSRestController
     *
     * @return View
     */
-    public function getPopularMangaAction(Request $request)
+    public function getPopularMangaAction($apiVersion, Request $request)
     {
         // http://myanimelist.net/topmanga.php?type=bypopularity&limit=#{0}
 
@@ -260,6 +291,14 @@ class TopController extends FOSRestController
         }
 
         $response = new Response();
+        $serializationContext = SerializationContext::create();
+        $serializationContext->setVersion($apiVersion);
+
+        //For compatibility, API 1.0 explicitly passes null parameters.
+        if ($apiVersion == "1.0") {
+            $serializationContext->setSerializeNull(true);
+        }
+
         $response->setPublic();
         $response->setMaxAge(10800); //Three hours
         $response->headers->addCacheControlDirective('must-revalidate', true);
@@ -280,6 +319,8 @@ class TopController extends FOSRestController
             $popularmanga = Top::parse($mangacontent, 'manga');
 
             $view = $this->view($popularmanga);
+
+            $view->setSerializationContext($serializationContext);
             $view->setResponse($response);
             $view->setStatusCode(200);
 
