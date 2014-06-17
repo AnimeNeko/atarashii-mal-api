@@ -13,6 +13,7 @@ namespace Atarashii\APIBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Guzzle\Http\Exception;
 use Atarashii\APIBundle\Parser\Upcoming;
 use JMS\Serializer\SerializationContext;
 
@@ -56,7 +57,7 @@ class UpcomingController extends FOSRestController
 
         try {
             $animecontent = $downloader->fetch('/anime.php?sd='.$startDay.'&sm='.$startMonth.'&sy='.$startYear.'&em=0&ed=0&ey=0&o=2&w=&c[]=a&c[]=d&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=1&show='.(($page*20)-20));
-        } catch (\Guzzle\Http\Exception\CurlException $e) {
+        } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
 
@@ -136,7 +137,7 @@ class UpcomingController extends FOSRestController
 
         try {
             $mangacontent = $downloader->fetch('/manga.php?sd='.$startDay.'&sm='.$startMonth.'&sy='.$startYear.'&em=0&ed=0&ey=0&o=2&w=&c[]=a&c[]=d&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=1&show='.(($page*20)-20));
-        } catch (\Guzzle\Http\Exception\CurlException $e) {
+        } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
 
@@ -203,7 +204,7 @@ class UpcomingController extends FOSRestController
 
         try {
             $animecontent = $downloader->fetch('/anime.php?o=9&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=2&w=1&show='.(($page*20)-20));
-        } catch (\Guzzle\Http\Exception\CurlException $e) {
+        } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
 
@@ -270,7 +271,7 @@ class UpcomingController extends FOSRestController
 
         try {
             $mangacontent = $downloader->fetch('/manga.php?o=9&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=2&w=1&show='.(($page*20)-20));
-        } catch (\Guzzle\Http\Exception\CurlException $e) {
+        } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
 

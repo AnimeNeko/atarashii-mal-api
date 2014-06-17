@@ -12,6 +12,7 @@ namespace Atarashii\APIBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Response;
+use Guzzle\Http\Exception;
 use Atarashii\APIBundle\Parser\User;
 use JMS\Serializer\SerializationContext;
 
@@ -33,7 +34,7 @@ class UserController extends FOSRestController
 
         try {
             $profilecontent = $downloader->fetch('/profile/' . $username);
-        } catch (\Guzzle\Http\Exception\CurlException $e) {
+        } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
 
@@ -93,7 +94,7 @@ class UserController extends FOSRestController
 
         try {
             $friendscontent = $downloader->fetch('/profile/' . $username . '/friends');
-        } catch (\Guzzle\Http\Exception\CurlException $e) {
+        } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
 
@@ -153,7 +154,7 @@ class UserController extends FOSRestController
 
         try {
             $historycontent = $downloader->fetch('/history/' . $username);
-        } catch (\Guzzle\Http\Exception\CurlException $e) {
+        } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
 

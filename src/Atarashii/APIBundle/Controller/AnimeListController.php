@@ -13,6 +13,7 @@ namespace Atarashii\APIBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Guzzle\Http\Exception;
 use Atarashii\APIBundle\Model\Anime;
 use JMS\Serializer\SerializationContext;
 
@@ -22,12 +23,12 @@ class AnimeListController extends FOSRestController
 {
 
     /**
-    * Get the list of anime stored for a user
-    *
-    * @param string $username The MyAnimeList username of the user whose list you want.
-    *
-    * @return View
-    */
+     * Get the list of anime stored for a user
+     *
+     * @param string $username The MyAnimeList username of the user whose list you want.
+     *
+     * @return View
+     */
     public function getAction($username, $apiVersion)
     {
         // http://myanimelist.net/malappinfo.php?u=#{username}&status=all&type=anime
@@ -36,7 +37,7 @@ class AnimeListController extends FOSRestController
 
         try {
             $animelistcontent = $downloader->fetch('/malappinfo.php?u=' . $username . '&status=all&type=anime');
-        } catch (\Guzzle\Http\Exception\CurlException $e) {
+        } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
 
@@ -124,17 +125,17 @@ class AnimeListController extends FOSRestController
         $connection = $this->get('atarashii_api.communicator');
 
         try {
-            $result = $connection->sendXML('/api/animelist/add/' . $anime->getId() . '.xml', $xmlcontent, $username, $password);
+            $connection->sendXML('/api/animelist/add/' . $anime->getId() . '.xml', $xmlcontent, $username, $password);
 
             return $this->view('ok', 201);
-        } catch (\Guzzle\Http\Exception\ClientErrorResponseException $e) {
+        } catch (Exception\ClientErrorResponseException $e) {
             $view = $this->view(Array('error' => 'unauthorized'), 401);
             $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
 
             return $view;
-        } catch (\Guzzle\Http\Exception\ServerErrorResponseException $e) {
+        } catch (Exception\ServerErrorResponseException $e) {
             return $this->view(Array('error' => 'not-found'), 404);
-        } catch (\Guzzle\Http\Exception\CurlException $e) {
+        } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
 
@@ -181,36 +182,35 @@ class AnimeListController extends FOSRestController
         $connection = $this->get('atarashii_api.communicator');
 
         try {
-            $result = $connection->sendXML('/api/animelist/update/' . $anime->getId . '.xml', $xmlcontent, $username, $password);
+            $connection->sendXML('/api/animelist/update/' . $anime->getId() . '.xml', $xmlcontent, $username, $password);
 
             return $this->view('ok', 200);
-        } catch (\Guzzle\Http\Exception\ClientErrorResponseException $e) {
+        } catch (Exception\ClientErrorResponseException $e) {
             $view = $this->view(Array('error' => 'unauthorized'), 401);
             $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
 
             return $view;
-        } catch (\Guzzle\Http\Exception\ServerErrorResponseException $e) {
+        } catch (Exception\ServerErrorResponseException $e) {
             return $this->view(Array('error' => 'not-found'), 404);
-        } catch (\Guzzle\Http\Exception\CurlException $e) {
+        } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
 
     }
 
     /**
-    * Delete an anime from a user's list.
-    *
-    * Uses the contents of the HTTP Request to get the needed data for deleting the
-    * requested title. The user must have passed the basic authentication needs and the
-    * PHP_AUTH_USER and PHP_AUTH_PW variables must be set. If so, an empty document is
-    * then posted to MyAnimeList at the right URL to delete an item.
-    *
-    * @param Request $request Contains all the needed information to delete the title.
-    * @param int     $id      ID of the anime.
-    *
-    * @return View
-    */
-    public function deleteAction(Request $request, $id)
+     * Delete an anime from a user's list.
+     *
+     * Uses the contents of the HTTP Request to get the needed data for deleting the
+     * requested title. The user must have passed the basic authentication needs and the
+     * PHP_AUTH_USER and PHP_AUTH_PW variables must be set. If so, an empty document is
+     * then posted to MyAnimeList at the right URL to delete an item.
+     *
+     * @param int $id ID of the anime.
+     *
+     * @return View
+     */
+    public function deleteAction($id)
     {
         // http://myanimelist.net/api/animelist/delete/#{id}.xml
 
@@ -229,17 +229,17 @@ class AnimeListController extends FOSRestController
         $connection = $this->get('atarashii_api.communicator');
 
         try {
-            $result = $connection->sendXML('/api/animelist/delete/' . $id . '.xml', '', $username, $password);
+            $connection->sendXML('/api/animelist/delete/' . $id . '.xml', '', $username, $password);
 
             return $this->view('ok', 200);
-        } catch (\Guzzle\Http\Exception\ClientErrorResponseException $e) {
+        } catch (Exception\ClientErrorResponseException $e) {
             $view = $this->view(Array('error' => 'unauthorized'), 401);
             $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
 
             return $view;
-        } catch (\Guzzle\Http\Exception\ServerErrorResponseException $e) {
+        } catch (Exception\ServerErrorResponseException $e) {
             return $this->view(Array('error' => 'not-found'), 404);
-        } catch (\Guzzle\Http\Exception\CurlException $e) {
+        } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
     }

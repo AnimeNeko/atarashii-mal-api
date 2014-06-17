@@ -13,6 +13,7 @@ namespace Atarashii\APIBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Guzzle\Http\Exception;
 use Atarashii\APIBundle\Parser\ForumParser;
 
 class ForumController extends FOSRestController
@@ -30,7 +31,7 @@ class ForumController extends FOSRestController
 
         try {
             $forumcontent = $downloader->fetch('/forum/index.php');
-        } catch (\Guzzle\Http\Exception\CurlException $e) {
+        } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
 
@@ -76,7 +77,7 @@ class ForumController extends FOSRestController
 
         try {
             $forumcontent = $downloader->fetch('/forum/index.php?board='.$id.'&show='.(($page*20)-20));
-        } catch (\Guzzle\Http\Exception\CurlException $e) {
+        } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
 
@@ -121,7 +122,7 @@ class ForumController extends FOSRestController
 
         try {
             $forumcontent = $downloader->fetch('/forum/?topicid='.$id.'&show='.(($page*20)-20));
-        } catch (\Guzzle\Http\Exception\CurlException $e) {
+        } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
 
@@ -179,7 +180,7 @@ class ForumController extends FOSRestController
         try {
             $downloader->cookieLogin($username, $password);
             $topicdetails = $downloader->createTopic($id, $title , $message);
-        } catch (\Guzzle\Http\Exception\CurlException $e) {
+        } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
 
@@ -223,7 +224,7 @@ class ForumController extends FOSRestController
         try {
             $downloader->cookieLogin($username, $password);
             $topicdetails = $downloader->createComment($id, $message);
-        } catch (\Guzzle\Http\Exception\CurlException $e) {
+        } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
 
@@ -267,7 +268,7 @@ class ForumController extends FOSRestController
         try {
             $downloader->cookieLogin($username, $password);
             $topicdetails = $downloader->edithComment($id, $message);
-        } catch (\Guzzle\Http\Exception\CurlException $e) {
+        } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
 

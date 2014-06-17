@@ -13,6 +13,7 @@ namespace Atarashii\APIBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Guzzle\Http\Exception;
 use Atarashii\APIBundle\Model\Manga;
 use JMS\Serializer\SerializationContext;
 
@@ -35,7 +36,7 @@ class MangaListController extends FOSRestController
 
         try {
             $mangalistcontent = $downloader->fetch('/malappinfo.php?u=' . $username . '&status=all&type=manga');
-        } catch (\Guzzle\Http\Exception\CurlException $e) {
+        } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
 
@@ -126,17 +127,17 @@ class MangaListController extends FOSRestController
         $connection = $this->get('atarashii_api.communicator');
 
         try {
-            $result = $connection->sendXML('/api/mangalist/add/' . $manga->getId() . '.xml', $xmlcontent, $username, $password);
+            $connection->sendXML('/api/mangalist/add/' . $manga->getId() . '.xml', $xmlcontent, $username, $password);
 
             return $this->view('ok', 201);
-        } catch (\Guzzle\Http\Exception\ClientErrorResponseException $e) {
+        } catch (Exception\ClientErrorResponseException $e) {
             $view = $this->view(Array('error' => 'unauthorized'), 401);
             $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
 
             return $view;
-        } catch (\Guzzle\Http\Exception\ServerErrorResponseException $e) {
+        } catch (Exception\ServerErrorResponseException $e) {
             return $this->view(Array('error' => 'not-found'), 404);
-        } catch (\Guzzle\Http\Exception\CurlException $e) {
+        } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
 
@@ -185,17 +186,17 @@ class MangaListController extends FOSRestController
         $connection = $this->get('atarashii_api.communicator');
 
         try {
-            $result = $connection->sendXML('/api/mangalist/update/' . $manga->getId() . '.xml', $xmlcontent, $username, $password);
+            $connection->sendXML('/api/mangalist/update/' . $manga->getId() . '.xml', $xmlcontent, $username, $password);
 
             return $this->view('ok', 200);
-        } catch (\Guzzle\Http\Exception\ClientErrorResponseException $e) {
+        } catch (Exception\ClientErrorResponseException $e) {
             $view = $this->view(Array('error' => 'unauthorized'), 401);
             $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
 
             return $view;
-        } catch (\Guzzle\Http\Exception\ServerErrorResponseException $e) {
+        } catch (Exception\ServerErrorResponseException $e) {
             return $this->view(Array('error' => 'not-found'), 404);
-        } catch (\Guzzle\Http\Exception\CurlException $e) {
+        } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
 
@@ -233,17 +234,17 @@ class MangaListController extends FOSRestController
         $connection = $this->get('atarashii_api.communicator');
 
         try {
-            $result = $connection->sendXML('/api/mangalist/delete/' . $id . '.xml', '', $username, $password);
+            $connection->sendXML('/api/mangalist/delete/' . $id . '.xml', '', $username, $password);
 
             return $this->view('ok', 200);
-        } catch (\Guzzle\Http\Exception\ClientErrorResponseException $e) {
+        } catch (Exception\ClientErrorResponseException $e) {
             $view = $this->view(Array('error' => 'unauthorized'), 401);
             $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
 
             return $view;
-        } catch (\Guzzle\Http\Exception\ServerErrorResponseException $e) {
+        } catch (Exception\ServerErrorResponseException $e) {
             return $this->view(Array('error' => 'not-found'), 404);
-        } catch (\Guzzle\Http\Exception\CurlException $e) {
+        } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
     }

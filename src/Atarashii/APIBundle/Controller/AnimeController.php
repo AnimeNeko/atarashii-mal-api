@@ -13,6 +13,7 @@ namespace Atarashii\APIBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Guzzle\Http\Exception;
 use Atarashii\APIBundle\Parser\AnimeParser;
 use JMS\Serializer\SerializationContext;
 
@@ -52,14 +53,14 @@ class AnimeController extends FOSRestController
 
             try {
                 $downloader->cookieLogin($username, $password);
-            } catch (\Guzzle\Http\Exception\CurlException $e) {
+            } catch (Exception\CurlException $e) {
                 return $this->view(Array('error' => 'network-error'), 500);
             }
         }
 
         try {
             $animedetails = $downloader->fetch('/anime/' . $id);
-        } catch (\Guzzle\Http\Exception\CurlException $e) {
+        } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
 
@@ -73,7 +74,7 @@ class AnimeController extends FOSRestController
 
                 try {
                     $animedetails = $downloader->fetch('/editlist.php?type=anime&id=' . $id . '&hideLayout=true');
-                } catch (\Guzzle\Http\Exception\CurlException $e) {
+                } catch (Exception\CurlException $e) {
                     return $this->view(Array('error' => 'network-error'), 500);
                 }
 

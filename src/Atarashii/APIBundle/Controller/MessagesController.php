@@ -13,6 +13,7 @@ namespace Atarashii\APIBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Guzzle\Http\Exception;
 use Atarashii\APIBundle\Parser\messagesParser;
 
 class MessagesController extends FOSRestController
@@ -51,7 +52,7 @@ class MessagesController extends FOSRestController
         try {
             $downloader->cookieLogin($username, $password);
             $messagesdetails = $downloader->fetch('/mymessages.php?go=&show='.(($page*20)-20));
-        } catch (\Guzzle\Http\Exception\CurlException $e) {
+        } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
 
@@ -104,7 +105,7 @@ class MessagesController extends FOSRestController
         try {
             $downloader->cookieLogin($username, $password);
             $messagesdetails = $downloader->fetch('/mymessages.php?go=read&id='.$id);
-        } catch (\Guzzle\Http\Exception\CurlException $e) {
+        } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
 
@@ -157,7 +158,7 @@ class MessagesController extends FOSRestController
         try {
             $downloader->cookieLogin($username, $password);
             $messagesdetails = $downloader->fetch('http://myanimelist.net/mymessages.php?go=delete&id='.$id);
-        } catch (\Guzzle\Http\Exception\CurlException $e) {
+        } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
 
@@ -208,7 +209,7 @@ class MessagesController extends FOSRestController
         try {
             $downloader->cookieLogin($username, $password);
             $messagesdetails = $downloader->sendMessage('threadid='.$id.'&toname='.$send_username, $subject , $message);
-        } catch (\Guzzle\Http\Exception\CurlException $e) {
+        } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
 

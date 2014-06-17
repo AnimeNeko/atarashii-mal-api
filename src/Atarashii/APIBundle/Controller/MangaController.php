@@ -13,6 +13,7 @@ namespace Atarashii\APIBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Guzzle\Http\Exception;
 use Atarashii\APIBundle\Parser\MangaParser;
 use JMS\Serializer\SerializationContext;
 
@@ -49,14 +50,14 @@ class MangaController extends FOSRestController
 
             try {
                 $downloader->cookieLogin($username, $password);
-            } catch (\Guzzle\Http\Exception\CurlException $e) {
+            } catch (Exception\CurlException $e) {
                 return $this->view(Array('error' => 'network-error'), 500);
             }
         }
 
         try {
             $mangadetails = $downloader->fetch('/manga/' . $id);
-        } catch (\Guzzle\Http\Exception\CurlException $e) {
+        } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
 
