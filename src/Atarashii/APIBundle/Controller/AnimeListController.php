@@ -26,6 +26,7 @@ class AnimeListController extends FOSRestController
      * Get the list of anime stored for a user
      *
      * @param string $username The MyAnimeList username of the user whose list you want.
+     * @param string $apiVersion The API version of the request
      *
      * @return View
      */

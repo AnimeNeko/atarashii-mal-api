@@ -20,13 +20,14 @@ use JMS\Serializer\SerializationContext;
 class MangaController extends FOSRestController
 {
     /**
-    * Get the details of a manga
-    *
-    * @param int     $id      The ID of the manga as assigned by MyAnimeList
-    * @param Request $request HTTP Request object
-    *
-    * @return View
-    */
+     * Get the details of a manga
+     *
+     * @param int     $id The ID of the manga as assigned by MyAnimeList
+     * @param string  $apiVersion The API version of the request
+     * @param Request $request HTTP Request object
+     *
+     * @return View
+     */
     public function getAction($id, $apiVersion, Request $request)
     {
         // http://myanimelist.net/manga/#{id}

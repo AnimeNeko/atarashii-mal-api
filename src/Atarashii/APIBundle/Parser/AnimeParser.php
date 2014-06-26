@@ -12,7 +12,7 @@ namespace Atarashii\APIBundle\Parser;
 
 use Symfony\Component\DomCrawler\Crawler;
 use Atarashii\APIBundle\Model\Anime;
-use \DateTime;
+use Atarashii\APIBundle\Model\DateTime;
 
 class AnimeParser
 {

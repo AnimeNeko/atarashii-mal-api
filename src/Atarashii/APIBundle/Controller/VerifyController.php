@@ -45,7 +45,7 @@ class VerifyController extends FOSRestController
         $connection = $this->get('atarashii_api.communicator');
 
         try {
-            $response = $connection->fetch('/api/account/verify_credentials.xml', $username, $password);
+            $connection->fetch('/api/account/verify_credentials.xml', $username, $password);
 
             return $this->view(Array('authorized' => 'OK'), 200);
         } catch (Exception\ClientErrorResponseException $e) {

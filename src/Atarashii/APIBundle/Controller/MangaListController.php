@@ -22,12 +22,13 @@ use \SimpleXMLElement;
 class MangaListController extends FOSRestController
 {
     /**
-    * Get the list of manga stored for a user
-    *
-    * @param string $username The MyAnimeList username of the user whose list you want.
-    *
-    * @return View
-    */
+     * Get the list of manga stored for a user
+     *
+     * @param string $username The MyAnimeList username of the user whose list you want.
+     * @param string  $apiVersion The API version of the request
+     *
+     * @return View
+     */
     public function getAction($username, $apiVersion)
     {
         // http://myanimelist.net/malappinfo.php?u=#{username}&status=all&type=manga

@@ -26,15 +26,16 @@ use \DateTime;
 class SearchController extends FOSRestController
 {
     /**
-    * Search for an anime
-    *
-    * Uses the contents of the HTTP Request to get the needed data for performing a search.
-    * The "page" and "q" get variables are used in the query for the title.
-    *
-    * @param Request $request The HTTP Request object.
-    *
-    * @return View
-    */
+     * Search for an anime
+     *
+     * Uses the contents of the HTTP Request to get the needed data for performing a search.
+     * The "page" and "q" get variables are used in the query for the title.
+     *
+     * @param string  $apiVersion The API version of the request
+     * @param Request $request The HTTP Request object.
+     *
+     * @return View
+     */
     public function getAnimeAction($apiVersion, Request $request)
     {
         // http://myanimelist.net/anime.php?c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&q=#{name}&show=#{page}
@@ -99,15 +100,16 @@ class SearchController extends FOSRestController
     }
 
     /**
-    * Search for a manga
-    *
-    * Uses the contents of the HTTP Request to get the needed data for performing a search.
-    * The "page" and "q" get variables are used in the query for the title.
-    *
-    * @param Request $request The HTTP Request object.
-    *
-    * @return View
-    */
+     * Search for a manga
+     *
+     * Uses the contents of the HTTP Request to get the needed data for performing a search.
+     * The "page" and "q" get variables are used in the query for the title.
+     *
+     * @param string  $apiVersion The API version of the request
+     * @param Request $request The HTTP Request object.
+     *
+     * @return View
+     */
     public function getMangaAction($apiVersion, Request $request)
     {
         // http://myanimelist.net/manga.php?c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&q=#{name}&show=#{page}

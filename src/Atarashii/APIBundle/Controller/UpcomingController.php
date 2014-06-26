@@ -20,18 +20,19 @@ use JMS\Serializer\SerializationContext;
 class UpcomingController extends FOSRestController
 {
     /**
-    * Fetch Upcoming Anime
-    *
-    * Gets the list of anime that will be beginning to air in the future. The get variable
-    * "page" is used to select the set of results to return (in a default of 30 items per
-    * set). An invalid or missing value defaults to page 1. The get variable "start_date"
-    * is used to select the date you want the list to begin. A missing or invalid value
-    * defaults to the current date.
-    *
-    * @param Request $request Contains all the needed information to get the list.
-    *
-    * @return View
-    */
+     * Fetch Upcoming Anime
+     *
+     * Gets the list of anime that will be beginning to air in the future. The get variable
+     * "page" is used to select the set of results to return (in a default of 30 items per
+     * set). An invalid or missing value defaults to page 1. The get variable "start_date"
+     * is used to select the date you want the list to begin. A missing or invalid value
+     * defaults to the current date.
+     *
+     * @param string  $apiVersion The API version of the request
+     * @param Request $request Contains all the needed information to get the list.
+     *
+     * @return View
+     */
     public function getAnimeUpcomingAction($apiVersion, Request $request)
     {
         // http://myanimelist.net/anime.php?sd=#{day}&sm=#{month}&sy=#{year}&em=0&ed=0&ey=0&o=2&w=&c[]=a&c[]=d&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=1&show=#{page}
@@ -100,18 +101,19 @@ class UpcomingController extends FOSRestController
     }
 
     /**
-    * Fetch Upcoming Manga
-    *
-    * Gets the list of manga that will be starting publication in the future. The get
-    * variable "page" is used to select the set of results to return (in a default of 30
-    * items per set). An invalid or missing value defaults to page 1. The get variable
-    * "start_date" is used to select the date you want the list to begin. A missing or
-    * invalid value defaults to the current date.
-    *
-    * @param Request $request Contains all the needed information to get the list.
-    *
-    * @return View
-    */
+     * Fetch Upcoming Manga
+     *
+     * Gets the list of manga that will be starting publication in the future. The get
+     * variable "page" is used to select the set of results to return (in a default of 30
+     * items per set). An invalid or missing value defaults to page 1. The get variable
+     * "start_date" is used to select the date you want the list to begin. A missing or
+     * invalid value defaults to the current date.
+     *
+     * @param string  $apiVersion The API version of the request
+     * @param Request $request Contains all the needed information to get the list.
+     *
+     * @return View
+     */
     public function getMangaUpcomingAction($apiVersion, Request $request)
     {
         // http://myanimelist.net/manga.php?sd=#{day}&sm=#{month}&sy=#{year}&em=0&ed=0&ey=0&o=2&w=&c[]=a&c[]=d&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=1&show=#{page}
@@ -186,6 +188,7 @@ class UpcomingController extends FOSRestController
     * variable "page" is used to select the set of results to return (in a default of 30
     * items per set). An invalid or missing value defaults to page 1.
     *
+    * @param string  $apiVersion The API version of the request
     * @param Request $request Contains all the needed information to get the list.
     *
     * @return View
@@ -253,6 +256,7 @@ class UpcomingController extends FOSRestController
     * variable "page" is used to select the set of results to return (in a default of 30
     * items per set). An invalid or missing value defaults to page 1.
     *
+    * @param string  $apiVersion The API version of the request
     * @param Request $request Contains all the needed information to get the list.
     *
     * @return View

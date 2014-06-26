@@ -20,18 +20,19 @@ use JMS\Serializer\SerializationContext;
 class TopController extends FOSRestController
 {
     /**
-    * Fetch Top-rated Anime
-    *
-    * Gets a list of the top-rated anime on MyAnimeList. The get variable "page" is used
-    * to select the set of results to return (in a default of 30 items per set). An
-    * invalid or missing value defaults to page 1. The get variable "type" is used to
-    * select the type of anime you want to see and can be one of "tv", "movie", "ova", or
-    * "special". A missing or invalid value defaults to show all types.
-    *
-    * @param Request $request Contains all the needed information to get the list.
-    *
-    * @return View
-    */
+     * Fetch Top-rated Anime
+     *
+     * Gets a list of the top-rated anime on MyAnimeList. The get variable "page" is used
+     * to select the set of results to return (in a default of 30 items per set). An
+     * invalid or missing value defaults to page 1. The get variable "type" is used to
+     * select the type of anime you want to see and can be one of "tv", "movie", "ova", or
+     * "special". A missing or invalid value defaults to show all types.
+     *
+     * @param string  $apiVersion The API version of the request
+     * @param Request $request Contains all the needed information to get the list.
+     *
+     * @return View
+     */
     public function getTopAnimeAction($apiVersion, Request $request)
     {
         // http://myanimelist.net/topanime.php?type=#{type}&limit=#{0}
@@ -106,19 +107,20 @@ class TopController extends FOSRestController
     }
 
     /**
-    * Fetch Top-rated Manga
-    *
-    * Gets a list of the top-rated manga on MyAnimeList. The get variable "page" is used
-    * to select the set of results to return (in a default of 30 items per set). An
-    * invalid or missing value defaults to page 1. The get variable "type" is used to
-    * select the type of manga you want to see and can be one of "manga", "novels",
-    * "oneshots", "doujin", "manwha", "manhua", or "oels". A missing or invalid value
-    * defaults to show all types.
-    *
-    * @param Request $request Contains all the needed information to get the list.
-    *
-    * @return View
-    */
+     * Fetch Top-rated Manga
+     *
+     * Gets a list of the top-rated manga on MyAnimeList. The get variable "page" is used
+     * to select the set of results to return (in a default of 30 items per set). An
+     * invalid or missing value defaults to page 1. The get variable "type" is used to
+     * select the type of manga you want to see and can be one of "manga", "novels",
+     * "oneshots", "doujin", "manwha", "manhua", or "oels". A missing or invalid value
+     * defaults to show all types.
+     *
+     * @param string  $apiVersion The API version of the request
+     * @param Request $request Contains all the needed information to get the list.
+     *
+     * @return View
+     */
     public function getTopMangaAction($apiVersion, Request $request)
     {
         // http://myanimelist.net/topmanga.php?type=&limit=#{0}
@@ -196,16 +198,17 @@ class TopController extends FOSRestController
     }
 
     /**
-    * Fetch Top-rated Anime by Popularity
-    *
-    * Gets a list of the top-rated anime on MyAnimeList sorted by popularity. The get
-    * variable "page" is used to select the set of results to return (in a default of 30
-    * items per set). An invalid or missing value defaults to page 1.
-    *
-    * @param Request $request Contains all the needed information to get the list.
-    *
-    * @return View
-    */
+     * Fetch Top-rated Anime by Popularity
+     *
+     * Gets a list of the top-rated anime on MyAnimeList sorted by popularity. The get
+     * variable "page" is used to select the set of results to return (in a default of 30
+     * items per set). An invalid or missing value defaults to page 1.
+     *
+     * @param string  $apiVersion The API version of the request
+     * @param Request $request Contains all the needed information to get the list.
+     *
+     * @return View
+     */
     public function getPopularAnimeAction($apiVersion, Request $request)
     {
         // http://myanimelist.net/topanime.php?type=bypopularity&limit=#{0}
@@ -263,16 +266,17 @@ class TopController extends FOSRestController
     }
 
     /**
-    * Fetch Top-rated Manga by Popularity
-    *
-    * Gets a list of the top-rated manga on MyAnimeList sorted by popularity. The get
-    * variable "page" is used to select the set of results to return (in a default of 30
-    * items per set). An invalid or missing value defaults to page 1.
-    *
-    * @param Request $request Contains all the needed information to get the list.
-    *
-    * @return View
-    */
+     * Fetch Top-rated Manga by Popularity
+     *
+     * Gets a list of the top-rated manga on MyAnimeList sorted by popularity. The get
+     * variable "page" is used to select the set of results to return (in a default of 30
+     * items per set). An invalid or missing value defaults to page 1.
+     *
+     * @param string  $apiVersion The API version of the request
+     * @param Request $request Contains all the needed information to get the list.
+     *
+     * @return View
+     */
     public function getPopularMangaAction($apiVersion, Request $request)
     {
         // http://myanimelist.net/topmanga.php?type=bypopularity&limit=#{0}

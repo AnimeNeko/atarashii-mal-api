@@ -56,10 +56,13 @@ class ForumController extends FOSRestController
     }
 
     /**
-    * Get the forum topics of MAL
-    *
-    * @return View
-    */
+     * Get the forum topics of MAL
+     *
+     * @param Request $request HTTP Request object
+     * @param int     $id The ID of the forum board as assigned by MyAnimeList
+     *
+     * @return View
+     */
     public function getForumTopicsAction(Request $request, $id)
     {
         // http://myanimelist.net/forum/index.php?board=#{id}
@@ -103,6 +106,9 @@ class ForumController extends FOSRestController
 
     /**
     * Get the topic of MAL
+    *
+    * @param Request $request HTTP Request object
+    * @param int     $id The ID of the forum topic as assigned by MyAnimeList
     *
     * @return View
     */
@@ -149,6 +155,9 @@ class ForumController extends FOSRestController
     /**
     * create a topic on MAL
     *
+    * @param Request $request HTTP Request object
+    * @param int     $id The ID of the forum board as assigned by MyAnimeList
+    *
     * @return View
     */
     public function newTopicAction(Request $request, $id)
@@ -194,6 +203,9 @@ class ForumController extends FOSRestController
     /**
     * create a comment on MAL topics
     *
+    * @param Request $request HTTP Request object
+    * @param int     $id The ID of the forum topic as assigned by MyAnimeList
+    *
     * @return View
     */
     public function newCommentAction(Request $request, $id)
@@ -237,6 +249,9 @@ class ForumController extends FOSRestController
 
     /**
     * edith a comment on MAL topics
+    *
+    * @param Request $request HTTP Request object
+    * @param int     $id The ID of the forum topic as assigned by MyAnimeList
     *
     * @return View
     */

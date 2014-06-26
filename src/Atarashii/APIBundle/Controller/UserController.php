@@ -22,6 +22,7 @@ class UserController extends FOSRestController
     /**
     * Get the details for a username
     *
+    * @param string  $apiVersion The API version of the request
     * @param string $username The MyAnimeList username of the user.
     *
     * @return View
@@ -82,6 +83,7 @@ class UserController extends FOSRestController
     * Returns a view of user objects constituting friends of the specified user. Sorting
     * is MyAnimeList default, in order of the most recently active user.
     *
+    * @param string  $apiVersion The API version of the request
     * @param string $username The MyAnimeList username of the user.
     *
     * @return View

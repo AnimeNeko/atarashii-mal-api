@@ -19,13 +19,13 @@ use Atarashii\APIBundle\Parser\messagesParser;
 class MessagesController extends FOSRestController
 {
     /**
-    * Get the messages list.
-    *
-    * @param int     $page    Pagenumber
-    * @param Request $request HTTP Request object
-    *
-    * @return View
-    */
+     * Get the messages list.
+     *
+     * @param Request $request HTTP Request object
+     *
+     * @internal param int $page The pagenumber assigned by MAL.
+     * @return View
+     */
     public function getAction(Request $request)
     {
         // http://myanimelist.net/mymessages.php?go=&show=#{page}
@@ -72,14 +72,13 @@ class MessagesController extends FOSRestController
     }
 
     /**
-    * Get the messages of the specified id
-    *
-    * @param int     $id      The ID of the message
-    * @param Request $request HTTP Request object
-    *
-    * @return View
-    */
-    public function getMessageAction($id, Request $request)
+     * Get the messages of the specified id
+     *
+     * @param int $id The ID of the message
+     *
+     * @return View
+     */
+    public function getMessageAction($id)
     {
         // http://myanimelist.net/mymessages.php?go=read&id=#{id}
 
@@ -127,12 +126,11 @@ class MessagesController extends FOSRestController
     /**
     * Get the messages of the specified username
     *
-    * @param int     $id      The action ID of a message
-    * @param Request $request HTTP Request object
+    * @param int $id The action ID of a message
     *
     * @return View
     */
-    public function deleteAction($id, Request $request)
+    public function deleteAction($id)
     {
         // http://myanimelist.net/mymessages.php?go=delete&id=#{id}
 
@@ -170,15 +168,15 @@ class MessagesController extends FOSRestController
     }
 
     /**
-    * Get the messages of the specified username
-    *
-    * @param String  $subject Subject of the message
-    * @param String  $message The body of a message
-    * @param int     $id      The thread ID of a message
-    * @param Request $request HTTP Request object
-    *
-    * @return View
-    */
+     * Get the messages of the specified username
+     *
+     * @param Request $request HTTP Request object
+     *
+     * @internal param String $subject Subject of the message
+     * @internal param String $message The body of a message
+     * @internal param int    $id The thread ID of a message
+     * @return View
+     */
     public function sendAction(Request $request)
     {
         // http://myanimelist.net/mymessages.php?go=send&threadid=#{id}&toname=#{username}
