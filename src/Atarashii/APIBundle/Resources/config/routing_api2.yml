@@ -215,3 +215,15 @@ _api2_verify_credentials:
     defaults: { _controller: AtarashiiAPIBundle:Verify:Verify, _format: json, apiVersion: '2.0' }
     requirements:
         _method: GET
+
+_api2_reviews_anime:
+    path: /anime/reviews/{id}
+    defaults: { _controller: AtarashiiAPIBundle:Anime:getReviews, _format: json, apiVersion: '2.0' }
+    requirements:
+        _method: GET
+
+_api2_reviews_manga:
+    path: /manga/reviews/{id}
+    defaults: { _controller: AtarashiiAPIBundle:Manga:getReviews, _format: json, apiVersion: '2.0' }
+    requirements:
+        _method: GET

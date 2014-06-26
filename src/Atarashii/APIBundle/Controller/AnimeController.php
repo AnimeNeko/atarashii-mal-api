@@ -10,6 +10,7 @@
 
 namespace Atarashii\APIBundle\Controller;
 
+use Atarashii\APIBundle\Parser\ReviewParser;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,13 +21,14 @@ use JMS\Serializer\SerializationContext;
 class AnimeController extends FOSRestController
 {
     /**
-    * Get the details of an anime
-    *
-    * @param int     $id      The ID of the anime as assigned by MyAnimeList
-    * @param Request $request HTTP Request object
-    *
-    * @return View
-    */
+     * Get the details of an anime
+     *
+     * @param int     $id The ID of the anime as assigned by MyAnimeList
+     * @param string  $apiVersion The API version of the request
+     * @param Request $request HTTP Request object
+     *
+     * @return View
+     */
     public function getAction($id, $apiVersion, Request $request)
     {
         //General information (and basic personal information) at:
@@ -114,6 +116,54 @@ class AnimeController extends FOSRestController
             $view = $this->view($anime);
 
             $view->setSerializationContext($serializationContext);
+            $view->setResponse($response);
+            $view->setStatusCode(200);
+
+            return $view;
+        }
+    }
+
+    /**
+     * Get the reviews of an anime
+     *
+     * @param int     $id The ID of the anime as assigned by MyAnimeList
+     * @param Request $request HTTP Request object
+     *
+     * @return View
+     */
+    public function getReviewsAction($id, Request $request)
+    {
+        // http://myanimelist.net/anime/#{id}/ /reviews&p=#{page}
+        $downloader = $this->get('atarashii_api.communicator');
+
+        $page = ((int) $request->query->get('page')) - 1;
+        if ($page < 0) {
+            $page = 0;
+        }
+
+        try {
+            $details = $downloader->fetch('/anime/' . $id . '/ /reviews&p=' . $page);
+        } catch (Exception\CurlException $e) {
+            return $this->view(Array('error' => 'network-error'), 500);
+        }
+
+        if (strpos($details, 'no reviews submitted') !== false) {
+            return $this->view(Array('error' => 'There have been no reviews submitted for this anime yet.'), 200);
+        } else {
+            $reviews = ReviewParser::parse($details, 'A'); //A = Anime
+
+            $response = new Response();
+            $response->setPublic();
+            $response->setMaxAge(10800); //One hour
+            $response->headers->addCacheControlDirective('must-revalidate', true);
+            $response->setEtag('anime/reviews/' . $id);
+
+            //Also, set "expires" header for caches that don't understand Cache-Control
+            $date = new \DateTime();
+            $date->modify('+10800 seconds'); //One hour
+            $response->setExpires($date);
+
+            $view = $this->view($reviews);
             $view->setResponse($response);
             $view->setStatusCode(200);
 

@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Guzzle\Http\Exception;
 use Atarashii\APIBundle\Parser\MangaParser;
+use Atarashii\APIBundle\Parser\ReviewParser;
 use JMS\Serializer\SerializationContext;
 
 class MangaController extends FOSRestController
@@ -90,6 +91,60 @@ class MangaController extends FOSRestController
             }
 
             $view = $this->view($manga);
+
+            $view->setSerializationContext($serializationContext);
+            $view->setResponse($response);
+            $view->setStatusCode(200);
+
+            return $view;
+        }
+    }
+
+    /**
+     * Get the reviews of an manga
+     *
+     * @param int     $id The ID of the anime as assigned by MyAnimeList
+     * @param Request $request HTTP Request object
+     *
+     * @return View
+     */
+    public function getReviewsAction($id, Request $request)
+    {
+        // http://myanimelist.net/manga/#{id}/ /reviews&p=#{page}
+
+        $downloader = $this->get('atarashii_api.communicator');
+
+        $page = ((int) $request->query->get('page')) - 1;
+        if ($page < 0) {
+            $page = 0;
+        }
+
+        try {
+            $details = $downloader->fetch('/manga/' . $id . '/ /reviews&p=' . $page);
+        } catch (Exception\CurlException $e) {
+            return $this->view(Array('error' => 'network-error'), 500);
+        }
+
+        if (strpos($details, 'no reviews submitted') !== false) {
+            return $this->view(Array('error' => 'There have been no reviews submitted for this manga yet.'), 200);
+        } else {
+            $reviews = ReviewParser::parse($details, 'M'); //M = Manga
+
+            $response = new Response();
+            $serializationContext = SerializationContext::create();
+            $serializationContext->setSerializeNull(true);
+
+            $response->setPublic();
+            $response->setMaxAge(10800); //One hour
+            $response->headers->addCacheControlDirective('must-revalidate', true);
+            $response->setEtag('manga/reviews/' . $id);
+
+            //Also, set "expires" header for caches that don't understand Cache-Control
+            $date = new \DateTime();
+            $date->modify('+10800 seconds'); //One hour
+            $response->setExpires($date);
+
+            $view = $this->view($reviews);
 
             $view->setSerializationContext($serializationContext);
             $view->setResponse($response);
