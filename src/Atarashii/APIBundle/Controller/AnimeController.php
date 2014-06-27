@@ -156,7 +156,7 @@ class AnimeController extends FOSRestController
             $response->setPublic();
             $response->setMaxAge(10800); //One hour
             $response->headers->addCacheControlDirective('must-revalidate', true);
-            $response->setEtag('anime/reviews/' . $id);
+            $response->setEtag('anime/reviews/' . $id . '?page=' . $page);
 
             //Also, set "expires" header for caches that don't understand Cache-Control
             $date = new \DateTime();

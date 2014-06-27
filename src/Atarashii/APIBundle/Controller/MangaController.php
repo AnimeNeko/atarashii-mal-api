@@ -137,7 +137,7 @@ class MangaController extends FOSRestController
             $response->setPublic();
             $response->setMaxAge(10800); //One hour
             $response->headers->addCacheControlDirective('must-revalidate', true);
-            $response->setEtag('manga/reviews/' . $id);
+            $response->setEtag('manga/reviews/' . $id . '?page=' . $page);
 
             //Also, set "expires" header for caches that don't understand Cache-Control
             $date = new \DateTime();
