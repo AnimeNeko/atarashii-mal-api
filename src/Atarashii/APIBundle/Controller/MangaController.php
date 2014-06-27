@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Guzzle\Http\Exception;
 use Atarashii\APIBundle\Parser\MangaParser;
 use Atarashii\APIBundle\Parser\ReviewParser;
+use Atarashii\APIBundle\Parser\CastParser;
 use JMS\Serializer\SerializationContext;
 
 class MangaController extends FOSRestController
@@ -101,9 +102,9 @@ class MangaController extends FOSRestController
     }
 
     /**
-     * Get the reviews of an manga
+     * Get the reviews of a manga
      *
-     * @param int     $id The ID of the anime as assigned by MyAnimeList
+     * @param int     $id The ID of the manga as assigned by MyAnimeList
      * @param Request $request HTTP Request object
      *
      * @return View
@@ -135,18 +136,60 @@ class MangaController extends FOSRestController
             $serializationContext->setSerializeNull(true);
 
             $response->setPublic();
-            $response->setMaxAge(10800); //One hour
+            $response->setMaxAge(10800); //Three hour
             $response->headers->addCacheControlDirective('must-revalidate', true);
             $response->setEtag('manga/reviews/' . $id . '?page=' . $page);
 
             //Also, set "expires" header for caches that don't understand Cache-Control
             $date = new \DateTime();
-            $date->modify('+10800 seconds'); //One hour
+            $date->modify('+10800 seconds'); //Three hour
             $response->setExpires($date);
 
             $view = $this->view($reviews);
 
             $view->setSerializationContext($serializationContext);
+            $view->setResponse($response);
+            $view->setStatusCode(200);
+
+            return $view;
+        }
+    }
+
+    /**
+     * Get the cast of a manga
+     *
+     * @param int $id The ID of the manga as assigned by MyAnimeList
+     *
+     * @return View
+     */
+    public function getCastAction($id)
+    {
+        // http://myanimelist.net/anime/#{id}/ /characters
+        $downloader = $this->get('atarashii_api.communicator');
+
+        try {
+            $details = $downloader->fetch('/manga/' . $id . '/ /characters');
+        } catch (Exception\CurlException $e) {
+            return $this->view(Array('error' => 'network-error'), 500);
+        }
+
+        if (strpos($details, 'No characters') !== false) {
+            return $this->view(Array('error' => 'No characters were found. '), 200);
+        } else {
+            $cast = CastParser::parse($details);
+
+            $response = new Response();
+            $response->setPublic();
+            $response->setMaxAge(86400); //One day
+            $response->headers->addCacheControlDirective('must-revalidate', true);
+            $response->setEtag('manga/cast/' . $id);
+
+            //Also, set "expires" header for caches that don't understand Cache-Control
+            $date = new \DateTime();
+            $date->modify('+86400 seconds'); //One day
+            $response->setExpires($date);
+
+            $view = $this->view($cast);
             $view->setResponse($response);
             $view->setStatusCode(200);
 
