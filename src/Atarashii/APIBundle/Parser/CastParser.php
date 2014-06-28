@@ -21,7 +21,10 @@ class CastParser
         $crawler->addHTMLContent($contents, 'UTF-8');
 
         $items = $crawler->filter('div[style="padding: 0 7px;"] table[width="100%"]');
+
+        //Bypass Undefined variable error.
         $staff = null;
+        $characters = null;
 
         foreach ($items as $item) {
             //Bypass to determine if the last table contains the staff members
