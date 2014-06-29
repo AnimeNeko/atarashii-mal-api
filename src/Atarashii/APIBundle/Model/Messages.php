@@ -13,8 +13,8 @@ namespace Atarashii\APIBundle\Model;
 class Messages
 {
     private $id; //The message ID used to send messages.
-    private $action_id; //The action ID (used to perform actions like delete).
-    private $thread_id; //The tread ID (used to view/send replies).
+    private $actionId; //The action ID (used to perform actions like delete).
+    private $threadId; //The tread ID (used to view/send replies).
     private $username; //username who send the message.
     private $time; //The time when we received the message.
     private $read; //The read status (true if you saw the message).
@@ -46,47 +46,47 @@ class Messages
     }
 
     /**
-     * Set the action_id property
+     * Set the actionId property
      *
-     * @param int $action_id The action ID of messages.
+     * @param int $actionId The action ID of messages.
      *
      * @return void
      */
-    public function setActionId($action_id)
+    public function setActionId($actionId)
     {
-        $this->action_id = $action_id;
+        $this->actionId = $actionId;
     }
 
     /**
-     * Get the action_id property.
+     * Get the actionId property.
      *
      * @return int
      */
     public function getActionId()
     {
-       return $this->action_id;
+       return $this->actionId;
     }
 
     /**
-     * Set the thread_id property
+     * Set the threadId property
      *
-     * @param int $thread_id The thread ID of messages.
+     * @param int $threadId The thread ID of messages.
      *
      * @return void
      */
-    public function setThreadId($thread_id)
+    public function setThreadId($threadId)
     {
-        $this->thread_id = $thread_id;
+        $this->threadId = $threadId;
     }
 
     /**
-     * Get the thread_id property.
+     * Get the threadId property.
      *
      * @return int
      */
     public function getThreadId()
     {
-       return $this->thread_id;
+       return $this->threadId;
     }
 
     /**

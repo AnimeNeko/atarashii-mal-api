@@ -18,10 +18,10 @@ class Review
     private $episodes; //number of episodes.
     private $watchedEpisodes; //number of watched episodes
     private $chapters; //number of chapters.
-    private $chapters_read; //Number of chapters already read.
+    private $chaptersRead; //Number of chapters already read.
     private $helpful; //description (board).
     private $helpfultotal; //description (board).
-    private $avatar_url; //the avatar url.
+    private $avatarUrl; //the avatar url.
     private $review; //last reply info (topic).
 
     /**
@@ -157,25 +157,25 @@ class Review
     }
 
     /**
-     * Set the chapters_read property
+     * Set the chaptersRead property
      *
-     * @param string chapters_read The number of read chapters.
+     * @param string chaptersRead The number of read chapters.
      *
      * @return void
      */
-    public function setChaptersRead($chapters_read)
+    public function setChaptersRead($chaptersRead)
     {
-        $this->chapters_read = (int) $chapters_read;
+        $this->chaptersRead = (int) $chaptersRead;
     }
 
     /**
-     * Get the chapters_read property
+     * Get the chaptersRead property
      *
      * @return int
      */
     public function getChaptersRead()
     {
-        return $this->chapters_read;
+        return $this->chaptersRead;
     }
 
     /**
@@ -247,23 +247,23 @@ class Review
     /**
      * Set the review property
      *
-     * @param string $avatar_url The user avatar.
+     * @param string $avatarUrl The user avatar.
      *
      * @return void
      */
-    public function setAvatarUrl($avatar_url)
+    public function setAvatarUrl($avatarUrl)
     {
-        $this->avatar_url = $avatar_url;
+        $this->avatarUrl = $avatarUrl;
     }
 
     /**
-     * Get the avatar_url property.
+     * Get the avatarUrl property.
      *
      * @return string
      */
     public function getAvatarUrl()
     {
-        return $this->avatar_url;
+        return $this->avatarUrl;
     }
 
 }

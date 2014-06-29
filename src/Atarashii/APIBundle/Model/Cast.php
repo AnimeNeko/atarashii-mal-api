@@ -16,9 +16,9 @@ class Cast
     private $role; //The anime role.
     private $image; //The image of the character or staff member.
     private $rank; //The staff member rank.
-    private $actor_name; //The actor name
-    private $actor_image; //The image of the voice actor.
-    private $actor_language; //The language of the voice actor.
+    private $actorName; //The actor name
+    private $actorImage; //The image of the voice actor.
+    private $actorLanguage; //The language of the voice actor.
 
     /**
      * Set the name property
@@ -109,69 +109,69 @@ class Cast
     }
 
     /**
-     * Set the actor_name property
+     * Set the actorName property
      *
-     * @param string $actor_name The name of the voice actor.
+     * @param string $actorName The name of the voice actor.
      *
      * @return void
      */
-    public function setActorName($actor_name)
+    public function setActorName($actorName)
     {
-        $this->actor_name = $actor_name;
+        $this->actorName = $actorName;
     }
 
     /**
-     * Get the actor_name property
+     * Get the actorName property
      *
      * @return string
      */
     public function getActorName()
     {
-        return $this->actor_name;
+        return $this->actorName;
     }
 
     /**
-     * Set the actor_image property
+     * Set the actorImage property
      *
-     * @param string $actor_image The image of the voice actor.
+     * @param string $actorImage The image of the voice actor.
      *
      * @return void
      */
-    public function setActorImage($actor_image)
+    public function setActorImage($actorImage)
     {
-        $this->actor_image = $actor_image;
+        $this->actorImage = $actorImage;
     }
 
     /**
-     * Get the actor_image property
+     * Get the actorImage property
      *
      * @return string
      */
     public function getActorImage()
     {
-        return $this->actor_image;
+        return $this->actorImage;
     }
 
     /**
-     * Set the Actor_language property
+     * Set the actorLanguage property
      *
-     * @param string $actor_language The language of the voice actor.
+     * @param string $actorLanguage The language of the voice actor.
      *
      * @return void
      */
-    public function setActorLanguage($actor_language)
+    public function setActorLanguage($actorLanguage)
     {
-        $this->actor_language = $actor_language;
+        $this->actorLanguage = $actorLanguage;
     }
 
     /**
-     * Get the Actor_language property
+     * Get the actorLanguage property
      *
      * @return string
      */
     public function getActorLanguage()
     {
-        return $this->actor_language;
+        return $this->actorLanguage;
     }
 
 }
