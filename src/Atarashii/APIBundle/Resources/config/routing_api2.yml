@@ -228,13 +228,13 @@ _api2_reviews_manga:
     requirements:
         _method: GET
 
-_api2_reviews_anime:
+_api2_cast_anime:
     path: /anime/cast/{id}
     defaults: { _controller: AtarashiiAPIBundle:Anime:getCast, _format: json, apiVersion: '2.0' }
     requirements:
         _method: GET
 
-_api2_reviews_manga:
+_api2_cast_manga:
     path: /manga/cast/{id}
     defaults: { _controller: AtarashiiAPIBundle:Manga:getCast, _format: json, apiVersion: '2.0' }
     requirements:
