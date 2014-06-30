@@ -123,7 +123,7 @@ class Anime
      * The value is null if the date is unknown.
      * Example: "2004-10-07", "2004-10", or "2004".
      *
-     * @SerializedName("start_date")
+     * @SerializedName("startDate")
      * @Type("string")
      * @Since("2.0")
      */
@@ -138,7 +138,7 @@ class Anime
      * The value is null if the date is unknown.
      * Example: "2004-10-07", "2004-10", or "2004".
      *
-     * @SerializedName("end_date")
+     * @SerializedName("endDate")
      * @Type("string")
      * @Since("2.0")
      */
@@ -426,19 +426,19 @@ class Anime
     }
 
     /**
-     * Set the other_titles property
+     * Set the otherTitles property
      *
-     * @param array $other_titles Other titles of series.
+     * @param array $otherTitles Other titles of series.
      *
      * @return void
      */
-    public function setOtherTitles($other_titles)
+    public function setOtherTitles($otherTitles)
     {
-        $this->otherTitles = $other_titles;
+        $this->otherTitles = $otherTitles;
     }
 
     /**
-     * Get the other_titles property
+     * Get the otherTitles property
      *
      * @return array
      */
@@ -470,19 +470,19 @@ class Anime
     }
 
     /**
-     * Set the popularity_rank property
+     * Set the popularityRank property
      *
-     * @param int $popularity_rank The Popularity Rank of series.
+     * @param int $popularityRank The Popularity Rank of series.
      *
      * @return void
      */
-    public function setPopularityRank($popularity_rank)
+    public function setPopularityRank($popularityRank)
     {
-        $this->popularityRank = $popularity_rank;
+        $this->popularityRank = $popularityRank;
     }
 
     /**
-     * Get the popularity_rank property
+     * Get the popularityRank property
      *
      * @return int
      */
@@ -492,19 +492,19 @@ class Anime
     }
 
     /**
-     * Set the image_url property
+     * Set the imageUrl property
      *
-     * @param string $image_url The Image url of series.
+     * @param string $imageUrl The Image url of series.
      *
      * @return void
      */
-    public function setImageUrl($image_url)
+    public function setImageUrl($imageUrl)
     {
-        $this->imageUrl = $image_url;
+        $this->imageUrl = $imageUrl;
     }
 
     /**
-     * Get the image_url property
+     * Get the imageUrl property
      *
      * @return string
      */
@@ -786,7 +786,7 @@ class Anime
     }
 
     /**
-     * Get the end_date property
+     * Get the endDate property
      *
      * @return string (ISO 8601)
      */
@@ -818,19 +818,19 @@ class Anime
     }
 
     /**
-     * Set the members_score property
+     * Set the membersScore property
      *
-     * @param float $members_score The score given by MAL members.
+     * @param float $membersScore The score given by MAL members.
      *
      * @return void
      */
-    public function setMembersScore($members_score)
+    public function setMembersScore($membersScore)
     {
-        $this->membersScore = $members_score;
+        $this->membersScore = $membersScore;
     }
 
     /**
-     * Get the members_score property
+     * Get the membersScore property
      *
      * @return float
      */
@@ -840,19 +840,19 @@ class Anime
     }
 
     /**
-     * Set the members_count property
+     * Set the membersCount property
      *
-     * @param int $members_count The number of members that added this serie in their list.
+     * @param int $membersCount The number of members that added this serie in their list.
      *
      * @return void
      */
-    public function setMembersCount($members_count)
+    public function setMembersCount($membersCount)
     {
-        $this->membersCount = $members_count;
+        $this->membersCount = $membersCount;
     }
 
     /**
-     * Get the members_count property
+     * Get the membersCount property
      *
      * @return int
      */
@@ -862,19 +862,19 @@ class Anime
     }
 
     /**
-     * Set the favorited_count property
+     * Set the favoritedCount property
      *
-     * @param int $favorited_count The number of members that added this serie in their favorite list.
+     * @param int $favoritedCount The number of members that added this serie in their favorite list.
      *
      * @return void
      */
-    public function setFavoritedCount($favorited_count)
+    public function setFavoritedCount($favoritedCount)
     {
-        $this->favoritedCount = $favorited_count;
+        $this->favoritedCount = $favoritedCount;
     }
 
     /**
-     * Get the favorited_count property
+     * Get the favoritedCount property
      *
      * @return int
      */
@@ -950,19 +950,19 @@ class Anime
     }
 
     /**
-     * Set the manga_adaptations property
+     * Set the mangaAdaptations property
      *
-     * @param string $manga_adaptations The manga adaptations of series.
+     * @param string $mangaAdaptations The manga adaptations of series.
      *
      * @return void
      */
-    public function setMangaAdaptations($manga_adaptations)
+    public function setMangaAdaptations($mangaAdaptations)
     {
-        $this->mangaAdaptations[] = $manga_adaptations;
+        $this->mangaAdaptations[] = $mangaAdaptations;
     }
 
     /**
-     * Get the manga_adaptations property
+     * Get the mangaAdaptations property
      *
      * @return array
      */
@@ -1016,19 +1016,19 @@ class Anime
     }
 
     /**
-     * Set the side_stories property
+     * Set the sideStories property
      *
-     * @param string $side_stories The side stories of series.
+     * @param string $sideStories The side stories of series.
      *
      * @return void
      */
-    public function setSideStories($side_stories)
+    public function setSideStories($sideStories)
     {
-        $this->sideStories[] = $side_stories;
+        $this->sideStories[] = $sideStories;
     }
 
     /**
-     * Get the side_stories property
+     * Get the sideStories property
      *
      * @return array
      */
@@ -1038,19 +1038,19 @@ class Anime
     }
 
     /**
-     * Set the parent_story property
+     * Set the parentStory property
      *
-     * @param string $parent_story The parent stories of series.
+     * @param string $parentStory The parent stories of series.
      *
      * @return void
      */
-    public function setParentStory($parent_story)
+    public function setParentStory($parentStory)
     {
-        $this->parentStory = $parent_story;
+        $this->parentStory = $parentStory;
     }
 
     /**
-     * Get the parent_story property
+     * Get the parentStory property
      *
      * @return string
      */
@@ -1059,13 +1059,13 @@ class Anime
         return $this->parentStory;
     }
 
-    public function setCharacterAnime($character_anime)
+    public function setCharacterAnime($characterAnime)
     {
-        $this->characterAnime[] = $character_anime;
+        $this->characterAnime[] = $characterAnime;
     }
 
     /**
-     * Get the character_anime property
+     * Get the characterAnime property
      *
      * @return array
      */
@@ -1075,19 +1075,19 @@ class Anime
     }
 
     /**
-     * Set the spin_offs property
+     * Set the spinOffs property
      *
-     * @param string $spin_offs The spin offs of series.
+     * @param string $spinOffs The spin offs of series.
      *
      * @return void
      */
-    public function setSpinOffs($spin_offs)
+    public function setSpinOffs($spinOffs)
     {
-        $this->spinOffs[] = $spin_offs;
+        $this->spinOffs[] = $spinOffs;
     }
 
     /**
-     * Get the spin_offs property
+     * Get the spinOffs property
      *
      * @return array
      */
@@ -1119,19 +1119,19 @@ class Anime
     }
 
     /**
-     * Set the alternative_versions property
+     * Set the alternativeVersions property
      *
-     * @param string $alternative_versions The alternative versions of series.
+     * @param string $alternativeVersions The alternative versions of series.
      *
      * @return void
      */
-    public function setAlternativeVersions($alternative_versions)
+    public function setAlternativeVersions($alternativeVersions)
     {
-        $this->alternativeVersions[] = $alternative_versions;
+        $this->alternativeVersions[] = $alternativeVersions;
     }
 
     /**
-     * Get the alternative_versions property
+     * Get the alternativeVersions property
      *
      * @return array
      */
@@ -1141,7 +1141,7 @@ class Anime
     }
 
     /**
-     * Set the watched_status property
+     * Set the watchedStatus property
      *
      * @param string|int $status The input status value of an item.
      *                           Accepts either integers as defined by the MAL API module, or strings as defined by the Ruby API (mal-api.com).
@@ -1217,19 +1217,19 @@ class Anime
     }
 
     /**
-     * Set the watched_episodes property
+     * Set the watchedEpisodes property
      *
-     * @param string $watched_episodes The number of watched episodes.
+     * @param string $watchedEpisodes The number of watched episodes.
      *
      * @return void
      */
-    public function setWatchedEpisodes($watched_episodes)
+    public function setWatchedEpisodes($watchedEpisodes)
     {
-        $this->watchedEpisodes = $watched_episodes;
+        $this->watchedEpisodes = $watchedEpisodes;
     }
 
     /**
-     * Get the watched_episodes property
+     * Get the watchedEpisodes property
      *
      * @return int
      */
@@ -1261,19 +1261,19 @@ class Anime
     }
 
     /**
-     * Set the listed_anime_id property
+     * Set the listedAnimeId property
      *
-     * @param int $listed_anime_id For internal use.
+     * @param int $listedAnimeId For internal use.
      *
      * @return void
      */
-    public function setListedAnimeId($listed_anime_id)
+    public function setListedAnimeId($listedAnimeId)
     {
-        $this->listedAnimeId = $listed_anime_id;
+        $this->listedAnimeId = $listedAnimeId;
     }
 
     /**
-     * Get the listed_anime_id property
+     * Get the listedAnimeId property
      *
      * @return int
      */

@@ -20,7 +20,7 @@ class Profile
     *
     * @var string
     */
-    private $avatar_url;
+    private $avatarUrl;
 
     /**
     * A ProfileDetails object containing general information on the user
@@ -55,25 +55,25 @@ class Profile
     }
 
     /**
-     * Set the avatar_url property
+     * Set the avatarUrl property
      *
-     * @param string $avatar_url The avatar url of an user.
+     * @param string $avatarUrl The avatar url of an user.
      *
      * @return void
      */
-    public function setAvatarUrl($avatar_url)
+    public function setAvatarUrl($avatarUrl)
     {
-        $this->avatar_url = $avatar_url;
+        $this->avatarUrl = $avatarUrl;
     }
 
     /**
-     * Get the avatar_url property
+     * Get the avatarUrl property
      *
      * @return string
      */
     public function getAvatarUrl()
     {
-       return $this->avatar_url;
+       return $this->avatarUrl;
     }
 
 }
@@ -84,42 +84,42 @@ class Profile
 */
 class ProfileDetails
 {
-    private $last_online;
+    private $lastOnline;
     private $status;
     private $gender;
     private $birthday;
     private $location;
     private $website;
-    private $join_date;
-    private $access_rank;
-    private $anime_list_views = 0;
-    private $manga_list_views = 0;
-    private $forum_posts = 0;
+    private $joinDate;
+    private $accessRank;
+    private $animeListViews = 0;
+    private $mangaListViews = 0;
+    private $forumPosts = 0;
     private $aim;
     private $comments = 0;
     private $msn;
     private $yahoo;
 
     /**
-     * Set the last_online property
+     * Set the lastOnline property
      *
-     * @param string $last_online The last time when an user was online.
+     * @param string $lastOnline The last time when an user was online.
      *
      * @return void
      */
-    public function setLastOnline($last_online)
+    public function setLastOnline($lastOnline)
     {
-        $this->last_online = $last_online;
+        $this->lastOnline = $lastOnline;
     }
 
     /**
-     * Get the last_online property
+     * Get the lastOnline property
      *
      * @return string
      */
     public function getLastOnline()
     {
-       return $this->last_online;
+       return $this->lastOnline;
     }
 
     /**
@@ -233,113 +233,113 @@ class ProfileDetails
     }
 
     /**
-     * Set the join_date property
+     * Set the joinDate property
      *
-     * @param string $join_date The MAL join date of an user.
+     * @param string $joinDate The MAL join date of an user.
      *
      * @return void
      */
-    public function setJoinDate($join_date)
+    public function setJoinDate($joinDate)
     {
-        $this->join_date = $join_date;
+        $this->joinDate = $joinDate;
     }
 
     /**
-     * Get the join_date property
+     * Get the joinDate property
      *
      * @return string
      */
     public function getJoinDate()
     {
-       return $this->join_date;
+       return $this->joinDate;
     }
 
     /**
-     * Set the access_rank property
+     * Set the accessRank property
      *
-     * @param string $access_rank The MAL access rank of an user.
+     * @param string $accessRank The MAL access rank of an user.
      *
      * @return void
      */
-    public function setAccessRank($access_rank)
+    public function setAccessRank($accessRank)
     {
-        $this->access_rank = $access_rank;
+        $this->accessRank = $accessRank;
     }
 
     /**
-     * Get the access_rank property
+     * Get the accessRank property
      *
      * @return string
      */
     public function getAccessRank()
     {
-       return $this->access_rank;
+       return $this->accessRank;
     }
 
     /**
-     * Set the anime_list_views property
+     * Set the animeListViews property
      *
-     * @param int $anime_list_views The animelist views of an user.
+     * @param int $animeListViews The animelist views of an user.
      *
      * @return void
      */
-    public function setAnimeListViews($anime_list_views)
+    public function setAnimeListViews($animeListViews)
     {
-        $this->anime_list_views = $anime_list_views;
+        $this->animeListViews = $animeListViews;
     }
 
     /**
-     * Get the anime_list_views property
+     * Get the animeListViews property
      *
      * @return int
      */
     public function getAnimeListViews()
     {
-       return $this->anime_list_views;
+       return $this->animeListViews;
     }
 
     /**
-     * Set the manga_list_views property
+     * Set the mangaListViews property
      *
-     * @param int $manga_list_views The mangalist views of an user.
+     * @param int $mangaListViews The mangalist views of an user.
      *
      * @return void
      */
-    public function setMangaListViews($manga_list_views)
+    public function setMangaListViews($mangaListViews)
     {
-        $this->manga_list_views = $manga_list_views;
+        $this->mangaListViews = $mangaListViews;
     }
 
     /**
-     * Get the manga_list_views property
+     * Get the mangaListViews property
      *
      * @return int
      */
     public function getMangaListViews()
     {
-       return $this->manga_list_views;
+       return $this->mangaListViews;
     }
 
     /**
-     * Set the forum_posts property
+     * Set the forumPosts property
      *
-     * @param int $forum_posts The number forum posts of an user.
+     * @param int $forumPosts The number forum posts of an user.
      *
      * @return void
      */
-    public function setForumPosts($forum_posts)
+    public function setForumPosts($forumPosts)
     {
-        $this->forum_posts = $forum_posts;
+        $this->forumPosts = $forumPosts;
     }
 
     /**
-     * Get the forum_posts property
+     * Get the forumPosts property
      *
      * @return int
      */
     public function getForumPosts()
     {
-       return $this->forum_posts;
+       return $this->forumPosts;
     }
 
     /**
@@ -437,34 +437,34 @@ class ProfileDetails
 */
 class AnimeStats
 {
-    private $time_days;
+    private $timeDays;
     private $watching;
     private $completed;
-    private $on_hold;
+    private $onHold;
     private $dropped;
-    private $plan_to_watch;
-    private $total_entries;
+    private $planToWatch;
+    private $totalEntries;
 
     /**
-     * Set the time_days property
+     * Set the timeDays property
      *
-     * @param float $time_days The time of days of profiles.
+     * @param float $timeDays The time of days of profiles.
      *
      * @return void
      */
-    public function setTimeDays($time_days)
+    public function setTimeDays($timeDays)
     {
-        $this->time_days = $time_days;
+        $this->timeDays = $timeDays;
     }
 
     /**
-     * Get the time_days property
+     * Get the timeDays property
      *
      * @return float
      */
     public function getTimeDays()
     {
-       return $this->time_days;
+       return $this->timeDays;
     }
 
     /**
@@ -512,25 +512,25 @@ class AnimeStats
     }
 
     /**
-     * Set the on_hold property
+     * Set the onHold property
      *
-     * @param int $on_hold The number of on_hold animes.
+     * @param int $onHold The number of onHold animes.
      *
      * @return void
      */
-    public function setOnHold($on_hold)
+    public function setOnHold($onHold)
     {
-        $this->on_hold = $on_hold;
+        $this->onHold = $onHold;
     }
 
     /**
-     * Get the on_hold property
+     * Get the onHold property
      *
      * @return int
      */
     public function getOnHold()
     {
-       return $this->on_hold;
+       return $this->onHold;
     }
 
     /**
@@ -556,47 +556,47 @@ class AnimeStats
     }
 
     /**
-     * Set the plan_to_Watch property
+     * Set the planToWatch property
      *
      * @param int $id The number of planned to watched animes.
      *
      * @return void
      */
-    public function setPlanToWatch($plan_to_watch)
+    public function setPlanToWatch($planToWatch)
     {
-        $this->plan_to_watch = $plan_to_watch;
+        $this->planToWatch = $planToWatch;
     }
 
     /**
-     * Get the plan_to_Watch property
+     * Get the planToWatch property
      *
      * @return int
      */
     public function getPlanToWatch()
     {
-       return $this->plan_to_watch;
+       return $this->planToWatch;
     }
 
     /**
-     * Set the total_entries property
+     * Set the totalEntries property
      *
-     * @param int $total_entries The total number of series.
+     * @param int $totalEntries The total number of series.
      *
      * @return void
      */
-    public function setTotalEntries($total_entries)
+    public function setTotalEntries($totalEntries)
     {
-        $this->total_entries = $total_entries;
+        $this->totalEntries = $totalEntries;
     }
 
     /**
-     * Get the total_entries property
+     * Get the totalEntries property
      *
      * @return int
      */
     public function getTotalEntries()
     {
-       return $this->total_entries;
+       return $this->totalEntries;
     }
 }
 
@@ -606,34 +606,34 @@ class AnimeStats
 */
 class MangaStats
 {
-    private $time_days;
+    private $timeDays;
     private $reading;
     private $completed;
-    private $on_hold;
+    private $onHold;
     private $dropped;
-    private $plan_to_read;
-    private $total_entries;
+    private $planToRead;
+    private $totalEntries;
 
     /**
-     * Set the time_days property
+     * Set the timeDays property
      *
-     * @param float $time_days The time of days of profiles.
+     * @param float $timeDays The time of days of profiles.
      *
      * @return void
      */
-    public function setTimeDays($time_days)
+    public function setTimeDays($timeDays)
     {
-        $this->time_days = $time_days;
+        $this->timeDays = $timeDays;
     }
 
     /**
-     * Get the time_days property
+     * Get the timeDays property
      *
      * @return float
      */
     public function getTimeDays()
     {
-       return $this->time_days;
+       return $this->timeDays;
     }
 
     /**
@@ -681,25 +681,25 @@ class MangaStats
     }
 
     /**
-     * Set the on_hold property
+     * Set the onHold property
      *
-     * @param int $on_hold The number of on_hold mangas.
+     * @param int $onHold The number of onHold mangas.
      *
      * @return void
      */
-    public function setOnHold($on_hold)
+    public function setOnHold($onHold)
     {
-        $this->on_hold = $on_hold;
+        $this->onHold = $onHold;
     }
 
     /**
-     * Get the on_hold property
+     * Get the onHold property
      *
      * @return int
      */
     public function getOnHold()
     {
-       return $this->on_hold;
+       return $this->onHold;
     }
 
     /**
@@ -725,47 +725,47 @@ class MangaStats
     }
 
     /**
-     * Set the plan_to_read property
+     * Set the planToRead property
      *
      * @param int $id The number of planned to read mangas.
      *
      * @return void
      */
-    public function setPlanToRead($plan_to_read)
+    public function setPlanToRead($planToRead)
     {
-        $this->plan_to_read = $plan_to_read;
+        $this->planToRead = $planToRead;
     }
 
     /**
-     * Get the plan_to_read property
+     * Get the planToRead property
      *
      * @return int
      */
     public function getPlanToRead()
     {
-       return $this->plan_to_read;
+       return $this->planToRead;
     }
 
     /**
-     * Set the total_entries property
+     * Set the totalEntries property
      *
-     * @param int $total_entries The total number of series.
+     * @param int $totalEntries The total number of series.
      *
      * @return void
      */
-    public function setTotalEntries($total_entries)
+    public function setTotalEntries($totalEntries)
     {
-        $this->total_entries = $total_entries;
+        $this->totalEntries = $totalEntries;
     }
 
     /**
-     * Get the total_entries property
+     * Get the totalEntries property
      *
      * @return int
      */
     public function getTotalEntries()
     {
-       return $this->total_entries;
+       return $this->totalEntries;
     }
 
 }

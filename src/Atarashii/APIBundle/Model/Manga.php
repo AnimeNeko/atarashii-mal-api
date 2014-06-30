@@ -14,28 +14,28 @@ class Manga
 {
     private $id; //The manga ID.
     private $title; //The manga title.
-    private $other_titles = array(); //A hash/dictionary containing other titles this manga has.
+    private $otherTitles = array(); //A hash/dictionary containing other titles this manga has.
     private $rank; //Global rank of this manga. Not available in /mangalist requests.
-    private $popularity_rank; //Rank of this manga based on its popularity, i.e. number of users that have added this manga. Not available in /mangalist requests.
-    private $image_url; //URL to an image for this manga.
+    private $popularityRank; //Rank of this manga based on its popularity, i.e. number of users that have added this manga. Not available in /mangalist requests.
+    private $imageUrl; //URL to an image for this manga.
     private $type; //Type of manga. Possible values: Manga, Novel, One Shot, Doujin, Manwha, Manhua, OEL ("OEL manga" refers to "Original English-Language manga").
     private $chapters; //Number of chapters. null is returned if the number of chapters is unknown.
     private $volumes; //Number of volumes. null is returned if the number of volumes is unknown.
     private $status; //Publishing status of this manga. Possible values: finished, publishing, not yet published.
-    private $members_score; //Weighted score members of MyAnimeList have given to this manga. Not available in /mangalist requests.
-    private $members_count; //Number of members who have this manga on their list. Not available in /mangalist requests.
-    private $favorited_count; //Number of members who have this manga marked as one of their favorites. Not available in /mangalist requests.
+    private $membersScore; //Weighted score members of MyAnimeList have given to this manga. Not available in /mangalist requests.
+    private $membersCount; //Number of members who have this manga on their list. Not available in /mangalist requests.
+    private $favoritedCount; //Number of members who have this manga marked as one of their favorites. Not available in /mangalist requests.
     private $synopsis; //Text describing the manga. Not available in /mangalist requests.
     private $genres = array(); //A list of genres for this manga, e.g. ["Comedy", "Slice of Life"]. Not available in /mangalist requests.
     private $tags = array(); //A list of popular tags for this manga, e.g. ["comedy", "slice of life"]. Not available in /mangalist requests.
-    private $anime_adaptations = array(); //A list of anime adaptations of this manga (or conversely, anime from which this manga is adapted). Not available in /mangalist requests.
-    private $related_manga = array(); //A list of related manga.
-    private $alternative_versions = array(); //A list of alternative versions of this manga.
-    private $read_status; //User's read status of the anime. This is a string that is one of: reading, completed, on-hold, dropped, plan to read.
-    private $chapters_read; //Number of chapters already read by the user.
-    private $volumes_read; //Number of volumes already read by the user.
+    private $animeAdaptations = array(); //A list of anime adaptations of this manga (or conversely, anime from which this manga is adapted). Not available in /mangalist requests.
+    private $relatedManga = array(); //A list of related manga.
+    private $alternativeVersions = array(); //A list of alternative versions of this manga.
+    private $readStatus; //User's read status of the anime. This is a string that is one of: reading, completed, on-hold, dropped, plan to read.
+    private $chaptersRead; //Number of chapters already read by the user.
+    private $volumesRead; //Number of volumes already read by the user.
     private $score; //User's score for the manga, from 1 to 10.
-    private $listed_manga_id; //For internal use. This is not listed as a public part of the returned list and it seems to only be used internally in the Ruby API.
+    private $listedMangaId; //For internal use. This is not listed as a public part of the returned list and it seems to only be used internally in the Ruby API.
 
         /**
      * Set the id property
@@ -82,25 +82,25 @@ class Manga
     }
 
     /**
-     * Set the other_titles property
+     * Set the otherTitles property
      *
-     * @param array $other_titles Other titles of series.
+     * @param array $otherTitles Other titles of series.
      *
      * @return void
      */
-    public function setOtherTitles($other_titles)
+    public function setOtherTitles($otherTitles)
     {
-        $this->other_titles = $other_titles;
+        $this->otherTitles = $otherTitles;
     }
 
     /**
-     * Get the other_titles property
+     * Get the otherTitles property
      *
      * @return array
      */
     public function getOtherTitles()
     {
-       return $this->other_titles;
+       return $this->otherTitles;
     }
 
     /**
@@ -126,47 +126,47 @@ class Manga
     }
 
     /**
-     * Set the popularity_rank property
+     * Set the popularityRank property
      *
-     * @param int $popularity_rank The Popularity Rank of series.
+     * @param int $popularityRank The Popularity Rank of series.
      *
      * @return void
      */
-    public function setPopularityRank($popularity_rank)
+    public function setPopularityRank($popularityRank)
     {
-        $this->popularity_rank = $popularity_rank;
+        $this->popularityRank = $popularityRank;
     }
 
     /**
-     * Get the popularity_rank property
+     * Get the popularityRank property
      *
      * @return int
      */
     public function getPopularityRank()
     {
-       return $this->popularity_rank;
+       return $this->popularityRank;
     }
 
     /**
-     * Set the image_url property
+     * Set the imageUrl property
      *
-     * @param string $image_url The Image url of series.
+     * @param string $imageUrl The Image url of series.
      *
      * @return void
      */
-    public function setImageUrl($image_url)
+    public function setImageUrl($imageUrl)
     {
-        $this->image_url = $image_url;
+        $this->imageUrl = $imageUrl;
     }
 
     /**
-     * Get the image_url property
+     * Get the imageUrl property
      *
      * @return string
      */
     public function getImageUrl()
     {
-       return $this->image_url;
+       return $this->imageUrl;
     }
 
     /**
@@ -308,69 +308,69 @@ class Manga
     }
 
     /**
-     * Set the members_score property
+     * Set the membersScore property
      *
-     * @param float $members_score The score given by MAL members.
+     * @param float $membersScore The score given by MAL members.
      *
      * @return void
      */
-    public function setMembersScore($members_score)
+    public function setMembersScore($membersScore)
     {
-        $this->members_score = $members_score;
+        $this->membersScore = $membersScore;
     }
 
     /**
-     * Get the members_score property
+     * Get the membersScore property
      *
      * @return float
      */
     public function getMembersScore()
     {
-        return $this->members_score;
+        return $this->membersScore;
     }
 
     /**
-     * Set the members_count property
+     * Set the membersCount property
      *
-     * @param int $members_count The number of members that added this serie in their list.
+     * @param int $membersCount The number of members that added this serie in their list.
      *
      * @return void
      */
-    public function setMembersCount($members_count)
+    public function setMembersCount($membersCount)
     {
-        $this->members_count = $members_count;
+        $this->membersCount = $membersCount;
     }
 
     /**
-     * Get the members_count property
+     * Get the membersCount property
      *
      * @return int
      */
     public function getMembersCount()
     {
-        return $this->members_count;
+        return $this->membersCount;
     }
 
     /**
-     * Set the favorited_count property
+     * Set the favoritedCount property
      *
-     * @param int $favorited_count The number of members that added this serie in their favorite list.
+     * @param int $favoritedCount The number of members that added this serie in their favorite list.
      *
      * @return void
      */
-    public function setFavoritedCount($favorited_count)
+    public function setFavoritedCount($favoritedCount)
     {
-        $this->favorited_count = $favorited_count;
+        $this->favoritedCount = $favoritedCount;
     }
 
     /**
-     * Get the favorited_count property
+     * Get the favoritedCount property
      *
      * @return int
      */
     public function getFavoritedCount()
     {
-        return $this->favorited_count;
+        return $this->favoritedCount;
     }
 
     /**
@@ -440,73 +440,73 @@ class Manga
     }
 
     /**
-     * Set the anime_adaptations property
+     * Set the animeAdaptations property
      *
-     * @param string $anime_adaptations The anime adaptations of series.
+     * @param string $animeAdaptations The anime adaptations of series.
      *
      * @return void
      */
-    public function setAnimeAdaptations($anime_adaptations)
+    public function setAnimeAdaptations($animeAdaptations)
     {
-        $this->anime_adaptations[] = $anime_adaptations;
+        $this->animeAdaptations[] = $animeAdaptations;
     }
 
     /**
-     * Get the anime_adaptations property
+     * Get the animeAdaptations property
      *
      * @return array
      */
     public function getAnimeAdaptations()
     {
-        return $this->anime_adaptations;
+        return $this->animeAdaptations;
     }
 
     /**
-     * Set the related_manga property
+     * Set the relatedManga property
      *
-     * @param string $related_manga The related mangas of series.
+     * @param string $relatedManga The related mangas of series.
      *
      * @return void
      */
-    public function setRelatedManga($related_manga)
+    public function setRelatedManga($relatedManga)
     {
-        $this->related_manga[] = $related_manga;
+        $this->relatedManga[] = $relatedManga;
     }
 
     /**
-     * Get the related_manga property
+     * Get the relatedManga property
      *
      * @return array
      */
     public function getRelatedManga()
     {
-        return $this->related_manga;
+        return $this->relatedManga;
     }
 
     /**
-     * Set the alternative_versions property
+     * Set the alternativeVersions property
      *
-     * @param string $alternative_versions The alternative versions of series.
+     * @param string $alternativeVersions The alternative versions of series.
      *
      * @return void
      */
-    public function setAlternativeVersions($alternative_versions)
+    public function setAlternativeVersions($alternativeVersions)
     {
-        $this->alternative_versions[] = $alternative_versions;
+        $this->alternativeVersions[] = $alternativeVersions;
     }
 
     /**
-     * Get the alternative_versions property
+     * Get the alternativeVersions property
      *
      * @return array
      */
     public function getAlternativeVersions()
     {
-        return $this->alternative_versions;
+        return $this->alternativeVersions;
     }
 
     /**
-     * Set the read_status propery
+     * Set the readStatus propery
      *
      * @param string|int $status The input status value of an item. Accepts either integers as defined
      *     by the MAL API module, or strings as defined by the Ruby API (mal-api.com).
@@ -518,28 +518,28 @@ class Manga
         switch ($statusid) {
             case 1:
             case 'reading':
-                $this->read_status = 'reading';
+                $this->readStatus = 'reading';
                 break;
             case 2:
             case 'completed':
-                $this->read_status = 'completed';
+                $this->readStatus = 'completed';
                 break;
             case 3:
             case 'on-hold':
             case 'onhold':
-                $this->read_status = 'on-hold';
+                $this->readStatus = 'on-hold';
                 break;
             case 4:
             case 'dropped':
-                $this->read_status = 'dropped';
+                $this->readStatus = 'dropped';
                 break;
             case 6:
             case 'plan to read':
             case 'plantoread':
-                $this->read_status = 'plan to read';
+                $this->readStatus = 'plan to read';
                 break;
             default:
-                $this->read_status = 'reading';
+                $this->readStatus = 'reading';
                 break;
         }
     }
@@ -555,7 +555,7 @@ class Manga
     public function getReadStatus($type = 'string')
     {
         if ($type == 'int') {
-            switch ($this->read_status) {
+            switch ($this->readStatus) {
                 case 'reading':
                     return 1;
                     break;
@@ -576,52 +576,52 @@ class Manga
                     break;
             }
         } else {
-            return $this->read_status;
+            return $this->readStatus;
         }
     }
 
     /**
-     * Set the chapters_read property
+     * Set the chaptersRead property
      *
-     * @param string chapters_read The number of read chapters.
+     * @param string chaptersRead The number of read chapters.
      *
      * @return void
      */
-    public function setChaptersRead($chapters_read)
+    public function setChaptersRead($chaptersRead)
     {
-        $this->chapters_read = $chapters_read;
+        $this->chaptersRead = $chaptersRead;
     }
 
     /**
-     * Get the chapters_read property
+     * Get the chaptersRead property
      *
      * @return int
      */
     public function getChaptersRead()
     {
-        return $this->chapters_read;
+        return $this->chaptersRead;
     }
 
     /**
-     * Set the volumes_read property
+     * Set the volumesRead property
      *
-     * @param string volumes_read The number of read volumes.
+     * @param string volumesRead The number of read volumes.
      *
      * @return void
      */
-    public function setVolumesRead($volumes_read)
+    public function setVolumesRead($volumesRead)
     {
-        $this->volumes_read = $volumes_read;
+        $this->volumesRead = $volumesRead;
     }
 
     /**
-     * Get the volumes_read property
+     * Get the volumesRead property
      *
      * @return int
      */
     public function getVolumesRead()
     {
-        return $this->volumes_read;
+        return $this->volumesRead;
     }
 
     /**
@@ -647,25 +647,25 @@ class Manga
     }
 
     /**
-     * Set the listed_manga_id property
+     * Set the listedMangaId property
      *
-     * @param int $listed_manga_id For internal use.
+     * @param int $listedMangaId For internal use.
      *
      * @return void
      */
-    public function setListedMangaId($listed_manga_id)
+    public function setListedMangaId($listedMangaId)
     {
-        $this->listed_manga_id = $listed_manga_id;
+        $this->listedMangaId = $listedMangaId;
     }
 
     /**
-     * Get the listed_manga_id property
+     * Get the listedMangaId property
      *
      * @return int
      */
     public function getListedMangaId()
     {
-        return $this->listed_manga_id;
+        return $this->listedMangaId;
     }
 
     /**
