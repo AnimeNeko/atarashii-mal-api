@@ -10,32 +10,201 @@
 
 namespace Atarashii\APIBundle\Model;
 
+use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\Since;
+use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\Until;
+
 class Manga
 {
-    private $id; //The manga ID.
-    private $title; //The manga title.
-    private $otherTitles = array(); //A hash/dictionary containing other titles this manga has.
-    private $rank; //Global rank of this manga. Not available in /mangalist requests.
-    private $popularityRank; //Rank of this manga based on its popularity, i.e. number of users that have added this manga. Not available in /mangalist requests.
-    private $imageUrl; //URL to an image for this manga.
-    private $type; //Type of manga. Possible values: Manga, Novel, One Shot, Doujin, Manwha, Manhua, OEL ("OEL manga" refers to "Original English-Language manga").
-    private $chapters; //Number of chapters. null is returned if the number of chapters is unknown.
-    private $volumes; //Number of volumes. null is returned if the number of volumes is unknown.
-    private $status; //Publishing status of this manga. Possible values: finished, publishing, not yet published.
-    private $membersScore; //Weighted score members of MyAnimeList have given to this manga. Not available in /mangalist requests.
-    private $membersCount; //Number of members who have this manga on their list. Not available in /mangalist requests.
-    private $favoritedCount; //Number of members who have this manga marked as one of their favorites. Not available in /mangalist requests.
-    private $synopsis; //Text describing the manga. Not available in /mangalist requests.
-    private $genres = array(); //A list of genres for this manga, e.g. ["Comedy", "Slice of Life"]. Not available in /mangalist requests.
-    private $tags = array(); //A list of popular tags for this manga, e.g. ["comedy", "slice of life"]. Not available in /mangalist requests.
-    private $animeAdaptations = array(); //A list of anime adaptations of this manga (or conversely, anime from which this manga is adapted). Not available in /mangalist requests.
-    private $relatedManga = array(); //A list of related manga.
-    private $alternativeVersions = array(); //A list of alternative versions of this manga.
-    private $readStatus; //User's read status of the anime. This is a string that is one of: reading, completed, on-hold, dropped, plan to read.
-    private $chaptersRead; //Number of chapters already read by the user.
-    private $volumesRead; //Number of volumes already read by the user.
-    private $score; //User's score for the manga, from 1 to 10.
-    private $listedMangaId; //For internal use. This is not listed as a public part of the returned list and it seems to only be used internally in the Ruby API.
+
+    /**
+     * The ID of the manga
+     *
+     * @Type("integer")
+     */
+    private $id;
+
+    /**
+     * Title of the manga
+     *
+     * @Type("string")
+     */
+    private $title;
+
+    /**
+     * Map of other titles for the manga
+     *
+     * @Type("array<string, array<string>>")
+     */
+    private $otherTitles = array();
+
+    /**
+     * The global rank of the manga
+     *
+     * @Type("integer")
+     */
+    private $rank;
+
+    /**
+     * Global rank of the manga based on popularity (number of people with the title on the list)
+     *
+     * @Type("integer")
+     */
+    private $popularityRank;
+
+    /**
+     * URL of tan image to the manga
+     *
+     * @Type("string")
+     */
+    private $imageUrl;
+
+    /**
+     * Type of manga
+     *
+     * Defined string from the type of manga. Value will be one of Manga, Novel, One Shot, Doujin, Manwha, Manhua, OEL ("OEL manga" refers to "Original English-Language manga")
+     *
+     * @Type("string")
+     */
+    private $type;
+
+    /**
+     * Total number of chapters of the manga.
+     *
+     * This value is the number of chapters of the anime, or null if unknown.
+     *
+     * @Type("integer")
+     */
+    private $chapters;
+
+    /**
+     * Total number of volumes of the manga.
+     *
+     * This value is the number of volumes of the manga, or null if unknown.
+     *
+     * @Type("integer")
+     */
+    private $volumes;
+
+    /**
+     * Publishing status of the manga
+     *
+     * Defines string of the status of the manga. Value will be one of finished, publishing, not yet published.
+     *
+     * @Type("string")
+     */
+    private $status;
+
+    /**
+     * Weighted score of the manga
+     *
+     * The score is calculated based on the ratings given by members.
+     *
+     * @Type("double")
+     */
+    private $membersScore;
+
+    /**
+     * The number of members that have the manga on the list
+     *
+     * @Type("integer")
+     */
+    private $membersCount;
+
+    /**
+     * The number of members that have the manga marked as a favorite
+     *
+     * @Type("integer")
+     */
+    private $favoritedCount;
+
+    /**
+     * Description of the manga
+     *
+     * An HTML-formatted string describing the anime
+     *
+     * @Type("string")
+     */
+    private $synopsis;
+
+    /**
+     * A list of genres for the manga
+     *
+     * @Type("array<string>")
+     */
+    private $genres = array();
+
+    /**
+     * A list of popular tags for the manga
+     *
+     * @Type("array<string>")
+     */
+    private $tags = array();
+
+    /**
+     * A list of anime adaptations of this manga (or conversely, anime from which this manga is adapted)
+     *
+     * @Type("array")
+     */
+    private $animeAdaptations = array();
+
+    /**
+     * A list of related manga
+     *
+     * @Type("array")
+     */
+    private $relatedManga = array();
+
+    /**
+     * A list of alternative versions of this manga
+     *
+     * @Type("array")
+     */
+    private $alternativeVersions = array();
+
+    /**
+     * User's read status of the manga
+     *
+     * This is a string that is one of: reading, completed, on-hold, dropped, plan to read
+     *
+     * @Type("string")
+     */
+    private $readStatus;
+
+    /**
+     * Number of chapters already read by the user
+     *
+     * @Type("integer")
+     */
+    private $chaptersRead;
+
+    /**
+     * Number of volumes already read by the user.
+     *
+     * @Type("integer")
+     */
+    private $volumesRead;
+
+    /**
+     * User's score for the manga, from 1 to 10
+     *
+     * @Type("integer")
+     */
+    private $score;
+
+    /**
+     * ID of the manga as per the user's list
+     *
+     * API 1.0
+     * This used to correspond to a unique ID for the title on the user's list, but is no longer used.
+     *
+     * @TODO: Why won't this disappear with 2.0?
+     *
+     * @Type("integer")
+     * @Until("1.1")
+     */
+    private $listedMangaId;
 
         /**
      * Set the id property

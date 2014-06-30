@@ -10,19 +10,100 @@
 
 namespace Atarashii\APIBundle\Model;
 
+use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\Since;
+use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\Until;
+
 class Review
 {
-    private $date; //The creation date.
-    private $rating; //The anime rating.
-    private $username; //The username who created this topic.
-    private $episodes; //number of episodes.
-    private $watchedEpisodes; //number of watched episodes
-    private $chapters; //number of chapters.
-    private $chaptersRead; //Number of chapters already read.
-    private $helpful; //description (board).
-    private $helpfultotal; //description (board).
-    private $avatarUrl; //the avatar url.
-    private $review; //last reply info (topic).
+    /**
+     * The creation date of the review
+     *
+     * @Type("string")
+     * @Since("2.0")
+     */
+    private $date;
+
+    /**
+     * The rating given by the user
+     *
+     * @Type("integer")
+     * @Since("2.0")
+     */
+    private $rating;
+
+    /**
+     * The username of the review creator
+     *
+     * @Type("string")
+     * @Since("2.0")
+     */
+    private $username;
+
+    /**
+     * The the number of the max episodes
+     *
+     * @Type("integer")
+     * @Since("2.0")
+     */
+    private $episodes;
+
+    /**
+     * The the number of watched episodes of the review creator
+     *
+     * @Type("integer")
+     * @Since("2.0")
+     */
+    private $watchedEpisodes;
+
+    /**
+     * The the number of the max chapters
+     *
+     * @Type("integer")
+     * @Since("2.0")
+     */
+    private $chapters;
+
+    /**
+     * The the number of read chapters of the review creator
+     *
+     * @Type("integer")
+     * @Since("2.0")
+     */
+    private $chaptersRead;
+
+    /**
+     * The number of users who marked this review helpful
+     *
+     * @Type("integer")
+     * @Since("2.0")
+     */
+    private $helpful;
+
+    /**
+     * The number of users who voted for helpful & not helpful
+     *
+     * @Type("integer")
+     * @Since("2.0")
+     */
+    private $helpfulTotal;
+
+    /**
+     * The avatar URL of the review creator
+     *
+     * @Type("string")
+     * @Since("2.0")
+     */
+    private $avatarUrl;
+
+    /**
+     * The review content
+     *
+     * @Type("string")
+     * @Since("2.0")
+     */
+    private $review;
 
     /**
      * Set the date property
@@ -201,25 +282,25 @@ class Review
     }
 
     /**
-     * Set the helpfultotal property
+     * Set the helpfulTotal property
      *
-     * @param int $helpfultotal Number of helpful & not helpful
+     * @param int $helpfulTotal Number of helpful & not helpful
      *
      * @return void
      */
-    public function setHelpfulTotal($helpfultotal)
+    public function setHelpfulTotal($helpfulTotal)
     {
-        $this->helpfultotal = (int) $helpfultotal;
+        $this->helpfulTotal = (int) $helpfulTotal;
     }
 
     /**
-     * Get the helpfultotal property.
+     * Get the helpfulTotal property.
      *
      * @return int
      */
     public function getHelpfulTotal()
     {
-       return $this->helpfultotal;
+       return $this->helpfulTotal;
     }
 
     /**
