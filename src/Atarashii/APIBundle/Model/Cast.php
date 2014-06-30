@@ -10,14 +10,67 @@
 
 namespace Atarashii\APIBundle\Model;
 
+use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\Since;
+use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\Until;
+
 class Cast
 {
-    private $name; //The creation name or The staff member name.
-    private $role; //The anime role.
-    private $image; //The image of the character or staff member.
-    private $rank; //The staff member rank.
-    private $actorName; //The actor name
-    private $actorImage; //The image of the voice actor.
+    /**
+     * The name of character|staff member
+     *
+     * @Type("string")
+     * @Since("2.0")
+     */
+    private $name;
+
+    /**
+     * The character role of the story
+     *
+     * @Type("string")
+     * @Since("2.0")
+     */
+    private $role;
+
+    /**
+     * The character|staff member image URL
+     *
+     * @Type("string")
+     * @Since("2.0")
+     */
+    private $image;
+
+    /**
+     * The staff member rank|influence inside the team
+     *
+     * @Type("string")
+     * @Since("2.0")
+     */
+    private $rank;
+
+    /**
+     * The voice actor name
+     *
+     * @Type("string")
+     * @Since("2.0")
+     */
+    private $actorName;
+
+    /**
+     * The voice actor image URL
+     *
+     * @Type("string")
+     * @Since("2.0")
+     */
+    private $actorImage;
+
+    /**
+     * The language of the voice actor
+     *
+     * @Type("string")
+     * @Since("2.0")
+     */
     private $actorLanguage; //The language of the voice actor.
 
     /**

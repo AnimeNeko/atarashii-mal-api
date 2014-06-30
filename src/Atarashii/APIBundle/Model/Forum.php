@@ -10,17 +10,83 @@
 
 namespace Atarashii\APIBundle\Model;
 
+use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\Since;
+use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\Until;
+
 class Forum
 {
-    private $id; //The ID used to get topic/board.
-    private $name; //The forum board/topic name.
-    private $username; //The username who created this topic.
-    private $replies; //number of replies (topic).
-    private $description; //description (board).
-    private $reply; //last reply info (topic).
-    private $children; //The children when we received the message (board).
-    private $comment; //Comment used in topic.
-    public $profile; //Userprofile used in topic.
+    /**
+     * The ID used to get topic|board
+     *
+     * @Since("2.0")
+     */
+    private $id;
+
+    /**
+     * The forum board|topic name.
+     *
+     * @Type("string")
+     * @Since("2.0")
+     */
+    private $name;
+
+    /**
+     * The username of the topic creator
+     *
+     * @Type("string")
+     * @Since("2.0")
+     */
+    private $username;
+
+    /**
+     * The number of replies of a topic
+     *
+     * @Type("integer")
+     * @Since("2.0")
+     */
+    private $replies;
+
+    /**
+     * The description of a board
+     *
+     * @Type("string")
+     * @Since("2.0")
+     */
+    private $description;
+
+    /**
+     * The info of the last reply inside a topic
+     *
+     * @Type("array")
+     * @Since("2.0")
+     */
+    private $reply;
+
+    /**
+     * The children of a forumboard
+     *
+     * @Type("array")
+     * @Since("2.0")
+     */
+    private $children;
+
+    /**
+     * The comment content in an post
+     *
+     * @Type("string")
+     * @Since("2.0")
+     */
+    private $comment;
+
+    /**
+     * The userprofile for the user details in topics
+     *
+     * @Type("array")
+     * @Since("2.0")
+     */
+    public $profile;
 
     /**
      * Set the id property

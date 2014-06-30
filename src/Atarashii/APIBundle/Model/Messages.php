@@ -10,18 +10,84 @@
 
 namespace Atarashii\APIBundle\Model;
 
+use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\Since;
+use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\Until;
+
 class Messages
 {
-    private $id; //The message ID used to send messages.
-    private $actionId; //The action ID (used to perform actions like delete).
-    private $threadId; //The tread ID (used to view/send replies).
-    private $username; //username who send the message.
-    private $time; //The time when we received the message.
-    private $read; //The read status (true if you saw the message).
-    private $subject; //The subject of a message.
-    private $message; //The message.
-    private $preview; //The preview message.
+    /**
+     * The message ID used to send messages
+     *
+     * @Type("integer")
+     * @Since("2.0")
+     */
+    private $id;
 
+    /**
+     * /The action ID used to perform actions like delete
+     *
+     * @Type("integer")
+     * @Since("2.0")
+     */
+    private $actionId;
+
+    /**
+     * The tread ID used to view|send replies
+     *
+     * @Type("integer")
+     * @Since("2.0")
+     */
+    private $threadId;
+
+    /**
+     * The username of the sender
+     *
+     * @Type("string")
+     * @Since("2.0")
+     */
+    private $username;
+
+    /**
+     * The time when the message was send
+     *
+     * @Type("string")
+     * @Since("2.0")
+     */
+    private $time;
+
+    /**
+     * The read status used to determine if you have read the content
+     *
+     * @Type("boolean")
+     * @Since("2.0")
+     */
+    private $read;
+
+    /**
+     * The subject of the received message
+     *
+     * @Type("string")
+     * @Since("2.0")
+     */
+    private $subject;
+
+    /**
+     * The message content
+     *
+     * @Type("string")
+     * @Since("2.0")
+     */
+    private $message;
+
+    /**
+     * The preview of a message
+     *
+     * @Type("string")
+     * @Since("2.0")
+     */
+    private $preview;
 
     /**
      * Set the id property
