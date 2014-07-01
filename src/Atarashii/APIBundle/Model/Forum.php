@@ -81,6 +81,14 @@ class Forum
     private $comment;
 
     /**
+     * The creation time of this post
+     *
+     * @Type("string")
+     * @Since("2.0")
+     */
+    private $time;
+
+    /**
      * The userprofile for the user details in topics
      *
      * @Type("array")
@@ -261,7 +269,29 @@ class Forum
      */
     public function getComment()
     {
-       return $this->comment;
+        return $this->comment;
+    }
+
+    /**
+     * Set the time property
+     *
+     * @param string $time The creation time of the reply.
+     *
+     * @return void
+     */
+    public function setTime($time)
+    {
+        $this->time = $time;
+    }
+
+    /**
+     * Get the time property.
+     *
+     * @return string
+     */
+    public function getTime()
+    {
+        return $this->time;
     }
 
 }

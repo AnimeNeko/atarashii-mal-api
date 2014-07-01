@@ -12,6 +12,7 @@ namespace Atarashii\APIBundle\Parser;
 
 use Symfony\Component\DomCrawler\Crawler;
 use Atarashii\APIBundle\Model\Review;
+use \DateTime;
 
 class ReviewParser
 {
@@ -57,6 +58,10 @@ class ReviewParser
                 $review->setChapters($episodes[2]);
             }
             $review->setChaptersRead($episodes[0]);
+        }
+
+        if (strlen($review->getDate()) == 12) {
+            $review->setDate(DateTime::createFromFormat('M j, Y', $review->getDate())->format(DateTime::ISO8601));
         }
 
         return $review;

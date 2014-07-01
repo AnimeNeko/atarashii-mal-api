@@ -14,6 +14,7 @@ use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\Since;
 use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Annotation\Until;
+use \DateTime;
 
 class Messages
 {
@@ -180,13 +181,13 @@ class Messages
     /**
      * Set the time property
      *
-     * @param string $time The time of messages.
+     * @param DateTime $time The time of messages.
      *
      * @return void
      */
     public function setTime($time)
     {
-        $this->time = $time;
+        $this->time = $time->format(DateTime::ISO8601);
     }
 
     /**
