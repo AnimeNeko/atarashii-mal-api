@@ -12,7 +12,7 @@
         <p class="alert alert-info">Not all properties are provided depending on the type of request made.</p>
 
         <ul>
-            <li><code>id</code>: The ID of the anime, as assigned by MyAnimeList</dd>
+            <li><code>id</code>: The ID of the anime, as assigned by MyAnimeList</li>
             <li><code>title</code>: The title of the item</li>
             <li><code>other_titles</code>
                 <ul>
@@ -110,7 +110,7 @@
         <p class="alert alert-info">Not all properties are provided depending on the type of request made.</p>
 
         <ul>
-            <li><code>id</code>: The ID of the manga, as assigned by MyAnimeList</dd>
+            <li><code>id</code>: The ID of the manga, as assigned by MyAnimeList</li>
             <li><code>title</code>: The title of the item</li>
             <li><code>other_titles</code>
                 <ul>
@@ -250,18 +250,19 @@
         <p class="alert alert-info">Not all properties are provided depending on the type of request made.</p>
 
         <ul>
-            <li><code>id</code>: The username of the friend</li>
+            <li><code>id</code>: The username of the friend.</li>
             <li><code>name</code>: The topic or board.</li>
             <li><code>username</code>: The username of the user that created a topic.</li>
             <li><code>replies</code>: The number of replies.</li>
-            <li><code>description</code>: The description of boards</li>
+            <li><code>description</code>: The description of boards.</li>
             <li><code>reply</code>: The info about the latest post.</li>
                 <ul>
                     <li><code>username</code>: The user that added the latest comment.</li>
-                    <li><code>time</code>: The time that the latest comment has been created.</li>
+                    <li><code>time</code>: The time that the latest comment has been created. This may be either a relative time (&quot;1 hour ago&quot;, &quot;now&quot;) or a date formatted as &quot;m-d-y, g:i A&quot;<sup><a href="#foot1">1</a></sup></li>
                 </ul>
-            <li><code>children</code>: The username of the friend</li>
-            <li><code>comment</code>: The username of the friend</li>
+            <li><code>children</code>: The username of the friend.</li>
+            <li><code>comment</code>: The username of the friend.</li>
+            <li><code>time</code>: The time that a post has been placed. This may be either a relative time (&quot;1 hour ago&quot;, &quot;now&quot;) or a date formatted as &quot;m-d-y, g:i A&quot;<sup><a href="#foot1">1</a></sup></li>
             <li><code>profile</code>: A <a href="#user">user details</a> object.</li>
         </ul>
 
@@ -271,15 +272,63 @@
         <p class="alert alert-info">Not all properties are provided depending on the type of request made.</p>
 
         <ul>
-            <li><code>id</code>: The id of the message</li>
+            <li><code>id</code>: The id of the message.</li>
             <li><code>action_id</code>: The id of the message used for deleting it.</li>
             <li><code>thread_id</code>: The id of the message used for the chat history.</li>
             <li><code>username</code>: The username of an user.</li>
-            <li><code>time</code>: The time when the message was send</li>
-            <li><code>read</code>: The read status.</li>
-            <li><code>subject</code>: The subject of the message</li>
+            <li><code>time</code>: The time when the message was send.  This may be either a relative time (&quot;1 hour ago&quot;, &quot;now&quot;) or a date formatted as &quot;m-d-y, g:i A&quot;<sup><a href="#foot1">1</a></sup></li>
+            <li><code>read</code>: The read status. This will be returned as true when the user already read this message.</li>
+            <li><code>subject</code>: The subject of the message.</li>
             <li><code>message</code>: The message.</li>
             <li><code>preview</code>: The preview of a message.</li>
+        </ul>
+
+
+        <a name="cast"></a><br><br><h2>Cast Details</h2>
+        <p>This is an object that defines a character or staff member. It consists of the following properties.</p>
+        <p class="alert alert-info">Not all properties are provided depending on the type of request made.</p>
+
+        <ul>
+            <li><code>name</code>: The character or staff member name.</li>
+            <li><code>role</code>: The character role in the story.</li>
+            <li><code>image</code>: The character or staff member image URL.</li>
+            <li><code>rank</code>: The staff member influence in the team.</li>
+            <li><code>actor_name</code>: The voice actor name.</li>
+            <li><code>actor_image</code>: The image URL of the voice actor.</li>
+            <li><code>actor_language</code>: The language of the voice actor.</li>
+        </ul>
+
+
+        <a name="review"></a><br><br><h2>Review Details</h2>
+        <p>This is an object that defines a review. It consists of the following properties.</p>
+        <p class="alert alert-info">Not all properties are provided depending on the type of request made.</p>
+
+        <ul>
+            <li><code>date</code>: The creation date of the review. This may be either a relative time (&quot;1 hour ago&quot;, &quot;now&quot;) or a date formatted as &quot;Y-m-d&quot;<sup><a href="#foot1">1</a></sup></li>
+            <li><code>rating</code>: The rating given by the review writer.</li>
+            <li><code>username</code>: The username of the review writer.</li>
+            <li><code>episodes</code>: The number of the max episodes.</li>
+            <li><code>watched_episodes</code>: The number of watched episodes by the review writer.</li>
+            <li><code>chapters</code>: The number of the max chapters.</li>
+            <li><code>chapters_read</code>: The the number of read chapters of the review writer.</li>
+            <li><code>helpful</code>: The number of users who marked this review helpful.</li>
+            <li><code>helpful_total</code>: The number of users who voted for helpful and not helpful.</li>
+            <li><code>avatar_url</code>: The avatar URL of the review writer.</li>
+            <li><code>review</code>: The review content.</li>
+        </ul>
+
+
+        <a name="history"></a><br><br><h2>History Details</h2>
+        <p>This is an object that defines a history item. It consists of the following properties.</p>
+        <p class="alert alert-info">Not all properties are provided depending on the type of request made.</p>
+
+        <ul>
+            <li><code>title</code>: The title of the item.></li>
+            <li><code>episodes</code>: Total number of episodes.</li>
+            <li><code>time_updated</code>: The time when the change was applied.  This may be either a relative time (&quot;1 hour ago&quot;, &quot;now&quot;) or a date formatted as &quot;m-d-y, g:i A&quot;<sup><a href="#foot1">1</a></sup></li>
+            <li><code>type</code>: The type of this item. This will return &quot;anime&quot; or &quot;manga&quot;.</li>
+            <li><code>id</code>: The ID of the item, as assigned by MyAnimeList.</li>
+            <li><code>chapters</code>: Total number of the chapters.</li>
         </ul>
 
 
@@ -316,6 +365,9 @@
                 <li><a href="#friend">Friend Details</a></li>
                 <li><a href="#forum">Forum Details</a></li>
                 <li><a href="#message">Message Details</a></li>
+                <li><a href="#cast">Cast Details</a></li>
+                <li><a href="#review">Review Details</a></li>
+                <li><a href="#history">History Details</a></li>
                 <li><a href="#errors">Errors</a></li>
             </ul>
         </div>

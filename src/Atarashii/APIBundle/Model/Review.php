@@ -50,7 +50,7 @@ class Review
     private $episodes;
 
     /**
-     * The the number of watched episodes of the review creator
+     * The number of watched episodes of the review creator
      *
      * @Type("integer")
      * @Since("2.0")
@@ -58,7 +58,7 @@ class Review
     private $watchedEpisodes;
 
     /**
-     * The the number of the max chapters
+     * The number of the max chapters
      *
      * @Type("integer")
      * @Since("2.0")
@@ -66,7 +66,7 @@ class Review
     private $chapters;
 
     /**
-     * The the number of read chapters of the review creator
+     * The number of read chapters of the review creator
      *
      * @Type("integer")
      * @Since("2.0")

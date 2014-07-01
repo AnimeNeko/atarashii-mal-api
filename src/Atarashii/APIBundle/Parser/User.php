@@ -165,7 +165,6 @@ class User
             if (($crawler->filter('a')->count()) > 0){
 
                 $historyinfo['title'] = $crawler->filter('a')->text();
-                $historyinfo['episodes'] = (int) $crawler->filter('strong')->text();
                 $historyinfo['time_updated'] = substr($crawler->filter('td')->eq(1)->text(), 1);
                 if (strpos($historyinfo['time_updated'], '-') == true) {
                     $historyinfo['time_updated'] = DateTime::createFromFormat('m-d-y, g:i A', $historyinfo['time_updated'])->format(DateTime::ISO8601);
@@ -173,8 +172,10 @@ class User
 
                 if (strpos($crawler->filter('a')->attr('href'), 'anime') == true) {
                     $historyinfo['type'] = 'anime';
+                    $historyinfo['episodes'] = (int) $crawler->filter('strong')->text();
                 } else {
                     $historyinfo['type'] = 'manga';
+                    $historyinfo['chapters'] = (int) $crawler->filter('strong')->text();
                 }
 
                 $historyinfo['id'] = (int) str_replace('/'.$historyinfo['type'].'.php?id=', '', $crawler->filter('a')->attr('href'));

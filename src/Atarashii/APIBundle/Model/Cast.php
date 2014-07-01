@@ -71,7 +71,7 @@ class Cast
      * @Type("string")
      * @Since("2.0")
      */
-    private $actorLanguage; //The language of the voice actor.
+    private $actorLanguage;
 
     /**
      * Set the name property
