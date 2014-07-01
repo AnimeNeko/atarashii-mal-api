@@ -61,7 +61,7 @@ class ReviewParser
         }
 
         if (strlen($review->getDate()) == 12) {
-            $review->setDate(DateTime::createFromFormat('M j, Y', $review->getDate())->format(DateTime::ISO8601));
+            $review->setDate(DateTime::createFromFormat('M j, Y', $review->getDate())->format('Y-m-d'));
         }
 
         return $review;
