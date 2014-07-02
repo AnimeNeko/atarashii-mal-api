@@ -25,6 +25,26 @@
     </dl>
     <p>Gets the details of the title specified by the id number. Output is a <a href="{{ path('_docs_responses') }}#manga">manga object</a>.</p>
 
+    <h3>Cast Details</h3>
+    <dl>
+      <dt>URI Format</dt><dd>manga/cast/<em>id</em></dd>
+      <dt>Method</dt><dd>GET</dd>
+      <dt>Authentication</dt><dd>No</dd>
+    </dl>
+    <p>Gets the list of staff members and characters with the voice actors. Output is an <a href="{{ path('_docs_responses') }}#cast">cast object</a>.</p>
+
+    <h3>Review Details</h3>
+    <dl>
+      <dt>URI Format</dt><dd>manga/reviews/<em>id</em></dd>
+      <dt>Method</dt><dd>GET</dd>
+      <dt>Authentication</dt><dd>No</dd>
+    </dl>
+    <p>Gets the list of reviews. Output is an <a href="{{ path('_docs_responses') }}#review">review object</a>.</p>
+    <p>The following optional parameters are supported:</p>
+    <ul>
+      <li><code>page</code>: The current set of reviews to return. Each set contains at most 20 items. Default value is &quot;1&quot; if not supplied.</li>
+    </ul>
+      
 
     <h2>Methods to Change Information</h2>
 
