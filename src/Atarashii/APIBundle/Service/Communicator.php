@@ -99,13 +99,14 @@ class Communicator
     }
 
     /**
-    * Send a message on MAL
-    *
-    * @param string $subject Subject of the message
-    * @param string $message body of the message
-    *
-    * @return void
-    */
+     * Send a message on MAL
+     *
+     * @param string $url     The parameters of the url
+     * @param string $subject Subject of the message
+     * @param string $message body of the message
+     *
+     * @return string
+     */
     public function sendMessage($url, $subject, $message)
     {
         // create a request
@@ -125,13 +126,14 @@ class Communicator
     }
 
     /**
-    * Create a topic on MAL
-    *
-    * @param string $title Subject of the message
-    * @param string $message body of the message
-    *
-    * @return void
-    */
+     * Create a topic on MAL
+     *
+     * @param int    $id    The board id
+     * @param string $title Subject of the message
+     * @param string $message body of the message
+     *
+     * @return string
+     */
     public function createTopic($id, $title, $message)
     {
         // create a request
@@ -151,12 +153,13 @@ class Communicator
     }
 
     /**
-    * Create a comment inside a topic on MAL
-    *
-    * @param string $message body of the message
-    *
-    * @return void
-    */
+     * Create a comment inside a topic on MAL
+     *
+     * @param int    $id      The topic id
+     * @param string $message The body of the message
+     *
+     * @return string
+     */
     public function createComment($id, $message)
     {
         // create a request
@@ -175,12 +178,13 @@ class Communicator
     }
 
     /**
-    * edith a comment inside a topic on MAL
-    *
-    * @param string $message body of the message
-    *
-    * @return void
-    */
+     * edith a comment inside a topic on MAL
+     *
+     * @param int    $id      The topic id
+     * @param string $message The body of the message
+     *
+     * @return string
+     */
     public function edithComment($id, $message)
     {
         // create a request
