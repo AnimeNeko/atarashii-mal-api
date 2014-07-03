@@ -41,16 +41,13 @@ class MessagesController extends FOSRestController
         $username = $this->getRequest()->server->get('PHP_AUTH_USER');
         $password = $this->getRequest()->server->get('PHP_AUTH_PW');
 
-        //Don't bother making a request if the user didn't send any authentication
-        if ($username == null) {
-            $view = $this->view(Array('error' => 'unauthorized'), 401);
-            $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
-
-            return $view;
-        }
-
         try {
-            $downloader->cookieLogin($username, $password);
+            if (!$downloader->cookieLogin($username, $password)){
+                $view = $this->view(Array('error' => 'unauthorized'), 401);
+                $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
+
+                return $view;
+            }
             $messagesdetails = $downloader->fetch('/mymessages.php?go=&show='.(($page*20)-20));
         } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
@@ -93,16 +90,13 @@ class MessagesController extends FOSRestController
         $username = $this->getRequest()->server->get('PHP_AUTH_USER');
         $password = $this->getRequest()->server->get('PHP_AUTH_PW');
 
-        //Don't bother making a request if the user didn't send any authentication
-        if ($username == null) {
-            $view = $this->view(Array('error' => 'unauthorized'), 401);
-            $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
-
-            return $view;
-        }
-
         try {
-            $downloader->cookieLogin($username, $password);
+            if (!$downloader->cookieLogin($username, $password)){
+                $view = $this->view(Array('error' => 'unauthorized'), 401);
+                $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
+
+                return $view;
+            }
             $messagesdetails = $downloader->fetch('/mymessages.php?go=read&id='.$id);
         } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
@@ -145,16 +139,13 @@ class MessagesController extends FOSRestController
         $username = $this->getRequest()->server->get('PHP_AUTH_USER');
         $password = $this->getRequest()->server->get('PHP_AUTH_PW');
 
-        //Don't bother making a request if the user didn't send any authentication
-        if ($username == null) {
-            $view = $this->view(Array('error' => 'unauthorized'), 401);
-            $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
-
-            return $view;
-        }
-
         try {
-            $downloader->cookieLogin($username, $password);
+            if (!$downloader->cookieLogin($username, $password)){
+                $view = $this->view(Array('error' => 'unauthorized'), 401);
+                $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
+
+                return $view;
+            }
             $messagesdetails = $downloader->fetch('http://myanimelist.net/mymessages.php?go=delete&id='.$id);
         } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
@@ -196,16 +187,13 @@ class MessagesController extends FOSRestController
         $username = $this->getRequest()->server->get('PHP_AUTH_USER');
         $password = $this->getRequest()->server->get('PHP_AUTH_PW');
 
-        //Don't bother making a request if the user didn't send any authentication
-        if ($username == null) {
-            $view = $this->view(Array('error' => 'unauthorized'), 401);
-            $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
-
-            return $view;
-        }
-
         try {
-            $downloader->cookieLogin($username, $password);
+            if (!$downloader->cookieLogin($username, $password)){
+                $view = $this->view(Array('error' => 'unauthorized'), 401);
+                $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
+
+                return $view;
+            }
             $messagesdetails = $downloader->sendMessage('threadid='.$id.'&toname='.$send_username, $subject , $message);
         } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);

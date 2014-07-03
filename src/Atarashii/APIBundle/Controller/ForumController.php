@@ -178,16 +178,13 @@ class ForumController extends FOSRestController
         $username = $this->getRequest()->server->get('PHP_AUTH_USER');
         $password = $this->getRequest()->server->get('PHP_AUTH_PW');
 
-        //Don't bother making a request if the user didn't send any authentication
-        if ($username == null) {
-            $view = $this->view(Array('error' => 'unauthorized'), 401);
-            $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
-
-            return $view;
-        }
-
         try {
-            $downloader->cookieLogin($username, $password);
+            if (!$downloader->cookieLogin($username, $password)){
+                $view = $this->view(Array('error' => 'unauthorized'), 401);
+                $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
+
+                return $view;
+            }
             $topicdetails = $downloader->createTopic($id, $title , $message);
         } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
@@ -225,16 +222,13 @@ class ForumController extends FOSRestController
         $username = $this->getRequest()->server->get('PHP_AUTH_USER');
         $password = $this->getRequest()->server->get('PHP_AUTH_PW');
 
-        //Don't bother making a request if the user didn't send any authentication
-        if ($username == null) {
-            $view = $this->view(Array('error' => 'unauthorized'), 401);
-            $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
-
-            return $view;
-        }
-
         try {
-            $downloader->cookieLogin($username, $password);
+            if (!$downloader->cookieLogin($username, $password)){
+                $view = $this->view(Array('error' => 'unauthorized'), 401);
+                $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
+
+                return $view;
+            }
             $topicdetails = $downloader->createComment($id, $message);
         } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
@@ -272,16 +266,13 @@ class ForumController extends FOSRestController
         $username = $this->getRequest()->server->get('PHP_AUTH_USER');
         $password = $this->getRequest()->server->get('PHP_AUTH_PW');
 
-        //Don't bother making a request if the user didn't send any authentication
-        if ($username == null) {
-            $view = $this->view(Array('error' => 'unauthorized'), 401);
-            $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
-
-            return $view;
-        }
-
         try {
-            $downloader->cookieLogin($username, $password);
+            if (!$downloader->cookieLogin($username, $password)){
+                $view = $this->view(Array('error' => 'unauthorized'), 401);
+                $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
+
+                return $view;
+            }
             $topicdetails = $downloader->edithComment($id, $message);
         } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);

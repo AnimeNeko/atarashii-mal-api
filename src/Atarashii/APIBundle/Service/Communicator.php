@@ -44,10 +44,15 @@ class Communicator
     * @param string $username MAL Username
     * @param string $password MAL Password
     *
-    * @return void
+    * @return boolean The confirmation of a login.
     */
     public function cookieLogin($username, $password)
     {
+        //Don't bother making a request if the user didn't send any authentication
+        if ($username == null || $password == null) {
+            return false;
+        }
+
         // create a request
         $request = $this->client->post("/login.php");
         $request->setHeader('User-Agent', $this->useragent);
@@ -57,8 +62,14 @@ class Communicator
         $request->setPostField('password', $password);
         $request->setPostField('sublogin', ' Login ');
 
-        // send request
-        $request->send();
+        // send request / get response
+        $this->response = $request->send();
+
+        if (strpos($this->response->getBody(), 'Could not find that username/password') !== false) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
