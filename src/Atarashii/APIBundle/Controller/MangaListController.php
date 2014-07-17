@@ -42,7 +42,7 @@ class MangaListController extends FOSRestController
         }
 
         if (strpos($mangalistcontent, 'Invalid username') !== false) {
-            $mangalist = 'Failed to find the specified user, please try again.';
+            return $this->view(Array('error' => 'Failed to find the specified user, please try again.'), 200);
         } else {
             $mangalistxml = new SimpleXMLElement($mangalistcontent);
             $mlist = array();
