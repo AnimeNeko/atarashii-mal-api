@@ -17,6 +17,7 @@ use Guzzle\Http\Exception;
 use Atarashii\APIBundle\Model\Anime;
 use JMS\Serializer\SerializationContext;
 
+use \DateTime;
 use \SimpleXMLElement;
 
 class AnimeListController extends FOSRestController
@@ -153,10 +154,11 @@ class AnimeListController extends FOSRestController
     *
     * @param Request $request Contains all the needed information to update the title.
     * @param int     $id      ID of the anime.
+    * @param float   $apiVersion The API version for the request
     *
     * @return View
     */
-    public function updateAction(Request $request, $id)
+    public function updateAction(Request $request, $id, $apiVersion)
     {
         // http://myanimelist.net/api/animelist/update/#{id}.xml
 
@@ -173,12 +175,96 @@ class AnimeListController extends FOSRestController
         }
 
         $anime = new Anime();
-        $anime->setId($id);
-        $anime->setWatchedStatus($request->request->get('status'));
-        $anime->setWatchedEpisodes($request->request->get('episodes'));
-        $anime->setScore($request->request->get('score'));
 
-        $xmlcontent = $anime->MALApiXml();
+        $anime->setId($id);
+
+        //Only use values we were sent for the Update XML
+        $update_items = array();
+        try {
+
+            if($request->request->get('status') !== null) {
+                $anime->setWatchedStatus((int) $request->request->get('status'));
+                $update_items[] = 'status';
+            }
+
+            if($request->request->get('episodes') !== null) {
+                $anime->setWatchedEpisodes($request->request->get('episodes'));
+                $update_items[] = 'episodes';
+            }
+
+            if ($request->request->get('score') !== null) {
+                $anime->setScore($request->request->get('score'));
+                $update_items[] = 'score';
+            }
+
+            //API 2 Items
+            if($apiVersion >= 2.0) {
+
+                if ($request->request->get('start') !== null) {
+                    $anime->setWatchingStart(DateTime::createFromFormat('Y-m-d', $request->request->get('start'))); //Needs to be DT!
+                    $update_items[] = 'start';
+                }
+
+                if ($request->request->get('end') !== null) {
+                    $anime->setWatchingEnd(DateTime::createFromFormat('Y-m-d', $request->request->get('end'))); //Needs to be DT!
+                    $update_items[] = 'end';
+                }
+
+                if ($request->request->get('downloaded_eps') !== null) {
+                    $anime->setEpsDownloaded($request->request->get('downloaded_eps')); //Int
+                    $update_items[] = 'downloaded';
+                }
+
+                if ($request->request->get('storage_type') !== null) {
+                    $anime->setStorage($request->request->get('storage_type')); //Int (see getStorage mappings)
+                    $update_items[] = 'storage';
+                }
+
+                if ($request->request->get('storage_amt') !== null) {
+                    $anime->setStorageValue($request->request->get('storage_amt')); //Float, either in number of discs or in GB
+                    $update_items[] = 'storageAmt';
+                }
+
+                if ($request->request->get('priority') !== null) {
+                    $anime->setPriority($request->request->get('priority'));
+                    $update_items[] = 'priority';
+                }
+
+                if ($request->request->get('rewatch_value') !== null) {
+                    $anime->setRewatchValue($request->request->get('rewatch_value')); //Int
+                    $update_items[] = 'rewatchValue';
+                }
+
+                if ($request->request->get('tags') !== null) {
+                    $anime->setPersonalTags($request->request->get('tags')); //Comma-separated string
+                    $update_items[] = 'tags';
+                }
+
+                if ($request->request->get('comments') !== null) {
+                    $anime->setPersonalComments($request->request->get('comments')); //Plain text string. No HTML.
+                    $update_items[] = 'comments';
+                }
+
+                if ($request->request->get('fansubber') !== null) {
+                    $anime->setFansubGroup($request->request->get('fansubber')); //Plain string
+                    $update_items[] = 'fansubber';
+                }
+
+                if ($request->request->get('is_rewatching') !== null) {
+                    $anime->setRewatching($request->request->get('is_rewatching')); //Bool - 0 = no, 1 = yes
+                    $update_items[] = 'isRewatching';
+                }
+
+                if ($request->request->get('rewatch_count') !== null) {
+                    $anime->setRewatchCount($request->request->get('rewatch_count')); //Int
+                    $update_items[] = 'rewatchCount';
+                }
+            }
+        } catch (\Exception $e) {
+            return $this->view(Array('error' => $e->getMessage()), 500);
+        }
+
+        $xmlcontent = $anime->MALApiXml($update_items);
 
         $connection = $this->get('atarashii_api.communicator');
 

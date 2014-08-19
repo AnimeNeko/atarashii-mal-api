@@ -1496,16 +1496,76 @@ class Anime
     /**
      * Return a formatted XML document for updating MAL
      *
+     * @param array $update_items An array listing the items that should be added to the XML
+     *
      * @return string An XML document of anime values as defined at http://myanimelist.net/modules.php?go=api#animevalues
      */
-    public function MALApiXml()
+    public function MALApiXml($update_items)
     {
         //For now, just add in the parameters we will use. The MAL API will handle missing items just fine.
         $xml = new \SimpleXMLElement('<entry/>');
 
-        $xml->addChild('episode', $this->getWatchedEpisodes());
-        $xml->addChild('status', $this->getWatchedStatus('int')); //Use int for the MAL API to eliminate problems with strings.
-        $xml->addChild('score', $this->getScore());
+        if(in_array('episodes', $update_items)) {
+            $xml->addChild('episode', $this->getWatchedEpisodes());
+        }
+
+        if(in_array('status', $update_items)) {
+            $xml->addChild('status', $this->getWatchedStatus('int')); //Use int for the MAL API to eliminate problems with strings.
+        }
+
+        if(in_array('score', $update_items)) {
+            $xml->addChild('score', $this->getScore());
+        }
+
+        if(in_array('downloaded', $update_items)) {
+            $xml->addChild('downloaded_episodes', $this->getEpsDownloaded());
+        }
+
+        if(in_array('storage', $update_items)) {
+            $xml->addChild('storage_type', $this->getStorage('int'));
+        }
+
+        if(in_array('storageAmt', $update_items)) {
+            $xml->addChild('storage_value', $this->getStorageValue());
+        }
+
+        if(in_array('rewatchCount', $update_items)) {
+            $xml->addChild('times_rewatched', $this->getRewatchCount());
+        }
+
+        if(in_array('rewatchValue', $update_items)) {
+            $xml->addChild('rewatch_value', $this->getRewatchValue('int'));
+        }
+
+        if(in_array('start', $update_items)) {
+            // Date must be MMDDYYYY.
+            $xml->addChild('date_start', $this->getWatchingStart()->format('mdY'));
+        }
+
+        if(in_array('end', $update_items)) {
+            // Date must be MMDDYYY.
+            $xml->addChild('date_finish', $this->getWatchingEnd()->format('mdY'));
+        }
+
+        if(in_array('priority', $update_items)) {
+            $xml->addChild('priority', $this->getPriority('int'));
+        }
+
+        if(in_array('isRewatching', $update_items)) {
+            $xml->addChild('enable_rewatching', $this->getRewatching());
+        }
+
+        if(in_array('comments', $update_items)) {
+            $xml->addChild('comments', $this->getPersonalComments());
+        }
+
+        if(in_array('fansubber', $update_items)) {
+            $xml->addChild('fansub_group', $this->getFansubGroup());
+        }
+
+        if(in_array('tags', $update_items)) {
+            $xml->addChild('tags', $this->getPersonalTags());
+        }
 
         return $xml->asXML();
     }
