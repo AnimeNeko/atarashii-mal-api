@@ -1474,7 +1474,7 @@ class Anime
                     break;
             }
         } else {
-            return $this->priority;
+            return $this->rewatchValue;
         }
     }
 
