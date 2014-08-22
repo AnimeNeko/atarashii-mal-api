@@ -23,15 +23,30 @@ class ForumParser
         $crawler->addHTMLContent($contents, 'UTF-8');
 
         $boarditems = $crawler->filter('tr');
+
+        $num = 0;
+        $category = '';
+        $resultset = array();
         foreach ($boarditems as $item) {
-            //Trick to force json array and not json objects.
+            $num++;
             $set = self::parseBoards($item);
-            if ($set != null) {
+
+            // Check if the catogory name($set) returned or the board item($set)
+            if (is_string ($set)) {
+                if ($category != '') {
+                    $result[$category] = $resultset;
+                    $resultset = array(); // clear the $resultset array
+                }
+                $category = $set;
+            } else {
                 $resultset[] = $set;
+                if ($num == $crawler->filter('tr')->count()) {
+                    $result[$category] = $resultset; // add the last category with the boarditems
+                }
             }
         }
 
-        return $resultset;
+        return $result;
     }
 
     private static function parseBoards($item)
@@ -77,7 +92,7 @@ class ForumParser
 
             return $board;
         } else {
-            return null;
+            return $crawler->filter('td')->text(); // This is the category name
         }
     }
 
