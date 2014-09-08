@@ -24,6 +24,7 @@ class ForumParser
 
         $boarditems = $crawler->filter('tr');
 
+        $itemnumber = $crawler->filter('tr')->count();
         $num = 0;
         $category = '';
         $resultset = array();
@@ -40,7 +41,7 @@ class ForumParser
                 $category = $set;
             } else {
                 $resultset[] = $set;
-                if ($num == $crawler->filter('tr')->count()) {
+                if ($num == $itemnumber) {
                     $result[$category] = $resultset; // add the last category with the boarditems
                 }
             }
