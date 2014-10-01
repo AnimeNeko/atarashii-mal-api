@@ -299,6 +299,8 @@ class Forum
     /**
      * Format the time in ISO 8601.
      *
+     * @param string $time The time that needs to be standardized.
+     *
      * @return string
      */
     public function formatTime($time)
