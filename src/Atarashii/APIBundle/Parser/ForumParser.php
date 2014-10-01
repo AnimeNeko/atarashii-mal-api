@@ -143,11 +143,8 @@ class ForumParser
             //note: eq(1) is the second node and !first.
             $username = $crawler->filter('td[class="forum_boardrow1"]')->eq(1)->filter('a')->text();
             $time = explode("\n", $crawler->filter('td[class="forum_boardrow1"]')->eq(1)->text());
-            if (strpos($time[1], '-') !== false) {
-                $time[1] = DateTime::createFromFormat('d-m-y, g:i A', $time[1])->format(DateTime::ISO8601);
-            }
 
-            $topics->setReply(array('username' => $username , 'time' => $time[1]));
+            $topics->setReply(array('username' => $username , 'time' => $topics->formatTime($time[1])));
 
             return $topics;
         } else {
@@ -175,9 +172,6 @@ class ForumParser
             $topic->profile = new Profile();
 
             $topic->setTime($crawler->filter('td div div')->eq(1)->text());
-            if (strpos($topic->getTime(), '-') !== false) {
-                $topic->setTime(DateTime::createFromFormat('d-m-y, g:i A', $topic->getTime())->format(DateTime::ISO8601));
-            }
 
             # message id.
             # Example:

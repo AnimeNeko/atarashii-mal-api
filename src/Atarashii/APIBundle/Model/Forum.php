@@ -14,6 +14,8 @@ use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\Since;
 use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Annotation\Until;
+use \DateTime;
+use \DateInterval;
 
 class Forum
 {
@@ -281,7 +283,7 @@ class Forum
      */
     public function setTime($time)
     {
-        $this->time = $time;
+        $this->time = $this->formatTime($time);
     }
 
     /**
@@ -292,6 +294,32 @@ class Forum
     public function getTime()
     {
         return $this->time;
+    }
+
+    /**
+     * Format the time in ISO 8601.
+     *
+     * @return string
+     */
+    public function formatTime($time)
+    {
+        if (strpos($time, '-') !== false) {
+            return DateTime::createFromFormat('m-d-y, g:i A', $time)->format(DateTime::ISO8601);
+        } else if (strpos($time, 'seconds') !== false) {
+            return (new DateTime())->modify('-' . substr($time, 0, -12) . ' second')->format(DateTime::ISO8601);
+        } else if (strpos($time, 'minutes') !== false) {
+            return (new DateTime())->modify('-' . substr($time, 0, -12) . ' minute')->format('Y-m-d\TH:iO');
+        } else if (strpos($time, 'minute') !== false) {
+            return (new DateTime())->modify('-' . substr($time, 0, -11) . ' minute')->format('Y-m-d\TH:iO');
+        } else if (strpos($time, 'hours') !== false) {
+            return (new DateTime())->modify('-' . substr($time, 0, -10) . ' hour')->format('Y-m-d\THO');
+        } else if (strpos($time, 'hour') !== false) {
+            return (new DateTime())->modify('-' . substr($time, 0, -9) . ' hour')->format('Y-m-d\THO');
+        } else if (strpos($time, 'Today') !== false) {
+            return DateTime::createFromFormat('g:i A', substr($time, 7))->format(DateTime::ISO8601);
+        } else if (strpos($time, 'Yesterday') !== false) {
+            return DateTime::createFromFormat('g:i A', substr($time, 11))->modify('-1 day')->format(DateTime::ISO8601);
+        }
     }
 
 }
