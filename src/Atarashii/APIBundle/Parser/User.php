@@ -12,7 +12,7 @@ namespace Atarashii\APIBundle\Parser;
 
 use Symfony\Component\DomCrawler\Crawler;
 use Atarashii\APIBundle\Model\Profile;
-use \DateTime;
+use Atarashii\APIBundle\Model\Date;
 
 class User
 {
@@ -115,19 +115,10 @@ class User
             $avatar = $crawler->filter('.friendIcon')->filterXPath('./div/a/img');
             $name = $crawler->filterXPath('//div[@class="friendBlock"]/div[2]/a')->text();
             $lastonline = $crawler->filterXPath('./div/div/div[3]')->text();
-            $friendssince = str_replace('Friends since ', '', $crawler->filterXPath('./div/div/div[4]')->text());
+            $friendssince = Date::formatTime(str_replace('Friends since ', '', $crawler->filterXPath('./div/div/div[4]')->text()));
 
             //Remove the tumbnail portions from the URL to get the full image.
             $avatar = str_replace('thumbs/', '', str_replace('_thumb', '', $avatar->attr('src')));
-
-            //Sometimes this value doesn't exist, so it should be set as null. Otherwise, format the time to RFC3389.
-            if ($friendssince != '') {
-                if (strpos($friendssince, '-') == true) {
-                    $friendssince = DateTime::createFromFormat('m-d-y, g:i A', $friendssince)->format(DateTime::ISO8601);
-                }
-            } else {
-                $friendssince = null;
-            }
 
             $friendinfo['name'] = $name;
             $friendinfo['friend_since'] = $friendssince;
