@@ -15,7 +15,6 @@ use JMS\Serializer\Annotation\Since;
 use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Annotation\Until;
 use \DateTime;
-use \DateInterval;
 
 class Forum
 {
