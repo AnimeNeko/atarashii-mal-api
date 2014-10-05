@@ -13,8 +13,7 @@ namespace Atarashii\APIBundle\Model;
 use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\Since;
 use JMS\Serializer\Annotation\Type;
-use JMS\Serializer\Annotation\Until;
-use \DateTime;
+use JMS\Serializer\Annotation\Until;;
 
 class Messages
 {
@@ -187,7 +186,7 @@ class Messages
      */
     public function setTime($time)
     {
-        $this->time = $time->format(DateTime::ISO8601);
+        $this->time = Date::formatTime($time);
     }
 
     /**

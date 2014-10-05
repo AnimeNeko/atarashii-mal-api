@@ -12,7 +12,6 @@ namespace Atarashii\APIBundle\Parser;
 
 use Symfony\Component\DomCrawler\Crawler;
 use Atarashii\APIBundle\Model\Messages;
-use \DateTime;
 
 class MessagesParser
 {
@@ -64,7 +63,7 @@ class MessagesParser
         # Time of the received message.
         # Example:
         # <small>50 minutes ago</small>
-        $message->setTime(DateTime::createFromFormat('d-m-y, g:i A', $crawler->filter('div[class="mym_user"] small')->text()));
+        $message->setTime($crawler->filter('div[class="mym_user"] small')->text());
 
         # Read (if the user has read this message).
         $message->setRead($read);
@@ -112,8 +111,7 @@ class MessagesParser
         # Time of the received message.
         # Example:
         # <small>50 minutes ago</small>
-        $time = $crawler->filter('div small')->text();
-        $message->setTime(DateTime::createFromFormat('d-m-y, g:i A', $time));
+        $message->setTime($crawler->filter('div small')->text());
 
         # Subject.
         # Example:
