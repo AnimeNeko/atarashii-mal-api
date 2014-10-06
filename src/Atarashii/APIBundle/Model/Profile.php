@@ -109,7 +109,7 @@ class ProfileDetails
      */
     public function setLastOnline($lastOnline)
     {
-        $this->lastOnline = $lastOnline;
+        $this->lastOnline = Date::formatTime($lastOnline);
     }
 
     /**
@@ -241,7 +241,7 @@ class ProfileDetails
      */
     public function setJoinDate($joinDate)
     {
-        $this->joinDate = $joinDate;
+        $this->joinDate = Date::formatTime($joinDate);
     }
 
     /**

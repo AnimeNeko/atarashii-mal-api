@@ -34,6 +34,8 @@ class Date
     {
         if (strpos($time, '-') !== false) {
             return DateTime::createFromFormat('m-d-y, g:i A', $time)->format(DateTime::ISO8601);
+        } else if (strpos($time, 'Now') !== false) {
+            return (new DateTime())->format(DateTime::ISO8601);
         } else if (strpos($time, 'seconds') !== false) {
             return (new DateTime())->modify('-' . substr($time, 0, -12) . ' second')->format(DateTime::ISO8601);
         } else if (strpos($time, 'minutes') !== false) {
@@ -48,6 +50,10 @@ class Date
             return DateTime::createFromFormat('g:i A', substr($time, 7))->format(DateTime::ISO8601);
         } else if (strpos($time, 'Yesterday') !== false) {
             return DateTime::createFromFormat('g:i A', substr($time, 11))->modify('-1 day')->format(DateTime::ISO8601);
+        } else if (strpos($time, ', ') !== false) { //Do not place this before the other formatters because it will break almost all dates.
+            return DateTime::createFromFormat('F d, Y', $time)->format(DateTime::ISO8601);
+        } else if (strpos($time, ' ') !== false) { //Do not place this before the other formatters because it will break almost all dates.
+            return DateTime::createFromFormat('M Y', $time)->format('Y-m');
         } else {
             return null;
         }
