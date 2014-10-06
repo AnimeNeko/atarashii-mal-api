@@ -13,6 +13,8 @@ namespace Atarashii\APIBundle\Parser;
 use Symfony\Component\DomCrawler\Crawler;
 use Atarashii\APIBundle\Model\Profile;
 use Atarashii\APIBundle\Model\Date;
+use Atarashii\APIBundle\Model\Anime;
+use Atarashii\APIBundle\Model\Manga;
 
 class User
 {
@@ -150,23 +152,23 @@ class User
 
         foreach ($maincontent as $historyentry) {
             $crawler = new Crawler($historyentry);
-            $historyinfo = array();
 
             // bypass for the MAL generated strings
             if (($crawler->filter('a')->count()) > 0){
 
-                $historyinfo['title'] = $crawler->filter('a')->text();
-                $historyinfo['time_updated'] = Date::formatTime(substr($crawler->filter('td')->eq(1)->text(), 1));
-
                 if (strpos($crawler->filter('a')->attr('href'), 'anime') == true) {
+                    $historyinfo['item'] = new Anime();
+                    $historyinfo['item']->setEpisodes((int) $crawler->filter('strong')->text());
                     $historyinfo['type'] = 'anime';
-                    $historyinfo['episodes'] = (int) $crawler->filter('strong')->text();
                 } else {
+                    $historyinfo['item'] = new Manga();
+                    $historyinfo['item']->setChapters((int) $crawler->filter('strong')->text());
                     $historyinfo['type'] = 'manga';
-                    $historyinfo['chapters'] = (int) $crawler->filter('strong')->text();
                 }
 
-                $historyinfo['id'] = (int) str_replace('/'.$historyinfo['type'].'.php?id=', '', $crawler->filter('a')->attr('href'));
+                $historyinfo['item']->setTitle($crawler->filter('a')->text());
+                $historyinfo['item']->setId((int) str_replace('/anime.php?id=', '', $crawler->filter('a')->attr('href')));
+                $historyinfo['time_updated'] = Date::formatTime(substr($crawler->filter('td')->eq(1)->text(), 1));
 
                 $historylist[] = $historyinfo;
             }
