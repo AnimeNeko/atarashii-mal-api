@@ -242,7 +242,7 @@ class MangaParser
                     foreach ($relateditems as $item) {
                         if (preg_match('/<a href="(\/anime\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
                             $itemarray = array();
-                            $itemarray['manga_id'] = $itemparts[2];
+                            $itemarray['anime_id'] = $itemparts[2];
                             $itemarray['title'] = $itemparts[3];
                             $itemarray['url'] = 'http://myanimelist.net'.$itemparts[1];
                             $mangarecord->setAnimeAdaptations($itemarray);
@@ -257,7 +257,7 @@ class MangaParser
                     foreach ($relateditems as $item) {
                         if (preg_match('/<a href="(\/manga\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
                             $itemarray = array();
-                            $itemarray['manga_id'] = $itemparts[2];
+                            $itemarray['anime_id'] = $itemparts[2];
                             $itemarray['title'] = $itemparts[3];
                             $itemarray['url'] = 'http://myanimelist.net'.$itemparts[1];
                             $mangarecord->setRelatedManga($itemarray);
