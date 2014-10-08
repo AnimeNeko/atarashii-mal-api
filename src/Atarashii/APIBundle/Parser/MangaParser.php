@@ -271,7 +271,7 @@ class MangaParser
                     foreach ($relateditems as $item) {
                         if (preg_match('/<a href="(\/manga\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
                             $itemarray = array();
-                            $itemarray['anime_id'] = $itemparts[2];
+                            $itemarray['manga_id'] = $itemparts[2];
                             $itemarray['title'] = $itemparts[3];
                             $itemarray['url'] = 'http://myanimelist.net'.$itemparts[1];
                             $mangarecord->setAlternativeVersions($itemarray);
