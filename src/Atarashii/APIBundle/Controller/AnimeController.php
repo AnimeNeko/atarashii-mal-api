@@ -124,6 +124,9 @@ class AnimeController extends FOSRestController
     /**
      * Get the reviews of an anime
      *
+     * If there isn't any page passed it will use the most helpfull voted reviews.
+     * These are determined by the ratio (helpfull:all).
+     *
      * @param int     $id The ID of the anime as assigned by MyAnimeList
      * @param Request $request HTTP Request object
      *
@@ -134,7 +137,7 @@ class AnimeController extends FOSRestController
         // http://myanimelist.net/anime/#{id}/ /reviews&p=#{page}
         $downloader = $this->get('atarashii_api.communicator');
 
-        $page = ((int) $request->query->get('page')) - 1;
+        $page = ((int) $request->query->get('page'));
         if ($page < 0) {
             $page = 0;
         }
