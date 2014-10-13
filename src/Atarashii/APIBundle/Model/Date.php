@@ -58,7 +58,10 @@ class Date
         } else if (strpos($time, 'Yesterday') !== false) {
             return $dateTime->createFromFormat('g:i A', substr($time, 11), $timeZone)->modify('-1 day')->format(DateTime::ISO8601);
         } else if (strpos($time, ', ') !== false) { //Do not place this before the other formatters because it will break almost all dates.
-            return $dateTime->createFromFormat('F d, Y', $time, $timeZone)->format(DateTime::ISO8601);
+            if (strlen($time) > 12)
+                return $dateTime->createFromFormat('F d, Y', $time, $timeZone)->format(DateTime::ISO8601);
+            else
+                return $dateTime->createFromFormat('M j, Y', $time, $timeZone)->format('Y-m-d');
         } else if (strpos($time, ' ') !== false) { //Do not place this before the other formatters because it will break almost all dates.
             return $dateTime->createFromFormat('M Y', $time, $timeZone)->format('Y-m');
         } else {

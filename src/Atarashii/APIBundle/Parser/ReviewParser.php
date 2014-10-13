@@ -60,10 +60,6 @@ class ReviewParser
             $review->setChaptersRead($episodes[0]);
         }
 
-        if (strlen($review->getDate()) == 12) {
-            $review->setDate(DateTime::createFromFormat('M j, Y', $review->getDate())->format('Y-m-d'));
-        }
-
         return $review;
 
     }
