@@ -34,7 +34,7 @@ class Date
      *
      * @return string
      */
-    public static function formatTime($time)
+    public function formatTime($time)
     {
         $dateTime = (new DateTime);
         $timeZone = new DateTimeZone(Date::$timeZone);

@@ -281,7 +281,7 @@ class Forum
      */
     public function setTime($time)
     {
-        $this->time = Date::formatTime($time);
+        $this->time = (new Date)->formatTime($time);
     }
 
     /**

@@ -117,7 +117,7 @@ class User
             $avatar = $crawler->filter('.friendIcon')->filterXPath('./div/a/img');
             $name = $crawler->filterXPath('//div[@class="friendBlock"]/div[2]/a')->text();
             $lastonline = $crawler->filterXPath('./div/div/div[3]')->text();
-            $friendssince = Date::formatTime(str_replace('Friends since ', '', $crawler->filterXPath('./div/div/div[4]')->text()));
+            $friendssince = (new Date)->formatTime(str_replace('Friends since ', '', $crawler->filterXPath('./div/div/div[4]')->text()));
 
             //Remove the tumbnail portions from the URL to get the full image.
             $avatar = str_replace('thumbs/', '', str_replace('_thumb', '', $avatar->attr('src')));
@@ -168,7 +168,7 @@ class User
 
                 $historyinfo['item']->setTitle($crawler->filter('a')->text());
                 $historyinfo['item']->setId((int) str_replace('/anime.php?id=', '', $crawler->filter('a')->attr('href')));
-                $historyinfo['time_updated'] = Date::formatTime(substr($crawler->filter('td')->eq(1)->text(), 1));
+                $historyinfo['time_updated'] = (new Date)->formatTime(substr($crawler->filter('td')->eq(1)->text(), 1));
 
                 $historylist[] = $historyinfo;
             }
