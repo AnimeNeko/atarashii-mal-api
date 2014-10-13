@@ -14,6 +14,7 @@ use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Guzzle\Http\Exception;
+use Atarashii\APIBundle\Model\Date;
 use Atarashii\APIBundle\Parser\messagesParser;
 
 class MessagesController extends FOSRestController
@@ -48,6 +49,7 @@ class MessagesController extends FOSRestController
 
                 return $view;
             }
+            (new Date)->setTimeZone($downloader->fetch('/editprofile.php'));
             $messagesdetails = $downloader->fetch('/mymessages.php?go=&show='.(($page*20)-20));
         } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);

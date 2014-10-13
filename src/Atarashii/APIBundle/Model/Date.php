@@ -11,14 +11,18 @@
 namespace Atarashii\APIBundle\Model;
 
 use \DateTime;
+use \DateTimeZone;
 
 use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\Since;
 use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Annotation\Until;
 
+use Symfony\Component\DomCrawler\Crawler;
+
 class Date
 {
+    Public static $timeZone = 'America/Los_Angeles';
 
     /**
      * Format the time in ISO 8601.
@@ -32,31 +36,52 @@ class Date
      */
     public static function formatTime($time)
     {
+        $dateTime = (new DateTime);
+        $timeZone = new DateTimeZone(Date::$timeZone);
+
         if (strpos($time, '-') !== false) {
-            return DateTime::createFromFormat('m-d-y, g:i A', $time)->format(DateTime::ISO8601);
+            return $dateTime->createFromFormat('m-d-y, g:i A', $time, $timeZone)->format(DateTime::ISO8601);
         } else if (strpos($time, 'Now') !== false) {
-            return (new DateTime())->format(DateTime::ISO8601);
+            return $dateTime->format(DateTime::ISO8601);
         } else if (strpos($time, 'seconds') !== false) {
-            return (new DateTime())->modify('-' . substr($time, 0, -12) . ' second')->format(DateTime::ISO8601);
+            return $dateTime->modify('-' . substr($time, 0, -12) . ' second')->format(DateTime::ISO8601);
         } else if (strpos($time, 'minutes') !== false) {
-            return (new DateTime())->modify('-' . substr($time, 0, -12) . ' minute')->format('Y-m-d\TH:iO');
+            return $dateTime->modify('-' . substr($time, 0, -12) . ' minute')->format('Y-m-d\TH:iO');
         } else if (strpos($time, 'minute') !== false) {
-            return (new DateTime())->modify('-' . substr($time, 0, -11) . ' minute')->format('Y-m-d\TH:iO');
+            return $dateTime->modify('-' . substr($time, 0, -11) . ' minute')->format('Y-m-d\TH:iO');
         } else if (strpos($time, 'hours') !== false) {
-            return (new DateTime())->modify('-' . substr($time, 0, -10) . ' hour')->format('Y-m-d\THO');
+            return $dateTime->modify('-' . substr($time, 0, -10) . ' hour')->format('Y-m-d\THO');
         } else if (strpos($time, 'hour') !== false) {
-            return (new DateTime())->modify('-' . substr($time, 0, -9) . ' hour')->format('Y-m-d\THO');
+            return $dateTime->modify('-' . substr($time, 0, -9) . ' hour')->format('Y-m-d\THO');
         } else if (strpos($time, 'Today') !== false) {
-            return DateTime::createFromFormat('g:i A', substr($time, 7))->format(DateTime::ISO8601);
+            return $dateTime->createFromFormat('g:i A', substr($time, 7), $timeZone)->format(DateTime::ISO8601);
         } else if (strpos($time, 'Yesterday') !== false) {
-            return DateTime::createFromFormat('g:i A', substr($time, 11))->modify('-1 day')->format(DateTime::ISO8601);
+            return $dateTime->createFromFormat('g:i A', substr($time, 11), $timeZone)->modify('-1 day')->format(DateTime::ISO8601);
         } else if (strpos($time, ', ') !== false) { //Do not place this before the other formatters because it will break almost all dates.
-            return DateTime::createFromFormat('F d, Y', $time)->format(DateTime::ISO8601);
+            return $dateTime->createFromFormat('F d, Y', $time, $timeZone)->format(DateTime::ISO8601);
         } else if (strpos($time, ' ') !== false) { //Do not place this before the other formatters because it will break almost all dates.
-            return DateTime::createFromFormat('M Y', $time)->format('Y-m');
+            return $dateTime->createFromFormat('M Y', $time, $timeZone)->format('Y-m');
         } else {
             return null;
         }
     }
 
+    /**
+     * Set timezone setting by parsing the MAL settings
+     *
+     * Parse the timezone setting used by MAL when an user logged in.
+     * This depends on the location of the country when a user joined.
+     * After parsing it stores the timezone in a static variable.
+     *
+     * @param string $settings The HTML source  of the settings page that contains the timezone.
+     *
+     * @return string
+     */
+    public function setTimeZone($settings)
+    {
+        $crawler = new Crawler();
+        $crawler->addHTMLContent($settings, 'UTF-8');
+
+        Date::$timeZone = $crawler->filter('option[selected]')->text();
+    }
 }
