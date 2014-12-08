@@ -11,8 +11,8 @@
 namespace Atarashii\APIBundle\Parser;
 
 use Symfony\Component\DomCrawler\Crawler;
-use Atarashii\APIBundle\Model\forum;
-use Atarashii\APIBundle\Model\profile;
+use Atarashii\APIBundle\Model\Forum;
+use Atarashii\APIBundle\Model\Profile;
 use \DateTime;
 
 class ForumParser
