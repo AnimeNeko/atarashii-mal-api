@@ -119,4 +119,18 @@ class Upcoming
 
         return $media;
     }
+
+    private static function fixMalShortYear($year) {
+        //Create a four digit year from MAL's display.
+        //We can't use PHP's built-in date parser as it parses two-digit years
+        //in the range 1970-2069. We need earlier, so have to do it manually.
+        //We use the range 1930-2029, which will create some incorrect dates
+        //for titles from the early part of the 20th century, but it's the best
+        //fix at this point.
+        if($year >= 30) {
+            return '19' . $year;
+        } else {
+            return '20' . $year;
+        }
+    }
 }
