@@ -91,7 +91,6 @@ class Forum
     /**
      * The userprofile for the user details in topics
      *
-     * @Type("array")
      * @Since("2.0")
      */
     public $profile;
