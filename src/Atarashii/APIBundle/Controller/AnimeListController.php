@@ -183,7 +183,7 @@ class AnimeListController extends FOSRestController
         try {
 
             if($request->request->get('status') !== null) {
-                $anime->setWatchedStatus((int) $request->request->get('status'));
+                $anime->setWatchedStatus($request->request->get('status'));
                 $update_items[] = 'status';
             }
 
