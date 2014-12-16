@@ -118,11 +118,30 @@ class AnimeListController extends FOSRestController
 
         $anime = new Anime();
         $anime->setId($request->request->get('anime_id'));
-        $anime->setWatchedStatus($request->request->get('status'));
-        $anime->setWatchedEpisodes($request->request->get('episodes'));
-        $anime->setScore($request->request->get('score'));
 
-        $xmlcontent = $anime->MALApiXml();
+        //Only use values we were sent for the Update XML
+        $update_items = array();
+        try {
+
+            if($request->request->get('status') !== null) {
+                $anime->setWatchedStatus($request->request->get('status'));
+                $update_items[] = 'status';
+            }
+
+            if($request->request->get('episodes') !== null) {
+                $anime->setWatchedEpisodes($request->request->get('episodes'));
+                $update_items[] = 'episodes';
+            }
+
+            if ($request->request->get('score') !== null) {
+                $anime->setScore($request->request->get('score'));
+                $update_items[] = 'score';
+            }
+        } catch (\Exception $e) {
+            return $this->view(Array('error' => $e->getMessage()), 500);
+        }
+
+        $xmlcontent = $anime->MALApiXml($update_items);
 
         $connection = $this->get('atarashii_api.communicator');
 
