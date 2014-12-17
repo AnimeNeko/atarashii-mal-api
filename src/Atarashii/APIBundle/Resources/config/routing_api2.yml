@@ -177,6 +177,12 @@ _api2_forum_board:
     requirements:
         _method: GET
 
+_api2_forum_subboard:
+    path: /forum/board/{id}
+    defaults: { _controller: AtarashiiAPIBundle:Forum:getForumSubBoard, _format: json, apiVersion: '2.0' }
+    requirements:
+        _method: GET
+
 _api2_forum_topics:
     path: /forum/{id}
     defaults: { _controller: AtarashiiAPIBundle:Forum:getForumTopics, _format: json, apiVersion: '2.0' }

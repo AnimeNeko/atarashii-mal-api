@@ -56,6 +56,50 @@ class ForumController extends FOSRestController
     }
 
     /**
+     * Get the forum sub board of MAL
+     *
+     * @return View
+     */
+    public function getForumSubBoardAction(Request $request, $id)
+    {
+        // http://myanimelist.net/forum/?subboard=#{id}
+        $page = (int) $request->query->get('page');
+        if ($page <= 0) {
+            $page = 1;
+        }
+        if ((int) $id == '') {
+            return $this->view(Array('error' => 'Invalid board ID'), 200);
+        }
+
+        $downloader = $this->get('atarashii_api.communicator');
+
+        try {
+            $forumcontent = $downloader->fetch('/forum/?subboard='.$id.'&show='.(($page*20)-20));
+        } catch (Exception\CurlException $e) {
+            return $this->view(Array('error' => 'network-error'), 500);
+        }
+
+        $forumtopic = ForumParser::parseTopics($forumcontent);
+
+        $response = new Response();
+        $response->setPublic();
+        $response->setMaxAge(300); //5 minutes
+        $response->headers->addCacheControlDirective('must-revalidate', true);
+        $response->setEtag('forum/topic/'.$id);
+
+        //Also, set "expires" header for caches that don't understand Cache-Control
+        $date = new \DateTime();
+        $date->modify('+300 seconds'); //5 minutes
+        $response->setExpires($date);
+
+        $view = $this->view($forumtopic);
+        $view->setResponse($response);
+        $view->setStatusCode(200);
+
+        return $view;
+    }
+
+    /**
      * Get the forum topics of MAL
      *
      * @param Request $request HTTP Request object
