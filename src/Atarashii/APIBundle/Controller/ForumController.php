@@ -81,7 +81,10 @@ class ForumController extends FOSRestController
             return $this->view(Array('error' => 'network-error'), 500);
         }
 
-        $forumtopic = ForumParser::parseTopics($forumcontent);
+        if ($id == 1 || $id == 4)
+            $forumtopic = ForumParser::parseSubBoards($forumcontent);
+        else
+            $forumtopic = ForumParser::parseTopics($forumcontent);
 
         $response = new Response();
         $response->setPublic();

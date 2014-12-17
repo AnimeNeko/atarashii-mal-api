@@ -97,6 +97,43 @@ class ForumParser
         }
     }
 
+    public static function parseSubBoards($contents)
+    {
+        $crawler = new Crawler();
+        $crawler->addHTMLContent($contents, 'UTF-8');
+
+        $topicsitems = $crawler->filter('tr');
+        foreach ($topicsitems as $item) {
+            //Trick to force json array and not json objects.
+            $set = self::parseSubBoardsetails($item);
+            if ($set != null) {
+                $resultset[] = $set;
+            }
+        }
+
+        return $resultset;
+    }
+
+    private static function parseSubBoardsetails($item)
+    {
+        $crawler = new Crawler($item);
+        if ($crawler->filter('td[class="borderClass bgColor1"]')->count() == 3) {
+            $topics = new Forum();
+
+            $topics->setId(str_replace('?mangaid=', '', str_replace('?animeid=', '', $crawler->filter('td[class="borderClass bgColor1"] a')->attr('href'))));
+
+            $topics->setName($crawler->filter('strong')->text().' '.$crawler->filter('small')->text());
+
+            $topics->setReplies($crawler->filter('td[align="center"]')->text());
+
+            $topics->setTime($crawler->filter('td[align="center"]')->eq(1)->text());
+
+            return $topics;
+        } else {
+            return null;
+        }
+    }
+
     public static function parseTopics($contents)
     {
         $crawler = new Crawler();
