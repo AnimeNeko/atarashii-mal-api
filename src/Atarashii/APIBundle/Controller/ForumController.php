@@ -58,6 +58,8 @@ class ForumController extends FOSRestController
     /**
      * Get the forum sub board of MAL
      *
+     * @param Request $request HTTP Request object
+     * @param int     $id The ID of the forum sub board as assigned by MyAnimeList
      * @return View
      */
     public function getForumSubBoardAction(Request $request, $id)
@@ -103,7 +105,7 @@ class ForumController extends FOSRestController
      * Get the forum topics of MAL
      *
      * @param Request $request HTTP Request object
-     * @param int     $id The ID of the forum board as assigned by MyAnimeList
+     * @param int     $id The ID of the topic as assigned by MyAnimeList
      *
      * @return View
      */
