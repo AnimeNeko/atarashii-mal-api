@@ -32,7 +32,11 @@ class MessagesParser
             $resultset[] = self::parseListview($item, true);
         }
 
-        return $resultset;
+        $pages = $crawler->filter('div[style="float: right;"] a')->eq(6)->attr('href');
+        $result['pages'] = ((int)substr($pages, strpos($pages, "show=") + 5)) / 20 + 1;
+        $result['list'] = $resultset;
+
+        return $result;
     }
 
     private static function parseListview($item, $read)

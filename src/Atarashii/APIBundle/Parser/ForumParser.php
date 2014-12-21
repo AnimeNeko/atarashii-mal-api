@@ -147,8 +147,11 @@ class ForumParser
                 $resultset[] = $set;
             }
         }
+        $pages = $crawler->filter('div[style="height: 15px; margin: 5px 0px;"] a')->eq(6)->attr('href');
+        $result['pages'] = ((int) substr($pages, strpos($pages, "show=") + 5)) / 20 + 1;
+        $result['list'] = $resultset;
 
-        return $resultset;
+        return $result;
     }
 
     private static function parseTopicsDetails($item)
@@ -196,10 +199,13 @@ class ForumParser
 
         $topicitems = $crawler->filter('div[class="forum_border_around"]');
         foreach ($topicitems as $item) {
-            $resultset[] = self::parseTopicDetails($item);
+            $set[] = self::parseTopicDetails($item);
         }
+        $pages = $crawler->filter('div[style="height: 15px; margin: 5px 0px;"] a')->eq(6)->attr('href');
+        $result['pages'] = ((int) substr($pages, strpos($pages, "show=") + 5)) / 20 + 1;
+        $result['list'] = $set;
 
-        return $resultset;
+        return $result;
     }
 
     private static function parseTopicDetails($item)
