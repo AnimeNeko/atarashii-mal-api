@@ -32,8 +32,8 @@ class MessagesParser
             $resultset[] = self::parseListview($item, true);
         }
 
-        $pages = $crawler->filter('div[style="float: right;"] a')->eq(6)->attr('href');
-        $result['pages'] = ((int)substr($pages, strpos($pages, "show=") + 5)) / 20 + 1;
+        $pages = $crawler->filter('div[class="total_messages spaceit_pad"] div')->last()->text();
+        $result['pages'] = ((int) substr($pages, strpos($pages, ' (') + 2, strpos($pages, ')')));
         $result['list'] = $resultset;
 
         return $result;

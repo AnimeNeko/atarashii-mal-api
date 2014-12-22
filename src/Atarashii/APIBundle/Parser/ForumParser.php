@@ -147,8 +147,9 @@ class ForumParser
                 $resultset[] = $set;
             }
         }
-        $pages = $crawler->filter('div[style="height: 15px; margin: 5px 0px;"] a')->eq(6)->attr('href');
-        $result['pages'] = ((int) substr($pages, strpos($pages, "show=") + 5)) / 20 + 1;
+
+        $pages = $crawler->filter('div[style="height: 15px; margin: 5px 0px;"] div')->last()->text();
+        $result['pages'] = ((int) substr($pages, strpos($pages, ' (') + 2, strpos($pages, ')')));
         $result['list'] = $resultset;
 
         return $result;
@@ -201,8 +202,9 @@ class ForumParser
         foreach ($topicitems as $item) {
             $set[] = self::parseTopicDetails($item);
         }
-        $pages = $crawler->filter('div[style="height: 15px; margin: 5px 0px;"] a')->eq(6)->attr('href');
-        $result['pages'] = ((int) substr($pages, strpos($pages, "show=") + 5)) / 20 + 1;
+
+        $pages = $crawler->filter('div[style="height: 15px; margin: 5px 0px; padding: 3px 0;"] div')->last()->text();
+        $result['pages'] = ((int) substr($pages, strpos($pages, ' (') + 2, strpos($pages, ')')));
         $result['list'] = $set;
 
         return $result;
