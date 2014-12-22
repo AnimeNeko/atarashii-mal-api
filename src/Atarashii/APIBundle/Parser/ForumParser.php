@@ -130,7 +130,11 @@ class ForumParser
 
             $topics->setId(str_replace('?mangaid=', '', str_replace('?animeid=', '', $crawler->filter('td[class="borderClass bgColor1"] a')->attr('href'))));
 
-            $topics->setName($crawler->filter('strong')->text().' '.$crawler->filter('small')->text());
+            try {
+                $topics->setName($crawler->filter('strong')->text() . ' ' . $crawler->filter('small')->text());
+            } catch (\InvalidArgumentException $e) {
+                $topics->setName($crawler->filter('strong')->text());
+            }
 
             $topics->setReplies($crawler->filter('td[align="center"]')->text());
 
