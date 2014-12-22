@@ -111,7 +111,15 @@ class ForumParser
             }
         }
 
-        return $resultset;
+        try {
+            $pages = $crawler->filter('div[style="height: 15px; margin: 5px 0px;"] div')->last()->text();
+            $result['pages'] = ((int)substr($pages, strpos($pages, ' (') + 2, strpos($pages, ')')));
+        } catch (\InvalidArgumentException $e) {
+            //do nothing
+        }
+        $result['list'] = $resultset;
+
+        return $result;
     }
 
     private static function parseSubBoardsetails($item)
