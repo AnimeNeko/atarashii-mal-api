@@ -120,7 +120,7 @@ class ForumController extends FOSRestController
         if ($page <= 0) {
             $page = 1;
         }
-        
+
         if ((int) $id == '') {
             return $this->view(Array('error' => 'Invalid board ID'), 200);
         }
@@ -140,6 +140,104 @@ class ForumController extends FOSRestController
         $response->setMaxAge(900); //15 minutes
         $response->headers->addCacheControlDirective('must-revalidate', true);
         $response->setEtag('forum/'.$id);
+
+        //Also, set "expires" header for caches that don't understand Cache-Control
+        $date = new \DateTime();
+        $date->modify('+900 seconds'); //15 minutes
+        $response->setExpires($date);
+
+        $view = $this->view($forumtopics);
+        $view->setResponse($response);
+        $view->setStatusCode(200);
+
+        return $view;
+    }
+
+    /**
+     * Get the Anime discussion forum topics of MAL
+     *
+     * @param Request $request HTTP Request object
+     * @param int     $id The ID of the topic as assigned by MyAnimeList
+     *
+     * @return View
+     */
+    public function getForumAnimeAction(Request $request, $id)
+    {
+        // http://myanimelist.net/forum/?animeid=#{id}
+
+        $page = (int) $request->query->get('page');
+        if ($page <= 0) {
+            $page = 1;
+        }
+
+        if ((int) $id == '') {
+            return $this->view(Array('error' => 'Invalid board ID'), 200);
+        }
+
+        $downloader = $this->get('atarashii_api.communicator');
+
+        try {
+            $forumcontent = $downloader->fetch('/forum/?animeid='.$id.'&show='.(($page*20)-20));
+        } catch (Exception\CurlException $e) {
+            return $this->view(Array('error' => 'network-error'), 500);
+        }
+
+        $forumtopics = ForumParser::parseTopics($forumcontent);
+
+        $response = new Response();
+        $response->setPublic();
+        $response->setMaxAge(900); //15 minutes
+        $response->headers->addCacheControlDirective('must-revalidate', true);
+        $response->setEtag('forum/anime/'.$id);
+
+        //Also, set "expires" header for caches that don't understand Cache-Control
+        $date = new \DateTime();
+        $date->modify('+900 seconds'); //15 minutes
+        $response->setExpires($date);
+
+        $view = $this->view($forumtopics);
+        $view->setResponse($response);
+        $view->setStatusCode(200);
+
+        return $view;
+    }
+
+    /**
+     * Get the manga discussion forum topics of MAL
+     *
+     * @param Request $request HTTP Request object
+     * @param int     $id The ID of the topic as assigned by MyAnimeList
+     *
+     * @return View
+     */
+    public function getForumMangaAction(Request $request, $id)
+    {
+        // http://myanimelist.net/forum/?mangaid=#{id}
+
+        $page = (int) $request->query->get('page');
+        if ($page <= 0) {
+            $page = 1;
+        }
+
+        if ((int) $id == '') {
+            return $this->view(Array('error' => 'Invalid board ID'), 200);
+        }
+
+        $downloader = $this->get('atarashii_api.communicator');
+
+        try {
+            $forumcontent = $downloader->fetch('/forum/?mangaid='.$id.'&show='.(($page*20)-20));
+        } catch (Exception\CurlException $e) {
+            return $this->view(Array('error' => 'network-error'), 500);
+        }
+
+        $forumtopics = ForumParser::parseTopics($forumcontent);
+
+        $response = new Response();
+        $response->setPublic();
+        $response->setMaxAge(900); //15 minutes
+        $response->headers->addCacheControlDirective('must-revalidate', true);
+        $response->setEtag('forum/manga/'.$id);
 
         //Also, set "expires" header for caches that don't understand Cache-Control
         $date = new \DateTime();
