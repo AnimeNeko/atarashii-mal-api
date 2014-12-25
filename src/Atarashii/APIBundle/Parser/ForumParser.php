@@ -248,7 +248,10 @@ class ForumParser
             $details = explode("\n\t\t  ", $crawler->filter('td[class="forum_boardrow2"]')->text());
             $topic->setUsername($details[0]);
             $topic->profile->details->setForumPosts(str_replace('Posts: ', '', $details[6]));
-            $topic->profile->details->setAccessRank($details[1]);
+            if ($details[1] == '')
+                $topic->profile->details->setAccessRank('Member');
+            else
+                $topic->profile->details->setAccessRank($details[1]);
 
             if ($topic->profile->details->getForumPosts() == '') {
                 $topic->profile->details->setStatus($details[3]);
