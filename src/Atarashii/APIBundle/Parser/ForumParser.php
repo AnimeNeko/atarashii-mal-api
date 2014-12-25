@@ -33,7 +33,7 @@ class ForumParser
             $set = self::parseBoards($item);
 
             // Check if the catogory name($set) returned or the board item($set)
-            if (is_string ($set)) {
+            if (is_string($set)) {
                 if ($category != '') {
                     $result[$category] = $resultset;
                     $resultset = array(); // clear the $resultset array
@@ -64,7 +64,7 @@ class ForumParser
             # description.
             # Example:
             # <br> Updates, changes, and additions to MAL.</br>
-            $board->setDescription(str_replace($board->getName()."\n          \n\t\t  ", '', $crawler->filter('td[class="forum_boardrow1"]')->text()));
+            $board->setDescription(str_replace($board->getName() . "\n          \n\t\t  ", '', $crawler->filter('td[class="forum_boardrow1"]')->text()));
 
             if ($crawler->filter('td[class=forum_boardrow1] a')->count() == 1) {
                 # id.
@@ -197,7 +197,7 @@ class ForumParser
             $username = $crawler->filter('td[class="forum_boardrow1"]')->eq(1)->filter('a')->text();
             $time = explode("\n", $crawler->filter('td[class="forum_boardrow1"]')->eq(1)->text());
 
-            $topics->setReply(array('username' => $username , 'time' => (new Date)->formatTime($time[1])));
+            $topics->setReply(array('username' => $username, 'time' => (new Date)->formatTime($time[1])));
 
             return $topics;
         } else {
@@ -225,52 +225,52 @@ class ForumParser
     private static function parseTopicDetails($item)
     {
         $crawler = new Crawler($item);
-            $topic = new Forum();
-            $topic->profile = new Profile();
+        $topic = new Forum();
+        $topic->profile = new Profile();
 
-            $topic->setTime($crawler->filter('td div div')->eq(1)->text());
+        $topic->setTime($crawler->filter('td div div')->eq(1)->text());
 
-            # message id.
-            # Example:
-            # <div class="forum_border_around" id="forumMsg30902219">...</div>
-            $topic->setid(str_replace('forumMsg', '', $crawler->attr('id')));
+        # message id.
+        # Example:
+        # <div class="forum_border_around" id="forumMsg30902219">...</div>
+        $topic->setid(str_replace('forumMsg', '', $crawler->attr('id')));
 
-            # image url.
-            # Example:
-            # <img src="http://cdn.myanimelist.net/images/useravatars/1901304.jpg" vspace="2" border="0">
-            //Note: Some MAL users do not have any avatars in the forum!
-            try {
-                $topic->profile->setAvatarUrl($crawler->filter('img')->attr('src'));
-            } catch (\InvalidArgumentException $e) {
-                //do nothing
-            }
+        # image url.
+        # Example:
+        # <img src="http://cdn.myanimelist.net/images/useravatars/1901304.jpg" vspace="2" border="0">
+        //Note: Some MAL users do not have any avatars in the forum!
+        try {
+            $topic->profile->setAvatarUrl($crawler->filter('img')->attr('src'));
+        } catch (\InvalidArgumentException $e) {
+            //do nothing
+        }
 
-            $details = explode("\n\t\t  ", $crawler->filter('td[class="forum_boardrow2"]')->text());
-            $topic->setUsername($details[0]);
-            $topic->profile->details->setForumPosts(str_replace('Posts: ', '', $details[6]));
-            if ($details[1] == '')
-                $topic->profile->details->setAccessRank('Member');
-            else
-                $topic->profile->details->setAccessRank($details[1]);
+        $details = explode("\n\t\t  ", $crawler->filter('td[class="forum_boardrow2"]')->text());
+        $topic->setUsername($details[0]);
+        $topic->profile->details->setForumPosts(str_replace('Posts: ', '', $details[6]));
+        if ($details[1] == '')
+            $topic->profile->details->setAccessRank('Member');
+        else
+            $topic->profile->details->setAccessRank($details[1]);
 
-            if ($topic->profile->details->getForumPosts() == '') {
-                $topic->profile->details->setStatus($details[3]);
-                $topic->profile->details->setJoinDate(str_replace('Joined: ', '', $details[4]));
-                $topic->profile->details->setForumPosts(str_replace('Posts: ', '', $details[5]));
-            } else {
-                $topic->profile->details->setStatus($details[4]);
-                $topic->profile->details->setJoinDate(str_replace('Joined: ', '', $details[5]));
-            }
+        if ($topic->profile->details->getForumPosts() == '') {
+            $topic->profile->details->setStatus($details[3]);
+            $topic->profile->details->setJoinDate(str_replace('Joined: ', '', $details[4]));
+            $topic->profile->details->setForumPosts(str_replace('Posts: ', '', $details[5]));
+        } else {
+            $topic->profile->details->setStatus($details[4]);
+            $topic->profile->details->setJoinDate(str_replace('Joined: ', '', $details[5]));
+        }
 
-            //to force json array and !objects.
-            $topic->profile->manga_stats = null;
-            $topic->profile->anime_stats = null;
+        //to force json array and !objects.
+        $topic->profile->manga_stats = null;
+        $topic->profile->anime_stats = null;
 
-            # comment.
-            # Example:
-            # <div id="message25496275">...</div>
-            $topic->setComment($crawler->filter('td[class="forum_boardrow1"] div')->html());
-            return $topic;
+        # comment.
+        # Example:
+        # <div id="message25496275">...</div>
+        $topic->setComment($crawler->filter('td[class="forum_boardrow1"] div')->html());
+        return $topic;
     }
 
 }
