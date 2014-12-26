@@ -123,7 +123,7 @@ class Anime
      * The value is null if the date is unknown.
      * Example: "2004-10-07", "2004-10", or "2004".
      *
-     * @SerializedName("startDate")
+     * @SerializedName("start_date")
      * @Type("string")
      * @Since("2.0")
      */
@@ -138,7 +138,7 @@ class Anime
      * The value is null if the date is unknown.
      * Example: "2004-10-07", "2004-10", or "2004".
      *
-     * @SerializedName("endDate")
+     * @SerializedName("end_date")
      * @Type("string")
      * @Since("2.0")
      */
