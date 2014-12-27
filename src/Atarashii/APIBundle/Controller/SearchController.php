@@ -194,7 +194,7 @@ class SearchController extends FOSRestController
         }
 
         if ($category < 0) {
-            $category = 0;
+            $category = -1;
         }
 
         $downloader = $this->get('atarashii_api.communicator');
