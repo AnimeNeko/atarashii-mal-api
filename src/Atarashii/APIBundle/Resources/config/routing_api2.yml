@@ -195,6 +195,12 @@ _api2_forum_manga:
     requirements:
         _method: GET
 
+_api2_forum_search:
+    path: /forum/search
+    defaults: { _controller: AtarashiiAPIBundle:Search:getForum, _format: json, apiVersion: '2.0' }
+    requirements:
+        _method: GET
+
 _api2_forum_topics:
     path: /forum/{id}
     defaults: { _controller: AtarashiiAPIBundle:Forum:getForumTopics, _format: json, apiVersion: '2.0' }

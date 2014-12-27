@@ -10,6 +10,7 @@
 
 namespace Atarashii\APIBundle\Controller;
 
+use Atarashii\APIBundle\Parser\ForumParser;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -165,6 +166,69 @@ class SearchController extends FOSRestController
             $view = $this->view($searchmanga);
 
             $view->setSerializationContext($serializationContext);
+            $view->setResponse($response);
+            $view->setStatusCode(200);
+
+            return $view;
+        }
+    }
+
+    /**
+     * Search for a topic in the forum.
+     *
+     * @param Request $request The HTTP Request object.
+     *
+     * @return View
+     */
+    public function getForumAction(Request $request)
+    {
+        // http://myanimelist.net/forum/?action=search&q=#{keyword}&u=#{user}&uloc=#{userCategory}&loc=#{category}
+
+        $user = $request->query->get('user');
+        $query = $request->query->get('query');
+        $userCategory = (int) $request->query->get('userCategory');
+        $category = (int) $request->query->get('category');
+
+        if ($userCategory <= 0) {
+            $userCategory = 1;
+        }
+
+        if ($category < 0) {
+            $category = 0;
+        }
+
+        $downloader = $this->get('atarashii_api.communicator');
+
+        try {
+            $content = $downloader->fetch('/forum/?action=search&q=' . $query . '&u=' . $user . '&uloc=' . $userCategory . '&loc=' . $category);
+        } catch (Exception\CurlException $e) {
+            return $this->view(Array('error' => 'network-error'), 500);
+        }
+
+        $response = new Response();
+
+        $response->setPublic();
+        $response->setMaxAge(3600); //One hour
+        $response->headers->addCacheControlDirective('must-revalidate', true);
+        $response->setEtag('forum/search?q=' . urlencode($query . $user));
+
+        //Also, set "expires" header for caches that don't understand Cache-Control
+        $date = new \DateTime();
+        $date->modify('+3600 seconds'); //One hour
+        $response->setExpires($date);
+
+        if (strpos($content, 'User not found') !== false || !strpos($content, 'Topic') !== false) {
+            $view = $this->view(Array('error' => 'not-found'));
+            $view->setResponse($response);
+            $view->setStatusCode(404);
+
+            return $view;
+        } else {
+
+            $result = ForumParser::parseTopics($content);
+
+            $view = $this->view($result);
+
             $view->setResponse($response);
             $view->setStatusCode(200);
 
