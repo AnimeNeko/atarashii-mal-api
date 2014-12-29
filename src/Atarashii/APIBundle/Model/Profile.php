@@ -10,6 +10,11 @@
 
 namespace Atarashii\APIBundle\Model;
 
+use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\Since;
+use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\Until;
+
 /**
 * An instance of this class represents a single user's profile
 */
@@ -84,13 +89,70 @@ class Profile
 */
 class ProfileDetails
 {
+    /**
+     * The date of when the user was last online.
+     *
+     * API 1.0
+     * Formatted for compatibility with the old Ruby API.
+     * It is not formatted, this means it would return raw time information from MAL.
+     * The value is null if the date is unknown.
+     * Example: "12-14-14, 12:01 PM" or "16 minutes ago".
+     *
+     * @Type("string")
+     * @Until("2.0")
+     */
     private $lastOnline;
+
+    /**
+     * The date of when the user was last online.
+     *
+     * API 2.0+
+     * Formatted as an ISO8601-compatible string.
+     * The contents my be formatted as a year, year and month, or year, month and day.
+     * The value is null if the date is unknown.
+     * Example: "2004-10-07T10:05+0100", "2004-10-07T10+0100", or "2004-10-07+0100".
+     *
+     * @SerializedName("last_online")
+     * @Type("string")
+     * @Since("2.0")
+     */
+    private $lastOnline2;
+
     private $status;
     private $gender;
     private $birthday;
     private $location;
     private $website;
+
+    /**
+     * The date of when the user joined MAL.
+     *
+     * API 1.0
+     * Formatted for compatibility with the old Ruby API.
+     * It is not formatted, this means it would return raw time information from MAL.
+     * The value is null if the date is unknown.
+     * Example: "12-14-14, 12:01 PM" or "16 minutes ago".
+     *
+     * @Type("string")
+     * @Until("2.0")
+     */
     private $joinDate;
+
+    /**
+     * The date of when the user joined MAL.
+     *
+     * API 2.0+
+     * Formatted as an ISO8601-compatible string.
+     * The contents my be formatted as a year, year and month, or year, month and day.
+     * The value is null if the date is unknown.
+     * Example: "2004-10-07T10:05+0100", "2004-10-07T10+0100", or "2004-10-07+0100".
+     *
+     * @SerializedName("join_date")
+     * @Type("string")
+     * @Since("2.0")
+     */
+    private $joinDate2;
+
     private $accessRank;
     private $animeListViews = 0;
     private $mangaListViews = 0;
@@ -103,13 +165,17 @@ class ProfileDetails
     /**
      * Set the lastOnline property
      *
+     * This function is for compatibility with certain parts of API1
+     *
      * @param string $lastOnline The last time when an user was online.
      *
      * @return void
      */
     public function setLastOnline($lastOnline)
     {
-        $this->lastOnline = (new Date)->formatTime($lastOnline);
+        $this->lastOnline = $lastOnline;
+
+        $this->lastOnline2 = (new Date)->formatTime($lastOnline);
     }
 
     /**
@@ -235,13 +301,17 @@ class ProfileDetails
     /**
      * Set the joinDate property
      *
+     * This function is for compatibility with certain parts of API1
+     *
      * @param string $joinDate The MAL join date of an user.
      *
      * @return void
      */
     public function setJoinDate($joinDate)
     {
-        $this->joinDate = (new Date)->formatTime($joinDate);
+        $this->joinDate = $joinDate;
+
+        $this->joinDate2 = (new Date)->formatTime($joinDate);
     }
 
     /**
