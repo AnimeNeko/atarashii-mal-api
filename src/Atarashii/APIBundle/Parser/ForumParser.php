@@ -113,7 +113,10 @@ class ForumParser
 
         try {
             $pages = $crawler->filter('div[style="height: 15px; margin: 5px 0px;"] div')->last()->text();
-            $result['pages'] = ((int)substr($pages, strpos($pages, ' (') + 2, strpos($pages, ')')));
+            if ($pages != '')
+                $result['pages'] = ((int) substr($pages, strpos($pages, ' (') + 2, strpos($pages, ')')));
+            else
+                $result['pages'] = 1;
         } catch (\InvalidArgumentException $e) {
             //do nothing
         }
@@ -162,7 +165,10 @@ class ForumParser
 
         try {
             $pages = $crawler->filter('div[style="height: 15px; margin: 5px 0px;"] div')->last()->text();
-            $result['pages'] = ((int)substr($pages, strpos($pages, ' (') + 2, strpos($pages, ')')));
+            if ($pages != '')
+                $result['pages'] = ((int) substr($pages, strpos($pages, ' (') + 2, strpos($pages, ')')));
+            else
+                $result['pages'] = 1;
         } catch (\InvalidArgumentException $e) {
             //do nothing
         }
@@ -220,7 +226,10 @@ class ForumParser
         }
 
         $pages = $crawler->filter('div[style="height: 15px; margin: 5px 0px; padding: 3px 0;"] div')->last()->text();
-        $result['pages'] = ((int) substr($pages, strpos($pages, ' (') + 2, strpos($pages, ')')));
+        if ($pages != '')
+            $result['pages'] = ((int) substr($pages, strpos($pages, ' (') + 2, strpos($pages, ')')));
+        else
+            $result['pages'] = 1;
         $result['list'] = $set;
 
         return $result;
