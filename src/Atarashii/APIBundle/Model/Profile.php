@@ -118,7 +118,17 @@ class ProfileDetails
      */
     private $lastOnline2;
 
+    /**
+     * The status of an user.
+     *
+     * This will indicate if an user is online or offline.
+     * Example: "Online" or "Offline".
+     *
+     * @Type("string")
+     * @Since("2.0")
+     */
     private $status;
+
     private $gender;
     private $birthday;
     private $location;
