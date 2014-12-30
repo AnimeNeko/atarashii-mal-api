@@ -152,6 +152,12 @@ class AnimeParser
             }
         }
 
+        # Producers:
+        $extracted = $leftcolumn->filterXPath('//span[text()="Producers:"]');
+        if (iterator_count($extracted) > 0) {
+            $animerecord->setProducers(explode(', ', trim(str_replace($extracted->text(), '', $extracted->parents()->text()))));
+        }
+
         # Genres:
         $extracted = $leftcolumn->filterXPath('//span[text()="Genres:"]');
         if (iterator_count($extracted) > 0) {
@@ -392,6 +398,20 @@ class AnimeParser
                             $itemarray['title'] = $itemparts[3];
                             $itemarray['url'] = 'http://myanimelist.net'.$itemparts[1];
                             $animerecord->setAlternativeVersions($itemarray);
+                        }
+                    }
+                }
+
+                #Other
+                if (preg_match('/Other?\: ?(<a .+?)\<br/', $relatedcontent, $relateditems)) {
+                    $relateditems = explode(', ', $relateditems[1]);
+                    foreach ($relateditems as $item) {
+                        if (preg_match('/<a href="(\/anime\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
+                            $itemarray = array();
+                            $itemarray['anime_id'] = $itemparts[2];
+                            $itemarray['title'] = $itemparts[3];
+                            $itemarray['url'] = 'http://myanimelist.net'.$itemparts[1];
+                            $animerecord->setOther($itemarray);
                         }
                     }
                 }

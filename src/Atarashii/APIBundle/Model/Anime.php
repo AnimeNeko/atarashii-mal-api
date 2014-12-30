@@ -186,6 +186,14 @@ class Anime
     private $synopsis;
 
     /**
+     * A list of producers for the anime
+     *
+     * @Type("array<string>")
+     * @Since("2.0")
+     */
+    private $producers = array();
+
+    /**
      * A list of genres for the anime
      *
      * @Type("array<string>")
@@ -243,6 +251,13 @@ class Anime
      * A list of alternative versions of this anime.
      */
     private $alternativeVersions = array();
+
+    /**
+     * A list of other related animes.
+     *
+     * @Since("2.0")
+     */
+    private $other = array();
 
     /**
      * Personal watched status of the anime
@@ -906,6 +921,28 @@ class Anime
     }
 
     /**
+     * Set the producers property
+     *
+     * @param string $producers The producers of series.
+     *
+     * @return void
+     */
+    public function setProducers($producers)
+    {
+        $this->producers = $producers;
+    }
+
+    /**
+     * Get the producers property
+     *
+     * @return string
+     */
+    public function getProducers()
+    {
+        return $this->producers;
+    }
+
+    /**
      * Set the genres property
      *
      * @param string $genres The genres of series.
@@ -1138,6 +1175,28 @@ class Anime
     public function getAlternativeVersions()
     {
         return $this->alternativeVersions;
+    }
+
+    /**
+     * Set the other property
+     *
+     * @param string $other The other animes of series.
+     *
+     * @return void
+     */
+    public function setOther($other)
+    {
+        $this->other[] = $other;
+    }
+
+    /**
+     * Get the other property
+     *
+     * @return array
+     */
+    public function getOther()
+    {
+        return $this->other;
     }
 
     /**
