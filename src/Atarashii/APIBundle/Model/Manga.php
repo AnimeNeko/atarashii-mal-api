@@ -10,14 +10,12 @@
 
 namespace Atarashii\APIBundle\Model;
 
-use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\Since;
 use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Annotation\Until;
 
 class Manga
 {
-
     /**
      * The ID of the manga
      *
@@ -206,7 +204,73 @@ class Manga
      */
     private $listedMangaId;
 
-        /**
+    /**
+     * Tags assigned by the user
+     *
+     * @Type("array<string>")
+     * @Since("2.0")
+     */
+    private $personalTags = array();
+
+    /**
+     * The date the user started reading the title
+     *
+     * @Type("DateTime<'Y-m-d'>")
+     * @Since("2.0")
+     */
+    private $readingStart;
+
+    /**
+     * The date the user finished reading the title
+     *
+     * @Type("DateTime<'Y-m-d'>")
+     * @Since("2.0")
+     */
+    private $readingEnd;
+
+    /**
+     * Reading priority level for the title.
+     *
+     * Integer corresponding to the reading priority of the manga from 0 (low) to 2 (high).
+     *
+     * @Type("integer")
+     * @Since("2.0")
+     */
+    private $priority;
+
+    /**
+     * Set if the user is rerereading the manga
+     *
+     * @Type("boolean")
+     * @Since("2.0")
+     */
+    private $rereading;
+
+    /**
+     * The number of times the user has re-read the title. (Does not include the first time.)
+     *
+     * @Type("integer")
+     * @Since("2.0")
+     */
+    private $rereadCount;
+
+    /**
+     * How much value the user thinks there is in rereading the series.
+     *
+     * @Type("integer")
+     * @Since("2.0")
+     */
+    private $rereadValue;
+
+    /**
+     * The user's personal comments on the title
+     *
+     * @Type("string")
+     * @Since("2.0")
+     */
+    private $personalComments;
+
+    /**
      * Set the id property
      *
      * @param int $id The id of series.
@@ -225,7 +289,7 @@ class Manga
      */
     public function getId()
     {
-       return $this->id;
+        return $this->id;
     }
 
     /**
@@ -247,7 +311,7 @@ class Manga
      */
     public function getTitle()
     {
-       return $this->title;
+        return $this->title;
     }
 
     /**
@@ -269,7 +333,7 @@ class Manga
      */
     public function getOtherTitles()
     {
-       return $this->otherTitles;
+        return $this->otherTitles;
     }
 
     /**
@@ -291,7 +355,7 @@ class Manga
      */
     public function getRank()
     {
-       return $this->rank;
+        return $this->rank;
     }
 
     /**
@@ -313,7 +377,7 @@ class Manga
      */
     public function getPopularityRank()
     {
-       return $this->popularityRank;
+        return $this->popularityRank;
     }
 
     /**
@@ -335,14 +399,14 @@ class Manga
      */
     public function getImageUrl()
     {
-       return $this->imageUrl;
+        return $this->imageUrl;
     }
 
     /**
      * Set the type property
      *
      * @param int $type The type of series.
-     *     Can be 1/Manga, 2/Novel, 3/One Shot, 4/Doujin, 5/Manwha, 6/Manhua, or 7/OEL. The default is "Manga".
+     *                  Can be 1/Manga, 2/Novel, 3/One Shot, 4/Doujin, 5/Manwha, 6/Manhua, or 7/OEL. The default is "Manga".
      *
      * @return void
      */
@@ -412,7 +476,7 @@ class Manga
      */
     public function getChapters()
     {
-       return $this->chapters;
+        return $this->chapters;
     }
 
     /**
@@ -434,14 +498,14 @@ class Manga
      */
     public function getVolumes()
     {
-       return $this->volumes;
+        return $this->volumes;
     }
 
     /**
      * Set the status property
      *
      * @param int $status The publishing status of manga.
-     *     Can be 1 (publishing), 2 (finished) or 3 (not yet published). The default is "2".
+     *                    Can be 1 (publishing), 2 (finished) or 3 (not yet published). The default is "2".
      *
      * @return void
      */
@@ -473,7 +537,7 @@ class Manga
      */
     public function getstatus()
     {
-       return $this->status;
+        return $this->status;
     }
 
     /**
@@ -678,7 +742,7 @@ class Manga
      * Set the readStatus propery
      *
      * @param string|int $status The input status value of an item. Accepts either integers as defined
-     *     by the MAL API module, or strings as defined by the Ruby API (mal-api.com).
+     *                           by the MAL API module, or strings as defined by the Ruby API (mal-api.com).
      *
      * @return void
      */
@@ -717,7 +781,7 @@ class Manga
      * Get the current value of the read status.
      *
      * @param string $type What type you want to get back. Currently accepts either "string" or "int".
-     *     Defaults to "string".
+     *                     Defaults to "string".
      *
      * @return string|int
      */
@@ -837,6 +901,207 @@ class Manga
         return $this->listedMangaId;
     }
 
+    public function getPersonalTags()
+    {
+        return $this->personalTags;
+    }
+
+    public function setPersonalTags($tags)
+    {
+        $this->personalTags = $tags;
+    }
+
+    public function getReadingStart()
+    {
+        return $this->readingStart;
+    }
+
+    public function setReadingStart($date)
+    {
+        $this->readingStart = $date;
+    }
+
+    public function getReadingEnd()
+    {
+        return $this->readingEnd;
+    }
+
+    public function setReadingEnd($date)
+    {
+        $this->readingEnd = $date;
+    }
+
+    /**
+     * Get the current reading priority for the anime title
+     *
+     * @param string $type What type you want to get back.
+     *                     Currently accepts either "string" or "int". Defaults to "int".
+     *
+     * @return string|int
+     */
+    public function getPriority($type = 'int')
+    {
+        if ($type == 'string') {
+            switch ($this->priority) {
+                case 1:
+                    return 'Medium';
+                    break;
+                case 2:
+                    return 'High';
+                    break;
+                default:
+                    return 'Low';
+                    break;
+            }
+        } else {
+            return $this->priority;
+        }
+    }
+
+    public function setPriority($priority)
+    {
+        $this->priority = (int) $priority;
+    }
+
+//    /**
+//     * Get the current value for the storage type that the anime is on
+//     *
+//     * @param string $type What type you want to get back.
+//     *                     Currently accepts either "string" or "int". Defaults to "int".
+//     *
+//     * @return string|int
+//     */
+//    public function getStorage($type = 'int')
+//    {
+//        if ($type == 'string') {
+//            switch ($this->storage) {
+//                case 1:
+//                    return 'Hard Drive';
+//                    break;
+//                case 2:
+//                    return 'DVD / CD';
+//                    break;
+//                case 3:
+//                    return 'None';
+//                    break;
+//                case 4:
+//                    return 'Retail DVD';
+//                    break;
+//                case 5:
+//                    return 'VHS';
+//                    break;
+//                case 6:
+//                    return 'External HD';
+//                    break;
+//                case 7:
+//                    return 'NAS';
+//                    break;
+//                default:
+//                    return NULL;
+//                    break;
+//            }
+//        } else {
+//            return $this->storage;
+//        }
+//
+//    }
+//
+//    public function setStorage($storage)
+//    {
+//        $this->storage = $storage;
+//    }
+//
+//    public function getStorageValue()
+//    {
+//        return $this->storageValue;
+//    }
+//
+//    public function setStorageValue($value)
+//    {
+//        $this->storageValue = (float) $value;
+//    }
+//
+//    public function getEpsDownloaded()
+//    {
+//        return $this->epsDownloaded;
+//    }
+//
+//    public function setEpsDownloaded($downloaded)
+//    {
+//        $this->epsDownloaded = (int) $downloaded;
+//    }
+//
+    public function getRereading()
+    {
+        return $this->rereading;
+    }
+
+    public function setRereading($rereading)
+    {
+        $this->rereading = $rereading;
+    }
+
+    public function getRereadCount()
+    {
+        return $this->rereadCount;
+    }
+
+    public function setRereadCount($count)
+    {
+        $this->rereadCount = (int) $count;
+    }
+
+    /**
+     * Get the current reading priority for the title
+     *
+     * @param string $type What type you want to get back.
+     *                     Currently accepts either "string" or "int". Defaults to "int".
+     *
+     * @return string|int
+     */
+    public function getRereadValue($type = 'int')
+    {
+        if ($type == 'string') {
+            switch ($this->rereadValue) {
+                case 1:
+                    return 'Very Low';
+                    break;
+                case 2:
+                    return 'Low';
+                    break;
+                case 3:
+                    return 'Medium';
+                    break;
+                case 4:
+                    return 'High';
+                    break;
+                case 5:
+                    return 'Very High';
+                    break;
+                default:
+                    return NULL;
+                    break;
+            }
+        } else {
+            return $this->rereadValue;
+        }
+    }
+
+    public function setRereadValue($value)
+    {
+        $this->rereadValue = (int) $value;
+    }
+
+    public function getPersonalComments()
+    {
+        return $this->personalComments;
+    }
+
+    public function setPersonalComments($comments)
+    {
+        $this->personalComments = $comments;
+    }
+
     /**
      * Return a formatted XML document for updating MAL
      *
@@ -854,5 +1119,4 @@ class Manga
 
         return $xml->asXML();
     }
-
 }

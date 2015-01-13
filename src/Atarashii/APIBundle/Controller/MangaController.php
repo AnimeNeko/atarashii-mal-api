@@ -24,15 +24,18 @@ class MangaController extends FOSRestController
     /**
      * Get the details of a manga
      *
-     * @param int     $id The ID of the manga as assigned by MyAnimeList
+     * @param int     $id         The ID of the manga as assigned by MyAnimeList
      * @param string  $apiVersion The API version of the request
-     * @param Request $request HTTP Request object
+     * @param Request $request    HTTP Request object
      *
      * @return View
      */
     public function getAction($id, $apiVersion, Request $request)
     {
+        //General information (and basic personal information) at:
         // http://myanimelist.net/manga/#{id}
+        //Detailed personal information at:
+        // http://myanimelist.net/panel.php?go=editmanga&id={listed id}&hidenav=true
 
         $usepersonal = (int) $request->query->get('mine');
 
@@ -44,27 +47,40 @@ class MangaController extends FOSRestController
             $password = $this->getRequest()->server->get('PHP_AUTH_PW');
 
             try {
-                if (!$downloader->cookieLogin($username, $password)){
-                    $view = $this->view(Array('error' => 'unauthorized'), 401);
+                if (!$downloader->cookieLogin($username, $password)) {
+                    $view = $this->view(array('error' => 'unauthorized'), 401);
                     $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
 
                     return $view;
                 }
             } catch (Exception\CurlException $e) {
-                return $this->view(Array('error' => 'network-error'), 500);
+                return $this->view(array('error' => 'network-error'), 500);
             }
         }
 
         try {
             $mangadetails = $downloader->fetch('/manga/' . $id);
         } catch (Exception\CurlException $e) {
-            return $this->view(Array('error' => 'network-error'), 500);
+            return $this->view(array('error' => 'network-error'), 500);
         }
 
         if (strpos($mangadetails, 'No manga found') !== false) {
-            return $this->view(Array('error' => 'No manga found, check the manga id and try again.'), 404);
+            return $this->view(array('error' => 'No manga found, check the manga id and try again.'), 404);
         } else {
             $manga = MangaParser::parse($mangadetails);
+
+            //Parse extended personal details if API 2.0 or better and personal details are requested
+            if ($apiVersion >= "2.0" && $usepersonal) {
+                try {
+                    $mangaDetails = $downloader->fetch('http://myanimelist.net/panel.php?go=editmanga&id='.$manga->getListedMangaId().'&hidenav=true');
+                } catch (Exception\CurlException $e) {
+                    return $this->view(array('error' => 'network-error'), 500);
+                }
+
+                if (strpos($mangaDetails, 'This is not your entry') === false) {
+                    $manga = MangaParser::parseExtendedPersonal($mangaDetails, $manga);
+                }
+            }
 
             $response = new Response();
             $serializationContext = SerializationContext::create();
@@ -73,6 +89,12 @@ class MangaController extends FOSRestController
             //For compatibility, API 1.0 explicitly passes null parameters.
             if ($apiVersion == "1.0") {
                 $serializationContext->setSerializeNull(true);
+            }
+
+            //After API 1.0, we don't show the "listed manga id" parameter
+            //Always set it to null to hide it from the output.
+            if ($apiVersion > 1.0) {
+                $manga->setListedMangaId(null);
             }
 
             //Only include cache info if it doesn't include personal data.
@@ -101,7 +123,7 @@ class MangaController extends FOSRestController
     /**
      * Get the reviews of a manga
      *
-     * @param int     $id The ID of the manga as assigned by MyAnimeList
+     * @param int     $id      The ID of the manga as assigned by MyAnimeList
      * @param Request $request HTTP Request object
      *
      * @return View
@@ -120,11 +142,11 @@ class MangaController extends FOSRestController
         try {
             $details = $downloader->fetch('/manga/' . $id . '/ /reviews&p=' . $page);
         } catch (Exception\CurlException $e) {
-            return $this->view(Array('error' => 'network-error'), 500);
+            return $this->view(array('error' => 'network-error'), 500);
         }
 
         if (strpos($details, 'no reviews submitted') !== false) {
-            return $this->view(Array('error' => 'There have been no reviews submitted for this manga yet.'), 200);
+            return $this->view(array('error' => 'There have been no reviews submitted for this manga yet.'), 200);
         } else {
             $reviews = ReviewParser::parse($details, 'M'); //M = Manga
 
@@ -167,11 +189,11 @@ class MangaController extends FOSRestController
         try {
             $details = $downloader->fetch('/manga/' . $id . '/ /characters');
         } catch (Exception\CurlException $e) {
-            return $this->view(Array('error' => 'network-error'), 500);
+            return $this->view(array('error' => 'network-error'), 500);
         }
 
         if (strpos($details, 'No characters') !== false) {
-            return $this->view(Array('error' => 'No characters were found. '), 200);
+            return $this->view(array('error' => 'No characters were found. '), 200);
         } else {
             $cast = CastParser::parse($details);
 

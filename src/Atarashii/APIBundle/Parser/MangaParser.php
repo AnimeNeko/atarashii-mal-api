@@ -12,6 +12,7 @@ namespace Atarashii\APIBundle\Parser;
 
 use Symfony\Component\DomCrawler\Crawler;
 use Atarashii\APIBundle\Model\Manga;
+use \DateTime;
 
 class MangaParser
 {
@@ -282,7 +283,6 @@ class MangaParser
                 //Note: There is a "related manga" option, but it doesn't appear to
                 //work properly in the existing API. We should extend to include all
                 //the other relations anyway.
-
             }
         }
 
@@ -347,5 +347,127 @@ class MangaParser
         }
 
         return $mangarecord;
+    }
+
+    public static function parseExtendedPersonal($contents, $manga)
+    {
+        $crawler = new Crawler();
+        $crawler->addHTMLContent($contents, 'UTF-8');
+
+        #Re-reading
+        #<label><input type="checkbox" name="rereading" id="rereadingBox" onclick="checkReReading();" value="1" > Re-reading</label>
+        $rereading = $crawler->filter('input[id="rereadingBox"]')->attr('checked');
+
+        if ($rereading) {
+            $manga->setRereading(true);
+        }
+
+        #Personal tags
+        #<td align="left" class="borderClass"><textarea name="tags" rows="2" id="tagtext" cols="45" class="textarea"></textarea><div class="spaceit_pad"><small>Popular tags: <a href="javascript:void(0);" onclick="detailedadd_addTag('cooking');">cooking</a>, <a href="javascript:void(0);" onclick="detailedadd_addTag('seinen');">seinen</a>, <a href="javascript:void(0);" onclick="detailedadd_addTag('drama');">drama</a>, <a href="javascript:void(0);" onclick="detailedadd_addTag('slice of life');">slice of life</a></small></div></td>
+        $personalTags = $crawler->filter('textarea[name="tags"]')->text();
+
+        if (strlen($personalTags) > 0) {
+            $personalTags = explode(',', $personalTags);
+
+            foreach ($personalTags as $tag) {
+                $tagArray[] = trim($tag);
+            }
+
+            $manga->setPersonalTags($tagArray);
+        }
+
+        #Start and Finish Dates
+        #<tr>
+        #    <td align="left" class="borderClass">Start Date</td>
+        #                <td align="left" class="borderClass">
+        #    Month:
+        #    <select name="startMonth" id="smonth"  class="inputtext">
+        #        <option value="00">
+        #        <option value="01" >Jan<option value="02" >Feb<option value="03" >Mar<option value="04" >Apr<option value="05" >May<option value="06" >Jun<option value="07" >Jul<option value="08" >Aug<option value="09" selected>Sep<option value="10" >Oct<option value="11" >Nov<option value="12" >Dec			</select>
+        #    Day:
+        #    <select name="startDay"  class="inputtext">
+        #        <option value="00">
+        #        <option value="01" >1<option value="02" >2<option value="03" >3<option value="04" >4<option value="05" >5<option value="06" >6<option value="07" >7<option value="08" >8<option value="09" >9<option value="10" >10<option value="11" >11<option value="12" >12<option value="13" >13<option value="14" >14<option value="15" >15<option value="16" >16<option value="17" >17<option value="18" >18<option value="19" >19<option value="20" >20<option value="21" >21<option value="22" >22<option value="23" >23<option value="24" >24<option value="25" selected>25<option value="26" >26<option value="27" >27<option value="28" >28<option value="29" >29<option value="30" >30<option value="31" >31			</select>
+        #    Year:
+        #    <select name="startYear"  class="inputtext">
+        #        <option value="0000">
+        #        <option value="2014" >2014<option value="2013" selected>2013<option value="2012" >2012<option value="2011" >2011<option value="2010" >2010<option value="2009" >2009<option value="2008" >2008<option value="2007" >2007<option value="2006" >2006<option value="2005" >2005<option value="2004" >2004<option value="2003" >2003<option value="2002" >2002<option value="2001" >2001<option value="2000" >2000<option value="1999" >1999<option value="1998" >1998<option value="1997" >1997<option value="1996" >1996<option value="1995" >1995<option value="1994" >1994<option value="1993" >1993<option value="1992" >1992<option value="1991" >1991<option value="1990" >1990<option value="1989" >1989<option value="1988" >1988<option value="1987" >1987<option value="1986" >1986<option value="1985" >1985<option value="1984" >1984			</select>
+        #    &nbsp;
+        #    <label><input type="checkbox"  onchange="ChangeStartDate();" name="unknownStart" value="1"> <small>Unknown Date</label><br>Start Date represents the date you started watching the Anime <a href="javascript:setToday(1);">Insert Today</a></small>
+        #    </td>
+        #</tr>
+        #<tr>
+        #    <td align="left" class="borderClass">Finish Date</td>
+        #                <td align="left" class="borderClass">
+        #    Month:
+        #    <select name="endMonth" id="emonth" class="inputtext" >
+        #        <option value="00">
+        #        <option value="01" >Jan<option value="02" >Feb<option value="03" >Mar<option value="04" >Apr<option value="05" >May<option value="06" >Jun<option value="07" >Jul<option value="08" >Aug<option value="09" >Sep<option value="10" selected>Oct<option value="11" >Nov<option value="12" >Dec			</select>
+        #    Day:
+        #    <select name="endDay" class="inputtext" >
+        #        <option value="00">
+        #        <option value="01" >1<option value="02" >2<option value="03" >3<option value="04" >4<option value="05" >5<option value="06" >6<option value="07" >7<option value="08" >8<option value="09" >9<option value="10" >10<option value="11" selected>11<option value="12" >12<option value="13" >13<option value="14" >14<option value="15" >15<option value="16" >16<option value="17" >17<option value="18" >18<option value="19" >19<option value="20" >20<option value="21" >21<option value="22" >22<option value="23" >23<option value="24" >24<option value="25" >25<option value="26" >26<option value="27" >27<option value="28" >28<option value="29" >29<option value="30" >30<option value="31" >31			</select>
+        #    Year:
+        #    <select name="endYear" class="inputtext" >
+        #        <option value="0000">
+        #        <option value="2014" >2014<option value="2013" selected>2013<option value="2012" >2012<option value="2011" >2011<option value="2010" >2010<option value="2009" >2009<option value="2008" >2008<option value="2007" >2007<option value="2006" >2006<option value="2005" >2005<option value="2004" >2004<option value="2003" >2003<option value="2002" >2002<option value="2001" >2001<option value="2000" >2000<option value="1999" >1999<option value="1998" >1998<option value="1997" >1997<option value="1996" >1996<option value="1995" >1995<option value="1994" >1994<option value="1993" >1993<option value="1992" >1992<option value="1991" >1991<option value="1990" >1990<option value="1989" >1989<option value="1988" >1988<option value="1987" >1987<option value="1986" >1986<option value="1985" >1985<option value="1984" >1984			</select>
+        #    &nbsp;
+        #    <small><label><input type="checkbox" onchange="ChangeEndDate();"  name="unknownEnd" value="1"> Unknown Date</label><br>Do <u>not</u> fill out the Finish Date unless status is <em>Completed</em> <a href="javascript:setToday(2);">Insert Today</a></small>
+        #    </td>
+        #</tr>
+        $isStarted = $crawler->filter('input[name="unknownStart"]')->attr('checked');
+        $isEnded = $crawler->filter('input[name="unknownEnd"]')->attr('checked');
+
+        if ($isStarted != "checked") {
+            $startMonth = $crawler->filter('select[name="startMonth"] option:selected')->attr('value');
+            $startDay = $crawler->filter('select[name="startDay"] option:selected')->attr('value');
+            $startYear = $crawler->filter('select[name="startYear"] option:selected')->attr('value');
+
+            $manga->setReadingStart(DateTime::createFromFormat('Y-n-j', "$startYear-$startMonth-$startDay"));
+        }
+
+        if ($isEnded != "checked") {
+            $endMonth = $crawler->filter('select[name="endMonth"] option:selected')->attr('value');
+            $endDay = $crawler->filter('select[name="endDay"] option:selected')->attr('value');
+            $endYear = $crawler->filter('select[name="endYear"] option:selected')->attr('value');
+
+            $manga->setReadingEnd(DateTime::createFromFormat('Y-n-j', "$endYear-$endMonth-$endDay"));
+        }
+
+        #Priority
+        #<td align="left" class="borderClass">Priority</td>
+        #<td align="left" class="borderClass"><select name="priority" class="inputtext">
+        #<option value="0">Select</option>
+        #<option value="0" selected>Low<option value="1" >Medium<option value="2" >High                </select>
+        #<div style="margin-top 3px;"><small>What is your priority level to read this manga?</small></div></td>
+        $priority = $crawler->filter('select[name="priority"] option:selected')->attr('value');
+        $manga->setPriority($priority);
+
+        #Times Reread
+        #<td align="left" class="borderClass"><input type="text" class="inputtext" size="4" value="0" name="times_read">
+        $rereadCount = $crawler->filter('input[name="times_read"]')->attr('value');
+
+        if ($rereadCount > 0) {
+            $manga->setRereadCount($rereadCount);
+        }
+
+        #Reread Value
+        #<td align="left" class="borderClass"><select class="inputtext" name="reread_value">
+        #	<option value="0">Select reread value</option><option value="1">Very Low</option><option value="2">Low</option><option value="3">Medium</option><option value="4">High</option><option value="5">Very High			</option></select>
+        $rereadValue = $crawler->filter('select[name="reread_value"] option:selected');
+
+        if (count($rereadValue)) {
+            $manga->setRereadValue($rereadValue->attr('value'));
+        }
+
+        #Comments
+        #<td align="left" class="borderClass"><textarea class="textarea" cols="45" rows="5" name="comments"></textarea></td>
+        $comments = trim($crawler->filter('textarea[name="comments"]')->text());
+
+        if (strlen($comments)) {
+            $manga->setPersonalComments($comments);
+        }
+
+        return $manga;
     }
 }
