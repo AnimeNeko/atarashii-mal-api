@@ -1058,15 +1058,64 @@ class Manga
      *
      * @return string An XML document of manga values as defined at http://myanimelist.net/modules.php?go=api#mangavalues
      */
-    public function MALApiXml()
+    public function MALApiXml($update_items)
     {
         //For now, just add in the parameters we will use. The MAL API will handle missing items just fine.
         $xml = new \SimpleXMLElement('<entry/>');
 
-        $xml->addChild('chapter', $this->getChaptersRead());
-        $xml->addChild('volume', $this->getVolumesRead());
-        $xml->addChild('status', $this->getReadStatus('int')); //Use int for the MAL API to eliminate problems with strings.
-        $xml->addChild('score', $this->getScore());
+        if(in_array('chapters', $update_items)) {
+            $xml->addChild('chapter', $this->getChaptersRead());
+        }
+
+        if(in_array('volumes', $update_items)) {
+            $xml->addChild('volume', $this->getVolumesRead());
+        }
+
+        if(in_array('status', $update_items)) {
+            $xml->addChild('status', $this->getReadStatus('int')); //Use int for the MAL API to eliminate problems with strings.
+        }
+
+        if(in_array('score', $update_items)) {
+            $xml->addChild('score', $this->getScore());
+        }
+
+        if(in_array('downloaded', $update_items)) {
+            $xml->addChild('downloaded_chapters', $this->getChapDownloaded());
+        }
+
+        if(in_array('rereadCount', $update_items)) {
+            $xml->addChild('times_reread', $this->getRereadCount());
+        }
+
+        if(in_array('rereadValue', $update_items)) {
+            $xml->addChild('reread_value', $this->getRereadValue('int'));
+        }
+
+        if(in_array('start', $update_items)) {
+            // Date must be MMDDYYYY.
+            $xml->addChild('date_start', $this->getReadingStart()->format('mdY'));
+        }
+
+        if(in_array('end', $update_items)) {
+            // Date must be MMDDYYY.
+            $xml->addChild('date_finish', $this->getReadingEnd()->format('mdY'));
+        }
+
+        if(in_array('priority', $update_items)) {
+            $xml->addChild('priority', $this->getPriority('int'));
+        }
+
+        if(in_array('isRereading', $update_items)) {
+            $xml->addChild('enable_rereading', $this->getRereading());
+        }
+
+        if(in_array('comments', $update_items)) {
+            $xml->addChild('comments', $this->getPersonalComments());
+        }
+
+        if(in_array('tags', $update_items)) {
+            $xml->addChild('tags', $this->getPersonalTags());
+        }
 
         return $xml->asXML();
     }

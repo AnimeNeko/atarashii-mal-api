@@ -17,6 +17,7 @@ use Guzzle\Http\Exception;
 use Atarashii\APIBundle\Model\Manga;
 use JMS\Serializer\SerializationContext;
 
+use \DateTime;
 use \SimpleXMLElement;
 
 class MangaListController extends FOSRestController
@@ -118,12 +119,36 @@ class MangaListController extends FOSRestController
 
         $manga = new Manga();
         $manga->setId($request->request->get('manga_id'));
-        $manga->setReadStatus($request->request->get('status'));
-        $manga->setChaptersRead($request->request->get('chapters'));
-        $manga->setVolumesRead($request->request->get('volumes'));
-        $manga->setScore($request->request->get('score'));
 
-        $xmlcontent = $manga->MALApiXml();
+        //Only use values we were sent for the Update XML
+        $update_items = array();
+
+        try {
+
+            if($request->request->get('status') !== null) {
+                $manga->setReadStatus($request->request->get('status'));
+                $update_items[] = 'status';
+            }
+
+            if($request->request->get('chapters') !== null) {
+                $manga->setChaptersRead($request->request->get('chapters'));
+                $update_items[] = 'chapters';
+            }
+
+            if($request->request->get('volumes') !== null) {
+                $manga->setVolumesRead($request->request->get('volumes'));
+                $update_items[] = 'volumes';
+            }
+
+            if ($request->request->get('score') !== null) {
+                $manga->setScore($request->request->get('score'));
+                $update_items[] = 'score';
+            }
+        } catch (\Exception $e) {
+            return $this->view(Array('error' => $e->getMessage()), 500);
+        }
+
+        $xmlcontent = $manga->MALApiXml($update_items);
 
         $connection = $this->get('atarashii_api.communicator');
 
@@ -159,7 +184,7 @@ class MangaListController extends FOSRestController
     *
     * @return View
     */
-    public function updateAction(Request $request, $id)
+    public function updateAction(Request $request, $id, $apiVersion)
     {
         // http://mymangalist.net/api/mangalist/update/#{id}.xml
 
@@ -177,12 +202,85 @@ class MangaListController extends FOSRestController
 
         $manga = new Manga();
         $manga->setId($id);
-        $manga->setReadStatus($request->request->get('status'));
-        $manga->setChaptersRead($request->request->get('chapters'));
-        $manga->setVolumesRead($request->request->get('volumes'));
-        $manga->setScore($request->request->get('score'));
 
-        $xmlcontent = $manga->MALApiXml();
+        //Only use values we were sent for the Update XML
+        $update_items = array();
+
+        try {
+
+            if($request->request->get('status') !== null) {
+                $manga->setReadStatus($request->request->get('status'));
+                $update_items[] = 'status';
+            }
+
+            if($request->request->get('chapters') !== null) {
+                $manga->setChaptersRead($request->request->get('chapters'));
+                $update_items[] = 'chapters';
+            }
+
+            if($request->request->get('volumes') !== null) {
+                $manga->setVolumesRead($request->request->get('volumes'));
+                $update_items[] = 'volumes';
+            }
+
+            if ($request->request->get('score') !== null) {
+                $manga->setScore($request->request->get('score'));
+                $update_items[] = 'score';
+            }
+
+            //API 2 Items
+            if($apiVersion >= 2.0) {
+
+                if ($request->request->get('downloaded_chap') !== null) {
+                    $manga->setChapDownloaded($request->request->get('downloaded_chap')); //Int
+                    $update_items[] = 'downloaded';
+                }
+
+                if ($request->request->get('reread_count') !== null) {
+                    $manga->setRereadCount($request->request->get('reread_count')); //Int
+                    $update_items[] = 'rereadCount';
+                }
+
+                if ($request->request->get('reread_value') !== null) {
+                    $manga->setRereadValue($request->request->get('reread_value')); //Int
+                    $update_items[] = 'rereadValue';
+                }
+
+                if ($request->request->get('start') !== null) {
+                    $manga->setReadingStart(DateTime::createFromFormat('Y-m-d', $request->request->get('start'))); //Needs to be DT!
+                    $update_items[] = 'start';
+                }
+
+                if ($request->request->get('end') !== null) {
+                    $manga->setReadingEnd(DateTime::createFromFormat('Y-m-d', $request->request->get('end'))); //Needs to be DT!
+                    $update_items[] = 'end';
+                }
+
+                if ($request->request->get('priority') !== null) {
+                    $manga->setPriority($request->request->get('priority'));
+                    $update_items[] = 'priority';
+                }
+
+                if ($request->request->get('is_rereading') !== null) {
+                    $manga->setRereading($request->request->get('is_rereading')); //Bool - 0 = no, 1 = yes
+                    $update_items[] = 'isRereading';
+                }
+
+                if ($request->request->get('comments') !== null) {
+                    $manga->setPersonalComments($request->request->get('comments')); //Plain text string. No HTML.
+                    $update_items[] = 'comments';
+                }
+
+                if ($request->request->get('tags') !== null) {
+                    $manga->setPersonalTags($request->request->get('tags')); //Comma-separated string
+                    $update_items[] = 'tags';
+                }
+            }
+        } catch (\Exception $e) {
+            return $this->view(Array('error' => $e->getMessage()), 500);
+        }
+
+        $xmlcontent = $manga->MALApiXml($update_items);
 
         $connection = $this->get('atarashii_api.communicator');
 
