@@ -4,7 +4,7 @@
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
-* @copyright 2014 Ratan Dhawtal and Michael Johnson
+* @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
 
@@ -442,6 +442,14 @@ class MangaParser
         #<div style="margin-top 3px;"><small>What is your priority level to read this manga?</small></div></td>
         $priority = $crawler->filter('select[name="priority"] option:selected')->attr('value');
         $manga->setPriority($priority);
+
+        #Chapters Downloaded
+		#<td align="left" class="borderClass"><input type="text" class="inputtext" size="4" value="0" id="dChap" name="downloaded_chapters"> <a onclick="incChapDownloadCount();" href="javascript:void(0);">+</a></td>
+        $downloaded = $crawler->filter('input[id="dChap"]')->attr('value');
+
+        if ($downloaded > 0) {
+            $manga->setChapDownloaded($downloaded);
+        }
 
         #Times Reread
         #<td align="left" class="borderClass"><input type="text" class="inputtext" size="4" value="0" name="times_read">

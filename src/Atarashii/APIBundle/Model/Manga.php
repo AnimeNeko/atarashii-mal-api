@@ -4,7 +4,7 @@
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
-* @copyright 2014 Ratan Dhawtal and Michael Johnson
+* @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
 
@@ -237,6 +237,15 @@ class Manga
      * @Since("2.0")
      */
     private $priority;
+
+    /**
+     * The number of chapters downloaded by the user
+     *
+     * @Type("integer")
+     * @Since("2.0")
+     */
+    private $chapDownloaded;
+
 
     /**
      * Set if the user is rerereading the manga
@@ -963,74 +972,16 @@ class Manga
         $this->priority = (int) $priority;
     }
 
-//    /**
-//     * Get the current value for the storage type that the anime is on
-//     *
-//     * @param string $type What type you want to get back.
-//     *                     Currently accepts either "string" or "int". Defaults to "int".
-//     *
-//     * @return string|int
-//     */
-//    public function getStorage($type = 'int')
-//    {
-//        if ($type == 'string') {
-//            switch ($this->storage) {
-//                case 1:
-//                    return 'Hard Drive';
-//                    break;
-//                case 2:
-//                    return 'DVD / CD';
-//                    break;
-//                case 3:
-//                    return 'None';
-//                    break;
-//                case 4:
-//                    return 'Retail DVD';
-//                    break;
-//                case 5:
-//                    return 'VHS';
-//                    break;
-//                case 6:
-//                    return 'External HD';
-//                    break;
-//                case 7:
-//                    return 'NAS';
-//                    break;
-//                default:
-//                    return NULL;
-//                    break;
-//            }
-//        } else {
-//            return $this->storage;
-//        }
-//
-//    }
-//
-//    public function setStorage($storage)
-//    {
-//        $this->storage = $storage;
-//    }
-//
-//    public function getStorageValue()
-//    {
-//        return $this->storageValue;
-//    }
-//
-//    public function setStorageValue($value)
-//    {
-//        $this->storageValue = (float) $value;
-//    }
-//
-//    public function getEpsDownloaded()
-//    {
-//        return $this->epsDownloaded;
-//    }
-//
-//    public function setEpsDownloaded($downloaded)
-//    {
-//        $this->epsDownloaded = (int) $downloaded;
-//    }
-//
+    public function getChapDownloaded()
+    {
+        return $this->chapDownloaded;
+    }
+
+    public function setChapDownloaded($downloaded)
+    {
+        $this->chapDownloaded = (int) $downloaded;
+    }
+
     public function getRereading()
     {
         return $this->rereading;
