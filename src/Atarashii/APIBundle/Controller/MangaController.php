@@ -71,13 +71,13 @@ class MangaController extends FOSRestController
 
             //Parse extended personal details if API 2.0 or better and personal details are requested
             if ($apiVersion >= "2.0" && $usepersonal) {
-                try {
-                    $mangaDetails = $downloader->fetch('http://myanimelist.net/panel.php?go=editmanga&id='.$manga->getListedMangaId().'&hidenav=true');
-                } catch (Exception\CurlException $e) {
-                    return $this->view(array('error' => 'network-error'), 500);
-                }
+                if($manga->getListedMangaId() !== null) {
+                    try {
+                        $mangaDetails = $downloader->fetch('http://myanimelist.net/panel.php?go=editmanga&id='.$manga->getListedMangaId().'&hidenav=true');
+                    } catch (Exception\CurlException $e) {
+                        return $this->view(array('error' => 'network-error'), 500);
+                    }
 
-                if (strpos($mangaDetails, 'This is not your entry') === false) {
                     $manga = MangaParser::parseExtendedPersonal($mangaDetails, $manga);
                 }
             }
