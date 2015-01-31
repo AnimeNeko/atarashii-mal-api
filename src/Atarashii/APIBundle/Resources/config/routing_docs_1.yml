@@ -1,0 +1,37 @@
+# Documentation for API 1.0
+# All Pages under the "/docs/1" prefix.
+
+_docs1_index:
+    path:  /
+    defaults:
+      _controller: FrameworkBundle:Template:template
+      template: 'AtarashiiAPIBundle:DocsAPI1:index.html.twig'
+      maxAge: 10800
+
+_docs1_responses:
+    path:  /responses/
+    defaults:
+      _controller: FrameworkBundle:Template:template
+      template: 'AtarashiiAPIBundle:DocsAPI1:responses.html.twig'
+      maxAge: 10800
+
+_docs1_anime:
+    path: /anime/
+    defaults:
+      _controller: FrameworkBundle:Template:template
+      template: 'AtarashiiAPIBundle:DocsAPI1:anime.html.twig'
+      maxAge: 10800
+
+_docs1_manga:
+    path: /manga/
+    defaults:
+      _controller: FrameworkBundle:Template:template
+      template: 'AtarashiiAPIBundle:DocsAPI1:manga.html.twig'
+      maxAge: 10800
+
+_docs1_user:
+    path: /user/
+    defaults:
+      _controller: FrameworkBundle:Template:template
+      template: 'AtarashiiAPIBundle:DocsAPI1:user.html.twig'
+      maxAge: 10800

@@ -15,7 +15,7 @@
       <dt>Method</dt><dd>GET</dd>
       <dt>Authentication</dt><dd>No</dd>
     </dl>
-    <p>Retrieves the list of a user's manga. Output is a <a href="{{ path('_docs_responses') }}#mangalist">manga list</a>.</p>
+    <p>Retrieves the list of a user's manga. Output is a <a href="{{ path('_docs1_responses') }}#mangalist">manga list</a>.</p>
 
     <h3>Manga Details</h3>
     <dl>
@@ -23,7 +23,7 @@
       <dt>Method</dt><dd>GET</dd>
       <dt>Authentication</dt><dd>Optional<sup><a href="#foot1">1</a></sup></dd>
     </dl>
-    <p>Gets the details of the title specified by the id number. Output is a <a href="{{ path('_docs_responses') }}#manga">manga object</a>.</p>
+    <p>Gets the details of the title specified by the id number. Output is a <a href="{{ path('_docs1_responses') }}#manga">manga object</a>.</p>
 
     <h3>Cast Details</h3>
     <dl>
@@ -31,7 +31,7 @@
       <dt>Method</dt><dd>GET</dd>
       <dt>Authentication</dt><dd>No</dd>
     </dl>
-    <p>Gets the list of staff members and characters with the voice actors. Output is an <a href="{{ path('_docs_responses') }}#cast">cast object</a>.</p>
+    <p>Gets the list of staff members and characters with the voice actors. Output is an <a href="{{ path('_docs1_responses') }}#cast">cast object</a>.</p>
 
     <h3>Review Details</h3>
     <dl>
@@ -39,12 +39,12 @@
       <dt>Method</dt><dd>GET</dd>
       <dt>Authentication</dt><dd>No</dd>
     </dl>
-    <p>Gets the list of reviews. Output is an <a href="{{ path('_docs_responses') }}#review">review object</a>.</p>
+    <p>Gets the list of reviews. Output is an <a href="{{ path('_docs1_responses') }}#review">review object</a>.</p>
     <p>The following optional parameters are supported:</p>
     <ul>
       <li><code>page</code>: The current set of reviews to return. Each set contains at most 20 items. Default value is &quot;1&quot; if not supplied.</li>
     </ul>
-      
+
 
     <h2>Methods to Change Information</h2>
 
@@ -98,7 +98,7 @@
       <dt>Method</dt><dd>GET</dd>
       <dt>Authentication</dt><dd>No</dd>
     </dl>
-    <p>Runs a search of the title against manga on MAL. Output is a <a href="{{ path('_docs_responses') }}#mangalist">manga list</a>.</p>
+    <p>Runs a search of the title against manga on MAL. Output is a <a href="{{ path('_docs1_responses') }}#mangalist">manga list</a>.</p>
 
     <h3>Top Ranking Manga</h3>
     <dl>
@@ -106,7 +106,7 @@
       <dt>Method</dt><dd>GET</dd>
       <dt>Authentication</dt><dd>No</dd>
     </dl>
-    <p>Returns the top-rated manga titles on MAL. Output is a <a href="{{ path('_docs_responses') }}#mangalist">manga list</a>.</p>
+    <p>Returns the top-rated manga titles on MAL. Output is a <a href="{{ path('_docs1_responses') }}#mangalist">manga list</a>.</p>
     <p>The following optional parameters are supported:</p>
     <ul>
       <li><code>page</code>: The current set of titles to return. Each set contains at most 30 items. Default value is &quot;1&quot; if not supplied.</li>
@@ -119,7 +119,7 @@
       <dt>Method</dt><dd>GET</dd>
       <dt>Authentication</dt><dd>No</dd>
     </dl>
-    <p>Returns the most popular titles on MAL. Output is a <a href="{{ path('_docs_responses') }}#mangalist">manga list</a>.</p>
+    <p>Returns the most popular titles on MAL. Output is a <a href="{{ path('_docs1_responses') }}#mangalist">manga list</a>.</p>
     <p>The following optional parameters are supported:</p>
     <ul>
       <li><code>page</code>: The current set of titles to return. Each set contains at most 30 items. Default value is &quot;1&quot; if not supplied.</li>
@@ -131,7 +131,7 @@
       <dt>Method</dt><dd>GET</dd>
       <dt>Authentication</dt><dd>No</dd>
     </dl>
-    <p>Returns upcoming titles on MAL, sorted by publication date. Output is a <a href="{{ path('_docs_responses') }}#mangalist">manga list</a>.</p>
+    <p>Returns upcoming titles on MAL, sorted by publication date. Output is a <a href="{{ path('_docs1_responses') }}#mangalist">manga list</a>.</p>
     <p>The following optional parameters are supported:</p>
     <ul>
       <li><code>start_date</code>: The date at which to start the list, formatted as YYYYMMDD. The date may be in the past. Default is the current date.</li>
@@ -144,7 +144,7 @@
       <dt>Method</dt><dd>GET</dd>
       <dt>Authentication</dt><dd>No</dd>
     </dl>
-    <p>Returns the most recently added titles on MAL, ordered by the most recently added items. Output is a <a href="{{ path('_docs_responses') }}#mangalist">manga list</a>.</p>
+    <p>Returns the most recently added titles on MAL, ordered by the most recently added items. Output is a <a href="{{ path('_docs1_responses') }}#mangalist">manga list</a>.</p>
     <p>The following optional parameters are supported:</p>
     <ul>
       <li><code>page</code>: The current set of titles to return. Each set contains at most 20 items. Default value is &quot;1&quot; if not supplied.</li>

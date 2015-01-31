@@ -15,7 +15,7 @@
             <dt>Method</dt><dd>GET</dd>
             <dt>Authentication</dt><dd>No</dd>
         </dl>
-        <p>Retrieves the list of a user's anime. Output is an <a href="{{ path('_docs_responses') }}#animelist">anime list</a>.</p>
+        <p>Retrieves the list of a user's anime. Output is an <a href="{{ path('_docs1_responses') }}#animelist">anime list</a>.</p>
 
         <h3>Anime Details</h3>
         <dl>
@@ -23,7 +23,7 @@
             <dt>Method</dt><dd>GET</dd>
             <dt>Authentication</dt><dd>Optional<sup><a href="#foot1">1</a></sup></dd>
         </dl>
-        <p>Gets the details of the title specified by the id number. Output is an <a href="{{ path('_docs_responses') }}#anime">anime object</a>.</p>
+        <p>Gets the details of the title specified by the id number. Output is an <a href="{{ path('_docs1_responses') }}#anime">anime object</a>.</p>
         <p>The following optional parameters are supported:</p>
         <ul>
             <li><code>mine</code>: This allows you to get personal info. Must contain a integer (like 1), it doesn't matter which one.</li>
@@ -35,7 +35,7 @@
             <dt>Method</dt><dd>GET</dd>
             <dt>Authentication</dt><dd>No</dd>
         </dl>
-        <p>Gets the list of staff members and characters with the voice actors. Output is an <a href="{{ path('_docs_responses') }}#cast">cast object</a>.</p>
+        <p>Gets the list of staff members and characters with the voice actors. Output is an <a href="{{ path('_docs1_responses') }}#cast">cast object</a>.</p>
 
         <h3>Review Details</h3>
         <dl>
@@ -43,7 +43,7 @@
             <dt>Method</dt><dd>GET</dd>
             <dt>Authentication</dt><dd>No</dd>
         </dl>
-        <p>Gets the list of reviews. Output is an <a href="{{ path('_docs_responses') }}#review">review object</a>.</p>
+        <p>Gets the list of reviews. Output is an <a href="{{ path('_docs1_responses') }}#review">review object</a>.</p>
         <p>The following optional parameters are supported:</p>
         <ul>
             <li><code>page</code>: The current set of reviews to return. Each set contains at most 20 items. Default value is &quot;1&quot; if not supplied.</li>
@@ -81,18 +81,6 @@
             <li><code>status</code>: An integer or specific string indicating the current status of the title for the user. Allowed values are 1/"watching", 2/"completed", 3/"on-hold"/"onhold", 4/"dropped", 6/"plan to watch"/"plantowatch".</li>
             <li><code>episodes</code>: The number of the last episode watched by the user.</li>
             <li><code>score</code>: An integer, from 1 to 10 indicating the user's score of the title.</li>
-            <li><code>start</code> <span class="small bg-info">API 2.0+</span>: The date the user started watching the anime title in ISO-8601 format (YYYY-MM-DD).</li>
-            <li><code>end</code> <span class="small bg-info">API 2.0+</span>: The date the user finished watching the anime title in ISO-8601 format (YYYY-MM-DD).</li>
-            <li><code>downloaded_eps</code> <span class="small bg-info">API 2.0+</span>: An integer indicating the number of episodes downloaded by the user.</li>
-            <li><code>storage_type</code> <span class="small bg-info">API 2.0+</span>: An integer indicating the type of storage being used by the user. Values are 1/Hard drive, 2/DVD or CD, 3/None, 4/Retail DVD, 5/VHS, 6/External HDD, or 7/NAS.</li>
-            <li><code>storage_amt</code> <span class="small bg-info">API 2.0+</span>: A decimal number indicating either disks or size in gigabytes depending on the storage type.</li>
-            <li><code>priority</code> <span class="small bg-info">API 2.0+</span>: An integer from 0 (low) to 2 (high) indicating the priority of the title for the user.</li>
-            <li><code>rewatch_value</code> <span class="small bg-info">API 2.0+</span>: An integer from 1 (very low) to 5 (very high) very high indicating how much value there is in rewatching the title.</li>
-            <li><code>tags</code> <span class="small bg-info">API 2.0+</span>: A comma-separated string of tags the user assigned to the title.</li>
-            <li><code>comments</code> <span class="small bg-info">API 2.0+</span>: A string containing comments on the title.</li>
-            <li><code>fansubber</code> <span class="small bg-info">API 2.0+</span>: A string with the name of the fansub group watched for the title.</li>
-            <li><code>is_rewatching</code> <span class="small bg-info">API 2.0+</span>: An integer indicating true (1) or false (0) if the user is currently rewatching the title.</li>
-            <li><code>rewatch_count</code> <span class="small bg-info">API 2.0+</span>: An integer indicating the number of times the user has rewatched the title. This does not count the first completed watch.</li>
         </ul>
 
         <h3>Deleting an Anime</h3>
@@ -112,7 +100,7 @@
             <dt>Method</dt><dd>GET</dd>
             <dt>Authentication</dt><dd>No</dd>
         </dl>
-        <p>Runs a search of the title against anime on MAL. Output is an <a href="{{ path('_docs_responses') }}#animelist">anime list</a>.</p>
+        <p>Runs a search of the title against anime on MAL. Output is an <a href="{{ path('_docs1_responses') }}#animelist">anime list</a>.</p>
 
         <h3>Top Ranking Anime</h3>
         <dl>
@@ -120,7 +108,7 @@
             <dt>Method</dt><dd>GET</dd>
             <dt>Authentication</dt><dd>No</dd>
         </dl>
-        <p>Returns the top-rated anime titles on MAL. Output is an <a href="{{ path('_docs_responses') }}#animelist">anime list</a>.</p>
+        <p>Returns the top-rated anime titles on MAL. Output is an <a href="{{ path('_docs1_responses') }}#animelist">anime list</a>.</p>
         <p>The following optional parameters are supported:</p>
         <ul>
             <li><code>page</code>: The current set of titles to return. Each set contains at most 30 items. Default value is &quot;1&quot; if not supplied.</li>
@@ -133,7 +121,7 @@
             <dt>Method</dt><dd>GET</dd>
             <dt>Authentication</dt><dd>No</dd>
         </dl>
-        <p>Returns the most popular titles on MAL. Output is an <a href="{{ path('_docs_responses') }}#animelist">anime list</a>.</p>
+        <p>Returns the most popular titles on MAL. Output is an <a href="{{ path('_docs1_responses') }}#animelist">anime list</a>.</p>
         <p>The following optional parameters are supported:</p>
         <ul>
             <li><code>page</code>: The current set of titles to return. Each set contains at most 30 items. Default value is &quot;1&quot; if not supplied.</li>
@@ -145,7 +133,7 @@
             <dt>Method</dt><dd>GET</dd>
             <dt>Authentication</dt><dd>No</dd>
         </dl>
-        <p>Returns upcoming titles on MAL, sorted by air date. Output is an <a href="{{ path('_docs_responses') }}#animelist">anime list</a>.</p>
+        <p>Returns upcoming titles on MAL, sorted by air date. Output is an <a href="{{ path('_docs1_responses') }}#animelist">anime list</a>.</p>
         <p>The following optional parameters are supported:</p>
         <ul>
             <li><code>start_date</code>: The date at which to start the list, formatted as YYYYMMDD. The date may be in the past. Default is the current date.</li>
@@ -158,7 +146,7 @@
             <dt>Method</dt><dd>GET</dd>
             <dt>Authentication</dt><dd>No</dd>
         </dl>
-        <p>Returns the most recently added titles on MAL, ordered by the most recently added items. Output is an <a href="{{ path('_docs_responses') }}#animelist">anime list</a>.</p>
+        <p>Returns the most recently added titles on MAL, ordered by the most recently added items. Output is an <a href="{{ path('_docs1_responses') }}#animelist">anime list</a>.</p>
         <p>The following optional parameters are supported:</p>
         <ul>
             <li><code>page</code>: The current set of titles to return. Each set contains at most 20 items. Default value is &quot;1&quot; if not supplied.</li>

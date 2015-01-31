@@ -7,44 +7,13 @@ _docs_index:
       template: 'AtarashiiAPIBundle:Documentation:index.html.twig'
       maxAge: 10800
 
-_docs_responses:
-    path:  /responses/
-    defaults:
-      _controller: FrameworkBundle:Template:template
-      template: 'AtarashiiAPIBundle:Documentation:responses.html.twig'
-      maxAge: 10800
+# Documents for API 1.0
+_docs1:
+    prefix: /1.0
+    resource: '@AtarashiiAPIBundle/Resources/config/routing_docs_1.yml'
 
-_docs_anime:
-    path: /anime/
-    defaults:
-      _controller: FrameworkBundle:Template:template
-      template: 'AtarashiiAPIBundle:Documentation:anime.html.twig'
-      maxAge: 10800
+# Documents for API 2.0
+_docs2:
+    prefix: /2.0
+    resource: '@AtarashiiAPIBundle/Resources/config/routing_docs_2.yml'
 
-_docs_manga:
-    path: /manga/
-    defaults:
-      _controller: FrameworkBundle:Template:template
-      template: 'AtarashiiAPIBundle:Documentation:manga.html.twig'
-      maxAge: 10800
-
-_docs_forum:
-    path: /forum/
-    defaults:
-      _controller: FrameworkBundle:Template:template
-      template: 'AtarashiiAPIBundle:Documentation:forum.html.twig'
-      maxAge: 10800
-
-_docs_message:
-    path: /message/
-    defaults:
-      _controller: FrameworkBundle:Template:template
-      template: 'AtarashiiAPIBundle:Documentation:message.html.twig'
-      maxAge: 10800
-
-_docs_user:
-    path: /user/
-    defaults:
-      _controller: FrameworkBundle:Template:template
-      template: 'AtarashiiAPIBundle:Documentation:user.html.twig'
-      maxAge: 10800

@@ -1,0 +1,176 @@
+{% set pageTitle = "Docs - Anime Methods" %}
+{% include "AtarashiiAPIBundle:includes:header.html.twig" %}
+
+<div class="row">
+    <div class="col-md-9">
+        <h1>Anime Methods</h1>
+        <p>All the below methods deal with reading and writing data related to anime. This includes managing a user's list.</p>
+
+
+        <h2>Methods to Get Information</h2>
+
+        <h3>Reading the Anime List</h3>
+        <dl>
+            <dt>URI Format</dt><dd>animelist/<em>username</em></dd>
+            <dt>Method</dt><dd>GET</dd>
+            <dt>Authentication</dt><dd>No</dd>
+        </dl>
+        <p>Retrieves the list of a user's anime. Output is an <a href="{{ path('_docs1_responses') }}#animelist">anime list</a>.</p>
+
+        <h3>Anime Details</h3>
+        <dl>
+            <dt>URI Format</dt><dd>anime/<em>id</em></dd>
+            <dt>Method</dt><dd>GET</dd>
+            <dt>Authentication</dt><dd>Optional<sup><a href="#foot1">1</a></sup></dd>
+        </dl>
+        <p>Gets the details of the title specified by the id number. Output is an <a href="{{ path('_docs1_responses') }}#anime">anime object</a>.</p>
+        <p>The following optional parameters are supported:</p>
+        <ul>
+            <li><code>mine</code>: This allows you to get personal info. Must contain a integer (like 1), it doesn't matter which one.</li>
+        </ul>
+
+        <h3>Cast Details</h3>
+        <dl>
+            <dt>URI Format</dt><dd>anime/cast/<em>id</em></dd>
+            <dt>Method</dt><dd>GET</dd>
+            <dt>Authentication</dt><dd>No</dd>
+        </dl>
+        <p>Gets the list of staff members and characters with the voice actors. Output is an <a href="{{ path('_docs1_responses') }}#cast">cast object</a>.</p>
+
+        <h3>Review Details</h3>
+        <dl>
+            <dt>URI Format</dt><dd>anime/reviews/<em>id</em></dd>
+            <dt>Method</dt><dd>GET</dd>
+            <dt>Authentication</dt><dd>No</dd>
+        </dl>
+        <p>Gets the list of reviews. Output is an <a href="{{ path('_docs1_responses') }}#review">review object</a>.</p>
+        <p>The following optional parameters are supported:</p>
+        <ul>
+            <li><code>page</code>: The current set of reviews to return. Each set contains at most 20 items. Default value is &quot;1&quot; if not supplied.</li>
+        </ul>
+
+
+        <h2>Methods to Change Information</h2>
+
+        <p class="alert alert-info">All post data <strong>must</strong> be sent as x-www-form-urlencoded as the API does not currently support multipart/form-data!</p>
+
+        <h3>Adding Anime</h3>
+        <dl>
+            <dt>URI Format</dt><dd>animelist/anime</dd>
+            <dt>Method</dt><dd>POST</dd>
+            <dt>Authentication</dt><dd>Required</dd>
+        </dl>
+        <p>Adds an anime to the authenticated user's list with the details provided in the post body. Output is blank.</p>
+        <p>The values that can be sent in the post body:</p>
+        <ul>
+            <li><code>anime_id</code>: The ID of the anime, as assigned by MyAnimeList</li>
+            <li><code>status</code>: An integer or specific string indicating the current status of the title for the user. Allowed values are 1/"watching", 2/"completed", 3/"on-hold"/"onhold", 4/"dropped", 6/"plan to watch"/"plantowatch".</li>
+            <li><code>episodes</code>: The number of the last episode watched by the user.</li>
+            <li><code>score</code>: An integer, from 1 to 10 indicating the user's score of the title.</li>
+        </ul>
+
+        <h3>Updating an Anime</h3>
+        <dl>
+            <dt>URI Format</dt><dd>animelist/anime/<em>id</em></dd>
+            <dt>Method</dt><dd>PUT</dd>
+            <dt>Authentication</dt><dd>Required</dd>
+        </dl>
+        <p>Updates the status of an anime on the authenticated user's list with the details provided in the post body. The anime must already exist in the user's list. The id in the URL should be the id as assigned by MyAnimeList. Output is blank.</p>
+        <p>The values that can be sent in the post body:</p>
+        <ul>
+            <li><code>status</code>: An integer or specific string indicating the current status of the title for the user. Allowed values are 1/"watching", 2/"completed", 3/"on-hold"/"onhold", 4/"dropped", 6/"plan to watch"/"plantowatch".</li>
+            <li><code>episodes</code>: The number of the last episode watched by the user.</li>
+            <li><code>score</code>: An integer, from 1 to 10 indicating the user's score of the title.</li>
+            <li><code>start</code> <span class="small bg-info">API 2.0+</span>: The date the user started watching the anime title in ISO-8601 format (YYYY-MM-DD).</li>
+            <li><code>end</code> <span class="small bg-info">API 2.0+</span>: The date the user finished watching the anime title in ISO-8601 format (YYYY-MM-DD).</li>
+            <li><code>downloaded_eps</code> <span class="small bg-info">API 2.0+</span>: An integer indicating the number of episodes downloaded by the user.</li>
+            <li><code>storage_type</code> <span class="small bg-info">API 2.0+</span>: An integer indicating the type of storage being used by the user. Values are 1/Hard drive, 2/DVD or CD, 3/None, 4/Retail DVD, 5/VHS, 6/External HDD, or 7/NAS.</li>
+            <li><code>storage_amt</code> <span class="small bg-info">API 2.0+</span>: A decimal number indicating either disks or size in gigabytes depending on the storage type.</li>
+            <li><code>priority</code> <span class="small bg-info">API 2.0+</span>: An integer from 0 (low) to 2 (high) indicating the priority of the title for the user.</li>
+            <li><code>rewatch_value</code> <span class="small bg-info">API 2.0+</span>: An integer from 1 (very low) to 5 (very high) very high indicating how much value there is in rewatching the title.</li>
+            <li><code>tags</code> <span class="small bg-info">API 2.0+</span>: A comma-separated string of tags the user assigned to the title.</li>
+            <li><code>comments</code> <span class="small bg-info">API 2.0+</span>: A string containing comments on the title.</li>
+            <li><code>fansubber</code> <span class="small bg-info">API 2.0+</span>: A string with the name of the fansub group watched for the title.</li>
+            <li><code>is_rewatching</code> <span class="small bg-info">API 2.0+</span>: An integer indicating true (1) or false (0) if the user is currently rewatching the title.</li>
+            <li><code>rewatch_count</code> <span class="small bg-info">API 2.0+</span>: An integer indicating the number of times the user has rewatched the title. This does not count the first completed watch.</li>
+        </ul>
+
+        <h3>Deleting an Anime</h3>
+        <dl>
+            <dt>URI Format</dt><dd>animelist/anime/<em>id</em></dd>
+            <dt>Method</dt><dd>DELETE</dd>
+            <dt>Authentication</dt><dd>Required</dd>
+        </dl>
+        <p>Deletes an anime from the authenticated user's list. The id in the URL should be the id as assigned by MyAnimeList. Output is blank.</p>
+
+
+        <h2>Searches and Global Lists</h2>
+
+        <h3>Searching for an Anime</h3>
+        <dl>
+            <dt>URI Format</dt><dd>anime/search?q=<em>search_terms</em></dd>
+            <dt>Method</dt><dd>GET</dd>
+            <dt>Authentication</dt><dd>No</dd>
+        </dl>
+        <p>Runs a search of the title against anime on MAL. Output is an <a href="{{ path('_docs1_responses') }}#animelist">anime list</a>.</p>
+
+        <h3>Top Ranking Anime</h3>
+        <dl>
+            <dt>URI Format</dt><dd>anime/top</dd>
+            <dt>Method</dt><dd>GET</dd>
+            <dt>Authentication</dt><dd>No</dd>
+        </dl>
+        <p>Returns the top-rated anime titles on MAL. Output is an <a href="{{ path('_docs1_responses') }}#animelist">anime list</a>.</p>
+        <p>The following optional parameters are supported:</p>
+        <ul>
+            <li><code>page</code>: The current set of titles to return. Each set contains at most 30 items. Default value is &quot;1&quot; if not supplied.</li>
+            <li><code>type</code>: Filters to a specific type of title to return. Can be one of &quot;tv&quot;, &quot;movie&quot;, &quot;ova&quot;, or &quot;special&quot;. Default is no filter.</li>
+        </ul>
+
+        <h3>Popular Anime</h3>
+        <dl>
+            <dt>URI Format</dt><dd>anime/top</dd>
+            <dt>Method</dt><dd>GET</dd>
+            <dt>Authentication</dt><dd>No</dd>
+        </dl>
+        <p>Returns the most popular titles on MAL. Output is an <a href="{{ path('_docs1_responses') }}#animelist">anime list</a>.</p>
+        <p>The following optional parameters are supported:</p>
+        <ul>
+            <li><code>page</code>: The current set of titles to return. Each set contains at most 30 items. Default value is &quot;1&quot; if not supplied.</li>
+        </ul>
+
+        <h3>Upcoming Anime</h3>
+        <dl>
+            <dt>URI Format</dt><dd>anime/upcoming</dd>
+            <dt>Method</dt><dd>GET</dd>
+            <dt>Authentication</dt><dd>No</dd>
+        </dl>
+        <p>Returns upcoming titles on MAL, sorted by air date. Output is an <a href="{{ path('_docs1_responses') }}#animelist">anime list</a>.</p>
+        <p>The following optional parameters are supported:</p>
+        <ul>
+            <li><code>start_date</code>: The date at which to start the list, formatted as YYYYMMDD. The date may be in the past. Default is the current date.</li>
+            <li><code>page</code>: The current set of titles to return. Each set contains at most 20 items. Default value is &quot;1&quot; if not supplied.</li>
+        </ul>
+
+        <h3>Anime Just Added</h3>
+        <dl>
+            <dt>URI Format</dt><dd>anime/just_added</dd>
+            <dt>Method</dt><dd>GET</dd>
+            <dt>Authentication</dt><dd>No</dd>
+        </dl>
+        <p>Returns the most recently added titles on MAL, ordered by the most recently added items. Output is an <a href="{{ path('_docs1_responses') }}#animelist">anime list</a>.</p>
+        <p>The following optional parameters are supported:</p>
+        <ul>
+            <li><code>page</code>: The current set of titles to return. Each set contains at most 20 items. Default value is &quot;1&quot; if not supplied.</li>
+        </ul>
+
+        <hr>
+
+        <p>Footnotes</p>
+        <ol>
+            <li><a name="foot1"></a>Although authentication is not required, additional information such as list status details can be provided if authentication is made.</li>
+        </ol>
+    </div>
+</div>
+
+{% include "AtarashiiAPIBundle:includes:footer.html.twig" %}
