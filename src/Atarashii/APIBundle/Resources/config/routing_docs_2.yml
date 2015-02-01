@@ -8,6 +8,13 @@ _docs2_index:
       template: 'AtarashiiAPIBundle:DocsAPI2:index.html.twig'
       maxAge: 10800
 
+_docs2_whatsnew:
+      path: /whatsnew/
+      defaults:
+        _controller: FrameworkBundle:Template:template
+        template: 'AtarashiiAPIBundle:DocsAPI2:whatsnew.html.twig'
+        maxAge: 10800
+
 _docs2_responses:
     path:  /responses/
     defaults:
