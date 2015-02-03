@@ -17,13 +17,25 @@
         </dl>
         <p>Retrieves the list of all the forum boards. Output is an <a href="{{ path('_docs2_responses') }}#forum">forum list</a>.</p>
 
+        <h3>Reading the topic List</h3>
+        <dl>
+            <dt>URI Format</dt><dd>forum/<em>id</em></dd>
+            <dt>Method</dt><dd>GET</dd>
+            <dt>Authentication</dt><dd>No</dd>
+        </dl>
+        <p>Retrieves the topic list of the specified by the id number. The output Output contains 2 objects called <code>pages</code> and <code>list</code>. The <code>list</code> object contains an arraylist of <a href="{{ path('_docs2_responses') }}#forum">forum models</a>. The <code>pages</code> object is an integer number which indicates the amount of pages.</p>
+        <p>The values that can be sent in the get body:</p>
+        <ul>
+            <li><code>page</code>:  The current set of topics to return. Each set contains at most 20 items. Default value is &quot;1&quot; if not supplied.</li>
+        </ul>
+
         <h3>Reading the sub board List</h3>
         <dl>
             <dt>URI Format</dt><dd>forum/board/<em>id</em></dd>
             <dt>Method</dt><dd>GET</dd>
             <dt>Authentication</dt><dd>No</dd>
         </dl>
-        <p>Retrieves the list of all the forum boards. Output is an <a href="{{ path('_docs2_responses') }}#forum">forum list</a>.</p>
+        <p>Retrieves the list of all the forum boards. The output contains 2 objects called <code>pages</code> and <code>list</code>. The <code>list</code> object contains an arraylist of <a href="{{ path('_docs2_responses') }}#forum">forum models</a>. The <code>pages</code> object is an integer number which indicates the amount of pages.</p>
         <ul>
             <li><code>page</code>:  The current set of topics to return. Each set contains at most 20 items. Default value is &quot;1&quot; if not supplied.</li>
         </ul>
@@ -34,7 +46,7 @@
             <dt>Method</dt><dd>GET</dd>
             <dt>Authentication</dt><dd>No</dd>
         </dl>
-        <p>Retrieves the anime discussion topic list of the specified by the id number. Output is an <a href="{{ path('_docs2_responses') }}#forum">forum list</a>.</p>
+        <p>Retrieves the anime discussion topic list of the specified by the id number. The output contains 2 objects called <code>pages</code> and <code>list</code>. The <code>list</code> object contains an arraylist of <a href="{{ path('_docs2_responses') }}#forum">forum models</a>. The <code>pages</code> object is an integer number which indicates the amount of pages.</p>
         <p>The values that can be sent in the get body:</p>
         <ul>
             <li><code>page</code>:  The current set of topics to return. Each set contains at most 20 items. Default value is &quot;1&quot; if not supplied.</li>
@@ -46,19 +58,7 @@
             <dt>Method</dt><dd>GET</dd>
             <dt>Authentication</dt><dd>No</dd>
         </dl>
-        <p>Retrieves the manga discussion topic list of the specified by the id number. Output is an <a href="{{ path('_docs2_responses') }}#forum">forum list</a>.</p>
-        <p>The values that can be sent in the get body:</p>
-        <ul>
-            <li><code>page</code>:  The current set of topics to return. Each set contains at most 20 items. Default value is &quot;1&quot; if not supplied.</li>
-        </ul>
-
-        <h3>Reading the topic List</h3>
-        <dl>
-            <dt>URI Format</dt><dd>forum/<em>id</em></dd>
-            <dt>Method</dt><dd>GET</dd>
-            <dt>Authentication</dt><dd>No</dd>
-        </dl>
-        <p>Retrieves the topic list of the specified by the id number. Output is an <a href="{{ path('_docs2_responses') }}#forum">forum list</a>.</p>
+        <p>Retrieves the manga discussion topic list of the specified by the id number. the output Output contains 2 objects called <code>pages</code> and <code>list</code>. The <code>list</code> object contains an arraylist of <a href="{{ path('_docs2_responses') }}#forum">forum models</a>. The <code>pages</code> object is an integer number which indicates the amount of pages.</p>
         <p>The values that can be sent in the get body:</p>
         <ul>
             <li><code>page</code>:  The current set of topics to return. Each set contains at most 20 items. Default value is &quot;1&quot; if not supplied.</li>

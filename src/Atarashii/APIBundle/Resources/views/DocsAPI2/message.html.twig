@@ -15,7 +15,7 @@
             <dt>Method</dt><dd>GET</dd>
             <dt>Authentication</dt><dd>Required</dd>
         </dl>
-        <p>Retrieves the list of all the messages. Output is an <a href="{{ path('_docs2_responses') }}#message">message</a>.</p>
+        <p>Retrieves the list of all the messages. The output contains 2 objects called <code>pages</code> and <code>list</code>. The <code>list</code> object contains an arraylist of <a href="{{ path('_docs2_responses') }}#message">message</a>. The <code>pages</code> object is an integer number which indicates the amount of pages.</p>
         <p>The values that can be sent in the get body:</p>
         <ul>
             <li><code>page</code>:  The current set of messages to return. Each set contains at most 20 items. Default value is &quot;1&quot; if not supplied.</li>
