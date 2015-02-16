@@ -543,19 +543,42 @@ class AnimeParser
         $isEnded = $crawler->filter('input[name="unknownEnd"]')->attr('checked');
 
         if ($isStarted != "checked") {
-            $startMonth = $crawler->filter('select[name="startMonth"] option:selected')->attr('value');
-            $startDay = $crawler->filter('select[name="startDay"] option:selected')->attr('value');
-            $startYear = $crawler->filter('select[name="startYear"] option:selected')->attr('value');
+            //So, MAL allows users to put in just years, just years and months, or all three values.
+            //This mess here is to try and avoid things breaking.
+            if ($crawler->filter('select[name="startYear"] option:selected')->count() > 0) {
+                $startYear = $crawler->filter('select[name="startYear"] option:selected')->attr('value');
+                $startMonth = 6;
+                $startDay = 15;
 
-            $anime->setWatchingStart(DateTime::createFromFormat('Y-n-j', "$startYear-$startMonth-$startDay"));
+                if ($crawler->filter('select[name="startMonth"] option:selected')->count() > 0) {
+                    $startMonth = $crawler->filter('select[name="startMonth"] option:selected')->attr('value');
+
+                    if ($crawler->filter('select[name="startDay"] option:selected')->count() > 0) {
+                        $startDay = $crawler->filter('select[name="startDay"] option:selected')->attr('value');
+                    }
+                }
+
+                $anime->setWatchingStart(DateTime::createFromFormat('Y-n-j', "$startYear-$startMonth-$startDay"));
+            }
         }
 
         if ($isEnded != "checked") {
-            $endMonth = $crawler->filter('select[name="endMonth"] option:selected')->attr('value');
-            $endDay = $crawler->filter('select[name="endDay"] option:selected')->attr('value');
-            $endYear = $crawler->filter('select[name="endYear"] option:selected')->attr('value');
+            //Same here, avoid breaking MAL's allowing of partial dates.
+            if ($crawler->filter('select[name="endYear"] option:selected')->count() > 0) {
+                $endYear = $crawler->filter('select[name="endYear"] option:selected')->attr('value');
+                $endMonth = 6;
+                $endDay = 15;
 
-            $anime->setWatchingEnd(DateTime::createFromFormat('Y-n-j', "$endYear-$endMonth-$endDay"));
+                if ($crawler->filter('select[name="endMonth"] option:selected')->count() > 0) {
+                    $endMonth = $crawler->filter('select[name="endMonth"] option:selected')->attr('value');
+
+                    if ($crawler->filter('select[name="endDay"] option:selected')->count() > 0) {
+                        $endDay = $crawler->filter('select[name="endDay"] option:selected')->attr('value');
+                    }
+                }
+
+                $anime->setWatchingEnd(DateTime::createFromFormat('Y-n-j', "$endYear-$endMonth-$endDay"));
+            }
         }
 
         #Fansub Group
