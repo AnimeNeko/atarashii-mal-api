@@ -244,8 +244,16 @@ class AnimeParser
         //Compatibility Note: We don't convert extended characters to HTML entities, we just
         //use the output directly from MAL. This should be okay as our return charset is UTF-8.
         if (iterator_count($extracted) > 0) {
-            $extracted = str_replace($extracted->html(), '', $extracted->parents()->html());
-            $extracted = str_replace('<h2></h2>', '', $extracted);
+            //Grab the whole containing TD that the synopsis is in.
+            $extracted = $extracted->parents()->first();
+            $advert = $extracted->filterXPath('//div');
+
+            $extracted = str_replace($advert->html(), '', $extracted->html());
+            $extracted = str_replace('<h2>Synopsis</h2>', '', $extracted);
+
+            //Ugly regular expression to remove the empty div at the end that used to contain the ad
+            $extracted = preg_replace('/\<div(.*?)\<\/div\>$/', '', $extracted);
+
             $animerecord->synopsis = $extracted;
         }
 
