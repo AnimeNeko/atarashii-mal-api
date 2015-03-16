@@ -76,7 +76,8 @@ class Upcoming
                         $start_date[2] = self::fixMalShortYear($start_date[2]);
                     }
 
-                    if ($start_date[0] == '?' && $start_date[1] == '?') {
+                    // If we don't know the month, then we can only be accurate to a year.
+                    if ($start_date[0] == '?') {
                         $media->setLiteralStartDate(null, DateTime::createFromFormat('Y', $start_date[2]), 'year');
                     } elseif ($start_date[0] != '?' && $start_date[1] == '?') {
                         $media->setLiteralStartDate(null, DateTime::createFromFormat('Y m', "$start_date[2] $start_date[0]"), 'month');
@@ -94,7 +95,7 @@ class Upcoming
                         $end_date[2] = self::fixMalShortYear($end_date[2]);
                     }
 
-                    if ($end_date[0] == '?' && $end_date[1] == '?') {
+                    if ($end_date[0] == '?') {
                         $media->setLiteralEndDate(null, DateTime::createFromFormat('Y', $end_date[2]), 'year');
                     } elseif ($end_date[0] != '?' && $end_date[1] == '?') {
                         $media->setLiteralEndDate(null, DateTime::createFromFormat('Y m', "$end_date[2] $end_date[0]"), 'month');
