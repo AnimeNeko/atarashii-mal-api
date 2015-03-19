@@ -20,6 +20,14 @@ class Cast
     /**
      * The name of character|staff member
      *
+     * @Type("integer")
+     * @Since("2.0")
+     */
+    private $id;
+
+    /**
+     * The name of character|staff member
+     *
      * @Type("string")
      * @Since("2.0")
      */
@@ -50,28 +58,33 @@ class Cast
     private $rank;
 
     /**
-     * The voice actor name
+     * The actors
      *
-     * @Type("string")
      * @Since("2.0")
      */
-    private $actorName;
+    private $actors;
 
     /**
-     * The voice actor image URL
+     * Set the name property
      *
-     * @Type("string")
-     * @Since("2.0")
+     * @param integer $id The character/staff id
+     *
+     * @return void
      */
-    private $actorImage;
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
     /**
-     * The language of the voice actor
+     * Get the name property.
      *
-     * @Type("string")
-     * @Since("2.0")
+     * @return string
      */
-    private $actorLanguage;
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Set the name property
@@ -92,7 +105,7 @@ class Cast
      */
     public function getName()
     {
-       return $this->name;
+        return $this->name;
     }
 
     /**
@@ -162,69 +175,24 @@ class Cast
     }
 
     /**
-     * Set the actorName property
+     * Set the actors array property
      *
-     * @param string $actorName The name of the voice actor.
-     *
-     * @return void
-     */
-    public function setActorName($actorName)
-    {
-        $this->actorName = $actorName;
-    }
-
-    /**
-     * Get the actorName property
-     *
-     * @return string
-     */
-    public function getActorName()
-    {
-        return $this->actorName;
-    }
-
-    /**
-     * Set the actorImage property
-     *
-     * @param string $actorImage The image of the voice actor.
+     * @param Actor $actors The actors.
      *
      * @return void
      */
-    public function setActorImage($actorImage)
+    public function setActors($actors)
     {
-        $this->actorImage = $actorImage;
+        $this->actors[] = $actors;
     }
 
     /**
-     * Get the actorImage property
+     * Get the actors property
      *
      * @return string
      */
-    public function getActorImage()
+    public function getActors()
     {
-        return $this->actorImage;
+        return $this->actors;
     }
-
-    /**
-     * Set the actorLanguage property
-     *
-     * @param string $actorLanguage The language of the voice actor.
-     *
-     * @return void
-     */
-    public function setActorLanguage($actorLanguage)
-    {
-        $this->actorLanguage = $actorLanguage;
-    }
-
-    /**
-     * Get the actorLanguage property
-     *
-     * @return string
-     */
-    public function getActorLanguage()
-    {
-        return $this->actorLanguage;
-    }
-
 }

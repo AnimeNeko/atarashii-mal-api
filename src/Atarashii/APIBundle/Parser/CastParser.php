@@ -10,6 +10,7 @@
 
 namespace Atarashii\APIBundle\Parser;
 
+use Atarashii\APIBundle\Model\Actor;
 use Symfony\Component\DomCrawler\Crawler;
 use Atarashii\APIBundle\Model\Cast;
 
@@ -46,13 +47,23 @@ class CastParser
     {
         $cast = new Cast();
 
+        $cast->setId(explode('/', $item->filter('a')->attr('href'))[2]);
         $cast->setName($item->filter('a')->eq(1)->text());
         $cast->setImage(str_replace('t.jpg', '.jpg', $item->filter('img')->attr('src')));
         $cast->setRole($item->filter('small')->text());
-        if ($item->filter('td table')->count() > 0) {
-            $cast->setActorName($item->filter('td')->eq(2)->filter('a')->text());
-            $cast->setActorLanguage($item->filter('small')->last()->text());
-            $cast->setActorImage(str_replace('v.jpg', '.jpg', $item->filter('img')->last()->attr('src')));
+
+            foreach ($item->filter('table[class="space_table"] tr') as $actorItem) {
+                $actor = new Actor();
+                $crawler = new Crawler($actorItem);
+
+                if ($crawler->filter('td')->count() > 1) {
+                    $actor->setId(explode('/', $crawler->filter('a')->attr('href'))[2]);
+                    $actor->setName($crawler->filter('a')->text());
+                    $actor->setLanguage($crawler->filter('small')->last()->text());
+                    $actor->setImage(str_replace('v.jpg', '.jpg', $crawler->filter('img')->last()->attr('src')));
+
+                    $cast->setActors($actor);
+                }
         }
 
         return $cast;
@@ -63,6 +74,7 @@ class CastParser
         $crawler = new Crawler($item);
         $cast = new Cast();
 
+        $cast->setId(explode('/', $crawler->filter('a')->attr('href'))[2]);
         $cast->setName($crawler->filter('a')->eq(1)->text());
         $cast->setRank($crawler->filter('small')->last()->text());
         $cast->setImage(str_replace('v.jpg', '.jpg', $crawler->filter('img')->last()->attr('src')));
