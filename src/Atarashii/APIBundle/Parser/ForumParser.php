@@ -220,7 +220,7 @@ class ForumParser
         $crawler = new Crawler();
         $crawler->addHTMLContent($contents, 'UTF-8');
 
-        $topicitems = $crawler->filter('div[class="forum_border_around"]');
+        $topicitems = $crawler->filter('div[class="forum_border_around"] table');
         foreach ($topicitems as $item) {
             $set[] = self::parseTopicDetails($item);
         }
