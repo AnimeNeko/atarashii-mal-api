@@ -76,7 +76,7 @@ class ForumController extends FOSRestController
         $downloader = $this->get('atarashii_api.communicator');
 
         try {
-            $forumcontent = $downloader->fetch('/forum/?subboard='.$id.'&show='.(($page*20)-20));
+            $forumcontent = $downloader->fetch('/forum/?subboard='.$id.'&show='.(($page*50)-50));
         } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
@@ -128,7 +128,7 @@ class ForumController extends FOSRestController
         $downloader = $this->get('atarashii_api.communicator');
 
         try {
-            $forumcontent = $downloader->fetch('/forum/index.php?board='.$id.'&show='.(($page*20)-20));
+            $forumcontent = $downloader->fetch('/forum/index.php?board='.$id.'&show='.(($page*50)-50));
         } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
@@ -177,7 +177,7 @@ class ForumController extends FOSRestController
         $downloader = $this->get('atarashii_api.communicator');
 
         try {
-            $forumcontent = $downloader->fetch('/forum/?animeid='.$id.'&show='.(($page*20)-20));
+            $forumcontent = $downloader->fetch('/forum/?animeid='.$id.'&show='.(($page*50)-50));
         } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
@@ -226,7 +226,7 @@ class ForumController extends FOSRestController
         $downloader = $this->get('atarashii_api.communicator');
 
         try {
-            $forumcontent = $downloader->fetch('/forum/?mangaid='.$id.'&show='.(($page*20)-20));
+            $forumcontent = $downloader->fetch('/forum/?mangaid='.$id.'&show='.(($page*50)-50));
         } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
@@ -274,7 +274,7 @@ class ForumController extends FOSRestController
         $downloader = $this->get('atarashii_api.communicator');
 
         try {
-            $forumcontent = $downloader->fetch('/forum/?topicid='.$id.'&show='.(($page*20)-20));
+            $forumcontent = $downloader->fetch('/forum/?topicid='.$id.'&show='.(($page*50)-50));
         } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
