@@ -246,15 +246,6 @@ class Manga
      */
     private $chapDownloaded;
 
-
-    /**
-     * Set if the user is rerereading the manga
-     *
-     * @Type("boolean")
-     * @Since("2.0")
-     */
-    private $rereading;
-
     /**
      * The number of times the user has re-read the title. (Does not include the first time.)
      *
@@ -982,16 +973,6 @@ class Manga
         $this->chapDownloaded = (int) $downloaded;
     }
 
-    public function getRereading()
-    {
-        return $this->rereading;
-    }
-
-    public function setRereading($rereading)
-    {
-        $this->rereading = $rereading;
-    }
-
     public function getRereadCount()
     {
         return $this->rereadCount;
@@ -1103,10 +1084,6 @@ class Manga
 
         if(in_array('priority', $update_items)) {
             $xml->addChild('priority', $this->getPriority('int'));
-        }
-
-        if(in_array('isRereading', $update_items)) {
-            $xml->addChild('enable_rereading', $this->getRereading());
         }
 
         if(in_array('comments', $update_items)) {

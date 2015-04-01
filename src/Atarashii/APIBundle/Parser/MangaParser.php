@@ -362,14 +362,6 @@ class MangaParser
         $crawler = new Crawler();
         $crawler->addHTMLContent($contents, 'UTF-8');
 
-        #Re-reading
-        #<label><input type="checkbox" name="rereading" id="rereadingBox" onclick="checkReReading();" value="1" > Re-reading</label>
-        $rereading = $crawler->filter('input[id="rereadingBox"]')->attr('checked');
-
-        if ($rereading) {
-            $manga->setRereading(true);
-        }
-
         #Personal tags
         #<td align="left" class="borderClass"><textarea name="tags" rows="2" id="tagtext" cols="45" class="textarea"></textarea><div class="spaceit_pad"><small>Popular tags: <a href="javascript:void(0);" onclick="detailedadd_addTag('cooking');">cooking</a>, <a href="javascript:void(0);" onclick="detailedadd_addTag('seinen');">seinen</a>, <a href="javascript:void(0);" onclick="detailedadd_addTag('drama');">drama</a>, <a href="javascript:void(0);" onclick="detailedadd_addTag('slice of life');">slice of life</a></small></div></td>
         $personalTags = $crawler->filter('textarea[name="tags"]')->text();

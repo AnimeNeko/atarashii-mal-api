@@ -365,14 +365,6 @@ class Anime
     private $epsDownloaded;
 
     /**
-     * Set if the user is rewatching the anime
-     *
-     * @Type("boolean")
-     * @Since("2.0")
-     */
-    private $rewatching;
-
-    /**
      * The number of times the user has re-watched the title. (Does not include the first time.)
      *
      * @Type("integer")
@@ -1481,16 +1473,6 @@ class Anime
         $this->epsDownloaded = (int) $downloaded;
     }
 
-    public function getRewatching()
-    {
-        return $this->rewatching;
-    }
-
-    public function setRewatching($rewatching)
-    {
-        $this->rewatching = $rewatching;
-    }
-
     public function getRewatchCount()
     {
         return $this->rewatchCount;
@@ -1608,10 +1590,6 @@ class Anime
 
         if(in_array('priority', $update_items)) {
             $xml->addChild('priority', $this->getPriority('int'));
-        }
-
-        if(in_array('isRewatching', $update_items)) {
-            $xml->addChild('enable_rewatching', $this->getRewatching());
         }
 
         if(in_array('comments', $update_items)) {

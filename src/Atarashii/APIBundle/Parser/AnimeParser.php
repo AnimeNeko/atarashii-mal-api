@@ -486,14 +486,6 @@ class AnimeParser
         $crawler = new Crawler();
         $crawler->addHTMLContent($contents, 'UTF-8');
 
-        #Rewatching
-        #<label><input type="checkbox" name="rewatching" id="rewatchingBox" onclick="checkRewatching();" value="1" > Re-watching</label>
-        $rewatching = $crawler->filter('input[id="rewatchingBox"]')->attr('checked');
-
-        if ($rewatching) {
-            $anime->setRewatching(TRUE);
-        }
-
         #Personal tags
         #<td class="borderClass"><textarea name="tags" rows="2" id="tagtext" cols="45" class="textarea">action, sci-fi</textarea></td>
         $personalTags = $crawler->filter('textarea[name="tags"]')->text();
