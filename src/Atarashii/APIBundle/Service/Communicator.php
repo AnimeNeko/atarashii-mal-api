@@ -58,9 +58,9 @@ class Communicator
         $request->setHeader('User-Agent', $this->useragent);
 
         //Add our data transmission - MAL requires the XML content to be in a variable named "data"
-        $request->setPostField('username', $username);
+        $request->setPostField('user_name', $username);
         $request->setPostField('password', $password);
-        $request->setPostField('sublogin', ' Login ');
+        $request->setPostField('submit', 'Login');
 
         // send request / get response
         $this->response = $request->send();
