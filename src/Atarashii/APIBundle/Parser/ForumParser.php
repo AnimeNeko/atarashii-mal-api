@@ -220,7 +220,7 @@ class ForumParser
         $crawler = new Crawler();
         $crawler->addHTMLContent($contents, 'UTF-8');
 
-        $topicitems = $crawler->filter('div[class="forum_border_around"] table');
+        $topicitems = $crawler->filter('div[class="forum_border_around"]');
         foreach ($topicitems as $item) {
             $set[] = self::parseTopicDetails($item);
         }
@@ -241,7 +241,7 @@ class ForumParser
         $topic = new Forum();
         $topic->profile = new Profile();
 
-        $topic->setTime($crawler->filter('td div div')->eq(1)->text());
+        $topic->setTime($crawler->filter('div[style="padding-left: 3px;"]')->text());
 
         # message id.
         # Example:
@@ -282,7 +282,7 @@ class ForumParser
         # comment.
         # Example:
         # <div id="message25496275">...</div>
-        $topic->setComment($crawler->filter('td[class="forum_boardrow1"] div')->html());
+        $topic->setComment($crawler->filter('div[id="message' . $topic->getId() . '"]')->html());
         return $topic;
     }
 
