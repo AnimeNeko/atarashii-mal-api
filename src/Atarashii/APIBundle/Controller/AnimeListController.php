@@ -62,7 +62,6 @@ class AnimeListController extends FOSRestController
                 $alist[$i]->setWatchedEpisodes((int) $anime->my_watched_episodes);
                 $alist[$i]->setScore((int) $anime->my_score);
                 $alist[$i]->setWatchedStatus((int) $anime->my_status);
-                $alist[$i]->setRewatching($anime->my_rewatching == '1');
                 $i++;
             }
 

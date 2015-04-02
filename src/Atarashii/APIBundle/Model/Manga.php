@@ -246,6 +246,15 @@ class Manga
      */
     private $chapDownloaded;
 
+
+    /**
+     * Set if the user is rerereading the manga
+     *
+     * @Type("boolean")
+     * @Since("2.0")
+     */
+    private $rereading;
+
     /**
      * The number of times the user has re-read the title. (Does not include the first time.)
      *
@@ -971,6 +980,16 @@ class Manga
     public function setChapDownloaded($downloaded)
     {
         $this->chapDownloaded = (int) $downloaded;
+    }
+
+    public function getRereading()
+    {
+        return $this->rereading;
+    }
+
+    public function setRereading($rereading)
+    {
+        $this->rereading = $rereading;
     }
 
     public function getRereadCount()
