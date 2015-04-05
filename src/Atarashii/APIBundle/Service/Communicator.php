@@ -65,7 +65,7 @@ class Communicator
         // send request / get response
         $this->response = $request->send();
 
-        if (strpos($this->response->getBody(), 'Could not find that username/password') !== false) {
+        if (strpos($this->response->getBody(), 'Invalid password') !== false || strpos($this->response->getBody(), 'Could not find that username') !== false) {
             return false;
         }
 
