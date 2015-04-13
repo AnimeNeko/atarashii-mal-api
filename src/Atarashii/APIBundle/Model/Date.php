@@ -41,6 +41,7 @@ class Date
     {
         $dateTime = (new DateTime);
         $timeZone = new DateTimeZone(Date::$timeZone);
+        $time = trim($time);
 
         if (strpos($time, '-') !== false) {
             return $dateTime->createFromFormat('m-d-y, g:i A', $time, $timeZone)->format('Y-m-d\TH:iO');
