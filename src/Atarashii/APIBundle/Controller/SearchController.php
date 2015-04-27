@@ -54,6 +54,10 @@ class SearchController extends FOSRestController
             $animecontent = $downloader->fetch('/anime.php?c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&q='.$query.'&show='.(($page*20)-20));
         } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
+        } catch (Exception\ClientErrorResponseException $e) {
+            //MAL now returns 404 on searches without results.
+            //We still need the content for logic purposes.
+            $animecontent = $e->getResponse();
         }
 
         $response = new Response();
@@ -128,6 +132,10 @@ class SearchController extends FOSRestController
             $mangacontent = $downloader->fetch('/manga.php?c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&q='.$query.'&show='.(($page*20)-20));
         } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
+        } catch (Exception\ClientErrorResponseException $e) {
+            //MAL now returns 404 on searches without results.
+            //We still need the content for logic purposes.
+            $mangacontent = $e->getResponse();
         }
 
         $response = new Response();
