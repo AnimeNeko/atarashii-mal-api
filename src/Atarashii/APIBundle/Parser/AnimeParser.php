@@ -581,15 +581,6 @@ class AnimeParser
             }
         }
 
-        #Fansub Group
-        #<td class="borderClass"><input type="text" name="fansub_group" class="inputtext" value="0" size="50"></td>
-        $fansubGroup = $crawler->filter('input[name="fansub_group"]')->attr('value');
-
-        //If a fansub group isn't set, it's often "0". This will catch that since PHP treats 0 as false and prevents us from setting a group.
-        if ($fansubGroup) {
-            $anime->setFansubGroup($fansubGroup);
-        }
-
         #Priority
         #<td class="borderClass"><select name="priority" class="inputtext">
         #<option value="0" selected>Low<option value="1" >Medium<option value="2" >High			</select>
