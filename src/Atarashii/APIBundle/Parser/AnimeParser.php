@@ -256,11 +256,9 @@ class AnimeParser
             $extracted = $extracted->parents()->first();
             $advert = $extracted->filterXPath('//div');
 
-            $extracted = str_replace($advert->html(), '', $extracted->html());
-            $extracted = str_replace('<h2>Synopsis</h2>', '', $extracted);
+            $rawSynopsis = str_replace($advert->html(), '', $extracted->html());
 
-            //Ugly regular expression to remove the empty div at the end that used to contain the ad
-            $extracted = preg_replace('/\<div(.*?)\<\/div\>$/', '', $extracted);
+            $extracted = preg_replace("/<h2>.*?<\/h2>(.*?)<div.*$/is", "$1", $rawSynopsis);
 
             $animerecord->setSynopsis($extracted);
         }
