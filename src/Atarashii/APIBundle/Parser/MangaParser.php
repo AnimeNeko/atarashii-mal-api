@@ -239,57 +239,54 @@ class MangaParser
         //TODO: Figure out if there is an easier way to get the content.
         //NOTE: We don't grab "Alternative Setting" or "Other" titles.
         if (iterator_count($related)) {
-            //Get all the content between the "Related Anime" h2 and the next h2 tag.
-            if (preg_match('/\<h2\>Related Manga\<\/h2\>(.+?)\<h2\>/', $related->parents()->html(), $relatedcontent)) {
-                $relatedcontent = $relatedcontent[1];
+            $relatedcontent = $related->parents()->html();
 
-                #Adaptation
-                if (preg_match('/Adaptation\: ?(<a .+?)\<br/', $relatedcontent, $relateditems)) {
-                    $relateditems = explode(', ', $relateditems[1]);
-                    foreach ($relateditems as $item) {
-                        if (preg_match('/<a href="(\/anime\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
-                            $itemarray = array();
-                            $itemarray['anime_id'] = $itemparts[2];
-                            $itemarray['title'] = $itemparts[3];
-                            $itemarray['url'] = 'http://myanimelist.net'.$itemparts[1];
-                            $mangarecord->setAnimeAdaptations($itemarray);
-                        }
+            #Adaptation
+            if (preg_match('/Adaptation\: ?(<a .+?)\<br/', $relatedcontent, $relateditems)) {
+                $relateditems = explode(', ', $relateditems[1]);
+                foreach ($relateditems as $item) {
+                    if (preg_match('/<a href="(\/anime\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
+                        $itemarray = array();
+                        $itemarray['anime_id'] = $itemparts[2];
+                        $itemarray['title'] = $itemparts[3];
+                        $itemarray['url'] = 'http://myanimelist.net' . $itemparts[1];
+                        $mangarecord->setAnimeAdaptations($itemarray);
                     }
                 }
-
-                #Related Manga
-                #NOTE: This doesn't seem to work as intended, but matches behavior of the Ruby API
-                if (preg_match('/.+\: ?(<a .+?)\<br/', $relatedcontent, $relateditems)) {
-                    $relateditems = explode(', ', $relateditems[1]);
-                    foreach ($relateditems as $item) {
-                        if (preg_match('/<a href="(\/manga\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
-                            $itemarray = array();
-                            $itemarray['manga_id'] = $itemparts[2];
-                            $itemarray['title'] = $itemparts[3];
-                            $itemarray['url'] = 'http://myanimelist.net'.$itemparts[1];
-                            $mangarecord->setRelatedManga($itemarray);
-                        }
-                    }
-                }
-
-                #Alternative Versions
-                if (preg_match('/Alternative versions?\: ?(<a .+?)\<br/', $relatedcontent, $relateditems)) {
-                    $relateditems = explode(', ', $relateditems[1]);
-                    foreach ($relateditems as $item) {
-                        if (preg_match('/<a href="(\/manga\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
-                            $itemarray = array();
-                            $itemarray['manga_id'] = $itemparts[2];
-                            $itemarray['title'] = $itemparts[3];
-                            $itemarray['url'] = 'http://myanimelist.net'.$itemparts[1];
-                            $mangarecord->setAlternativeVersions($itemarray);
-                        }
-                    }
-                }
-
-                //Note: There is a "related manga" option, but it doesn't appear to
-                //work properly in the existing API. We should extend to include all
-                //the other relations anyway.
             }
+
+            #Related Manga
+            #NOTE: This doesn't seem to work as intended, but matches behavior of the Ruby API
+            if (preg_match('/.+\: ?(<a .+?)\<br/', $relatedcontent, $relateditems)) {
+                $relateditems = explode(', ', $relateditems[1]);
+                foreach ($relateditems as $item) {
+                    if (preg_match('/<a href="(\/manga\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
+                        $itemarray = array();
+                        $itemarray['manga_id'] = $itemparts[2];
+                        $itemarray['title'] = $itemparts[3];
+                        $itemarray['url'] = 'http://myanimelist.net' . $itemparts[1];
+                        $mangarecord->setRelatedManga($itemarray);
+                    }
+                }
+            }
+
+            #Alternative Versions
+            if (preg_match('/Alternative versions?\: ?(<a .+?)\<br/', $relatedcontent, $relateditems)) {
+                $relateditems = explode(', ', $relateditems[1]);
+                foreach ($relateditems as $item) {
+                    if (preg_match('/<a href="(\/manga\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
+                        $itemarray = array();
+                        $itemarray['manga_id'] = $itemparts[2];
+                        $itemarray['title'] = $itemparts[3];
+                        $itemarray['url'] = 'http://myanimelist.net' . $itemparts[1];
+                        $mangarecord->setAlternativeVersions($itemarray);
+                    }
+                }
+            }
+
+            //Note: There is a "related manga" option, but it doesn't appear to
+            //work properly in the existing API. We should extend to include all
+            //the other relations anyway.
         }
 
         # User's manga details (only available if he authenticates).
