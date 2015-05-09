@@ -1,1 +1,7 @@
-../vendor/oyejorge/less.php/bin/lessc
+#!/usr/bin/env sh
+SRC_DIR="`pwd`"
+cd "`dirname "$0"`"
+cd "../vendor/oyejorge/less.php/bin"
+BIN_TARGET="`pwd`/lessc"
+cd "$SRC_DIR"
+"$BIN_TARGET" "$@"
