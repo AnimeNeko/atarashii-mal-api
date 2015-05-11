@@ -7,9 +7,9 @@ Symfony PHP framework.
 Due to a poor official API that offers spotty coverage, the need exists for
 something that offers more features in a REST-ful manner.
 
-Where possible, this code tries to offer the same interface as provided by the
-[unofficial MyAnimeList API](https://github.com/chuyeow/myanimelist-api). Please
-review COMPATIBILITY for a list of differences.
+The API "1.0" version tries, where possible, to offer the same interface as
+provided by the [unofficial MyAnimeList API](https://github.com/chuyeow/myanimelist-api).
+Please review COMPATIBILITY for a list of differences.
 
 Download
 --------
@@ -51,10 +51,10 @@ It makes use of the following major components:
 * [JMSSerializerBundle](http://jmsyst.com/bundles/JMSSerializerBundle) by Johannes Schmitt
 
 This project is not sponsored by, endorsed by, or affiliated with MyAnimeList, a
-property of CraveOnline, LLC.
+property of MyAnimeList, LLC.
 
 License
 -------
 
-The Atarashii MAL API is Copyright © 2014 Ratan Dhawtal and Michael Johnson. It
+The Atarashii MAL API is Copyright © 2015 Ratan Dhawtal and Michael Johnson. It
 is licensed under the Apache Public License 2.0.
