@@ -145,27 +145,36 @@ class MangaController extends FOSRestController
             return $this->view(array('error' => 'network-error'), 500);
         }
 
-        if (strpos($details, 'no reviews submitted') !== false) {
-            return $this->view(array('error' => 'There have been no reviews submitted for this manga yet.'), 200);
+        $response = new Response();
+        $serializationContext = SerializationContext::create();
+        $serializationContext->setSerializeNull(true);
+
+        $response->setPublic();
+        $response->setMaxAge(10800); //Three hour
+        $response->headers->addCacheControlDirective('must-revalidate', true);
+        $response->setEtag('manga/reviews/' . $id . '?page=' . $page);
+
+        //Also, set "expires" header for caches that don't understand Cache-Control
+        $date = new \DateTime();
+        $date->modify('+10800 seconds'); //Three hour
+        $response->setExpires($date);
+
+        if (strpos($details, 'No manga found, check the manga id and try again.') !== false) {
+            $view = $this->view(Array('error' => 'not-found'));
+            $view->setResponse($response);
+            $view->setStatusCode(404);
+
+            return $view;
+        } elseif (strpos($details, 'no reviews submitted') !== false) {
+            $view = $this->view(array());
+            $view->setResponse($response);
+            $view->setStatusCode(200);
+
+            return $view;
         } else {
             $reviews = ReviewParser::parse($details, 'M'); //M = Manga
 
-            $response = new Response();
-            $serializationContext = SerializationContext::create();
-            $serializationContext->setSerializeNull(true);
-
-            $response->setPublic();
-            $response->setMaxAge(10800); //Three hour
-            $response->headers->addCacheControlDirective('must-revalidate', true);
-            $response->setEtag('manga/reviews/' . $id . '?page=' . $page);
-
-            //Also, set "expires" header for caches that don't understand Cache-Control
-            $date = new \DateTime();
-            $date->modify('+10800 seconds'); //Three hour
-            $response->setExpires($date);
-
             $view = $this->view($reviews);
-
             $view->setSerializationContext($serializationContext);
             $view->setResponse($response);
             $view->setStatusCode(200);

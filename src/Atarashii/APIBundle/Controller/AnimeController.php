@@ -148,21 +148,31 @@ class AnimeController extends FOSRestController
             return $this->view(Array('error' => 'network-error'), 500);
         }
 
-        if (strpos($details, 'no reviews submitted') !== false) {
-            return $this->view(Array('error' => 'There have been no reviews submitted for this anime yet.'), 200);
+        $response = new Response();
+        $response->setPublic();
+        $response->setMaxAge(10800); //Three hour
+        $response->headers->addCacheControlDirective('must-revalidate', true);
+        $response->setEtag('anime/reviews/' . $id . '?page=' . $page);
+
+        //Also, set "expires" header for caches that don't understand Cache-Control
+        $date = new \DateTime();
+        $date->modify('+10800 seconds'); //Three hour
+        $response->setExpires($date);
+
+        if (strpos($details, 'No series found, check the series id and try again.') !== false) {
+            $view = $this->view(Array('error' => 'not-found'));
+            $view->setResponse($response);
+            $view->setStatusCode(404);
+
+            return $view;
+        } elseif (strpos($details, 'no reviews submitted') !== false) {
+            $view = $this->view(array());
+            $view->setResponse($response);
+            $view->setStatusCode(200);
+
+            return $view;
         } else {
             $reviews = ReviewParser::parse($details, 'A'); //A = Anime
-
-            $response = new Response();
-            $response->setPublic();
-            $response->setMaxAge(10800); //Three hour
-            $response->headers->addCacheControlDirective('must-revalidate', true);
-            $response->setEtag('anime/reviews/' . $id . '?page=' . $page);
-
-            //Also, set "expires" header for caches that don't understand Cache-Control
-            $date = new \DateTime();
-            $date->modify('+10800 seconds'); //Three hour
-            $response->setExpires($date);
 
             $view = $this->view($reviews);
             $view->setResponse($response);
