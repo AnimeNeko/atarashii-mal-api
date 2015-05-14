@@ -171,10 +171,16 @@ class UserController extends FOSRestController
         $date->modify('+900 seconds'); //15 minutes
         $response->setExpires($date);
 
-        if (strpos($historycontent, 'No history found') !== false) {
+        if (strpos($historycontent, 'Invalid member username provided') !== false) {
             $view = $this->view(Array('error' => 'not-found'));
             $view->setResponse($response);
             $view->setStatusCode(404);
+
+            return $view;
+        } elseif (strpos($historycontent, 'No history found') !== false) {
+            $view = $this->view(array());
+            $view->setResponse($response);
+            $view->setStatusCode(200);
 
             return $view;
         } else {
