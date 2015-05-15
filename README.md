@@ -19,6 +19,10 @@ Bitbucket: https://bitbucket.org/ratan12/atarashii-api
 Installation and Configuration
 ------------------------------
 
+Note: If you want to try out the API, or develop against a fully working
+environment, a configuration for Vagrant is provided. Please see VAGRANT for
+details.
+
 You will need [Composer](https://getcomposer.org/) to set up the project.
 
 Additionally, you will need to get a user agent whitelisted with MyAnimeList.
