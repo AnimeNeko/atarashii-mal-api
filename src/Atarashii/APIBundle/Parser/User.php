@@ -167,7 +167,7 @@ class User
                 }
 
                 $historyinfo['item']->setTitle($crawler->filter('a')->text());
-                $historyinfo['item']->setId((int) str_replace('/anime.php?id=', '', $crawler->filter('a')->attr('href')));
+                $historyinfo['item']->setId((int)str_replace('/' . $historyinfo['type'] . '.php?id=', '', $crawler->filter('a')->attr('href')));
                 $historyinfo['time_updated'] = (new Date)->formatTime(substr($crawler->filter('td')->eq(1)->text(), 1));
 
                 $historylist[] = $historyinfo;
