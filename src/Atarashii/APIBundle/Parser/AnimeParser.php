@@ -135,7 +135,9 @@ class AnimeParser
                     $animerecord->setStartDate(DateTime::createFromFormat('M Y d', $daterange[0] . ' 01'), 'month'); //Example ID 22535 (check upcoming list)
                 }
             } else {
-                $animerecord->setStartDate(DateTime::createFromFormat('M j, Y', $daterange[0]), 'day');
+                if (strlen($daterange[0]) !== 7 && strlen($daterange[0]) !== 8) {
+                    $animerecord->setStartDate(DateTime::createFromFormat('M j, Y', $daterange[0]), 'day');
+                }
             }
 
             //Series not yet to air won't list a range at all while currently airing series will use a "?"
@@ -147,7 +149,9 @@ class AnimeParser
                 } elseif (strpos($daterange[1],',') == false) {
                     $animerecord->setEndDate(DateTime::createFromFormat('M Y d', $daterange[1] . ' 01'), 'month'); //Example ID 21275
                 } else {
-                    $animerecord->setEndDate(DateTime::createFromFormat('M j, Y', $daterange[1]), 'day');
+                    if (strlen($daterange[1]) !== 7 && strlen($daterange[1]) !== 8) {
+                        $animerecord->setEndDate(DateTime::createFromFormat('M j, Y', $daterange[1]), 'day');
+                    }
                 }
             }
         }
