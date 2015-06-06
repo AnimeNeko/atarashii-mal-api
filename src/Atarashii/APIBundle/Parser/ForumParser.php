@@ -225,7 +225,7 @@ class ForumParser
             $set[] = self::parseTopicDetails($item);
         }
 
-        $pages = $crawler->filter('div[style="height: 15px; margin: 5px 0px; padding: 3px 0;"] div')->last()->text();
+        $pages = $crawler->filter('div[class="fl-r pb4"]')->text();
         if ($pages != '')
             $result['pages'] = ((int) substr($pages, strpos($pages, ' (') + 2, strpos($pages, ')')));
         else
