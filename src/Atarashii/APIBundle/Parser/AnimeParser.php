@@ -286,7 +286,7 @@ class AnimeParser
 
             #Adaptation
             if (preg_match('/Adaptation\: ?(<a .+?)\<br/', $related->parents()->html(), $relateditems)) {
-                $relateditems = explode(', ', $relateditems[1]);
+                $relateditems = preg_split("/, (?=<a)/", $relateditems[1]);
                 foreach ($relateditems as $item) {
                     if (preg_match('/<a href="(\/manga\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
                         $itemarray = array();
@@ -300,7 +300,7 @@ class AnimeParser
 
             #Prequel
             if (preg_match('/Prequel\: ?(<a .+?)\<br/', $relatedcontent, $relateditems)) {
-                $relateditems = explode(', ', $relateditems[1]);
+                $relateditems = preg_split("/, (?=<a)/", $relateditems[1]);
                 foreach ($relateditems as $item) {
                     if (preg_match('/<a href="(\/anime\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
                         $itemarray = array();
@@ -314,7 +314,7 @@ class AnimeParser
 
             #Sequel
             if (preg_match('/Sequel\: ?(<a .+?)\<br/', $relatedcontent, $relateditems)) {
-                $relateditems = explode(', ', $relateditems[1]);
+                $relateditems = preg_split("/, (?=<a)/", $relateditems[1]);
                 foreach ($relateditems as $item) {
                     if (preg_match('/<a href="(\/anime\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
                         $itemarray = array();
@@ -328,7 +328,7 @@ class AnimeParser
 
             #Side story
             if (preg_match('/Side story\: ?(<a .+?)\<br/', $relatedcontent, $relateditems)) {
-                $relateditems = explode(', ', $relateditems[1]);
+                $relateditems = preg_split("/, (?=<a)/", $relateditems[1]);
                 foreach ($relateditems as $item) {
                     if (preg_match('/<a href="(\/anime\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
                         $itemarray = array();
@@ -342,7 +342,7 @@ class AnimeParser
 
             #Parent story
             if (preg_match('/Parent story\: ?(<a .+?)\<br/', $relatedcontent, $relateditems)) {
-                $relateditems = explode(', ', $relateditems[1]);
+                $relateditems = preg_split("/, (?=<a)/", $relateditems[1]);
                 foreach ($relateditems as $item) {
                     if (preg_match('/<a href="(\/anime\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
                         $itemarray = array();
@@ -356,7 +356,7 @@ class AnimeParser
 
             #Character
             if (preg_match('/Character\: ?(<a .+?)\<br/', $relatedcontent, $relateditems)) {
-                $relateditems = explode(', ', $relateditems[1]);
+                $relateditems = preg_split("/, (?=<a)/", $relateditems[1]);
                 foreach ($relateditems as $item) {
                     if (preg_match('/<a href="(\/anime\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
                         $itemarray = array();
@@ -370,7 +370,7 @@ class AnimeParser
 
             #Spin-off
             if (preg_match('/Spin-off\: ?(<a .+?)\<br/', $relatedcontent, $relateditems)) {
-                $relateditems = explode(', ', $relateditems[1]);
+                $relateditems = preg_split("/, (?=<a)/", $relateditems[1]);
                 foreach ($relateditems as $item) {
                     if (preg_match('/<a href="(\/anime\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
                         $itemarray = array();
@@ -384,7 +384,7 @@ class AnimeParser
 
             #Summary
             if (preg_match('/Summary\: ?(<a .+?)\<br/', $relatedcontent, $relateditems)) {
-                $relateditems = explode(', ', $relateditems[1]);
+                $relateditems = preg_split("/, (?=<a)/", $relateditems[1]);
                 foreach ($relateditems as $item) {
                     if (preg_match('/<a href="(\/anime\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
                         $itemarray = array();
@@ -398,7 +398,7 @@ class AnimeParser
 
             #Alternative Versions
             if (preg_match('/Alternative versions?\: ?(<a .+?)\<br/', $relatedcontent, $relateditems)) {
-                $relateditems = explode(', ', $relateditems[1]);
+                $relateditems = preg_split("/, (?=<a)/", $relateditems[1]);
                 foreach ($relateditems as $item) {
                     if (preg_match('/<a href="(\/anime\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
                         $itemarray = array();
@@ -412,7 +412,7 @@ class AnimeParser
 
             #Other
             if (preg_match('/Other?\: ?(<a .+?)\<br/', $relatedcontent, $relateditems)) {
-                $relateditems = explode(', ', $relateditems[1]);
+                $relateditems = preg_split("/, (?=<a)/", $relateditems[1]);
                 foreach ($relateditems as $item) {
                     if (preg_match('/<a href="(\/anime\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
                         $itemarray = array();
@@ -500,42 +500,42 @@ class AnimeParser
 
         #Start and Finish Dates
         #<tr>
-        #	<td class="borderClass">Start Date</td>
-        #				<td class="borderClass">
-        #	Month:
-        #	<select name="startMonth"  class="inputtext">
-        #		<option value="00">
-        #		<option value="1" >Jan<option value="2" selected>Feb<option value="3" >Mar<option value="4" >Apr<option value="5" >May<option value="6" >Jun<option value="7" >Jul<option value="8" >Aug<option value="9" >Sep<option value="10" >Oct<option value="11" >Nov<option value="12" >Dec			</select>
-        #	Day:
-        #	<select name="startDay"  class="inputtext">
-        #		<option value="00">
-        #		<option value="1" >1<option value="2" selected>2<option value="3" >3<option value="4" >4<option value="5" >5<option value="6" >6<option value="7" >7<option value="8" >8<option value="9" >9<option value="10" >10<option value="11" >11<option value="12" >12<option value="13" >13<option value="14" >14<option value="15" >15<option value="16" >16<option value="17" >17<option value="18" >18<option value="19" >19<option value="20" >20<option value="21" >21<option value="22" >22<option value="23" >23<option value="24" >24<option value="25" >25<option value="26" >26<option value="27" >27<option value="28" >28<option value="29" >29<option value="30" >30<option value="31" >31			</select>
-        #	Year:
-        #	<select name="startYear"  class="inputtext">
-        #		<option value="0000">
-        #		<option value="2014" selected>2014<option value="2013" >2013<option value="2012" >2012<option value="2011" >2011<option value="2010" >2010<option value="2009" >2009<option value="2008" >2008<option value="2007" >2007<option value="2006" >2006<option value="2005" >2005<option value="2004" >2004<option value="2003" >2003<option value="2002" >2002<option value="2001" >2001<option value="2000" >2000<option value="1999" >1999<option value="1998" >1998<option value="1997" >1997<option value="1996" >1996<option value="1995" >1995<option value="1994" >1994<option value="1993" >1993<option value="1992" >1992<option value="1991" >1991<option value="1990" >1990<option value="1989" >1989<option value="1988" >1988<option value="1987" >1987<option value="1986" >1986<option value="1985" >1985<option value="1984" >1984			</select>
-        #	&nbsp;
-        #	<label><input type="checkbox"  onchange="ChangeStartDate();"  name="unknownStart" value="1"> <small>Unknown Date</label><br>Start Date represents the date you started watching the Anime <a href="javascript:setToday(1);">Insert Today</a></small>
-        #	</td>
+        #   <td class="borderClass">Start Date</td>
+        #               <td class="borderClass">
+        #   Month:
+        #   <select name="startMonth"  class="inputtext">
+        #       <option value="00">
+        #       <option value="1" >Jan<option value="2" selected>Feb<option value="3" >Mar<option value="4" >Apr<option value="5" >May<option value="6" >Jun<option value="7" >Jul<option value="8" >Aug<option value="9" >Sep<option value="10" >Oct<option value="11" >Nov<option value="12" >Dec         </select>
+        #   Day:
+        #   <select name="startDay"  class="inputtext">
+        #       <option value="00">
+        #       <option value="1" >1<option value="2" selected>2<option value="3" >3<option value="4" >4<option value="5" >5<option value="6" >6<option value="7" >7<option value="8" >8<option value="9" >9<option value="10" >10<option value="11" >11<option value="12" >12<option value="13" >13<option value="14" >14<option value="15" >15<option value="16" >16<option value="17" >17<option value="18" >18<option value="19" >19<option value="20" >20<option value="21" >21<option value="22" >22<option value="23" >23<option value="24" >24<option value="25" >25<option value="26" >26<option value="27" >27<option value="28" >28<option value="29" >29<option value="30" >30<option value="31" >31            </select>
+        #   Year:
+        #   <select name="startYear"  class="inputtext">
+        #       <option value="0000">
+        #       <option value="2014" selected>2014<option value="2013" >2013<option value="2012" >2012<option value="2011" >2011<option value="2010" >2010<option value="2009" >2009<option value="2008" >2008<option value="2007" >2007<option value="2006" >2006<option value="2005" >2005<option value="2004" >2004<option value="2003" >2003<option value="2002" >2002<option value="2001" >2001<option value="2000" >2000<option value="1999" >1999<option value="1998" >1998<option value="1997" >1997<option value="1996" >1996<option value="1995" >1995<option value="1994" >1994<option value="1993" >1993<option value="1992" >1992<option value="1991" >1991<option value="1990" >1990<option value="1989" >1989<option value="1988" >1988<option value="1987" >1987<option value="1986" >1986<option value="1985" >1985<option value="1984" >1984          </select>
+        #   &nbsp;
+        #   <label><input type="checkbox"  onchange="ChangeStartDate();"  name="unknownStart" value="1"> <small>Unknown Date</label><br>Start Date represents the date you started watching the Anime <a href="javascript:setToday(1);">Insert Today</a></small>
+        #   </td>
         #</tr>
         #<tr>
-        #	<td class="borderClass">Finish Date</td>
-        #				<td class="borderClass">
-        #	Month:
-        #	<select name="endMonth" class="inputtext" disabled>
-        #		<option value="00">
-        #		<option value="1" >Jan<option value="2" >Feb<option value="3" >Mar<option value="4" >Apr<option value="5" >May<option value="6" >Jun<option value="7" >Jul<option value="8" >Aug<option value="9" >Sep<option value="10" >Oct<option value="11" >Nov<option value="12" >Dec			</select>
-        #	Day:
-        #	<select name="endDay" class="inputtext" disabled>
-        #		<option value="00">
-        #		<option value="1" >1<option value="2" >2<option value="3" >3<option value="4" >4<option value="5" >5<option value="6" >6<option value="7" >7<option value="8" >8<option value="9" >9<option value="10" >10<option value="11" >11<option value="12" >12<option value="13" >13<option value="14" >14<option value="15" >15<option value="16" >16<option value="17" >17<option value="18" >18<option value="19" >19<option value="20" >20<option value="21" >21<option value="22" >22<option value="23" >23<option value="24" >24<option value="25" >25<option value="26" >26<option value="27" >27<option value="28" >28<option value="29" >29<option value="30" >30<option value="31" >31			</select>
-        #	Year:
-        #	<select name="endYear" class="inputtext" disabled>
-        #		<option value="0000">
-        #		<option value="2014" >2014<option value="2013" >2013<option value="2012" >2012<option value="2011" >2011<option value="2010" >2010<option value="2009" >2009<option value="2008" >2008<option value="2007" >2007<option value="2006" >2006<option value="2005" >2005<option value="2004" >2004<option value="2003" >2003<option value="2002" >2002<option value="2001" >2001<option value="2000" >2000<option value="1999" >1999<option value="1998" >1998<option value="1997" >1997<option value="1996" >1996<option value="1995" >1995<option value="1994" >1994<option value="1993" >1993<option value="1992" >1992<option value="1991" >1991<option value="1990" >1990<option value="1989" >1989<option value="1988" >1988<option value="1987" >1987<option value="1986" >1986<option value="1985" >1985<option value="1984" >1984			</select>
-        #	&nbsp;
-        #	<small><label><input type="checkbox" onchange="ChangeEndDate();" checked name="unknownEnd" value="1"> Unknown Date</label><br>Do <u>not</u> fill out the Finish Date unless status is <em>Completed</em> <a href="javascript:setToday(2);">Insert Today</a></small>
-        #	</td>
+        #   <td class="borderClass">Finish Date</td>
+        #               <td class="borderClass">
+        #   Month:
+        #   <select name="endMonth" class="inputtext" disabled>
+        #       <option value="00">
+        #       <option value="1" >Jan<option value="2" >Feb<option value="3" >Mar<option value="4" >Apr<option value="5" >May<option value="6" >Jun<option value="7" >Jul<option value="8" >Aug<option value="9" >Sep<option value="10" >Oct<option value="11" >Nov<option value="12" >Dec         </select>
+        #   Day:
+        #   <select name="endDay" class="inputtext" disabled>
+        #       <option value="00">
+        #       <option value="1" >1<option value="2" >2<option value="3" >3<option value="4" >4<option value="5" >5<option value="6" >6<option value="7" >7<option value="8" >8<option value="9" >9<option value="10" >10<option value="11" >11<option value="12" >12<option value="13" >13<option value="14" >14<option value="15" >15<option value="16" >16<option value="17" >17<option value="18" >18<option value="19" >19<option value="20" >20<option value="21" >21<option value="22" >22<option value="23" >23<option value="24" >24<option value="25" >25<option value="26" >26<option value="27" >27<option value="28" >28<option value="29" >29<option value="30" >30<option value="31" >31            </select>
+        #   Year:
+        #   <select name="endYear" class="inputtext" disabled>
+        #       <option value="0000">
+        #       <option value="2014" >2014<option value="2013" >2013<option value="2012" >2012<option value="2011" >2011<option value="2010" >2010<option value="2009" >2009<option value="2008" >2008<option value="2007" >2007<option value="2006" >2006<option value="2005" >2005<option value="2004" >2004<option value="2003" >2003<option value="2002" >2002<option value="2001" >2001<option value="2000" >2000<option value="1999" >1999<option value="1998" >1998<option value="1997" >1997<option value="1996" >1996<option value="1995" >1995<option value="1994" >1994<option value="1993" >1993<option value="1992" >1992<option value="1991" >1991<option value="1990" >1990<option value="1989" >1989<option value="1988" >1988<option value="1987" >1987<option value="1986" >1986<option value="1985" >1985<option value="1984" >1984          </select>
+        #   &nbsp;
+        #   <small><label><input type="checkbox" onchange="ChangeEndDate();" checked name="unknownEnd" value="1"> Unknown Date</label><br>Do <u>not</u> fill out the Finish Date unless status is <em>Completed</em> <a href="javascript:setToday(2);">Insert Today</a></small>
+        #   </td>
         #</tr>
         $isStarted = $crawler->filter('input[name="unknownStart"]')->attr('checked');
         $isEnded = $crawler->filter('input[name="unknownEnd"]')->attr('checked');
@@ -581,15 +581,15 @@ class AnimeParser
 
         #Priority
         #<td class="borderClass"><select name="priority" class="inputtext">
-        #<option value="0" selected>Low<option value="1" >Medium<option value="2" >High			</select>
+        #<option value="0" selected>Low<option value="1" >Medium<option value="2" >High         </select>
         $priority = $crawler->filter('select[name="priority"] option:selected')->attr('value');
         $anime->setPriority($priority);
 
         #Storage
         #
         #<td class="borderClass" align="left"><select name="storage" id="storage" onchange="StorageBooleanCheck(2);" class="inputtext">
-        #	<option value="0">Select storage type
-        #	<option value="1" >Hard Drive<option value="6" >External HD<option value="7" >NAS<option value="2" >DVD / CD<option value="4" >Retail DVD<option value="5" >VHS<option value="3" >None			</select>
+        #   <option value="0">Select storage type
+        #   <option value="1" >Hard Drive<option value="6" >External HD<option value="7" >NAS<option value="2" >DVD / CD<option value="4" >Retail DVD<option value="5" >VHS<option value="3" >None          </select>
         #<div style="margin: 3px 0px; display: none;" id="StorageDiv">Total <span id="storageDescription">DvD's</span> <input type="text" name="storageVal" id="storageValue" value="0.00" size="4" class="inputtext"></div>
         #</td>
 
@@ -626,7 +626,7 @@ class AnimeParser
 
         #Rewatch Value
         #<td class="borderClass"><select name="list_rewatch_value" class="inputtext">
-        #    <option value="0">Select rewatch value<option  value="1">Very Low<option  value="2">Low<option  value="3">Medium<option  value="4">High<option selected value="5">Very High			</select>
+        #    <option value="0">Select rewatch value<option  value="1">Very Low<option  value="2">Low<option  value="3">Medium<option  value="4">High<option selected value="5">Very High            </select>
         $rewatchValue = $crawler->filter('select[name="list_rewatch_value"] option:selected');
 
         if (count($rewatchValue)) {
@@ -644,3 +644,4 @@ class AnimeParser
         return $anime;
     }
 }
+
