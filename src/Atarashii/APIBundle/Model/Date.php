@@ -62,7 +62,10 @@ class Date
         } else if (strpos($time, 'Yesterday') !== false) {
             return $dateTime->createFromFormat('g:i A', substr($time, 11), $timeZone)->modify('-1 day')->format('Y-m-d\TH:iO');
         } else if (strpos($time, 'AM') !== false || strpos($time, 'PM') !== false) {
-            return $dateTime->createFromFormat('M j, g:i A', $time, $timeZone)->format('Y-m-d\TH:iO');
+            if (strlen($time) > 18)
+                return $dateTime->createFromFormat('M j, Y g:i A', $time, $timeZone)->format('Y-m-d\TH:iO');
+            else
+                return $dateTime->createFromFormat('M j, g:i A', $time, $timeZone)->format('Y-m-d\TH:iO');
         } else if (strpos($time, ', ') !== false) { //Do not place this before the other formatters because it will break almost all dates.
             if (strlen($time) > 12)
                 return $dateTime->createFromFormat('F d, Y', $time)->format('Y-m-d');
