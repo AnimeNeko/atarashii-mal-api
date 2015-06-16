@@ -1,0 +1,10 @@
+<h2>Errors</h2>
+<p>Errors are normally returned with proper HTTP status codes, so you don't need to process the contents unless needed. Response content will generally consist of an error property with a string describing the problem. While not comprehensive, some of the more commonly used error descriptions follow:</p>
+
+<ul>
+    <li><code>not-found</code>: Used when an item isn't found (but the API endpoint is correct). This is returned with a 404 error code.</li>
+    <li><code><em>arg</em>-required</code>: The argument &quot;<em>arg</em>&quot; is required, but was not supplied. (This is not currently used.)</li>
+    <li><code>network-error</code>: A communication error occurred with the MyAnimeList website.</li>
+    <li><code>unauthorized</code>: The action requires authentication.</li>
+    <li><code>forbidden</code>: The user authenticated does not have access.</li>
+</ul>

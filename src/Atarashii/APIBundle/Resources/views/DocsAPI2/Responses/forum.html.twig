@@ -1,0 +1,20 @@
+<h2>Forum Details</h2>
+<p>The forum details entry is an object that contains a profile along with some unique information.</p>
+<p class="alert alert-info">Not all properties are provided depending on the type of request made.</p>
+
+<ul>
+    <li><code>id</code>: The username of the friend.</li>
+    <li><code>name</code>: The topic or board.</li>
+    <li><code>username</code>: The username of the user that created a topic.</li>
+    <li><code>replies</code>: The number of replies.</li>
+    <li><code>description</code>: The description of boards.</li>
+    <li><code>reply</code>: The info about the latest post.</li>
+    <ul>
+        <li><code>username</code>: The user that added the latest comment.</li>
+        <li><code>time</code>: The time that the latest comment has been created. This may be either a relative time (&quot;1 hour ago&quot;, &quot;now&quot;) or a date formatted as &quot;m-d-y, g:i A&quot;<sup><a href="#foot1">1</a></sup></li>
+    </ul>
+    <li><code>children</code>: The username of the friend.</li>
+    <li><code>comment</code>: The username of the friend.</li>
+    <li><code>time</code>: The time that a post has been placed. This may be either a relative time (&quot;1 hour ago&quot;, &quot;now&quot;) or a date formatted as &quot;m-d-y, g:i A&quot;<sup><a href="#foot1">1</a></sup></li>
+    <li><code>profile</code>: A <a href="#user">user details</a> object.</li>
+</ul>
