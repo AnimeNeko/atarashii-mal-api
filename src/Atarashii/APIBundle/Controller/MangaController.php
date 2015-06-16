@@ -128,7 +128,7 @@ class MangaController extends FOSRestController
      *
      * @return View
      */
-    public function getReviewsAction($id, Request $request)
+    public function getReviewsAction($id, $apiVersion, Request $request)
     {
         // http://myanimelist.net/manga/#{id}/ /reviews&p=#{page}
 
@@ -147,7 +147,7 @@ class MangaController extends FOSRestController
 
         $response = new Response();
         $serializationContext = SerializationContext::create();
-        $serializationContext->setSerializeNull(true);
+        $serializationContext->setVersion($apiVersion);
 
         $response->setPublic();
         $response->setMaxAge(10800); //Three hour
