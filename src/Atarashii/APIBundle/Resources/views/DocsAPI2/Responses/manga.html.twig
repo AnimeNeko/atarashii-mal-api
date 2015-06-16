@@ -50,4 +50,14 @@
     <li><code>chapters_read</code>: The number of chapters the user has read. <span class="text-warning">Only available for authenticated requests.</span></li>
     <li><code>volumes_read</code>: The number of volumes the user has read. <span class="text-warning">Only available for authenticated requests.</span></li>
     <li><code>score</code>: The user's rating of the manga. <span class="text-warning">Only available for authenticated requests.</span></li>
+    <li><span class="label label-default">NEW</span> <code>personal_tags</code>: A list of tags for the title assigned by the logged in user. <span class="text-warning">Only available for authenticated requests.</span></li>
+    <li><span class="label label-default">NEW</span> <code>reading_start</code>: The date that the user began reading the title. Formatted as a full ISO 8601 date and time<sup><a href="#foot2">2</a></sup> <span class="text-warning">Only available for authenticated requests.</span></li>
+    <li><span class="label label-default">NEW</span> <code>reading_end</code>: The date that the user finished reading the title. Formatted as a full ISO 8601 date and time<sup><a href="#foot2">2</a></sup> <span class="text-warning">Only available for authenticated requests.</span></li>
+    <li><span class="label label-default">NEW</span> <code>priority</code>: An integer indicating the priority of the title for the user. Range from 0 to 2 representing Low (0), Medium (1), and High (2). <span class="text-warning">Only available for authenticated requests.</span></li>
+
+    <li><span class="label label-default">NEW</span> <code>chap_downloaded</code>: An integer that indicates the number of chapters the user has recorded as having downloaded. <span class="text-warning">Only available for authenticated requests.</span></li>
+    <li><span class="label label-default">NEW</span> <code>rereading</code>: An boolean indicating if the title is being reread. <span class="text-warning">Only available for authenticated requests.</span></li>
+    <li><span class="label label-default">NEW</span> <code>reread_count</code>: An integer indicating the number of times a title has been reread. This does not include the first reading. <span class="text-warning">Only available for authenticated requests.</span></li>
+    <li><span class="label label-default">NEW</span> <code>reread_value</code>: An integer from 1 (Very Low) to 5 (High) indicating the value in rereading a title. <span class="text-warning">Only available for authenticated requests.</span></li>
+    <li><span class="label label-default">NEW</span> <code>personal_comments</code>: Text entered by the user containing comments on the title. <span class="text-warning">Only available for authenticated requests.</span></li>
 </ul>
