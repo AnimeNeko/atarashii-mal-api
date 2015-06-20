@@ -196,7 +196,7 @@ class MangaController extends FOSRestController
         $downloader = $this->get('atarashii_api.communicator');
 
         try {
-            $details = $downloader->fetch('/manga/' . $id . '/ /characters');
+            $details = $downloader->fetch('/manga/' . $id . '/_/characters');
         } catch (Exception\CurlException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
