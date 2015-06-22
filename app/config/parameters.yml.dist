@@ -1,3 +1,4 @@
+# This file is a "template" of what your parameters.yml file should look like
 parameters:
     locale: en
     secret: SetMe
