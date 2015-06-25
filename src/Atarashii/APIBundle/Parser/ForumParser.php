@@ -207,7 +207,7 @@ class ForumParser
             $username = $crawler->filter('td[class="forum_boardrow1"]')->eq(1)->filter('a')->text();
             $time = explode("\n", $crawler->filter('td[class="forum_boardrow1"]')->eq(1)->text());
 
-            $topics->setReply(array('username' => $username, 'time' => (new Date)->formatTime($time[1])));
+            $topics->setReply(array('username' => $username, 'time' => Date::formatTime($time[1])));
 
             return $topics;
         } else {

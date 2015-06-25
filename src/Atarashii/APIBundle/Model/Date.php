@@ -37,7 +37,7 @@ class Date
      *
      * @return string
      */
-    public function formatTime($time)
+    public static function formatTime($time)
     {
         $dateTime = (new DateTime);
         $timeZone = new DateTimeZone(Date::$timeZone);
@@ -89,7 +89,7 @@ class Date
      *
      * @return string
      */
-    public function setTimeZone($settings)
+    public static function setTimeZone($settings)
     {
         $crawler = new Crawler();
         $crawler->addHTMLContent($settings, 'UTF-8');

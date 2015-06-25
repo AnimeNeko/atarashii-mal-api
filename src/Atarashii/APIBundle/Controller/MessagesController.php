@@ -49,7 +49,7 @@ class MessagesController extends FOSRestController
 
                 return $view;
             }
-            (new Date)->setTimeZone($downloader->fetch('/editprofile.php'));
+            Date::setTimeZone($downloader->fetch('/editprofile.php'));
             $messagesdetails = $downloader->fetch('/mymessages.php?go=&show='.(($page*20)-20));
         } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);

@@ -114,7 +114,7 @@ class Review
      */
     public function setDate($date)
     {
-        $this->date = (new Date)->formatTime($date);
+        $this->date = Date::formatTime($date);
     }
 
     /**
