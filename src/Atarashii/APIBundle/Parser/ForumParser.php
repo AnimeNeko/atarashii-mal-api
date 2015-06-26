@@ -93,7 +93,8 @@ class ForumParser
 
             return $board;
         } else {
-            return $crawler->filter('td')->text(); // This is the category name
+            if ($crawler->filter('td[class="forum_category"]')->count() == 1)
+                return $crawler->filter('td')->text(); // This is the category name
         }
     }
 
