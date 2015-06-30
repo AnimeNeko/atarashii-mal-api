@@ -140,7 +140,7 @@ class MangaController extends FOSRestController
         }
 
         try {
-            $details = $downloader->fetch('/manga/' . $id . '/ /reviews&p=' . $page);
+            $details = $downloader->fetch('/manga/' . $id . '/_/reviews&p=' . $page);
         } catch (Exception\CurlException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
