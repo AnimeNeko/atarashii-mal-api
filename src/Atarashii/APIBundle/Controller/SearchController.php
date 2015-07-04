@@ -51,7 +51,7 @@ class SearchController extends FOSRestController
         $downloader = $this->get('atarashii_api.communicator');
 
         try {
-            $animecontent = $downloader->fetch('/anime.php?c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&q='.$query.'&show='.(($page*20)-20));
+            $animecontent = $downloader->fetch('/anime.php?c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&q='.$query.'&show='.(($page*50)-50));
         } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         } catch (Exception\ClientErrorResponseException $e) {
@@ -129,7 +129,7 @@ class SearchController extends FOSRestController
         $downloader = $this->get('atarashii_api.communicator');
 
         try {
-            $mangacontent = $downloader->fetch('/manga.php?c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&q='.$query.'&show='.(($page*20)-20));
+            $mangacontent = $downloader->fetch('/manga.php?c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&q='.$query.'&show='.(($page*50)-50));
         } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         } catch (Exception\ClientErrorResponseException $e) {

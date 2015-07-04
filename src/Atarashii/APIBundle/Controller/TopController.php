@@ -58,7 +58,7 @@ class TopController extends FOSRestController
         $downloader = $this->get('atarashii_api.communicator');
 
         try {
-            $animecontent = $downloader->fetch('/topanime.php?type=' . $type . '&limit='.(($page*30)-30));
+            $animecontent = $downloader->fetch('/topanime.php?type=' . $type . '&limit='.(($page*50)-50));
         } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
@@ -149,7 +149,7 @@ class TopController extends FOSRestController
         $downloader = $this->get('atarashii_api.communicator');
 
         try {
-            $mangacontent = $downloader->fetch('/topmanga.php?type=' . $type . '&limit='.(($page*30)-30));
+            $mangacontent = $downloader->fetch('/topmanga.php?type=' . $type . '&limit='.(($page*50)-50));
         } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
