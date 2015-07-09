@@ -190,18 +190,6 @@ class MangaParser
             $mangarecord->setFavoritedCount((int) $extracted);
         }
 
-        # Popular Tags
-        # Example:
-        # <h2>Popular Tags</h2>
-        # <span style="font-size: 11px;">
-        #   <a href="http://myanimelist.net/manga.php?tag=comedy" style="font-size: 24px" title="241 people tagged with comedy">comedy</a>
-        #   <a href="http://myanimelist.net/manga.php?tag=slice of life" style="font-size: 11px" title="207 people tagged with slice of life">slice of life</a>
-        # </span>
-        $extracted = $leftcolumn->filterXPath('//h2[text()="Popular Tags"]')->nextAll()->filter('a');
-        foreach ($extracted as $term) {
-            $mangarecord->setTags($term->textContent);
-        }
-
         # -
         # Extract from sections on the right column: Synopsis, Related Manga
         # -

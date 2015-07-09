@@ -225,20 +225,6 @@ class AnimeParser
             $animerecord->setFavoritedCount((int) $extracted);
         }
 
-        # Popular Tags
-        # Example:
-        # <h2>Popular Tags</h2>
-        # <span style="font-size: 11px;">
-        #   <a href="http://myanimelist.net/anime.php?tag=comedy" style="font-size: 24px" title="1059 people tagged with comedy">comedy</a>
-        #   <a href="http://myanimelist.net/anime.php?tag=parody" style="font-size: 11px" title="493 people tagged with parody">parody</a>
-        #   <a href="http://myanimelist.net/anime.php?tag=school" style="font-size: 12px" title="546 people tagged with school">school</a>
-        #   <a href="http://myanimelist.net/anime.php?tag=slice of life" style="font-size: 18px" title="799 people tagged with slice of life">slice of life</a>
-        # </span>
-        $extracted = $leftcolumn->filterXPath('//h2[text()="Popular Tags"]')->nextAll()->filter('a');
-        foreach ($extracted as $term) {
-            $animerecord->setTags($tags[] = $term->textContent);
-        }
-
         # -
         # Extract from sections on the right column: Synopsis, Related Anime, Characters & Voice Actors, Reviews
         # Recommendations.
