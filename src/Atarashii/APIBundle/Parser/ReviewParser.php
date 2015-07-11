@@ -34,7 +34,7 @@ class ReviewParser
         $crawler = new Crawler($item);
         $review = new Review();
 
-        $episodes = explode(' ', $crawler->filter('td[style="text-align: right;"] div')->eq(1)->text());
+        $episodes = explode(' ', $crawler->filter('td[style="text-align: right;"] div')->text());
 
         //The review is not clean and should be separated from the other html codes
         $firstpart = explode('div>', $crawler->filter('div[class="spaceit textReadability"]')->html());
