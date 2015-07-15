@@ -1,12 +1,12 @@
 <?php
 /**
-* Atarashii MAL API
-*
-* @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
-* @author    Michael Johnson <youngmug@animeneko.net>
-* @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
-* @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
-*/
+ * Atarashii MAL API
+ *
+ * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
+ * @author    Michael Johnson <youngmug@animeneko.net>
+ * @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
+ * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
+ */
 
 namespace Atarashii\APIBundle\Parser;
 
@@ -48,11 +48,13 @@ class ReviewParser
         $review->setHelpfulTotal($crawler->filter('tr strong')->eq(1)->text());
         $review->setReview($secondpart[0]);
 
-        if ($type == 'A'){
+        if ($type == 'A') {
             if (count($episodes) >= 3) {
-               $review->setEpisodes($episodes[2]);
+                $review->setEpisodes($episodes[2]);
+                $review->setWatchedEpisodes($episodes[0]);
+            } elseif (count($episodes) >= 1) {
+                $review->setEpisodes($episodes[0]);
             }
-            $review->setWatchedEpisodes($episodes[0]);
         } else {
             if (count($episodes) >= 3) {
                 $review->setChapters($episodes[2]);
