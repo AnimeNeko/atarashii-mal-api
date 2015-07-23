@@ -219,62 +219,66 @@ class MangaParser
 
         # Related Manga
         # Example:
-        # <h2>Related Manga</h2>
-        #   Adaptation: <a href="http://myanimelist.net/anime/66/Azumanga_Daioh">Azumanga Daioh</a><br>
-        #   Side story: <a href="http://myanimelist.net/manga/13992/Azumanga_Daioh:_Supplementary_Lessons">Azumanga Daioh: Supplementary Lessons</a><br>
-        $related = $rightcolumn->filterXPath('//h2[text()="Related Manga"]');
+        #<table class="anime_detail_related_anime" style="border-spacing:0px;">
+        #  <tr>
+        #    <td class="ar fw-n borderClass" nowrap="" valign="top">Side story:</td>
+        #    <td class="borderClass" width="100%"><a href="/manga/13992/Azumanga_Daioh:_Hoshuu-hen">Azumanga Daioh: Hoshuu-hen</a></td>
+        #  </tr>
+        #  <tr>
+        #    <td class="ar fw-n borderClass" nowrap="" valign="top">Other:</td>
+        #    <td class="borderClass" width="100%"><a href="/manga/29937/Bara_Manga_Daioh">Bara Manga Daioh</a>, <a href="/manga/59917/Osaka_Banpaku">Osaka Banpaku</a></td>
+        #  </tr>
+        #</table>
 
-        //TODO: Figure out if there is an easier way to get the content.
-        //NOTE: We don't grab "Alternative Setting" or "Other" titles.
+        $related = $rightcolumn->filter('table.anime_detail_related_anime');
+
+        //NOTE: Not all relations are currently supported.
         if (iterator_count($related)) {
-            $relatedcontent = $related->parents()->html();
 
-            #Adaptation
-            if (preg_match('/Adaptation\: ?(<a .+?)\<br/', $relatedcontent, $relateditems)) {
-                $relateditems = explode(', ', $relateditems[1]);
-                foreach ($relateditems as $item) {
-                    if (preg_match('/<a href="(\/anime\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
-                        $itemarray = array();
-                        $itemarray['anime_id'] = $itemparts[2];
-                        $itemarray['title'] = $itemparts[3];
-                        $itemarray['url'] = 'http://myanimelist.net' . $itemparts[1];
-                        $mangarecord->setAnimeAdaptations($itemarray);
+            $rows = $related->children();
+            foreach ($rows as $row) {
+                $rowItem = $row->firstChild;
+
+                $relationType = rtrim($rowItem->nodeValue, ':');
+
+                //This gets the next td containing the items
+                $relatedItem = $rowItem->nextSibling->firstChild;
+
+                do {
+                    if ($relatedItem->nodeType !== XML_TEXT_NODE && $relatedItem->tagName == 'a') {
+                        $url = $relatedItem->attributes->getNamedItem('href')->nodeValue;
+                        $id = preg_match('/\/(?:anime|manga)\/(\d+)\/.*?/', $url, $urlParts);
+
+                        if ($id !== false || $id !== 0) {
+                            $itemId = (int)$urlParts[1];
+                            $itemTitle = $relatedItem->textContent;
+                            $itemUrl = $url;
+                        }
+
+                        $itemArray = array();
+                        $itemArray['manga_id'] = $itemId;
+                        $itemArray['title'] = $itemTitle;
+                        $itemArray['url'] = 'http://myanimelist.net' . $itemUrl;
+
+                        switch ($relationType) {
+                            case 'Adaptation':
+                                $mangarecord->setAnimeAdaptations($itemArray);
+                                break;
+                            case 'Alternative version':
+                                $mangarecord->setAlternativeVersions($itemArray);
+                                break;
+                            case 'Other':
+                            default:
+                                $mangarecord->setRelatedManga($itemArray);
+                                break;
+                        }
                     }
-                }
-            }
 
-            #Related Manga
-            #NOTE: This doesn't seem to work as intended, but matches behavior of the Ruby API
-            if (preg_match('/.+\: ?(<a .+?)\<br/', $relatedcontent, $relateditems)) {
-                $relateditems = explode(', ', $relateditems[1]);
-                foreach ($relateditems as $item) {
-                    if (preg_match('/<a href="(\/manga\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
-                        $itemarray = array();
-                        $itemarray['manga_id'] = $itemparts[2];
-                        $itemarray['title'] = $itemparts[3];
-                        $itemarray['url'] = 'http://myanimelist.net' . $itemparts[1];
-                        $mangarecord->setRelatedManga($itemarray);
-                    }
-                }
-            }
+                    //Grab next item
+                    $relatedItem = $relatedItem->nextSibling;
 
-            #Alternative Versions
-            if (preg_match('/Alternative versions?\: ?(<a .+?)\<br/', $relatedcontent, $relateditems)) {
-                $relateditems = explode(', ', $relateditems[1]);
-                foreach ($relateditems as $item) {
-                    if (preg_match('/<a href="(\/manga\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
-                        $itemarray = array();
-                        $itemarray['manga_id'] = $itemparts[2];
-                        $itemarray['title'] = $itemparts[3];
-                        $itemarray['url'] = 'http://myanimelist.net' . $itemparts[1];
-                        $mangarecord->setAlternativeVersions($itemarray);
-                    }
-                }
+                } while ($relatedItem !== null);
             }
-
-            //Note: There is a "related manga" option, but it doesn't appear to
-            //work properly in the existing API. We should extend to include all
-            //the other relations anyway.
         }
 
         # User's manga details (only available if he authenticates).
