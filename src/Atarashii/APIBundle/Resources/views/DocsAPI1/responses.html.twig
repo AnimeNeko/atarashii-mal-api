@@ -12,7 +12,7 @@
         <p class="alert alert-info">Not all properties are provided depending on the type of request made.</p>
 
         <ul>
-            <li><code>id</code>: The ID of the anime, as assigned by MyAnimeList</dd>
+            <li><code>id</code>: The ID of the anime, as assigned by MyAnimeList</li>
             <li><code>title</code>: The title of the item</li>
             <li><code>other_titles</code>
                 <ul>
@@ -110,7 +110,7 @@
         <p class="alert alert-info">Not all properties are provided depending on the type of request made.</p>
 
         <ul>
-            <li><code>id</code>: The ID of the manga, as assigned by MyAnimeList</dd>
+            <li><code>id</code>: The ID of the manga, as assigned by MyAnimeList</li>
             <li><code>title</code>: The title of the item</li>
             <li><code>other_titles</code>
                 <ul>
@@ -188,6 +188,7 @@
 
         <a name="user"></a><br><br><h2>User Details</h2>
         <p>This data is an overview of a user and their statistics.</p>
+        <p class="alert alert-info">The 'anime_stats' & 'manga_stats' properties are only provided when an user profile request is made.</p>
 
         <ul>
             <li><code>avatar_url</code>: URL to a copy of the user's MyAnimeList user photo. Note that this is <em>not</em> the forum avatar.</li>
@@ -242,7 +243,6 @@
             <li><code>friend_since</code>: Date the user became a friend with the specified user. Formatted as a full ISO 8601 date and time<sup><a href="#foot2">2</a></sup>.</li>
             <li><code>profile</code>: A <a href="#user">user details</a> object.</li>
         </ul>
-
 
 
         <a name="errors"></a><br><br><h2>Errors</h2>

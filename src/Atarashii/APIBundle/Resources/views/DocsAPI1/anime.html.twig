@@ -15,7 +15,7 @@
             <dt>Method</dt><dd>GET</dd>
             <dt>Authentication</dt><dd>No</dd>
         </dl>
-        <p>Retrieves the list of a user's anime. Output is an <a href="{{ path('_docs_responses') }}#animelist">anime list</a>.</p>
+        <p>Retrieves the list of a user's anime. Output is an <a href="{{ path('_docs1_responses') }}#animelist">anime list</a>.</p>
 
         <h3>Anime Details</h3>
         <dl>
@@ -23,11 +23,12 @@
             <dt>Method</dt><dd>GET</dd>
             <dt>Authentication</dt><dd>Optional<sup><a href="#foot1">1</a></sup></dd>
         </dl>
-        <p>Gets the details of the title specified by the id number. Output is an <a href="{{ path('_docs_responses') }}#anime">anime object</a>.</p>
+        <p>Gets the details of the title specified by the id number. Output is an <a href="{{ path('_docs1_responses') }}#anime">anime object</a>.</p>
         <p>The following optional parameters are supported:</p>
         <ul>
             <li><code>mine</code>: This allows you to get personal info. Must contain a integer (like 1), it doesn't matter which one.</li>
         </ul>
+
 
         <h2>Methods to Change Information</h2>
 
@@ -79,7 +80,7 @@
             <dt>Method</dt><dd>GET</dd>
             <dt>Authentication</dt><dd>No</dd>
         </dl>
-        <p>Runs a search of the title against anime on MAL. Output is an <a href="{{ path('_docs_responses') }}#animelist">anime list</a>.</p>
+        <p>Runs a search of the title against anime on MAL. Output is an <a href="{{ path('_docs1_responses') }}#animelist">anime list</a>.</p>
 
         <h3>Top Ranking Anime</h3>
         <dl>
@@ -87,7 +88,7 @@
             <dt>Method</dt><dd>GET</dd>
             <dt>Authentication</dt><dd>No</dd>
         </dl>
-        <p>Returns the top-rated anime titles on MAL. Output is an <a href="{{ path('_docs_responses') }}#animelist">anime list</a>.</p>
+        <p>Returns the top-rated anime titles on MAL. Output is an <a href="{{ path('_docs1_responses') }}#animelist">anime list</a>.</p>
         <p>The following optional parameters are supported:</p>
         <ul>
             <li><code>page</code>: The current set of titles to return. Each set contains at most 30 items. Default value is &quot;1&quot; if not supplied.</li>
@@ -96,11 +97,11 @@
 
         <h3>Popular Anime</h3>
         <dl>
-            <dt>URI Format</dt><dd>anime/popular</dd>
+            <dt>URI Format</dt><dd>anime/top</dd>
             <dt>Method</dt><dd>GET</dd>
             <dt>Authentication</dt><dd>No</dd>
         </dl>
-        <p>Returns the most popular titles on MAL. Output is an <a href="{{ path('_docs_responses') }}#animelist">anime list</a>.</p>
+        <p>Returns the most popular titles on MAL. Output is an <a href="{{ path('_docs1_responses') }}#animelist">anime list</a>.</p>
         <p>The following optional parameters are supported:</p>
         <ul>
             <li><code>page</code>: The current set of titles to return. Each set contains at most 30 items. Default value is &quot;1&quot; if not supplied.</li>
@@ -112,7 +113,7 @@
             <dt>Method</dt><dd>GET</dd>
             <dt>Authentication</dt><dd>No</dd>
         </dl>
-        <p>Returns upcoming titles on MAL, sorted by air date. Output is an <a href="{{ path('_docs_responses') }}#animelist">anime list</a>.</p>
+        <p>Returns upcoming titles on MAL, sorted by air date. Output is an <a href="{{ path('_docs1_responses') }}#animelist">anime list</a>.</p>
         <p>The following optional parameters are supported:</p>
         <ul>
             <li><code>start_date</code>: The date at which to start the list, formatted as YYYYMMDD. The date may be in the past. Default is the current date.</li>
@@ -125,7 +126,7 @@
             <dt>Method</dt><dd>GET</dd>
             <dt>Authentication</dt><dd>No</dd>
         </dl>
-        <p>Returns the most recently added titles on MAL, ordered by the most recently added items. Output is an <a href="{{ path('_docs_responses') }}#animelist">anime list</a>.</p>
+        <p>Returns the most recently added titles on MAL, ordered by the most recently added items. Output is an <a href="{{ path('_docs1_responses') }}#animelist">anime list</a>.</p>
         <p>The following optional parameters are supported:</p>
         <ul>
             <li><code>page</code>: The current set of titles to return. Each set contains at most 20 items. Default value is &quot;1&quot; if not supplied.</li>

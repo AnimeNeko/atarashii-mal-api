@@ -1,0 +1,140 @@
+{% set pageTitle = "Docs - Anime Methods" %}
+{% include "AtarashiiAPIBundle:includes:header.html.twig" %}
+
+<div class="row">
+    <div class="col-md-9">
+        <h1>Forum Methods</h1>
+        <p>All the below methods deal with reading and writing data related to the forum.</p>
+
+
+        <h2>Methods to Get Information</h2>
+
+        <h3>Reading the board List</h3>
+        <dl>
+            <dt>URI Format</dt><dd>forum</dd>
+            <dt>Method</dt><dd>GET</dd>
+            <dt>Authentication</dt><dd>No</dd>
+        </dl>
+        <p>Retrieves the list of all the forum boards. Output is an <a href="{{ path('_docs2_responses') }}#forum">forum list</a>.</p>
+
+        <h3>Reading the topic List</h3>
+        <dl>
+            <dt>URI Format</dt><dd>forum/<em>id</em></dd>
+            <dt>Method</dt><dd>GET</dd>
+            <dt>Authentication</dt><dd>No</dd>
+        </dl>
+        <p>Retrieves the topic list of the specified by the id number. The output Output contains 2 objects called <code>pages</code> and <code>list</code>. The <code>list</code> object contains an arraylist of <a href="{{ path('_docs2_responses') }}#forum">forum models</a>. The <code>pages</code> object is an integer number which indicates the amount of pages.</p>
+        <p>The values that can be sent in the get body:</p>
+        <ul>
+            <li><code>page</code>:  The current set of topics to return. Each set contains at most 20 items. Default value is &quot;1&quot; if not supplied.</li>
+        </ul>
+
+        <h3>Reading the sub board List</h3>
+        <dl>
+            <dt>URI Format</dt><dd>forum/board/<em>id</em></dd>
+            <dt>Method</dt><dd>GET</dd>
+            <dt>Authentication</dt><dd>No</dd>
+        </dl>
+        <p>Retrieves the list of all the forum boards. The output contains 2 objects called <code>pages</code> and <code>list</code>. The <code>list</code> object contains an arraylist of <a href="{{ path('_docs2_responses') }}#forum">forum models</a>. The <code>pages</code> object is an integer number which indicates the amount of pages.</p>
+        <ul>
+            <li><code>page</code>:  The current set of topics to return. Each set contains at most 20 items. Default value is &quot;1&quot; if not supplied.</li>
+        </ul>
+
+        <h3>Reading the anime discussion List</h3>
+        <dl>
+            <dt>URI Format</dt><dd>forum/anime/<em>id</em></dd>
+            <dt>Method</dt><dd>GET</dd>
+            <dt>Authentication</dt><dd>No</dd>
+        </dl>
+        <p>Retrieves the anime discussion topic list of the specified by the id number. The output contains 2 objects called <code>pages</code> and <code>list</code>. The <code>list</code> object contains an arraylist of <a href="{{ path('_docs2_responses') }}#forum">forum models</a>. The <code>pages</code> object is an integer number which indicates the amount of pages.</p>
+        <p>The values that can be sent in the get body:</p>
+        <ul>
+            <li><code>page</code>:  The current set of topics to return. Each set contains at most 20 items. Default value is &quot;1&quot; if not supplied.</li>
+        </ul>
+
+        <h3>Reading the manga discussion List</h3>
+        <dl>
+            <dt>URI Format</dt><dd>forum/manga/<em>id</em></dd>
+            <dt>Method</dt><dd>GET</dd>
+            <dt>Authentication</dt><dd>No</dd>
+        </dl>
+        <p>Retrieves the manga discussion topic list of the specified by the id number. the output Output contains 2 objects called <code>pages</code> and <code>list</code>. The <code>list</code> object contains an arraylist of <a href="{{ path('_docs2_responses') }}#forum">forum models</a>. The <code>pages</code> object is an integer number which indicates the amount of pages.</p>
+        <p>The values that can be sent in the get body:</p>
+        <ul>
+            <li><code>page</code>:  The current set of topics to return. Each set contains at most 20 items. Default value is &quot;1&quot; if not supplied.</li>
+        </ul>
+
+        <h3>Reading the topic Details</h3>
+        <dl>
+            <dt>URI Format</dt><dd>forum/topic/<em>id</em></dd>
+            <dt>Method</dt><dd>GET</dd>
+            <dt>Authentication</dt><dd>No</dd>
+        </dl>
+        <p>Retrieves the topic details (like comments) of the specified by the id number. Output is an <a href="{{ path('_docs2_responses') }}#forum">forum list</a>.</p>
+        <p>The values that can be sent in the get body:</p>
+        <ul>
+            <li><code>page</code>:  The current set of topic details to return. Each set contains at most 20 items. Default value is &quot;1&quot; if not supplied.</li>
+        </ul>
+
+        <h3>Searching the Forum</h3>
+        <dl>
+            <dt>URI Format</dt><dd>forum/search?<em>parameters</em></dd>
+            <dt>Method</dt><dd>GET</dd>
+            <dt>Authentication</dt><dd>No</dd>
+        </dl>
+        <p>Runs a search on the forum. Output is an <a href="{{ path('_docs2_responses') }}#forum">forum list</a>. Note that either the query or user parameter is required. All other parameters are optional.</p>
+        <p>The following parameters are supported:</p>
+        <ul>
+            <li><code>query</code>: Keyword or phrase to search for. The minimum length is two characters, per MyAnimeList requirements. Phrases are searched literally.</li>
+            <li><code>user</code>: A username of a user on MyAnimeList.</li>
+            <li><code>userCategory</code>: An integer specifying how to search based on username. 1 will find posts made by the specified username, 2 will find topics/threads started by the specified username. Default value is 1. This value only has effect if a username is supplied.</li>
+            <li><code>category</code>: An integer corresponding to the ID of a board to limit the search. Default is to search all boards.</li>
+        </ul>
+
+
+        <h2>Methods to Change Information</h2>
+
+        <p class="alert alert-info">All post data <strong>must</strong> be sent as x-www-form-urlencoded as the API does not currently support multipart/form-data!</p>
+
+        <h3>Adding Topics</h3>
+        <dl>
+            <dt>URI Format</dt><dd>forum/<em>id</em></dd>
+            <dt>Method</dt><dd>POST</dd>
+            <dt>Authentication</dt><dd>Required</dd>
+        </dl>
+        <p>Adds an topic to the specified board.</p>
+        <p>The values that can be sent in the post body:</p>
+        <ul>
+            <li><code>title</code>: The title for the topic</li>
+            <li><code>message</code>: The message for the topic.</li>
+        </ul>
+
+        <h3>Adding Comments</h3>
+        <dl>
+            <dt>URI Format</dt><dd>forum/topic/<em>id</em></dd>
+            <dt>Method</dt><dd>POST</dd>
+            <dt>Authentication</dt><dd>Required</dd>
+        </dl>
+        <p>Adds a comment to the specified topic.</p>
+        <p>The values that can be sent in the post body:</p>
+        <ul>
+            <li><code>message</code>: The comment for the topic.</li>
+        </ul>
+
+        <h3>Editing Comments</h3>
+        <dl>
+            <dt>URI Format</dt><dd>forum/topic/<em>id</em></dd>
+            <dt>Method</dt><dd>PUT</dd>
+            <dt>Authentication</dt><dd>Required</dd>
+        </dl>
+        <p>Edits a comment of the specified topic.</p>
+        <p>The values that can be sent in the put body:</p>
+        <ul>
+            <li><code>message</code>: The modified comment for the topic.</li>
+        </ul>
+
+        <hr>
+    </div>
+</div>
+
+{% include "AtarashiiAPIBundle:includes:footer.html.twig" %}

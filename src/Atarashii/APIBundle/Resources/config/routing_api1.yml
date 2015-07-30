@@ -3,144 +3,144 @@
 
 _api1_anime:
     path: /anime/{id}
-    defaults: { _controller: AtarashiiAPIBundle:Anime:get, _format: json }
+    defaults: { _controller: AtarashiiAPIBundle:Anime:get, _format: json, apiVersion: '1.0' }
     requirements:
         _method: GET
         id: \d+
 
 _api1_animelist:
     path: /animelist/{username}
-    defaults: { _controller: AtarashiiAPIBundle:AnimeList:get, _format: json }
+    defaults: { _controller: AtarashiiAPIBundle:AnimeList:get, _format: json, apiVersion: '1.0' }
     requirements:
         _method: GET
 
 _api1_animelist_add:
     path: /animelist/anime
-    defaults: { _controller: AtarashiiAPIBundle:AnimeList:add, _format: json }
+    defaults: { _controller: AtarashiiAPIBundle:AnimeList:add, _format: json, apiVersion: '1.0' }
     requirements:
         _method: POST
 
 _api1_animelist_update:
     path: /animelist/anime/{id}
-    defaults: { _controller: AtarashiiAPIBundle:AnimeList:update, _format: json }
+    defaults: { _controller: AtarashiiAPIBundle:AnimeList:update, _format: json, apiVersion: '1.0' }
     requirements:
         _method: PUT
         id: \d+
 
 _api1_animelist_delete:
     path: /animelist/anime/{id}
-    defaults: { _controller: AtarashiiAPIBundle:AnimeList:delete, _format: json }
+    defaults: { _controller: AtarashiiAPIBundle:AnimeList:delete, _format: json, apiVersion: '1.0' }
     requirements:
         _method: DELETE
         id: \d+
 
 _api1_manga:
     path: /manga/{id}
-    defaults: { _controller: AtarashiiAPIBundle:Manga:get, _format: json }
+    defaults: { _controller: AtarashiiAPIBundle:Manga:get, _format: json, apiVersion: '1.0' }
     requirements:
         _method: GET
         id: \d+
 
 _api1_mangalist:
     path: /mangalist/{username}
-    defaults: { _controller: AtarashiiAPIBundle:MangaList:get, _format: json }
+    defaults: { _controller: AtarashiiAPIBundle:MangaList:get, _format: json, apiVersion: '1.0' }
     requirements:
         _method: GET
 
 _api1_mangalist_add:
     path: /mangalist/manga
-    defaults: { _controller: AtarashiiAPIBundle:MangaList:add, _format: json }
+    defaults: { _controller: AtarashiiAPIBundle:MangaList:add, _format: json, apiVersion: '1.0' }
     requirements:
         _method: POST
 
 _api1_mangalist_update:
     path: /mangalist/manga/{id}
-    defaults: { _controller: AtarashiiAPIBundle:MangaList:update, _format: json }
+    defaults: { _controller: AtarashiiAPIBundle:MangaList:update, _format: json, apiVersion: '1.0' }
     requirements:
         _method: PUT
         id: \d+
 
 _api1_mangalist_delete:
     path: /mangalist/manga/{id}
-    defaults: { _controller: AtarashiiAPIBundle:MangaList:delete, _format: json }
+    defaults: { _controller: AtarashiiAPIBundle:MangaList:delete, _format: json, apiVersion: '1.0' }
     requirements:
         _method: DELETE
         id: \d+
 
 _api1_userprofile:
     path: /profile/{username}
-    defaults: { _controller: AtarashiiAPIBundle:User:getProfile, _format: json }
+    defaults: { _controller: AtarashiiAPIBundle:User:getProfile, _format: json, apiVersion: '1.0' }
     requirements:
         _method: GET
 
 _api1_userprofile_friends:
     path: /friends/{username}
-    defaults: { _controller: AtarashiiAPIBundle:User:getFriends, _format: json }
+    defaults: { _controller: AtarashiiAPIBundle:User:getFriends, _format: json, apiVersion: '1.0' }
     requirements:
         _method: GET
 
 _api1_popular_anime:
     path: /anime/popular
-    defaults: { _controller: AtarashiiAPIBundle:Top:getPopularAnime, _format: json }
+    defaults: { _controller: AtarashiiAPIBundle:Top:getPopularAnime, _format: json, apiVersion: '1.0' }
     requirements:
         _method: GET
 
 _api1_popular_manga:
     path: /manga/popular
-    defaults: { _controller: AtarashiiAPIBundle:Top:getPopularManga, _format: json }
+    defaults: { _controller: AtarashiiAPIBundle:Top:getPopularManga, _format: json, apiVersion: '1.0' }
     requirements:
         _method: GET
 
 _api1_top_anime:
     path: /anime/top
-    defaults: { _controller: AtarashiiAPIBundle:Top:getTopAnime, _format: json }
+    defaults: { _controller: AtarashiiAPIBundle:Top:getTopAnime, _format: json, apiVersion: '1.0' }
     requirements:
         _method: GET
 
 _api1_top_manga:
     path: /manga/top
-    defaults: { _controller: AtarashiiAPIBundle:Top:getTopManga, _format: json }
+    defaults: { _controller: AtarashiiAPIBundle:Top:getTopManga, _format: json, apiVersion: '1.0' }
     requirements:
         _method: GET
 
 _api1_just_anime:
     path: /anime/just_added
-    defaults: { _controller: AtarashiiAPIBundle:Upcoming:getAnimeJustadded, _format: json }
+    defaults: { _controller: AtarashiiAPIBundle:Upcoming:getAnimeJustadded, _format: json, apiVersion: '1.0' }
     requirements:
         _method: GET
 
 _api1_just_manga:
     path: /manga/just_added
-    defaults: { _controller: AtarashiiAPIBundle:Upcoming:getMangaJustadded, _format: json }
+    defaults: { _controller: AtarashiiAPIBundle:Upcoming:getMangaJustadded, _format: json, apiVersion: '1.0' }
     requirements:
         _method: GET
 
 _api1_upcoming_anime:
     path: /anime/upcoming
-    defaults: { _controller: AtarashiiAPIBundle:Upcoming:getAnimeUpcoming, _format: json }
+    defaults: { _controller: AtarashiiAPIBundle:Upcoming:getAnimeUpcoming, _format: json, apiVersion: '1.0' }
     requirements:
         _method: GET
 
 _api1_upcoming_manga:
     path: /manga/upcoming
-    defaults: { _controller: AtarashiiAPIBundle:Upcoming:getMangaUpcoming, _format: json }
+    defaults: { _controller: AtarashiiAPIBundle:Upcoming:getMangaUpcoming, _format: json, apiVersion: '1.0' }
     requirements:
         _method: GET
 
 _api1_search_anime:
     path: /anime/search
-    defaults: { _controller: AtarashiiAPIBundle:Search:getAnime, _format: json }
+    defaults: { _controller: AtarashiiAPIBundle:Search:getAnime, _format: json, apiVersion: '1.0' }
     requirements:
         _method: GET
 
 _api1_search_manga:
     path: /manga/search
-    defaults: { _controller: AtarashiiAPIBundle:Search:getManga, _format: json }
+    defaults: { _controller: AtarashiiAPIBundle:Search:getManga, _format: json, apiVersion: '1.0' }
     requirements:
         _method: GET
 
 _api1_verify_credentials:
     path: /account/verify_credentials
-    defaults: { _controller: AtarashiiAPIBundle:Verify:Verify, _format: json }
+    defaults: { _controller: AtarashiiAPIBundle:Verify:Verify, _format: json, apiVersion: '1.0' }
     requirements:
         _method: GET

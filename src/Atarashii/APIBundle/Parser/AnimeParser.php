@@ -4,7 +4,7 @@
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
-* @copyright 2014 Ratan Dhawtal and Michael Johnson
+* @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
 
@@ -16,7 +16,7 @@ use \DateTime;
 
 class AnimeParser
 {
-    public static function parse($contents, $mine = false)
+    public static function parse($contents)
     {
         $crawler = new Crawler();
         $crawler->addHTMLContent($contents, 'UTF-8');
@@ -26,18 +26,18 @@ class AnimeParser
         # Anime ID.
         # Example:
         # <input type="hidden" name="aid" value="790">
-        $animerecord->id = (int) $crawler->filter('input[name="aid"]')->attr('value');
+        $animerecord->setId((int) $crawler->filter('input[name="aid"]')->attr('value'));
 
         # Title and rank.
         # Example:
         # <h1><div style="float: right; font-size: 13px;">Ranked #96</div>Lucky ☆ Star</h1>
-        $animerecord->title = str_replace($crawler->filter('h1')->children()->text(), '', $crawler->filter('h1')->text());
-        $animerecord->rank = (int) str_replace('Ranked #', '', $crawler->filter('h1 div')->text());
+        $animerecord->setTitle(str_replace($crawler->filter('h1')->children()->text(), '', $crawler->filter('h1')->text()));
+        $animerecord->setRank((int) str_replace('Ranked #', '', $crawler->filter('h1 div')->text()));
 
         # Title Image
         # Example:
         # <a href="http://myanimelist.net/anime/16353/Love_Lab/pic&pid=50257"><img src="http://cdn.myanimelist.net/images/anime/12/50257.jpg" alt="Love Lab" align="center"></a>
-        $animerecord->image_url = $crawler->filter('div#content tr td div img')->attr('src');
+        $animerecord->setImageUrl($crawler->filter('div#content tr td div img')->attr('src'));
 
         # Alternative Titles section.
         # Example:
@@ -51,21 +51,24 @@ class AnimeParser
         $extracted = $leftcolumn->filterXPath('//span[text()="English:"]');
         if (iterator_count($extracted) > 0) {
             $text = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
-            $animerecord->other_titles['english'] = explode(', ', $text);
+            $other_titles['english'] = explode(', ', $text);
+            $animerecord->setOtherTitles($other_titles);
         }
 
         # Synonyms:
         $extracted = $leftcolumn->filterXPath('//span[text()="Synonyms:"]');
         if (iterator_count($extracted) > 0) {
             $text = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
-            $animerecord->other_titles['synonyms'] = explode(', ', $text);
+            $other_titles['synonyms'] = explode(', ', $text);
+            $animerecord->setOtherTitles($other_titles);
         }
 
         # Japanese:
         $extracted = $leftcolumn->filterXPath('//span[text()="Japanese:"]');
         if (iterator_count($extracted) > 0) {
             $text = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
-            $animerecord->other_titles['japanese'] = explode(', ', $text);
+            $other_titles['japanese'] = explode(', ', $text);
+            $animerecord->setOtherTitles($other_titles);
         }
 
         # Information section.
@@ -95,21 +98,21 @@ class AnimeParser
         # Type:
         $extracted = $leftcolumn->filterXPath('//span[text()="Type:"]');
         if (iterator_count($extracted) > 0) {
-            $animerecord->type = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
+            $animerecord->setType(trim(str_replace($extracted->text(), '', $extracted->parents()->text())));
         }
 
         # Episodes:
         $extracted = $leftcolumn->filterXPath('//span[text()="Episodes:"]');
         if (iterator_count($extracted) > 0) {
-            $animerecord->episodes = (int) trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
+            $animerecord->setEpisodes((int) trim(str_replace($extracted->text(), '', $extracted->parents()->text())));
         } else {
-            $animerecord->episodes = null;
+            $animerecord->setEpisodes(null);
         }
 
         # Status:
         $extracted = $leftcolumn->filterXPath('//span[text()="Status:"]');
         if (iterator_count($extracted) > 0) {
-            $animerecord->status = strtolower(trim(str_replace($extracted->text(), '', $extracted->parents()->text())));
+            $animerecord->setStatus(strtolower(trim(str_replace($extracted->text(), '', $extracted->parents()->text()))));
         }
 
         # Aired:
@@ -124,42 +127,51 @@ class AnimeParser
 
             $daterange = explode(' to ', trim(str_replace($extracted->text(), '', $extracted->parents()->text())));
 
-            //MAL always provides record dates in US-style format. We export to a non-standard format to keep compatibility with the Ruby API.
-            //Sometimes the startdate doesn't contain any day. For compatibility with the Ruby API I must pass a date, dayname and time.
+            //MAL always provides record dates in US-style format.
             if (strpos($daterange[0],',') == false) {
                 if (strlen($daterange[0]) === 4) {
-                    $animerecord->start_date = DateTime::createFromFormat('Y m d', $daterange[0] . ' 01 01')->format('Y');
+                    $animerecord->setStartDate(DateTime::createFromFormat('Y m d', $daterange[0] . ' 01 01'), 'year'); //Example ID 6535 or 9951
                 } elseif ($daterange[0] !== 'Not available') {
-                    $animerecord->start_date = DateTime::createFromFormat('M Y d', $daterange[0] . ' 16')->format('D M d 12:00:00 O Y');
+                    $animerecord->setStartDate(DateTime::createFromFormat('M Y d', $daterange[0] . ' 01'), 'month'); //Example ID 22535 (check upcoming list)
                 }
             } else {
-                $animerecord->start_date = DateTime::createFromFormat('M j, Y', $daterange[0])->format('D M d 12:00:00 O Y');
+                if (strlen($daterange[0]) !== 7 && strlen($daterange[0]) !== 8) {
+                    $animerecord->setStartDate(DateTime::createFromFormat('M j, Y', $daterange[0]), 'day');
+                }
             }
 
             //Series not yet to air won't list a range at all while currently airing series will use a "?"
             //For these, we should return a null
             if (count($daterange) > 1 && $daterange[1] !== '?') {
-                //MAL always provides record dates in US-style format. We export to a non-standard format to keep compatibility with the Ruby API.
+                //MAL always provides record dates in US-style format.
                 if (strlen($daterange[1]) === 4) {
-                    $animerecord->end_date = DateTime::createFromFormat('Y m d', $daterange[1] . ' 01 01')->format('Y');
+                    $animerecord->setEndDate(DateTime::createFromFormat('Y m d', $daterange[1] . ' 01 01'), 'year'); //Example ID 11836
                 } elseif (strpos($daterange[1],',') == false) {
-                    $animerecord->end_date = DateTime::createFromFormat('M Y d', $daterange[1] . ' 16')->format('D M d 12:00:00 O Y');
+                    $animerecord->setEndDate(DateTime::createFromFormat('M Y d', $daterange[1] . ' 01'), 'month'); //Example ID 21275
                 } else {
-                    $animerecord->end_date = DateTime::createFromFormat('M j, Y', $daterange[1])->format('D M d 12:00:00 O Y');
+                    if (strlen($daterange[1]) !== 7 && strlen($daterange[1]) !== 8) {
+                        $animerecord->setEndDate(DateTime::createFromFormat('M j, Y', $daterange[1]), 'day');
+                    }
                 }
             }
+        }
+
+        # Producers:
+        $extracted = $leftcolumn->filterXPath('//span[text()="Producers:"]');
+        if (iterator_count($extracted) > 0) {
+            $animerecord->setProducers(explode(', ', trim(str_replace($extracted->text(), '', $extracted->parents()->text()))));
         }
 
         # Genres:
         $extracted = $leftcolumn->filterXPath('//span[text()="Genres:"]');
         if (iterator_count($extracted) > 0) {
-            $animerecord->genres = explode(', ', trim(str_replace($extracted->text(), '', $extracted->parents()->text())));
+            $animerecord->setGenres(explode(', ', trim(str_replace($extracted->text(), '', $extracted->parents()->text()))));
         }
 
         # Classification:
         $extracted = $leftcolumn->filterXPath('//span[text()="Rating:"]');
         if (iterator_count($extracted) > 0) {
-            $animerecord->classification = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
+            $animerecord->setClassification(trim(str_replace($extracted->text(), '', $extracted->parents()->text())));
         }
 
         # Statistics
@@ -183,7 +195,7 @@ class AnimeParser
             $extracted = trim(str_replace(strstr($extracted, '('), '', $extracted));
             //Sometimes there is a superscript number at the end from a note.
             //Scores are only two decimals, so number_format should chop off the excess, hopefully.
-            $animerecord->members_score = (float) number_format($extracted, 2);
+            $animerecord->setMembersScore((float) number_format($extracted, 2));
         }
 
         # Popularity:
@@ -192,7 +204,7 @@ class AnimeParser
             $extracted = str_replace($extracted->text(), '', $extracted->parents()->text());
             //Remove the hash at the front of the string and trim whitespace. Needed so we can cast to an int.
             $extracted = trim(str_replace('#', '', $extracted));
-            $animerecord->popularity_rank = (int) $extracted;
+            $animerecord->setPopularityRank((int) $extracted);
         }
 
         # Members:
@@ -201,7 +213,7 @@ class AnimeParser
             $extracted = str_replace($extracted->text(), '', $extracted->parents()->text());
             //PHP doesn't like commas in integers. Remove it.
             $extracted = trim(str_replace(',', '', $extracted));
-            $animerecord->members_count = (int) $extracted;
+            $animerecord->setMembersCount((int) $extracted);
         }
 
         # Members:
@@ -210,21 +222,7 @@ class AnimeParser
             $extracted = str_replace($extracted->text(), '', $extracted->parents()->text());
             //PHP doesn't like commas in integers. Remove it.
             $extracted = trim(str_replace(',', '', $extracted));
-            $animerecord->favorited_count = (int) $extracted;
-        }
-
-        # Popular Tags
-        # Example:
-        # <h2>Popular Tags</h2>
-        # <span style="font-size: 11px;">
-        #   <a href="http://myanimelist.net/anime.php?tag=comedy" style="font-size: 24px" title="1059 people tagged with comedy">comedy</a>
-        #   <a href="http://myanimelist.net/anime.php?tag=parody" style="font-size: 11px" title="493 people tagged with parody">parody</a>
-        #   <a href="http://myanimelist.net/anime.php?tag=school" style="font-size: 12px" title="546 people tagged with school">school</a>
-        #   <a href="http://myanimelist.net/anime.php?tag=slice of life" style="font-size: 18px" title="799 people tagged with slice of life">slice of life</a>
-        # </span>
-        $extracted = $leftcolumn->filterXPath('//h2[text()="Popular Tags"]')->nextAll()->filter('a');
-        foreach ($extracted as $term) {
-            $animerecord->tags[] = $term->textContent;
+            $animerecord->setFavoritedCount((int) $extracted);
         }
 
         # -
@@ -248,160 +246,94 @@ class AnimeParser
             $extracted = $extracted->parents()->first();
             $advert = $extracted->filterXPath('//div');
 
-            $extracted = str_replace($advert->html(), '', $extracted->html());
-            $extracted = str_replace('<h2>Synopsis</h2>', '', $extracted);
+            $rawSynopsis = str_replace($advert->html(), '', $extracted->html());
 
-            //Ugly regular expression to remove the empty div at the end that used to contain the ad
-            $extracted = preg_replace('/\<div(.*?)\<\/div\>$/', '', $extracted);
+            $extracted = preg_replace("/<h2>.*?<\/h2>(.*?)<div.*$/is", "$1", $rawSynopsis);
 
-            $animerecord->synopsis = $extracted;
+            $animerecord->setSynopsis($extracted);
         }
 
         # Related Anime
         # Example:
-        # <td>
-        #   <br>
-        #   <h2>Related Anime</h2>
-        #   Adaptation: <a href="http://myanimelist.net/manga/9548/Higurashi_no_Naku_Koro_ni_Kai_Minagoroshi-hen">Higurashi no Naku Koro ni Kai Minagoroshi-hen</a>,
-        #   <a href="http://myanimelist.net/manga/9738/Higurashi_no_Naku_Koro_ni_Matsuribayashi-hen">Higurashi no Naku Koro ni Matsuribayashi-hen</a><br>
-        #   Prequel: <a href="http://myanimelist.net/anime/934/Higurashi_no_Naku_Koro_ni">Higurashi no Naku Koro ni</a><br>
-        #   Sequel: <a href="http://myanimelist.net/anime/3652/Higurashi_no_Naku_Koro_ni_Rei">Higurashi no Naku Koro ni Rei</a><br>
-        #   Side story: <a href="http://myanimelist.net/anime/6064/Higurashi_no_Naku_Koro_ni_Kai_DVD_Specials">Higurashi no Naku Koro ni Kai DVD Specials</a><br>
-        $related = $rightcolumn->filterXPath('//h2[text()="Related Anime"]');
+        #<table class="anime_detail_related_anime" style="border-spacing:0px;">
+        #  <tr>
+        #    <td class="ar fw-n borderClass" nowrap="" valign="top">Adaptation:</td>
+        #    <td class="borderClass" width="100%"><a href="/manga/587/Lucky☆Star">Lucky☆Star</a></td>
+        #  </tr>
+        #  <tr>
+        #    <td class="ar fw-n borderClass" nowrap="" valign="top">Character:</td>
+        #    <td class="borderClass" width="100%"><a href="/anime/3080/Anime_Tenchou">Anime Tenchou</a></td>
+        #  </tr>
+        #</table>
 
-        //TODO: Figure out if there is an easier way to get the content.
-        //NOTE: We don't grab "Alternative Setting" or "Other" titles.
+        $related = $rightcolumn->filter('table.anime_detail_related_anime');
+
+        //NOTE: Not all relations are currently supported.
         if (iterator_count($related)) {
-            //Get all the content between the "Related Anime" h2 and the next h2 tag.
-            if (preg_match('/\<h2\>Related Anime\<\/h2\>(.+?)\<h2\>/', $related->parents()->html(), $relatedcontent)) {
-                $relatedcontent = $relatedcontent[1];
 
-                #Adaptation
-                if (preg_match('/Adaptation\: ?(<a .+?)\<br/', $relatedcontent, $relateditems)) {
-                    $relateditems = explode(', ', $relateditems[1]);
-                    foreach ($relateditems as $item) {
-                        if (preg_match('/<a href="(\/manga\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
-                            $itemarray = array();
-                            $itemarray['manga_id'] = $itemparts[2];
-                            $itemarray['title'] = $itemparts[3];
-                            $itemarray['url'] = 'http://myanimelist.net'.$itemparts[1];
-                            $animerecord->manga_adaptations[] = $itemarray;
+            $rows = $related->children();
+            foreach ($rows as $row) {
+                $rowItem = $row->firstChild;
+
+                $relationType = rtrim($rowItem->nodeValue, ':');
+
+                //This gets the next td containing the items
+                $relatedItem = $rowItem->nextSibling->firstChild;
+
+                do {
+                    if ($relatedItem->nodeType !== XML_TEXT_NODE && $relatedItem->tagName == 'a') {
+                        $url = $relatedItem->attributes->getNamedItem('href')->nodeValue;
+                        $id = preg_match('/\/(?:anime|manga)\/(\d+)\/.*?/', $url, $urlParts);
+
+                        if ($id !== false || $id !== 0) {
+                            $itemId = (int)$urlParts[1];
+                            $itemTitle = $relatedItem->textContent;
+                            $itemUrl = $url;
+                        }
+
+                        $itemArray = array();
+                        $itemArray['manga_id'] = $itemId;
+                        $itemArray['title'] = $itemTitle;
+                        $itemArray['url'] = 'http://myanimelist.net' . $itemUrl;
+
+                        switch ($relationType) {
+                            case 'Adaptation':
+                                $animerecord->setMangaAdaptations($itemArray);
+                                break;
+                            case 'Prequel':
+                                $animerecord->setPrequels($itemArray);
+                                break;
+                            case 'Sequel':
+                                $animerecord->setSequels($itemArray);
+                                break;
+                            case 'Side story':
+                                $animerecord->setSideStories($itemArray);
+                                break;
+                            case 'Parent story':
+                                $animerecord->setParentStory($itemArray);
+                                break;
+                            case 'Character':
+                                $animerecord->setCharacterAnime($itemArray);
+                                break;
+                            case 'Spin-off':
+                                $animerecord->setSpinOffs($itemArray);
+                                break;
+                            case 'Summary':
+                                $animerecord->setSummaries($itemArray);
+                                break;
+                            case 'Alternative version':
+                                $animerecord->setAlternativeVersions($itemArray);
+                                break;
+                            case 'Other':
+                                $animerecord->setOther($itemArray);
+                                break;
                         }
                     }
-                }
 
-                #Prequel
-                if (preg_match('/Prequel\: ?(<a .+?)\<br/', $relatedcontent, $relateditems)) {
-                    $relateditems = explode(', ', $relateditems[1]);
-                    foreach ($relateditems as $item) {
-                        if (preg_match('/<a href="(\/anime\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
-                            $itemarray = array();
-                            $itemarray['anime_id'] = $itemparts[2];
-                            $itemarray['title'] = $itemparts[3];
-                            $itemarray['url'] = 'http://myanimelist.net'.$itemparts[1];
-                            $animerecord->prequels[] = $itemarray;
-                        }
-                    }
-                }
+                    //Grab next item
+                    $relatedItem = $relatedItem->nextSibling;
 
-                #Sequel
-                if (preg_match('/Sequel\: ?(<a .+?)\<br/', $relatedcontent, $relateditems)) {
-                    $relateditems = explode(', ', $relateditems[1]);
-                    foreach ($relateditems as $item) {
-                        if (preg_match('/<a href="(\/anime\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
-                            $itemarray = array();
-                            $itemarray['anime_id'] = $itemparts[2];
-                            $itemarray['title'] = $itemparts[3];
-                            $itemarray['url'] = 'http://myanimelist.net'.$itemparts[1];
-                            $animerecord->sequels[] = $itemarray;
-                        }
-                    }
-                }
-
-                #Side story
-                if (preg_match('/Side story\: ?(<a .+?)\<br/', $relatedcontent, $relateditems)) {
-                    $relateditems = explode(', ', $relateditems[1]);
-                    foreach ($relateditems as $item) {
-                        if (preg_match('/<a href="(\/anime\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
-                            $itemarray = array();
-                            $itemarray['anime_id'] = $itemparts[2];
-                            $itemarray['title'] = $itemparts[3];
-                            $itemarray['url'] = 'http://myanimelist.net'.$itemparts[1];
-                            $animerecord->side_stories[] = $itemarray;
-                        }
-                    }
-                }
-
-                #Parent story
-                if (preg_match('/Parent story\: ?(<a .+?)\<br/', $relatedcontent, $relateditems)) {
-                    $relateditems = explode(', ', $relateditems[1]);
-                    foreach ($relateditems as $item) {
-                        if (preg_match('/<a href="(\/anime\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
-                            $itemarray = array();
-                            $itemarray['anime_id'] = $itemparts[2];
-                            $itemarray['title'] = $itemparts[3];
-                            $itemarray['url'] = 'http://myanimelist.net'.$itemparts[1];
-                            $animerecord->parent_story = $itemarray;
-                        }
-                    }
-                }
-
-                #Character
-                if (preg_match('/Character\: ?(<a .+?)\<br/', $relatedcontent, $relateditems)) {
-                    $relateditems = explode(', ', $relateditems[1]);
-                    foreach ($relateditems as $item) {
-                        if (preg_match('/<a href="(\/anime\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
-                            $itemarray = array();
-                            $itemarray['anime_id'] = $itemparts[2];
-                            $itemarray['title'] = $itemparts[3];
-                            $itemarray['url'] = 'http://myanimelist.net'.$itemparts[1];
-                            $animerecord->character_anime[] = $itemarray;
-                        }
-                    }
-                }
-
-                #Spin-off
-                if (preg_match('/Spin-off\: ?(<a .+?)\<br/', $relatedcontent, $relateditems)) {
-                    $relateditems = explode(', ', $relateditems[1]);
-                    foreach ($relateditems as $item) {
-                        if (preg_match('/<a href="(\/anime\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
-                            $itemarray = array();
-                            $itemarray['anime_id'] = $itemparts[2];
-                            $itemarray['title'] = $itemparts[3];
-                            $itemarray['url'] = 'http://myanimelist.net'.$itemparts[1];
-                            $animerecord->spin_offs[] = $itemarray;
-                        }
-                    }
-                }
-
-                #Summary
-                if (preg_match('/Summary\: ?(<a .+?)\<br/', $relatedcontent, $relateditems)) {
-                    $relateditems = explode(', ', $relateditems[1]);
-                    foreach ($relateditems as $item) {
-                        if (preg_match('/<a href="(\/anime\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
-                            $itemarray = array();
-                            $itemarray['anime_id'] = $itemparts[2];
-                            $itemarray['title'] = $itemparts[3];
-                            $itemarray['url'] = 'http://myanimelist.net'.$itemparts[1];
-                            $animerecord->summaries[] = $itemarray;
-                        }
-                    }
-                }
-
-                #Alternative Versions
-                if (preg_match('/Alternative versions?\: ?(<a .+?)\<br/', $relatedcontent, $relateditems)) {
-                    $relateditems = explode(', ', $relateditems[1]);
-                    foreach ($relateditems as $item) {
-                        if (preg_match('/<a href="(\/anime\/(\d+)\/.*?)">(.+?)<\/a>/', $item, $itemparts)) {
-                            $itemarray = array();
-                            $itemarray['anime_id'] = $itemparts[2];
-                            $itemarray['title'] = $itemparts[3];
-                            $itemarray['url'] = 'http://myanimelist.net'.$itemparts[1];
-                            $animerecord->alternative_versions[] = $itemarray;
-                        }
-                    }
-                }
-
+                } while ($relatedItem !== null);
             }
         }
 
@@ -439,23 +371,189 @@ class AnimeParser
         #Watched Episodes - Only available when user is authenticated
         $my_data = $crawler->filter('input#myinfo_watchedeps');
         if (iterator_count($my_data)) {
-            $animerecord->watched_episodes = (int) $my_data->attr('value');
+            $animerecord->setWatchedEpisodes((int) $my_data->attr('value'));
         }
 
         #User's Score - Only available when user is authenticated
         $my_data = $crawler->filter('select#myinfo_score');
         if (iterator_count($my_data) && iterator_count($my_data->filter('option[selected="selected"]'))) {
-            $animerecord->score = (int) $my_data->filter('option[selected="selected"]')->attr('value');
+            $animerecord->setScore((int) $my_data->filter('option[selected="selected"]')->attr('value'));
         }
 
         #Listed ID (?) - Only available when user is authenticated
         $my_data = $crawler->filterXPath('//a[text()="Edit Details"]');
         if (iterator_count($my_data)) {
             if (preg_match('/id=(\d+)/', $my_data->attr('href'), $my_data)) {
-                $animerecord->listed_anime_id = (int) $my_data[1];
+                $animerecord->setListedAnimeId((int) $my_data[1]);
             }
         }
 
         return $animerecord;
     }
+
+    public static function parseExtendedPersonal($contents, $anime)
+    {
+        $crawler = new Crawler();
+        $crawler->addHTMLContent($contents, 'UTF-8');
+
+        #Personal tags
+        #<td class="borderClass"><textarea name="tags" rows="2" id="tagtext" cols="45" class="textarea">action, sci-fi</textarea></td>
+        $personalTags = $crawler->filter('textarea[name="tags"]')->text();
+
+        if (strlen($personalTags) > 0) {
+            $personalTags = explode(',', $personalTags);
+
+            foreach ($personalTags as $tag) {
+                $tagArray[] = trim($tag);
+            }
+
+            $anime->setPersonalTags($tagArray);
+        }
+
+        #Start and Finish Dates
+        #<tr>
+        #   <td class="borderClass">Start Date</td>
+        #               <td class="borderClass">
+        #   Month:
+        #   <select name="startMonth"  class="inputtext">
+        #       <option value="00">
+        #       <option value="1" >Jan<option value="2" selected>Feb<option value="3" >Mar<option value="4" >Apr<option value="5" >May<option value="6" >Jun<option value="7" >Jul<option value="8" >Aug<option value="9" >Sep<option value="10" >Oct<option value="11" >Nov<option value="12" >Dec         </select>
+        #   Day:
+        #   <select name="startDay"  class="inputtext">
+        #       <option value="00">
+        #       <option value="1" >1<option value="2" selected>2<option value="3" >3<option value="4" >4<option value="5" >5<option value="6" >6<option value="7" >7<option value="8" >8<option value="9" >9<option value="10" >10<option value="11" >11<option value="12" >12<option value="13" >13<option value="14" >14<option value="15" >15<option value="16" >16<option value="17" >17<option value="18" >18<option value="19" >19<option value="20" >20<option value="21" >21<option value="22" >22<option value="23" >23<option value="24" >24<option value="25" >25<option value="26" >26<option value="27" >27<option value="28" >28<option value="29" >29<option value="30" >30<option value="31" >31            </select>
+        #   Year:
+        #   <select name="startYear"  class="inputtext">
+        #       <option value="0000">
+        #       <option value="2014" selected>2014<option value="2013" >2013<option value="2012" >2012<option value="2011" >2011<option value="2010" >2010<option value="2009" >2009<option value="2008" >2008<option value="2007" >2007<option value="2006" >2006<option value="2005" >2005<option value="2004" >2004<option value="2003" >2003<option value="2002" >2002<option value="2001" >2001<option value="2000" >2000<option value="1999" >1999<option value="1998" >1998<option value="1997" >1997<option value="1996" >1996<option value="1995" >1995<option value="1994" >1994<option value="1993" >1993<option value="1992" >1992<option value="1991" >1991<option value="1990" >1990<option value="1989" >1989<option value="1988" >1988<option value="1987" >1987<option value="1986" >1986<option value="1985" >1985<option value="1984" >1984          </select>
+        #   &nbsp;
+        #   <label><input type="checkbox"  onchange="ChangeStartDate();"  name="unknownStart" value="1"> <small>Unknown Date</label><br>Start Date represents the date you started watching the Anime <a href="javascript:setToday(1);">Insert Today</a></small>
+        #   </td>
+        #</tr>
+        #<tr>
+        #   <td class="borderClass">Finish Date</td>
+        #               <td class="borderClass">
+        #   Month:
+        #   <select name="endMonth" class="inputtext" disabled>
+        #       <option value="00">
+        #       <option value="1" >Jan<option value="2" >Feb<option value="3" >Mar<option value="4" >Apr<option value="5" >May<option value="6" >Jun<option value="7" >Jul<option value="8" >Aug<option value="9" >Sep<option value="10" >Oct<option value="11" >Nov<option value="12" >Dec         </select>
+        #   Day:
+        #   <select name="endDay" class="inputtext" disabled>
+        #       <option value="00">
+        #       <option value="1" >1<option value="2" >2<option value="3" >3<option value="4" >4<option value="5" >5<option value="6" >6<option value="7" >7<option value="8" >8<option value="9" >9<option value="10" >10<option value="11" >11<option value="12" >12<option value="13" >13<option value="14" >14<option value="15" >15<option value="16" >16<option value="17" >17<option value="18" >18<option value="19" >19<option value="20" >20<option value="21" >21<option value="22" >22<option value="23" >23<option value="24" >24<option value="25" >25<option value="26" >26<option value="27" >27<option value="28" >28<option value="29" >29<option value="30" >30<option value="31" >31            </select>
+        #   Year:
+        #   <select name="endYear" class="inputtext" disabled>
+        #       <option value="0000">
+        #       <option value="2014" >2014<option value="2013" >2013<option value="2012" >2012<option value="2011" >2011<option value="2010" >2010<option value="2009" >2009<option value="2008" >2008<option value="2007" >2007<option value="2006" >2006<option value="2005" >2005<option value="2004" >2004<option value="2003" >2003<option value="2002" >2002<option value="2001" >2001<option value="2000" >2000<option value="1999" >1999<option value="1998" >1998<option value="1997" >1997<option value="1996" >1996<option value="1995" >1995<option value="1994" >1994<option value="1993" >1993<option value="1992" >1992<option value="1991" >1991<option value="1990" >1990<option value="1989" >1989<option value="1988" >1988<option value="1987" >1987<option value="1986" >1986<option value="1985" >1985<option value="1984" >1984          </select>
+        #   &nbsp;
+        #   <small><label><input type="checkbox" onchange="ChangeEndDate();" checked name="unknownEnd" value="1"> Unknown Date</label><br>Do <u>not</u> fill out the Finish Date unless status is <em>Completed</em> <a href="javascript:setToday(2);">Insert Today</a></small>
+        #   </td>
+        #</tr>
+        $isStarted = $crawler->filter('input[name="unknownStart"]')->attr('checked');
+        $isEnded = $crawler->filter('input[name="unknownEnd"]')->attr('checked');
+
+        if ($isStarted != "checked") {
+            //So, MAL allows users to put in just years, just years and months, or all three values.
+            //This mess here is to try and avoid things breaking.
+            if ($crawler->filter('select[name="startYear"] option:selected')->count() > 0) {
+                $startYear = $crawler->filter('select[name="startYear"] option:selected')->attr('value');
+                $startMonth = 6;
+                $startDay = 15;
+
+                if ($crawler->filter('select[name="startMonth"] option:selected')->count() > 0) {
+                    $startMonth = $crawler->filter('select[name="startMonth"] option:selected')->attr('value');
+
+                    if ($crawler->filter('select[name="startDay"] option:selected')->count() > 0) {
+                        $startDay = $crawler->filter('select[name="startDay"] option:selected')->attr('value');
+                    }
+                }
+
+                $anime->setWatchingStart(DateTime::createFromFormat('Y-n-j', "$startYear-$startMonth-$startDay"));
+            }
+        }
+
+        if ($isEnded != "checked") {
+            //Same here, avoid breaking MAL's allowing of partial dates.
+            if ($crawler->filter('select[name="endYear"] option:selected')->count() > 0) {
+                $endYear = $crawler->filter('select[name="endYear"] option:selected')->attr('value');
+                $endMonth = 6;
+                $endDay = 15;
+
+                if ($crawler->filter('select[name="endMonth"] option:selected')->count() > 0) {
+                    $endMonth = $crawler->filter('select[name="endMonth"] option:selected')->attr('value');
+
+                    if ($crawler->filter('select[name="endDay"] option:selected')->count() > 0) {
+                        $endDay = $crawler->filter('select[name="endDay"] option:selected')->attr('value');
+                    }
+                }
+
+                $anime->setWatchingEnd(DateTime::createFromFormat('Y-n-j', "$endYear-$endMonth-$endDay"));
+            }
+        }
+
+        #Priority
+        #<td class="borderClass"><select name="priority" class="inputtext">
+        #<option value="0" selected>Low<option value="1" >Medium<option value="2" >High         </select>
+        $priority = $crawler->filter('select[name="priority"] option:selected')->attr('value');
+        $anime->setPriority($priority);
+
+        #Storage
+        #
+        #<td class="borderClass" align="left"><select name="storage" id="storage" onchange="StorageBooleanCheck(2);" class="inputtext">
+        #   <option value="0">Select storage type
+        #   <option value="1" >Hard Drive<option value="6" >External HD<option value="7" >NAS<option value="2" >DVD / CD<option value="4" >Retail DVD<option value="5" >VHS<option value="3" >None          </select>
+        #<div style="margin: 3px 0px; display: none;" id="StorageDiv">Total <span id="storageDescription">DvD's</span> <input type="text" name="storageVal" id="storageValue" value="0.00" size="4" class="inputtext"></div>
+        #</td>
+
+        //Note that if storage isn't defined, nothing will be marked as selected. We thus have to get the value in two stages to avoid raising an exception.
+        $storage = $crawler->filter('select[name="storage"] option:selected');
+
+        if (count($storage)) {
+            $anime->setStorage($storage->attr('value'));
+        }
+
+        #Storage Value - Either number of discs or size in GB
+        #<div style="margin: 3px 0px; display: none;" id="StorageDiv">Total <span id="storageDescription">DvD's</span> <input type="text" name="storageVal" id="storageValue" value="1.00" size="4" class="inputtext"></div>
+        $storageval = (float) $crawler->filter('input[name="storageVal"]')->attr('value');
+
+        if ($storageval > 0) {
+            $anime->setStorageValue($storageval);
+        }
+
+        #Episodes Downloaded
+        #<td class="borderClass"><input type="text" name="list_downloaded_eps" id="epDownloaded" value="3" size="4" class="inputtext"> <a href="javascript:void(0);" onclick="incEpDownloadCount();">+</a> <small><a href="javascript:SetDownloadedEps();">Insert Series Eps</a></small></td>
+        $downloaded = $crawler->filter('input[id="epDownloaded"]')->attr('value');
+
+        if ($downloaded > 0) {
+            $anime->setEpsDownloaded($downloaded);
+        }
+
+        #Times Rewatched
+        #<td class="borderClass"><input type="text" name="list_times_watched" value="0" size="4" class="inputtext">
+        $rewatchCount = $crawler->filter('input[name="list_times_watched"]')->attr('value');
+
+        if ($rewatchCount > 0) {
+            $anime->setRewatchCount($rewatchCount);
+        }
+
+        #Rewatch Value
+        #<td class="borderClass"><select name="list_rewatch_value" class="inputtext">
+        #    <option value="0">Select rewatch value<option  value="1">Very Low<option  value="2">Low<option  value="3">Medium<option  value="4">High<option selected value="5">Very High            </select>
+        $rewatchValue = $crawler->filter('select[name="list_rewatch_value"] option:selected');
+
+        if (count($rewatchValue)) {
+            $anime->setRewatchValue($rewatchValue->attr('value'));
+        }
+
+        #Comments
+        #<td class="borderClass"><textarea name="list_comments" rows="5" cols="45" class="textarea"></textarea></td>
+        $comments = trim($crawler->filter('textarea[name="list_comments"]')->text());
+
+        if (strlen($comments)) {
+            $anime->setPersonalComments($comments);
+        }
+
+        return $anime;
+    }
 }
+

@@ -4,14 +4,13 @@
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
-* @copyright 2014 Ratan Dhawtal and Michael Johnson
+* @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
 
 namespace Atarashii\APIBundle\Parser;
 
 use Symfony\Component\DomCrawler\Crawler;
-use Symfony\Component\CssSelector\CssSelector;
 use Atarashii\APIBundle\Model\Anime;
 use Atarashii\APIBundle\Model\Manga;
 
@@ -47,23 +46,23 @@ class Top
         }
 
         //Pull out all the common parts
-        $media->id = (int) str_replace('#area','',$crawler->filter('a')->attr('id'));
-        $media->title = trim($crawler->filter('strong')->text());
-        $media->image_url = str_replace('t.jpg','.jpg',$crawler->filter('img')->attr('src')); //Convert thumbnail to full size image by stripping the "t" in the filename
-        $media->members_count = (int) trim(str_replace(',', '', str_replace('members', '', $crawler->filter('div.spaceit_pad span.lightLink')->text())));
+        $media->setId((int) str_replace('#area','',$crawler->filter('a')->attr('id')));
+        $media->setTitle(trim($crawler->filter('strong')->text()));
+        $media->setImageUrl(str_replace('t.jpg','.jpg',$crawler->filter('img')->attr('src'))); //Convert thumbnail to full size image by stripping the "t" in the filename
+        $media->setMembersCount((int) trim(str_replace(',', '', str_replace('members', '', $crawler->filter('div.spaceit_pad span.lightLink')->text()))));
 
         //Anime and manga have different details, so we grab an array of the list and then process based on the type
         $details = explode(', ', str_replace($crawler->filter('div.spaceit_pad span')->text(), '', $crawler->filter('div.spaceit_pad')->text()));
 
         switch ($type) {
             case 'anime':
-                $media->type = trim($details[0]);
-                $media->episodes = (strstr($details[1], '?') ? null : (int) trim(str_replace('eps', '', $details[1])));
-                $media->members_score = (float) trim(str_replace('scored', '', $details[2]));
+                $media->setType(trim($details[0]));
+                $media->setEpisodes(strstr($details[1], '?') ? null : (int) trim(str_replace('eps', '', $details[1])));
+                $media->setMembersScore((float) trim(str_replace('scored', '', $details[2])));
                 break;
             case 'manga':
-                $media->volumes = (strstr($details[0], '?') ? null : (int) trim(str_replace('volumes', '', $details[0])));
-                $media->members_score = (float) trim(str_replace('scored', '', $details[1]));
+                $media->setVolumes(strstr($details[0], '?') ? null : (int) trim(str_replace('volumes', '', $details[0])));
+                $media->setMembersScore((float) trim(str_replace('scored', '', $details[1])));
                 break;
         }
 

@@ -1,0 +1,48 @@
+<h2>User Details</h2>
+<p>This data is an overview of a user and their statistics.</p>
+<p class="alert alert-info">The 'anime_stats' & 'manga_stats' properties are only provided when an user profile request is made.</p>
+
+<ul>
+    <li><code>avatar_url</code>: URL to a copy of the user's MyAnimeList user photo. Note that this is <em>not</em> the forum avatar.</li>
+    <li><code>details</code>: An object containing general details on a user, which consist of the following:
+        <ul>
+            <li><span class="label label-default">UPDATED</span> <code>last_online</code>: The time the user was last seen online. Formatted as an ISO 8601 date and time<sup><a href="#foot2">2</a></sup></li>
+            <li><span class="label label-default">NEW</span> <code>status</code>: A string indicating the status of the user. Values are one of: online, offline.</li>
+            <li><code>gender</code>: The user's gender as text of either &quot;Male&quot;, &quot;Female&quot;, or &quot;Not specified&quot;</li>
+            <li><code>birthday</code>: The user's birthday formatted as &quot;F j Y&quot;<sup><a href="#foot1">1</a></sup></li>
+            <li><code>location</code>: Freeform text of the location that the user specified in their profile</li>
+            <li><code>website</code>: URL of the user's website</li>
+            <li><span class="label label-default">UPDATED</span> <code>join_date</code>: Date of when the user created an account on MyAnimeList.Formatted as an ISO 8601 date<sup><a href="#foot2">2</a></sup></li>
+            <li><code>access_rank</code>: Freeform text specifying the access level the user has on MyAnimeList, as listed on the user's profile. Some examples include &quot;Member&quot;, &quot;Forum Moderator&quot;, and &quot;Anime DB Moderator&quot;, but there are others.</li>
+            <li><code>anime_list_views</code>: Integer listing the number of unique views of the user's anime list.</li>
+            <li><code>manga_list_views</code>: Integer listing the number of unique views of the user's manga list.</li>
+            <li><code>forum_posts</code>: Number of posts the user has made to the MyAnimeList forums.</li>
+            <li><code>aim</code>: User's AOL Instant Messenger (AIM) screen name.</li>
+            <li><code>comments</code>: Comments users have left on this user's profile page.</li>
+            <li><code>msn</code>: User's MSN Messenger account. This isn't an active network anymore, but MAL still allows it to be filled out on profiles, so it is kept for compatibility.</li>
+            <li><code>yahoo</code>: User's Yahoo! Messenger account.</li>
+        </ul>
+    </li>
+    <li><code>anime_stats</code>: This is an object containing all the public anime statistics about the user. It consists of:
+        <ul>
+            <li><code>time_days</code>: A floating point decimal number representing the number of days spent watching anime.</li>
+            <li><code>watching</code>: An integer containing the number of anime the user has flagged as currently watching.</li>
+            <li><code>completed</code>: An integer of the number of anime the user has marked as have completed.</li>
+            <li><code>on_hold</code>: An integer containing the number of anime the user has placed in the on-hold status.</li>
+            <li><code>dropped</code>: The number of anime the user has marked as dropped, as an integer.</li>
+            <li><code>plan_to_watch</code>: Anime that the user has added as planning to watch, as an integer.</li>
+            <li><code>total_entries</code>: An integer specifying the total number of anime on the user's list.</li>
+        </ul>
+    </li>
+    <li><code>manga_stats</code>: This is an object containing all the public manga statistics about the user. It consists of:
+        <ul>
+            <li><code>time_days</code>: A floating point decimal number representing the number of days spent reading manga.</li>
+            <li><code>reading</code>: An integer containing the number of manga the user has flagged as currently reading.</li>
+            <li><code>completed</code>: An integer of the number of manga the user has marked as have completed.</li>
+            <li><code>on_hold</code>: An integer containing the number of manga the user has placed in the on-hold status.</li>
+            <li><code>dropped</code>: The number of manga the user has marked as dropped, as an integer.</li>
+            <li><code>plan_to_read</code>: Manga that the user has added as planning to read, as an integer.</li>
+            <li><code>total_entries</code>: An integer specifying the total number of manga on the user's list.</li>
+        </ul>
+    </li>
+</ul>

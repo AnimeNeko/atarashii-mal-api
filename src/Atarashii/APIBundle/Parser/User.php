@@ -4,7 +4,7 @@
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
-* @copyright 2014 Ratan Dhawtal and Michael Johnson
+* @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
 
@@ -12,7 +12,9 @@ namespace Atarashii\APIBundle\Parser;
 
 use Symfony\Component\DomCrawler\Crawler;
 use Atarashii\APIBundle\Model\Profile;
-use \DateTime;
+use Atarashii\APIBundle\Model\Date;
+use Atarashii\APIBundle\Model\Anime;
+use Atarashii\APIBundle\Model\Manga;
 
 class User
 {
@@ -25,7 +27,7 @@ class User
 
         $leftside = $crawler->filter('#content .profile_leftcell');
 
-        $user->avatar_url = $leftside->filter('img')->attr('src');
+        $user->setAvatarUrl($leftside->filter('img')->attr('src'));
 
         $maincontent = iterator_to_array($crawler->filter('#horiznav_nav')->nextAll()->filterXPath('./div/table/tr/td'));
 
@@ -34,8 +36,8 @@ class User
         $mangastats = $maincontent[3];
 
         $user->details = self::parseDetails($userdetails, $user->details); //Details is an object, so we need to pass it to the function.
-        $user->anime_stats = self::parseStats($animestats);
-        $user->manga_stats = self::parseStats($mangastats);
+        $user->anime_stats = self::parseStats($animestats, $user->anime_stats);
+        $user->manga_stats = self::parseStats($mangastats, $user->manga_stats);
 
         return $user;
     }
@@ -52,14 +54,14 @@ class User
 
             $values = iterator_to_array($crawler);
 
-            $key = trim(str_replace(' ', '_', strtolower($values[0]->textContent)));
+            $key = 'set'.trim(str_replace(' ', '', $values[0]->textContent));
             $value = trim($values[1]->textContent);
 
             //We have to do some casting and manipulation for certain values so we return them as the right type
-            switch ($key) {
-                case 'forum_posts':
-                case 'manga_list_views':
-                case 'anime_list_views':
+            switch (strtolower(str_replace('set', '', $key))) {
+                case 'forumposts':
+                case 'mangalistviews':
+                case 'animelistviews':
                 case 'comments':
                     $value = (int) str_replace(',', '', $value);
                     break;
@@ -68,20 +70,14 @@ class User
                     $value = $values[1]->firstChild->getAttribute('href');
                     break;
             }
-
-            if (property_exists($details, $key)) {
-                $details->$key = $value;
-            }
-
+            $details->$key($value);
         }
 
         return $details;
     }
 
-    private static function parseStats($content)
+    private static function parseStats($content, $stats)
     {
-        $stats = array();
-
         $elements = new Crawler($content);
         $elements = $elements->filter('tr');
 
@@ -91,19 +87,15 @@ class User
             $crawler = $crawler->filter('td');
 
             $values = iterator_to_array($crawler);
-
-            $key = trim($values[0]->textContent);
             $value = trim($values[1]->textContent);
 
             //Some of the key values have parenthesis. This is messy, but we need to
             //extract only letters to properly transform the names for our output.
             //The regex was found at http://stackoverflow.com/questions/16426976
             $key = trim(preg_replace('~[^\p{L}]++~u', ' ', $values[0]->textContent));
-            $key = str_replace(' ', '_', strtolower($key));
+            $key = 'set'.str_replace(' ', '', $key);
 
-            $value = trim($values[1]->textContent);
-
-            $stats[$key] = (float) $value;
+            $stats->$key((float) $value);
         }
 
         return $stats;
@@ -125,32 +117,64 @@ class User
             $avatar = $crawler->filter('.friendIcon')->filterXPath('./div/a/img');
             $name = $crawler->filterXPath('//div[@class="friendBlock"]/div[2]/a')->text();
             $lastonline = $crawler->filterXPath('./div/div/div[3]')->text();
-            $friendssince = str_replace('Friends since ', '', $crawler->filterXPath('./div/div/div[4]')->text());
+            $friendssince = Date::formatTime(str_replace('Friends since ', '', $crawler->filterXPath('./div/div/div[4]')->text()));
 
             //Remove the tumbnail portions from the URL to get the full image.
             $avatar = str_replace('thumbs/', '', str_replace('_thumb', '', $avatar->attr('src')));
-
-            //Sometimes this value doesn't exist, so it should be set as null. Otherwise, format the time to RFC3389.
-            if ($friendssince != '') {
-                if (strpos($friendssince, '-') == true) {
-                    $friendssince = DateTime::createFromFormat('m-d-y, g:i A', $friendssince)->format(DateTime::ISO8601);
-                }
-            } else {
-                $friendssince = null;
-            }
 
             $friendinfo['name'] = $name;
             $friendinfo['friend_since'] = $friendssince;
 
             //Fill out a profile object for this user with what information we can extract
             $friendinfo['profile'] = new Profile();
-            $friendinfo['profile']->avatar_url = $avatar;
-            $friendinfo['profile']->details->last_online = $lastonline;
+            $friendinfo['profile']->setAvatarUrl($avatar);
+            $friendinfo['profile']->details->setLastOnline($lastonline);
+
+            //to force json array and !objects.
+            $friendinfo['profile']->manga_stats = null;
+            $friendinfo['profile']->anime_stats = null;
 
             $friendlist[] = $friendinfo;
         }
 
         return $friendlist;
+
+    }
+
+    public static function parseHistory($contents)
+    {
+        $crawler = new Crawler();
+        $crawler->addHTMLContent($contents, 'UTF-8');
+        $maincontent = $crawler->filter('table')->filter('tr');
+
+        //Empty array so we return something non-null if the list is empty.
+        $historylist = array();
+
+        foreach ($maincontent as $historyentry) {
+            $crawler = new Crawler($historyentry);
+
+            // bypass for the MAL generated strings
+            if (($crawler->filter('a')->count()) > 0){
+
+                if (strpos($crawler->filter('a')->attr('href'), 'anime') == true) {
+                    $historyinfo['item'] = new Anime();
+                    $historyinfo['item']->setEpisodes((int) $crawler->filter('strong')->text());
+                    $historyinfo['type'] = 'anime';
+                } else {
+                    $historyinfo['item'] = new Manga();
+                    $historyinfo['item']->setChapters((int) $crawler->filter('strong')->text());
+                    $historyinfo['type'] = 'manga';
+                }
+
+                $historyinfo['item']->setTitle($crawler->filter('a')->text());
+                $historyinfo['item']->setId((int)str_replace('/' . $historyinfo['type'] . '.php?id=', '', $crawler->filter('a')->attr('href')));
+                $historyinfo['time_updated'] = Date::formatTime(substr($crawler->filter('td')->eq(1)->text(), 1));
+
+                $historylist[] = $historyinfo;
+            }
+        }
+
+        return $historylist;
 
     }
 }

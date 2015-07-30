@@ -4,7 +4,7 @@
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
-* @copyright 2014 Ratan Dhawtal and Michael Johnson
+* @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
 
@@ -12,7 +12,9 @@ namespace Atarashii\APIBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Response;
+use Guzzle\Http\Exception;
 use Atarashii\APIBundle\Parser\User;
+use JMS\Serializer\SerializationContext;
 
 class UserController extends FOSRestController
 {
@@ -20,11 +22,12 @@ class UserController extends FOSRestController
     /**
     * Get the details for a username
     *
+    * @param string  $apiVersion The API version of the request
     * @param string $username The MyAnimeList username of the user.
     *
     * @return View
     */
-    public function getProfileAction($username)
+    public function getProfileAction($apiVersion, $username)
     {
         // http://myanimelist.net/profile/#{username}
 
@@ -32,11 +35,19 @@ class UserController extends FOSRestController
 
         try {
             $profilecontent = $downloader->fetch('/profile/' . $username);
-        } catch (\Guzzle\Http\Exception\CurlException $e) {
+        } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
 
         $response = new Response();
+        $serializationContext = SerializationContext::create();
+        $serializationContext->setVersion($apiVersion);
+
+        //For compatibility, API 1.0 explicitly passes null parameters.
+        if ($apiVersion == "1.0") {
+            $serializationContext->setSerializeNull(true);
+        }
+
         $response->setPublic();
         $response->setMaxAge(900); //15 minutes
         $response->headers->addCacheControlDirective('must-revalidate', true);
@@ -57,6 +68,8 @@ class UserController extends FOSRestController
             $userprofile = User::parse($profilecontent);
 
             $view = $this->view($userprofile);
+
+            $view->setSerializationContext($serializationContext);
             $view->setResponse($response);
             $view->setStatusCode(200);
 
@@ -70,11 +83,12 @@ class UserController extends FOSRestController
     * Returns a view of user objects constituting friends of the specified user. Sorting
     * is MyAnimeList default, in order of the most recently active user.
     *
+    * @param string  $apiVersion The API version of the request
     * @param string $username The MyAnimeList username of the user.
     *
     * @return View
     */
-    public function getFriendsAction($username)
+    public function getFriendsAction($apiVersion, $username)
     {
         // http://myanimelist.net/profile/#{username}/friends
 
@@ -82,11 +96,19 @@ class UserController extends FOSRestController
 
         try {
             $friendscontent = $downloader->fetch('/profile/' . $username . '/friends');
-        } catch (\Guzzle\Http\Exception\CurlException $e) {
+        } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
 
         $response = new Response();
+        $serializationContext = SerializationContext::create();
+        $serializationContext->setVersion($apiVersion);
+
+        //For compatibility, API 1.0 explicitly passes null parameters.
+        if ($apiVersion == "1.0") {
+            $serializationContext->setSerializeNull(true);
+        }
+
         $response->setPublic();
         $response->setMaxAge(900); //15 minutes
         $response->headers->addCacheControlDirective('must-revalidate', true);
@@ -107,6 +129,64 @@ class UserController extends FOSRestController
             $friendlist = User::parseFriends($friendscontent);
 
             $view = $this->view($friendlist);
+
+            $view->setSerializationContext($serializationContext);
+            $view->setResponse($response);
+            $view->setStatusCode(200);
+
+            return $view;
+        }
+    }
+
+    /**
+    * Get a list of anime/manga history of the specified username
+    *
+    * Returns a view of history objects constituting history of the specified user. Sorting
+    * is MyAnimeList default, in order of the leastest update.
+    *
+    * @param string $username The MyAnimeList username of the user.
+    *
+    * @return View
+    */
+    public function getHistoryAction($username)
+    {
+        // http://myanimelist.net/history/#{username}
+
+        $downloader = $this->get('atarashii_api.communicator');
+
+        try {
+            $historycontent = $downloader->fetch('/history/' . $username);
+        } catch (Exception\CurlException $e) {
+            return $this->view(Array('error' => 'network-error'), 500);
+        }
+
+        $response = new Response();
+        $response->setPublic();
+        $response->setMaxAge(900); //15 minutes
+        $response->headers->addCacheControlDirective('must-revalidate', true);
+        $response->setEtag('history/' . $username);
+
+        //Also, set "expires" header for caches that don't understand Cache-Control
+        $date = new \DateTime();
+        $date->modify('+900 seconds'); //15 minutes
+        $response->setExpires($date);
+
+        if (strpos($historycontent, 'Invalid member username provided') !== false) {
+            $view = $this->view(Array('error' => 'not-found'));
+            $view->setResponse($response);
+            $view->setStatusCode(404);
+
+            return $view;
+        } elseif (strpos($historycontent, 'No history found') !== false) {
+            $view = $this->view(array());
+            $view->setResponse($response);
+            $view->setStatusCode(200);
+
+            return $view;
+        } else {
+            $historylist = User::parseHistory($historycontent);
+
+            $view = $this->view($historylist);
             $view->setResponse($response);
             $view->setStatusCode(200);
 

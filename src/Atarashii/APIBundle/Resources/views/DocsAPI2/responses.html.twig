@@ -1,0 +1,76 @@
+{% set pageTitle = "Docs - Data Response Formats" %}
+{% include "AtarashiiAPIBundle:includes:header.html.twig" %}
+
+<div class="row">
+    <div class="col-md-9">
+
+        <h1>Data Response Formats</h1>
+        <p>The below sections provide a conceptual description of the data returned by the API.</p>
+
+        <a name="anime"></a><br><br>
+        {% include "AtarashiiAPIBundle:DocsAPI2/Responses:anime.html.twig" %}
+
+        <a name="manga"></a><br><br>
+        {%  include "AtarashiiAPIBundle:DocsAPI2/Responses:manga.html.twig" %}
+
+        <a name="animelist"></a><br><br>
+        {%  include "AtarashiiAPIBundle:DocsAPI2/Responses:animelist.html.twig" %}
+
+        <a name="mangalist"></a><br><br>
+        {%  include "AtarashiiAPIBundle:DocsAPI2/Responses:mangalist.html.twig" %}
+
+        <a name="user"></a><br><br>
+        {%  include "AtarashiiAPIBundle:DocsAPI2/Responses:user.html.twig" %}
+
+        <a name="friend"></a><br><br>
+        {%  include "AtarashiiAPIBundle:DocsAPI2/Responses:friend.html.twig" %}
+
+        <a name="forum"></a><br><br>
+        {%  include "AtarashiiAPIBundle:DocsAPI2/Responses:forum.html.twig" %}
+
+        <a name="message"></a><br><br>
+        {%  include "AtarashiiAPIBundle:DocsAPI2/Responses:message.html.twig" %}
+
+        <a name="cast"></a><br><br>
+        {%  include "AtarashiiAPIBundle:DocsAPI2/Responses:cast.html.twig" %}
+
+        <a name="review"></a><br><br>
+        {%  include "AtarashiiAPIBundle:DocsAPI2/Responses:review.html.twig" %}
+
+        <a name="history"></a><br><br>
+        {%  include "AtarashiiAPIBundle:DocsAPI2/Responses:history.html.twig" %}
+
+        <a name="errors"></a><br><br>
+        {%  include "AtarashiiAPIBundle:DocsAPI2/Responses:errors.html.twig" %}
+
+        <hr>
+
+        <p>Footnotes</p>
+        <ol>
+            <li><a name="foot1"></a>For an explanation of the letters, see the <a href="http://www.php.net/manual/en/function.date.php#refsect1-function.date-parameters">PHP Date Format characters</a> reference.</li>
+            <li><a name="foot2"></a>For an explanation of ISO 8601 dates, see <a href="http://wikipedia.org/wiki/ISO_8601">http://wikipedia.org/wiki/ISO_8601</a>.</li>
+        </ol>
+    </div>
+
+    <div class="col-md-3">
+        <div class="affix">
+            <p class="h5">Quick Navigation</p>
+            <ul>
+                <li><a href="#anime">Anime</a></li>
+                <li><a href="#manga">Manga</a></li>
+                <li><a href="#animelist">Anime List</a></li>
+                <li><a href="#mangalist">Manga List</a></li>
+                <li><a href="#user">User Details</a></li>
+                <li><a href="#friend">Friend Details</a></li>
+                <li><a href="#forum">Forum Details</a></li>
+                <li><a href="#message">Message Details</a></li>
+                <li><a href="#cast">Cast Details</a></li>
+                <li><a href="#review">Review Details</a></li>
+                <li><a href="#history">History Details</a></li>
+                <li><a href="#errors">Errors</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% include "AtarashiiAPIBundle:includes:footer.html.twig" %}

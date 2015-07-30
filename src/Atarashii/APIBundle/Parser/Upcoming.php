@@ -4,13 +4,14 @@
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
-* @copyright 2014 Ratan Dhawtal and Michael Johnson
+* @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
 
 namespace Atarashii\APIBundle\Parser;
 
 use Symfony\Component\DomCrawler\Crawler;
+use Symfony\Component\Serializer\Serializer;
 use Atarashii\APIBundle\Model\Anime;
 use Atarashii\APIBundle\Model\Manga;
 use \DateTime;
@@ -54,17 +55,17 @@ class Upcoming
         }
 
         //Pull out all the common parts
-        $media->id = (int) str_replace('#sarea', '', $crawler->filter('a')->attr('id'));
-        $media->title = $crawler->filter('strong')->text();
+        $media->setId((int) str_replace('#sarea', '', $crawler->filter('a')->attr('id')));
+        $media->setTitle($crawler->filter('strong')->text());
 
         //I removed the 't' because it will else return a little image
-        $media->image_url = str_replace('t.j', '.j', $crawler->filter('img')->attr('src'));
-        $media->type = trim($crawler->filterXPath('//td[3]')->text());
+        $media->setImageUrl(str_replace('t.j', '.j', $crawler->filter('img')->attr('src')));
+        $media->setType(trim($crawler->filterXPath('//td[3]')->text()));
 
         switch ($type) {
             case 'anime':
                 //Custom parsing for anime
-                $media->episodes = (int) trim($crawler->filterXPath('//td[4]')->text());
+                $media->setEpisodes((int) trim($crawler->filterXPath('//td[4]')->text()));
 
                 $start_date = trim($crawler->filterXPath('//td[6]')->text());
 
@@ -75,8 +76,13 @@ class Upcoming
                         $start_date[2] = self::fixMalShortYear($start_date[2]);
                     }
 
-                    if ($start_date[0] != '?') {
-                        $media->start_date = "$start_date[2]-$start_date[0]-$start_date[1]";
+                    // If we don't know the month, then we can only be accurate to a year.
+                    if ($start_date[0] == '?') {
+                        $media->setLiteralStartDate(null, DateTime::createFromFormat('Y', $start_date[2]), 'year');
+                    } elseif ($start_date[0] != '?' && $start_date[1] == '?') {
+                        $media->setLiteralStartDate(null, DateTime::createFromFormat('Y m', "$start_date[2] $start_date[0]"), 'month');
+                    } else {
+                        $media->setLiteralStartDate("$start_date[2]-$start_date[0]-$start_date[1]", DateTime::createFromFormat('Y m d', "$start_date[2] $start_date[0] $start_date[1]"), 'day');
                     }
                 }
 
@@ -89,22 +95,26 @@ class Upcoming
                         $end_date[2] = self::fixMalShortYear($end_date[2]);
                     }
 
-                    if ($end_date[0] != '?') {
-                        $media->end_date = "$end_date[2]-$end_date[0]-$end_date[1]";
+                    if ($end_date[0] == '?') {
+                        $media->setLiteralEndDate(null, DateTime::createFromFormat('Y', $end_date[2]), 'year');
+                    } elseif ($end_date[0] != '?' && $end_date[1] == '?') {
+                        $media->setLiteralEndDate(null, DateTime::createFromFormat('Y m', "$end_date[2] $end_date[0]"), 'month');
+                    } else {
+                        $media->setLiteralEndDate("$end_date[2]-$end_date[0]-$end_date[1]", DateTime::createFromFormat('Y m d', "$end_date[2] $end_date[0] $end_date[1]"), 'day');
                     }
                 }
 
-                $media->classification = trim($crawler->filterXPath('//td[9]')->text());
-                $media->members_score = (float) trim($crawler->filterXPath('//td[5]')->text());
-                $media->synopsis = trim($crawler->filterXPath('//td[2]//div[3]')->text());
+                $media->setClassification(trim($crawler->filterXPath('//td[9]')->text()));
+                $media->setMembersScore((float) trim($crawler->filterXPath('//td[5]')->text()));
+                $media->setSynopsis(trim($crawler->filterXPath('//td[2]/div[3]')->text()));
                 break;
             case 'manga':
                 //Custom parsing for manga
-                $media->type = trim($crawler->filterXPath('//td[3]')->text());
-                $media->chapters = (int) trim($crawler->filterXPath('//td[5]')->text());
-                $media->volumes = (int) trim($crawler->filterXPath('//td[4]')->text());
-                $media->members_score = (float) trim($crawler->filterXPath('//td[6]')->text());
-                $media->synopsis = trim($crawler->filterXPath('//td[2]//div[2]')->text());
+                $media->setType(trim($crawler->filterXPath('//td[3]')->text()));
+                $media->setChapters((int) trim($crawler->filterXPath('//td[5]')->text()));
+                $media->setVolumes((int) trim($crawler->filterXPath('//td[4]')->text()));
+                $media->setMembersScore((float) trim($crawler->filterXPath('//td[6]')->text()));
+                $media->setSynopsis(trim($crawler->filterXPath('//td[2]/div[2]')->text()));
                 break;
             }
 
@@ -124,5 +134,4 @@ class Upcoming
             return '20' . $year;
         }
     }
-
 }

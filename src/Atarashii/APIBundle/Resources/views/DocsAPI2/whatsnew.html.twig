@@ -1,0 +1,30 @@
+{% set pageTitle = "Docs - What's New in API 2.0" %}
+{% include "AtarashiiAPIBundle:includes:header.html.twig" %}
+
+<div class="row">
+    <div class="col-md-9">
+        <h1>What's New in API 2.0</h1>
+        <p>API 2.0 cleaned up the output in API 1.0 and has added several new endpoints and expanded others.</p>
+
+        <h2>New Features</h2>
+        <ul>
+            <li>Support for the MyAnimeList Forums including board/forum navigation, making posts, and more.</li>
+            <li>Support for personal messages.</li>
+        </ul>
+
+        <h2>Non-Compatible Changes</h2>
+        <ul>
+            <li>All specific dates are now in <a href="http://en.wikipedia.org/wiki/ISO_8601">ISO-8601</a> format. Some dates are still given in relative terms (now, 1 hour ago, etc.) due to limitations in MyAnimeList. These are noted where applicable.</li>
+            <li>Null values are no longer explicitly returned in responses.</li>
+        </ul>
+
+        <h2>Notable Changes</h2>
+        <ul>
+            <li>MAL no longer displays global tags. As such, it is no longer supported in the API.</li>
+            <li>Extra general details are now provided for anime and manga titles.</li>
+            <li>Extra details for anime and manga items on list are now provided. These should cover nearly all relevant items that can be edited on the website for entries.</li>
+        </ul>
+    </div>
+</div>
+
+{% include "AtarashiiAPIBundle:includes:footer.html.twig" %}

@@ -1,0 +1,62 @@
+<h2>Manga</h2>
+<p>This is an object that defines a manga. It consists of the following properties.<p>
+<p class="alert alert-info">Not all properties are provided depending on the type of request made.</p>
+
+<ul>
+    <li><code>id</code>: The ID of the manga, as assigned by MyAnimeList</li>
+    <li><code>title</code>: The title of the item</li>
+    <li><code>other_titles</code>
+        <ul>
+            <li><code>synonyms</code>: Other titles by which this manga may be commonly known. <span class="text-info">Only available in manga detail requests.</span></li>
+            <li><code>english</code>: The title in English. <span class="text-info">Only available in manga detail requests.</span></li>
+            <li><code>Japanese</code>: The title in Japanese. <span class="text-info">Only available in manga detail requests.</span></li>
+        </ul>
+    </li>
+    <li><code>rank</code>: The global ranking of the title. <span class="text-info">Only available in manga detail requests.</span></li>
+    <li><code>popularity_rank</code>: Rank of the title based on popularity. (number of people adding title to the list) <span class="text-info">Only available in manga detail requests.</span></li>
+    <li><code>image_url</code>: URL to a representative image of the title. Usually a &quot;cover&quot; image.</li>
+    <li><code>type</code>: The type of manga. Values are one of: Manga, Novel, One Shot, Doujin, Manwha, Manhua, OEL. <span class="text-muted">Manwha is Korean, Manhua is Chinese, OEL is manga written in English.</span></li>
+    <li><code>chapters</code>: Total number of chapters in the title. Not returned (null) if unknown.</li>
+    <li><code>volumes</code>: Total number of volumes in the title. Not returned (null) if unknown.</li>
+    <li><code>status</code>: Current airing status of the title. Values are one of: finished, publishing, not yet published.</li>
+    <li><code>members_score</code>: A weighted score based on the rating MyAnimeList members have given the title. <span class="text-info">Only available in manga detail requests.</span></li>
+    <li><code>members_count</code>: Number of MyAnimeList members that that added the title to their list. <span class="text-info">Only available in manga detail requests.</span></li>
+    <li><code>favorited_count</code>: The number of MyAnimeList members that have this title on their favorites list. <span class="text-info">Only available in manga detail requests.</span></li>
+    <li><code>synopsis</code>: A short HTML-formatted description of the manga.</li>
+    <li><code>genres</code>: A list of genres for this title. <span class="text-info">Only available in manga detail requests.</span></li>
+    <li><code>anime_adaptations</code>: A list of anime adaptations of this manga, or anime on which this manga is based. <span class="text-info">Only available in manga detail requests.</span> Each list item includes an object with the following items:
+        <ul>
+            <li><code>anime_id</code>: ID of the anime, as assigned by MyAnimeList</li>
+            <li><code>title</code>: Title of the manga.</li>
+            <li><code>url</code>: URL to the MyAnimeList page for this anime.</li>
+        </ul>
+    </li>
+    <li><code>related_manga</code>: A list of manga related to this title. <span class="text-info">Only available in manga detail requests.</span> Each list item includes an object with the following items:
+        <ul>
+            <li><code>manga_id</code>: ID of the manga, as assigned by MyAnimeList</li>
+            <li><code>title</code>: Title of the manga.</li>
+            <li><code>url</code>: URL to the MyAnimeList page for this manga.</li>
+        </ul>
+    </li>
+    <li><code>alternative_versions</code>: A list of alternative versions of manga for this title. <span class="text-info">Only available in manga detail requests.</span> Each list item includes an object with the following items:
+        <ul>
+            <li><code>manga_id</code>: ID of the manga, as assigned by MyAnimeList</li>
+            <li><code>title</code>: Title of the manga.</li>
+            <li><code>url</code>: URL to the MyAnimeList page for this manga.</li>
+        </ul>
+    </li>
+    <li><code>read_status</code>: The watched status for the title. Values are one of reading, completed, on-hold, dropped, plan to read. <span class="text-warning">Only available for authenticated requests.</span></li>
+    <li><code>chapters_read</code>: The number of chapters the user has read. <span class="text-warning">Only available for authenticated requests.</span></li>
+    <li><code>volumes_read</code>: The number of volumes the user has read. <span class="text-warning">Only available for authenticated requests.</span></li>
+    <li><code>score</code>: The user's rating of the manga. <span class="text-warning">Only available for authenticated requests.</span></li>
+    <li><span class="label label-default">NEW</span> <code>personal_tags</code>: A list of tags for the title assigned by the logged in user. <span class="text-warning">Only available for authenticated requests.</span></li>
+    <li><span class="label label-default">NEW</span> <code>reading_start</code>: The date that the user began reading the title. Formatted as a full ISO 8601 date and time<sup><a href="#foot2">2</a></sup> <span class="text-warning">Only available for authenticated requests.</span></li>
+    <li><span class="label label-default">NEW</span> <code>reading_end</code>: The date that the user finished reading the title. Formatted as a full ISO 8601 date and time<sup><a href="#foot2">2</a></sup> <span class="text-warning">Only available for authenticated requests.</span></li>
+    <li><span class="label label-default">NEW</span> <code>priority</code>: An integer indicating the priority of the title for the user. Range from 0 to 2 representing Low (0), Medium (1), and High (2). <span class="text-warning">Only available for authenticated requests.</span></li>
+
+    <li><span class="label label-default">NEW</span> <code>chap_downloaded</code>: An integer that indicates the number of chapters the user has recorded as having downloaded. <span class="text-warning">Only available for authenticated requests.</span></li>
+    <li><span class="label label-default">NEW</span> <code>rereading</code>: An boolean indicating if the title is being reread. <span class="text-warning">Only available for authenticated requests.</span></li>
+    <li><span class="label label-default">NEW</span> <code>reread_count</code>: An integer indicating the number of times a title has been reread. This does not include the first reading. <span class="text-warning">Only available for authenticated requests.</span></li>
+    <li><span class="label label-default">NEW</span> <code>reread_value</code>: An integer from 1 (Very Low) to 5 (High) indicating the value in rereading a title. <span class="text-warning">Only available for authenticated requests.</span></li>
+    <li><span class="label label-default">NEW</span> <code>personal_comments</code>: Text entered by the user containing comments on the title. <span class="text-warning">Only available for authenticated requests.</span></li>
+</ul>

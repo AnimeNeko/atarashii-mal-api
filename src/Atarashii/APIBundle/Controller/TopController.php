@@ -4,7 +4,7 @@
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
-* @copyright 2014 Ratan Dhawtal and Michael Johnson
+* @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
 
@@ -13,24 +13,27 @@ namespace Atarashii\APIBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Guzzle\Http\Exception;
 use Atarashii\APIBundle\Parser\Top;
+use JMS\Serializer\SerializationContext;
 
 class TopController extends FOSRestController
 {
     /**
-    * Fetch Top-rated Anime
-    *
-    * Gets a list of the top-rated anime on MyAnimeList. The get variable "page" is used
-    * to select the set of results to return (in a default of 30 items per set). An
-    * invalid or missing value defaults to page 1. The get variable "type" is used to
-    * select the type of anime you want to see and can be one of "tv", "movie", "ova", or
-    * "special". A missing or invalid value defaults to show all types.
-    *
-    * @param Request $request Contains all the needed information to get the list.
-    *
-    * @return View
-    */
-    public function getTopAnimeAction(Request $request)
+     * Fetch Top-rated Anime
+     *
+     * Gets a list of the top-rated anime on MyAnimeList. The get variable "page" is used
+     * to select the set of results to return (in a default of 30 items per set). An
+     * invalid or missing value defaults to page 1. The get variable "type" is used to
+     * select the type of anime you want to see and can be one of "tv", "movie", "ova", or
+     * "special". A missing or invalid value defaults to show all types.
+     *
+     * @param string  $apiVersion The API version of the request
+     * @param Request $request Contains all the needed information to get the list.
+     *
+     * @return View
+     */
+    public function getTopAnimeAction($apiVersion, Request $request)
     {
         // http://myanimelist.net/topanime.php?type=#{type}&limit=#{0}
 
@@ -55,8 +58,8 @@ class TopController extends FOSRestController
         $downloader = $this->get('atarashii_api.communicator');
 
         try {
-            $animecontent = $downloader->fetch('/topanime.php?type=' . $type . '&limit='.(($page*30)-30));
-        } catch (\Guzzle\Http\Exception\CurlException $e) {
+            $animecontent = $downloader->fetch('/topanime.php?type=' . $type . '&limit='.(($page*50)-50));
+        } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
 
@@ -66,6 +69,14 @@ class TopController extends FOSRestController
         }
 
         $response = new Response();
+        $serializationContext = SerializationContext::create();
+        $serializationContext->setVersion($apiVersion);
+
+        //For compatibility, API 1.0 explicitly passes null parameters.
+        if ($apiVersion == "1.0") {
+            $serializationContext->setSerializeNull(true);
+        }
+
         $response->setPublic();
         $response->setMaxAge(10800); //Three hours
         $response->headers->addCacheControlDirective('must-revalidate', true);
@@ -86,6 +97,8 @@ class TopController extends FOSRestController
             $topanime = Top::parse($animecontent, 'anime');
 
             $view = $this->view($topanime);
+
+            $view->setSerializationContext($serializationContext);
             $view->setResponse($response);
             $view->setStatusCode(200);
 
@@ -94,20 +107,21 @@ class TopController extends FOSRestController
     }
 
     /**
-    * Fetch Top-rated Manga
-    *
-    * Gets a list of the top-rated manga on MyAnimeList. The get variable "page" is used
-    * to select the set of results to return (in a default of 30 items per set). An
-    * invalid or missing value defaults to page 1. The get variable "type" is used to
-    * select the type of manga you want to see and can be one of "manga", "novels",
-    * "oneshots", "doujin", "manwha", "manhua", or "oels". A missing or invalid value
-    * defaults to show all types.
-    *
-    * @param Request $request Contains all the needed information to get the list.
-    *
-    * @return View
-    */
-    public function getTopMangaAction(Request $request)
+     * Fetch Top-rated Manga
+     *
+     * Gets a list of the top-rated manga on MyAnimeList. The get variable "page" is used
+     * to select the set of results to return (in a default of 30 items per set). An
+     * invalid or missing value defaults to page 1. The get variable "type" is used to
+     * select the type of manga you want to see and can be one of "manga", "novels",
+     * "oneshots", "doujin", "manwha", "manhua", or "oels". A missing or invalid value
+     * defaults to show all types.
+     *
+     * @param string  $apiVersion The API version of the request
+     * @param Request $request Contains all the needed information to get the list.
+     *
+     * @return View
+     */
+    public function getTopMangaAction($apiVersion, Request $request)
     {
         // http://myanimelist.net/topmanga.php?type=&limit=#{0}
 
@@ -135,8 +149,8 @@ class TopController extends FOSRestController
         $downloader = $this->get('atarashii_api.communicator');
 
         try {
-            $mangacontent = $downloader->fetch('/topmanga.php?type=' . $type . '&limit='.(($page*30)-30));
-        } catch (\Guzzle\Http\Exception\CurlException $e) {
+            $mangacontent = $downloader->fetch('/topmanga.php?type=' . $type . '&limit='.(($page*50)-50));
+        } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
 
@@ -146,6 +160,14 @@ class TopController extends FOSRestController
         }
 
         $response = new Response();
+        $serializationContext = SerializationContext::create();
+        $serializationContext->setVersion($apiVersion);
+
+        //For compatibility, API 1.0 explicitly passes null parameters.
+        if ($apiVersion == "1.0") {
+            $serializationContext->setSerializeNull(true);
+        }
+
         $response->setPublic();
         $response->setMaxAge(10800); //Three hours
         $response->headers->addCacheControlDirective('must-revalidate', true);
@@ -166,6 +188,8 @@ class TopController extends FOSRestController
             $topmanga = Top::parse($mangacontent, 'manga');
 
             $view = $this->view($topmanga);
+
+            $view->setSerializationContext($serializationContext);
             $view->setResponse($response);
             $view->setStatusCode(200);
 
@@ -174,17 +198,18 @@ class TopController extends FOSRestController
     }
 
     /**
-    * Fetch Top-rated Anime by Popularity
-    *
-    * Gets a list of the top-rated anime on MyAnimeList sorted by popularity. The get
-    * variable "page" is used to select the set of results to return (in a default of 30
-    * items per set). An invalid or missing value defaults to page 1.
-    *
-    * @param Request $request Contains all the needed information to get the list.
-    *
-    * @return View
-    */
-    public function getPopularAnimeAction(Request $request)
+     * Fetch Top-rated Anime by Popularity
+     *
+     * Gets a list of the top-rated anime on MyAnimeList sorted by popularity. The get
+     * variable "page" is used to select the set of results to return (in a default of 30
+     * items per set). An invalid or missing value defaults to page 1.
+     *
+     * @param string  $apiVersion The API version of the request
+     * @param Request $request Contains all the needed information to get the list.
+     *
+     * @return View
+     */
+    public function getPopularAnimeAction($apiVersion, Request $request)
     {
         // http://myanimelist.net/topanime.php?type=bypopularity&limit=#{0}
 
@@ -198,11 +223,19 @@ class TopController extends FOSRestController
 
         try {
             $animecontent = $downloader->fetch('/topanime.php?type=bypopularity&limit='.(($page*30)-30));
-        } catch (\Guzzle\Http\Exception\CurlException $e) {
+        } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
 
         $response = new Response();
+        $serializationContext = SerializationContext::create();
+        $serializationContext->setVersion($apiVersion);
+
+        //For compatibility, API 1.0 explicitly passes null parameters.
+        if ($apiVersion == "1.0") {
+            $serializationContext->setSerializeNull(true);
+        }
+
         $response->setPublic();
         $response->setMaxAge(10800); //Three hours
         $response->headers->addCacheControlDirective('must-revalidate', true);
@@ -223,6 +256,8 @@ class TopController extends FOSRestController
             $popularanime = Top::parse($animecontent, 'anime');
 
             $view = $this->view($popularanime);
+
+            $view->setSerializationContext($serializationContext);
             $view->setResponse($response);
             $view->setStatusCode(200);
 
@@ -231,17 +266,18 @@ class TopController extends FOSRestController
     }
 
     /**
-    * Fetch Top-rated Manga by Popularity
-    *
-    * Gets a list of the top-rated manga on MyAnimeList sorted by popularity. The get
-    * variable "page" is used to select the set of results to return (in a default of 30
-    * items per set). An invalid or missing value defaults to page 1.
-    *
-    * @param Request $request Contains all the needed information to get the list.
-    *
-    * @return View
-    */
-    public function getPopularMangaAction(Request $request)
+     * Fetch Top-rated Manga by Popularity
+     *
+     * Gets a list of the top-rated manga on MyAnimeList sorted by popularity. The get
+     * variable "page" is used to select the set of results to return (in a default of 30
+     * items per set). An invalid or missing value defaults to page 1.
+     *
+     * @param string  $apiVersion The API version of the request
+     * @param Request $request Contains all the needed information to get the list.
+     *
+     * @return View
+     */
+    public function getPopularMangaAction($apiVersion, Request $request)
     {
         // http://myanimelist.net/topmanga.php?type=bypopularity&limit=#{0}
 
@@ -255,11 +291,19 @@ class TopController extends FOSRestController
 
         try {
             $mangacontent = $downloader->fetch('/topmanga.php?type=bypopularity&limit='.(($page*30)-30));
-        } catch (\Guzzle\Http\Exception\CurlException $e) {
+        } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
 
         $response = new Response();
+        $serializationContext = SerializationContext::create();
+        $serializationContext->setVersion($apiVersion);
+
+        //For compatibility, API 1.0 explicitly passes null parameters.
+        if ($apiVersion == "1.0") {
+            $serializationContext->setSerializeNull(true);
+        }
+
         $response->setPublic();
         $response->setMaxAge(10800); //Three hours
         $response->headers->addCacheControlDirective('must-revalidate', true);
@@ -280,6 +324,8 @@ class TopController extends FOSRestController
             $popularmanga = Top::parse($mangacontent, 'manga');
 
             $view = $this->view($popularmanga);
+
+            $view->setSerializationContext($serializationContext);
             $view->setResponse($response);
             $view->setStatusCode(200);
 

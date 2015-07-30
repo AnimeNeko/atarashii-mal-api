@@ -4,7 +4,7 @@
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
-* @copyright 2014 Ratan Dhawtal and Michael Johnson
+* @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
 
@@ -90,6 +90,110 @@ class Communicator
         if ($username) {
             $request->setAuth($username, $password);
         }
+
+        // send request / get response
+        $this->response = $request->send();
+
+        // this is the response body from the requested page
+        return $this->response->getBody();
+    }
+
+    /**
+     * Send a message on MAL
+     *
+     * @param string $url     The parameters of the url
+     * @param string $subject Subject of the message
+     * @param string $message body of the message
+     *
+     * @return string
+     */
+    public function sendMessage($url, $subject, $message)
+    {
+        // create a request
+        $request = $this->client->post("http://myanimelist.net/mymessages.php?go=send&".$url);
+        $request->setHeader('User-Agent', $this->useragent);
+
+        //Add our data transmission - MAL requires the XML content to be in a variable named "data"
+        $request->setPostField('subject', $subject);
+        $request->setPostField('message', $message);
+        $request->setPostField('sendmessage', 'Send Message');
+
+        // send request / get response
+        $this->response = $request->send();
+
+        // this is the response body from the requested page
+        return $this->response->getBody();
+    }
+
+    /**
+     * Create a topic on MAL
+     *
+     * @param int    $id    The board id
+     * @param string $title Subject of the message
+     * @param string $message body of the message
+     *
+     * @return string
+     */
+    public function createTopic($id, $title, $message)
+    {
+        // create a request
+        $request = $this->client->post("http://myanimelist.net/forum/?action=post&boardid=".$id);
+        $request->setHeader('User-Agent', $this->useragent);
+
+        //Add our data transmission - MAL requires the XML content to be in a variable named "data"
+        $request->setPostField('topic_title', $title);
+        $request->setPostField('msg_text', $message);
+        $request->setPostField('submit', 'Post New Topic');
+
+        // send request / get response
+        $this->response = $request->send();
+
+        // this is the response body from the requested page
+        return $this->response->getBody();
+    }
+
+    /**
+     * Create a comment inside a topic on MAL
+     *
+     * @param int    $id      The topic id
+     * @param string $message The body of the message
+     *
+     * @return string
+     */
+    public function createComment($id, $message)
+    {
+        // create a request
+        $request = $this->client->post("http://myanimelist.net/forum/?action=message&topic_id=".$id);
+        $request->setHeader('User-Agent', $this->useragent);
+
+        //Add our data transmission - MAL requires the XML content to be in a variable named "data"
+        $request->setPostField('msg_text', $message);
+        $request->setPostField('submit', 'Post Message ');
+
+        // send request / get response
+        $this->response = $request->send();
+
+        // this is the response body from the requested page
+        return $this->response->getBody();
+    }
+
+    /**
+     * edith a comment inside a topic on MAL
+     *
+     * @param int    $id      The topic id
+     * @param string $message The body of the message
+     *
+     * @return string
+     */
+    public function edithComment($id, $message)
+    {
+        // create a request
+        $request = $this->client->post("http://myanimelist.net/forum/?action=message&msgid=".$id);
+        $request->setHeader('User-Agent', $this->useragent);
+
+        //Add our data transmission - MAL requires the XML content to be in a variable named "data"
+        $request->setPostField('msg_text', $message);
+        $request->setPostField('submit', 'Edit Message');
 
         // send request / get response
         $this->response = $request->send();

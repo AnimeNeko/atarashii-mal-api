@@ -4,7 +4,7 @@
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
-* @copyright 2014 Ratan Dhawtal and Michael Johnson
+* @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
 
@@ -13,24 +13,27 @@ namespace Atarashii\APIBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Guzzle\Http\Exception;
 use Atarashii\APIBundle\Parser\Upcoming;
+use JMS\Serializer\SerializationContext;
 
 class UpcomingController extends FOSRestController
 {
     /**
-    * Fetch Upcoming Anime
-    *
-    * Gets the list of anime that will be beginning to air in the future. The get variable
-    * "page" is used to select the set of results to return (in a default of 30 items per
-    * set). An invalid or missing value defaults to page 1. The get variable "start_date"
-    * is used to select the date you want the list to begin. A missing or invalid value
-    * defaults to the current date.
-    *
-    * @param Request $request Contains all the needed information to get the list.
-    *
-    * @return View
-    */
-    public function getAnimeUpcomingAction(Request $request)
+     * Fetch Upcoming Anime
+     *
+     * Gets the list of anime that will be beginning to air in the future. The get variable
+     * "page" is used to select the set of results to return (in a default of 30 items per
+     * set). An invalid or missing value defaults to page 1. The get variable "start_date"
+     * is used to select the date you want the list to begin. A missing or invalid value
+     * defaults to the current date.
+     *
+     * @param string  $apiVersion The API version of the request
+     * @param Request $request Contains all the needed information to get the list.
+     *
+     * @return View
+     */
+    public function getAnimeUpcomingAction($apiVersion, Request $request)
     {
         // http://myanimelist.net/anime.php?sd=#{day}&sm=#{month}&sy=#{year}&em=0&ed=0&ey=0&o=2&w=&c[]=a&c[]=d&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=1&show=#{page}
 
@@ -54,12 +57,20 @@ class UpcomingController extends FOSRestController
         $downloader = $this->get('atarashii_api.communicator');
 
         try {
-            $animecontent = $downloader->fetch('/anime.php?sd='.$startDay.'&sm='.$startMonth.'&sy='.$startYear.'&em=0&ed=0&ey=0&o=2&w=&c[]=a&c[]=d&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=1&show='.(($page*20)-20));
-        } catch (\Guzzle\Http\Exception\CurlException $e) {
+            $animecontent = $downloader->fetch('/anime.php?sd='.$startDay.'&sm='.$startMonth.'&sy='.$startYear.'&em=0&ed=0&ey=0&o=2&w=&c[]=a&c[]=d&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=1&show='.(($page*50)-50));
+        } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
 
         $response = new Response();
+        $serializationContext = SerializationContext::create();
+        $serializationContext->setVersion($apiVersion);
+
+        //For compatibility, API 1.0 explicitly passes null parameters.
+        if ($apiVersion == "1.0") {
+            $serializationContext->setSerializeNull(true);
+        }
+
         $response->setPublic();
         $response->setMaxAge(10800); //Three hours
         $response->headers->addCacheControlDirective('must-revalidate', true);
@@ -80,6 +91,8 @@ class UpcomingController extends FOSRestController
             $Upcominganime = Upcoming::parse($animecontent, 'anime');
 
             $view = $this->view($Upcominganime);
+
+            $view->setSerializationContext($serializationContext);
             $view->setResponse($response);
             $view->setStatusCode(200);
 
@@ -88,19 +101,20 @@ class UpcomingController extends FOSRestController
     }
 
     /**
-    * Fetch Upcoming Manga
-    *
-    * Gets the list of manga that will be starting publication in the future. The get
-    * variable "page" is used to select the set of results to return (in a default of 30
-    * items per set). An invalid or missing value defaults to page 1. The get variable
-    * "start_date" is used to select the date you want the list to begin. A missing or
-    * invalid value defaults to the current date.
-    *
-    * @param Request $request Contains all the needed information to get the list.
-    *
-    * @return View
-    */
-    public function getMangaUpcomingAction(Request $request)
+     * Fetch Upcoming Manga
+     *
+     * Gets the list of manga that will be starting publication in the future. The get
+     * variable "page" is used to select the set of results to return (in a default of 30
+     * items per set). An invalid or missing value defaults to page 1. The get variable
+     * "start_date" is used to select the date you want the list to begin. A missing or
+     * invalid value defaults to the current date.
+     *
+     * @param string  $apiVersion The API version of the request
+     * @param Request $request Contains all the needed information to get the list.
+     *
+     * @return View
+     */
+    public function getMangaUpcomingAction($apiVersion, Request $request)
     {
         // http://myanimelist.net/manga.php?sd=#{day}&sm=#{month}&sy=#{year}&em=0&ed=0&ey=0&o=2&w=&c[]=a&c[]=d&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=1&show=#{page}
 
@@ -124,12 +138,20 @@ class UpcomingController extends FOSRestController
         $downloader = $this->get('atarashii_api.communicator');
 
         try {
-            $mangacontent = $downloader->fetch('/manga.php?sd='.$startDay.'&sm='.$startMonth.'&sy='.$startYear.'&em=0&ed=0&ey=0&o=2&w=&c[]=a&c[]=d&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=1&show='.(($page*20)-20));
-        } catch (\Guzzle\Http\Exception\CurlException $e) {
+            $mangacontent = $downloader->fetch('/manga.php?sd='.$startDay.'&sm='.$startMonth.'&sy='.$startYear.'&em=0&ed=0&ey=0&o=2&w=&c[]=a&c[]=d&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=1&show='.(($page*50)-50));
+        } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
 
         $response = new Response();
+        $serializationContext = SerializationContext::create();
+        $serializationContext->setVersion($apiVersion);
+
+        //For compatibility, API 1.0 explicitly passes null parameters.
+        if ($apiVersion == "1.0") {
+            $serializationContext->setSerializeNull(true);
+        }
+
         $response->setPublic();
         $response->setMaxAge(10800); //Three hours
         $response->headers->addCacheControlDirective('must-revalidate', true);
@@ -150,6 +172,8 @@ class UpcomingController extends FOSRestController
             $Upcomingmanga = Upcoming::parse($mangacontent, 'manga');
 
             $view = $this->view($Upcomingmanga);
+
+            $view->setSerializationContext($serializationContext);
             $view->setResponse($response);
             $view->setStatusCode(200);
 
@@ -164,11 +188,12 @@ class UpcomingController extends FOSRestController
     * variable "page" is used to select the set of results to return (in a default of 30
     * items per set). An invalid or missing value defaults to page 1.
     *
+    * @param string  $apiVersion The API version of the request
     * @param Request $request Contains all the needed information to get the list.
     *
     * @return View
     */
-    public function getAnimeJustaddedAction(Request $request)
+    public function getAnimeJustaddedAction($apiVersion, Request $request)
     {
         // http://myanimelist.net/anime.php?o=9&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=2&w=1&show=#{page}
 
@@ -182,11 +207,19 @@ class UpcomingController extends FOSRestController
 
         try {
             $animecontent = $downloader->fetch('/anime.php?o=9&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=2&w=1&show='.(($page*20)-20));
-        } catch (\Guzzle\Http\Exception\CurlException $e) {
+        } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
 
         $response = new Response();
+        $serializationContext = SerializationContext::create();
+        $serializationContext->setVersion($apiVersion);
+
+        //For compatibility, API 1.0 explicitly passes null parameters.
+        if ($apiVersion == "1.0") {
+            $serializationContext->setSerializeNull(true);
+        }
+
         $response->setPublic();
         $response->setMaxAge(10800); //Three hours
         $response->headers->addCacheControlDirective('must-revalidate', true);
@@ -207,6 +240,8 @@ class UpcomingController extends FOSRestController
             $Justaddedanime = Upcoming::parse($animecontent, 'anime');
 
             $view = $this->view($Justaddedanime);
+
+            $view->setSerializationContext($serializationContext);
             $view->setResponse($response);
             $view->setStatusCode(200);
 
@@ -221,11 +256,12 @@ class UpcomingController extends FOSRestController
     * variable "page" is used to select the set of results to return (in a default of 30
     * items per set). An invalid or missing value defaults to page 1.
     *
+    * @param string  $apiVersion The API version of the request
     * @param Request $request Contains all the needed information to get the list.
     *
     * @return View
     */
-    public function getMangaJustaddedAction(Request $request)
+    public function getMangaJustaddedAction($apiVersion, Request $request)
     {
         // http://myanimelist.net/anime.php?o=9&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=2&w=1&show=#{page}
 
@@ -239,11 +275,19 @@ class UpcomingController extends FOSRestController
 
         try {
             $mangacontent = $downloader->fetch('/manga.php?o=9&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=2&w=1&show='.(($page*20)-20));
-        } catch (\Guzzle\Http\Exception\CurlException $e) {
+        } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
 
         $response = new Response();
+        $serializationContext = SerializationContext::create();
+        $serializationContext->setVersion($apiVersion);
+
+        //For compatibility, API 1.0 explicitly passes null parameters.
+        if ($apiVersion == "1.0") {
+            $serializationContext->setSerializeNull(true);
+        }
+
         $response->setPublic();
         $response->setMaxAge(10800); //Three hours
         $response->headers->addCacheControlDirective('must-revalidate', true);
@@ -264,6 +308,8 @@ class UpcomingController extends FOSRestController
             $Justaddedmanga = Upcoming::parse($mangacontent, 'manga');
 
             $view = $this->view($Justaddedmanga);
+
+            $view->setSerializationContext($serializationContext);
             $view->setResponse($response);
             $view->setStatusCode(200);
 

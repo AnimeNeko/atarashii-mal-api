@@ -1,0 +1,107 @@
+<h2>Anime</h2>
+<p>This is an object that defines an anime. It consists of the following properties.<p>
+<p class="alert alert-info">Not all properties are provided depending on the type of request made.</p>
+
+<ul>
+    <li><code>id</code>: The ID of the anime, as assigned by MyAnimeList</li>
+    <li><code>title</code>: The title of the item</li>
+    <li><code>other_titles</code>
+        <ul>
+            <li><code>synonyms</code>: Other titles by which this anime may be commonly known. <span class="text-info">Only available in anime detail requests.</span></li>
+            <li><code>english</code>: The title in English. <span class="text-info">Only available in anime detail requests.</span></li>
+            <li><code>Japanese</code>: The title in Japanese. <span class="text-info">Only available in anime detail requests.</span></li>
+        </ul>
+    </li>
+    <li><code>rank</code>: The global ranking of the title. <span class="text-info">Only available in anime detail requests.</span></li>
+    <li><code>popularity_rank</code>: Rank of the title based on popularity. (number of people adding title to the list) <span class="text-info">Only available in anime detail requests.</span></li>
+    <li><code>image_url</code>: URL to a representative image of the title. Usually a &quot;cover&quot; image.</li>
+    <li><code>type</code>: The type of anime. Values are one of: TV, Movie, OVA, ONA, Special, Music.</li>
+    <li><code>episodes</code>: Total number of episodes. Not returned (null) if unknown.</li>
+    <li><code>status</code>: Current airing status of the title. Values are one of: finished airing, currently airing, not yet aired.</li>
+    <li><span class="label label-default">UPDATED</span><code>start_date</code>: Date the anime starts airing. Formatted as an ISO 8601 date<sup><a href="#foot2">2</a></sup></li>
+    <li><span class="label label-default">UPDATED</span><code>end_date</code>: Date the anime finishes airing. Formatted as an ISO 8601 date<sup><a href="#foot2">2</a></sup></li>
+    <li><code>classification</code>: Classification of the title. This is a freeform text field, usually based on the MPAA rating system. <span class="text-info">Only available in anime detail requests.</span></li>
+    <li><code>members_score</code>: A weighted score based on the rating MyAnimeList members have given the title. <span class="text-info">Only available in anime detail requests.</span></li>
+    <li><code>members_count</code>: Number of MyAnimeList members that that added the title to their list. <span class="text-info">Only available in anime detail requests.</span></li>
+    <li><code>favorited_count</code>: The number of MyAnimeList members that have this title on their favorites list. <span class="text-info">Only available in anime detail requests.</span></li>
+    <li><code>synopsis</code>: A short HTML-formatted description of the anime.</li>
+    <li><span class="label label-default">NEW</span> <code>producers</code>: A list of production companies for this title. <span class="text-info">Only available in anime detail requests.</span></li>
+    <li><code>genres</code>: A list of genres for this title. <span class="text-info">Only available in anime detail requests.</span></li>
+    <li><code>manga_adaptations</code>: A list of manga adaptations of this anime, or manga on which this anime is based. <span class="text-info">Only available in anime detail requests.</span> Each list item includes an object with the following items:
+        <ul>
+            <li><code>manga_id</code>: ID of the manga, as assigned by MyAnimeList</li>
+            <li><code>title</code>: Title of the manga.</li>
+            <li><code>url</code>: URL to the MyAnimeList page for this manga.</li>
+        </ul>
+    </li>
+    <li><code>prequels</code>: A list of anime prequels for this title. <span class="text-info">Only available in anime detail requests.</span> Each list item includes an object with the following items:
+        <ul>
+            <li><code>anime_id</code>: ID of the anime, as assigned by MyAnimeList</li>
+            <li><code>title</code>: Title of the anime.</li>
+            <li><code>url</code>: URL to the MyAnimeList page for this anime.</li>
+        </ul>
+    </li>
+    <li><code>sequels</code>: A list of anime sequels for this title. <span class="text-info">Only available in anime detail requests.</span> Each list item includes an object with the following items:
+        <ul>
+            <li><code>anime_id</code>: ID of the anime, as assigned by MyAnimeList</li>
+            <li><code>title</code>: Title of the anime.</li>
+            <li><code>url</code>: URL to the MyAnimeList page for this anime.</li>
+        </ul>
+    </li>
+    <li><code>side_stories</code>: A list of anime side stories for this title. <span class="text-info">Only available in anime detail requests.</span> Each list item includes an object with the following items:
+        <ul>
+            <li><code>anime_id</code>: ID of the anime, as assigned by MyAnimeList</li>
+            <li><code>title</code>: Title of the anime.</li>
+            <li><code>url</code>: URL to the MyAnimeList page for this anime.</li>
+        </ul>
+    </li>
+    <li><code>parent_story</code>: If the anime is a spin-off, the parent story anime for the title. <span class="text-info">Only available in anime detail requests.</span> If it exists, it is an object with the following items:
+        <ul>
+            <li><code>anime_id</code>: ID of the anime, as assigned by MyAnimeList</li>
+            <li><code>title</code>: Title of the anime.</li>
+            <li><code>url</code>: URL to the MyAnimeList page for this anime.</li>
+        </ul>
+    </li>
+    <li><code>character_anime</code>: A list of character animes for this title. <span class="text-info">Only available in anime detail requests.</span> Each list item includes an object with the following items:
+        <ul>
+            <li><code>anime_id</code>: ID of the anime, as assigned by MyAnimeList</li>
+            <li><code>title</code>: Title of the anime.</li>
+            <li><code>url</code>: URL to the MyAnimeList page for this anime.</li>
+        </ul>
+    </li>
+    <li><code>spin_offs</code>: A list of animes that are spin-offs for this title. <span class="text-info">Only available in anime detail requests.</span> Each list item includes an object with the following items:
+        <ul>
+            <li><code>anime_id</code>: ID of the anime, as assigned by MyAnimeList</li>
+            <li><code>title</code>: Title of the anime.</li>
+            <li><code>url</code>: URL to the MyAnimeList page for this anime.</li>
+        </ul>
+    </li>
+    <li><code>summaries</code>: A list of anime summaries for this title. <span class="text-info">Only available in anime detail requests.</span> Each list item includes an object with the following items:
+        <ul>
+            <li><code>anime_id</code>: ID of the anime, as assigned by MyAnimeList</li>
+            <li><code>title</code>: Title of the anime.</li>
+            <li><code>url</code>: URL to the MyAnimeList page for this anime.</li>
+        </ul>
+    </li>
+    <li><code>alternative_versions</code>: A list of alternative anime version for this title. <span class="text-info">Only available in anime detail requests.</span> Each list item includes an object with the following items:
+        <ul>
+            <li><code>anime_id</code>: ID of the anime, as assigned by MyAnimeList</li>
+            <li><code>title</code>: Title of the anime.</li>
+            <li><code>url</code>: URL to the MyAnimeList page for this anime.</li>
+        </ul>
+    </li>
+    <li><code>watched_status</code>: The watched status for the title. Values are one of: watching, completed, on-hold, dropped, plan to watch. <span class="text-warning">Only available for authenticated requests.</span></li>
+    <li><code>watched_episodes</code>: The number of episodes watched for the title. <span class="text-warning">Only available for authenticated requests.</span></li>
+    <li><code>score</code>: The user's rating of the anime. <span class="text-warning">Only available for authenticated requests.</span></li>
+    <li><span class="label label-default">NEW</span> <code>personal_tags</code>: A list of tags for the title assigned by the logged in user. <span class="text-warning">Only available for authenticated requests.</span></li>
+    <li><span class="label label-default">NEW</span> <code>watching_start</code>: The date that the user began watching the title. Formatted as a full ISO 8601 date and time<sup><a href="#foot2">2</a></sup> <span class="text-warning">Only available for authenticated requests.</span></li>
+    <li><span class="label label-default">NEW</span> <code>watching_end</code>: The date that the user finished watching the title. Formatted as a full ISO 8601 date and time<sup><a href="#foot2">2</a></sup> <span class="text-warning">Only available for authenticated requests.</span></li>
+    <li><span class="label label-default">NEW</span> <code>priority</code>: An integer indicating the priority of the title for the user. Range from 0 to 2 representing Low (0), Medium (1), and High (2). <span class="text-warning">Only available for authenticated requests.</span></li>
+    <li><span class="label label-default">NEW</span> <code>storage</code>: An integer indicating the type of storage media the user has the title on. Values are one of: 1 (Hard Drive), 2 (DVD/CD), 3 (None), 4 (Retail DVD), 5 (VHS), 6 (External HDD), or 7 (NAS). <span class="text-warning">Only available for authenticated requests.</span></li>
+    <li><span class="label label-default">NEW</span> <code>storage_value</code>: A decimal number indicating how much it uses of the selected storage. Value may be number of discs, tapes, or size in gigabytes for hard-drive storage types. <span class="text-warning">Only available for authenticated requests.</span></li>
+    <li><span class="label label-default">NEW</span> <code>eps_downloaded</code>: An integer that indicates the number of episodes the user has recorded as having downloaded. <span class="text-warning">Only available for authenticated requests.</span></li>
+    <li><span class="label label-default">NEW</span> <code>rewatching</code>: An boolean indicating if the title is being rewatched. <span class="text-warning">Only available for authenticated requests.</span></li>
+    <li><span class="label label-default">NEW</span> <code>rewatch_count</code>: An integer indicating the number of times a title has been rewatched. This does not include the first watching. <span class="text-warning">Only available for authenticated requests.</span></li>
+    <li><span class="label label-default">NEW</span> <code>rewatch_value</code>: An integer from 1 (Very Low) to 5 (High) indicating the value in rewatching a title. <span class="text-warning">Only available for authenticated requests.</span></li>
+    <li><span class="label label-default">NEW</span> <code>personal_comments</code>: Text entered by the user containing comments on the title. <span class="text-warning">Only available for authenticated requests.</span></li>
+</ul>

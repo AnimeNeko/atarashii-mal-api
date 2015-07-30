@@ -4,6 +4,32 @@
 <h1>API Documentation</h1>
 <p>The MyAnimeList Unofficial API allows developers to interact with the <a href="http://myanimelist.net/">MyAnimeList</a> site programmatically via HTTP requests. It tries to remain as close to REST principles as possible.</p>
 
-<p>Select a section from the menu above to view details.</p>
+<h2>API Versioning</h2>
+<p>This API follows the <a href="http://semver.org/">Semantic Versioning</a> specification. Where possible, advance notice will be made before fully removing a major API version from support.</p>
+
+
+<h2>Usage</h2>
+<p>To access the API, you will want to prefix the endpoint path with the major and minor version numbers for the API version you are using. If the minor version number is a 0 (as in 2.0), then omit the minor version number.</p>
+
+<p>The below are examples for accessing anime #1887 via different API versions. These are for example only and the displayed API versions may not exist or be supported.</p>
+<dl class="dl-horizontal">
+    <dt>API 1.0</dt>
+    <dd>/1/anime/1887</dd>
+    <dt>API 1.1</dt>
+    <dd>/1.1/anime/1887</dd>
+    <dt>API 2.0</dt>
+    <dd>/2/anime/1887</dd>
+</dl>
+
+<p>To begin using the API, select an area from the documentation menu and explore the functionality offered.</p>
+
+
+<h2>Background and History</h2>
+<p>This API was developed to support the <a href="http://atarashiiapp.com/">Atarashii</a> Android application.</p>
+<p>It was written to replace the Unofficial MyAnimeList API created by Cheah Chu Yeow, which was not being actively developed. As none of the developers had extensive experience in Ruby, it was decided to re-create the API from scratch using a familiar language and tools that would allow rapid development while providing wide deployment support.</p>
+
+<p>Version 1.0 of the API was designed to be a drop-in replacement for the existing Ruby-based API to ease migration. Any applications coded for the older API should work with minimal to no changes.</p>
+
+<p>With version 2.0, many areas of the API output were standardized. Some highlights included consistent date formats and null values no longer being explicitly returned. Additionally, support for more areas of MyAnimeList was added along with expanding the detail of data returned from many of the endpoints.</p>
 
 {% include "AtarashiiAPIBundle:includes:footer.html.twig" %}

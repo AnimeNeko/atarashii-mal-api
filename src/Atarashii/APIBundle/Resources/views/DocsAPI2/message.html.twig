@@ -1,0 +1,62 @@
+{% set pageTitle = "Docs - Anime Methods" %}
+{% include "AtarashiiAPIBundle:includes:header.html.twig" %}
+
+<div class="row">
+    <div class="col-md-9">
+        <h1>Message Methods</h1>
+        <p>All the below methods deal with reading and writing data related to the messages.</p>
+
+
+        <h2>Methods to Get Information</h2>
+
+        <h3>Reading the messages List</h3>
+        <dl>
+            <dt>URI Format</dt><dd>messages</dd>
+            <dt>Method</dt><dd>GET</dd>
+            <dt>Authentication</dt><dd>Required</dd>
+        </dl>
+        <p>Retrieves the list of all the messages. The output contains 2 objects called <code>pages</code> and <code>list</code>. The <code>list</code> object contains an arraylist of <a href="{{ path('_docs2_responses') }}#message">message</a>. The <code>pages</code> object is an integer number which indicates the amount of pages.</p>
+        <p>The values that can be sent in the get body:</p>
+        <ul>
+            <li><code>page</code>:  The current set of messages to return. Each set contains at most 20 items. Default value is &quot;1&quot; if not supplied.</li>
+        </ul>
+
+        <h3>Reading the message</h3>
+        <dl>
+            <dt>URI Format</dt><dd>messages/<em>id</em></dd>
+            <dt>Method</dt><dd>GET</dd>
+            <dt>Authentication</dt><dd>Required</dd>
+        </dl>
+        <p>Retrieves the message details of the specified by the id number. Output is an <a href="{{ path('_docs2_responses') }}#message">message</a>.</p>
+
+        <h2>Methods to Change Information</h2>
+
+        <p class="alert alert-info">All post data <strong>must</strong> be sent as x-www-form-urlencoded as the API does not currently support multipart/form-data!</p>
+
+        <h3>Sending messages</h3>
+        <dl>
+            <dt>URI Format</dt><dd>messages</dd>
+            <dt>Method</dt><dd>POST</dd>
+            <dt>Authentication</dt><dd>Required</dd>
+        </dl>
+        <p>Sends a message to the specified user.</p>
+        <p>The values that can be sent in the post body:</p>
+        <ul>
+            <li><code>username</code>: The username of the receiver</li>
+            <li><code>subject</code>: The subject for the message.</li>
+            <li><code>message</code>: The message.</li>
+        </ul>
+
+        <h3>Deleting the message</h3>
+        <dl>
+            <dt>URI Format</dt><dd>messages/<em>id</em></dd>
+            <dt>Method</dt><dd>DELETE</dd>
+            <dt>Authentication</dt><dd>Required</dd>
+        </dl>
+        <p>deletes a message from your list.</p>
+
+        <hr>
+    </div>
+</div>
+
+{% include "AtarashiiAPIBundle:includes:footer.html.twig" %}

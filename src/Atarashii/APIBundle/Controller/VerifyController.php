@@ -4,13 +4,14 @@
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
-* @copyright 2014 Ratan Dhawtal and Michael Johnson
+* @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
 
 namespace Atarashii\APIBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
+use Guzzle\Http\Exception;
 
 class VerifyController extends FOSRestController
 {
@@ -44,15 +45,15 @@ class VerifyController extends FOSRestController
         $connection = $this->get('atarashii_api.communicator');
 
         try {
-            $response = $connection->fetch('/api/account/verify_credentials.xml', $username, $password);
+            $connection->fetch('/api/account/verify_credentials.xml', $username, $password);
 
             return $this->view(Array('authorized' => 'OK'), 200);
-        } catch (\Guzzle\Http\Exception\ClientErrorResponseException $e) {
+        } catch (Exception\ClientErrorResponseException $e) {
             $view = $this->view(Array('error' => 'unauthorized'), 401);
             $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
 
             return $view;
-        } catch (\Guzzle\Http\Exception\CurlException $e) {
+        } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
     }

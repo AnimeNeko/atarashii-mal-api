@@ -1,0 +1,15 @@
+<h2>Message Details</h2>
+<p>This is an object that defines a message. It consists of the following properties.</p>
+<p class="alert alert-info">Not all properties are provided depending on the type of request made.</p>
+
+<ul>
+    <li><code>id</code>: The id of the message.</li>
+    <li><code>action_id</code>: The id of the message used for deleting it.</li>
+    <li><code>thread_id</code>: The id of the message used for the chat history.</li>
+    <li><code>username</code>: The username of an user.</li>
+    <li><code>time</code>: The time when the message was send.  This may be either a relative time (&quot;1 hour ago&quot;, &quot;now&quot;) or a date formatted as &quot;m-d-y, g:i A&quot;<sup><a href="#foot1">1</a></sup></li>
+    <li><code>read</code>: The read status. This will be returned as true when the user already read this message.</li>
+    <li><code>subject</code>: The subject of the message.</li>
+    <li><code>message</code>: The message.</li>
+    <li><code>preview</code>: The preview of a message.</li>
+</ul>
