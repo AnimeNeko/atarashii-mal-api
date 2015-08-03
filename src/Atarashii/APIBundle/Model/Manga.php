@@ -558,7 +558,7 @@ class Manga
      */
     public function setMembersScore($membersScore)
     {
-        $this->membersScore = $membersScore;
+        $this->membersScore = (float) $membersScore;
     }
 
     /**
@@ -580,7 +580,7 @@ class Manga
      */
     public function setMembersCount($membersCount)
     {
-        $this->membersCount = $membersCount;
+        $this->membersCount = (int) $membersCount;
     }
 
     /**
@@ -798,25 +798,26 @@ class Manga
     {
         if ($type == 'int') {
             switch ($this->readStatus) {
-                case 'reading':
-                    return 1;
-                    break;
                 case 'completed':
-                    return 2;
+                    $status = 2;
                     break;
                 case 'on-hold':
-                    return 3;
+                    $status = 3;
                     break;
                 case 'dropped':
-                    return 4;
+                    $status = 4;
                     break;
                 case 'plan to read':
-                    return 6;
+                    $status = 6;
                     break;
+                case 'reading':
                 default:
-                    return 1;
+                    $status = 1;
                     break;
             }
+
+            return $status;
+
         } else {
             return $this->readStatus;
         }
@@ -969,7 +970,12 @@ class Manga
 
     public function setPriority($priority)
     {
-        $this->priority = (int) $priority;
+        $priority = (int) $priority;
+
+        //Only allow 0-2. If outside the range, force to 0.
+        if ($priority > 2 || $priority < 0) $priority = 0;
+
+        $this->priority = $priority;
     }
 
     public function getChapDownloaded()
@@ -989,7 +995,7 @@ class Manga
 
     public function setRereading($rereading)
     {
-        $this->rereading = $rereading;
+        $this->rereading = (bool) $rereading;
     }
 
     public function getRereadCount()

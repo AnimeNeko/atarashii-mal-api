@@ -685,7 +685,6 @@ class Anime
             case 'day':
             default:
                 $this->startDate = $startDate->format('D M d 12:00:00 O Y');
-                break;
         }
 
         $this->setStartDate2($startDate, $accuracy);
@@ -711,7 +710,6 @@ class Anime
             case 'day':
             default:
                 $this->startDate2 = $startDate->format('Y-m-d');
-                break;
         }
     }
 
@@ -770,7 +768,6 @@ class Anime
             case 'day':
             default:
                 $this->endDate = $endDate->format('D M d 12:00:00 O Y');
-                break;
         }
 
         $this->setEndDate2($endDate, $accuracy);
@@ -796,7 +793,6 @@ class Anime
             case 'day':
             default:
                 $this->endDate2 = $endDate->format('Y-m-d');
-                break;
         }
     }
 
@@ -841,7 +837,7 @@ class Anime
      */
     public function setMembersScore($membersScore)
     {
-        $this->membersScore = $membersScore;
+        $this->membersScore = (float) $membersScore;
     }
 
     /**
@@ -863,7 +859,7 @@ class Anime
      */
     public function setMembersCount($membersCount)
     {
-        $this->membersCount = $membersCount;
+        $this->membersCount = (int) $membersCount;
     }
 
     /**
@@ -1250,25 +1246,25 @@ class Anime
     {
         if ($type == 'int') {
             switch ($this->watchedStatus) {
-                case 'watching':
-                    return 1;
-                    break;
                 case 'completed':
-                    return 2;
+                    $status = 2;
                     break;
                 case 'on-hold':
-                    return 3;
+                    $status = 3;
                     break;
                 case 'dropped':
-                    return 4;
+                    $status = 4;
                     break;
                 case 'plan to watch':
-                    return 6;
+                    $status = 6;
                     break;
+                case 'watching':
                 default:
-                    return 1;
-                    break;
+                    $status = 1;
             }
+
+            return $status;
+
         } else {
             return $this->watchedStatus;
         }
@@ -1410,7 +1406,12 @@ class Anime
 
     public function setPriority($priority)
     {
-        $this->priority = (int) $priority;
+        $priority = (int) $priority;
+
+        //Only allow 0-2. If outside the range, force to 0.
+        if ($priority > 2 || $priority < 0) $priority = 0;
+
+        $this->priority = $priority;
     }
 
     /**
@@ -1458,7 +1459,11 @@ class Anime
 
     public function setStorage($storage)
     {
-        $this->storage = $storage;
+        $storage = (int) $storage;
+
+        if ($storage > 0 || $storage <= 7) {
+            $this->storage = $storage;
+        }
     }
 
     public function getStorageValue()
@@ -1488,7 +1493,7 @@ class Anime
 
     public function setRewatching($rewatching)
     {
-        $this->rewatching = $rewatching;
+        $this->rewatching = (bool) $rewatching;
     }
 
     public function getRewatchCount()

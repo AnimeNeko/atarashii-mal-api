@@ -198,6 +198,11 @@ class ProfileDetails
        return $this->lastOnline;
     }
 
+    public function getLastOnline2()
+    {
+        return $this->lastOnline2;
+    }
+
     /**
      * Set the status property
      *
@@ -332,6 +337,11 @@ class ProfileDetails
     public function getJoinDate()
     {
        return $this->joinDate;
+    }
+
+    public function getJoinDate2()
+    {
+        return $this->joinDate2;
     }
 
     /**
