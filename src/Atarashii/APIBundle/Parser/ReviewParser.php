@@ -21,7 +21,7 @@ class ReviewParser
         $crawler = new Crawler();
         $crawler->addHTMLContent($contents, 'UTF-8');
 
-        $items = $crawler->filter('div [class="borderDark"]');
+        $items = $crawler->filter('div [class="borderDark pt4 pb8 pl4 pr4 mb8"]');
         foreach ($items as $item) {
             $result[] = self::parseReviews($item, $type);
         }
@@ -40,7 +40,7 @@ class ReviewParser
         $firstpart = explode('div>', $crawler->filter('div[class="spaceit textReadability"]')->html());
         $secondpart = explode('</span>', $firstpart[1]);
 
-        $review->setDate($crawler->filter('div[class="spaceit"] div')->text());
+        $review->setDate($crawler->filter('td[style="text-align: right;"]')->filter('div[style="text-align: right;"]')->text());
         $review->setRating(str_replace('Overall Rating: ', '', $crawler->filter('tr td[style="text-align: right;"] div')->last()->text()));
         $review->setAvatarUrl(str_replace('_thumb','' , str_replace('/thumbs', '', $crawler->filter('div[class="picSurround"] img')->attr('src'))));
         $review->setUsername($crawler->filter('tr a')->eq(2)->text());
