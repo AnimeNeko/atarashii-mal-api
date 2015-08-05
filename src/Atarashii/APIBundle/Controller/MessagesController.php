@@ -14,7 +14,7 @@ use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Guzzle\Http\Exception;
-use Atarashii\APIBundle\Model\Date;
+use Atarashii\APIBundle\Helper\Date;
 use Atarashii\APIBundle\Parser\messagesParser;
 
 class MessagesController extends FOSRestController

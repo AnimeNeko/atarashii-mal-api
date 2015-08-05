@@ -14,6 +14,7 @@ use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\Since;
 use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Annotation\Until;
+use Atarashii\APIBundle\Helper\Date;
 
 /**
 * An instance of this class represents a single user's profile

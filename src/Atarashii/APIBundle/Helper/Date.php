@@ -8,16 +8,10 @@
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
 
-namespace Atarashii\APIBundle\Model;
+namespace Atarashii\APIBundle\Helper;
 
 use \DateTime;
 use \DateTimeZone;
-
-use JMS\Serializer\Annotation\SerializedName;
-use JMS\Serializer\Annotation\Since;
-use JMS\Serializer\Annotation\Type;
-use JMS\Serializer\Annotation\Until;
-
 use Symfony\Component\DomCrawler\Crawler;
 
 class Date

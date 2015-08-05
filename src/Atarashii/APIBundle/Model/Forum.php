@@ -10,10 +10,9 @@
 
 namespace Atarashii\APIBundle\Model;
 
-use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\Since;
 use JMS\Serializer\Annotation\Type;
-use JMS\Serializer\Annotation\Until;
+use Atarashii\APIBundle\Helper\Date;
 
 class Forum
 {

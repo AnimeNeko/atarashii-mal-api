@@ -13,7 +13,7 @@ namespace Atarashii\APIBundle\Parser;
 use Symfony\Component\DomCrawler\Crawler;
 use Atarashii\APIBundle\Model\Forum;
 use Atarashii\APIBundle\Model\Profile;
-use Atarashii\APIBundle\Model\Date;
+use Atarashii\APIBundle\Helper\Date;
 
 class ForumParser
 {

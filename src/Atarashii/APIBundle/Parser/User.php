@@ -12,9 +12,9 @@ namespace Atarashii\APIBundle\Parser;
 
 use Symfony\Component\DomCrawler\Crawler;
 use Atarashii\APIBundle\Model\Profile;
-use Atarashii\APIBundle\Model\Date;
 use Atarashii\APIBundle\Model\Anime;
 use Atarashii\APIBundle\Model\Manga;
+use Atarashii\APIBundle\Helper\Date;
 
 class User
 {
