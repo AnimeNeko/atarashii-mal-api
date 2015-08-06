@@ -31,9 +31,16 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('1887', $anime->getId());
         $this->assertEquals('Lucky☆Star', $anime->getTitle());
-        $this->assertEquals('Lucky☆Star', $anime->getOtherTitles()['english'][0]);
-        $this->assertEquals('Lucky Star', $anime->getOtherTitles()['synonyms'][0]);
-        $this->assertEquals('らき☆すた', $anime->getOtherTitles()['japanese'][0]);
+
+        $this->assertArrayHasKey('english', $anime->getOtherTitles());
+        $this->assertContains('Lucky☆Star', $anime->getOtherTitles()['english']);
+
+        $this->assertArrayHasKey('synonyms', $anime->getOtherTitles());
+        $this->assertContains('Lucky Star', $anime->getOtherTitles()['synonyms']);
+
+        $this->assertArrayHasKey('japanese', $anime->getOtherTitles());
+        $this->assertContains('らき☆すた', $anime->getOtherTitles()['japanese']);
+
         $this->assertEquals(583, $anime->getRank());
         $this->assertEquals(59, $anime->getPopularityRank());
         $this->assertEquals('http://cdn.myanimelist.net/images/anime/13/15010.jpg', $anime->getImageUrl());
@@ -84,6 +91,54 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(24, $anime->getWatchedEpisodes());
 
         $this->assertEquals(7, $anime->getScore());
+
+        $animeContents = file_get_contents(__DIR__ . '/../../Resources/Samples/Input/anime-9253.htm');
+
+        $anime = AnimeParser::parse($animeContents);
+
+        $this->assertInstanceOf('Atarashii\APIBundle\Model\Anime', $anime);
+
+        $this->assertInternalType('array', $anime->getParentStory());
+        $this->assertEquals('30484', $anime->getParentStory()['anime_id']);
+        $this->assertStringStartsWith('Steins;Gate', $anime->getParentStory()['title']);
+        $this->assertContains('anime/30484', $anime->getParentStory()['url']);
+
+        $this->assertInternalType('array', $anime->getOther()[0]);
+        $this->assertEquals('27957', $anime->getOther()[0]['anime_id']);
+        $this->assertStringStartsWith('Steins;Gate: Soumei', $anime->getOther()[0]['title']);
+        $this->assertContains('anime/27957', $anime->getOther()[0]['url']);
+
+        $animeContents = file_get_contents(__DIR__ . '/../../Resources/Samples/Input/anime-918.htm');
+
+        $anime = AnimeParser::parse($animeContents);
+
+        $this->assertInstanceOf('Atarashii\APIBundle\Model\Anime', $anime);
+
+        $this->assertInternalType('array', $anime->getSideStories()[0]);
+        $this->assertEquals('2951', $anime->getSideStories()[0]['anime_id']);
+        $this->assertStringStartsWith('Gintama: Jump Festa', $anime->getSideStories()[0]['title']);
+        $this->assertContains('anime/2951', $anime->getSideStories()[0]['url']);
+
+        $this->assertInternalType('array', $anime->getAlternativeVersions()[0]);
+        $this->assertEquals('7472', $anime->getAlternativeVersions()[0]['anime_id']);
+        $this->assertStringStartsWith('Gintama: Shinyaku', $anime->getAlternativeVersions()[0]['title']);
+        $this->assertContains('anime/7472', $anime->getAlternativeVersions()[0]['url']);
+
+        $animeContents = file_get_contents(__DIR__ . '/../../Resources/Samples/Input/anime-2904.htm');
+
+        $anime = AnimeParser::parse($animeContents);
+
+        $this->assertInstanceOf('Atarashii\APIBundle\Model\Anime', $anime);
+
+        $this->assertInternalType('array', $anime->getPrequels()[0]);
+        $this->assertEquals('1575', $anime->getPrequels()[0]['anime_id']);
+        $this->assertStringStartsWith('Code Geass: Hangyaku', $anime->getPrequels()[0]['title']);
+        $this->assertContains('anime/1575', $anime->getPrequels()[0]['url']);
+
+        $this->assertInternalType('array', $anime->getSummaries()[0]);
+        $this->assertEquals('6768', $anime->getSummaries()[0]['anime_id']);
+        $this->assertContains('Zero Requiem', $anime->getSummaries()[0]['title']);
+        $this->assertContains('anime/6768', $anime->getSummaries()[0]['url']);
     }
 
     /**
