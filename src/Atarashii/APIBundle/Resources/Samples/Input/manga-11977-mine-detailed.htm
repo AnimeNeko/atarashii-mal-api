@@ -1,0 +1,378 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html >
+<head>
+<title>
+    MyAnimeList.net - Panel
+  </title><meta name="keywords" content="anime, animelist, myanimelist, anime list, log anime seen, catalog anime watched, anime reviews, top anime, anime characters, favorite anime, anime discussion, anime information, manga series, manga information, top manga, mangalist, manga list, manga, manga reviews, voice actors, seiyuu" />
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.1.min.js"></script>
+<script type="text/javascript" src="http://cdn.myanimelist.net/static/assets/js/pc/all-73c1b1ae21.js"></script><script type="text/javascript" src="http://cdn.myanimelist.net/js/hover.js?v=29"></script>
+<script type="text/javascript" src="http://cdn.myanimelist.net/js/jquery.fancybox.pack.js?v=29"></script>
+
+
+<script type="text/javascript" src="http://cdn.myanimelist.net/js/detailedmanga.js?v=29"></script>
+
+<script type="text/javascript" src="http://cdn.myanimelist.net/js/myanimelist.js?v=29" id="myanimelistjs" data-myanimelistjs-params='{&quot;is_request_bot_filter_log&quot;:false,&quot;origin_url&quot;:&quot;http:\/\/myanimelist.net&quot;}'></script>
+
+
+	<link rel="stylesheet" type="text/css" href="http://cdn.myanimelist.net/css/mal.ridlayout.css?v=24" />
+
+<link rel="stylesheet" type="text/css" href="http://cdn.myanimelist.net/css/jquery.fancybox.css?v=24" />
+<link rel="stylesheet" type="text/css" href="http://cdn.myanimelist.net/css/dialog.css?v=24" />
+<link rel="stylesheet" type="text/css" href="http://cdn.myanimelist.net/static/assets/css/pc/style-8d5ab0377a.css" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://cdn.myanimelist.net/plugins/myanimelist.xml" title="MyAnimeList" /><link rel="shortcut icon" href="http://cdn.myanimelist.net/images/faviconv5.ico" />
+
+<!-- ### Load GPT Library ### -->
+<script type='text/javascript'>
+  var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
+  (function() {
+    var gads = document.createElement('script');
+    gads.async = true;
+    gads.type = 'text/javascript';
+    var useSSL = 'https:' == document.location.protocol;
+    gads.src = (useSSL ? 'https:' : 'http:') +
+               '//www.googletagservices.com/tag/js/gpt.js';
+    var node = document.getElementsByTagName('script')[0];
+    node.parentNode.insertBefore(gads, node);
+  })();
+</script>
+
+<!-- GA script -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-369102-1']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+<script src="https://apis.google.com/js/platform.js" async defer>{lang: 'en-GB'}</script>
+<script src="https://www.google.com/recaptcha/api.js?hl=en"></script>
+</head>
+
+<body onload="onloadManga(); " class="page-common">
+
+<div id="myanimelist">
+
+<div id="headerSmall">
+		<a href="/panel.php">MyAnimeList.net</a>
+		
+    </div>
+        <div id="header-menu" class="pulldown">
+    <div class="header-profile">
+      <a class="profile-image" style="background-image:url(http://cdn.myanimelist.net/images/userimages/1183995.jpg)" href="/profile/motokochan"></a>
+      <span class="profile-name">motokochan</span>
+    </div>
+    <div id="header-menu-profile-container">
+      <ul id="header-menu-profile" class="header-menu-profile">
+        <li><a href="/profile/motokochan">Profile</a></li>
+        <li><a href="/editprofile.php?go=myoptions">Settings</a></li>
+        <li><a href="javascript:void(0);" onclick="$(this).next('form.logout').submit();">
+  Logout
+</a>
+<form class="logout" action="http://myanimelist.net/logout.php" method="post">
+  <input type="hidden" name="key" value="c27ebdc63db0c61fce6a95795eeb82daae9ac2e2">
+</form>
+</li>
+      </ul>
+    </div>
+  </div>
+
+<div id="menu">
+
+    <div id="menu_right">
+
+        <form id="searchBar" method="get">
+
+        <input id="topSearchText" type="text" class="inputtext" value="Search" size="30" />
+        <select id="topSearchValue" class="inputtext">
+        <option value="0">Anime</option>
+        <option value="1">Manga</option>
+        <option value="2">Characters</option>
+        <option value="6">People</option>
+        <option value="4">Clubs</option>
+        <option value="5">Users</option>
+        </select>
+
+        <input id="topSearchButon" type="image" src="http://cdn.myanimelist.net/images/magnify.gif" value="Search" />
+
+        </form>
+
+	</div>
+
+	<div id="menu_left">
+		<ul id="nav">
+								<li class="x-large"><a href="#" class="non-link">My Page<span class="count">1</span></a>
+				<ul class="wider">
+					<li><span class="edit"><a href="/editprofile.php">Edit</a></span><a href="/profile/motokochan">Profile</a></li>
+					<li><a href="/mymessages.php">Messages</a></li>
+					<li><span class="new"><a href="/myfriends.php?go=pending">1</a></span><a href="/myfriends.php">Friends</a></li>
+					<li><a href="/clubs.php?action=myclubs">Clubs</a></li>
+					<li><span class="edit"><a href="/myblog.php">Edit</a></span><a href="/blog/motokochan">Blog</a></li>
+					<li><a href="/myreviews.php">Reviews</a></li>
+					<li><a href="/myrecommendations.php">Recommendations</a></li>
+                    <li><a href="javascript:void(0);" onclick="$(this).next('form.logout').submit();">
+  Logout
+</a>
+<form class="logout" action="http://myanimelist.net/logout.php" method="post">
+  <input type="hidden" name="key" value="c27ebdc63db0c61fce6a95795eeb82daae9ac2e2">
+</form>
+</li>
+				</ul>
+			</li>
+						<li class="small"><a href="#" class="non-link">Anime</a>
+				<ul class="wider">
+					<li><a href="/animelist/motokochan">View List</a></li>
+                                                  <li><a href="/addtolist.php">Add Anime</a></li>					<li><a href="/anime.php">Anime Search</a></li>
+					<li><a href="/reviews.php?t=anime">Reviews</a></li>
+					<li><a href="/recommendations.php?s=recentrecs&t=anime">Recommendations</a></li>
+					<li><a href="/topanime.php">Top Anime</a></li>
+					<li><a href="/anime/season">Seasonal Anime</a></li>
+                </ul>
+			</li>
+			<li class="small"><a href="#" class="non-link">Manga</a>
+				<ul class="wider">
+					<li><a href="/mangalist/motokochan">View List</a></li>
+						<li><a href="/addtolist.php">Add Manga</a></li>					<li><a href="/manga.php">Manga Search</a></li>
+					<li><a href="/reviews.php?t=manga">Reviews</a></li>
+					<li><a href="/recommendations.php?s=recentrecs&t=manga">Recommendations</a></li>
+					<li><a href="/topmanga.php">Top Manga</a></li>
+				</ul>
+			</li>
+			<li><a href="#" class="non-link">Community</a>
+				<ul>
+					<li><a href="/forum/">Forums</a></li>
+					<li><a href="/clubs.php">Clubs</a></li>
+					<li><a href="/blog.php">Blogs</a></li>
+					<li><a href="/users.php">Users</a></li>
+				</ul>
+			</li>
+			<li class="medium"><a href="#" class="non-link">Industry</a>
+				<ul class="wider">
+					<li><a href="/news">News</a></li>
+					<li><a href="/featured">Featured Articles</a></li>
+					<li><a href="/people.php">People</a></li>
+					<li><a href="/character.php">Characters</a></li>
+					<li><a href="/favorites.php">Top Favorites</a></li>
+				</ul>
+			</li>
+			<li class="smaller"><a href="#" class="non-link">Help</a>
+				<ul class="wide">
+					<li><a href="/about.php">About</a></li>
+					<li><a href="/about.php?go=support">Support</a></li>
+					<li><a href="/about.php?go=advertising">Advertising</a></li>
+					<li><a href="/forum/?topicid=515949">FAQ</a></li>
+					<li><a href="/modules.php?go=report">Report</a></li>
+					<li><a href="/about.php?go=team">Staff</a></li>
+				</ul>
+			</li>
+					</ul>
+	</div>
+</div>
+
+<div id="contentWrapper">
+
+	<h1>Edit Manga List</h1>
+	<div id="content">
+	<table id="dialog" cellpadding="0" cellspacing="0" style="width: 650px;"><tr><td><div class="normal_header" style="margin-top: 0; text-align: left;">Update Entry Bambino!</div>
+	<form method="post" name="mangaForm" id="mangaForm">
+	<input type="hidden" name="entry_id" value="26768945">
+	<input type="hidden" name="manga_id" id="mangaid" value="11977">
+	<input type="hidden" id="volumes" value="15" />
+	<input type="hidden" id="mstatus" value="2" />
+	<input type="hidden" name="close_on_update" value="" />
+	<table border="0" cellpadding="5" cellspacing="0" width="100%">
+	
+	<tr>
+		<td colspan="2" align="center">
+		<input type="button" class="inputButton" onclick="checkValidSubmit(2)" value="Submit">
+		
+			&nbsp;
+			<input type="button" class="inputButton" value="Delete" onclick="checkValidSubmit(3)">
+			
+		</td>
+	</tr>
+	<tr>
+		<td align="left" class="borderClass" width="130" valign="top">Manga Title</td>
+		<td align="left" class="borderClass">
+	<strong>Bambino!</strong> (<a href="/manga.php?id=11977">Info</a>)
+	</td>
+	</tr>	<tr>
+			<td align="left" class="borderClass">Status</td>
+			<td align="left" class="borderClass">
+				<select name="status" id="status" onchange="StatusCheck(this.value);" class="inputtext">
+					<option value="0">Select status
+					<option value="1" >Reading
+					<option value="2" selected>Completed
+					<option value="3" >On-Hold
+					<option value="6" >Plan to Read
+					<option value="4" >Dropped
+				</select>
+				
+					<label><input type="checkbox" name="rereading" id="rereadingBox" onclick="checkReReading();" value="1" > Re-reading</label>
+								<input type="hidden" name="last_status" value="2" /></td>
+		</tr>
+        <tr>
+			<td align="left" class="borderClass">Volumes Read</td>
+			<td align="left" class="borderClass"><input type="text" name="vol_read" id="vol_read" class="inputtext" value="15" size="3"> <a href="javascript:void(0);" onclick="incrementVolume(); return false;">+</a> / <span id="totalVol">15</span>
+			<input type="hidden" name="last_completed_vol" value="15" /></td>
+		</tr>
+		<tr>
+			<td align="left" class="borderClass">Chapters Read</td>
+			<td align="left" class="borderClass"><input type="text" name="chap_read" id="chap_read" class="inputtext" value="164" size="3"> <a href="javascript:void(0);" onclick="incrementChapter(); return false;">+</a> / <span id="totalChap">164</span>
+			<input type="hidden" name="last_completed_chap" value="164" />
+            <a href="/ajaxtb.php?keepThis=true&detailedmid=11977&TB_iframe=true&height=420&width=390" title="Chapter Details" class="thickbox">Chapter Details</a>            </td>
+		</tr>
+        <tr>
+                <td align="left" class="borderClass">Your Score</td>
+                <td align="left" class="borderClass"><select name="score" class="inputtext">
+                    <option value="0.00">Select score<option  value="10">(10) Masterpiece<option  value="9">(9) Great<option  value="8">(8) Very Good<option selected value="7">(7) Good<option  value="6">(6) Fine<option  value="5">(5) Average<option  value="4">(4) Bad<option  value="3">(3) Very Bad<option  value="2">(2) Horrible<option  value="1">(1) Appalling                </select>
+                </td>
+        </tr>
+		<tr>
+			<td align="left" class="borderClass" valign="top">Tags</td>
+			<td align="left" class="borderClass"><textarea name="tags" rows="2" id="tagtext" cols="45" class="textarea">cooking, drama, seinen</textarea><div class="spaceit_pad"><small>Popular tags: <a href="javascript:void(0);" onclick="detailedadd_addTag('seinen');">seinen</a>, <a href="javascript:void(0);" onclick="detailedadd_addTag('cooking');">cooking</a>, <a href="javascript:void(0);" onclick="detailedadd_addTag('drama');">drama</a>, <a href="javascript:void(0);" onclick="detailedadd_addTag('slice of life');">slice of life</a></small></div></td>
+		</tr>
+		<tr>
+			<td align="left" class="borderClass">Start Date</td>
+						<td align="left" class="borderClass">
+			Month:
+			<select name="startMonth" id="smonth"  class="inputtext">
+				<option value="00">
+				<option value="01" >Jan<option value="02" >Feb<option value="03" >Mar<option value="04" >Apr<option value="05" >May<option value="06" >Jun<option value="07" >Jul<option value="08" >Aug<option value="09" selected>Sep<option value="10" >Oct<option value="11" >Nov<option value="12" >Dec			</select>
+			Day:
+			<select name="startDay"  class="inputtext">
+				<option value="00">
+				<option value="01" >1<option value="02" >2<option value="03" >3<option value="04" >4<option value="05" >5<option value="06" >6<option value="07" >7<option value="08" >8<option value="09" >9<option value="10" >10<option value="11" >11<option value="12" >12<option value="13" >13<option value="14" >14<option value="15" >15<option value="16" >16<option value="17" >17<option value="18" >18<option value="19" >19<option value="20" >20<option value="21" >21<option value="22" >22<option value="23" >23<option value="24" >24<option value="25" selected>25<option value="26" >26<option value="27" >27<option value="28" >28<option value="29" >29<option value="30" >30<option value="31" >31			</select>
+			Year:
+			<select name="startYear"  class="inputtext">
+				<option value="0000">
+				<option value="2015" >2015<option value="2014" >2014<option value="2013" selected>2013<option value="2012" >2012<option value="2011" >2011<option value="2010" >2010<option value="2009" >2009<option value="2008" >2008<option value="2007" >2007<option value="2006" >2006<option value="2005" >2005<option value="2004" >2004<option value="2003" >2003<option value="2002" >2002<option value="2001" >2001<option value="2000" >2000<option value="1999" >1999<option value="1998" >1998<option value="1997" >1997<option value="1996" >1996<option value="1995" >1995<option value="1994" >1994<option value="1993" >1993<option value="1992" >1992<option value="1991" >1991<option value="1990" >1990<option value="1989" >1989<option value="1988" >1988<option value="1987" >1987<option value="1986" >1986<option value="1985" >1985			</select>
+			&nbsp;
+			<label><input type="checkbox"  onchange="ChangeStartDate();" name="unknownStart" value="1"> <small>Unknown Date</label><br>Start Date represents the date you started watching the Anime <a href="javascript:setToday(1);">Insert Today</a></small>
+			</td>
+		</tr>
+		<tr>
+			<td align="left" class="borderClass">Finish Date</td>
+						<td align="left" class="borderClass">
+			Month:
+			<select name="endMonth" id="emonth" class="inputtext" >
+				<option value="00">
+				<option value="01" >Jan<option value="02" >Feb<option value="03" >Mar<option value="04" >Apr<option value="05" >May<option value="06" >Jun<option value="07" >Jul<option value="08" >Aug<option value="09" >Sep<option value="10" selected>Oct<option value="11" >Nov<option value="12" >Dec			</select>
+			Day:
+			<select name="endDay" class="inputtext" >
+				<option value="00">
+				<option value="01" >1<option value="02" >2<option value="03" >3<option value="04" >4<option value="05" >5<option value="06" >6<option value="07" >7<option value="08" >8<option value="09" >9<option value="10" >10<option value="11" selected>11<option value="12" >12<option value="13" >13<option value="14" >14<option value="15" >15<option value="16" >16<option value="17" >17<option value="18" >18<option value="19" >19<option value="20" >20<option value="21" >21<option value="22" >22<option value="23" >23<option value="24" >24<option value="25" >25<option value="26" >26<option value="27" >27<option value="28" >28<option value="29" >29<option value="30" >30<option value="31" >31			</select>
+			Year:
+			<select name="endYear" class="inputtext" >
+				<option value="0000">
+				<option value="2015" >2015<option value="2014" >2014<option value="2013" selected>2013<option value="2012" >2012<option value="2011" >2011<option value="2010" >2010<option value="2009" >2009<option value="2008" >2008<option value="2007" >2007<option value="2006" >2006<option value="2005" >2005<option value="2004" >2004<option value="2003" >2003<option value="2002" >2002<option value="2001" >2001<option value="2000" >2000<option value="1999" >1999<option value="1998" >1998<option value="1997" >1997<option value="1996" >1996<option value="1995" >1995<option value="1994" >1994<option value="1993" >1993<option value="1992" >1992<option value="1991" >1991<option value="1990" >1990<option value="1989" >1989<option value="1988" >1988<option value="1987" >1987<option value="1986" >1986<option value="1985" >1985			</select>
+			&nbsp;
+			<small><label><input type="checkbox" onchange="ChangeEndDate();"  name="unknownEnd" value="1"> Unknown Date</label><br>Do <u>not</u> fill out the Finish Date unless status is <em>Completed</em> <a href="javascript:setToday(2);">Insert Today</a></small>
+			</td>
+		</tr>
+            <tr>
+                <td align="left" class="borderClass">Priority</td>
+                <td align="left" class="borderClass"><select name="priority" class="inputtext">
+                <option value="0">Select</option>
+                <option value="0" selected>Low<option value="1" >Medium<option value="2" >High                </select>
+                <div style="margin-top 3px;"><small>What is your priority level to read this manga?</small></div></td>
+            </tr>
+	<tr><td class='borderClass' align='left' style='border-width: 0;'>Storage</td>
+	<td class='borderClass' align='left' style='border-width: 0;'><select id='storageSel' name='storage_num' onchange='storageDisplay();' class='inputtext'><option value='0'>None</option><option value='1' >Hard Drive</option><option value='2' >External HD</option><option value='6' >NAS</option><option value='7' >Blu-ray</option><option value='3' >DVD / CD</option><option value='4' >Retail Manga</option><option value='5' >Magazine</option></select> <div style='display: none; margin-top: 3px;' id='storagebox'>How many volumes? <input type='text' id='storagevols' name='retail_volumes' value='0' size='4' class='inputtext'></div></td></tr>    <tr>
+			<td align="left" class="borderClass">Chapters Downloaded</td>
+			<td align="left" class="borderClass"><input type="text" name="downloaded_chapters" id="dChap" value="164" size="4" class="inputtext"> <a href="javascript:void(0);" onclick="incChapDownloadCount();">+</a></td>
+		</tr>
+		<tr>
+			<td align="left" class="borderClass">Total Times<br>Re-read</td>
+			<td align="left" class="borderClass"><input type="text" name="times_read" value="0" size="4" class="inputtext">
+			<small><a href="#" onclick="window.open('info.php?go=timesread','infoWindow','menubar=no,scrollbars=no,status=no,width=300,height=400');">More Info</a></small></td>
+		</tr>
+		<tr>
+			<td align="left" class="borderClass">Re-read Value</td>
+			<td align="left" class="borderClass"><select name="reread_value" class="inputtext">
+			<option value="0">Select reread value<option  value="1">Very Low<option  value="2">Low<option selected value="3">Medium<option  value="4">High<option  value="5">Very High			</select>
+			<small><a href="#" onclick="window.open('info.php?go=rereadvalue','infoWindow3','menubar=no,scrollbars=no,status=no,width=300,height=200');">More Info</a></small></td>
+		</tr>
+		<tr>
+			<td align="left" class="borderClass" valign="top">Comments</td>
+			<td align="left" class="borderClass"><textarea name="comments" rows="5" cols="45" class="textarea">An interesting spin on the genre of cooking manga.</textarea></td>
+		</tr>
+        <tr>
+			<td align="left" class="borderClass" valign="top">Ask to Discuss?</td>
+			<td align="left" class="borderClass"><label><input type="checkbox" name="discuss" value="1"  /> Ask to discuss a chapter after you update the chapter #?</label></td>
+		</tr>
+    
+	<tr>
+		<td colspan="2" align="center">
+		<input type="button" class="inputButton" onclick="checkValidSubmit(2)" value="Submit">
+		
+			&nbsp;
+			<input type="button" class="inputButton" value="Delete" onclick="checkValidSubmit(3)">
+			
+		</td>
+	</tr>
+	</table>
+	<input type="hidden" name="submitIt" id="submitIt" value="0">
+	</form>
+	</td> </tr></table>
+</div><!-- end of contentHome -->
+
+</div><!-- end of contentWrapper -->
+
+<!--  control container height -->
+<div style="clear:both;"></div>
+
+<!-- end rightbody -->
+</div>
+
+</div>
+
+
+<footer>
+  <div id="footer-block">
+    <div class="footer-link-block">
+      <p class="footer-link home di-ib">
+        <a href="http://myanimelist.net/">Home</a>
+      </p>
+      <p class="footer-link di-ib">
+        <a href="http://myanimelist.net/about.php">About</a>
+        <a href="http://myanimelist.net/about.php?go=contact">Support</a>
+        <a href="http://myanimelist.net/about.php?go=advertising">Advertising</a>
+        <a href="http://myanimelist.net/forum/?topicid=515949">FAQ</a>
+        <a href="http://myanimelist.net/about/terms_of_use">Terms</a>
+        <a href="http://myanimelist.net/about/privacy_policy">Privacy</a>
+        <a href="http://myanimelist.net/about/sitemap">Sitemap</a>
+    	</p>
+  		    </div>
+
+    <div class="footer-link-icon-block">
+            <div class="footer-social-media ac">
+        <a target="_blank" class="icon-sns icon-fb di-ib" href="https://www.facebook.com/OfficialMyAnimeList"></a>
+        <a target="_blank" class="icon-sns icon-tw di-ib" title="Follow @myanimelist on Twitter" href="https://twitter.com/myanimelist"></a>
+        <a class="icon-sns icon-gp" href="https://plus.google.com/105884801583962160252?prsrc=3" rel="publisher" target="_blank" style="text-decoration:none;">
+          <img src="http://cdn.myanimelist.net/images/footer/icon-google_plus.png" alt="Google+" style="border:0;width:30px;height:30px;" />
+        </a>
+      </div>
+            <div class="footer-recommended ac">
+        <a target="_blank" class="icon-recommended icon-tokyo-otaku-mode" href="http://otakumode.com/fb/5aO">Tokyo Otaku Mode</a>
+      </div>
+    </div>
+
+    <div id="copyright">
+      MyAnimeList.net is a property of MyAnimeList, LLC. &copy;2015 All Rights Reserved.
+    </div>
+  </div>
+</footer>
+
+
+</body>
+</html>
+
+</body>
+</html>
