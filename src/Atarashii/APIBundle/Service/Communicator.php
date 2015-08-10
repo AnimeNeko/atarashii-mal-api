@@ -40,6 +40,33 @@ class Communicator
     }
 
     /**
+     * Get the CSRF Token
+     *
+     * @return string A string representing the CSRF token required for login
+     */
+    private function getCsrfToken() {
+        $token = null;
+
+        //Get the csrf_token for login
+        $loginPageContent = $this->fetch('/login.php');
+
+        $crawler = new Crawler();
+        $crawler->addHTMLContent($loginPageContent, 'UTF-8');
+
+        $metaTags = $crawler->filter('meta[name="csrf_token"]');
+
+        foreach($metaTags as $tag) {
+            $name = $tag->attributes->getNamedItem('name');
+
+            if($name !== null && $name->value == 'csrf_token') {
+                $token = $tag->attributes->getNamedItem('content')->value;
+            }
+        }
+
+        return $token;
+    }
+
+    /**
     * Login to the MAL Front-end to get a cookie
     *
     * @param string $username MAL Username
@@ -49,28 +76,12 @@ class Communicator
     */
     public function cookieLogin($username, $password)
     {
-        $token = null;
-
         //Don't bother making a request if the user didn't send any authentication
         if ($username == null || $password == null) {
             return false;
         }
 
-        //Get the csrf_token for login
-        $loginPageContent = $this->fetch('/login.php');
-
-        $crawler = new Crawler();
-        $crawler->addHTMLContent($loginPageContent, 'UTF-8');
-
-        $metaTags = $crawler->filter('meta');// [name="csrf_token"]');
-
-        foreach($metaTags as $tag) {
-            $name = $tag->attributes->getNamedItem('name');
-
-            if($name !== null && $name->value == 'csrf_token') {
-                $token = $tag->attributes->getNamedItem('content')->value;
-            }
-        }
+        $token = $this->getCsrfToken();
 
         // Catch the case where we don't have a token
         if ($token === null) {
