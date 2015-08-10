@@ -10,6 +10,7 @@
 
 namespace Atarashii\APIBundle\Service;
 
+use Symfony\Component\DomCrawler\Crawler;
 use Guzzle\Http\Client;
 use Guzzle\Plugin\Cookie\CookiePlugin;
 use Guzzle\Plugin\Cookie\CookieJar\ArrayCookieJar;
@@ -48,8 +49,31 @@ class Communicator
     */
     public function cookieLogin($username, $password)
     {
+        $token = null;
+
         //Don't bother making a request if the user didn't send any authentication
         if ($username == null || $password == null) {
+            return false;
+        }
+
+        //Get the csrf_token for login
+        $loginPageContent = $this->fetch('/login.php');
+
+        $crawler = new Crawler();
+        $crawler->addHTMLContent($loginPageContent, 'UTF-8');
+
+        $metaTags = $crawler->filter('meta');// [name="csrf_token"]');
+
+        foreach($metaTags as $tag) {
+            $name = $tag->attributes->getNamedItem('name');
+
+            if($name !== null && $name->value == 'csrf_token') {
+                $token = $tag->attributes->getNamedItem('content')->value;
+            }
+        }
+
+        // Catch the case where we don't have a token
+        if ($token === null) {
             return false;
         }
 
@@ -61,6 +85,7 @@ class Communicator
         $request->setPostField('user_name', $username);
         $request->setPostField('password', $password);
         $request->setPostField('submit', 'Login');
+        $request->setPostField('csrf_token', $token);
 
         // send request / get response
         $this->response = $request->send();
