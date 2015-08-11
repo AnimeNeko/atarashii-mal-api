@@ -155,6 +155,14 @@ class AnimeListController extends FOSRestController
 
             return $view;
         } catch (Exception\ServerErrorResponseException $e) {
+            //MAL broke API responses, so we have to check the content on the response to make sure
+            //it actually was an error.
+            $response = $e->getResponse()->getBody(true);
+
+            if(stripos($response, '201 Created') !== false) {
+                return $this->view('ok', 200);
+            }
+
             return $this->view(Array('error' => 'not-found'), 404);
         } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
@@ -297,6 +305,15 @@ class AnimeListController extends FOSRestController
 
             return $view;
         } catch (Exception\ServerErrorResponseException $e) {
+
+            //MAL broke API responses, so we have to check the content on the response to make sure
+            //it actually was an error.
+            $response = $e->getResponse()->getBody(true);
+
+            if(stripos($response, 'Updated') === 0) {
+                return $this->view('ok', 200);
+            }
+
             return $this->view(Array('error' => 'not-found'), 404);
         } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
@@ -344,6 +361,14 @@ class AnimeListController extends FOSRestController
 
             return $view;
         } catch (Exception\ServerErrorResponseException $e) {
+            //MAL broke API responses, so we have to check the content on the response to make sure
+            //it actually was an error.
+            $response = $e->getResponse()->getBody(true);
+
+            if(stripos($response, 'Deleted') === 0) {
+                return $this->view('ok', 200);
+            }
+
             return $this->view(Array('error' => 'not-found'), 404);
         } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
