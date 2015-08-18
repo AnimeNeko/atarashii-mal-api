@@ -44,17 +44,31 @@ class VerifyController extends FOSRestController
 
         $connection = $this->get('atarashii_api.communicator');
 
-        try {
-            $connection->fetch('/api/account/verify_credentials.xml', $username, $password);
+        // Count the times we have tried
+        $tryCount = 1;
 
-            return $this->view(Array('authorized' => 'OK'), 200);
-        } catch (Exception\ClientErrorResponseException $e) {
-            $view = $this->view(Array('error' => 'unauthorized'), 401);
-            $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
+        do {
+            try {
+                $connection->fetch('/api/account/verify_credentials.xml', $username, $password);
 
-            return $view;
-        } catch (Exception\CurlException $e) {
-            return $this->view(Array('error' => 'network-error'), 500);
-        }
+                return $this->view(Array('authorized' => 'OK'), 200);
+            } catch (Exception\ClientErrorResponseException $e) {
+
+                if ($tryCount >= 3) {
+                    $view = $this->view(Array('error' => 'unauthorized'), 401);
+                    $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
+
+                    return $view;
+                }
+
+                $tryCount++;
+
+                //Sleep for 0.50 seconds (50,000 microseconds)
+                usleep(500000);
+            } catch (Exception\CurlException $e) {
+                return $this->view(Array('error' => 'network-error'), 500);
+            }
+        } while ($tryCount < 4);
+
     }
 }

@@ -12,6 +12,7 @@ namespace Atarashii\APIBundle\Service;
 
 use Symfony\Component\DomCrawler\Crawler;
 use Guzzle\Http\Client;
+use Guzzle\Http\Exception;
 use Guzzle\Plugin\Cookie\CookiePlugin;
 use Guzzle\Plugin\Cookie\CookieJar\ArrayCookieJar;
 
@@ -266,11 +267,28 @@ class Communicator
         //Add our data transmission - MAL requires the XML content to be in a variable named "data"
         $request->setPostField('data', $content);
 
-        // send request / get response
-        $this->response = $request->send();
+        // Count the times we have tried
+        $tryCount = 1;
 
-        // this is the response body from the requested page
-        return $this->response->getBody();
+        do {
+            try {
+                // send request / get response
+                $this->response = $request->send();
+
+                // this is the response body from the requested page
+                return $this->response->getBody();
+            } catch (Exception\ClientErrorResponseException $e) {
+
+                if ($tryCount >= 3) {
+                    throw $e;
+                }
+
+                $tryCount++;
+
+                //Sleep for 0.5 seconds (50,000 microseconds)
+                usleep(500000);
+            }
+        } while ($tryCount < 4);
     }
 
     /**
