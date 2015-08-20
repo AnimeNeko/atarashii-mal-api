@@ -31,10 +31,10 @@ class MangaParser
         # Title and rank.
         # Example:
         # <h1>
-        #   <div style="float: right; font-size: 13px;">Ranked #8</div>Yotsuba&!
-        #   <span style="font-weight: normal;"><small>(Manga)</small></span>
+        #     <div style="float: right; font-size: 13px;">Ranked #22</div>
+        #     <span itemprop="name">One Punch-Man</span> <span style="font-weight: normal;"><small>(Manga)</small></span>
         # </h1>
-        $mangarecord->setTitle(trim($title = $crawler->filterXPath('//h1/text()')->text()));
+        $mangarecord->setTitle(trim($crawler->filter('span[itemprop="name"]')->text()));
         $mangarecord->setRank((int) str_replace('Ranked #', '', $crawler->filter('h1 div')->text()));
 
         # Title Image
