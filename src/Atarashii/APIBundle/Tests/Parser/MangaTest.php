@@ -35,16 +35,16 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('japanese', $manga->getOtherTitles());
         $this->assertContains('バンビ～ノ！', $manga->getOtherTitles()['japanese']);
 
-        $this->assertEquals(831, $manga->getRank());
-        $this->assertEquals(2165, $manga->getPopularityRank());
+        $this->assertEquals(812, $manga->getRank());
+        $this->assertEquals(2161, $manga->getPopularityRank());
         $this->assertEquals('http://cdn.myanimelist.net/images/manga/5/74977.jpg', $manga->getImageUrl());
         $this->assertEquals('Manga', $manga->getType());
         $this->assertEquals(164, $manga->getChapters());
         $this->assertEquals(15, $manga->getVolumes());
         $this->assertEquals('finished', $manga->getstatus());
 
-        $this->assertEquals(8.01, $manga->getMembersScore());
-        $this->assertEquals(2330, $manga->getMembersCount());
+        $this->assertEquals(8.02, $manga->getMembersScore());
+        $this->assertEquals(2352, $manga->getMembersCount());
         $this->assertEquals(41, $manga->getFavoritedCount());
 
         $this->assertStringStartsWith('Shogo Ban, a college student from Fukuoka', $manga->getSynopsis());
