@@ -248,7 +248,7 @@ class AnimeParser
 
             $rawSynopsis = str_replace($advert->html(), '', $extracted->html());
 
-            $extracted = preg_replace("/<h2>.*?<\/h2>(.*?)<div.*$/is", "$1", $rawSynopsis);
+            $extracted = preg_replace("/<h2>.*?<\/h2>(.*?)<h2.*$/is", "$1", $rawSynopsis);
 
             $animerecord->setSynopsis($extracted);
         }
