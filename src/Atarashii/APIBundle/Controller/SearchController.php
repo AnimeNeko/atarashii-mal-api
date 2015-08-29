@@ -74,7 +74,7 @@ class SearchController extends FOSRestController
         $date->modify('+3600 seconds'); //One hour
         $response->setExpires($date);
 
-        if (strpos($animecontent, 'No titles that matched') !== false) {
+        if ((strpos($animecontent, 'No titles that matched') !== false) || (strpos($animecontent, 'This page doesn\'t exist') !== false)) {
             $view = $this->view(array());
             $view->setResponse($response);
             $view->setStatusCode(200);
@@ -152,7 +152,7 @@ class SearchController extends FOSRestController
         $date->modify('+3600 seconds'); //One hour
         $response->setExpires($date);
 
-        if (strpos($mangacontent, 'No titles that matched') !== false) {
+        if ((strpos($mangacontent, 'No titles that matched') !== false) || (strpos($mangacontent, 'This page doesn\'t exist') !== false)) {
             $view = $this->view(Array('error' => 'not-found'));
             $view->setResponse($response);
             $view->setStatusCode(404);
