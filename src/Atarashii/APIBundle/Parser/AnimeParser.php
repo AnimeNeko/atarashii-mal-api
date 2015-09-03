@@ -229,7 +229,7 @@ class AnimeParser
         # Extract from sections on the right column: Synopsis, Related Anime, Characters & Voice Actors, Reviews
         # Recommendations.
         # -
-        $rightcolumn = $crawler->filterXPath('//div[@id="content"]/table/tr/td/div/table');
+        $rightcolumn = $crawler->filterXPath('//div[@id="content"]/table/tr/td/table');
 
         # Synopsis
         # Example:
@@ -244,13 +244,9 @@ class AnimeParser
         if (iterator_count($extracted) > 0) {
             //Grab the whole containing TD that the synopsis is in.
             $extracted = $extracted->parents()->first();
-            $advert = $extracted->filterXPath('//div');
+            $rawSynopsis = $extracted->filter('span[itemprop="description"]');
 
-            $rawSynopsis = str_replace($advert->html(), '', $extracted->html());
-
-            $extracted = preg_replace("/<h2>.*?<\/h2>(.*?)<h2.*$/is", "$1", $rawSynopsis);
-
-            $animerecord->setSynopsis($extracted);
+            $animerecord->setSynopsis($rawSynopsis->html());
         }
 
         # Related Anime
