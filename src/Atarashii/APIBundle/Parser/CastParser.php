@@ -21,7 +21,7 @@ class CastParser
         $crawler = new Crawler();
         $crawler->addHTMLContent($contents, 'UTF-8');
 
-        $items = $crawler->filter('div[style="padding: 0 7px;"] table[width="100%"]');
+        $items = $crawler->filter('td table[width="100%"]');
 
         //Bypass Undefined variable error.
         $staff = null;
@@ -30,7 +30,7 @@ class CastParser
         foreach ($items as $item) {
             //Bypass to determine if the last table contains the staff members
             $crawler = new Crawler($item);
-            if ($crawler->filter('tr')->eq(0)->filter('td[width="25"]')->count() == 1) {
+            if ($crawler->filter('td[width="27"]')->count() != 1) {
                 $staffitems = $crawler->children();
                 foreach ($staffitems as $staffitem) {
                     $staff[] = self::parseStaff($staffitem);
