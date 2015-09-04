@@ -195,7 +195,7 @@ class AnimeController extends FOSRestController
         $downloader = $this->get('atarashii_api.communicator');
 
         try {
-            $details = $downloader->fetch('/anime/' . $id . '_/characters');
+            $details = $downloader->fetch('/anime/' . $id . '/_/characters');
         } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
         }
