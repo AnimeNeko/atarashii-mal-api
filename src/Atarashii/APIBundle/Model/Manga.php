@@ -432,10 +432,12 @@ class Manga
                 break;
             case 3:
             case 'One Shot':
+            case 'One-shot':
                 $this->type = 'One Shot';
                 break;
             case 4:
             case 'Doujin':
+            case 'Doujinshi':
                 $this->type = 'Doujin';
                 break;
             case 5:
