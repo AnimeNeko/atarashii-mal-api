@@ -159,13 +159,25 @@ class AnimeParser
         # Producers:
         $extracted = $leftcolumn->filterXPath('//span[text()="Producers:"]');
         if (iterator_count($extracted) > 0) {
-            $animerecord->setProducers(explode(', ', trim(str_replace($extracted->text(), '', $extracted->parents()->text()))));
+            $records = $extracted->parents()->first()->filter('a');
+
+            foreach($records as $rItem) {
+                $producers[] = $rItem->nodeValue;
+            }
+
+            $animerecord->setProducers($producers);
         }
 
         # Genres:
         $extracted = $leftcolumn->filterXPath('//span[text()="Genres:"]');
         if (iterator_count($extracted) > 0) {
-            $animerecord->setGenres(explode(', ', trim(str_replace($extracted->text(), '', $extracted->parents()->text()))));
+            $records = $extracted->parents()->first()->filter('a');
+
+            foreach($records as $rItem) {
+                $genres[] = $rItem->nodeValue;
+            }
+
+            $animerecord->setGenres($genres);
         }
 
         # Classification:
