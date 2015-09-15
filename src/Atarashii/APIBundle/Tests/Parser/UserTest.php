@@ -101,7 +101,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
         $friends = User::parseFriends($friendsContent);
 
-        $friend = $friends[4];
+        $friend = $friends[5];
 
         $this->assertEquals('AnimaSA', $friend['name']);
         $this->assertEquals('2014-06-15T20:58-0700', $friend['friend_since']);
