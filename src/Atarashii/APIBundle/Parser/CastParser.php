@@ -21,7 +21,7 @@ class CastParser
         $crawler = new Crawler();
         $crawler->addHTMLContent($contents, 'UTF-8');
 
-        $items = $crawler->filter('td table[width="100%"]');
+        $items = $crawler->filter('td[style="padding-left: 5px;"] table[width="100%"]');
 
         //Bypass Undefined variable error.
         $staff = null;
