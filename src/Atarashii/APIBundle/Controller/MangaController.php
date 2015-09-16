@@ -62,9 +62,11 @@ class MangaController extends FOSRestController
             $mangadetails = $downloader->fetch('/manga/' . $id);
         } catch (Exception\CurlException $e) {
             return $this->view(array('error' => 'network-error'), 500);
+        } catch (Exception\ClientErrorResponseException $e) {
+            $mangadetails = $e->getResponse();
         }
 
-        if (strpos($mangadetails, 'No manga found') !== false) {
+        if ((strpos($mangadetails, 'No manga found') !== false) || (strpos($mangadetails, 'This page doesn\'t exist') !== false)) {
             return $this->view(array('error' => 'No manga found, check the manga id and try again.'), 404);
         } else {
             $manga = MangaParser::parse($mangadetails);
