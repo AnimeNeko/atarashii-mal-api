@@ -87,10 +87,23 @@ class SearchController extends FOSRestController
                 $serializationContext->setSerializeNull(true);
             }
 
-            if ($downloader->wasRedirected()) {
-                $searchanime = Array(AnimeParser::parse($animecontent));
+            //MAL now returns 404 on a single result. Workaround
+            if (method_exists($animecontent, 'getStatusCode') && $animecontent->getStatusCode() === 404) {
+                $location = $animecontent->getHeader('Location');
+
+                try {
+                    $animecontent = $downloader->fetch($location);
+                    $searchanime = Array(AnimeParser::parse($animecontent));
+                } catch (Exception\CurlException $e) {
+                    return $this->view(Array('error' => 'network-error'), 500);
+                }
             } else {
-                $searchanime = Upcoming::parse($animecontent, 'anime');
+
+                if ($downloader->wasRedirected()) {
+                    $searchanime = Array(AnimeParser::parse($animecontent));
+                } else {
+                    $searchanime = Upcoming::parse($animecontent, 'anime');
+                }
             }
 
             $view = $this->view($searchanime);
