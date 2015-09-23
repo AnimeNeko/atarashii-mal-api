@@ -2,7 +2,7 @@
 
 namespace Atarashii\APIBundle\Tests\Controller;
 
-use Atarashii\APIBundle\Tests\Util\LoginCredentials;
+use Atarashii\APIBundle\Tests\Util\ConnectivityUtilities;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
@@ -17,7 +17,7 @@ class VerifyControllerTest extends WebTestCase
     {
         $client = $this->client;
 
-        $credentials = LoginCredentials::get($client->getContainer());
+        $credentials = ConnectivityUtilities::getLoginCredentials($client->getContainer());
 
         if ($credentials !== false) {
 
@@ -47,6 +47,17 @@ class VerifyControllerTest extends WebTestCase
             $this->assertEquals('OK', $content->authorized);
         } else {
             $this->markTestSkipped('Username and password must be set.');
+        }
+    }
+
+    public static function setUpBeforeClass() {
+        $client = static::createClient();
+        $container = $client->getContainer();
+
+        $doTest = ConnectivityUtilities::checkConnection($container);
+
+        if ($doTest[0] === false) {
+            self::markTestSkipped($doTest[1]);
         }
     }
 

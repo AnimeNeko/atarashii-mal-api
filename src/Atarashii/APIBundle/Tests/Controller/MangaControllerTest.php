@@ -2,7 +2,7 @@
 
 namespace Atarashii\APIBundle\Tests\Controller;
 
-use Atarashii\APIBundle\Tests\Util\LoginCredentials;
+use Atarashii\APIBundle\Tests\Util\ConnectivityUtilities;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
@@ -71,6 +71,17 @@ class MangaControllerTest extends WebTestCase
         $this->assertGreaterThanOrEqual(1, count($content->anime_adaptations));
 
         $this->assertGreaterThanOrEqual(1, count($content->related_manga));
+    }
+
+    public static function setUpBeforeClass() {
+        $client = static::createClient();
+        $container = $client->getContainer();
+
+        $doTest = ConnectivityUtilities::checkConnection($container);
+
+        if ($doTest[0] === false) {
+            self::markTestSkipped($doTest[1]);
+        }
     }
 
     protected function setUp() {

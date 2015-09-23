@@ -2,7 +2,7 @@
 
 namespace Atarashii\APIBundle\Tests\Controller;
 
-use Atarashii\APIBundle\Tests\Util\LoginCredentials;
+use Atarashii\APIBundle\Tests\Util\ConnectivityUtilities;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
@@ -75,6 +75,17 @@ class AnimeControllerTest extends WebTestCase
         $this->assertGreaterThanOrEqual(1, count($content->manga_adaptations));
 
         $this->assertEquals(0, count($content->prequels));
+    }
+
+    public static function setUpBeforeClass() {
+        $client = static::createClient();
+        $container = $client->getContainer();
+
+        $doTest = ConnectivityUtilities::checkConnection($container);
+
+        if ($doTest[0] === false) {
+            self::markTestSkipped($doTest[1]);
+        }
     }
 
     protected function setUp() {

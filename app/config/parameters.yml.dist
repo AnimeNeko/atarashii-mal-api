@@ -6,3 +6,4 @@ parameters:
     unit_testing:
         username: CHANGEME
         password: CHANGEME
+        test_mal: false

@@ -2,7 +2,7 @@
 
 namespace Atarashii\APIBundle\Tests\Controller;
 
-use Atarashii\APIBundle\Tests\Util\LoginCredentials;
+use Atarashii\APIBundle\Tests\Util\ConnectivityUtilities;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
@@ -57,6 +57,17 @@ class UserControllerTest extends WebTestCase
         $this->assertInternalType('int', $content->manga_stats->plan_to_read);
         $this->assertInternalType('int', $content->manga_stats->total_entries);
         $this->assertGreaterThanOrEqual(1, $content->manga_stats->total_entries);
+    }
+
+    public static function setUpBeforeClass() {
+        $client = static::createClient();
+        $container = $client->getContainer();
+
+        $doTest = ConnectivityUtilities::checkConnection($container);
+
+        if ($doTest[0] === false) {
+            self::markTestSkipped($doTest[1]);
+        }
     }
 
     protected function setUp() {
