@@ -54,7 +54,12 @@
         "symfony-app-dir": "app",
         "symfony-web-dir": "web",
         "incenteev-parameters": {
-            "file": "app/config/parameters.yml"
+            "file": "app/config/parameters.yml",
+            "env-map": {
+                "secret": "API__SECRET",
+                "api_user_agent": "API__USER_AGENT",
+                "unit_testing": "API__UNIT_TESTING"
+            }
         },
         "branch-alias": {
             "dev-master": "2.3-dev"
