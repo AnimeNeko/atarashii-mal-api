@@ -35,7 +35,7 @@ class MangaParser
         #     <span itemprop="name">One Punch-Man</span> <span style="font-weight: normal;"><small>(Manga)</small></span>
         # </h1>
         $mangarecord->setTitle(trim($crawler->filter('span[itemprop="name"]')->text()));
-        $mangarecord->setRank((int) str_replace('Ranked #', '', $crawler->filter('h1 div')->text()));
+        $mangarecord->setRank((int) str_replace('Ranked #', '', $crawler->filter('div[id="contentWrapper"] div')->text()));
 
         # Title Image
         # Example:
