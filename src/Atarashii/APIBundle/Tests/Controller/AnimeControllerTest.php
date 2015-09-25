@@ -6,7 +6,7 @@ use Atarashii\APIBundle\Tests\Util\ConnectivityUtilities;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
- * Class VerifyControllerTest
+ * Class AnimeControllerTest
  * @package Atarashii\APIBundle\Tests\Controller
  */
 class AnimeControllerTest extends WebTestCase
