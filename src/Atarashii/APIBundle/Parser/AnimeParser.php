@@ -30,8 +30,8 @@ class AnimeParser
 
         # Title and rank.
         # Example:
-        # <h1><div style="float: right; font-size: 13px;">Ranked #96</div>Lucky ☆ Star</h1>
-        $animerecord->setTitle(str_replace($crawler->filter('h1')->children()->text(), '', $crawler->filter('h1')->text()));
+        # <span itemprop="name">One Piece</span>
+        $animerecord->setTitle(trim($crawler->filter('span[itemprop="name"]')->text()));
         $animerecord->setRank((int) str_replace('Ranked #', '', $crawler->filter('div[id="contentWrapper"] div')->text()));
 
         # Title Image
