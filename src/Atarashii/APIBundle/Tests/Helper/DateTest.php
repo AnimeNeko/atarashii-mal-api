@@ -3,7 +3,6 @@
 namespace Atarashii\APIBundle\Tests\Model;
 
 use Atarashii\APIBundle\Helper\Date;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 class DateTest extends \PHPUnit_Framework_TestCase
 {
@@ -120,6 +119,12 @@ class DateTest extends \PHPUnit_Framework_TestCase
 
     protected function tearDown() {
         Date::$timeZone = 'America/Los_Angeles';
+    }
+
+    public static function setUpBeforeClass() {
+        //Our date tests assume we're in the default timezone for MAL
+        //Set the PHP timezone to America/Los_Angeles to be safe.
+        date_default_timezone_set('America/Los_Angeles');
     }
 
 }
