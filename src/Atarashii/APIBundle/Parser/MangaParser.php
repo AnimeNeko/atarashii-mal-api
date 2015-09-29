@@ -210,7 +210,9 @@ class MangaParser
             $extracted = $extracted->parents()->first();
             $rawSynopsis = $extracted->filter('span[itemprop="description"]');
 
-            $mangarecord->setSynopsis($rawSynopsis->html());
+            if(iterator_count($rawSynopsis) > 0) {
+                $mangarecord->setSynopsis($rawSynopsis->html());
+            }
         }
 
         # Related Manga

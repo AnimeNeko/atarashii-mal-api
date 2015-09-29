@@ -135,7 +135,12 @@ class AnimeParser
                     $animerecord->setStartDate(DateTime::createFromFormat('M Y d', $daterange[0] . ' 01'), 'month'); //Example ID 22535 (check upcoming list)
                 }
             } else {
-                if (strlen($daterange[0]) !== 7 && strlen($daterange[0]) !== 8) {
+                if (count(explode(' ', $daterange[0])) == 2) { //MAL has been showing a comma with month and year (Jan, 2016), so catch that
+                    $dateComponents = explode(' ', $daterange[0]);
+                    $month = substr($dateComponents[0], 0, -1);
+                    $year = $dateComponents[1];
+                    $animerecord->setStartDate(DateTime::createFromFormat('M Y d', $month . ' ' . $year . ' 01'), 'month');
+                } elseif (strlen($daterange[0]) !== 7 && strlen($daterange[0]) !== 8) {
                     $animerecord->setStartDate(DateTime::createFromFormat('M j, Y', $daterange[0]), 'day');
                 }
             }
@@ -205,9 +210,12 @@ class AnimeParser
             $extracted = str_replace($extracted->text(), '', $extracted->parents()->text());
             //Remove the parenthetical at the end of the string
             $extracted = trim(str_replace(strstr($extracted, '('), '', $extracted));
+
             //Sometimes there is a superscript number at the end from a note.
             //Scores are only two decimals, so number_format should chop off the excess, hopefully.
-            $animerecord->setMembersScore((float) number_format($extracted, 2));
+            if (strpos($extracted, 'N/A') === false) {
+                $animerecord->setMembersScore((float)number_format($extracted, 2));
+            }
         }
 
         # Popularity:
@@ -258,7 +266,9 @@ class AnimeParser
             $extracted = $extracted->parents()->first();
             $rawSynopsis = $extracted->filter('span[itemprop="description"]');
 
-            $animerecord->setSynopsis($rawSynopsis->html());
+            if(iterator_count($rawSynopsis) > 0) {
+                $animerecord->setSynopsis($rawSynopsis->html());
+            }
         }
 
         # Related Anime
