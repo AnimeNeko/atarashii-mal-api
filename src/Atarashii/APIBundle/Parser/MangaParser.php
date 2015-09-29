@@ -212,6 +212,8 @@ class MangaParser
 
             if(iterator_count($rawSynopsis) > 0) {
                 $mangarecord->setSynopsis($rawSynopsis->html());
+            } else {
+                $mangarecord->setSynopsis('There is currently no synopsis for this title.');
             }
         }
 

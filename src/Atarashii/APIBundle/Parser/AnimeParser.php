@@ -268,6 +268,8 @@ class AnimeParser
 
             if(iterator_count($rawSynopsis) > 0) {
                 $animerecord->setSynopsis($rawSynopsis->html());
+            } else {
+                $animerecord->setSynopsis('There is currently no synopsis for this title.');
             }
         }
 
