@@ -13,7 +13,7 @@ class MangaControllerTest extends WebTestCase
 {
     private $client = null;
 
-    public function testVerifyAction()
+    public function testGetAction()
     {
         $client = $this->client;
 
