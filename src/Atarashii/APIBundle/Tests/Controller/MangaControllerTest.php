@@ -73,6 +73,39 @@ class MangaControllerTest extends WebTestCase
         $this->assertGreaterThanOrEqual(1, count($content->related_manga));
     }
 
+    public function testGetActionPersonal()
+    {
+        $client = $this->client;
+
+        $credentials = ConnectivityUtilities::getLoginCredentials($client->getContainer());
+
+        if ($credentials !== false) {
+
+            //Now, test grabbing personal details for a title
+            $client->request('GET', '/2/manga/436', array('mine' => 1), array(), array(
+                'PHP_AUTH_USER' => $credentials['username'],
+                'PHP_AUTH_PW' => $credentials['password'],
+            ));
+
+            $rawContent = $client->getResponse()->getContent();
+            $statusCode = $client->getResponse()->getStatusCode();
+            $content = json_decode($rawContent);
+
+            $this->assertNotNull($content);
+            $this->assertEquals(200, $statusCode);
+
+            $this->assertInternalType('int', $content->score);
+            $this->assertEquals(9, $content->score);
+
+            $this->assertEquals('completed', $content->read_status);
+            $this->assertEquals('2013-09-17', $content->reading_start);
+            $this->assertEquals('2013-11-17', $content->reading_end);
+
+        } else {
+            $this->markTestSkipped('Username and password must be set.');
+        }
+    }
+
     public static function setUpBeforeClass() {
         $client = static::createClient();
         $container = $client->getContainer();

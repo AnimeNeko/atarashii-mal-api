@@ -77,6 +77,39 @@ class AnimeControllerTest extends WebTestCase
         $this->assertEquals(0, count($content->prequels));
     }
 
+    public function testGetActionPersonal()
+    {
+        $client = $this->client;
+
+        $credentials = ConnectivityUtilities::getLoginCredentials($client->getContainer());
+
+        if ($credentials !== false) {
+
+            //Now, test grabbing personal details for a title
+            $client->request('GET', '/2/anime/189', array('mine' => 1), array(), array(
+                'PHP_AUTH_USER' => $credentials['username'],
+                'PHP_AUTH_PW' => $credentials['password'],
+            ));
+
+            $rawContent = $client->getResponse()->getContent();
+            $statusCode = $client->getResponse()->getStatusCode();
+            $content = json_decode($rawContent);
+
+            $this->assertNotNull($content);
+            $this->assertEquals(200, $statusCode);
+
+            $this->assertInternalType('int', $content->score);
+            $this->assertEquals(7, $content->score);
+
+            $this->assertEquals('completed', $content->watched_status);
+            $this->assertEquals('2000-01-01', $content->watching_start);
+            $this->assertEquals('2000-03-20', $content->watching_end);
+
+        } else {
+            $this->markTestSkipped('Username and password must be set.');
+        }
+    }
+
     public static function setUpBeforeClass() {
         $client = static::createClient();
         $container = $client->getContainer();
