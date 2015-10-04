@@ -57,7 +57,173 @@ class AnimelistControllerTest extends WebTestCase
         $this->assertEquals('completed', $animeItem->watched_status);
         $this->assertInternalType('int', $animeItem->score);
         $this->assertEquals(7, $animeItem->score);
-   }
+    }
+
+    public function testAddAction() {
+        $client = $this->client;
+
+        $credentials = ConnectivityUtilities::getLoginCredentials($client->getContainer());
+
+        if ($credentials !== false) {
+            $animeID = 5941; //Cross Game
+            $status = 1; //Watching
+            $episodes = 3;
+            $score = 8;
+
+            $client->request('POST', '/2/animelist/anime',
+                array(
+                    'anime_id' => $animeID,
+                    'status' => $status,
+                    'episodes' => $episodes,
+                    'score' => $score
+                ),
+                array(),
+                array(
+                    'PHP_AUTH_USER' => $credentials['username'],
+                    'PHP_AUTH_PW' => $credentials['password']
+                )
+            );
+
+            $rawContent = $client->getResponse()->getContent();
+            $content = json_decode($rawContent);
+
+            $this->assertNotNull($content);
+            $this->assertTrue($client->getResponse()->isSuccessful());
+            $this->assertEquals('ok', $content);
+
+            //Make sure the title actually was added to the list
+            $client->request('GET', '/2/animelist/' . $credentials['username']);
+            $rawContent = $client->getResponse()->getContent();
+            $content = json_decode($rawContent);
+
+            $this->assertNotNull($content);
+            $this->assertTrue($client->getResponse()->isSuccessful());
+
+
+            $this->assertGreaterThanOrEqual(1, count($content->anime));
+
+            foreach ($content->anime as $listItem) {
+                if ($listItem->id === $animeID) {
+                    $animeItem = $listItem;
+                    break;
+                }
+            }
+
+            $this->assertEquals('watching', $animeItem->watched_status);
+            $this->assertInternalType('int', $animeItem->score);
+            $this->assertEquals($score, $animeItem->score);
+            $this->assertInternalType('int', $animeItem->watched_episodes);
+            $this->assertEquals($episodes, $animeItem->watched_episodes);
+        } else {
+            $this->markTestSkipped('Username and password must be set.');
+        }
+    }
+
+    /**
+     * @depends testAddAction
+     */
+    public function testUpdateAction() {
+        $client = $this->client;
+
+        $credentials = ConnectivityUtilities::getLoginCredentials($client->getContainer());
+
+        if ($credentials !== false) {
+            $animeID = 5941; //Cross Game
+            $status = 3; //on-hold
+            $episodes = 5;
+            $score = 7;
+            $start = '2015-09-01';
+            $rewatchCount = 2;
+
+            $client->request('PUT', '/2/animelist/anime/' . $animeID,
+                array(
+                    'status' => $status,
+                    'episodes' => $episodes,
+                    'score' => $score,
+                    'start' => $start,
+                    'rewatch_count' => $rewatchCount
+                ),
+                array(),
+                array(
+                    'PHP_AUTH_USER' => $credentials['username'],
+                    'PHP_AUTH_PW' => $credentials['password']
+                )
+            );
+
+            $this->assertTrue($client->getResponse()->isSuccessful());
+
+            //Grab personal details for the title to check values
+            $client->request('GET', '/2/anime/' . $animeID, array('mine' => 1), array(), array(
+                'PHP_AUTH_USER' => $credentials['username'],
+                'PHP_AUTH_PW' => $credentials['password'],
+            ));
+
+            $rawContent = $client->getResponse()->getContent();
+            $content = json_decode($rawContent);
+
+            $this->assertTrue($client->getResponse()->isSuccessful());
+
+            $this->assertEquals('on-hold', $content->watched_status);
+            $this->assertEquals($episodes, $content->watched_episodes);
+
+            $this->assertInternalType('int', $content->score);
+            $this->assertEquals($score, $content->score);
+
+            $this->assertEquals($start, $content->watching_start);
+            $this->assertEquals($rewatchCount, $content->rewatch_count);
+
+        } else {
+            $this->markTestSkipped('Username and password must be set.');
+        }
+    }
+
+    /**
+     * @depends testUpdateAction
+     */
+    public function testDeleteAction() {
+        $client = $this->client;
+
+        $credentials = ConnectivityUtilities::getLoginCredentials($client->getContainer());
+
+        if ($credentials !== false) {
+
+            $animeID = 5941; //Cross Game
+
+            $client->request('DELETE', '/2/animelist/anime/' . $animeID,
+                array(),
+                array(),
+                array(
+                    'PHP_AUTH_USER' => $credentials['username'],
+                    'PHP_AUTH_PW' => $credentials['password']
+                )
+            );
+
+            $this->assertTrue($client->getResponse()->isSuccessful());
+
+            //Make sure the title actually was deleted
+            $client->request('GET', '/2/animelist/' . $credentials['username']);
+            $rawContent = $client->getResponse()->getContent();
+            $content = json_decode($rawContent);
+
+            $this->assertNotNull($content);
+            $this->assertTrue($client->getResponse()->isSuccessful());
+
+
+            $foundItem = false;
+
+            foreach ($content->anime as $listItem) {
+                if ($listItem->id === $animeID) {
+                    $foundItem = true;
+                    break;
+                }
+            }
+
+            $this->assertFalse($foundItem);
+
+        } else {
+            $this->markTestSkipped('Username and password must be set.');
+        }
+    }
 
     public static function setUpBeforeClass() {
         $client = static::createClient();
