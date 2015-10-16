@@ -18,7 +18,7 @@ class MangaTest extends \PHPUnit_Framework_TestCase
      */
     public function testParse()
     {
-        $mangaContents = file_get_contents(__DIR__ . '/../../Resources/Samples/Input/manga-11977-mine.html');
+        $mangaContents = file_get_contents(__DIR__ . '/../InputSamples/manga-11977-mine.html');
 
         $manga = MangaParser::parse($mangaContents);
 
@@ -76,7 +76,7 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(15, $manga->getVolumesRead());
         $this->assertEquals(7, $manga->getScore());
 
-        $mangaContents = file_get_contents(__DIR__ . '/../../Resources/Samples/Input/manga-137-mine.html');
+        $mangaContents = file_get_contents(__DIR__ . '/../InputSamples/manga-137-mine.html');
 
         $manga = MangaParser::parse($mangaContents);
 
@@ -98,7 +98,7 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertStringStartsWith('Read or Die', $manga->getAlternativeVersions()[0]['title']);
         $this->assertContains('manga/10869', $manga->getAlternativeVersions()[0]['url']);
 
-        $mangaContents = file_get_contents(__DIR__ . '/../../Resources/Samples/Input/manga-44347.html');
+        $mangaContents = file_get_contents(__DIR__ . '/../InputSamples/manga-44347.html');
 
         $manga = MangaParser::parse($mangaContents);
 
@@ -115,7 +115,7 @@ class MangaTest extends \PHPUnit_Framework_TestCase
     {
         $manga = new Manga();
 
-        $mangaContents = file_get_contents(__DIR__ . '/../../Resources/Samples/Input/manga-11977-mine-detailed.html');
+        $mangaContents = file_get_contents(__DIR__ . '/../InputSamples/manga-11977-mine-detailed.html');
 
         MangaParser::parseExtendedPersonal($mangaContents, $manga);
 

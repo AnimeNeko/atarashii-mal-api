@@ -97,7 +97,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testParseFriends()
     {
-        $friendsContent = file_get_contents(__DIR__ . '/../../Resources/Samples/Input/profile-motokochan-friends.html');
+        $friendsContent = file_get_contents(__DIR__ . '/../InputSamples/profile-motokochan-friends.html');
 
         $friends = User::parseFriends($friendsContent);
 
@@ -113,7 +113,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testParseHistory()
     {
-        $historyContent = file_get_contents(__DIR__ . '/../../Resources/Samples/Input/history-motokochan.html');
+        $historyContent = file_get_contents(__DIR__ . '/../InputSamples/history-motokochan.html');
 
         $history = User::parseHistory($historyContent);
 
@@ -127,7 +127,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
     }
 
     protected function setUp() {
-        $profileContents = file_get_contents(__DIR__ . '/../../Resources/Samples/Input/profile-motokochan.html');
+        $profileContents = file_get_contents(__DIR__ . '/../InputSamples/profile-motokochan.html');
 
         $this->profile = User::parse($profileContents);
     }

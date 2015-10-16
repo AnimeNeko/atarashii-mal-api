@@ -18,7 +18,7 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
      */
     public function testParse()
     {
-        $animeContents = file_get_contents(__DIR__ . '/../../Resources/Samples/Input/anime-1887-mine.html');
+        $animeContents = file_get_contents(__DIR__ . '/../InputSamples/anime-1887-mine.html');
 
         $anime = AnimeParser::parse($animeContents);
 
@@ -101,7 +101,7 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(7, $anime->getScore());
 
-        $animeContents = file_get_contents(__DIR__ . '/../../Resources/Samples/Input/anime-9253.html');
+        $animeContents = file_get_contents(__DIR__ . '/../InputSamples/anime-9253.html');
 
         $anime = AnimeParser::parse($animeContents);
 
@@ -117,7 +117,7 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertStringStartsWith('Steins;Gate: Soumei', $anime->getOther()[0]['title']);
         $this->assertContains('anime/27957', $anime->getOther()[0]['url']);
 
-        $animeContents = file_get_contents(__DIR__ . '/../../Resources/Samples/Input/anime-918.html');
+        $animeContents = file_get_contents(__DIR__ . '/../InputSamples/anime-918.html');
 
         $anime = AnimeParser::parse($animeContents);
 
@@ -133,7 +133,7 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertStringStartsWith('Gintama Movie: Shinyaku', $anime->getAlternativeVersions()[0]['title']);
         $this->assertContains('anime/7472', $anime->getAlternativeVersions()[0]['url']);
 
-        $animeContents = file_get_contents(__DIR__ . '/../../Resources/Samples/Input/anime-2904.html');
+        $animeContents = file_get_contents(__DIR__ . '/../InputSamples/anime-2904.html');
 
         $anime = AnimeParser::parse($animeContents);
 
@@ -157,7 +157,7 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
     {
         $anime = new Anime();
 
-        $animeContents = file_get_contents(__DIR__ . '/../../Resources/Samples/Input/anime-1689-mine-detailed.html');
+        $animeContents = file_get_contents(__DIR__ . '/../InputSamples/anime-1689-mine-detailed.html');
 
         AnimeParser::parseExtendedPersonal($animeContents, $anime);
 

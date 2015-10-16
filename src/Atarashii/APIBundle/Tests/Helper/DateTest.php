@@ -106,7 +106,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testTZ() {
-        $editProfileContents = file_get_contents(__DIR__.'/../../Resources/Samples/Input/editprofile.html');
+        $editProfileContents = file_get_contents(__DIR__.'/../InputSamples/editprofile.html');
         Date::setTimeZone($editProfileContents);
 
         $expected = 'America/New_York';
