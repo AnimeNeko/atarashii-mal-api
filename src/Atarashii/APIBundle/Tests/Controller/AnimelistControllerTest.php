@@ -133,15 +133,24 @@ class AnimelistControllerTest extends WebTestCase
             $episodes = 5;
             $score = 7;
             $start = '2015-09-01';
+            $end = '2015-10-30';
+            $downloadedEps = $episodes;
+            $storageType = 2; // DVD/CD
+            $storageAmt = 4;
+            $priority = 2; //High
+            $rewatchValue = 3; //Medium
+            $tags = 'shonen, sports, baseball';
+            $comments = 'None';
+            $fansubber = 'None';
+            $isRewatching = 0;
             $rewatchCount = 2;
 
             $client->request('PUT', '/2/animelist/anime/' . $animeID,
                 array(
-                    'status' => $status,
-                    'episodes' => $episodes,
-                    'score' => $score,
-                    'start' => $start,
-                    'rewatch_count' => $rewatchCount
+                    'status' => $status, 'episodes' => $episodes, 'score' => $score, 'start' => $start, 'end' => $end,
+                    'downloaded_eps' => $downloadedEps, 'storage_type' => $storageType, 'storage_amt' => $storageAmt,
+                    'priority' => $priority, 'rewatch_value' => $rewatchValue, 'tags' => $tags, 'comments' => $comments,
+                    'fansubber' => $fansubber, 'is_rewatching' => $isRewatching, 'rewatch_count' => $rewatchCount
                 ),
                 array(),
                 array(
