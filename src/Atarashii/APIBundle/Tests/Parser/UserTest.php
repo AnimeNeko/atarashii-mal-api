@@ -49,19 +49,16 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected->format('Y-m-d\THO'), $profileDetails->getLastOnline2());
         $this->assertNull($profileDetails->getStatus());
         $this->assertEquals('Not specified', $profileDetails->getGender());
-        $this->assertEquals('April  28, 1981', $profileDetails->getBirthday()); // Yes, the date from MAL has two spaces between the month and day.
+        $this->assertEquals('April 28, 1981', $profileDetails->getBirthday());
         $this->assertEquals('California, USA', $profileDetails->getLocation());
         $this->assertEquals('http://www.animeneko.net', $profileDetails->getWebsite());
         $this->assertEquals('March 5, 2012', $profileDetails->getJoinDate());
         $this->assertEquals('2012-03-05', $profileDetails->getJoinDate2());
         $this->assertEquals('Member', $profileDetails->getAccessRank());
-        $this->assertGreaterThanOrEqual(694, $profileDetails->getAnimeListViews());
-        $this->assertGreaterThanOrEqual(399, $profileDetails->getMangaListViews());
         $this->assertGreaterThanOrEqual(57, $profileDetails->getForumPosts());
         $this->assertNull($profileDetails->getAim());
         $this->assertNull($profileDetails->getMsn());
         $this->assertNull($profileDetails->getYahoo());
-        $this->assertGreaterThanOrEqual(1, $profileDetails->getComments());
     }
 
     /**
@@ -101,7 +98,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
         $friends = User::parseFriends($friendsContent);
 
-        $friend = $friends[5];
+        $friend = $friends[2];
 
         $this->assertEquals('AnimaSA', $friend['name']);
         $this->assertEquals('2014-06-15T20:58-0700', $friend['friend_since']);

@@ -25,78 +25,142 @@ class User
         $crawler = new Crawler();
         $crawler->addHTMLContent($contents, 'UTF-8');
 
-        $leftside = $crawler->filter('#content .profile_leftcell');
+        $profileContent = $crawler->filter('#contentWrapper');
 
-        $user->setAvatarUrl($leftside->filter('img')->attr('src'));
+        $user->setAvatarUrl($profileContent->filter('.user-image img')->attr('src'));
 
-        $maincontent = iterator_to_array($crawler->filter('#horiznav_nav')->nextAll()->filterXPath('./div/table/tr/td'));
+        $animeStats = $profileContent->filter('.stats')->filter('.anime');
+        $mangaStats = $profileContent->filter('.stats')->filter('.manga');
 
-        $userdetails = $maincontent[0];
-        $animestats = $maincontent[2];
-        $mangastats = $maincontent[3];
-
-        $user->details = self::parseDetails($userdetails, $user->details); //Details is an object, so we need to pass it to the function.
-        $user->anime_stats = self::parseStats($animestats, $user->anime_stats);
-        $user->manga_stats = self::parseStats($mangastats, $user->manga_stats);
+        $user->details = self::parseDetails($profileContent, $user->details); //Details is an object, so we need to pass it to the function.
+        $user->anime_stats = self::parseStats($animeStats, $user->anime_stats, 'anime');
+        $user->manga_stats = self::parseStats($mangaStats, $user->manga_stats, 'manga');
 
         return $user;
     }
 
     private static function parseDetails($content, $details)
     {
-        $elements = new Crawler($content);
-        $elements = $elements->filter('tr');
+        $userAccessLevel = $content->filterXPath('//*[contains(attribute::class,"profile-team-title")]');
 
-        foreach ($elements as $content) {
+        $userStats = $content->filter('.user-status');
 
-            $crawler = new Crawler($content);
-            $crawler = $crawler->filter('td');
+        $userOnline = $userStats->filterXPath('//*[text()="Last Online"]/../span[2]');
+        $userGender =  $userStats->filterXPath('//*[text()="Gender"]/../span[2]');
+        $userBDay = $userStats->filterXPath('//*[text()="Birthday"]/../span[2]');
+        $userLoc = $userStats->filterXPath('//*[text()="Location"]/../span[2]');
+        $userJoined = $userStats->filterXPath('//*[text()="Joined"]/../span[2]');
+        $userForumPosts =  $userStats->filterXPath('//*[text()="Forum Posts"]/../span[2]');
+        $userWebsite = $content->filterXPath('//*[@class="user-profile-sns"][1]/a');
 
-            $values = iterator_to_array($crawler);
+        if($userAccessLevel->count() > 0) {
+            $details->setAccessRank($userAccessLevel->text());
+        } else {
+            $details->setAccessRank('Member');
+        }
 
-            $key = 'set'.trim(str_replace(' ', '', $values[0]->textContent));
-            $value = trim($values[1]->textContent);
+        if($userOnline->count() > 0) {
+            $details->setLastOnline($userOnline->text());
+        }
 
-            //We have to do some casting and manipulation for certain values so we return them as the right type
-            switch (strtolower(str_replace('set', '', $key))) {
-                case 'forumposts':
-                case 'mangalistviews':
-                case 'animelistviews':
-                case 'comments':
-                    $value = (int) str_replace(',', '', $value);
-                    break;
-                case 'website':
-                    //Display value is truncated if it's too long, so get the href value instead.
-                    $value = $values[1]->firstChild->getAttribute('href');
-                    break;
-            }
-            $details->$key($value);
+        if($userGender->count() > 0) {
+            $details->setGender($userGender->text());
+        } else {
+            $details->setGender('Not specified');
+        }
+
+        if($userBDay->count() > 0) {
+            $details->setBirthday(\DateTime::createFromFormat('M d, Y', $userBDay->text())->format('F j, Y'));
+        }
+
+        if($userJoined->count() > 0) {
+            $details->setJoinDate(\DateTime::createFromFormat('M d, Y', $userJoined->text())->format('F j, Y'));
+        }
+
+        if($userLoc->count() > 0) {
+            $details->setLocation($userLoc->text());
+        }
+
+        if($userWebsite->count() > 0) {
+            $details->setWebsite($userWebsite->attr('href'));
+        }
+
+        if($userForumPosts->count() > 0) {
+         $details->setForumPosts((int) $userForumPosts->text());
         }
 
         return $details;
     }
 
-    private static function parseStats($content, $stats)
+    private static function parseStats($content, $stats, $mediaType)
     {
-        $elements = new Crawler($content);
-        $elements = $elements->filter('tr');
 
-        foreach ($elements as $content) {
+        //General header stuff
+        $genStats = $content->filterXPath('//*[contains(attribute::class,"stat-score")]');
 
-            $crawler = new Crawler($content);
-            $crawler = $crawler->filter('td');
+        $timeDays = $genStats->filterXPath('//*[normalize-space(.)="Days:"]/..');
 
-            $values = iterator_to_array($crawler);
-            $value = trim($values[1]->textContent);
+        if($timeDays->count() > 0){
+            $days = explode(' ', $timeDays->text());
 
-            //Some of the key values have parenthesis. This is messy, but we need to
-            //extract only letters to properly transform the names for our output.
-            //The regex was found at http://stackoverflow.com/questions/16426976
-            $key = trim(preg_replace('~[^\p{L}]++~u', ' ', $values[0]->textContent));
-            $key = 'set'.str_replace(' ', '', $key);
-
-            $stats->$key((float) $value);
+            $stats->setTimeDays((float) $days[1]);
         }
+
+        //Individual Status Items
+        $statsStatus = $content->filterXPath('//ul[contains(attribute::class,"stats-status")]');
+
+        //Watching/Reading and Planned are different for anime/manga
+        if($mediaType == 'anime') {
+            $inProgress = $statsStatus->filterXPath('//*[contains(attribute::class,"watching")]/../span');
+            $planned = $statsStatus->filterXPath('//*[contains(attribute::class,"plantowatch")]/../span');
+
+            if ($inProgress->count() > 0) {
+                $stats->setWatching((int)$inProgress->text());
+            }
+
+            if ($planned->count() > 0) {
+                $stats->setPlanToWatch((int)$planned->text());
+            }
+        } elseif($mediaType == 'manga') {
+            $inProgress = $statsStatus->filterXPath('//*[contains(attribute::class,"reading")]/../span');
+            $planned = $statsStatus->filterXPath('//*[contains(attribute::class,"plantoread")]/../span');
+
+            if ($inProgress->count() > 0) {
+                $stats->setReading((int)$inProgress->text());
+            }
+
+            if ($planned->count() > 0) {
+                $stats->setPlanToRead((int)$planned->text());
+            }
+        }
+
+        $completed = $statsStatus->filterXPath('//*[contains(attribute::class,"completed")]/../span');
+        $onHold = $statsStatus->filterXPath('//*[contains(attribute::class,"on-hold")]/../span');
+        $dropped = $statsStatus->filterXPath('//*[contains(attribute::class,"dropped")]/../span');
+
+
+        if($completed->count() > 0) {
+            $stats->setCompleted((int) $completed->text());
+        }
+
+        if($onHold->count() > 0) {
+            $stats->setOnHold((int) $onHold->text());
+        }
+
+        if($dropped->count() > 0) {
+            $stats->setDropped((int) $dropped->text());
+        }
+
+
+        //Summary Stats
+        $statsSummary = $content->filterXPath('//ul[contains(attribute::class,"stats-data")]');
+
+        $totalEntries = $statsSummary->filterXPath('//li[1]/span[2]');
+
+        if($totalEntries->count() > 0) {
+            $stats->setTotalEntries((int) $totalEntries->text());
+        }
+
 
         return $stats;
     }
