@@ -70,7 +70,28 @@ class User
         }
 
         if($userBDay->count() > 0) {
-            $details->setBirthday(\DateTime::createFromFormat('M d, Y', $userBDay->text())->format('F j, Y'));
+            //MAL allows partial birthdays, even just day and year (wth?)
+            //We need to check combinations to handle this correctly.
+            $bdParts = explode(' ', $userBDay->text());
+
+            if(count($bdParts) == 3) { //Full date, normal processing
+                $details->setBirthday(\DateTime::createFromFormat('M d, Y', $userBDay->text())->format('F j, Y'));
+            } elseif(count($bdParts) == 2) { //We only have two parts, figure out what we were given
+                $firstIsNumber = is_numeric($bdParts[0]);
+                $hasComma = strpos($bdParts[0], ',');
+
+                if ( ($firstIsNumber === false) && ($hasComma === false) ) {
+                    //First Value must be a month
+                    //This will cover month and day or month and year
+                    $monthName = \DateTime::createFromFormat('M d', $bdParts[0] . ' 1')->format('F');
+                    $details->setBirthday($monthName . ' ' . $bdParts[1]);
+                } else { //Day and year make no sense, just use year
+                    $details->setBirthday($bdParts[1]);
+                }
+
+            } else { //It's either just one value or something else, just save the data.
+                $details->setBirthday($userBDay->text());
+            }
         }
 
         if($userJoined->count() > 0) {
