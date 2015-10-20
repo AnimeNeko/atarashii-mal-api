@@ -20,12 +20,14 @@ class Upcoming
 {
     public static function parse($contents,$type)
     {
+        $resultset = '';
+
         $crawler = new Crawler();
         $crawler->addHTMLContent($contents, 'UTF-8');
         $menubar = true;
 
         //Filter into a set of tds from the source HTML table
-        $mediaitems = $crawler->filter('#horiznav_nav')->nextAll()->filterXPath('./div/table/tr');
+        $mediaitems = $crawler->filterXPath('//div[@id="content"]/table/tr');
 
         foreach ($mediaitems as $item) {
             //tricky method to skip the menu bar which is also a <tr></tr>
