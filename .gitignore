@@ -11,3 +11,4 @@
 /web/bundles/
 .idea/
 .vagrant/
+/src/Atarashii/APIBundle/Resources/views/includes/server-specific.html.twig
