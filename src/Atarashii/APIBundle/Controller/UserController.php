@@ -37,6 +37,8 @@ class UserController extends FOSRestController
             $profilecontent = $downloader->fetch('/profile/' . $username);
         } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
+        } catch (Exception\ClientErrorResponseException $e) {
+            $profilecontent = $e->getResponse();
         }
 
         $response = new Response();
@@ -58,7 +60,7 @@ class UserController extends FOSRestController
         $date->modify('+900 seconds'); //15 minutes
         $response->setExpires($date);
 
-        if (strpos($profilecontent, 'Failed to find') !== false) {
+        if (strpos($profilecontent, 'Failed to find') !== false || (strpos($profilecontent, 'This page doesn\'t exist') !== false)) {
             $view = $this->view(Array('error' => 'not-found'));
             $view->setResponse($response);
             $view->setStatusCode(404);
