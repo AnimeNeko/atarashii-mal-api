@@ -98,6 +98,8 @@ class UserController extends FOSRestController
             $friendscontent = $downloader->fetch('/profile/' . $username . '/friends');
         } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
+        } catch (Exception\ClientErrorResponseException $e) {
+            $friendscontent = $e->getResponse();
         }
 
         $response = new Response();
@@ -126,7 +128,11 @@ class UserController extends FOSRestController
 
             return $view;
         } else {
-            $friendlist = User::parseFriends($friendscontent);
+            if (strpos($friendscontent, 'No friends found') === false) {
+                $friendlist = User::parseFriends($friendscontent);
+            } else {
+                $friendlist = array();
+            }
 
             $view = $this->view($friendlist);
 
