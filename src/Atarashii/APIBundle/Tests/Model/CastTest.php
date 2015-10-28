@@ -68,6 +68,8 @@ class CastTest extends \PHPUnit_Framework_TestCase
         $cast = new Cast();
         $cast->setActors($actor);
 
-        $this->assertEquals($actor, $cast->getActors()[0]);
+        $actors = $cast->getActors();
+
+        $this->assertEquals($actor, $actors[0]);
     }
 }

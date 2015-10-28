@@ -23,7 +23,8 @@ class ConnectivityUtilities
 
     public static function checkConnection(Container $container)
     {
-        $doTest = $container->getParameter('unit_testing')['test_mal'];
+        $params = $container->getParameter('unit_testing');
+        $doTest = $params['test_mal'];
 
         if($doTest === false) {
             return array(false, 'Live tests for MyAnimeList are disabled by configuration.');

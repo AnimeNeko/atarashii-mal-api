@@ -81,7 +81,9 @@ class ForumTest extends \PHPUnit_Framework_TestCase
 
         $forum->setChildren($child);
 
-        $this->assertEquals($child, $forum->getChildren()[0]);
+        $children = $forum->getChildren();
+
+        $this->assertEquals($child, $children[0]);
     }
 
     public function testComment()

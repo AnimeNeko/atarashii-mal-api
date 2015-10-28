@@ -32,8 +32,9 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(11977, $manga->getId());
         $this->assertEquals('Bambino!', $manga->getTitle());
 
-        $this->assertArrayHasKey('japanese', $manga->getOtherTitles());
-        $this->assertContains('バンビ～ノ！', $manga->getOtherTitles()['japanese']);
+        $otherTitles = $manga->getOtherTitles();
+        $this->assertArrayHasKey('japanese', $otherTitles);
+        $this->assertContains('バンビ～ノ！', $otherTitles['japanese']);
 
         $this->assertInternalType('integer', $manga->getRank());
         $this->assertLessThan(850, $manga->getRank());
@@ -64,10 +65,11 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($manga->getTags());
         $this->assertEmpty($manga->getAnimeAdaptations());
 
-        $this->assertInternalType('array', $manga->getRelatedManga()[0]);
-        $this->assertEquals('19008', $manga->getRelatedManga()[0]['manga_id']);
-        $this->assertStringStartsWith('Bambino! Secondo', $manga->getRelatedManga()[0]['title']);
-        $this->assertContains('manga/19008', $manga->getRelatedManga()[0]['url']);
+        $relatedManga = $manga->getRelatedManga();
+        $this->assertInternalType('array', $relatedManga[0]);
+        $this->assertEquals('19008', $relatedManga[0]['manga_id']);
+        $this->assertStringStartsWith('Bambino! Secondo', $relatedManga[0]['title']);
+        $this->assertContains('manga/19008', $relatedManga[0]['url']);
 
         $this->assertEmpty($manga->getAlternativeVersions());
 
@@ -82,21 +84,24 @@ class MangaTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf('Atarashii\APIBundle\Model\Manga', $manga);
 
-        $this->assertArrayHasKey('english', $manga->getOtherTitles());
-        $this->assertContains('Read or Die', $manga->getOtherTitles()['english']);
+        $otherTitles = $manga->getOtherTitles();
+        $this->assertArrayHasKey('english', $otherTitles);
+        $this->assertContains('Read or Die', $otherTitles['english']);
 
-        $this->assertArrayHasKey('synonyms', $manga->getOtherTitles());
-        $this->assertContains('R.O.D.', $manga->getOtherTitles()['synonyms']);
+        $this->assertArrayHasKey('synonyms', $otherTitles);
+        $this->assertContains('R.O.D.', $otherTitles['synonyms']);
 
-        $this->assertInternalType('array', $manga->getAnimeAdaptations()[0]);
-        $this->assertEquals('208', $manga->getAnimeAdaptations()[0]['anime_id']);
-        $this->assertStringStartsWith('R.O.D OVA', $manga->getAnimeAdaptations()[0]['title']);
-        $this->assertContains('anime/208', $manga->getAnimeAdaptations()[0]['url']);
+        $animeAdaptations = $manga->getAnimeAdaptations();
+        $this->assertInternalType('array', $animeAdaptations[0]);
+        $this->assertEquals('208', $animeAdaptations[0]['anime_id']);
+        $this->assertStringStartsWith('R.O.D OVA', $animeAdaptations[0]['title']);
+        $this->assertContains('anime/208', $animeAdaptations[0]['url']);
 
-        $this->assertInternalType('array', $manga->getAlternativeVersions()[0]);
-        $this->assertEquals('10869', $manga->getAlternativeVersions()[0]['manga_id']);
-        $this->assertStringStartsWith('Read or Die', $manga->getAlternativeVersions()[0]['title']);
-        $this->assertContains('manga/10869', $manga->getAlternativeVersions()[0]['url']);
+        $altVersions = $manga->getAlternativeVersions();
+        $this->assertInternalType('array', $altVersions[0]);
+        $this->assertEquals('10869', $altVersions[0]['manga_id']);
+        $this->assertStringStartsWith('Read or Die', $altVersions[0]['title']);
+        $this->assertContains('manga/10869', $altVersions[0]['url']);
 
         $mangaContents = file_get_contents(__DIR__ . '/../InputSamples/manga-44347.html');
 

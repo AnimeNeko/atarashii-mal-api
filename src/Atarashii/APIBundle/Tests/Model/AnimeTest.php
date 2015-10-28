@@ -487,7 +487,9 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $anime = new Anime();
         $anime->setMangaAdaptations($relation);
 
-        $this->assertEquals($relation, $anime->getMangaAdaptations()[0]);
+        $adaptations = $anime->getMangaAdaptations();
+
+        $this->assertEquals($relation, $adaptations[0]);
 
     }
 
@@ -500,7 +502,9 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $anime = new Anime();
         $anime->setPrequels($relation);
 
-        $this->assertEquals($relation, $anime->getPrequels()[0]);
+        $prequels = $anime->getPrequels();
+
+        $this->assertEquals($relation, $prequels[0]);
 
     }
 
@@ -513,7 +517,9 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $anime = new Anime();
         $anime->setSequels($relation);
 
-        $this->assertEquals($relation, $anime->getSequels()[0]);
+        $sequels = $anime->getSequels();
+
+        $this->assertEquals($relation, $sequels[0]);
 
     }
 
@@ -526,7 +532,9 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $anime = new Anime();
         $anime->setSideStories($relation);
 
-        $this->assertEquals($relation, $anime->getSideStories()[0]);
+        $sideStories = $anime->getSideStories();
+
+        $this->assertEquals($relation, $sideStories[0]);
 
     }
 
@@ -539,7 +547,9 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $anime = new Anime();
         $anime->setParentStory($relation);
 
-        $this->assertEquals($relation, $anime->getParentStory());
+        $parentStory = $anime->getParentStory();
+
+        $this->assertEquals($relation, $parentStory);
 
     }
 
@@ -552,7 +562,9 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $anime = new Anime();
         $anime->setCharacterAnime($relation);
 
-        $this->assertEquals($relation, $anime->getCharacterAnime()[0]);
+        $characterAnime = $anime->getCharacterAnime();
+
+        $this->assertEquals($relation, $characterAnime[0]);
 
     }
 
@@ -565,7 +577,9 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $anime = new Anime();
         $anime->setSpinOffs($relation);
 
-        $this->assertEquals($relation, $anime->getSpinOffs()[0]);
+        $spinOffs = $anime->getSpinOffs();
+
+        $this->assertEquals($relation, $spinOffs[0]);
 
     }
 
@@ -578,7 +592,9 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $anime = new Anime();
         $anime->setSummaries($relation);
 
-        $this->assertEquals($relation, $anime->getSummaries()[0]);
+        $summaries = $anime->getSummaries();
+
+        $this->assertEquals($relation, $summaries[0]);
 
     }
 
@@ -591,7 +607,9 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $anime = new Anime();
         $anime->setAlternativeVersions($relation);
 
-        $this->assertEquals($relation, $anime->getAlternativeVersions()[0]);
+        $alternativeVersions = $anime->getAlternativeVersions();
+
+        $this->assertEquals($relation, $alternativeVersions[0]);
 
     }
 
@@ -604,7 +622,9 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $anime = new Anime();
         $anime->setOther($relation);
 
-        $this->assertEquals($relation, $anime->getOther()[0]);
+        $other = $anime->getOther();
+
+        $this->assertEquals($relation, $other[0]);
 
     }
 

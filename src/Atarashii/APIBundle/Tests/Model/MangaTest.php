@@ -385,7 +385,9 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $manga = new Manga();
         $manga->setAnimeAdaptations($relation);
 
-        $this->assertEquals($relation, $manga->getAnimeAdaptations()[0]);
+        $animeAdaptations = $manga->getAnimeAdaptations();
+
+        $this->assertEquals($relation, $animeAdaptations[0]);
 
     }
 
@@ -398,7 +400,9 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $manga = new Manga();
         $manga->setRelatedManga($relation);
 
-        $this->assertEquals($relation, $manga->getRelatedManga()[0]);
+        $relatedManga = $manga->getRelatedManga();
+
+        $this->assertEquals($relation, $relatedManga[0]);
 
     }
 
@@ -411,7 +415,9 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $manga = new Manga();
         $manga->setAlternativeVersions($relation);
 
-        $this->assertEquals($relation, $manga->getAlternativeVersions()[0]);
+        $altVersions = $manga->getAlternativeVersions();
+
+        $this->assertEquals($relation, $altVersions[0]);
 
     }
 

@@ -32,14 +32,16 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('1887', $anime->getId());
         $this->assertEquals('Lucky☆Star', $anime->getTitle());
 
-        $this->assertArrayHasKey('english', $anime->getOtherTitles());
-        $this->assertContains('Lucky☆Star', $anime->getOtherTitles()['english']);
+        $oTitles = $anime->getOtherTitles();
 
-        $this->assertArrayHasKey('synonyms', $anime->getOtherTitles());
-        $this->assertContains('Lucky Star', $anime->getOtherTitles()['synonyms']);
+        $this->assertArrayHasKey('english', $oTitles);
+        $this->assertContains('Lucky☆Star', $oTitles['english']);
 
-        $this->assertArrayHasKey('japanese', $anime->getOtherTitles());
-        $this->assertContains('らき☆すた', $anime->getOtherTitles()['japanese']);
+        $this->assertArrayHasKey('synonyms', $oTitles);
+        $this->assertContains('Lucky Star', $oTitles['synonyms']);
+
+        $this->assertArrayHasKey('japanese', $oTitles);
+        $this->assertContains('らき☆すた', $oTitles['japanese']);
 
         $this->assertInternalType('integer', $anime->getRank());
         $this->assertLessThan(600, $anime->getRank());
@@ -68,29 +70,33 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('Comedy', $anime->getGenres());
         $this->assertContains('Parody', $anime->getGenres());
 
-        $this->assertInternalType('array', $anime->getMangaAdaptations()[0]);
-        $this->assertEquals('587', $anime->getMangaAdaptations()[0]['manga_id']);
-        $this->assertEquals('Lucky☆Star', $anime->getMangaAdaptations()[0]['title']);
-        $this->assertContains('manga/587', $anime->getMangaAdaptations()[0]['url']);
+        $mangaAdaptations = $anime->getMangaAdaptations();
+        $this->assertInternalType('array', $mangaAdaptations[0]);
+        $this->assertEquals('587', $mangaAdaptations[0]['manga_id']);
+        $this->assertEquals('Lucky☆Star', $mangaAdaptations[0]['title']);
+        $this->assertContains('manga/587', $mangaAdaptations[0]['url']);
 
         $this->assertEmpty($anime->getPrequels());
 
-        $this->assertInternalType('array', $anime->getSequels()[0]);
-        $this->assertEquals('4472', $anime->getSequels()[0]['anime_id']);
-        $this->assertStringStartsWith('Lucky☆Star', $anime->getSequels()[0]['title']);
-        $this->assertContains('anime/4472', $anime->getSequels()[0]['url']);
+        $sequels = $anime->getSequels();
+        $this->assertInternalType('array', $sequels[0]);
+        $this->assertEquals('4472', $sequels[0]['anime_id']);
+        $this->assertStringStartsWith('Lucky☆Star', $sequels[0]['title']);
+        $this->assertContains('anime/4472', $sequels[0]['url']);
 
         $this->assertEmpty($anime->getSideStories());
 
-        $this->assertInternalType('array', $anime->getCharacterAnime()[0]);
-        $this->assertEquals('3080', $anime->getCharacterAnime()[0]['anime_id']);
-        $this->assertEquals('Anime Tenchou', $anime->getCharacterAnime()[0]['title']);
-        $this->assertContains('anime/3080', $anime->getCharacterAnime()[0]['url']);
+        $charAnime = $anime->getCharacterAnime();
+        $this->assertInternalType('array', $charAnime[0]);
+        $this->assertEquals('3080', $charAnime[0]['anime_id']);
+        $this->assertEquals('Anime Tenchou', $charAnime[0]['title']);
+        $this->assertContains('anime/3080', $charAnime[0]['url']);
 
-        $this->assertInternalType('array', $anime->getSpinOffs()[0]);
-        $this->assertEquals('17637', $anime->getSpinOffs()[0]['anime_id']);
-        $this->assertStringStartsWith('Miyakawa-ke', $anime->getSpinOffs()[0]['title']);
-        $this->assertContains('anime/17637', $anime->getSpinOffs()[0]['url']);
+        $spinOffs = $anime->getSpinOffs();
+        $this->assertInternalType('array', $spinOffs[0]);
+        $this->assertEquals('17637', $spinOffs[0]['anime_id']);
+        $this->assertStringStartsWith('Miyakawa-ke', $spinOffs[0]['title']);
+        $this->assertContains('anime/17637', $spinOffs[0]['url']);
 
         $this->assertEmpty($anime->getSummaries());
         $this->assertEmpty($anime->getAlternativeVersions());
@@ -112,10 +118,11 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
 //        $this->assertStringStartsWith('Steins;Gate', $anime->getParentStory()['title']);
 //        $this->assertContains('anime/30484', $anime->getParentStory()['url']);
 
-        $this->assertInternalType('array', $anime->getOther()[0]);
-        $this->assertEquals('27957', $anime->getOther()[0]['anime_id']);
-        $this->assertStringStartsWith('Steins;Gate: Soumei', $anime->getOther()[0]['title']);
-        $this->assertContains('anime/27957', $anime->getOther()[0]['url']);
+        $other = $anime->getOther();
+        $this->assertInternalType('array', $other[0]);
+        $this->assertEquals('27957', $other[0]['anime_id']);
+        $this->assertStringStartsWith('Steins;Gate: Soumei', $other[0]['title']);
+        $this->assertContains('anime/27957', $other[0]['url']);
 
         $animeContents = file_get_contents(__DIR__ . '/../InputSamples/anime-918.html');
 
@@ -123,15 +130,17 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf('Atarashii\APIBundle\Model\Anime', $anime);
 
-        $this->assertInternalType('array', $anime->getSideStories()[0]);
-        $this->assertEquals('2951', $anime->getSideStories()[0]['anime_id']);
-        $this->assertStringStartsWith('Gintama: Jump Festa', $anime->getSideStories()[0]['title']);
-        $this->assertContains('anime/2951', $anime->getSideStories()[0]['url']);
+        $sideStories = $anime->getSideStories();
+        $this->assertInternalType('array', $sideStories[0]);
+        $this->assertEquals('2951', $sideStories[0]['anime_id']);
+        $this->assertStringStartsWith('Gintama: Jump Festa', $sideStories[0]['title']);
+        $this->assertContains('anime/2951', $sideStories[0]['url']);
 
-        $this->assertInternalType('array', $anime->getAlternativeVersions()[0]);
-        $this->assertEquals('7472', $anime->getAlternativeVersions()[0]['anime_id']);
-        $this->assertStringStartsWith('Gintama Movie: Shinyaku', $anime->getAlternativeVersions()[0]['title']);
-        $this->assertContains('anime/7472', $anime->getAlternativeVersions()[0]['url']);
+        $altVersions = $anime->getAlternativeVersions();
+        $this->assertInternalType('array', $altVersions[0]);
+        $this->assertEquals('7472', $altVersions[0]['anime_id']);
+        $this->assertStringStartsWith('Gintama Movie: Shinyaku', $altVersions[0]['title']);
+        $this->assertContains('anime/7472', $altVersions[0]['url']);
 
         $animeContents = file_get_contents(__DIR__ . '/../InputSamples/anime-2904.html');
 
@@ -139,15 +148,17 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf('Atarashii\APIBundle\Model\Anime', $anime);
 
-        $this->assertInternalType('array', $anime->getPrequels()[0]);
-        $this->assertEquals('1575', $anime->getPrequels()[0]['anime_id']);
-        $this->assertStringStartsWith('Code Geass: Hangyaku', $anime->getPrequels()[0]['title']);
-        $this->assertContains('anime/1575', $anime->getPrequels()[0]['url']);
+        $prequels = $anime->getPrequels();
+        $this->assertInternalType('array', $prequels[0]);
+        $this->assertEquals('1575', $prequels[0]['anime_id']);
+        $this->assertStringStartsWith('Code Geass: Hangyaku', $prequels[0]['title']);
+        $this->assertContains('anime/1575', $prequels[0]['url']);
 
-        $this->assertInternalType('array', $anime->getSummaries()[0]);
-        $this->assertEquals('6768', $anime->getSummaries()[0]['anime_id']);
-        $this->assertContains('Zero Requiem', $anime->getSummaries()[0]['title']);
-        $this->assertContains('anime/6768', $anime->getSummaries()[0]['url']);
+        $summaries = $anime->getSummaries();
+        $this->assertInternalType('array', $summaries[0]);
+        $this->assertEquals('6768', $summaries[0]['anime_id']);
+        $this->assertContains('Zero Requiem', $summaries[0]['title']);
+        $this->assertContains('anime/6768', $summaries[0]['url']);
     }
 
     /**
