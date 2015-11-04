@@ -265,7 +265,10 @@ class Communicator
         }
 
         //Add our data transmission - MAL requires the XML content to be in a variable named "data"
-        $request->setPostField('data', $content);
+        //If the content is empty, don't send the data.
+        if ($content !== '') {
+            $request->setPostField('data', $content);
+        }
 
         // Count the times we have tried
         $tryCount = 1;
