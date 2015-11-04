@@ -131,6 +131,8 @@ class ForumController extends FOSRestController
             $forumcontent = $downloader->fetch('/forum/index.php?board='.$id.'&show='.(($page*50)-50));
         } catch (Exception\CurlException $e) {
             return $this->view(Array('error' => 'network-error'), 500);
+        } catch (Exception\ClientErrorResponseException $e) {
+            return $this->view(Array('error' => 'Invalid board ID or page number'), 200);
         }
 
         $forumtopics = ForumParser::parseTopics($forumcontent);
