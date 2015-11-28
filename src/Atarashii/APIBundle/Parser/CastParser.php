@@ -49,7 +49,13 @@ class CastParser
 
         $cast->setId(explode('/', $item->filter('a')->attr('href'))[2]);
         $cast->setName($item->filter('a')->eq(1)->text());
-        $cast->setImage(str_replace('t.jpg', '.jpg', $item->filter('img')->attr('src')));
+
+        $result = preg_match('/rs\/(.*?)\?/', $item->filter('img')->attr('src'), $imageURL);
+        if ($result > 0)
+            $cast->setImage('http://cdn.myanimelist.net/images/characters/' . $imageURL[1]);
+        else
+            $cast->setImage($item->filter('img')->attr('src'));
+
         $cast->setRole($item->filter('small')->text());
 
             foreach ($item->filter('table[class="space_table"] tr') as $actorItem) {
@@ -60,7 +66,12 @@ class CastParser
                     $actor->setId(explode('/', $crawler->filter('a')->attr('href'))[2]);
                     $actor->setName($crawler->filter('a')->text());
                     $actor->setLanguage($crawler->filter('small')->last()->text());
-                    $actor->setImage(str_replace('v.jpg', '.jpg', $crawler->filter('img')->last()->attr('src')));
+
+                    $result = preg_match('/rs\/(.*?)\?/', $crawler->filter('img')->last()->attr('src'), $imageURL);
+                    if ($result > 0)
+                        $actor->setImage('http://cdn.myanimelist.net/images/voiceactors/' . $imageURL[1]);
+                    else
+                        $actor->setImage($crawler->filter('img')->last()->attr('src'));
 
                     $cast->setActors($actor);
                 }
@@ -77,7 +88,12 @@ class CastParser
         $cast->setId(explode('/', $crawler->filter('a')->attr('href'))[2]);
         $cast->setName($crawler->filter('a')->eq(1)->text());
         $cast->setRank($crawler->filter('small')->last()->text());
-        $cast->setImage(str_replace('v.jpg', '.jpg', $crawler->filter('img')->last()->attr('src')));
+
+        $result = preg_match('/rs\/(.*?)\?/', $crawler->filter('img')->last()->attr('src'), $imageURL);
+        if ($result > 0)
+            $cast->setImage('http://cdn.myanimelist.net/images/voiceactors/' . $imageURL[1]);
+        else
+            $cast->setImage($crawler->filter('img')->last()->attr('src'));
 
         return $cast;
     }
