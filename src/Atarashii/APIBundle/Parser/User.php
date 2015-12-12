@@ -27,7 +27,11 @@ class User
 
         $profileContent = $crawler->filter('#contentWrapper');
 
-        $user->setAvatarUrl($profileContent->filter('.user-image img')->attr('src'));
+        $avatar = $profileContent->filter('.user-image img');
+
+        if ($avatar->count() > 0) {
+            $user->setAvatarUrl($avatar->attr('src'));
+        }
 
         $animeStats = $profileContent->filter('.stats')->filter('.anime');
         $mangaStats = $profileContent->filter('.stats')->filter('.manga');
