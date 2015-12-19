@@ -189,13 +189,17 @@ class AnimeParser
         # Genres:
         $extracted = $leftcolumn->filterXPath('//span[text()="Genres:"]');
         if (iterator_count($extracted) > 0) {
+            $genres = array();
+
             $records = $extracted->parents()->first()->filter('a');
 
             foreach($records as $rItem) {
                 $genres[] = $rItem->nodeValue;
             }
 
-            $animerecord->setGenres($genres);
+            if(count($genres) > 0) {
+                $animerecord->setGenres($genres);
+            }
         }
 
         # Classification:
