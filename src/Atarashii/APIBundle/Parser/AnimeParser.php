@@ -149,13 +149,26 @@ class AnimeParser
             //For these, we should return a null
             if (count($daterange) > 1 && $daterange[1] !== '?') {
                 //MAL always provides record dates in US-style format.
-                if (strlen($daterange[1]) === 4) {
-                    $animerecord->setEndDate(DateTime::createFromFormat('Y m d', $daterange[1] . ' 01 01'), 'year'); //Example ID 11836
-                } elseif (strpos($daterange[1],',') == false) {
-                    $animerecord->setEndDate(DateTime::createFromFormat('M Y d', $daterange[1] . ' 01'), 'month'); //Example ID 21275
+                //Not all dates are full, so we have to figure out how to properly parse them
+                $dateParts = explode(' ', $daterange[1]);
+
+                $firstIsNumber = is_numeric($dateParts[0]);
+                $hasComma = strpos($dateParts[0], ',');
+
+                if(count($dateParts) == 3) { //Full date, normal processing
+                    $endDate = DateTime::createFromFormat('M j, Y', $daterange[1]);
+                    $animerecord->setEndDate($endDate, 'day');
+                } elseif(count($dateParts) == 2) { //We only have two parts, figure out what we were given
+                    if ( ($firstIsNumber === false) && ($hasComma !== false) ) {
+                        //So, it looks like month and year, because MAL adds the comma regardless.
+                        $endDate = DateTime::createFromFormat(('M, Y d'), $daterange[1] . ' 01'); //Example ID 21275
+                        $animerecord->setEndDate($endDate, 'month');
+                    }
                 } else {
-                    if (strlen($daterange[1]) !== 7 && strlen($daterange[1]) !== 8) {
-                        $animerecord->setEndDate(DateTime::createFromFormat('M j, Y', $daterange[1]), 'day');
+                    if(count($dateParts) == 1 && $firstIsNumber) {
+                        //Most likely just a year.
+                        $endDate = DateTime::createFromFormat('Y m d', $daterange[1] . ' 01 01');
+                        $animerecord->setEndDate($endDate, 'year'); //Example ID 11836
                     }
                 }
             }
