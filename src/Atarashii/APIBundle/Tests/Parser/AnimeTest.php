@@ -159,6 +159,14 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('6768', $summaries[0]['anime_id']);
         $this->assertContains('Zero Requiem', $summaries[0]['title']);
         $this->assertContains('anime/6768', $summaries[0]['url']);
+        
+        $animeContents = file_get_contents(__DIR__ . '/../InputSamples/anime-31636.html');
+
+        $anime = AnimeParser::parse($animeContents);
+
+        $this->assertInstanceOf('Atarashii\APIBundle\Model\Anime', $anime);
+
+        $this->assertNull($anime->getEpisodes());
     }
 
     /**

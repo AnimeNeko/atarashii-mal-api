@@ -104,9 +104,11 @@ class AnimeParser
         # Episodes:
         $extracted = $leftcolumn->filterXPath('//span[text()="Episodes:"]');
         if (iterator_count($extracted) > 0) {
-            $animerecord->setEpisodes((int) trim(str_replace($extracted->text(), '', $extracted->parents()->text())));
-        } else {
-            $animerecord->setEpisodes(null);
+            $episodeCount = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
+
+            if(is_numeric($episodeCount)) {
+                $animerecord->setEpisodes((int) $episodeCount);
+            }
         }
 
         # Status:
