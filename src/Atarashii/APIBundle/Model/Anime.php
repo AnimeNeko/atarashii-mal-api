@@ -1195,6 +1195,52 @@ class Anime
         return $this->other;
     }
 
+
+    /**
+     * Add a relation
+     *
+     * @param  array  $item An array containing details of the related item
+     * @param  string $type The type of relation, all lowercase with the underscore replacing spaces
+     * @return void
+     */
+    public function addRelation($item, $type)
+    {
+        switch ($type) {
+            case 'adaptation':
+                $this->setMangaAdaptations($item);
+                break;
+            case 'prequel':
+                $this->setPrequels($item);
+                break;
+            case 'sequel':
+                $this->setSequels($item);
+                break;
+            case 'side_story':
+                $this->setSideStories($item);
+                break;
+            case 'parent_story':
+                $this->setParentStory($item);
+                break;
+            case 'character':
+                $this->setCharacterAnime($item);
+                break;
+            case 'spin-off':
+                $this->setSpinOffs($item);
+                break;
+            case 'summary':
+                $this->setSummaries($item);
+                break;
+            case 'alternative_version':
+                $this->setAlternativeVersions($item);
+                break;
+            case 'other':
+                $this->setOther($item);
+                break;
+        }
+    }
+
+
+
     /**
      * Set the watchedStatus property
      *

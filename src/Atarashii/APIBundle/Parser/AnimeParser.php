@@ -314,7 +314,7 @@ class AnimeParser
             foreach ($rows as $row) {
                 $rowItem = $row->firstChild;
 
-                $relationType = rtrim($rowItem->nodeValue, ':');
+                $relationType = strtr(strtolower(rtrim($rowItem->nodeValue, ':')), ' ', '_');
 
                 //This gets the next td containing the items
                 $relatedItem = $rowItem->nextSibling->firstChild;
@@ -341,38 +341,7 @@ class AnimeParser
                         $itemArray['title'] = $itemTitle;
                         $itemArray['url'] = 'http://myanimelist.net' . $itemUrl;
 
-                        switch ($relationType) {
-                            case 'Adaptation':
-                                $animerecord->setMangaAdaptations($itemArray);
-                                break;
-                            case 'Prequel':
-                                $animerecord->setPrequels($itemArray);
-                                break;
-                            case 'Sequel':
-                                $animerecord->setSequels($itemArray);
-                                break;
-                            case 'Side story':
-                                $animerecord->setSideStories($itemArray);
-                                break;
-                            case 'Parent story':
-                                $animerecord->setParentStory($itemArray);
-                                break;
-                            case 'Character':
-                                $animerecord->setCharacterAnime($itemArray);
-                                break;
-                            case 'Spin-off':
-                                $animerecord->setSpinOffs($itemArray);
-                                break;
-                            case 'Summary':
-                                $animerecord->setSummaries($itemArray);
-                                break;
-                            case 'Alternative version':
-                                $animerecord->setAlternativeVersions($itemArray);
-                                break;
-                            case 'Other':
-                                $animerecord->setOther($itemArray);
-                                break;
-                        }
+                        $animerecord->addRelation($itemArray, $relationType);
                     }
 
                     //Grab next item
