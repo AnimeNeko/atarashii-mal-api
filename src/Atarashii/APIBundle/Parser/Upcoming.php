@@ -60,8 +60,13 @@ class Upcoming
         $media->setId((int) str_replace('#sarea', '', $crawler->filter('a')->attr('id')));
         $media->setTitle($crawler->filter('strong')->text());
 
-        //I removed the 't' because it will else return a little image
-        $media->setImageUrl(str_replace('t.j', '.j', $crawler->filter('img')->attr('src')));
+        //Title Image
+        //We need to do some string manipulation here so it doesn't return a tiny image
+        $imageUrl = $crawler->filter('img')->attr('src');
+        $imageUrl = preg_replace('/\?s.*$/', '', $imageUrl); //Remove session info
+        $imageUrl = preg_replace('/r\/[0-9]*?x[0-9]*?\//', '', $imageUrl); //Remove the resize part of the path
+        $media->setImageUrl($imageUrl);
+
         $media->setType(trim($crawler->filterXPath('//td[3]')->text()));
 
         switch ($type) {
