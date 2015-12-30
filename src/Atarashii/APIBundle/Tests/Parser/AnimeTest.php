@@ -44,7 +44,7 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('らき☆すた', $oTitles['japanese']);
 
         $this->assertInternalType('integer', $anime->getRank());
-        $this->assertLessThan(600, $anime->getRank());
+        $this->assertLessThan(800, $anime->getRank());
         $this->assertGreaterThan(0, $anime->getRank());
 
         $this->assertInternalType('integer', $anime->getPopularityRank());
@@ -65,7 +65,7 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertGreaterThan(230000, $anime->getMembersCount());
         $this->assertGreaterThan(7200, $anime->getFavoritedCount());
         $this->assertStringStartsWith('Having fun in school, doing homework together', $anime->getSynopsis());
-        $this->assertContains('Kyoto Animation', $anime->getProducers());
+        $this->assertContains('Lucky Paradise', $anime->getProducers());
         $this->assertContains('Lantis', $anime->getProducers());
         $this->assertContains('Comedy', $anime->getGenres());
         $this->assertContains('Parody', $anime->getGenres());

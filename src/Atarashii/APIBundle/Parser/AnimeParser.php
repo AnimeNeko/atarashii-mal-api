@@ -412,7 +412,7 @@ class AnimeParser
 
         #Personal tags
         #<td class="borderClass"><textarea name="tags" rows="2" id="tagtext" cols="45" class="textarea">action, sci-fi</textarea></td>
-        $personalTags = $crawler->filter('textarea[name="tags"]')->text();
+        $personalTags = $crawler->filter('textarea[id="add_anime_tags"]')->text();
 
         if (strlen($personalTags) > 0) {
             $personalTags = explode(',', $personalTags);
@@ -463,22 +463,22 @@ class AnimeParser
         #   <small><label><input type="checkbox" onchange="ChangeEndDate();" checked name="unknownEnd" value="1"> Unknown Date</label><br>Do <u>not</u> fill out the Finish Date unless status is <em>Completed</em> <a href="javascript:setToday(2);">Insert Today</a></small>
         #   </td>
         #</tr>
-        $isStarted = $crawler->filter('input[name="unknownStart"]')->attr('checked');
-        $isEnded = $crawler->filter('input[name="unknownEnd"]')->attr('checked');
+        $isStarted = $crawler->filter('input[id="unknown_start"]')->attr('checked');
+        $isEnded = $crawler->filter('input[id="unknown_end"]')->attr('checked');
 
         if ($isStarted != "checked") {
             //So, MAL allows users to put in just years, just years and months, or all three values.
             //This mess here is to try and avoid things breaking.
-            if ($crawler->filter('select[name="startYear"] option:selected')->count() > 0) {
-                $startYear = $crawler->filter('select[name="startYear"] option:selected')->attr('value');
+            if ($crawler->filter('select[id="add_anime_start_date_year"] option:selected')->count() > 0) {
+                $startYear = $crawler->filter('select[id="add_anime_start_date_year"] option:selected')->attr('value');
                 $startMonth = 6;
                 $startDay = 15;
 
-                if ($crawler->filter('select[name="startMonth"] option:selected')->count() > 0) {
-                    $startMonth = $crawler->filter('select[name="startMonth"] option:selected')->attr('value');
+                if ($crawler->filter('select[id="add_anime_start_date_month"] option:selected')->count() > 0) {
+                    $startMonth = $crawler->filter('select[id="add_anime_start_date_month"] option:selected')->attr('value');
 
-                    if ($crawler->filter('select[name="startDay"] option:selected')->count() > 0) {
-                        $startDay = $crawler->filter('select[name="startDay"] option:selected')->attr('value');
+                    if ($crawler->filter('select[id="add_anime_start_date_day"] option:selected')->count() > 0) {
+                        $startDay = $crawler->filter('select[id="add_anime_start_date_day"] option:selected')->attr('value');
                     }
                 }
 
@@ -488,16 +488,16 @@ class AnimeParser
 
         if ($isEnded != "checked") {
             //Same here, avoid breaking MAL's allowing of partial dates.
-            if ($crawler->filter('select[name="endYear"] option:selected')->count() > 0) {
-                $endYear = $crawler->filter('select[name="endYear"] option:selected')->attr('value');
+            if ($crawler->filter('select[id="add_anime_finish_date_year"] option:selected')->count() > 0) {
+                $endYear = $crawler->filter('select[id="add_anime_finish_date_year"] option:selected')->attr('value');
                 $endMonth = 6;
                 $endDay = 15;
 
-                if ($crawler->filter('select[name="endMonth"] option:selected')->count() > 0) {
-                    $endMonth = $crawler->filter('select[name="endMonth"] option:selected')->attr('value');
+                if ($crawler->filter('select[id="add_anime_finish_date_month"] option:selected')->count() > 0) {
+                    $endMonth = $crawler->filter('select[id="add_anime_finish_date_month"] option:selected')->attr('value');
 
-                    if ($crawler->filter('select[name="endDay"] option:selected')->count() > 0) {
-                        $endDay = $crawler->filter('select[name="endDay"] option:selected')->attr('value');
+                    if ($crawler->filter('select[id="add_anime_finish_date_day"] option:selected')->count() > 0) {
+                        $endDay = $crawler->filter('select[id="add_anime_finish_date_day"] option:selected')->attr('value');
                     }
                 }
 
@@ -508,7 +508,7 @@ class AnimeParser
         #Priority
         #<td class="borderClass"><select name="priority" class="inputtext">
         #<option value="0" selected>Low<option value="1" >Medium<option value="2" >High         </select>
-        $priority = $crawler->filter('select[name="priority"] option:selected')->attr('value');
+        $priority = $crawler->filter('select[id="add_anime_priority"] option:selected')->attr('value');
         $anime->setPriority($priority);
 
         #Storage
@@ -520,7 +520,7 @@ class AnimeParser
         #</td>
 
         //Note that if storage isn't defined, nothing will be marked as selected. We thus have to get the value in two stages to avoid raising an exception.
-        $storage = $crawler->filter('select[name="storage"] option:selected');
+        $storage = $crawler->filter('select[id="add_anime_storage_type"] option:selected');
 
         if (count($storage)) {
             $anime->setStorage($storage->attr('value'));
@@ -528,7 +528,7 @@ class AnimeParser
 
         #Storage Value - Either number of discs or size in GB
         #<div style="margin: 3px 0px; display: none;" id="StorageDiv">Total <span id="storageDescription">DvD's</span> <input type="text" name="storageVal" id="storageValue" value="1.00" size="4" class="inputtext"></div>
-        $storageval = (float) $crawler->filter('input[name="storageVal"]')->attr('value');
+        $storageval = (float) $crawler->filter('input[id="add_anime_storage_value"]')->attr('value');
 
         if ($storageval > 0) {
             $anime->setStorageValue($storageval);
@@ -536,7 +536,7 @@ class AnimeParser
 
         #Episodes Downloaded
         #<td class="borderClass"><input type="text" name="list_downloaded_eps" id="epDownloaded" value="3" size="4" class="inputtext"> <a href="javascript:void(0);" onclick="incEpDownloadCount();">+</a> <small><a href="javascript:SetDownloadedEps();">Insert Series Eps</a></small></td>
-        $downloaded = $crawler->filter('input[id="epDownloaded"]')->attr('value');
+        $downloaded = $crawler->filter('input[id="add_anime_num_downloaded_episodes"]')->attr('value');
 
         if ($downloaded > 0) {
             $anime->setEpsDownloaded($downloaded);
@@ -544,7 +544,7 @@ class AnimeParser
 
         #Times Rewatched
         #<td class="borderClass"><input type="text" name="list_times_watched" value="0" size="4" class="inputtext">
-        $rewatchCount = $crawler->filter('input[name="list_times_watched"]')->attr('value');
+        $rewatchCount = $crawler->filter('input[id="add_anime_num_watched_times"]')->attr('value');
 
         if ($rewatchCount > 0) {
             $anime->setRewatchCount($rewatchCount);
@@ -553,7 +553,7 @@ class AnimeParser
         #Rewatch Value
         #<td class="borderClass"><select name="list_rewatch_value" class="inputtext">
         #    <option value="0">Select rewatch value<option  value="1">Very Low<option  value="2">Low<option  value="3">Medium<option  value="4">High<option selected value="5">Very High            </select>
-        $rewatchValue = $crawler->filter('select[name="list_rewatch_value"] option:selected');
+        $rewatchValue = $crawler->filter('select[id="add_anime_rewatch_value"] option:selected');
 
         if (count($rewatchValue)) {
             $anime->setRewatchValue($rewatchValue->attr('value'));
@@ -561,7 +561,7 @@ class AnimeParser
 
         #Comments
         #<td class="borderClass"><textarea name="list_comments" rows="5" cols="45" class="textarea"></textarea></td>
-        $comments = trim($crawler->filter('textarea[name="list_comments"]')->text());
+        $comments = trim($crawler->filter('textarea[id="add_anime_comments"]')->text());
 
         if (strlen($comments)) {
             $anime->setPersonalComments($comments);

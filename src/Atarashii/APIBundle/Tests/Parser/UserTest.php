@@ -41,11 +41,11 @@ class UserTest extends \PHPUnit_Framework_TestCase
         // Profile Details
         $profileDetails = $this->profile->details;
 
-        //Source says "1 hour ago"
+        //Source says "6 hours ago"
         $expected = new \DateTime('now');
-        $expected->modify('-1 hour');
+        $expected->modify('-6 hours');
 
-        $this->assertEquals('1 hour ago', $profileDetails->getLastOnline());
+        $this->assertEquals('6 hours ago', $profileDetails->getLastOnline());
         $this->assertEquals($expected->format('Y-m-d\THO'), $profileDetails->getLastOnline2());
         $this->assertNull($profileDetails->getStatus());
         $this->assertEquals('Not specified', $profileDetails->getGender());

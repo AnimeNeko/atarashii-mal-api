@@ -357,7 +357,7 @@ class MangaParser
 
         #Personal tags
         #<td align="left" class="borderClass"><textarea name="tags" rows="2" id="tagtext" cols="45" class="textarea"></textarea><div class="spaceit_pad"><small>Popular tags: <a href="javascript:void(0);" onclick="detailedadd_addTag('cooking');">cooking</a>, <a href="javascript:void(0);" onclick="detailedadd_addTag('seinen');">seinen</a>, <a href="javascript:void(0);" onclick="detailedadd_addTag('drama');">drama</a>, <a href="javascript:void(0);" onclick="detailedadd_addTag('slice of life');">slice of life</a></small></div></td>
-        $personalTags = $crawler->filter('textarea[name="tags"]')->text();
+        $personalTags = $crawler->filter('textarea[id="add_manga_tags"]')->text();
 
         if (strlen($personalTags) > 0) {
             $personalTags = explode(',', $personalTags);
@@ -408,22 +408,22 @@ class MangaParser
         #    <small><label><input type="checkbox" onchange="ChangeEndDate();"  name="unknownEnd" value="1"> Unknown Date</label><br>Do <u>not</u> fill out the Finish Date unless status is <em>Completed</em> <a href="javascript:setToday(2);">Insert Today</a></small>
         #    </td>
         #</tr>
-        $isStarted = $crawler->filter('input[name="unknownStart"]')->attr('checked');
-        $isEnded = $crawler->filter('input[name="unknownEnd"]')->attr('checked');
+        $isStarted = $crawler->filter('input[id="unknown_start"]')->attr('checked');
+        $isEnded = $crawler->filter('input[id="unknown_end"]')->attr('checked');
 
         if ($isStarted != "checked") {
             //So, MAL allows users to put in just years, just years and months, or all three values.
             //This mess here is to try and avoid things breaking.
-            if ($crawler->filter('select[name="startYear"] option:selected')->count() > 0) {
-                $startYear = $crawler->filter('select[name="startYear"] option:selected')->attr('value');
+            if ($crawler->filter('select[id="add_manga_start_date_year"] option:selected')->count() > 0) {
+                $startYear = $crawler->filter('select[id="add_manga_start_date_year"] option:selected')->attr('value');
                 $startMonth = 6;
                 $startDay = 15;
 
-                if ($crawler->filter('select[name="startMonth"] option:selected')->count() > 0) {
-                    $startMonth = $crawler->filter('select[name="startMonth"] option:selected')->attr('value');
+                if ($crawler->filter('select[id="add_manga_start_date_month"] option:selected')->count() > 0) {
+                    $startMonth = $crawler->filter('select[id="add_manga_start_date_month"] option:selected')->attr('value');
 
-                    if ($crawler->filter('select[name="startDay"] option:selected')->count() > 0) {
-                        $startDay = $crawler->filter('select[name="startDay"] option:selected')->attr('value');
+                    if ($crawler->filter('select[id="add_manga_start_date_day"] option:selected')->count() > 0) {
+                        $startDay = $crawler->filter('select[id="add_manga_start_date_day"] option:selected')->attr('value');
                     }
                 }
 
@@ -433,16 +433,16 @@ class MangaParser
 
         if ($isEnded != "checked") {
             //Same here, avoid breaking MAL's allowing of partial dates.
-            if ($crawler->filter('select[name="endYear"] option:selected')->count() > 0) {
-                $endYear = $crawler->filter('select[name="endYear"] option:selected')->attr('value');
+            if ($crawler->filter('select[id="add_manga_finish_date_year"] option:selected')->count() > 0) {
+                $endYear = $crawler->filter('select[id="add_manga_finish_date_year"] option:selected')->attr('value');
                 $endMonth = 6;
                 $endDay = 15;
 
-                if ($crawler->filter('select[name="endMonth"] option:selected')->count() > 0) {
-                    $endMonth = $crawler->filter('select[name="endMonth"] option:selected')->attr('value');
+                if ($crawler->filter('select[id="add_manga_finish_date_month"] option:selected')->count() > 0) {
+                    $endMonth = $crawler->filter('select[id="add_manga_finish_date_month"] option:selected')->attr('value');
 
-                    if ($crawler->filter('select[name="endDay"] option:selected')->count() > 0) {
-                        $endDay = $crawler->filter('select[name="endDay"] option:selected')->attr('value');
+                    if ($crawler->filter('select[id="add_manga_finish_date_day"] option:selected')->count() > 0) {
+                        $endDay = $crawler->filter('select[id="add_manga_finish_date_day"] option:selected')->attr('value');
                     }
                 }
 
@@ -456,12 +456,16 @@ class MangaParser
         #<option value="0">Select</option>
         #<option value="0" selected>Low<option value="1" >Medium<option value="2" >High                </select>
         #<div style="margin-top 3px;"><small>What is your priority level to read this manga?</small></div></td>
-        $priority = $crawler->filter('select[name="priority"] option:selected')->attr('value');
-        $manga->setPriority($priority);
+        $priorityList = $crawler->filter('select[id="add_manga_priority"] option:selected');
+
+        if (count($priorityList)) {
+            $priority = $priorityList->attr('value');
+            $manga->setPriority($priority);
+        }
 
         #Chapters Downloaded
 		#<td align="left" class="borderClass"><input type="text" class="inputtext" size="4" value="0" id="dChap" name="downloaded_chapters"> <a onclick="incChapDownloadCount();" href="javascript:void(0);">+</a></td>
-        $downloaded = $crawler->filter('input[id="dChap"]')->attr('value');
+        $downloaded = $crawler->filter('input[id="add_manga_num_downloaded_chapters"]')->attr('value');
 
         if ($downloaded > 0) {
             $manga->setChapDownloaded($downloaded);
@@ -469,7 +473,7 @@ class MangaParser
 
         #Times Reread
         #<td align="left" class="borderClass"><input type="text" class="inputtext" size="4" value="0" name="times_read">
-        $rereadCount = $crawler->filter('input[name="times_read"]')->attr('value');
+        $rereadCount = $crawler->filter('input[id="add_manga_num_read_times"]')->attr('value');
 
         if ($rereadCount > 0) {
             $manga->setRereadCount($rereadCount);
@@ -478,7 +482,7 @@ class MangaParser
         #Reread Value
         #<td align="left" class="borderClass"><select class="inputtext" name="reread_value">
         #	<option value="0">Select reread value</option><option value="1">Very Low</option><option value="2">Low</option><option value="3">Medium</option><option value="4">High</option><option value="5">Very High			</option></select>
-        $rereadValue = $crawler->filter('select[name="reread_value"] option:selected');
+        $rereadValue = $crawler->filter('select[id="add_manga_reread_value"] option:selected');
 
         if (count($rereadValue)) {
             $manga->setRereadValue($rereadValue->attr('value'));
@@ -486,7 +490,7 @@ class MangaParser
 
         #Comments
         #<td align="left" class="borderClass"><textarea class="textarea" cols="45" rows="5" name="comments"></textarea></td>
-        $comments = trim($crawler->filter('textarea[name="comments"]')->text());
+        $comments = trim($crawler->filter('textarea[id="add_manga_comments"]')->text());
 
         if (strlen($comments)) {
             $manga->setPersonalComments($comments);
