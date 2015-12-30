@@ -419,15 +419,17 @@ class MangaParser
                 $startMonth = 6;
                 $startDay = 15;
 
-                if ($crawler->filter('select[id="add_manga_start_date_month"] option:selected')->count() > 0) {
-                    $startMonth = $crawler->filter('select[id="add_manga_start_date_month"] option:selected')->attr('value');
+                if($startYear !== '') {
+                    if ($crawler->filter('select[id="add_manga_start_date_month"] option:selected')->count() > 0) {
+                        $startMonth = $crawler->filter('select[id="add_manga_start_date_month"] option:selected')->attr('value');
 
-                    if ($crawler->filter('select[id="add_manga_start_date_day"] option:selected')->count() > 0) {
-                        $startDay = $crawler->filter('select[id="add_manga_start_date_day"] option:selected')->attr('value');
+                        if ($crawler->filter('select[id="add_manga_start_date_day"] option:selected')->count() > 0) {
+                            $startDay = $crawler->filter('select[id="add_manga_start_date_day"] option:selected')->attr('value');
+                        }
                     }
-                }
 
-                $manga->setReadingStart(DateTime::createFromFormat('Y-n-j', "$startYear-$startMonth-$startDay"));
+                    $manga->setReadingStart(DateTime::createFromFormat('Y-n-j', "$startYear-$startMonth-$startDay"));
+                }
             }
         }
 
@@ -438,15 +440,17 @@ class MangaParser
                 $endMonth = 6;
                 $endDay = 15;
 
-                if ($crawler->filter('select[id="add_manga_finish_date_month"] option:selected')->count() > 0) {
-                    $endMonth = $crawler->filter('select[id="add_manga_finish_date_month"] option:selected')->attr('value');
+                if($endYear !== '') {
+                    if ($crawler->filter('select[id="add_manga_finish_date_month"] option:selected')->count() > 0) {
+                        $endMonth = $crawler->filter('select[id="add_manga_finish_date_month"] option:selected')->attr('value');
 
-                    if ($crawler->filter('select[id="add_manga_finish_date_day"] option:selected')->count() > 0) {
-                        $endDay = $crawler->filter('select[id="add_manga_finish_date_day"] option:selected')->attr('value');
+                        if ($crawler->filter('select[id="add_manga_finish_date_day"] option:selected')->count() > 0) {
+                            $endDay = $crawler->filter('select[id="add_manga_finish_date_day"] option:selected')->attr('value');
+                        }
                     }
-                }
 
-                $manga->setReadingEnd(DateTime::createFromFormat('Y-n-j', "$endYear-$endMonth-$endDay"));
+                    $manga->setReadingEnd(DateTime::createFromFormat('Y-n-j', "$endYear-$endMonth-$endDay"));
+                }
             }
         }
 
