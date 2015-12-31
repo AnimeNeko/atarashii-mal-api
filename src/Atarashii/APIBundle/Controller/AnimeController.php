@@ -80,7 +80,7 @@ class AnimeController extends FOSRestController
                     return $this->view(Array('error' => 'network-error'), 500);
                 }
 
-                if (strpos($animedetails, 'This is not your entry') === false) {
+                if (strpos($animedetails, 'delete-form') !== false) {
                     $anime = AnimeParser::parseExtendedPersonal($animedetails, $anime);
                 }
             }
