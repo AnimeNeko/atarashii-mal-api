@@ -178,7 +178,7 @@ class AnimeParser
 
         # Producers:
         $extracted = $leftcolumn->filterXPath('//span[text()="Producers:"]');
-        if (iterator_count($extracted) > 0) {
+        if (strpos($extracted->parents()->text(), 'None found') === false && iterator_count($extracted) > 0) {
             $records = $extracted->parents()->first()->filter('a');
 
             foreach($records as $rItem) {
