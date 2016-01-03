@@ -19,8 +19,8 @@ class DateTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $date::formatTime($inputDate));
 
         // M j, g:i A
-        $inputDate = 'Mar 9, 8:15 PM';
-        $expected = $currentYear . '-03-09T20:15-0700';
+        $inputDate = 'Apr 9, 8:15 PM';
+        $expected = $currentYear . '-04-09T20:15-0700';
         $this->assertEquals($expected, $date::formatTime($inputDate));
 
         // M j, Y g:i A
