@@ -485,7 +485,7 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $relation['url'] = 'http://myanimelist.net/manga/' . $relation['manga_id'];
 
         $anime = new Anime();
-        $anime->setMangaAdaptations($relation);
+        $anime->addRelation($relation, 'adaptation');
 
         $adaptations = $anime->getMangaAdaptations();
 
@@ -500,7 +500,7 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $relation['url'] = 'http://myanimelist.net/anime/' . $relation['anime_id'];
 
         $anime = new Anime();
-        $anime->setPrequels($relation);
+        $anime->addRelation($relation, 'prequel');
 
         $prequels = $anime->getPrequels();
 
@@ -515,7 +515,7 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $relation['url'] = 'http://myanimelist.net/anime/' . $relation['anime_id'];
 
         $anime = new Anime();
-        $anime->setSequels($relation);
+        $anime->addRelation($relation, 'sequel');
 
         $sequels = $anime->getSequels();
 
@@ -530,7 +530,7 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $relation['url'] = 'http://myanimelist.net/anime/' . $relation['anime_id'];
 
         $anime = new Anime();
-        $anime->setSideStories($relation);
+        $anime->addRelation($relation, 'side_story');
 
         $sideStories = $anime->getSideStories();
 
@@ -545,7 +545,7 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $relation['url'] = 'http://myanimelist.net/anime/' . $relation['anime_id'];
 
         $anime = new Anime();
-        $anime->setParentStory($relation);
+        $anime->addRelation($relation, 'parent_story');
 
         $parentStory = $anime->getParentStory();
 
@@ -560,7 +560,7 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $relation['url'] = 'http://myanimelist.net/anime/' . $relation['anime_id'];
 
         $anime = new Anime();
-        $anime->setCharacterAnime($relation);
+        $anime->addRelation($relation, 'character');
 
         $characterAnime = $anime->getCharacterAnime();
 
@@ -575,7 +575,7 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $relation['url'] = 'http://myanimelist.net/anime/' . $relation['anime_id'];
 
         $anime = new Anime();
-        $anime->setSpinOffs($relation);
+        $anime->addRelation($relation, 'spin-off');
 
         $spinOffs = $anime->getSpinOffs();
 
@@ -590,7 +590,7 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $relation['url'] = 'http://myanimelist.net/anime/' . $relation['anime_id'];
 
         $anime = new Anime();
-        $anime->setSummaries($relation);
+        $anime->addRelation($relation, 'summary');
 
         $summaries = $anime->getSummaries();
 
@@ -605,7 +605,7 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $relation['url'] = 'http://myanimelist.net/anime/' . $relation['anime_id'];
 
         $anime = new Anime();
-        $anime->setAlternativeVersions($relation);
+        $anime->addRelation($relation, 'alternative_version');
 
         $alternativeVersions = $anime->getAlternativeVersions();
 
@@ -620,7 +620,7 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $relation['url'] = 'http://myanimelist.net/anime/' . $relation['anime_id'];
 
         $anime = new Anime();
-        $anime->setOther($relation);
+        $anime->addRelation($relation, 'other');
 
         $other = $anime->getOther();
 

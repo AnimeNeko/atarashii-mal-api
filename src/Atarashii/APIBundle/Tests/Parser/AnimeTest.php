@@ -107,59 +107,6 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(7, $anime->getScore());
 
-        $animeContents = file_get_contents(__DIR__ . '/../InputSamples/anime-9253.html');
-
-        $anime = AnimeParser::parse($animeContents);
-
-        $this->assertInstanceOf('Atarashii\APIBundle\Model\Anime', $anime);
-
-//        $this->assertInternalType('array', $anime->getParentStory());
-//        $this->assertEquals('30484', $anime->getParentStory()['anime_id']);
-//        $this->assertStringStartsWith('Steins;Gate', $anime->getParentStory()['title']);
-//        $this->assertContains('anime/30484', $anime->getParentStory()['url']);
-
-        $other = $anime->getOther();
-        $this->assertInternalType('array', $other[0]);
-        $this->assertEquals('27957', $other[0]['anime_id']);
-        $this->assertStringStartsWith('Steins;Gate: Soumei', $other[0]['title']);
-        $this->assertContains('anime/27957', $other[0]['url']);
-
-        $animeContents = file_get_contents(__DIR__ . '/../InputSamples/anime-918.html');
-
-        $anime = AnimeParser::parse($animeContents);
-
-        $this->assertInstanceOf('Atarashii\APIBundle\Model\Anime', $anime);
-
-        $sideStories = $anime->getSideStories();
-        $this->assertInternalType('array', $sideStories[0]);
-        $this->assertEquals('2951', $sideStories[0]['anime_id']);
-        $this->assertStringStartsWith('Gintama: Jump Festa', $sideStories[0]['title']);
-        $this->assertContains('anime/2951', $sideStories[0]['url']);
-
-        $altVersions = $anime->getAlternativeVersions();
-        $this->assertInternalType('array', $altVersions[0]);
-        $this->assertEquals('7472', $altVersions[0]['anime_id']);
-        $this->assertStringStartsWith('Gintama Movie: Shinyaku', $altVersions[0]['title']);
-        $this->assertContains('anime/7472', $altVersions[0]['url']);
-
-        $animeContents = file_get_contents(__DIR__ . '/../InputSamples/anime-2904.html');
-
-        $anime = AnimeParser::parse($animeContents);
-
-        $this->assertInstanceOf('Atarashii\APIBundle\Model\Anime', $anime);
-
-        $prequels = $anime->getPrequels();
-        $this->assertInternalType('array', $prequels[0]);
-        $this->assertEquals('1575', $prequels[0]['anime_id']);
-        $this->assertStringStartsWith('Code Geass: Hangyaku', $prequels[0]['title']);
-        $this->assertContains('anime/1575', $prequels[0]['url']);
-
-        $summaries = $anime->getSummaries();
-        $this->assertInternalType('array', $summaries[0]);
-        $this->assertEquals('6768', $summaries[0]['anime_id']);
-        $this->assertContains('Zero Requiem', $summaries[0]['title']);
-        $this->assertContains('anime/6768', $summaries[0]['url']);
-
         $animeContents = file_get_contents(__DIR__ . '/../InputSamples/anime-27833.html');
 
         $anime = AnimeParser::parse($animeContents);
