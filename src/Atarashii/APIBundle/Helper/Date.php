@@ -66,7 +66,10 @@ class Date
             else
                 return $dateTime->createFromFormat('M j, Y', $time)->format('Y-m-d');
         } else if (strpos($time, ' ') !== false) { //Do not place this before the other formatters because it will break almost all dates.
-            return $dateTime->createFromFormat('M Y', $time)->format('Y-m');
+            //WARNING: PHP will fill in missing details with the current date. This can be a problem when processing
+            //a month with fewer days than the current date (e.g. April, which has 30 days, on the 31st of another month).
+            //To solve this, use a fake day in the input, but not the output so we return the correct date.
+            return $dateTime->createFromFormat('M Y d', $time . ' 01')->format('Y-m');
         } else {
             return null;
         }
