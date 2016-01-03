@@ -12,6 +12,7 @@ use Atarashii\APIBundle\Parser\User;
 class UserTest extends \PHPUnit_Framework_TestCase
 {
     private $profile;
+    private $profile2;
 
     /**
      * @covers ::parse
@@ -59,6 +60,12 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($profileDetails->getAim());
         $this->assertNull($profileDetails->getMsn());
         $this->assertNull($profileDetails->getYahoo());
+
+        //Some extra tests based on profile #2 (a privileged account)
+        $profileDetails = $this->profile2->details;
+
+        $this->assertEquals('Site Administrator', $profileDetails->getAccessRank());
+        $this->assertEquals('Male', $profileDetails->getGender());
     }
 
     /**
@@ -125,7 +132,9 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp() {
         $profileContents = file_get_contents(__DIR__ . '/../InputSamples/profile-motokochan.html');
+        $profile2Contents = file_get_contents(__DIR__ . '/../InputSamples/profile-xinil.html');
 
         $this->profile = User::parse($profileContents);
+        $this->profile2 = User::parse($profile2Contents);
     }
 }
