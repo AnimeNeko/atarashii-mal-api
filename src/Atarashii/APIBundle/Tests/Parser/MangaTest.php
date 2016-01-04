@@ -132,5 +132,13 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(164, $manga->getChapDownloaded());
         $this->assertEquals('Medium', $manga->getRereadValue('string'));
         $this->assertStringStartsWith('An interesting spin', $manga->getPersonalComments());
+
+        $mangaContents = file_get_contents(__DIR__ . '/../InputSamples/manga-17074-mine-detailed.html');
+
+        MangaParser::parseExtendedPersonal($mangaContents, $manga);
+
+        $this->assertEquals('Medium', $manga->getPriority('string'));
+        $this->assertEquals(3, $manga->getRereadValue());
+        $this->assertEquals(1, $manga->getRereadCount());
     }
 }

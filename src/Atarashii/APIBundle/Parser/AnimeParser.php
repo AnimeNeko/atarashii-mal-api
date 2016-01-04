@@ -285,10 +285,10 @@ class AnimeParser
             $extracted = $extracted->parents()->first();
             $rawSynopsis = $extracted->filter('span[itemprop="description"]');
 
+            $animerecord->setSynopsis('There is currently no synopsis for this title.');
+
             if(iterator_count($rawSynopsis) > 0) {
                 $animerecord->setSynopsis($rawSynopsis->html());
-            } else {
-                $animerecord->setSynopsis('There is currently no synopsis for this title.');
             }
         }
 

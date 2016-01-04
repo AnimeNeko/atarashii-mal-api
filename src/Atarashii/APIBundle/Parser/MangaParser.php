@@ -103,6 +103,7 @@ class MangaParser
 
         # Volumes:
         $extracted = $leftcolumn->filterXPath('//span[text()="Volumes:"]');
+        $mangarecord->setVolumes(null);
         if (iterator_count($extracted) > 0) {
             $data = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
 
@@ -111,12 +112,11 @@ class MangaParser
             } else {
                 $mangarecord->setVolumes(null);
             }
-        } else {
-            $mangarecord->setVolumes(null);
         }
 
         # Chapters:
         $extracted = $leftcolumn->filterXPath('//span[text()="Chapters:"]');
+        $mangarecord->setChapters(null);
         if (iterator_count($extracted) > 0) {
             $data = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
 
@@ -125,8 +125,6 @@ class MangaParser
             } else {
                 $mangarecord->setChapters(null);
             }
-        } else {
-            $mangarecord->setChapters(null);
         }
 
         # Status:
@@ -210,10 +208,10 @@ class MangaParser
             $extracted = $extracted->parents()->first();
             $rawSynopsis = $extracted->filter('span[itemprop="description"]');
 
+            $mangarecord->setSynopsis('There is currently no synopsis for this title.');
+
             if(iterator_count($rawSynopsis) > 0) {
                 $mangarecord->setSynopsis($rawSynopsis->html());
-            } else {
-                $mangarecord->setSynopsis('There is currently no synopsis for this title.');
             }
         }
 
