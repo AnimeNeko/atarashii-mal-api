@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Guzzle\Http\Exception;
 use Atarashii\APIBundle\Helper\Date;
-use Atarashii\APIBundle\Parser\messagesParser;
+use Atarashii\APIBundle\Parser\MessagesParser;
 
 class MessagesController extends FOSRestController
 {
@@ -58,7 +58,7 @@ class MessagesController extends FOSRestController
         if (strpos($messagesdetails, 'You have 0 messages') !== false) {
             return $this->view(Array('error' => 'No messages found.'), 404);
         } else {
-            $messages = messagesParser::parse($messagesdetails);
+            $messages = MessagesParser::parse($messagesdetails);
 
             $response = new Response();
 

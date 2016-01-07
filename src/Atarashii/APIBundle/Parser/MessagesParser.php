@@ -118,7 +118,8 @@ class MessagesParser
         # Time of the received message.
         # Example:
         # <small>50 minutes ago</small>
-        $message->setTime($crawler->filter('div small')->text());
+        $time = $crawler->filter('div small')->text();
+        $message->setTime($time);
 
         # Subject.
         # Example:
