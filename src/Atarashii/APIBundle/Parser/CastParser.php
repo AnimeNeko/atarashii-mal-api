@@ -47,7 +47,9 @@ class CastParser
     {
         $cast = new Cast();
 
-        $cast->setId(explode('/', $item->filter('a')->attr('href'))[2]);
+        $characterIds = explode('/', $item->filter('a')->attr('href'));
+
+        $cast->setId($characterIds[2]);
         $cast->setName($item->filter('a')->eq(1)->text());
 
         $result = preg_match('/rs\/(.*?)\?/', $item->filter('img')->attr('src'), $imageURL);
@@ -63,7 +65,9 @@ class CastParser
                 $crawler = new Crawler($actorItem);
 
                 if ($crawler->filter('td')->count() > 1) {
-                    $actor->setId(explode('/', $crawler->filter('a')->attr('href'))[2]);
+                    $actorIds = explode('/', $crawler->filter('a')->attr('href'));
+
+                    $actor->setId($actorIds[2]);
                     $actor->setName($crawler->filter('a')->text());
                     $actor->setLanguage($crawler->filter('small')->last()->text());
 
@@ -85,7 +89,9 @@ class CastParser
         $crawler = new Crawler($item);
         $cast = new Cast();
 
-        $cast->setId(explode('/', $crawler->filter('a')->attr('href'))[2]);
+        $castId = explode('/', $crawler->filter('a')->attr('href'));
+
+        $cast->setId($castId[2]);
         $cast->setName($crawler->filter('a')->eq(1)->text());
         $cast->setRank($crawler->filter('small')->last()->text());
 
