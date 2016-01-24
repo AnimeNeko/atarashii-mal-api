@@ -22,29 +22,15 @@ class ForumParser
         $crawler = new Crawler();
         $crawler->addHTMLContent($contents, 'UTF-8');
 
-        $boarditems = $crawler->filter('tr');
-
-        $itemnumber = $crawler->filter('tr')->count();
-        $num = 0;
-        $category = '';
-        $resultset = array();
-        foreach ($boarditems as $item) {
-            $num++;
-            $set = self::parseBoards($item);
-
-            // Check if the catogory name($set) returned or the board item($set)
-            if (is_string($set)) {
-                if ($category != '') {
-                    $result[$category] = $resultset;
-                    $resultset = array(); // clear the $resultset array
-                }
-                $category = $set;
-            } else {
-                $resultset[] = $set;
-                if ($num == $itemnumber) {
-                    $result[$category] = $resultset; // add the last category with the boarditems
-                }
+        $category = $crawler->filter('div[class="forum-board-list pb16"]');
+        foreach ($category as $item) {
+            $crawler = new Crawler($item);
+            $categoryHeader = $crawler->filter('div[class="forum-header"]')->text();
+            $boarditems = $crawler->filter('div[class="forum-board"]');
+            foreach ($boarditems as $boardParseItem) {
+                $resultArray[] = self::parseBoards($boardParseItem);
             }
+            $result[$categoryHeader] = $resultArray;
         }
 
         return $result;
@@ -53,49 +39,40 @@ class ForumParser
     private static function parseBoards($item)
     {
         $crawler = new Crawler($item);
-        if ($crawler->filter('td')->count() >= 2) {
             $board = new Forum();
 
+        // contains no childeren
+        if ($crawler->filter('span[class=forum-subboards]')->count() < 1) {
             # name.
-            # Example:
-            # <strong>Updates &amp; Announcements</strong>
-            $board->setName($crawler->filter('strong')->text());
+            $board->setName($crawler->filter('a')->text());
+
+            # id.
+            $board->setId(str_replace('http://myanimelist.net/forum/?board=', '', $crawler->filter('a')->attr('href')));
 
             # description.
-            # Example:
-            # <br> Updates, changes, and additions to MAL.</br>
-            $board->setDescription(str_replace($board->getName() . "\n          \n\t\t  ", '', $crawler->filter('td[class="forum_boardrow1"]')->text()));
-
-            if ($crawler->filter('td[class=forum_boardrow1] a')->count() == 1) {
-                # id.
-                # Example:
-                # <strong>Anime DB</strong>
-                $board->setId(str_replace('?board=', '', $crawler->filter('td[class="forum_boardrow1"] a')->attr('href')));
-            } else {
-                $childerenitems = $crawler->filter('td[class="forum_boardrow1"] a');
-                foreach ($childerenitems as $children) {
-                    $crawler = new Crawler($children);
-                    $child = new Forum();
-
-                    # name.
-                    # Example:
-                    # <strong>Updates &amp; Announcements</strong>
-                    $child->setName($crawler->filter('a strong')->text());
-
-                    # id.
-                    # Example:
-                    # <a href="?subboard=5">...</a>
-                    $child->setId(str_replace('?subboard=', '', $crawler->attr('href')));
-
-                    $board->setChildren($child);
-                }
-            }
-
-            return $board;
+            $board->setDescription($crawler->filter('span')->text());
         } else {
-            if ($crawler->filter('td[class="forum_category"]')->count() == 1)
-                return $crawler->filter('td')->text(); // This is the category name
+            # name.
+            $board->setName($crawler->filter('span')->text());
+
+            # description.
+            $board->setDescription($crawler->filter('span[class="forum-board-description"]')->text());
+
+            $childerenitems = $crawler->filter('span[class="forum-subboards"] a');
+            foreach ($childerenitems as $children) {
+                $crawler = new Crawler($children);
+                $child = new Forum();
+
+                # name.
+                $child->setName($crawler->filter('a')->text());
+
+                # id.
+                $child->setId(str_replace('http://myanimelist.net/forum/?subboard=', '', $crawler->attr('href')));
+
+                $board->setChildren($child);
+            }
         }
+        return $board;
     }
 
     public static function parseSubBoards($contents)
