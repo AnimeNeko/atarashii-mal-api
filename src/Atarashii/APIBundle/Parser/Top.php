@@ -22,7 +22,7 @@ class Top
         $crawler->addHTMLContent($contents, 'UTF-8');
 
         //Filter into a set of tds from the source HTML table
-        $mediaitems = $crawler->filter('#horiznav_nav')->nextAll()->filterXPath('./div/table/tr');
+        $mediaitems = $crawler->filter('tr[class="ranking-list"]');
 
         foreach ($mediaitems as $item) {
             $resultset[] = self::parseRecord($item, $type);
@@ -45,24 +45,26 @@ class Top
                 break;
         }
 
+        //Separate all the details
+        $details = explode("\n",trim($crawler->filter('div[class="detail"]')->text()));
+        $subDetails = explode(' ', trim($details[1]));
+
         //Pull out all the common parts
         $media->setId((int) str_replace('#area','',$crawler->filter('a')->attr('id')));
-        $media->setTitle(trim($crawler->filter('strong')->text()));
+        $media->setTitle(trim($details[0]));
         $media->setImageUrl(str_replace('t.jpg','.jpg',$crawler->filter('img')->attr('src'))); //Convert thumbnail to full size image by stripping the "t" in the filename
-        $media->setMembersCount((int) trim(str_replace(',', '', str_replace('members', '', $crawler->filter('div.spaceit_pad span.lightLink')->text()))));
+        $media->setMembersCount((int) trim(str_replace(',', '', str_replace('members', '', $details[3]))));
 
         //Anime and manga have different details, so we grab an array of the list and then process based on the type
-        $details = explode(', ', str_replace($crawler->filter('div.spaceit_pad span')->text(), '', $crawler->filter('div.spaceit_pad')->text()));
-
         switch ($type) {
             case 'anime':
-                $media->setType(trim($details[0]));
-                $media->setEpisodes(strstr($details[1], '?') ? null : (int) trim(str_replace('eps', '', $details[1])));
-                $media->setMembersScore((float) trim(str_replace('scored', '', $details[2])));
+                $media->setType($subDetails[0]);
+                $media->setEpisodes(strstr($subDetails[1], '?') ? null : (int) trim(str_replace('eps', '', $subDetails[1]), '()'));
+                $media->setMembersScore((float) $crawler->filter('td')->eq(2)->text());
                 break;
             case 'manga':
-                $media->setVolumes(strstr($details[0], '?') ? null : (int) trim(str_replace('volumes', '', $details[0])));
-                $media->setMembersScore((float) trim(str_replace('scored', '', $details[1])));
+                $media->setVolumes(strstr($subDetails[1], '?') ? null : (int) trim(str_replace('vols', '', $subDetails[1]), '()'));
+                $media->setMembersScore((float) $crawler->filter('td')->eq(2)->text());
                 break;
         }
 
