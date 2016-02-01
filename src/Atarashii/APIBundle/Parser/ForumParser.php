@@ -28,9 +28,8 @@ class ForumParser
             $categoryHeader = $crawler->filter('div[class="forum-header"]')->text();
             $boarditems = $crawler->filter('div[class="forum-board"]');
             foreach ($boarditems as $boardParseItem) {
-                $resultArray[] = self::parseBoards($boardParseItem);
+                $result[$categoryHeader][] = self::parseBoards($boardParseItem);
             }
-            $result[$categoryHeader] = $resultArray;
         }
 
         return $result;
@@ -39,10 +38,10 @@ class ForumParser
     private static function parseBoards($item)
     {
         $crawler = new Crawler($item);
-            $board = new Forum();
+        $board = new Forum();
 
         // contains no childeren
-        if ($crawler->filter('span[class=forum-subboards]')->count() < 1) {
+        if ($crawler->filter('span[class="forum-subboards"]')->count() < 1) {
             # name.
             $board->setName($crawler->filter('a')->text());
 
