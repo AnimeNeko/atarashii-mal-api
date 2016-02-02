@@ -141,11 +141,9 @@ class ForumParser
         }
 
         try {
-            $pages = $crawler->filter('div[style="height: 15px; margin: 5px 0px;"] div')->last()->text();
-            if ($pages != '')
-                $result['pages'] = ((int) substr($pages, strpos($pages, ' (') + 2, strpos($pages, ')')));
-            else
-                $result['pages'] = 1;
+            $pages = $crawler->filter('span[class="di-ib"]')->text();
+            preg_match('/\((\d*?)\)/', $pages, $pageNumber);
+            $result['pages'] = (int) $pageNumber[1];
         } catch (\InvalidArgumentException $e) {
             //do nothing
         }
