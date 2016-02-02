@@ -82,7 +82,7 @@ class ForumParser
         $topicsitems = $crawler->filter('tr');
         foreach ($topicsitems as $item) {
             //Trick to force json array and not json objects.
-            $set = self::parseSubBoardsetails($item);
+            $set = self::parseSubBoardsdetails($item);
             if ($set != null) {
                 $resultset[] = $set;
             }
@@ -102,7 +102,7 @@ class ForumParser
         return $result;
     }
 
-    private static function parseSubBoardsetails($item)
+    private static function parseSubBoardsdetails($item)
     {
         $crawler = new Crawler($item);
         if ($crawler->filter('td[class="borderClass bgColor1"]')->count() == 3) {
