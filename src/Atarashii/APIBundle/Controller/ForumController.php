@@ -385,6 +385,8 @@ class ForumController extends FOSRestController
 
         if (strpos($topicdetails, 'Successfully posted') !== false) {
             return $this->view(Array('status' => 'OK'), 200);
+        } else if (strpos($topicdetails, 'must contain 15 characters excluding') !== false)  {
+            return $this->view(Array('error' => 'short message'), 200);
         } else {
             return $this->view(Array('error' => 'unknown'), 200);
         }

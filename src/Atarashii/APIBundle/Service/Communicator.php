@@ -205,7 +205,8 @@ class Communicator
 
         //Add our data transmission - MAL requires the XML content to be in a variable named "data"
         $request->setPostField('msg_text', $message);
-        $request->setPostField('submit', 'Post Message ');
+        $request->setPostField('csrf_token', $this->getCsrfToken());
+        $request->setPostField('submit', 'Submit');
 
         // send request / get response
         $this->response = $request->send();
