@@ -153,6 +153,7 @@ class Communicator
         //Add our data transmission - MAL requires the XML content to be in a variable named "data"
         $request->setPostField('subject', $subject);
         $request->setPostField('message', $message);
+        $request->setPostField('csrf_token', $this->getCsrfToken());
         $request->setPostField('sendmessage', 'Send Message');
 
         // send request / get response
@@ -180,7 +181,8 @@ class Communicator
         //Add our data transmission - MAL requires the XML content to be in a variable named "data"
         $request->setPostField('topic_title', $title);
         $request->setPostField('msg_text', $message);
-        $request->setPostField('submit', 'Post New Topic');
+        $request->setPostField('csrf_token', $this->getCsrfToken());
+        $request->setPostField('submit', 'Submit');
 
         // send request / get response
         $this->response = $request->send();
@@ -231,7 +233,8 @@ class Communicator
 
         //Add our data transmission - MAL requires the XML content to be in a variable named "data"
         $request->setPostField('msg_text', $message);
-        $request->setPostField('submit', 'Edit Message');
+        $request->setPostField('csrf_token', $this->getCsrfToken());
+        $request->setPostField('submit', 'Submit');
 
         // send request / get response
         $this->response = $request->send();
