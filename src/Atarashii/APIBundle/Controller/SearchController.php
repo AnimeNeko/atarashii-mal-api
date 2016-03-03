@@ -18,7 +18,6 @@ use Atarashii\APIBundle\Parser\Upcoming;
 use Atarashii\APIBundle\Parser\AnimeParser;
 use Atarashii\APIBundle\Parser\MangaParser;
 use JMS\Serializer\SerializationContext;
-use DateTime;
 
 class SearchController extends FOSRestController
 {

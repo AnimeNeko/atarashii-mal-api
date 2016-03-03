@@ -11,7 +11,6 @@ namespace Atarashii\APIBundle\Parser;
 
 use Symfony\Component\DomCrawler\Crawler;
 use Atarashii\APIBundle\Model\Review;
-use DateTime;
 
 class ReviewParser
 {

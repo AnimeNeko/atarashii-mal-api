@@ -10,7 +10,6 @@
 namespace Atarashii\APIBundle\Parser;
 
 use Symfony\Component\DomCrawler\Crawler;
-use Symfony\Component\Serializer\Serializer;
 use Atarashii\APIBundle\Model\Anime;
 use Atarashii\APIBundle\Model\Manga;
 use DateTime;
