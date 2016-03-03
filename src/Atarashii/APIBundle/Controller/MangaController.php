@@ -93,12 +93,6 @@ class MangaController extends FOSRestController
                 $serializationContext->setSerializeNull(true);
             }
 
-            //After API 1.0, we don't show the "listed manga id" parameter
-            //Always set it to null to hide it from the output.
-            if ($apiVersion > 1.0) {
-                $manga->setListedMangaId(null);
-            }
-
             //Only include cache info if it doesn't include personal data.
             if (!$usepersonal) {
                 $response->setPublic();

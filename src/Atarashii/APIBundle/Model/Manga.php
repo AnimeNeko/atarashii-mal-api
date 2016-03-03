@@ -197,8 +197,6 @@ class Manga
      * API 1.0
      * This used to correspond to a unique ID for the title on the user's list, but is no longer used.
      *
-     * @TODO: Why won't this disappear with 2.0?
-     *
      * @Type("integer")
      * @Until("1.1")
      */
