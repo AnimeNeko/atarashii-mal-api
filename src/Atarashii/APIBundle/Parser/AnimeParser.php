@@ -405,7 +405,7 @@ class AnimeParser
         return $animerecord;
     }
 
-    public static function parseExtendedPersonal($contents, $anime)
+    public static function parseExtendedPersonal($contents, Anime $anime)
     {
         $crawler = new Crawler();
         $crawler->addHTMLContent($contents, 'UTF-8');

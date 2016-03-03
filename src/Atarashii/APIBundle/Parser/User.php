@@ -10,6 +10,7 @@
 
 namespace Atarashii\APIBundle\Parser;
 
+use Atarashii\APIBundle\Model\ProfileDetails;
 use Symfony\Component\DomCrawler\Crawler;
 use Atarashii\APIBundle\Model\Profile;
 use Atarashii\APIBundle\Model\Anime;
@@ -43,7 +44,7 @@ class User
         return $user;
     }
 
-    private static function parseDetails($content, $details)
+    private static function parseDetails(Crawler $content, ProfileDetails $details)
     {
         $userAccessLevel = $content->filterXPath('//*[contains(attribute::class,"profile-team-title")]');
 
@@ -117,7 +118,7 @@ class User
         return $details;
     }
 
-    private static function parseStats($content, $stats, $mediaType)
+    private static function parseStats(Crawler $content, $stats, $mediaType)
     {
 
         //General header stuff

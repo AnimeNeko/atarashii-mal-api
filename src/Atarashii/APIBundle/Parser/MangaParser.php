@@ -348,7 +348,7 @@ class MangaParser
         return $mangarecord;
     }
 
-    public static function parseExtendedPersonal($contents, $manga)
+    public static function parseExtendedPersonal($contents, Manga $manga)
     {
         $crawler = new Crawler();
         $crawler->addHTMLContent($contents, 'UTF-8');

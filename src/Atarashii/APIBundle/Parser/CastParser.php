@@ -43,7 +43,7 @@ class CastParser
         return array('Characters' => $characters, 'Staff' => $staff);
     }
 
-    private static function parseCharacters($item)
+    private static function parseCharacters(Crawler $item)
     {
         $cast = new Cast();
 

@@ -660,12 +660,12 @@ class Anime
     /**
      * Set the startDate property and call the setter for startDate2
      *
-     * @param DateTime $startDate  The start date of the series
+     * @param \DateTime $startDate  The start date of the series
      * @param string   $accuracy   To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day".
      *
      * @return void
      */
-    public function setStartDate($startDate, $accuracy = 'day')
+    public function setStartDate(\DateTime $startDate, $accuracy = 'day')
     {
         //For API 1.0 compatibility with the old Ruby API, dates that have an accuracy greater than a year
         //use a non-standard date format. For month-only accuracy, the day is always the 16th. The time returned
@@ -691,12 +691,12 @@ class Anime
     /**
      * Set the startDate2 property
      *
-     * @param DateTime $startDate  The start date of the series
+     * @param \DateTime $startDate  The start date of the series
      * @param string   $accuracy   To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day".
      *
      * @return void
      */
-    private function setStartDate2($startDate, $accuracy = 'day')
+    private function setStartDate2(\DateTime $startDate, $accuracy = 'day')
     {
         switch ($accuracy) {
             case 'year':
@@ -728,12 +728,12 @@ class Anime
      * is not in a "parsed" format and instead is however is passed by MAL
      *
      * @param String   $literalDate The string that should be used as the end date.
-     * @param DateTime $endDate     The end date of the series
+     * @param \DateTime $endDate     The end date of the series
      * @param string   $accuracy    To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day".
      *
      * @return void
      */
-    public function setLiteralEndDate($literalDate, $endDate, $accuracy = 'day')
+    public function setLiteralEndDate($literalDate, \DateTime $endDate, $accuracy = 'day')
     {
         $this->endDate = $literalDate;
 
@@ -743,12 +743,12 @@ class Anime
     /**
      * Set the endDate property and call the setter for endDate2
      *
-     * @param DateTime $endDate    The end date of the series
+     * @param \DateTime $endDate    The end date of the series
      * @param string   $accuracy   To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day".
      *
      * @return void
      */
-    public function setEndDate($endDate, $accuracy = 'day')
+    public function setEndDate(\DateTime $endDate, $accuracy = 'day')
     {
         //For API 1.0 compatibility with the old Ruby API, dates that have an accuracy greater than a year
         //use a non-standard date format. For month-only accuracy, the day is always the 16th. The time returned
@@ -774,12 +774,12 @@ class Anime
     /**
      * Set the endDate2 property
      *
-     * @param DateTime $endDate    The end date of the series
+     * @param \DateTime $endDate    The end date of the series
      * @param string   $accuracy   To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day".
      *
      * @return void
      */
-    private function setEndDate2($endDate, $accuracy = 'day')
+    private function setEndDate2(\DateTime $endDate, $accuracy = 'day')
     {
         switch ($accuracy) {
             case 'year':
