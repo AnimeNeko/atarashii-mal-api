@@ -6,7 +6,8 @@ use Atarashii\APIBundle\Model\Review;
 
 class ReviewTest extends \PHPUnit_Framework_TestCase
 {
-    public function testAvatarUrl() {
+    public function testAvatarUrl()
+    {
         $avaUrl = 'http://www.example.com/image.jpg';
 
         $review = new Review();
@@ -15,7 +16,8 @@ class ReviewTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($avaUrl, $review->getAvatarUrl());
     }
 
-    public function testChapters() {
+    public function testChapters()
+    {
         $chap = rand();
 
         $review = new Review();
@@ -24,7 +26,8 @@ class ReviewTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($chap, $review->getChapters());
     }
 
-    public function testChaptersRead() {
+    public function testChaptersRead()
+    {
         $chap = rand();
 
         $review = new Review();
@@ -33,7 +36,8 @@ class ReviewTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($chap, $review->getChaptersRead());
     }
 
-    public function testDate() {
+    public function testDate()
+    {
         $date = 'Jan 25, 2010 7:34 AM';
         $expected = '2010-01-25T07:34-0800';
 
@@ -43,7 +47,8 @@ class ReviewTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $review->getDate());
     }
 
-    public function testEpisodes() {
+    public function testEpisodes()
+    {
         $eps = rand();
 
         $review = new Review();
@@ -52,7 +57,8 @@ class ReviewTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($eps, $review->getEpisodes());
     }
 
-    public function testWatchedEpisodes() {
+    public function testWatchedEpisodes()
+    {
         $eps = rand();
 
         $review = new Review();
@@ -61,7 +67,8 @@ class ReviewTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($eps, $review->getWatchedEpisodes());
     }
 
-    public function testHelpful() {
+    public function testHelpful()
+    {
         $helped = rand();
 
         $review = new Review();
@@ -70,7 +77,8 @@ class ReviewTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($helped, $review->getHelpful());
     }
 
-    public function testHelpfulTotal() {
+    public function testHelpfulTotal()
+    {
         $helped = rand();
 
         $review = new Review();
@@ -79,7 +87,8 @@ class ReviewTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($helped, $review->getHelpfulTotal());
     }
 
-    public function testRating() {
+    public function testRating()
+    {
         $rating = rand(1, 10);
 
         $review = new Review();
@@ -88,7 +97,8 @@ class ReviewTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($rating, $review->getRating());
     }
 
-    public function testReview() {
+    public function testReview()
+    {
         $reviewText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean molestie nisi sed lacus tincidunt, vel vestibulum enim facilisis. Nunc consectetur eget justo placerat scelerisque. Nullam eu augue ullamcorper, faucibus elit sed, malesuada libero. Proin pretium elit quis arcu eleifend venenatis. Vestibulum efficitur cursus tellus eu pharetra. Cras pharetra accumsan consequat.';
 
         $review = new Review();
@@ -97,7 +107,8 @@ class ReviewTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($reviewText, $review->getReview());
     }
 
-    public function testUsername() {
+    public function testUsername()
+    {
         $username = 'TaroYamada';
 
         $review = new Review();

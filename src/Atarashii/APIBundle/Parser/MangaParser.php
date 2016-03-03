@@ -1,18 +1,17 @@
 <?php
 /**
-* Atarashii MAL API
+* Atarashii MAL API.
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
 * @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
-
 namespace Atarashii\APIBundle\Parser;
 
 use Symfony\Component\DomCrawler\Crawler;
 use Atarashii\APIBundle\Model\Manga;
-use \DateTime;
+use DateTime;
 
 class MangaParser
 {
@@ -107,7 +106,7 @@ class MangaParser
         if (iterator_count($extracted) > 0) {
             $data = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
 
-            if ($data != "Unknown") {
+            if ($data != 'Unknown') {
                 $mangarecord->setVolumes((int) $data);
             } else {
                 $mangarecord->setVolumes(null);
@@ -120,7 +119,7 @@ class MangaParser
         if (iterator_count($extracted) > 0) {
             $data = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
 
-            if ($data != "Unknown") {
+            if ($data != 'Unknown') {
                 $mangarecord->setChapters((int) $data);
             } else {
                 $mangarecord->setChapters(null);
@@ -210,7 +209,7 @@ class MangaParser
 
             $mangarecord->setSynopsis('There is currently no synopsis for this title.');
 
-            if(iterator_count($rawSynopsis) > 0) {
+            if (iterator_count($rawSynopsis) > 0) {
                 $mangarecord->setSynopsis($rawSynopsis->html());
             }
         }
@@ -232,7 +231,6 @@ class MangaParser
 
         //NOTE: Not all relations are currently supported.
         if (iterator_count($related)) {
-
             $rows = $related->children();
             foreach ($rows as $row) {
                 $rowItem = $row->firstChild;
@@ -248,21 +246,21 @@ class MangaParser
                         $id = preg_match('/\/(anime|manga)\/(\d+)\/.*?/', $url, $urlParts);
 
                         if ($id !== false || $id !== 0) {
-                            $itemId = (int)$urlParts[2];
+                            $itemId = (int) $urlParts[2];
                             $itemTitle = $relatedItem->textContent;
                             $itemUrl = $url;
                         }
 
                         $itemArray = array();
 
-                        if($urlParts[1] == 'anime') {
+                        if ($urlParts[1] == 'anime') {
                             $itemArray['anime_id'] = $itemId;
                         } else {
                             $itemArray['manga_id'] = $itemId;
                         }
 
                         $itemArray['title'] = $itemTitle;
-                        $itemArray['url'] = 'http://myanimelist.net' . $itemUrl;
+                        $itemArray['url'] = 'http://myanimelist.net'.$itemUrl;
 
                         switch ($relationType) {
                             case 'Adaptation':
@@ -280,7 +278,6 @@ class MangaParser
 
                     //Grab next item
                     $relatedItem = $relatedItem->nextSibling;
-
                 } while ($relatedItem !== null);
             }
         }
@@ -409,7 +406,7 @@ class MangaParser
         $isStarted = $crawler->filter('input[id="unknown_start"]')->attr('checked');
         $isEnded = $crawler->filter('input[id="unknown_end"]')->attr('checked');
 
-        if ($isStarted != "checked") {
+        if ($isStarted != 'checked') {
             //So, MAL allows users to put in just years, just years and months, or all three values.
             //This mess here is to try and avoid things breaking.
             if ($crawler->filter('select[id="add_manga_start_date_year"] option:selected')->count() > 0) {
@@ -417,7 +414,7 @@ class MangaParser
                 $startMonth = 6;
                 $startDay = 15;
 
-                if($startYear !== '') {
+                if ($startYear !== '') {
                     if ($crawler->filter('select[id="add_manga_start_date_month"] option:selected')->count() > 0) {
                         $startMonth = $crawler->filter('select[id="add_manga_start_date_month"] option:selected')->attr('value');
 
@@ -431,14 +428,14 @@ class MangaParser
             }
         }
 
-        if ($isEnded != "checked") {
+        if ($isEnded != 'checked') {
             //Same here, avoid breaking MAL's allowing of partial dates.
             if ($crawler->filter('select[id="add_manga_finish_date_year"] option:selected')->count() > 0) {
                 $endYear = $crawler->filter('select[id="add_manga_finish_date_year"] option:selected')->attr('value');
                 $endMonth = 6;
                 $endDay = 15;
 
-                if($endYear !== '') {
+                if ($endYear !== '') {
                     if ($crawler->filter('select[id="add_manga_finish_date_month"] option:selected')->count() > 0) {
                         $endMonth = $crawler->filter('select[id="add_manga_finish_date_month"] option:selected')->attr('value');
 

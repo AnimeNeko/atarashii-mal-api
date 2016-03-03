@@ -1,13 +1,12 @@
 <?php
 /**
-* Atarashii MAL API
+* Atarashii MAL API.
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
 * @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
-
 namespace Atarashii\APIBundle\Service;
 
 use Symfony\Component\DomCrawler\Crawler;
@@ -25,11 +24,11 @@ class Communicator
     private $response;
 
     /**
-    * Create an instance of the communicator.
-    *
-    * @param string $baseurl The base URL for the communications. Do not use a terminating slash.
-    * @param string $ua      User-Agent to send.
-    */
+     * Create an instance of the communicator.
+     *
+     * @param string $baseurl The base URL for the communications. Do not use a terminating slash.
+     * @param string $ua      User-Agent to send.
+     */
     public function __construct($baseurl, $ua)
     {
         $this->useragent = $ua;
@@ -41,11 +40,12 @@ class Communicator
     }
 
     /**
-     * Get the CSRF Token
+     * Get the CSRF Token.
      *
      * @return string A string representing the CSRF token required for login
      */
-    private function getCsrfToken() {
+    private function getCsrfToken()
+    {
         $token = null;
 
         //Get the csrf_token for login
@@ -56,10 +56,10 @@ class Communicator
 
         $metaTags = $crawler->filter('meta[name="csrf_token"]');
 
-        foreach($metaTags as $tag) {
+        foreach ($metaTags as $tag) {
             $name = $tag->attributes->getNamedItem('name');
 
-            if($name !== null && $name->value == 'csrf_token') {
+            if ($name !== null && $name->value == 'csrf_token') {
                 $token = $tag->attributes->getNamedItem('content')->value;
             }
         }
@@ -68,13 +68,13 @@ class Communicator
     }
 
     /**
-    * Login to the MAL Front-end to get a cookie
-    *
-    * @param string $username MAL Username
-    * @param string $password MAL Password
-    *
-    * @return boolean The confirmation of a login.
-    */
+     * Login to the MAL Front-end to get a cookie.
+     *
+     * @param string $username MAL Username
+     * @param string $password MAL Password
+     *
+     * @return bool The confirmation of a login.
+     */
     public function cookieLogin($username, $password)
     {
         //Don't bother making a request if the user didn't send any authentication
@@ -90,7 +90,7 @@ class Communicator
         }
 
         // create a request
-        $request = $this->client->post("/login.php");
+        $request = $this->client->post('/login.php');
         $request->setHeader('User-Agent', $this->useragent);
 
         //Add our data transmission - MAL requires the XML content to be in a variable named "data"
@@ -110,14 +110,14 @@ class Communicator
     }
 
     /**
-    * Fetch content from a URL
-    *
-    * @param string $url      Path to access
-    * @param string $username Optional MAL Username. Default is null.
-    * @param string $password Optional MAL Password. Default is null.
-    *
-    * @return string Contents of the resource at the supplied path.
-    */
+     * Fetch content from a URL.
+     *
+     * @param string $url      Path to access
+     * @param string $username Optional MAL Username. Default is null.
+     * @param string $password Optional MAL Password. Default is null.
+     *
+     * @return string Contents of the resource at the supplied path.
+     */
     public function fetch($url, $username = null, $password = null)
     {
         // create a request
@@ -136,7 +136,7 @@ class Communicator
     }
 
     /**
-     * Send a message on MAL
+     * Send a message on MAL.
      *
      * @param string $url     The parameters of the url
      * @param string $subject Subject of the message
@@ -147,7 +147,7 @@ class Communicator
     public function sendMessage($url, $subject, $message)
     {
         // create a request
-        $request = $this->client->post("http://myanimelist.net/mymessages.php?go=send&".$url);
+        $request = $this->client->post('http://myanimelist.net/mymessages.php?go=send&'.$url);
         $request->setHeader('User-Agent', $this->useragent);
 
         //Add our data transmission - MAL requires the XML content to be in a variable named "data"
@@ -164,10 +164,10 @@ class Communicator
     }
 
     /**
-     * Create a topic on MAL
+     * Create a topic on MAL.
      *
-     * @param int    $id    The board id
-     * @param string $title Subject of the message
+     * @param int    $id      The board id
+     * @param string $title   Subject of the message
      * @param string $message body of the message
      *
      * @return string
@@ -175,7 +175,7 @@ class Communicator
     public function createTopic($id, $title, $message)
     {
         // create a request
-        $request = $this->client->post("http://myanimelist.net/forum/?action=post&boardid=".$id);
+        $request = $this->client->post('http://myanimelist.net/forum/?action=post&boardid='.$id);
         $request->setHeader('User-Agent', $this->useragent);
 
         //Add our data transmission - MAL requires the XML content to be in a variable named "data"
@@ -192,7 +192,7 @@ class Communicator
     }
 
     /**
-     * Create a comment inside a topic on MAL
+     * Create a comment inside a topic on MAL.
      *
      * @param int    $id      The topic id
      * @param string $message The body of the message
@@ -202,7 +202,7 @@ class Communicator
     public function createComment($id, $message)
     {
         // create a request
-        $request = $this->client->post("http://myanimelist.net/forum/?action=message&topic_id=".$id);
+        $request = $this->client->post('http://myanimelist.net/forum/?action=message&topic_id='.$id);
         $request->setHeader('User-Agent', $this->useragent);
 
         //Add our data transmission - MAL requires the XML content to be in a variable named "data"
@@ -218,7 +218,7 @@ class Communicator
     }
 
     /**
-     * edith a comment inside a topic on MAL
+     * edith a comment inside a topic on MAL.
      *
      * @param int    $id      The topic id
      * @param string $message The body of the message
@@ -228,7 +228,7 @@ class Communicator
     public function edithComment($id, $message)
     {
         // create a request
-        $request = $this->client->post("http://myanimelist.net/forum/?action=message&msgid=".$id);
+        $request = $this->client->post('http://myanimelist.net/forum/?action=message&msgid='.$id);
         $request->setHeader('User-Agent', $this->useragent);
 
         //Add our data transmission - MAL requires the XML content to be in a variable named "data"
@@ -244,20 +244,20 @@ class Communicator
     }
 
     /**
-    * Post content to a URL
-    *
-    * This function is called sendXML as it's intended to send an XML document to
-    * MAL's official API and assumes certain requirements. Note that MAL usually
-    * requires authenticated access for API operations, so you should generally
-    * supply username and password.
-    *
-    * @param string $url      Path for posting
-    * @param string $content  Content to post to the $url. Generally an XML document.
-    * @param string $username Optional MAL Username. Default is null.
-    * @param string $password Optional MAL Password. Default is null.
-    *
-    * @return string Contents of the resource at the supplied path.
-    */
+     * Post content to a URL.
+     *
+     * This function is called sendXML as it's intended to send an XML document to
+     * MAL's official API and assumes certain requirements. Note that MAL usually
+     * requires authenticated access for API operations, so you should generally
+     * supply username and password.
+     *
+     * @param string $url      Path for posting
+     * @param string $content  Content to post to the $url. Generally an XML document.
+     * @param string $username Optional MAL Username. Default is null.
+     * @param string $password Optional MAL Password. Default is null.
+     *
+     * @return string Contents of the resource at the supplied path.
+     */
     public function sendXML($url, $content, $username = null, $password = null)
     {
         // create a request
@@ -285,12 +285,11 @@ class Communicator
                 // this is the response body from the requested page
                 return $this->response->getBody();
             } catch (Exception\ClientErrorResponseException $e) {
-
                 if ($tryCount >= 3) {
                     throw $e;
                 }
 
-                $tryCount++;
+                ++$tryCount;
 
                 //Sleep for 0.5 seconds (50,000 microseconds)
                 usleep(500000);
@@ -299,10 +298,10 @@ class Communicator
     }
 
     /**
-    * Determine if a redirect happened
-    *
-    * @return boolean States if a redirect occurred during the operation
-    */
+     * Determine if a redirect happened.
+     *
+     * @return bool States if a redirect occurred during the operation
+     */
     public function wasRedirected()
     {
         if ($this->response->getRedirectCount()) {

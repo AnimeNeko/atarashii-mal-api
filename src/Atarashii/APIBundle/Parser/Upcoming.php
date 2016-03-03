@@ -1,24 +1,23 @@
 <?php
 /**
-* Atarashii MAL API
+* Atarashii MAL API.
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
 * @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
-
 namespace Atarashii\APIBundle\Parser;
 
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\Serializer\Serializer;
 use Atarashii\APIBundle\Model\Anime;
 use Atarashii\APIBundle\Model\Manga;
-use \DateTime;
+use DateTime;
 
 class Upcoming
 {
-    public static function parse($contents,$type)
+    public static function parse($contents, $type)
     {
         $resultset = '';
 
@@ -41,7 +40,7 @@ class Upcoming
         return $resultset;
     }
 
-    private static function parserecord($item,$type)
+    private static function parserecord($item, $type)
     {
         $crawler = new Crawler($item);
         $check = true;
@@ -128,17 +127,18 @@ class Upcoming
         return $media;
     }
 
-    private static function fixMalShortYear($year) {
+    private static function fixMalShortYear($year)
+    {
         //Create a four digit year from MAL's display.
         //We can't use PHP's built-in date parser as it parses two-digit years
         //in the range 1970-2069. We need earlier, so have to do it manually.
         //We use the range 1930-2029, which will create some incorrect dates
         //for titles from the early part of the 20th century, but it's the best
         //fix at this point.
-        if($year >= 30) {
-            return '19' . $year;
+        if ($year >= 30) {
+            return '19'.$year;
         } else {
-            return '20' . $year;
+            return '20'.$year;
         }
     }
 }

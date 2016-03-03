@@ -1,13 +1,12 @@
 <?php
 /**
-* Atarashii MAL API
+* Atarashii MAL API.
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
 * @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
-
 namespace Atarashii\APIBundle\Parser;
 
 use Symfony\Component\DomCrawler\Crawler;
@@ -71,6 +70,7 @@ class ForumParser
                 $board->setChildren($child);
             }
         }
+
         return $board;
     }
 
@@ -111,7 +111,7 @@ class ForumParser
             $topics->setId(str_replace('?mangaid=', '', str_replace('?animeid=', '', $crawler->filter('td[class="borderClass bgColor1"] a')->attr('href'))));
 
             try {
-                $topics->setName($crawler->filter('strong')->text() . ' ' . $crawler->filter('small')->text());
+                $topics->setName($crawler->filter('strong')->text().' '.$crawler->filter('small')->text());
             } catch (\InvalidArgumentException $e) {
                 $topics->setName($crawler->filter('strong')->text());
             }
@@ -122,7 +122,7 @@ class ForumParser
 
             return $topics;
         } else {
-            return null;
+            return;
         }
     }
 
@@ -186,7 +186,7 @@ class ForumParser
 
             return $topics;
         } else {
-            return null;
+            return;
         }
     }
 
@@ -257,7 +257,8 @@ class ForumParser
         # comment.
         # Example:
         # <div id="message25496275">...</div>
-        $topic->setComment($crawler->filter('div[id="message' . $topic->getId() . '"]')->html());
+        $topic->setComment($crawler->filter('div[id="message'.$topic->getId().'"]')->html());
+
         return $topic;
     }
 

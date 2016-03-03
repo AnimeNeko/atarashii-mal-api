@@ -1,13 +1,12 @@
 <?php
 /**
-* Atarashii MAL API
+* Atarashii MAL API.
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
 * @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
-
 namespace Atarashii\APIBundle\Controller;
 
 use Atarashii\APIBundle\Parser\ForumParser;
@@ -15,25 +14,22 @@ use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Guzzle\Http\Exception;
-
 use Atarashii\APIBundle\Parser\Upcoming;
 use Atarashii\APIBundle\Parser\AnimeParser;
 use Atarashii\APIBundle\Parser\MangaParser;
-
 use JMS\Serializer\SerializationContext;
-
-use \DateTime;
+use DateTime;
 
 class SearchController extends FOSRestController
 {
     /**
-     * Search for an anime
+     * Search for an anime.
      *
      * Uses the contents of the HTTP Request to get the needed data for performing a search.
      * The "page" and "q" get variables are used in the query for the title.
      *
      * @param string  $apiVersion The API version of the request
-     * @param Request $request The HTTP Request object.
+     * @param Request $request    The HTTP Request object.
      *
      * @return View
      */
@@ -51,9 +47,9 @@ class SearchController extends FOSRestController
         $downloader = $this->get('atarashii_api.communicator');
 
         try {
-            $animecontent = $downloader->fetch('/anime.php?c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&q='.$query.'&show='.(($page*50)-50));
+            $animecontent = $downloader->fetch('/anime.php?c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&q='.$query.'&show='.(($page * 50) - 50));
         } catch (Exception\CurlException $e) {
-            return $this->view(Array('error' => 'network-error'), 500);
+            return $this->view(array('error' => 'network-error'), 500);
         } catch (Exception\ClientErrorResponseException $e) {
             //MAL now returns 404 on searches without results.
             //We still need the content for logic purposes.
@@ -67,7 +63,7 @@ class SearchController extends FOSRestController
         $response->setPublic();
         $response->setMaxAge(3600); //One hour
         $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag('anime/search?q=' . urlencode($query));
+        $response->setEtag('anime/search?q='.urlencode($query));
 
         //Also, set "expires" header for caches that don't understand Cache-Control
         $date = new \DateTime();
@@ -83,7 +79,7 @@ class SearchController extends FOSRestController
         } else {
 
             //For compatibility, API 1.0 explicitly passes null parameters.
-            if ($apiVersion == "1.0") {
+            if ($apiVersion == '1.0') {
                 $serializationContext->setSerializeNull(true);
             }
 
@@ -93,14 +89,13 @@ class SearchController extends FOSRestController
 
                 try {
                     $animecontent = $downloader->fetch($location);
-                    $searchanime = Array(AnimeParser::parse($animecontent));
+                    $searchanime = array(AnimeParser::parse($animecontent));
                 } catch (Exception\CurlException $e) {
-                    return $this->view(Array('error' => 'network-error'), 500);
+                    return $this->view(array('error' => 'network-error'), 500);
                 }
             } else {
-
                 if ($downloader->wasRedirected()) {
-                    $searchanime = Array(AnimeParser::parse($animecontent));
+                    $searchanime = array(AnimeParser::parse($animecontent));
                 } else {
                     $searchanime = Upcoming::parse($animecontent, 'anime');
                 }
@@ -114,17 +109,16 @@ class SearchController extends FOSRestController
 
             return $view;
         }
-
     }
 
     /**
-     * Search for a manga
+     * Search for a manga.
      *
      * Uses the contents of the HTTP Request to get the needed data for performing a search.
      * The "page" and "q" get variables are used in the query for the title.
      *
      * @param string  $apiVersion The API version of the request
-     * @param Request $request The HTTP Request object.
+     * @param Request $request    The HTTP Request object.
      *
      * @return View
      */
@@ -142,9 +136,9 @@ class SearchController extends FOSRestController
         $downloader = $this->get('atarashii_api.communicator');
 
         try {
-            $mangacontent = $downloader->fetch('/manga.php?c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&q='.$query.'&show='.(($page*50)-50));
+            $mangacontent = $downloader->fetch('/manga.php?c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&q='.$query.'&show='.(($page * 50) - 50));
         } catch (Exception\CurlException $e) {
-            return $this->view(Array('error' => 'network-error'), 500);
+            return $this->view(array('error' => 'network-error'), 500);
         } catch (Exception\ClientErrorResponseException $e) {
             //MAL now returns 404 on searches without results.
             //We still need the content for logic purposes.
@@ -158,7 +152,7 @@ class SearchController extends FOSRestController
         $response->setPublic();
         $response->setMaxAge(3600); //One hour
         $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag('manga/search?q=' . urlencode($query));
+        $response->setEtag('manga/search?q='.urlencode($query));
 
         //Also, set "expires" header for caches that don't understand Cache-Control
         $date = new \DateTime();
@@ -166,7 +160,7 @@ class SearchController extends FOSRestController
         $response->setExpires($date);
 
         if ((strpos($mangacontent, 'No titles that matched') !== false) || (strpos($mangacontent, 'This page doesn\'t exist') !== false)) {
-            $view = $this->view(Array('error' => 'not-found'));
+            $view = $this->view(array('error' => 'not-found'));
             $view->setResponse($response);
             $view->setStatusCode(404);
 
@@ -174,7 +168,7 @@ class SearchController extends FOSRestController
         } else {
 
             //For compatibility, API 1.0 explicitly passes null parameters.
-            if ($apiVersion == "1.0") {
+            if ($apiVersion == '1.0') {
                 $serializationContext->setSerializeNull(true);
             }
 
@@ -184,13 +178,13 @@ class SearchController extends FOSRestController
 
                 try {
                     $mangacontent = $downloader->fetch($location);
-                    $searchmanga = Array(MangaParser::parse($mangacontent));
+                    $searchmanga = array(MangaParser::parse($mangacontent));
                 } catch (Exception\CurlException $e) {
-                    return $this->view(Array('error' => 'network-error'), 500);
+                    return $this->view(array('error' => 'network-error'), 500);
                 }
             } else {
                 if ($downloader->wasRedirected()) {
-                    $searchmanga = Array(MangaParser::parse($mangacontent));
+                    $searchmanga = array(MangaParser::parse($mangacontent));
                 } else {
                     $searchmanga = Upcoming::parse($mangacontent, 'manga');
                 }
@@ -233,9 +227,9 @@ class SearchController extends FOSRestController
         $downloader = $this->get('atarashii_api.communicator');
 
         try {
-            $content = $downloader->fetch('/forum/?action=search&q=' . $query . '&u=' . $user . '&uloc=' . $userCategory . '&loc=' . $category);
+            $content = $downloader->fetch('/forum/?action=search&q='.$query.'&u='.$user.'&uloc='.$userCategory.'&loc='.$category);
         } catch (Exception\CurlException $e) {
-            return $this->view(Array('error' => 'network-error'), 500);
+            return $this->view(array('error' => 'network-error'), 500);
         }
 
         $response = new Response();
@@ -243,7 +237,7 @@ class SearchController extends FOSRestController
         $response->setPublic();
         $response->setMaxAge(3600); //One hour
         $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag('forum/search?q=' . urlencode($query . $user));
+        $response->setEtag('forum/search?q='.urlencode($query.$user));
 
         //Also, set "expires" header for caches that don't understand Cache-Control
         $date = new \DateTime();
@@ -251,13 +245,12 @@ class SearchController extends FOSRestController
         $response->setExpires($date);
 
         if (strpos($content, 'User not found') !== false || !strpos($content, 'Topic') !== false) {
-            $view = $this->view(Array('error' => 'not-found'));
+            $view = $this->view(array('error' => 'not-found'));
             $view->setResponse($response);
             $view->setStatusCode(404);
 
             return $view;
         } else {
-
             $result = ForumParser::parseTopics($content);
 
             $view = $this->view($result);

@@ -1,13 +1,12 @@
 <?php
 /**
-* Atarashii MAL API
+* Atarashii MAL API.
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
 * @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
-
 namespace Atarashii\APIBundle\Model;
 
 use JMS\Serializer\Annotation\SerializedName;
@@ -18,7 +17,7 @@ use JMS\Serializer\Annotation\Until;
 class Actor
 {
     /**
-     * The id of an actor
+     * The id of an actor.
      *
      * @Type("integer")
      * @Since("2.0")
@@ -26,7 +25,7 @@ class Actor
     private $id;
 
     /**
-     * The voice actor name
+     * The voice actor name.
      *
      * @Type("string")
      * @Since("2.0")
@@ -34,7 +33,7 @@ class Actor
     private $name;
 
     /**
-     * The voice actor image URL
+     * The voice actor image URL.
      *
      * @Type("string")
      * @Since("2.0")
@@ -42,7 +41,7 @@ class Actor
     private $image;
 
     /**
-     * The language of the voice actor
+     * The language of the voice actor.
      *
      * @Type("string")
      * @Since("2.0")
@@ -50,11 +49,9 @@ class Actor
     private $language;
 
     /**
-     * Set the id property
+     * Set the id property.
      *
-     * @param integer $id The actor
-     *
-     * @return void
+     * @param int $id The actor
      */
     public function setId($id)
     {
@@ -72,11 +69,9 @@ class Actor
     }
 
     /**
-     * Set the actorName property
+     * Set the actorName property.
      *
      * @param string $actorName The name of the voice actor.
-     *
-     * @return void
      */
     public function setName($actorName)
     {
@@ -84,7 +79,7 @@ class Actor
     }
 
     /**
-     * Get the actorName property
+     * Get the actorName property.
      *
      * @return string
      */
@@ -94,22 +89,20 @@ class Actor
     }
 
     /**
-     * Set the actorImage property
+     * Set the actorImage property.
      *
      * @param string $actorImage The image of the voice actor.
-     *
-     * @return void
      */
     public function setImage($actorImage)
     {
-        if ($actorImage === "http://cdn.myanimelist.net/images/questionmark_23.gif")
+        if ($actorImage === 'http://cdn.myanimelist.net/images/questionmark_23.gif')
             $this->image = 'http://cdn.myanimelist.net/images/na.gif';
         else
             $this->image = $actorImage;
     }
 
     /**
-     * Get the actorImage property
+     * Get the actorImage property.
      *
      * @return string
      */
@@ -119,11 +112,9 @@ class Actor
     }
 
     /**
-     * Set the actorLanguage property
+     * Set the actorLanguage property.
      *
      * @param string $actorLanguage The language of the voice actor.
-     *
-     * @return void
      */
     public function setLanguage($actorLanguage)
     {
@@ -131,7 +122,7 @@ class Actor
     }
 
     /**
-     * Get the actorLanguage property
+     * Get the actorLanguage property.
      *
      * @return string
      */

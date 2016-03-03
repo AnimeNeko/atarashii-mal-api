@@ -1,18 +1,17 @@
 <?php
 /**
-* Atarashii MAL API
+* Atarashii MAL API.
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
 * @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
-
 namespace Atarashii\APIBundle\Parser;
 
 use Symfony\Component\DomCrawler\Crawler;
 use Atarashii\APIBundle\Model\Anime;
-use \DateTime;
+use DateTime;
 
 class AnimeParser
 {
@@ -106,7 +105,7 @@ class AnimeParser
         if (iterator_count($extracted) > 0) {
             $episodeCount = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
 
-            if(is_numeric($episodeCount)) {
+            if (is_numeric($episodeCount)) {
                 $animerecord->setEpisodes((int) $episodeCount);
             }
         }
@@ -130,18 +129,18 @@ class AnimeParser
             $daterange = explode(' to ', trim(str_replace($extracted->text(), '', $extracted->parents()->text())));
 
             //MAL always provides record dates in US-style format.
-            if (strpos($daterange[0],',') === false) {
+            if (strpos($daterange[0], ',') === false) {
                 if (strlen($daterange[0]) === 4) {
-                    $animerecord->setStartDate(DateTime::createFromFormat('Y m d', $daterange[0] . ' 01 01'), 'year'); //Example ID 6535 or 9951
+                    $animerecord->setStartDate(DateTime::createFromFormat('Y m d', $daterange[0].' 01 01'), 'year'); //Example ID 6535 or 9951
                 } elseif ($daterange[0] !== 'Not available') {
-                    $animerecord->setStartDate(DateTime::createFromFormat('M Y d', $daterange[0] . ' 01'), 'month'); //Example ID 22535 (check upcoming list)
+                    $animerecord->setStartDate(DateTime::createFromFormat('M Y d', $daterange[0].' 01'), 'month'); //Example ID 22535 (check upcoming list)
                 }
             } else {
                 if (count(explode(' ', $daterange[0])) == 2) { //MAL has been showing a comma with month and year (Jan, 2016), so catch that
                     $dateComponents = explode(' ', $daterange[0]);
                     $month = substr($dateComponents[0], 0, -1);
                     $year = $dateComponents[1];
-                    $animerecord->setStartDate(DateTime::createFromFormat('M Y d', $month . ' ' . $year . ' 01'), 'month');
+                    $animerecord->setStartDate(DateTime::createFromFormat('M Y d', $month.' '.$year.' 01'), 'month');
                 } elseif (strlen($daterange[0]) !== 7 && strlen($daterange[0]) !== 8) {
                     $animerecord->setStartDate(DateTime::createFromFormat('M j, Y', $daterange[0]), 'day');
                 }
@@ -157,19 +156,19 @@ class AnimeParser
                 $firstIsNumber = is_numeric($dateParts[0]);
                 $hasComma = strpos($dateParts[0], ',');
 
-                if(count($dateParts) == 3) { //Full date, normal processing
+                if (count($dateParts) == 3) { //Full date, normal processing
                     $endDate = DateTime::createFromFormat('M j, Y', $daterange[1]);
                     $animerecord->setEndDate($endDate, 'day');
-                } elseif(count($dateParts) == 2) { //We only have two parts, figure out what we were given
-                    if ( ($firstIsNumber === false) && ($hasComma !== false) ) {
+                } elseif (count($dateParts) == 2) { //We only have two parts, figure out what we were given
+                    if (($firstIsNumber === false) && ($hasComma !== false)) {
                         //So, it looks like month and year, because MAL adds the comma regardless.
-                        $endDate = DateTime::createFromFormat(('M, Y d'), $daterange[1] . ' 01'); //Example ID 21275
+                        $endDate = DateTime::createFromFormat(('M, Y d'), $daterange[1].' 01'); //Example ID 21275
                         $animerecord->setEndDate($endDate, 'month');
                     }
                 } else {
-                    if(count($dateParts) == 1 && $firstIsNumber) {
+                    if (count($dateParts) == 1 && $firstIsNumber) {
                         //Most likely just a year.
-                        $endDate = DateTime::createFromFormat('Y m d', $daterange[1] . ' 01 01');
+                        $endDate = DateTime::createFromFormat('Y m d', $daterange[1].' 01 01');
                         $animerecord->setEndDate($endDate, 'year'); //Example ID 11836
                     }
                 }
@@ -181,7 +180,7 @@ class AnimeParser
         if (strpos($extracted->parents()->text(), 'None found') === false && iterator_count($extracted) > 0) {
             $records = $extracted->parents()->first()->filter('a');
 
-            foreach($records as $rItem) {
+            foreach ($records as $rItem) {
                 $producers[] = $rItem->nodeValue;
             }
 
@@ -195,11 +194,11 @@ class AnimeParser
 
             $records = $extracted->parents()->first()->filter('a');
 
-            foreach($records as $rItem) {
+            foreach ($records as $rItem) {
                 $genres[] = $rItem->nodeValue;
             }
 
-            if(count($genres) > 0) {
+            if (count($genres) > 0) {
                 $animerecord->setGenres($genres);
             }
         }
@@ -233,7 +232,7 @@ class AnimeParser
             //Sometimes there is a superscript number at the end from a note.
             //Scores are only two decimals, so number_format should chop off the excess, hopefully.
             if (strpos($extracted, 'N/A') === false) {
-                $animerecord->setMembersScore((float)number_format($extracted, 2));
+                $animerecord->setMembersScore((float) number_format($extracted, 2));
             }
         }
 
@@ -287,7 +286,7 @@ class AnimeParser
 
             $animerecord->setSynopsis('There is currently no synopsis for this title.');
 
-            if(iterator_count($rawSynopsis) > 0) {
+            if (iterator_count($rawSynopsis) > 0) {
                 $animerecord->setSynopsis($rawSynopsis->html());
             }
         }
@@ -309,7 +308,6 @@ class AnimeParser
 
         //NOTE: Not all relations are currently supported.
         if (iterator_count($related)) {
-
             $rows = $related->children();
             foreach ($rows as $row) {
                 $rowItem = $row->firstChild;
@@ -325,28 +323,27 @@ class AnimeParser
                         $id = preg_match('/\/(anime|manga)\/(\d+)\/.*?/', $url, $urlParts);
 
                         if ($id !== false || $id !== 0) {
-                            $itemId = (int)$urlParts[2];
+                            $itemId = (int) $urlParts[2];
                             $itemTitle = $relatedItem->textContent;
                             $itemUrl = $url;
                         }
 
                         $itemArray = array();
 
-                        if($urlParts[1] == 'anime') {
+                        if ($urlParts[1] == 'anime') {
                             $itemArray['anime_id'] = $itemId;
                         } else {
                             $itemArray['manga_id'] = $itemId;
                         }
 
                         $itemArray['title'] = $itemTitle;
-                        $itemArray['url'] = 'http://myanimelist.net' . $itemUrl;
+                        $itemArray['url'] = 'http://myanimelist.net'.$itemUrl;
 
                         $animerecord->addRelation($itemArray, $relationType);
                     }
 
                     //Grab next item
                     $relatedItem = $relatedItem->nextSibling;
-
                 } while ($relatedItem !== null);
             }
         }
@@ -466,7 +463,7 @@ class AnimeParser
         $isStarted = $crawler->filter('input[id="unknown_start"]')->attr('checked');
         $isEnded = $crawler->filter('input[id="unknown_end"]')->attr('checked');
 
-        if ($isStarted != "checked") {
+        if ($isStarted != 'checked') {
             //So, MAL allows users to put in just years, just years and months, or all three values.
             //This mess here is to try and avoid things breaking.
             if ($crawler->filter('select[id="add_anime_start_date_year"] option:selected')->count() > 0) {
@@ -474,7 +471,7 @@ class AnimeParser
                 $startMonth = 6;
                 $startDay = 15;
 
-                if($startYear !== '') {
+                if ($startYear !== '') {
                     if ($crawler->filter('select[id="add_anime_start_date_month"] option:selected')->count() > 0) {
                         $startMonth = $crawler->filter('select[id="add_anime_start_date_month"] option:selected')->attr('value');
 
@@ -488,14 +485,14 @@ class AnimeParser
             }
         }
 
-        if ($isEnded != "checked") {
+        if ($isEnded != 'checked') {
             //Same here, avoid breaking MAL's allowing of partial dates.
             if ($crawler->filter('select[id="add_anime_finish_date_year"] option:selected')->count() > 0) {
                 $endYear = $crawler->filter('select[id="add_anime_finish_date_year"] option:selected')->attr('value');
                 $endMonth = 6;
                 $endDay = 15;
 
-                if($endYear !== '') {
+                if ($endYear !== '') {
                     if ($crawler->filter('select[id="add_anime_finish_date_month"] option:selected')->count() > 0) {
                         $endMonth = $crawler->filter('select[id="add_anime_finish_date_month"] option:selected')->attr('value');
 
@@ -574,4 +571,3 @@ class AnimeParser
         return $anime;
     }
 }
-

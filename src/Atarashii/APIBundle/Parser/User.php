@@ -1,13 +1,12 @@
 <?php
 /**
-* Atarashii MAL API
+* Atarashii MAL API.
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
 * @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
-
 namespace Atarashii\APIBundle\Parser;
 
 use Atarashii\APIBundle\Model\ProfileDetails;
@@ -51,11 +50,11 @@ class User
         $userStats = $content->filter('.user-status');
 
         $userOnline = $userStats->filterXPath('//*[text()="Last Online"]/../span[2]');
-        $userGender =  $userStats->filterXPath('//*[text()="Gender"]/../span[2]');
+        $userGender = $userStats->filterXPath('//*[text()="Gender"]/../span[2]');
         $userBDay = $userStats->filterXPath('//*[text()="Birthday"]/../span[2]');
         $userLoc = $userStats->filterXPath('//*[text()="Location"]/../span[2]');
         $userJoined = $userStats->filterXPath('//*[text()="Joined"]/../span[2]');
-        $userForumPosts =  $userStats->filterXPath('//*[text()="Forum Posts"]/../span[2]');
+        $userForumPosts = $userStats->filterXPath('//*[text()="Forum Posts"]/../span[2]');
         $userWebsite = $content->filterXPath('//*[@class="user-profile-sns"][1]/a');
 
         if($userAccessLevel->count() > 0) {
@@ -85,11 +84,11 @@ class User
                 $firstIsNumber = is_numeric($bdParts[0]);
                 $hasComma = strpos($bdParts[0], ',');
 
-                if ( ($firstIsNumber === false) && ($hasComma === false) ) {
+                if (($firstIsNumber === false) && ($hasComma === false)) {
                     //First Value must be a month
                     //This will cover month and day or month and year
-                    $monthName = \DateTime::createFromFormat('M d', $bdParts[0] . ' 1')->format('F');
-                    $details->setBirthday($monthName . ' ' . $bdParts[1]);
+                    $monthName = \DateTime::createFromFormat('M d', $bdParts[0].' 1')->format('F');
+                    $details->setBirthday($monthName.' '.$bdParts[1]);
                 } else { //Day and year make no sense, just use year
                     $details->setBirthday($bdParts[1]);
                 }
@@ -141,29 +140,28 @@ class User
             $planned = $statsStatus->filterXPath('//*[contains(attribute::class,"plantowatch")]/../span');
 
             if ($inProgress->count() > 0) {
-                $stats->setWatching((int)$inProgress->text());
+                $stats->setWatching((int) $inProgress->text());
             }
 
             if ($planned->count() > 0) {
-                $stats->setPlanToWatch((int)$planned->text());
+                $stats->setPlanToWatch((int) $planned->text());
             }
         } elseif($mediaType == 'manga') {
             $inProgress = $statsStatus->filterXPath('//*[contains(attribute::class,"reading")]/../span');
             $planned = $statsStatus->filterXPath('//*[contains(attribute::class,"plantoread")]/../span');
 
             if ($inProgress->count() > 0) {
-                $stats->setReading((int)$inProgress->text());
+                $stats->setReading((int) $inProgress->text());
             }
 
             if ($planned->count() > 0) {
-                $stats->setPlanToRead((int)$planned->text());
+                $stats->setPlanToRead((int) $planned->text());
             }
         }
 
         $completed = $statsStatus->filterXPath('//*[contains(attribute::class,"completed")]/../span');
         $onHold = $statsStatus->filterXPath('//*[contains(attribute::class,"on-hold")]/../span');
         $dropped = $statsStatus->filterXPath('//*[contains(attribute::class,"dropped")]/../span');
-
 
         if($completed->count() > 0) {
             $stats->setCompleted((int) $completed->text());
@@ -177,7 +175,6 @@ class User
             $stats->setDropped((int) $dropped->text());
         }
 
-
         //Summary Stats
         $statsSummary = $content->filterXPath('//ul[contains(attribute::class,"stats-data")]');
 
@@ -186,7 +183,6 @@ class User
         if($totalEntries->count() > 0) {
             $stats->setTotalEntries((int) $totalEntries->text());
         }
-
 
         return $stats;
     }
@@ -257,7 +253,7 @@ class User
                 }
 
                 $historyinfo['item']->setTitle($crawler->filter('a')->text());
-                $historyinfo['item']->setId((int)str_replace('/' . $historyinfo['type'] . '.php?id=', '', $crawler->filter('a')->attr('href')));
+                $historyinfo['item']->setId((int) str_replace('/'.$historyinfo['type'].'.php?id=', '', $crawler->filter('a')->attr('href')));
                 $historyinfo['time_updated'] = Date::formatTime(substr($crawler->filter('td')->eq(1)->text(), 1));
 
                 $historylist[] = $historyinfo;

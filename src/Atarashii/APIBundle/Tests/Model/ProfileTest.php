@@ -241,7 +241,8 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($entries, $animeStats->getTotalEntries());
     }
 
-    public function testMangaTimeDays() {
+    public function testMangaTimeDays()
+    {
         $days = number_format(rand(1, 800) + (rand() / getrandmax()), 1);
 
         $mangaStats = new MangaStats();
@@ -250,7 +251,8 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($days, $mangaStats->getTimeDays());
     }
 
-    public function testMangaReading() {
+    public function testMangaReading()
+    {
         $value = rand();
 
         $mangaStats = new MangaStats();
@@ -259,7 +261,8 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($value, $mangaStats->getReading());
     }
 
-    public function testMangaCompleted() {
+    public function testMangaCompleted()
+    {
         $value = rand();
 
         $mangaStats = new MangaStats();
@@ -268,7 +271,8 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($value, $mangaStats->getCompleted());
     }
 
-    public function testMangaOnHold() {
+    public function testMangaOnHold()
+    {
         $value = rand();
 
         $mangaStats = new MangaStats();
@@ -277,7 +281,8 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($value, $mangaStats->getOnHold());
     }
 
-    public function testMangaDropped() {
+    public function testMangaDropped()
+    {
         $value = rand();
 
         $mangaStats = new MangaStats();
@@ -286,7 +291,8 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($value, $mangaStats->getDropped());
     }
 
-    public function testMangaPlanToRead() {
+    public function testMangaPlanToRead()
+    {
         $value = rand();
 
         $mangaStats = new MangaStats();

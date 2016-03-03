@@ -1,13 +1,12 @@
 <?php
 /**
-* Atarashii MAL API
+* Atarashii MAL API.
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
 * @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
-
 namespace Atarashii\APIBundle\Model;
 
 use JMS\Serializer\Annotation\SerializedName;
@@ -19,7 +18,7 @@ use Atarashii\APIBundle\Helper\Date;
 class Messages
 {
     /**
-     * The message ID used to send messages
+     * The message ID used to send messages.
      *
      * @Type("integer")
      * @Since("2.0")
@@ -27,7 +26,7 @@ class Messages
     private $id;
 
     /**
-     * /The action ID used to perform actions like delete
+     * /The action ID used to perform actions like delete.
      *
      * @Type("integer")
      * @Since("2.0")
@@ -35,7 +34,7 @@ class Messages
     private $actionId;
 
     /**
-     * The tread ID used to view|send replies
+     * The tread ID used to view|send replies.
      *
      * @Type("integer")
      * @Since("2.0")
@@ -43,7 +42,7 @@ class Messages
     private $threadId;
 
     /**
-     * The username of the sender
+     * The username of the sender.
      *
      * @Type("string")
      * @Since("2.0")
@@ -51,7 +50,7 @@ class Messages
     private $username;
 
     /**
-     * The time when the message was send
+     * The time when the message was send.
      *
      * @Type("string")
      * @Since("2.0")
@@ -59,7 +58,7 @@ class Messages
     private $time;
 
     /**
-     * The read status used to determine if you have read the content
+     * The read status used to determine if you have read the content.
      *
      * @Type("boolean")
      * @Since("2.0")
@@ -67,7 +66,7 @@ class Messages
     private $read;
 
     /**
-     * The subject of the received message
+     * The subject of the received message.
      *
      * @Type("string")
      * @Since("2.0")
@@ -75,7 +74,7 @@ class Messages
     private $subject;
 
     /**
-     * The message content
+     * The message content.
      *
      * @Type("string")
      * @Since("2.0")
@@ -83,7 +82,7 @@ class Messages
     private $message;
 
     /**
-     * The preview of a message
+     * The preview of a message.
      *
      * @Type("string")
      * @Since("2.0")
@@ -91,11 +90,9 @@ class Messages
     private $preview;
 
     /**
-     * Set the id property
+     * Set the id property.
      *
      * @param int $id The id of messages.
-     *
-     * @return void
      */
     public function setId($id)
     {
@@ -109,15 +106,13 @@ class Messages
      */
     public function getId()
     {
-       return $this->id;
+        return $this->id;
     }
 
     /**
-     * Set the actionId property
+     * Set the actionId property.
      *
      * @param int $actionId The action ID of messages.
-     *
-     * @return void
      */
     public function setActionId($actionId)
     {
@@ -131,15 +126,13 @@ class Messages
      */
     public function getActionId()
     {
-       return $this->actionId;
+        return $this->actionId;
     }
 
     /**
-     * Set the threadId property
+     * Set the threadId property.
      *
      * @param int $threadId The thread ID of messages.
-     *
-     * @return void
      */
     public function setThreadId($threadId)
     {
@@ -153,15 +146,13 @@ class Messages
      */
     public function getThreadId()
     {
-       return $this->threadId;
+        return $this->threadId;
     }
 
     /**
-     * Set the username property
+     * Set the username property.
      *
      * @param string $username The username of messages.
-     *
-     * @return void
      */
     public function setUsername($username)
     {
@@ -175,15 +166,13 @@ class Messages
      */
     public function getUsername()
     {
-       return $this->username;
+        return $this->username;
     }
 
     /**
-     * Set the time property
+     * Set the time property.
      *
      * @param DateTime $time The time of messages.
-     *
-     * @return void
      */
     public function setTime($time)
     {
@@ -197,15 +186,13 @@ class Messages
      */
     public function getTime()
     {
-       return $this->time;
+        return $this->time;
     }
 
     /**
-     * Set the read property
+     * Set the read property.
      *
-     * @param boolean $read The read status of messages.
-     *
-     * @return void
+     * @param bool $read The read status of messages.
      */
     public function setRead($read)
     {
@@ -215,19 +202,17 @@ class Messages
     /**
      * Get the read property.
      *
-     * @return boolean
+     * @return bool
      */
     public function getRead()
     {
-       return $this->read;
+        return $this->read;
     }
 
     /**
-     * Set the subject property
+     * Set the subject property.
      *
      * @param string $subject The subject of messages.
-     *
-     * @return void
      */
     public function setSubject($subject)
     {
@@ -241,15 +226,13 @@ class Messages
      */
     public function getSubject()
     {
-       return $this->subject;
+        return $this->subject;
     }
 
     /**
-     * Set the message property
+     * Set the message property.
      *
      * @param string $message The message of messages.
-     *
-     * @return void
      */
     public function setMessage($message)
     {
@@ -263,15 +246,13 @@ class Messages
      */
     public function getMessage()
     {
-       return $this->message;
+        return $this->message;
     }
 
     /**
-     * Set the preview property
+     * Set the preview property.
      *
      * @param string $preview The preview of messages.
-     *
-     * @return void
      */
     public function setPreview($preview)
     {
@@ -285,6 +266,6 @@ class Messages
      */
     public function getPreview()
     {
-       return $this->preview;
+        return $this->preview;
     }
 }

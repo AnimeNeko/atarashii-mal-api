@@ -6,8 +6,7 @@ use Atarashii\APIBundle\Tests\Util\ConnectivityUtilities;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
- * Class UserControllerTest
- * @package Atarashii\APIBundle\Tests\Controller
+ * Class UserControllerTest.
  */
 class UserControllerTest extends WebTestCase
 {
@@ -52,7 +51,8 @@ class UserControllerTest extends WebTestCase
         $this->assertGreaterThanOrEqual(1, $content->manga_stats->total_entries);
     }
 
-    public static function setUpBeforeClass() {
+    public static function setUpBeforeClass()
+    {
         $client = static::createClient();
         $container = $client->getContainer();
 
@@ -63,8 +63,8 @@ class UserControllerTest extends WebTestCase
         }
     }
 
-    protected function setUp() {
+    protected function setUp()
+    {
         $this->client = static::createClient();
     }
-
 }

@@ -1,13 +1,12 @@
 <?php
 /**
-* Atarashii MAL API
+* Atarashii MAL API.
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
 * @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
-
 namespace Atarashii\APIBundle\Model;
 
 use JMS\Serializer\Annotation\SerializedName;
@@ -18,7 +17,7 @@ use JMS\Serializer\Annotation\Until;
 class Cast
 {
     /**
-     * The name of character|staff member
+     * The name of character|staff member.
      *
      * @Type("integer")
      * @Since("2.0")
@@ -26,7 +25,7 @@ class Cast
     private $id;
 
     /**
-     * The name of character|staff member
+     * The name of character|staff member.
      *
      * @Type("string")
      * @Since("2.0")
@@ -34,7 +33,7 @@ class Cast
     private $name;
 
     /**
-     * The character role of the story
+     * The character role of the story.
      *
      * @Type("string")
      * @Since("2.0")
@@ -42,7 +41,7 @@ class Cast
     private $role;
 
     /**
-     * The character|staff member image URL
+     * The character|staff member image URL.
      *
      * @Type("string")
      * @Since("2.0")
@@ -50,7 +49,7 @@ class Cast
     private $image;
 
     /**
-     * The staff member rank|influence inside the team
+     * The staff member rank|influence inside the team.
      *
      * @Type("string")
      * @Since("2.0")
@@ -58,18 +57,16 @@ class Cast
     private $rank;
 
     /**
-     * The actors
+     * The actors.
      *
      * @Since("2.0")
      */
     private $actors;
 
     /**
-     * Set the name property
+     * Set the name property.
      *
-     * @param integer $id The character/staff id
-     *
-     * @return void
+     * @param int $id The character/staff id
      */
     public function setId($id)
     {
@@ -87,11 +84,9 @@ class Cast
     }
 
     /**
-     * Set the name property
+     * Set the name property.
      *
      * @param string $name The character name
-     *
-     * @return void
      */
     public function setName($name)
     {
@@ -109,11 +104,9 @@ class Cast
     }
 
     /**
-     * Set the role property
+     * Set the role property.
      *
      * @param string $role The character role
-     *
-     * @return void
      */
     public function setRole($role)
     {
@@ -127,19 +120,17 @@ class Cast
      */
     public function getRole()
     {
-       return $this->role;
+        return $this->role;
     }
 
     /**
-     * Set the image property
+     * Set the image property.
      *
      * @param string $image The character image.
-     *
-     * @return void
      */
     public function setImage($image)
     {
-        if ($image === "http://cdn.myanimelist.net/images/questionmark_23.gif")
+        if ($image === 'http://cdn.myanimelist.net/images/questionmark_23.gif')
             $this->image = 'http://cdn.myanimelist.net/images/na.gif';
         else
             $this->image = $image;
@@ -152,15 +143,13 @@ class Cast
      */
     public function getImage()
     {
-       return $this->image;
+        return $this->image;
     }
 
     /**
-     * Set the rank property
+     * Set the rank property.
      *
      * @param string $rank The rank of the staff member.
-     *
-     * @return void
      */
     public function setRank($rank)
     {
@@ -168,7 +157,7 @@ class Cast
     }
 
     /**
-     * Get the rank property
+     * Get the rank property.
      *
      * @return string
      */
@@ -178,11 +167,9 @@ class Cast
     }
 
     /**
-     * Set the actors array property
+     * Set the actors array property.
      *
      * @param Actor $actors The actors.
-     *
-     * @return void
      */
     public function setActors($actors)
     {
@@ -190,7 +177,7 @@ class Cast
     }
 
     /**
-     * Get the actors property
+     * Get the actors property.
      *
      * @return string
      */

@@ -6,19 +6,18 @@ use Atarashii\APIBundle\Model\Anime;
 use Atarashii\APIBundle\Parser\AnimeParser;
 
 /**
- * Class AnimeTest
- * @package Atarashii\APIBundle\Tests\Parser
+ * Class AnimeTest.
+ *
  * @coversDefaultClass Atarashii\APIBundle\Parser\AnimeParser
  */
 class AnimeTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @covers ::parse
      */
     public function testParse()
     {
-        $animeContents = file_get_contents(__DIR__ . '/../InputSamples/anime-1887-mine.html');
+        $animeContents = file_get_contents(__DIR__.'/../InputSamples/anime-1887-mine.html');
 
         $anime = AnimeParser::parse($animeContents);
 
@@ -107,7 +106,7 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(7, $anime->getScore());
 
-        $animeContents = file_get_contents(__DIR__ . '/../InputSamples/anime-27833.html');
+        $animeContents = file_get_contents(__DIR__.'/../InputSamples/anime-27833.html');
 
         $anime = AnimeParser::parse($animeContents);
 
@@ -115,7 +114,7 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('2016-03', $anime->getEndDate());
 
-        $animeContents = file_get_contents(__DIR__ . '/../InputSamples/anime-10236.html');
+        $animeContents = file_get_contents(__DIR__.'/../InputSamples/anime-10236.html');
 
         $anime = AnimeParser::parse($animeContents);
 
@@ -123,7 +122,7 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('1981', $anime->getEndDate());
 
-        $animeContents = file_get_contents(__DIR__ . '/../InputSamples/anime-31636.html');
+        $animeContents = file_get_contents(__DIR__.'/../InputSamples/anime-31636.html');
 
         $anime = AnimeParser::parse($animeContents);
 
@@ -139,7 +138,7 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
     {
         $anime = new Anime();
 
-        $animeContents = file_get_contents(__DIR__ . '/../InputSamples/anime-1689-mine-detailed.html');
+        $animeContents = file_get_contents(__DIR__.'/../InputSamples/anime-1689-mine-detailed.html');
 
         AnimeParser::parseExtendedPersonal($animeContents, $anime);
 
@@ -154,8 +153,5 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(0, $anime->getRewatchCount());
         $this->assertEquals('High', $anime->getRewatchValue('string'));
         $this->assertStringStartsWith('The beautiful art direction', $anime->getPersonalComments());
-
-
-
     }
 }

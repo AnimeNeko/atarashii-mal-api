@@ -1,13 +1,12 @@
 <?php
 /**
-* Atarashii MAL API
+* Atarashii MAL API.
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
 * @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
-
 namespace Atarashii\APIBundle\Model;
 
 use JMS\Serializer\Annotation\SerializedName;
@@ -18,49 +17,49 @@ use JMS\Serializer\Annotation\Until;
 class Anime
 {
     /**
-     * The ID of the Anime
+     * The ID of the Anime.
      *
      * @Type("integer")
      */
     private $id;
 
     /**
-     * Title of the anime
+     * Title of the anime.
      *
      * @Type("string")
      */
     private $title;
 
     /**
-     * Map of other titles for the anime
+     * Map of other titles for the anime.
      *
      * @Type("array<string, array<string>>")
      */
     private $otherTitles = array();
 
     /**
-     * The global rank of the anime
+     * The global rank of the anime.
      *
      * @Type("integer")
      */
     private $rank;
 
     /**
-     * Global rank of the anime based on popularity (number of people with the title on the list)
+     * Global rank of the anime based on popularity (number of people with the title on the list).
      *
      * @Type("integer")
      */
     private $popularityRank;
 
     /**
-     * URL of tan image to the anime
+     * URL of tan image to the anime.
      *
      * @Type("string")
      */
     private $imageUrl;
 
     /**
-     * Type of anime
+     * Type of anime.
      *
      * Defined string from the type of anime. Value will be one of TV, Movie, OVA, ONA, Special, or Music.
      *
@@ -78,7 +77,7 @@ class Anime
     private $episodes;
 
     /**
-     * Airing status of the anime
+     * Airing status of the anime.
      *
      * Defines string of the status of the anime. Value will be one of finished airing, currently airing, or not yet aired.
      *
@@ -101,7 +100,7 @@ class Anime
     private $startDate;
 
     /**
-     * Airing end date for the anime
+     * Airing end date for the anime.
      *
      * API 1.0
      * This is the starting date of the anime, formatted for compatibility with the old Ruby API.
@@ -130,7 +129,7 @@ class Anime
     private $startDate2;
 
     /**
-     * Airing end date for the anime
+     * Airing end date for the anime.
      *
      * API 2.0+
      * This is the starting date of the anime, formatted as an ISO8601-compatible string.
@@ -145,7 +144,7 @@ class Anime
     private $endDate2;
 
     /**
-     * Rating of the anime
+     * Rating of the anime.
      *
      * The rating is a freeform text field with no defined values.
      *
@@ -154,7 +153,7 @@ class Anime
     private $classification;
 
     /**
-     * Weighted score of the anime
+     * Weighted score of the anime.
      *
      * The score is calculated based on the ratings given by members.
      *
@@ -163,21 +162,21 @@ class Anime
     private $membersScore;
 
     /**
-     * The number of members that have the anime on the list
+     * The number of members that have the anime on the list.
      *
      * @Type("integer")
      */
     private $membersCount;
 
     /**
-     * The number of members that have the anime marked as a favorite
+     * The number of members that have the anime marked as a favorite.
      *
      * @Type("integer")
      */
     private $favoritedCount;
 
     /**
-     * Description of the anime
+     * Description of the anime.
      *
      * An HTML-formatted string describing the anime
      *
@@ -186,7 +185,7 @@ class Anime
     private $synopsis;
 
     /**
-     * A list of producers for the anime
+     * A list of producers for the anime.
      *
      * @Type("array<string>")
      * @Since("2.0")
@@ -194,14 +193,14 @@ class Anime
     private $producers = array();
 
     /**
-     * A list of genres for the anime
+     * A list of genres for the anime.
      *
      * @Type("array<string>")
      */
     private $genres = array();
 
     /**
-     * A list of popular tags for the anime
+     * A list of popular tags for the anime.
      *
      * @Type("array<string>")
      */
@@ -260,7 +259,7 @@ class Anime
     private $other = array();
 
     /**
-     * Personal watched status of the anime
+     * Personal watched status of the anime.
      *
      * Defined string. Value will be one of watching, completed, on-hold, dropped, or plan to watch.
      *
@@ -269,21 +268,21 @@ class Anime
     private $watchedStatus;
 
     /**
-     * Number of episodes watched by the user
+     * Number of episodes watched by the user.
      *
      * @Type("integer")
      */
     private $watchedEpisodes;
 
     /**
-     * Score from 1 to 10 given to the title by the user
+     * Score from 1 to 10 given to the title by the user.
      *
      * @Type("integer")
      */
     private $score;
 
     /**
-     * ID of the anime as per the user's list
+     * ID of the anime as per the user's list.
      *
      * API 1.0
      * This used to correspond to a unique ID for the title on the user's list, but is no longer used.
@@ -294,7 +293,7 @@ class Anime
     private $listedAnimeId;
 
     /**
-     * Tags assigned by the user
+     * Tags assigned by the user.
      *
      * @Type("array<string>")
      * @Since("2.0")
@@ -302,7 +301,7 @@ class Anime
     private $personalTags = array();
 
     /**
-     * The date the user started watching the show
+     * The date the user started watching the show.
      *
      * @Type("DateTime<'Y-m-d'>")
      * @Since("2.0")
@@ -310,16 +309,15 @@ class Anime
     private $watchingStart;
 
     /**
-     * The date the user finished watching the show
+     * The date the user finished watching the show.
      *
      * @Type("DateTime<'Y-m-d'>")
      * @Since("2.0")
      */
     private $watchingEnd;
 
-
     /**
-     * The fansub group the user used, if any
+     * The fansub group the user used, if any.
      *
      * @Type("string")
      * @Since("2.0")
@@ -337,7 +335,7 @@ class Anime
     private $priority;
 
     /**
-     * Storage type for the series
+     * Storage type for the series.
      *
      * @Type("integer")
      * @Since("2.0")
@@ -345,7 +343,7 @@ class Anime
     private $storage;
 
     /**
-     * The value for the storage chosen
+     * The value for the storage chosen.
      *
      * This number may either be the number of discs (for DVDs, VHS, etc) or size in GB for HD types
      *
@@ -355,7 +353,7 @@ class Anime
     private $storageValue;
 
     /**
-     * The number of episodes downloaded by the user
+     * The number of episodes downloaded by the user.
      *
      * @Type("integer")
      * @Since("2.0")
@@ -363,7 +361,7 @@ class Anime
     private $epsDownloaded;
 
     /**
-     * Set if the user is rewatching the anime
+     * Set if the user is rewatching the anime.
      *
      * @Type("boolean")
      * @Since("2.0")
@@ -371,7 +369,7 @@ class Anime
     private $rewatching;
 
     /**
-     * The number of times the user has re-watched the title. (Does not include the first time.)
+     * The number of times the user has re-watched the title. (Does not include the first time.).
      *
      * @Type("integer")
      * @Since("2.0")
@@ -387,7 +385,7 @@ class Anime
     private $rewatchValue;
 
     /**
-     * The user's personal comments on the title
+     * The user's personal comments on the title.
      *
      * @Type("string")
      * @Since("2.0")
@@ -395,11 +393,9 @@ class Anime
     private $personalComments;
 
     /**
-     * Set the id property
+     * Set the id property.
      *
      * @param int $id The id of series.
-     *
-     * @return void
      */
     public function setId($id)
     {
@@ -407,21 +403,19 @@ class Anime
     }
 
     /**
-     * Get the id property
+     * Get the id property.
      *
      * @return int
      */
     public function getId()
     {
-       return $this->id;
+        return $this->id;
     }
 
     /**
-     * Set the title property
+     * Set the title property.
      *
      * @param string $title The title of series.
-     *
-     * @return void
      */
     public function setTitle($title)
     {
@@ -435,15 +429,13 @@ class Anime
      */
     public function getTitle()
     {
-       return $this->title;
+        return $this->title;
     }
 
     /**
-     * Set the otherTitles property
+     * Set the otherTitles property.
      *
      * @param array $otherTitles Other titles of series.
-     *
-     * @return void
      */
     public function setOtherTitles($otherTitles)
     {
@@ -451,21 +443,19 @@ class Anime
     }
 
     /**
-     * Get the otherTitles property
+     * Get the otherTitles property.
      *
      * @return array
      */
     public function getOtherTitles()
     {
-       return $this->otherTitles;
+        return $this->otherTitles;
     }
 
     /**
-     * Set the rank property
+     * Set the rank property.
      *
      * @param int $rank The rank of series.
-     *
-     * @return void
      */
     public function setRank($rank)
     {
@@ -473,21 +463,19 @@ class Anime
     }
 
     /**
-     * Get the rank property
+     * Get the rank property.
      *
      * @return int
      */
     public function getRank()
     {
-       return $this->rank;
+        return $this->rank;
     }
 
     /**
-     * Set the popularityRank property
+     * Set the popularityRank property.
      *
      * @param int $popularityRank The Popularity Rank of series.
-     *
-     * @return void
      */
     public function setPopularityRank($popularityRank)
     {
@@ -495,21 +483,19 @@ class Anime
     }
 
     /**
-     * Get the popularityRank property
+     * Get the popularityRank property.
      *
      * @return int
      */
     public function getPopularityRank()
     {
-       return $this->popularityRank;
+        return $this->popularityRank;
     }
 
     /**
-     * Set the imageUrl property
+     * Set the imageUrl property.
      *
      * @param string $imageUrl The Image url of series.
-     *
-     * @return void
      */
     public function setImageUrl($imageUrl)
     {
@@ -517,22 +503,20 @@ class Anime
     }
 
     /**
-     * Get the imageUrl property
+     * Get the imageUrl property.
      *
      * @return string
      */
     public function getImageUrl()
     {
-       return $this->imageUrl;
+        return $this->imageUrl;
     }
 
     /**
-     * Set the type property
+     * Set the type property.
      *
      * @param string|int $type The type of series.
      *                         Can be 1/TV, 2/OVA, 3/Movie, 4/Special, 5/ONA, or 6/Music. The default is "TV".
-     *
-     * @return void
      */
     public function setType($type)
     {
@@ -568,7 +552,7 @@ class Anime
     }
 
     /**
-     * Get the type property
+     * Get the type property.
      *
      * @return string (TV/OVA/Movie/Special/ONA/Music)
      */
@@ -578,11 +562,9 @@ class Anime
     }
 
     /**
-     * Set the episodes property
+     * Set the episodes property.
      *
      * @param int $episodes The number episodes of series.
-     *
-     * @return void
      */
     public function setEpisodes($episodes)
     {
@@ -590,22 +572,20 @@ class Anime
     }
 
     /**
-     * Get the episodes property
+     * Get the episodes property.
      *
      * @return int
      */
     public function getEpisodes()
     {
-       return $this->episodes;
+        return $this->episodes;
     }
 
     /**
-     * Set the status property
+     * Set the status property.
      *
      * @param int $status The broadcasting status of series.
      *                    Can be 1 (currently airing), 2 (finished airing) or 3 (not yet aired). The default is "2".
-     *
-     * @return void
      */
     public function setStatus($status)
     {
@@ -629,26 +609,24 @@ class Anime
     }
 
     /**
-     * Get the status property
+     * Get the status property.
      *
      * @return string (currently airing/finished airing/not yet aired)
      */
     public function getStatus()
     {
-       return $this->status;
+        return $this->status;
     }
 
     /**
-     * Set the startDate property with the literal value passed and call the setter for startDate2
+     * Set the startDate property with the literal value passed and call the setter for startDate2.
      *
      * This function is for compatibility with certain parts of API1 where the date format for the start and end dates
      * is not in a "parsed" format and instead is however is passed by MAL
      *
-     * @param String   $literalDate The string that should be used as the start date.
+     * @param string   $literalDate The string that should be used as the start date.
      * @param DateTime $startDate   The start date of the series
      * @param string   $accuracy    To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day".
-     *
-     * @return void
      */
     public function setLiteralStartDate($literalDate, $startDate, $accuracy = 'day')
     {
@@ -658,12 +636,10 @@ class Anime
     }
 
     /**
-     * Set the startDate property and call the setter for startDate2
+     * Set the startDate property and call the setter for startDate2.
      *
-     * @param \DateTime $startDate  The start date of the series
-     * @param string   $accuracy   To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day".
-     *
-     * @return void
+     * @param \DateTime $startDate The start date of the series
+     * @param string    $accuracy  To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day".
      */
     public function setStartDate(\DateTime $startDate, $accuracy = 'day')
     {
@@ -689,12 +665,10 @@ class Anime
     }
 
     /**
-     * Set the startDate2 property
+     * Set the startDate2 property.
      *
-     * @param \DateTime $startDate  The start date of the series
-     * @param string   $accuracy   To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day".
-     *
-     * @return void
+     * @param \DateTime $startDate The start date of the series
+     * @param string    $accuracy  To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day".
      */
     private function setStartDate2(\DateTime $startDate, $accuracy = 'day')
     {
@@ -712,26 +686,24 @@ class Anime
     }
 
     /**
-     * Get the startDate property
+     * Get the startDate property.
      *
      * @return string (ISO 8601)
      */
     public function getStartDate()
     {
-       return $this->startDate2;
+        return $this->startDate2;
     }
 
     /**
-     * Set the endDate property with the literal value passed and call the setter for endDate2
+     * Set the endDate property with the literal value passed and call the setter for endDate2.
      *
      * This function is for compatibility with certain parts of API1 where the date format for the start and end dates
      * is not in a "parsed" format and instead is however is passed by MAL
      *
-     * @param String   $literalDate The string that should be used as the end date.
+     * @param string    $literalDate The string that should be used as the end date.
      * @param \DateTime $endDate     The end date of the series
-     * @param string   $accuracy    To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day".
-     *
-     * @return void
+     * @param string    $accuracy    To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day".
      */
     public function setLiteralEndDate($literalDate, \DateTime $endDate, $accuracy = 'day')
     {
@@ -741,12 +713,10 @@ class Anime
     }
 
     /**
-     * Set the endDate property and call the setter for endDate2
+     * Set the endDate property and call the setter for endDate2.
      *
-     * @param \DateTime $endDate    The end date of the series
-     * @param string   $accuracy   To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day".
-     *
-     * @return void
+     * @param \DateTime $endDate  The end date of the series
+     * @param string    $accuracy To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day".
      */
     public function setEndDate(\DateTime $endDate, $accuracy = 'day')
     {
@@ -772,12 +742,10 @@ class Anime
     }
 
     /**
-     * Set the endDate2 property
+     * Set the endDate2 property.
      *
-     * @param \DateTime $endDate    The end date of the series
-     * @param string   $accuracy   To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day".
-     *
-     * @return void
+     * @param \DateTime $endDate  The end date of the series
+     * @param string    $accuracy To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day".
      */
     private function setEndDate2(\DateTime $endDate, $accuracy = 'day')
     {
@@ -795,21 +763,19 @@ class Anime
     }
 
     /**
-     * Get the endDate property
+     * Get the endDate property.
      *
      * @return string (ISO 8601)
      */
     public function getEndDate()
     {
-       return $this->endDate2;
+        return $this->endDate2;
     }
 
     /**
-     * Set the classification property
+     * Set the classification property.
      *
      * @param string $classification The MAL classification of series.
-     *
-     * @return void
      */
     public function setClassification($classification)
     {
@@ -817,21 +783,19 @@ class Anime
     }
 
     /**
-     * Get the classification property
+     * Get the classification property.
      *
      * @return string
      */
     public function getClassification()
     {
-       return $this->classification;
+        return $this->classification;
     }
 
     /**
-     * Set the membersScore property
+     * Set the membersScore property.
      *
      * @param float $membersScore The score given by MAL members.
-     *
-     * @return void
      */
     public function setMembersScore($membersScore)
     {
@@ -839,7 +803,7 @@ class Anime
     }
 
     /**
-     * Get the membersScore property
+     * Get the membersScore property.
      *
      * @return float
      */
@@ -849,11 +813,9 @@ class Anime
     }
 
     /**
-     * Set the membersCount property
+     * Set the membersCount property.
      *
      * @param int $membersCount The number of members that added this serie in their list.
-     *
-     * @return void
      */
     public function setMembersCount($membersCount)
     {
@@ -861,7 +823,7 @@ class Anime
     }
 
     /**
-     * Get the membersCount property
+     * Get the membersCount property.
      *
      * @return int
      */
@@ -871,11 +833,9 @@ class Anime
     }
 
     /**
-     * Set the favoritedCount property
+     * Set the favoritedCount property.
      *
      * @param int $favoritedCount The number of members that added this serie in their favorite list.
-     *
-     * @return void
      */
     public function setFavoritedCount($favoritedCount)
     {
@@ -883,7 +843,7 @@ class Anime
     }
 
     /**
-     * Get the favoritedCount property
+     * Get the favoritedCount property.
      *
      * @return int
      */
@@ -893,11 +853,9 @@ class Anime
     }
 
     /**
-     * Set the synopsis property
+     * Set the synopsis property.
      *
      * @param string $synopsis The Text describing the anime.
-     *
-     * @return void
      */
     public function setSynopsis($synopsis)
     {
@@ -905,7 +863,7 @@ class Anime
     }
 
     /**
-     * Get the synopsis property
+     * Get the synopsis property.
      *
      * @return string
      */
@@ -915,11 +873,9 @@ class Anime
     }
 
     /**
-     * Set the producers property
+     * Set the producers property.
      *
      * @param string $producers The producers of series.
-     *
-     * @return void
      */
     public function setProducers($producers)
     {
@@ -927,7 +883,7 @@ class Anime
     }
 
     /**
-     * Get the producers property
+     * Get the producers property.
      *
      * @return string
      */
@@ -937,11 +893,9 @@ class Anime
     }
 
     /**
-     * Set the genres property
+     * Set the genres property.
      *
      * @param string $genres The genres of series.
-     *
-     * @return void
      */
     public function setGenres($genres)
     {
@@ -949,7 +903,7 @@ class Anime
     }
 
     /**
-     * Get the genres property
+     * Get the genres property.
      *
      * @return string
      */
@@ -959,11 +913,9 @@ class Anime
     }
 
     /**
-     * Set the tags property
+     * Set the tags property.
      *
      * @param string $tags The tags of series.
-     *
-     * @return void
      */
     public function setTags($tags)
     {
@@ -971,7 +923,7 @@ class Anime
     }
 
     /**
-     * Get the tags property
+     * Get the tags property.
      *
      * @return array
      */
@@ -981,11 +933,9 @@ class Anime
     }
 
     /**
-     * Set the mangaAdaptations property
+     * Set the mangaAdaptations property.
      *
      * @param string $mangaAdaptations The manga adaptations of series.
-     *
-     * @return void
      */
     public function setMangaAdaptations($mangaAdaptations)
     {
@@ -993,7 +943,7 @@ class Anime
     }
 
     /**
-     * Get the mangaAdaptations property
+     * Get the mangaAdaptations property.
      *
      * @return array
      */
@@ -1003,11 +953,9 @@ class Anime
     }
 
     /**
-     * Set the prequels property
+     * Set the prequels property.
      *
      * @param string prequels The prequels of series.
-     *
-     * @return void
      */
     public function setPrequels($prequels)
     {
@@ -1015,7 +963,7 @@ class Anime
     }
 
     /**
-     * Get the prequels property
+     * Get the prequels property.
      *
      * @return array
      */
@@ -1025,11 +973,9 @@ class Anime
     }
 
     /**
-     * Set the sequels property
+     * Set the sequels property.
      *
      * @param string $sequels The sequels of series.
-     *
-     * @return void
      */
     public function setSequels($sequels)
     {
@@ -1037,7 +983,7 @@ class Anime
     }
 
     /**
-     * Get the sequels property
+     * Get the sequels property.
      *
      * @return array
      */
@@ -1047,11 +993,9 @@ class Anime
     }
 
     /**
-     * Set the sideStories property
+     * Set the sideStories property.
      *
      * @param string $sideStories The side stories of series.
-     *
-     * @return void
      */
     public function setSideStories($sideStories)
     {
@@ -1059,7 +1003,7 @@ class Anime
     }
 
     /**
-     * Get the sideStories property
+     * Get the sideStories property.
      *
      * @return array
      */
@@ -1069,11 +1013,9 @@ class Anime
     }
 
     /**
-     * Set the parentStory property
+     * Set the parentStory property.
      *
      * @param string $parentStory The parent stories of series.
-     *
-     * @return void
      */
     public function setParentStory($parentStory)
     {
@@ -1081,7 +1023,7 @@ class Anime
     }
 
     /**
-     * Get the parentStory property
+     * Get the parentStory property.
      *
      * @return string
      */
@@ -1096,7 +1038,7 @@ class Anime
     }
 
     /**
-     * Get the characterAnime property
+     * Get the characterAnime property.
      *
      * @return array
      */
@@ -1106,11 +1048,9 @@ class Anime
     }
 
     /**
-     * Set the spinOffs property
+     * Set the spinOffs property.
      *
      * @param string $spinOffs The spin offs of series.
-     *
-     * @return void
      */
     public function setSpinOffs($spinOffs)
     {
@@ -1118,7 +1058,7 @@ class Anime
     }
 
     /**
-     * Get the spinOffs property
+     * Get the spinOffs property.
      *
      * @return array
      */
@@ -1128,11 +1068,9 @@ class Anime
     }
 
     /**
-     * Set the summaries property
+     * Set the summaries property.
      *
      * @param string $summaries The summaries of series.
-     *
-     * @return void
      */
     public function setSummaries($summaries)
     {
@@ -1140,7 +1078,7 @@ class Anime
     }
 
     /**
-     * Get the summaries property
+     * Get the summaries property.
      *
      * @return array
      */
@@ -1150,11 +1088,9 @@ class Anime
     }
 
     /**
-     * Set the alternativeVersions property
+     * Set the alternativeVersions property.
      *
      * @param string $alternativeVersions The alternative versions of series.
-     *
-     * @return void
      */
     public function setAlternativeVersions($alternativeVersions)
     {
@@ -1162,7 +1098,7 @@ class Anime
     }
 
     /**
-     * Get the alternativeVersions property
+     * Get the alternativeVersions property.
      *
      * @return array
      */
@@ -1172,11 +1108,9 @@ class Anime
     }
 
     /**
-     * Set the other property
+     * Set the other property.
      *
      * @param string $other The other animes of series.
-     *
-     * @return void
      */
     public function setOther($other)
     {
@@ -1184,7 +1118,7 @@ class Anime
     }
 
     /**
-     * Get the other property
+     * Get the other property.
      *
      * @return array
      */
@@ -1193,13 +1127,11 @@ class Anime
         return $this->other;
     }
 
-
     /**
-     * Add a relation
+     * Add a relation.
      *
-     * @param  array  $item An array containing details of the related item
-     * @param  string $type The type of relation, all lowercase with the underscore replacing spaces
-     * @return void
+     * @param array  $item An array containing details of the related item
+     * @param string $type The type of relation, all lowercase with the underscore replacing spaces
      */
     public function addRelation($item, $type)
     {
@@ -1237,15 +1169,11 @@ class Anime
         }
     }
 
-
-
     /**
-     * Set the watchedStatus property
+     * Set the watchedStatus property.
      *
      * @param string|int $status The input status value of an item.
      *                           Accepts either integers as defined by the MAL API module, or strings as defined by the Ruby API (mal-api.com).
-     *
-     * @return void
      */
     public function setWatchedStatus($status)
     {
@@ -1308,19 +1236,15 @@ class Anime
             }
 
             return $status;
-
         } else {
             return $this->watchedStatus;
         }
-
     }
 
     /**
-     * Set the watchedEpisodes property
+     * Set the watchedEpisodes property.
      *
      * @param string $watchedEpisodes The number of watched episodes.
-     *
-     * @return void
      */
     public function setWatchedEpisodes($watchedEpisodes)
     {
@@ -1328,7 +1252,7 @@ class Anime
     }
 
     /**
-     * Get the watchedEpisodes property
+     * Get the watchedEpisodes property.
      *
      * @return int
      */
@@ -1338,11 +1262,9 @@ class Anime
     }
 
     /**
-     * Set the score property
+     * Set the score property.
      *
      * @param int $score The score of series.
-     *
-     * @return void
      */
     public function setScore($score)
     {
@@ -1350,7 +1272,7 @@ class Anime
     }
 
     /**
-     * Get the score property
+     * Get the score property.
      *
      * @return int
      */
@@ -1360,11 +1282,9 @@ class Anime
     }
 
     /**
-     * Set the listedAnimeId property
+     * Set the listedAnimeId property.
      *
      * @param int $listedAnimeId For internal use.
-     *
-     * @return void
      */
     public function setListedAnimeId($listedAnimeId)
     {
@@ -1372,7 +1292,7 @@ class Anime
     }
 
     /**
-     * Get the listedAnimeId property
+     * Get the listedAnimeId property.
      *
      * @return int
      */
@@ -1393,7 +1313,7 @@ class Anime
 
     public function getWatchingStart()
     {
-       return $this->watchingStart;
+        return $this->watchingStart;
     }
 
     public function setWatchingStart($date)
@@ -1403,7 +1323,7 @@ class Anime
 
     public function getWatchingEnd()
     {
-       return $this->watchingEnd;
+        return $this->watchingEnd;
     }
 
     public function setWatchingEnd($date)
@@ -1422,7 +1342,7 @@ class Anime
     }
 
     /**
-     * Get the current watching priority for the anime title
+     * Get the current watching priority for the anime title.
      *
      * @param string $type What type you want to get back.
      *                     Currently accepts either "string" or "int". Defaults to "int".
@@ -1453,13 +1373,15 @@ class Anime
         $priority = (int) $priority;
 
         //Only allow 0-2. If outside the range, force to 0.
-        if ($priority > 2 || $priority < 0) $priority = 0;
+        if ($priority > 2 || $priority < 0) {
+            $priority = 0;
+        }
 
         $this->priority = $priority;
     }
 
     /**
-     * Get the current value for the storage type that the anime is on
+     * Get the current value for the storage type that the anime is on.
      *
      * @param string $type What type you want to get back.
      *                     Currently accepts either "string" or "int". Defaults to "int".
@@ -1492,13 +1414,12 @@ class Anime
                     return 'NAS';
                     break;
                 default:
-                    return NULL;
+                    return;
                     break;
             }
         } else {
             return $this->storage;
         }
-
     }
 
     public function setStorage($storage)
@@ -1551,7 +1472,7 @@ class Anime
     }
 
     /**
-     * Get the current watching priority for the anime title
+     * Get the current watching priority for the anime title.
      *
      * @param string $type What type you want to get back.
      *                     Currently accepts either "string" or "int". Defaults to "int".
@@ -1578,7 +1499,7 @@ class Anime
                     return 'Very High';
                     break;
                 default:
-                    return NULL;
+                    return;
                     break;
             }
         } else {
@@ -1602,7 +1523,7 @@ class Anime
     }
 
     /**
-     * Return a formatted XML document for updating MAL
+     * Return a formatted XML document for updating MAL.
      *
      * @param array $update_items An array listing the items that should be added to the XML
      *
@@ -1613,65 +1534,64 @@ class Anime
         //For now, just add in the parameters we will use. The MAL API will handle missing items just fine.
         $xml = new \SimpleXMLElement('<entry/>');
 
-        if(in_array('episodes', $update_items)) {
+        if (in_array('episodes', $update_items)) {
             $xml->addChild('episode', $this->getWatchedEpisodes());
         }
 
-        if(in_array('status', $update_items)) {
+        if (in_array('status', $update_items)) {
             $xml->addChild('status', $this->getWatchedStatus('int')); //Use int for the MAL API to eliminate problems with strings.
         }
 
-        if(in_array('score', $update_items)) {
+        if (in_array('score', $update_items)) {
             $xml->addChild('score', $this->getScore());
         }
 
-        if(in_array('downloaded', $update_items)) {
+        if (in_array('downloaded', $update_items)) {
             $xml->addChild('downloaded_episodes', $this->getEpsDownloaded());
         }
 
-        if(in_array('storage', $update_items)) {
+        if (in_array('storage', $update_items)) {
             $xml->addChild('storage_type', $this->getStorage('int'));
         }
 
-        if(in_array('storageAmt', $update_items)) {
+        if (in_array('storageAmt', $update_items)) {
             $xml->addChild('storage_value', $this->getStorageValue());
         }
 
-        if(in_array('rewatchCount', $update_items)) {
+        if (in_array('rewatchCount', $update_items)) {
             $xml->addChild('times_rewatched', $this->getRewatchCount());
         }
 
-        if(in_array('rewatchValue', $update_items)) {
+        if (in_array('rewatchValue', $update_items)) {
             $xml->addChild('rewatch_value', $this->getRewatchValue('int'));
         }
 
-        if(in_array('start', $update_items)) {
+        if (in_array('start', $update_items)) {
             // Date must be MMDDYYYY.
             $xml->addChild('date_start', $this->getWatchingStart()->format('mdY'));
         }
 
-        if(in_array('end', $update_items)) {
+        if (in_array('end', $update_items)) {
             // Date must be MMDDYYY.
             $xml->addChild('date_finish', $this->getWatchingEnd()->format('mdY'));
         }
 
-        if(in_array('priority', $update_items)) {
+        if (in_array('priority', $update_items)) {
             $xml->addChild('priority', $this->getPriority('int'));
         }
 
-        if(in_array('comments', $update_items)) {
+        if (in_array('comments', $update_items)) {
             $xml->addChild('comments', $this->getPersonalComments());
         }
 
-        if(in_array('fansubber', $update_items)) {
+        if (in_array('fansubber', $update_items)) {
             $xml->addChild('fansub_group', $this->getFansubGroup());
         }
 
-        if(in_array('tags', $update_items)) {
+        if (in_array('tags', $update_items)) {
             $xml->addChild('tags', $this->getPersonalTags());
         }
 
         return $xml->asXML();
     }
-
 }

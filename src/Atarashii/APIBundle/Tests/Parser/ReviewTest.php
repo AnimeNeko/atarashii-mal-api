@@ -6,10 +6,9 @@ use Atarashii\APIBundle\Parser\ReviewParser;
 
 class ReviewTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testParse()
     {
-        $reviewContents = file_get_contents(__DIR__ . '/../InputSamples/anime-1887-reviews.html');
+        $reviewContents = file_get_contents(__DIR__.'/../InputSamples/anime-1887-reviews.html');
 
         $reviews = ReviewParser::parse($reviewContents, 'A');
 
@@ -30,8 +29,7 @@ class ReviewTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('int', $review->getEpisodes());
         $this->assertNull($review->getChapters());
 
-
-        $reviewContents = file_get_contents(__DIR__ . '/../InputSamples/manga-11977-reviews.html');
+        $reviewContents = file_get_contents(__DIR__.'/../InputSamples/manga-11977-reviews.html');
 
         $reviews = ReviewParser::parse($reviewContents, 'M');
 

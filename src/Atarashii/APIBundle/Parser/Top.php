@@ -1,13 +1,12 @@
 <?php
 /**
-* Atarashii MAL API
+* Atarashii MAL API.
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
 * @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
-
 namespace Atarashii\APIBundle\Parser;
 
 use Symfony\Component\DomCrawler\Crawler;
@@ -46,13 +45,13 @@ class Top
         }
 
         //Separate all the details
-        $details = explode("\n",trim($crawler->filter('div[class="detail"]')->text()));
+        $details = explode("\n", trim($crawler->filter('div[class="detail"]')->text()));
         $subDetails = explode(' ', trim($details[1]));
 
         //Pull out all the common parts
-        $media->setId((int) str_replace('#area','',$crawler->filter('a')->attr('id')));
+        $media->setId((int) str_replace('#area', '', $crawler->filter('a')->attr('id')));
         $media->setTitle(trim($details[0]));
-        $media->setImageUrl(str_replace('t.jpg','.jpg',$crawler->filter('img')->attr('src'))); //Convert thumbnail to full size image by stripping the "t" in the filename
+        $media->setImageUrl(str_replace('t.jpg', '.jpg', $crawler->filter('img')->attr('src'))); //Convert thumbnail to full size image by stripping the "t" in the filename
         $media->setMembersCount((int) trim(str_replace(',', '', str_replace('members', '', $details[3]))));
 
         //Anime and manga have different details, so we grab an array of the list and then process based on the type

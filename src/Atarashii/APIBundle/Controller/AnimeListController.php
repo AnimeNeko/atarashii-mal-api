@@ -1,13 +1,12 @@
 <?php
 /**
-* Atarashii MAL API
+* Atarashii MAL API.
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
 * @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
-
 namespace Atarashii\APIBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
@@ -16,17 +15,15 @@ use Symfony\Component\HttpFoundation\Response;
 use Guzzle\Http\Exception;
 use Atarashii\APIBundle\Model\Anime;
 use JMS\Serializer\SerializationContext;
-
-use \DateTime;
-use \SimpleXMLElement;
+use DateTime;
+use SimpleXMLElement;
 
 class AnimeListController extends FOSRestController
 {
-
     /**
-     * Get the list of anime stored for a user
+     * Get the list of anime stored for a user.
      *
-     * @param string $username The MyAnimeList username of the user whose list you want.
+     * @param string $username   The MyAnimeList username of the user whose list you want.
      * @param string $apiVersion The API version of the request
      *
      * @return View
@@ -38,13 +35,13 @@ class AnimeListController extends FOSRestController
         $downloader = $this->get('atarashii_api.communicator');
 
         try {
-            $animelistcontent = $downloader->fetch('/malappinfo.php?u=' . $username . '&status=all&type=anime');
+            $animelistcontent = $downloader->fetch('/malappinfo.php?u='.$username.'&status=all&type=anime');
         } catch (Exception\CurlException $e) {
-            return $this->view(Array('error' => 'network-error'), 500);
+            return $this->view(array('error' => 'network-error'), 500);
         }
 
         if (strpos($animelistcontent, 'Invalid username') !== false) {
-            return $this->view(Array('error' => 'Failed to find the specified user, please try again.'), 200);
+            return $this->view(array('error' => 'Failed to find the specified user, please try again.'), 200);
         } else {
             $animelistxml = new SimpleXMLElement($animelistcontent);
             $alist = array();
@@ -62,7 +59,7 @@ class AnimeListController extends FOSRestController
                 $alist[$i]->setWatchedEpisodes((int) $anime->my_watched_episodes);
                 $alist[$i]->setScore((int) $anime->my_score);
                 $alist[$i]->setWatchedStatus((int) $anime->my_status);
-                $i++;
+                ++$i;
             }
 
             $animelist['statistics']['days'] = (float) $animelistxml->myinfo->user_days_spent_watching;
@@ -74,7 +71,7 @@ class AnimeListController extends FOSRestController
         $serializationContext->setVersion($apiVersion);
 
         //For compatibility, API 1.0 explicitly passes null parameters.
-        if ($apiVersion == "1.0") {
+        if ($apiVersion == '1.0') {
             $serializationContext->setSerializeNull(true);
         }
 
@@ -88,18 +85,18 @@ class AnimeListController extends FOSRestController
     }
 
     /**
-    * Add an anime to a user's list.
-    *
-    * Uses the contents of the HTTP Request to get the needed data for adding a title.
-    * The user must have passed the basic authentication needs and the PHP_AUTH_USER and
-    * PHP_AUTH_PW variables must be set. If so, the get variables of "anime_id", "status",
-    * "episodes", and "score" are checked and used in the creation of an Anime object. The
-    * object is used to make an XML document that is then posted to MyAnimeList.
-    *
-    * @param Request $request Contains all the needed information to add the title.
-    *
-    * @return View
-    */
+     * Add an anime to a user's list.
+     *
+     * Uses the contents of the HTTP Request to get the needed data for adding a title.
+     * The user must have passed the basic authentication needs and the PHP_AUTH_USER and
+     * PHP_AUTH_PW variables must be set. If so, the get variables of "anime_id", "status",
+     * "episodes", and "score" are checked and used in the creation of an Anime object. The
+     * object is used to make an XML document that is then posted to MyAnimeList.
+     *
+     * @param Request $request Contains all the needed information to add the title.
+     *
+     * @return View
+     */
     public function addAction(Request $request)
     {
         // http://myanimelist.net/api/animelist/add/#{id}.xml
@@ -110,7 +107,7 @@ class AnimeListController extends FOSRestController
 
         //Don't bother making a request if the user didn't send any authentication
         if ($username === null) {
-            $view = $this->view(Array('error' => 'unauthorized'), 401);
+            $view = $this->view(array('error' => 'unauthorized'), 401);
             $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
 
             return $view;
@@ -122,13 +119,12 @@ class AnimeListController extends FOSRestController
         //Only use values we were sent for the Update XML
         $update_items = array();
         try {
-
-            if($request->request->get('status') !== null) {
+            if ($request->request->get('status') !== null) {
                 $anime->setWatchedStatus($request->request->get('status'));
                 $update_items[] = 'status';
             }
 
-            if($request->request->get('episodes') !== null) {
+            if ($request->request->get('episodes') !== null) {
                 $anime->setWatchedEpisodes($request->request->get('episodes'));
                 $update_items[] = 'episodes';
             }
@@ -138,7 +134,7 @@ class AnimeListController extends FOSRestController
                 $update_items[] = 'score';
             }
         } catch (\Exception $e) {
-            return $this->view(Array('error' => $e->getMessage()), 500);
+            return $this->view(array('error' => $e->getMessage()), 500);
         }
 
         $xmlcontent = $anime->MALApiXml($update_items);
@@ -146,11 +142,11 @@ class AnimeListController extends FOSRestController
         $connection = $this->get('atarashii_api.communicator');
 
         try {
-            $connection->sendXML('/api/animelist/add/' . $anime->getId() . '.xml', $xmlcontent, $username, $password);
+            $connection->sendXML('/api/animelist/add/'.$anime->getId().'.xml', $xmlcontent, $username, $password);
 
             return $this->view('ok', 201);
         } catch (Exception\ClientErrorResponseException $e) {
-            $view = $this->view(Array('error' => 'unauthorized'), 401);
+            $view = $this->view(array('error' => 'unauthorized'), 401);
             $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
 
             return $view;
@@ -159,32 +155,31 @@ class AnimeListController extends FOSRestController
             //it actually was an error.
             $response = $e->getResponse()->getBody(true);
 
-            if(stripos($response, '201 Created') !== false) {
+            if (stripos($response, '201 Created') !== false) {
                 return $this->view('ok', 200);
             }
 
-            return $this->view(Array('error' => 'not-found'), 404);
+            return $this->view(array('error' => 'not-found'), 404);
         } catch (Exception\CurlException $e) {
-            return $this->view(Array('error' => 'network-error'), 500);
+            return $this->view(array('error' => 'network-error'), 500);
         }
-
     }
 
     /**
-    * Update an anime on a user's list.
-    *
-    * Uses the contents of the HTTP Request to get the needed data for updating the
-    * requested title. The user must have passed the basic authentication needs and the
-    * PHP_AUTH_USER and PHP_AUTH_PW variables must be set. If so, the get variables of
-    * "status", "episodes", and "score" are checked and used in the creation of an Anime
-    * object. The object is used to make an XML document that is then posted to MyAnimeList.
-    *
-    * @param Request $request Contains all the needed information to update the title.
-    * @param int     $id      ID of the anime.
-    * @param float   $apiVersion The API version for the request
-    *
-    * @return View
-    */
+     * Update an anime on a user's list.
+     *
+     * Uses the contents of the HTTP Request to get the needed data for updating the
+     * requested title. The user must have passed the basic authentication needs and the
+     * PHP_AUTH_USER and PHP_AUTH_PW variables must be set. If so, the get variables of
+     * "status", "episodes", and "score" are checked and used in the creation of an Anime
+     * object. The object is used to make an XML document that is then posted to MyAnimeList.
+     *
+     * @param Request $request    Contains all the needed information to update the title.
+     * @param int     $id         ID of the anime.
+     * @param float   $apiVersion The API version for the request
+     *
+     * @return View
+     */
     public function updateAction(Request $request, $id, $apiVersion)
     {
         // http://myanimelist.net/api/animelist/update/#{id}.xml
@@ -195,7 +190,7 @@ class AnimeListController extends FOSRestController
 
         //Don't bother making a request if the user didn't send any authentication
         if ($username === null) {
-            $view = $this->view(Array('error' => 'unauthorized'), 401);
+            $view = $this->view(array('error' => 'unauthorized'), 401);
             $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
 
             return $view;
@@ -208,13 +203,12 @@ class AnimeListController extends FOSRestController
         //Only use values we were sent for the Update XML
         $update_items = array();
         try {
-
-            if($request->request->get('status') !== null) {
+            if ($request->request->get('status') !== null) {
                 $anime->setWatchedStatus($request->request->get('status'));
                 $update_items[] = 'status';
             }
 
-            if($request->request->get('episodes') !== null) {
+            if ($request->request->get('episodes') !== null) {
                 $anime->setWatchedEpisodes($request->request->get('episodes'));
                 $update_items[] = 'episodes';
             }
@@ -225,8 +219,7 @@ class AnimeListController extends FOSRestController
             }
 
             //API 2 Items
-            if($apiVersion >= 2.0) {
-
+            if ($apiVersion >= 2.0) {
                 if ($request->request->get('start') !== null) {
                     $anime->setWatchingStart(DateTime::createFromFormat('Y-m-d', $request->request->get('start'))); //Needs to be DT!
                     $update_items[] = 'start';
@@ -288,7 +281,7 @@ class AnimeListController extends FOSRestController
                 }
             }
         } catch (\Exception $e) {
-            return $this->view(Array('error' => $e->getMessage()), 500);
+            return $this->view(array('error' => $e->getMessage()), 500);
         }
 
         $xmlcontent = $anime->MALApiXml($update_items);
@@ -296,11 +289,11 @@ class AnimeListController extends FOSRestController
         $connection = $this->get('atarashii_api.communicator');
 
         try {
-            $connection->sendXML('/api/animelist/update/' . $anime->getId() . '.xml', $xmlcontent, $username, $password);
+            $connection->sendXML('/api/animelist/update/'.$anime->getId().'.xml', $xmlcontent, $username, $password);
 
             return $this->view('ok', 200);
         } catch (Exception\ClientErrorResponseException $e) {
-            $view = $this->view(Array('error' => 'unauthorized'), 401);
+            $view = $this->view(array('error' => 'unauthorized'), 401);
             $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
 
             return $view;
@@ -310,15 +303,14 @@ class AnimeListController extends FOSRestController
             //it actually was an error.
             $response = $e->getResponse()->getBody(true);
 
-            if(stripos($response, 'Updated') === 0) {
+            if (stripos($response, 'Updated') === 0) {
                 return $this->view('ok', 200);
             }
 
-            return $this->view(Array('error' => 'not-found'), 404);
+            return $this->view(array('error' => 'not-found'), 404);
         } catch (Exception\CurlException $e) {
-            return $this->view(Array('error' => 'network-error'), 500);
+            return $this->view(array('error' => 'network-error'), 500);
         }
-
     }
 
     /**
@@ -343,7 +335,7 @@ class AnimeListController extends FOSRestController
 
         //Don't bother making a request if the user didn't send any authentication
         if ($username === null) {
-            $view = $this->view(Array('error' => 'unauthorized'), 401);
+            $view = $this->view(array('error' => 'unauthorized'), 401);
             $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
 
             return $view;
@@ -352,11 +344,11 @@ class AnimeListController extends FOSRestController
         $connection = $this->get('atarashii_api.communicator');
 
         try {
-            $connection->sendXML('/api/animelist/delete/' . $id . '.xml', '', $username, $password);
+            $connection->sendXML('/api/animelist/delete/'.$id.'.xml', '', $username, $password);
 
             return $this->view('ok', 200);
         } catch (Exception\ClientErrorResponseException $e) {
-            $view = $this->view(Array('error' => 'unauthorized'), 401);
+            $view = $this->view(array('error' => 'unauthorized'), 401);
             $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
 
             return $view;
@@ -365,13 +357,13 @@ class AnimeListController extends FOSRestController
             //it actually was an error.
             $response = $e->getResponse()->getBody(true);
 
-            if(stripos($response, 'Deleted') === 0) {
+            if (stripos($response, 'Deleted') === 0) {
                 return $this->view('ok', 200);
             }
 
-            return $this->view(Array('error' => 'not-found'), 404);
+            return $this->view(array('error' => 'not-found'), 404);
         } catch (Exception\CurlException $e) {
-            return $this->view(Array('error' => 'network-error'), 500);
+            return $this->view(array('error' => 'network-error'), 500);
         }
     }
 }

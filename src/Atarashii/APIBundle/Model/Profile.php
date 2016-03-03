@@ -1,13 +1,12 @@
 <?php
 /**
-* Atarashii MAL API
+* Atarashii MAL API.
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
 * @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
-
 namespace Atarashii\APIBundle\Model;
 
 use JMS\Serializer\Annotation\SerializedName;
@@ -17,41 +16,41 @@ use JMS\Serializer\Annotation\Until;
 use Atarashii\APIBundle\Helper\Date;
 
 /**
-* An instance of this class represents a single user's profile
-*/
+ * An instance of this class represents a single user's profile.
+ */
 class Profile
 {
     /**
-    * Fully qualified URL to the user's avatar image
-    *
-    * @var string
-    */
+     * Fully qualified URL to the user's avatar image.
+     *
+     * @var string
+     */
     private $avatarUrl;
 
     /**
-    * A ProfileDetails object containing general information on the user
-    *
-    * @var ProfileDetails
-    */
+     * A ProfileDetails object containing general information on the user.
+     *
+     * @var ProfileDetails
+     */
     public $details;
 
     /**
-    * An AnimeStats object containing information on the user's anime statistics
-    *
-    * @var AnimeStats
-    */
+     * An AnimeStats object containing information on the user's anime statistics.
+     *
+     * @var AnimeStats
+     */
     public $anime_stats;
 
     /**
-    * A MangaStats object containing information on the user's manga statistics
-    *
-    * @var MangaStats
-    */
+     * A MangaStats object containing information on the user's manga statistics.
+     *
+     * @var MangaStats
+     */
     public $manga_stats;
 
     /**
-    * Create an instance of the object
-    */
+     * Create an instance of the object.
+     */
     public function __construct()
     {
         // Initialize the sub classes we use.
@@ -61,11 +60,9 @@ class Profile
     }
 
     /**
-     * Set the avatarUrl property
+     * Set the avatarUrl property.
      *
      * @param string $avatarUrl The avatar url of an user.
-     *
-     * @return void
      */
     public function setAvatarUrl($avatarUrl)
     {
@@ -73,21 +70,20 @@ class Profile
     }
 
     /**
-     * Get the avatarUrl property
+     * Get the avatarUrl property.
      *
      * @return string
      */
     public function getAvatarUrl()
     {
-       return $this->avatarUrl;
+        return $this->avatarUrl;
     }
-
 }
 
 /**
-* This class is used within the Profile Class.
-* It contains general user details
-*/
+ * This class is used within the Profile Class.
+ * It contains general user details.
+ */
 class ProfileDetails
 {
     /**
@@ -174,13 +170,11 @@ class ProfileDetails
     private $yahoo;
 
     /**
-     * Set the lastOnline property
+     * Set the lastOnline property.
      *
      * This function is for compatibility with certain parts of API1
      *
      * @param string $lastOnline The last time when an user was online.
-     *
-     * @return void
      */
     public function setLastOnline($lastOnline)
     {
@@ -190,13 +184,13 @@ class ProfileDetails
     }
 
     /**
-     * Get the lastOnline property
+     * Get the lastOnline property.
      *
      * @return string
      */
     public function getLastOnline()
     {
-       return $this->lastOnline;
+        return $this->lastOnline;
     }
 
     public function getLastOnline2()
@@ -205,11 +199,9 @@ class ProfileDetails
     }
 
     /**
-     * Set the status property
+     * Set the status property.
      *
      * @param string $status The status of an user.
-     *
-     * @return void
      */
     public function setStatus($status)
     {
@@ -223,15 +215,13 @@ class ProfileDetails
      */
     public function getStatus()
     {
-       return $this->status;
+        return $this->status;
     }
 
     /**
-     * Set the gender property
+     * Set the gender property.
      *
      * @param string $gender The gender of an user.
-     *
-     * @return void
      */
     public function setGender($gender)
     {
@@ -239,21 +229,19 @@ class ProfileDetails
     }
 
     /**
-     * Get the gender property
+     * Get the gender property.
      *
      * @return string
      */
     public function getGender()
     {
-       return $this->gender;
+        return $this->gender;
     }
 
     /**
-     * Set the birthday property
+     * Set the birthday property.
      *
      * @param string $birthday The birthday of an user.
-     *
-     * @return void
      */
     public function setBirthday($birthday)
     {
@@ -261,21 +249,19 @@ class ProfileDetails
     }
 
     /**
-     * Get the birthday property
+     * Get the birthday property.
      *
      * @return string
      */
     public function getBirthday()
     {
-       return $this->birthday;
+        return $this->birthday;
     }
 
     /**
-     * Set the location property
+     * Set the location property.
      *
      * @param string $location The location of an user.
-     *
-     * @return void
      */
     public function setLocation($location)
     {
@@ -283,21 +269,19 @@ class ProfileDetails
     }
 
     /**
-     * Get the location property
+     * Get the location property.
      *
      * @return string
      */
     public function getLocation()
     {
-       return $this->location;
+        return $this->location;
     }
 
     /**
-     * Set the website property
+     * Set the website property.
      *
      * @param string $website The website of an user.
-     *
-     * @return void
      */
     public function setWebsite($website)
     {
@@ -305,23 +289,21 @@ class ProfileDetails
     }
 
     /**
-     * Get the website property
+     * Get the website property.
      *
      * @return string
      */
     public function getWebsite()
     {
-       return $this->website;
+        return $this->website;
     }
 
     /**
-     * Set the joinDate property
+     * Set the joinDate property.
      *
      * This function is for compatibility with certain parts of API1
      *
      * @param string $joinDate The MAL join date of an user.
-     *
-     * @return void
      */
     public function setJoinDate($joinDate)
     {
@@ -331,13 +313,13 @@ class ProfileDetails
     }
 
     /**
-     * Get the joinDate property
+     * Get the joinDate property.
      *
      * @return string
      */
     public function getJoinDate()
     {
-       return $this->joinDate;
+        return $this->joinDate;
     }
 
     public function getJoinDate2()
@@ -346,11 +328,9 @@ class ProfileDetails
     }
 
     /**
-     * Set the accessRank property
+     * Set the accessRank property.
      *
      * @param string $accessRank The MAL access rank of an user.
-     *
-     * @return void
      */
     public function setAccessRank($accessRank)
     {
@@ -358,21 +338,19 @@ class ProfileDetails
     }
 
     /**
-     * Get the accessRank property
+     * Get the accessRank property.
      *
      * @return string
      */
     public function getAccessRank()
     {
-       return $this->accessRank;
+        return $this->accessRank;
     }
 
     /**
-     * Set the animeListViews property
+     * Set the animeListViews property.
      *
      * @param int $animeListViews The animelist views of an user.
-     *
-     * @return void
      */
     public function setAnimeListViews($animeListViews)
     {
@@ -380,21 +358,19 @@ class ProfileDetails
     }
 
     /**
-     * Get the animeListViews property
+     * Get the animeListViews property.
      *
      * @return int
      */
     public function getAnimeListViews()
     {
-       return $this->animeListViews;
+        return $this->animeListViews;
     }
 
     /**
-     * Set the mangaListViews property
+     * Set the mangaListViews property.
      *
      * @param int $mangaListViews The mangalist views of an user.
-     *
-     * @return void
      */
     public function setMangaListViews($mangaListViews)
     {
@@ -402,21 +378,19 @@ class ProfileDetails
     }
 
     /**
-     * Get the mangaListViews property
+     * Get the mangaListViews property.
      *
      * @return int
      */
     public function getMangaListViews()
     {
-       return $this->mangaListViews;
+        return $this->mangaListViews;
     }
 
     /**
-     * Set the forumPosts property
+     * Set the forumPosts property.
      *
      * @param int $forumPosts The number forum posts of an user.
-     *
-     * @return void
      */
     public function setForumPosts($forumPosts)
     {
@@ -424,21 +398,19 @@ class ProfileDetails
     }
 
     /**
-     * Get the forumPosts property
+     * Get the forumPosts property.
      *
      * @return int
      */
     public function getForumPosts()
     {
-       return $this->forumPosts;
+        return $this->forumPosts;
     }
 
     /**
-     * Set the aim property
+     * Set the aim property.
      *
      * @param string $aim The aim of an user.
-     *
-     * @return void
      */
     public function setAim($aim)
     {
@@ -446,21 +418,19 @@ class ProfileDetails
     }
 
     /**
-     * Get the aim property
+     * Get the aim property.
      *
      * @return string
      */
     public function getAim()
     {
-       return $this->aim;
+        return $this->aim;
     }
 
     /**
-     * Set the comments property
+     * Set the comments property.
      *
      * @param int $comments The number comments of an user.
-     *
-     * @return void
      */
     public function setComments($comments)
     {
@@ -468,21 +438,19 @@ class ProfileDetails
     }
 
     /**
-     * Get the comments property
+     * Get the comments property.
      *
      * @return int
      */
     public function getComments()
     {
-       return $this->comments;
+        return $this->comments;
     }
 
     /**
-     * Set the msn property
+     * Set the msn property.
      *
      * @param string $msn The msn of an user.
-     *
-     * @return void
      */
     public function setMsn($msn)
     {
@@ -490,21 +458,19 @@ class ProfileDetails
     }
 
     /**
-     * Get the msn property
+     * Get the msn property.
      *
      * @return string
      */
     public function getMsn()
     {
-       return $this->msn;
+        return $this->msn;
     }
 
     /**
-     * Set the yahoo property
+     * Set the yahoo property.
      *
      * @param string $yahoo The yahoo of an user.
-     *
-     * @return void
      */
     public function setYahoo($yahoo)
     {
@@ -512,20 +478,20 @@ class ProfileDetails
     }
 
     /**
-     * Get the yahoo property
+     * Get the yahoo property.
      *
      * @return string
      */
     public function getYahoo()
     {
-       return $this->yahoo;
+        return $this->yahoo;
     }
 }
 
 /**
-* This class is used within the Profile Class.
-* It contains statistical information on the user's anime watching.
-*/
+ * This class is used within the Profile Class.
+ * It contains statistical information on the user's anime watching.
+ */
 class AnimeStats
 {
     private $timeDays;
@@ -537,11 +503,9 @@ class AnimeStats
     private $totalEntries;
 
     /**
-     * Set the timeDays property
+     * Set the timeDays property.
      *
      * @param float $timeDays The time of days of profiles.
-     *
-     * @return void
      */
     public function setTimeDays($timeDays)
     {
@@ -549,21 +513,19 @@ class AnimeStats
     }
 
     /**
-     * Get the timeDays property
+     * Get the timeDays property.
      *
      * @return float
      */
     public function getTimeDays()
     {
-       return $this->timeDays;
+        return $this->timeDays;
     }
 
     /**
-     * Set the watching property
+     * Set the watching property.
      *
      * @param int $reading The number of watching animes.
-     *
-     * @return void
      */
     public function setWatching($watching)
     {
@@ -571,21 +533,19 @@ class AnimeStats
     }
 
     /**
-     * Get the watching property
+     * Get the watching property.
      *
      * @return int
      */
     public function getWatching()
     {
-       return $this->watching;
+        return $this->watching;
     }
 
     /**
-     * Set the completed property
+     * Set the completed property.
      *
      * @param int $completed The number of completed animes.
-     *
-     * @return void
      */
     public function setCompleted($completed)
     {
@@ -593,21 +553,19 @@ class AnimeStats
     }
 
     /**
-     * Get the completed property
+     * Get the completed property.
      *
      * @return int
      */
     public function getCompleted()
     {
-       return $this->completed;
+        return $this->completed;
     }
 
     /**
-     * Set the onHold property
+     * Set the onHold property.
      *
      * @param int $onHold The number of onHold animes.
-     *
-     * @return void
      */
     public function setOnHold($onHold)
     {
@@ -615,21 +573,19 @@ class AnimeStats
     }
 
     /**
-     * Get the onHold property
+     * Get the onHold property.
      *
      * @return int
      */
     public function getOnHold()
     {
-       return $this->onHold;
+        return $this->onHold;
     }
 
     /**
-     * Set the dropped property
+     * Set the dropped property.
      *
      * @param int $dropped The number of dropped animes.
-     *
-     * @return void
      */
     public function setDropped($dropped)
     {
@@ -637,21 +593,19 @@ class AnimeStats
     }
 
     /**
-     * Get the dropped property
+     * Get the dropped property.
      *
      * @return int
      */
     public function getDropped()
     {
-       return $this->dropped;
+        return $this->dropped;
     }
 
     /**
-     * Set the planToWatch property
+     * Set the planToWatch property.
      *
      * @param int $id The number of planned to watched animes.
-     *
-     * @return void
      */
     public function setPlanToWatch($planToWatch)
     {
@@ -659,21 +613,19 @@ class AnimeStats
     }
 
     /**
-     * Get the planToWatch property
+     * Get the planToWatch property.
      *
      * @return int
      */
     public function getPlanToWatch()
     {
-       return $this->planToWatch;
+        return $this->planToWatch;
     }
 
     /**
-     * Set the totalEntries property
+     * Set the totalEntries property.
      *
      * @param int $totalEntries The total number of series.
-     *
-     * @return void
      */
     public function setTotalEntries($totalEntries)
     {
@@ -681,20 +633,20 @@ class AnimeStats
     }
 
     /**
-     * Get the totalEntries property
+     * Get the totalEntries property.
      *
      * @return int
      */
     public function getTotalEntries()
     {
-       return $this->totalEntries;
+        return $this->totalEntries;
     }
 }
 
 /**
-* This class is used within the Profile Class.
-* It contains statistical information on the user's manga reading.
-*/
+ * This class is used within the Profile Class.
+ * It contains statistical information on the user's manga reading.
+ */
 class MangaStats
 {
     private $timeDays;
@@ -706,11 +658,9 @@ class MangaStats
     private $totalEntries;
 
     /**
-     * Set the timeDays property
+     * Set the timeDays property.
      *
      * @param float $timeDays The time of days of profiles.
-     *
-     * @return void
      */
     public function setTimeDays($timeDays)
     {
@@ -718,21 +668,19 @@ class MangaStats
     }
 
     /**
-     * Get the timeDays property
+     * Get the timeDays property.
      *
      * @return float
      */
     public function getTimeDays()
     {
-       return $this->timeDays;
+        return $this->timeDays;
     }
 
     /**
-     * Set the reading property
+     * Set the reading property.
      *
      * @param int $reading The number of reading mangas.
-     *
-     * @return void
      */
     public function setReading($reading)
     {
@@ -740,21 +688,19 @@ class MangaStats
     }
 
     /**
-     * Get the reading property
+     * Get the reading property.
      *
      * @return int
      */
     public function getReading()
     {
-       return $this->reading;
+        return $this->reading;
     }
 
     /**
-     * Set the completed property
+     * Set the completed property.
      *
      * @param int $completed The number of completed mangas.
-     *
-     * @return void
      */
     public function setCompleted($completed)
     {
@@ -762,21 +708,19 @@ class MangaStats
     }
 
     /**
-     * Get the completed property
+     * Get the completed property.
      *
      * @return int
      */
     public function getCompleted()
     {
-       return $this->completed;
+        return $this->completed;
     }
 
     /**
-     * Set the onHold property
+     * Set the onHold property.
      *
      * @param int $onHold The number of onHold mangas.
-     *
-     * @return void
      */
     public function setOnHold($onHold)
     {
@@ -784,21 +728,19 @@ class MangaStats
     }
 
     /**
-     * Get the onHold property
+     * Get the onHold property.
      *
      * @return int
      */
     public function getOnHold()
     {
-       return $this->onHold;
+        return $this->onHold;
     }
 
     /**
-     * Set the dropped property
+     * Set the dropped property.
      *
      * @param int $dropped The number of dropped mangas.
-     *
-     * @return void
      */
     public function setDropped($dropped)
     {
@@ -806,21 +748,19 @@ class MangaStats
     }
 
     /**
-     * Get the dropped property
+     * Get the dropped property.
      *
      * @return int
      */
     public function getDropped()
     {
-       return $this->dropped;
+        return $this->dropped;
     }
 
     /**
-     * Set the planToRead property
+     * Set the planToRead property.
      *
      * @param int $id The number of planned to read mangas.
-     *
-     * @return void
      */
     public function setPlanToRead($planToRead)
     {
@@ -828,21 +768,19 @@ class MangaStats
     }
 
     /**
-     * Get the planToRead property
+     * Get the planToRead property.
      *
      * @return int
      */
     public function getPlanToRead()
     {
-       return $this->planToRead;
+        return $this->planToRead;
     }
 
     /**
-     * Set the totalEntries property
+     * Set the totalEntries property.
      *
      * @param int $totalEntries The total number of series.
-     *
-     * @return void
      */
     public function setTotalEntries($totalEntries)
     {
@@ -850,13 +788,12 @@ class MangaStats
     }
 
     /**
-     * Get the totalEntries property
+     * Get the totalEntries property.
      *
      * @return int
      */
     public function getTotalEntries()
     {
-       return $this->totalEntries;
+        return $this->totalEntries;
     }
-
 }

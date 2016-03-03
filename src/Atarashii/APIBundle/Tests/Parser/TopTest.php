@@ -6,15 +6,13 @@ use Atarashii\APIBundle\Parser\Top;
 
 class TopTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testParseAnime()
     {
-        $animeContents = file_get_contents(__DIR__ . '/../InputSamples/anime-top.html');
+        $animeContents = file_get_contents(__DIR__.'/../InputSamples/anime-top.html');
 
         $topList = Top::parse($animeContents, 'anime');
 
         $this->assertInternalType('array', $topList);
-
 
         $topItem = $topList[0];
 
@@ -42,12 +40,11 @@ class TopTest extends \PHPUnit_Framework_TestCase
 
     public function testParseManga()
     {
-        $mangaContents = file_get_contents(__DIR__ . '/../InputSamples/manga-top.html');
+        $mangaContents = file_get_contents(__DIR__.'/../InputSamples/manga-top.html');
 
         $topList = Top::parse($mangaContents, 'manga');
 
         $this->assertInternalType('array', $topList);
-
 
         $topItem = $topList[0];
 

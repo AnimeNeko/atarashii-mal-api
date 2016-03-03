@@ -1,18 +1,17 @@
 <?php
 /**
- * Atarashii MAL API
+ * Atarashii MAL API.
  *
  * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
  * @author    Michael Johnson <youngmug@animeneko.net>
  * @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
  * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
  */
-
 namespace Atarashii\APIBundle\Parser;
 
 use Symfony\Component\DomCrawler\Crawler;
 use Atarashii\APIBundle\Model\Review;
-use \DateTime;
+use DateTime;
 
 class ReviewParser
 {
@@ -42,7 +41,7 @@ class ReviewParser
 
         $review->setDate($crawler->filter('td[style="text-align: right;"]')->filter('div[style="text-align: right;"]')->text());
         $review->setRating(str_replace('Overall Rating: ', '', $crawler->filter('tr td[style="text-align: right;"] div')->last()->text()));
-        $review->setAvatarUrl(str_replace('_thumb','' , str_replace('/thumbs', '', $crawler->filter('div[class="picSurround"] img')->attr('src'))));
+        $review->setAvatarUrl(str_replace('_thumb', '', str_replace('/thumbs', '', $crawler->filter('div[class="picSurround"] img')->attr('src'))));
         $review->setUsername($crawler->filter('tr a')->eq(2)->text());
         $review->setHelpful($crawler->filter('tr strong')->text());
         $review->setHelpfulTotal($crawler->filter('tr strong')->eq(1)->text());
@@ -63,6 +62,5 @@ class ReviewParser
         }
 
         return $review;
-
     }
 }

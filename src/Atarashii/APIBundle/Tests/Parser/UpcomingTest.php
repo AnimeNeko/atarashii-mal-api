@@ -6,15 +6,13 @@ use Atarashii\APIBundle\Parser\Upcoming;
 
 class UpcomingTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testParseAnime()
     {
-        $animeContents = file_get_contents(__DIR__ . '/../InputSamples/anime-upcoming.html');
+        $animeContents = file_get_contents(__DIR__.'/../InputSamples/anime-upcoming.html');
 
         $upcomingList = Upcoming::parse($animeContents, 'anime');
 
         $this->assertInternalType('array', $upcomingList);
-
 
         $upcomingItem = $upcomingList[0];
 
@@ -37,9 +35,8 @@ class UpcomingTest extends \PHPUnit_Framework_TestCase
         $this->assertStringStartsWith('http://cdn.myanimelist.net/images/anime/', $upcomingItem->getImageUrl());
         $this->assertInstanceOf('\DateTime', new \DateTime($upcomingItem->getStartDate()));
 
-
         // Get some older titles to test date parsing and wrapping for two-digit years
-        $animeContents = file_get_contents(__DIR__ . '/../InputSamples/anime-upcoming-1930.html');
+        $animeContents = file_get_contents(__DIR__.'/../InputSamples/anime-upcoming-1930.html');
 
         $upcomingList = Upcoming::parse($animeContents, 'anime');
 
@@ -53,12 +50,11 @@ class UpcomingTest extends \PHPUnit_Framework_TestCase
 
     public function testParseManga()
     {
-        $mangaContents = file_get_contents(__DIR__ . '/../InputSamples/manga-upcoming.html');
+        $mangaContents = file_get_contents(__DIR__.'/../InputSamples/manga-upcoming.html');
 
         $upcomingList = Upcoming::parse($mangaContents, 'manga');
 
         $this->assertInternalType('array', $upcomingList);
-
 
         $upcomingItem = $upcomingList[0];
 
@@ -79,5 +75,4 @@ class UpcomingTest extends \PHPUnit_Framework_TestCase
         //Check some data that should remain consistent
         $this->assertStringStartsWith('http://cdn.myanimelist.net/images/manga/', $upcomingItem->getImageUrl());
     }
-
 }

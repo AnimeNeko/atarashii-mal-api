@@ -1,13 +1,12 @@
 <?php
 /**
-* Atarashii MAL API
+* Atarashii MAL API.
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
 * @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
-
 namespace Atarashii\APIBundle\Model;
 
 use JMS\Serializer\Annotation\SerializedName;
@@ -19,7 +18,7 @@ use Atarashii\APIBundle\Helper\Date;
 class Review
 {
     /**
-     * The creation date of the review
+     * The creation date of the review.
      *
      * @Type("string")
      * @Since("2.0")
@@ -27,7 +26,7 @@ class Review
     private $date;
 
     /**
-     * The rating given by the user
+     * The rating given by the user.
      *
      * @Type("integer")
      * @Since("2.0")
@@ -35,7 +34,7 @@ class Review
     private $rating;
 
     /**
-     * The username of the review creator
+     * The username of the review creator.
      *
      * @Type("string")
      * @Since("2.0")
@@ -43,7 +42,7 @@ class Review
     private $username;
 
     /**
-     * The the number of the max episodes
+     * The the number of the max episodes.
      *
      * @Type("integer")
      * @Since("2.0")
@@ -51,7 +50,7 @@ class Review
     private $episodes;
 
     /**
-     * The number of watched episodes of the review creator
+     * The number of watched episodes of the review creator.
      *
      * @Type("integer")
      * @Since("2.0")
@@ -59,7 +58,7 @@ class Review
     private $watchedEpisodes;
 
     /**
-     * The number of the max chapters
+     * The number of the max chapters.
      *
      * @Type("integer")
      * @Since("2.0")
@@ -67,7 +66,7 @@ class Review
     private $chapters;
 
     /**
-     * The number of read chapters of the review creator
+     * The number of read chapters of the review creator.
      *
      * @Type("integer")
      * @Since("2.0")
@@ -75,7 +74,7 @@ class Review
     private $chaptersRead;
 
     /**
-     * The number of users who marked this review helpful
+     * The number of users who marked this review helpful.
      *
      * @Type("integer")
      * @Since("2.0")
@@ -83,7 +82,7 @@ class Review
     private $helpful;
 
     /**
-     * The number of users who voted for helpful & not helpful
+     * The number of users who voted for helpful & not helpful.
      *
      * @Type("integer")
      * @Since("2.0")
@@ -91,7 +90,7 @@ class Review
     private $helpfulTotal;
 
     /**
-     * The avatar URL of the review creator
+     * The avatar URL of the review creator.
      *
      * @Type("string")
      * @Since("2.0")
@@ -99,7 +98,7 @@ class Review
     private $avatarUrl;
 
     /**
-     * The review content
+     * The review content.
      *
      * @Type("string")
      * @Since("2.0")
@@ -107,11 +106,9 @@ class Review
     private $review;
 
     /**
-     * Set the date property
+     * Set the date property.
      *
      * @param string $date The creation date of this review
-     *
-     * @return void
      */
     public function setDate($date)
     {
@@ -125,15 +122,13 @@ class Review
      */
     public function getDate()
     {
-       return $this->date;
+        return $this->date;
     }
 
     /**
-     * Set the rating property
+     * Set the rating property.
      *
      * @param int $rating The rating of the writer
-     *
-     * @return void
      */
     public function setRating($rating)
     {
@@ -147,15 +142,13 @@ class Review
      */
     public function getRating()
     {
-       return $this->rating;
+        return $this->rating;
     }
 
     /**
-     * Set the username property
+     * Set the username property.
      *
      * @param string $username The username of the creator.
-     *
-     * @return void
      */
     public function setUsername($username)
     {
@@ -169,15 +162,13 @@ class Review
      */
     public function getUsername()
     {
-       return $this->username;
+        return $this->username;
     }
 
     /**
-     * Set the episodes property
+     * Set the episodes property.
      *
      * @param int $episodes The number of watched episodes
-     *
-     * @return void
      */
     public function setEpisodes($episodes)
     {
@@ -191,15 +182,13 @@ class Review
      */
     public function getEpisodes()
     {
-       return $this->episodes;
+        return $this->episodes;
     }
 
     /**
-     * Set the watched_episodes property
+     * Set the watched_episodes property.
      *
      * @param string $watched_episodes The number of watched episodes.
-     *
-     * @return void
      */
     public function setWatchedEpisodes($watched_episodes)
     {
@@ -207,7 +196,7 @@ class Review
     }
 
     /**
-     * Get the watched_episodes property
+     * Get the watched_episodes property.
      *
      * @return int
      */
@@ -217,11 +206,9 @@ class Review
     }
 
     /**
-     * Set the chapters property
+     * Set the chapters property.
      *
      * @param int $chapters The number chapters of series.
-     *
-     * @return void
      */
     public function setChapters($chapters)
     {
@@ -229,7 +216,7 @@ class Review
     }
 
     /**
-     * Get the episodes property
+     * Get the episodes property.
      *
      * @return int
      */
@@ -239,11 +226,9 @@ class Review
     }
 
     /**
-     * Set the chaptersRead property
+     * Set the chaptersRead property.
      *
      * @param string chaptersRead The number of read chapters.
-     *
-     * @return void
      */
     public function setChaptersRead($chaptersRead)
     {
@@ -251,7 +236,7 @@ class Review
     }
 
     /**
-     * Get the chaptersRead property
+     * Get the chaptersRead property.
      *
      * @return int
      */
@@ -261,11 +246,9 @@ class Review
     }
 
     /**
-     * Set the helpful property
+     * Set the helpful property.
      *
      * @param int $helpful The number of people who found it helpful
-     *
-     * @return void
      */
     public function setHelpful($helpful)
     {
@@ -279,15 +262,13 @@ class Review
      */
     public function getHelpful()
     {
-       return $this->helpful;
+        return $this->helpful;
     }
 
     /**
-     * Set the helpfulTotal property
+     * Set the helpfulTotal property.
      *
      * @param int $helpfulTotal Number of helpful & not helpful
-     *
-     * @return void
      */
     public function setHelpfulTotal($helpfulTotal)
     {
@@ -301,15 +282,13 @@ class Review
      */
     public function getHelpfulTotal()
     {
-       return $this->helpfulTotal;
+        return $this->helpfulTotal;
     }
 
     /**
-     * Set the review property
+     * Set the review property.
      *
      * @param string $review The review content.
-     *
-     * @return void
      */
     public function setReview($review)
     {
@@ -327,11 +306,9 @@ class Review
     }
 
     /**
-     * Set the review property
+     * Set the review property.
      *
      * @param string $avatarUrl The user avatar.
-     *
-     * @return void
      */
     public function setAvatarUrl($avatarUrl)
     {
@@ -347,5 +324,4 @@ class Review
     {
         return $this->avatarUrl;
     }
-
 }

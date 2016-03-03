@@ -6,8 +6,7 @@ use Atarashii\APIBundle\Tests\Util\ConnectivityUtilities;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
- * Class AnimeControllerTest
- * @package Atarashii\APIBundle\Tests\Controller
+ * Class AnimeControllerTest.
  */
 class AnimeControllerTest extends WebTestCase
 {
@@ -27,7 +26,6 @@ class AnimeControllerTest extends WebTestCase
         $this->assertNotNull($content);
         $this->assertEquals(404, $statusCode);
         $this->assertStringStartsWith('No series found', $content->error);
-
 
         //Test an actual title, in this case NouCome.
         $client->request('GET', '/2/anime/19221');
@@ -104,13 +102,13 @@ class AnimeControllerTest extends WebTestCase
             $this->assertEquals('completed', $content->watched_status);
             $this->assertEquals('2000-01-01', $content->watching_start);
             $this->assertEquals('2000-03-20', $content->watching_end);
-
         } else {
             $this->markTestSkipped('Username and password must be set.');
         }
     }
 
-    public static function setUpBeforeClass() {
+    public static function setUpBeforeClass()
+    {
         $client = static::createClient();
         $container = $client->getContainer();
 
@@ -121,8 +119,8 @@ class AnimeControllerTest extends WebTestCase
         }
     }
 
-    protected function setUp() {
+    protected function setUp()
+    {
         $this->client = static::createClient();
     }
-
 }

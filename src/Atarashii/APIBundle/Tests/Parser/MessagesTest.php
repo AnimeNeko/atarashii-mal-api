@@ -7,10 +7,9 @@ use Atarashii\APIBundle\Parser\MessagesParser;
 
 class MessagesTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testParse()
     {
-        $messageIndex = file_get_contents(__DIR__ . '/../InputSamples/user-messages-list.html');
+        $messageIndex = file_get_contents(__DIR__.'/../InputSamples/user-messages-list.html');
 
         $messages = MessagesParser::parse($messageIndex);
 
@@ -32,7 +31,7 @@ class MessagesTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($message->getMessage());
         $this->assertInternalType('string', $message->getPreview());
 
-        $messageContent = file_get_contents(__DIR__ . '/../InputSamples/user-message.html');
+        $messageContent = file_get_contents(__DIR__.'/../InputSamples/user-message.html');
 
         $message = MessagesParser::parseMessage($messageContent, 1234);
 
@@ -45,5 +44,4 @@ class MessagesTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('string', $message->getMessage());
         $this->assertNull($message->getPreview());
     }
-
 }

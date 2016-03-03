@@ -137,7 +137,8 @@ class ForumTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($verifyTime->format('Y-m-d\TH:iO'), $forum->getTime());
     }
 
-    public static function setUpBeforeClass() {
+    public static function setUpBeforeClass()
+    {
         //Our date tests assume we're in the default timezone for MAL
         //Set the PHP timezone to America/Los_Angeles to be safe.
         date_default_timezone_set('America/Los_Angeles');

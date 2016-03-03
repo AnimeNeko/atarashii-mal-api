@@ -1,13 +1,12 @@
 <?php
 /**
-* Atarashii MAL API
+* Atarashii MAL API.
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
 * @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
-
 namespace Atarashii\APIBundle\Parser;
 
 use Atarashii\APIBundle\Model\Actor;
@@ -54,7 +53,7 @@ class CastParser
 
         $result = preg_match('/rs\/(.*?)\?/', $item->filter('img')->attr('src'), $imageURL);
         if ($result > 0)
-            $cast->setImage('http://cdn.myanimelist.net/images/characters/' . $imageURL[1]);
+            $cast->setImage('http://cdn.myanimelist.net/images/characters/'.$imageURL[1]);
         else
             $cast->setImage($item->filter('img')->attr('src'));
 
@@ -73,7 +72,7 @@ class CastParser
 
                     $result = preg_match('/rs\/(.*?)\?/', $crawler->filter('img')->last()->attr('src'), $imageURL);
                     if ($result > 0)
-                        $actor->setImage('http://cdn.myanimelist.net/images/voiceactors/' . $imageURL[1]);
+                        $actor->setImage('http://cdn.myanimelist.net/images/voiceactors/'.$imageURL[1]);
                     else
                         $actor->setImage($crawler->filter('img')->last()->attr('src'));
 
@@ -97,7 +96,7 @@ class CastParser
 
         $result = preg_match('/rs\/(.*?)\?/', $crawler->filter('img')->last()->attr('src'), $imageURL);
         if ($result > 0)
-            $cast->setImage('http://cdn.myanimelist.net/images/voiceactors/' . $imageURL[1]);
+            $cast->setImage('http://cdn.myanimelist.net/images/voiceactors/'.$imageURL[1]);
         else
             $cast->setImage($crawler->filter('img')->last()->attr('src'));
 

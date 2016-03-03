@@ -26,7 +26,8 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($animeTitle, $anime->getTitle());
     }
 
-    public function testOtherTitles() {
+    public function testOtherTitles()
+    {
         $anime = new Anime();
 
         $otherTitles = array();
@@ -71,7 +72,6 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($animeImgUrl, $anime->getImageUrl());
     }
-
 
     public function testType()
     {
@@ -139,7 +139,8 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('TV', $anime->getType());
     }
 
-    public function testEpisodes() {
+    public function testEpisodes()
+    {
         $episodes = rand();
 
         $anime = new Anime();
@@ -377,7 +378,6 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('High', $anime->getPriority('string'));
         $this->assertEquals($animePriority, $anime->getPriority());
 
-
         /*
          * Default Value
          */
@@ -387,7 +387,8 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('0', $anime->getPriority());
     }
 
-    public function testClassification() {
+    public function testClassification()
+    {
         $classification = 'PG-13 - Teens 13 or older';
 
         $anime = new Anime();
@@ -396,7 +397,8 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($classification, $anime->getClassification());
     }
 
-    public function testMembersScore() {
+    public function testMembersScore()
+    {
         $score = 7.95;
 
         $anime = new Anime();
@@ -412,7 +414,8 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals((float) $score, $anime->getMembersScore());
     }
 
-    public function testMembersCount() {
+    public function testMembersCount()
+    {
         $count = 238793;
 
         $anime = new Anime();
@@ -428,7 +431,8 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals((int) $count, $anime->getMembersCount());
     }
 
-    public function testFavoritedCount() {
+    public function testFavoritedCount()
+    {
         $favs = 7295;
 
         $anime = new Anime();
@@ -444,7 +448,8 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
 //        $this->assertEquals((int) $favs, $anime->getFavoritedCount());
     }
 
-    public function testSynopsis() {
+    public function testSynopsis()
+    {
         $synopsis = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce fringilla, nisi sed rutrum interdum, neque neque tincidunt eros, ac euismod enim massa a quam. Vivamus maximus enim ac odio euismod tristique. Suspendisse potenti. Praesent a nulla tortor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean varius metus at sapien tempor auctor. Donec semper odio sed posuere placerat.';
 
         $anime = new Anime();
@@ -460,7 +465,8 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($synopsis, $anime->getSynopsis());
     }
 
-    public function testProducers() {
+    public function testProducers()
+    {
         $producers = 'Kyoto Animation, FUNimation Entertainment, Lantis, Rakuonsha, Kadokawa Pictures USA, Lucky Paradise';
 
         $anime = new Anime();
@@ -469,7 +475,8 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($producers, $anime->getProducers());
     }
 
-    public function testGenres() {
+    public function testGenres()
+    {
         $genres = 'Comedy, Parody, School, Slice of Life';
 
         $anime = new Anime();
@@ -478,11 +485,12 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($genres, $anime->getGenres());
     }
 
-    public function testMangaAdaptations() {
+    public function testMangaAdaptations()
+    {
         $relation = array();
         $relation['manga_id'] = rand();
         $relation['title'] = 'This is a title';
-        $relation['url'] = 'http://myanimelist.net/manga/' . $relation['manga_id'];
+        $relation['url'] = 'http://myanimelist.net/manga/'.$relation['manga_id'];
 
         $anime = new Anime();
         $anime->addRelation($relation, 'adaptation');
@@ -490,14 +498,14 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $adaptations = $anime->getMangaAdaptations();
 
         $this->assertEquals($relation, $adaptations[0]);
-
     }
 
-    public function testPrequels() {
+    public function testPrequels()
+    {
         $relation = array();
         $relation['anime_id'] = rand();
         $relation['title'] = 'This is a title';
-        $relation['url'] = 'http://myanimelist.net/anime/' . $relation['anime_id'];
+        $relation['url'] = 'http://myanimelist.net/anime/'.$relation['anime_id'];
 
         $anime = new Anime();
         $anime->addRelation($relation, 'prequel');
@@ -505,14 +513,14 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $prequels = $anime->getPrequels();
 
         $this->assertEquals($relation, $prequels[0]);
-
     }
 
-    public function testSequels() {
+    public function testSequels()
+    {
         $relation = array();
         $relation['anime_id'] = rand();
         $relation['title'] = 'This is a title';
-        $relation['url'] = 'http://myanimelist.net/anime/' . $relation['anime_id'];
+        $relation['url'] = 'http://myanimelist.net/anime/'.$relation['anime_id'];
 
         $anime = new Anime();
         $anime->addRelation($relation, 'sequel');
@@ -520,14 +528,14 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $sequels = $anime->getSequels();
 
         $this->assertEquals($relation, $sequels[0]);
-
     }
 
-    public function testSideStories() {
+    public function testSideStories()
+    {
         $relation = array();
         $relation['anime_id'] = rand();
         $relation['title'] = 'This is a title';
-        $relation['url'] = 'http://myanimelist.net/anime/' . $relation['anime_id'];
+        $relation['url'] = 'http://myanimelist.net/anime/'.$relation['anime_id'];
 
         $anime = new Anime();
         $anime->addRelation($relation, 'side_story');
@@ -535,14 +543,14 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $sideStories = $anime->getSideStories();
 
         $this->assertEquals($relation, $sideStories[0]);
-
     }
 
-    public function testParentStory() {
+    public function testParentStory()
+    {
         $relation = array();
         $relation['anime_id'] = rand();
         $relation['title'] = 'This is a title';
-        $relation['url'] = 'http://myanimelist.net/anime/' . $relation['anime_id'];
+        $relation['url'] = 'http://myanimelist.net/anime/'.$relation['anime_id'];
 
         $anime = new Anime();
         $anime->addRelation($relation, 'parent_story');
@@ -550,14 +558,14 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $parentStory = $anime->getParentStory();
 
         $this->assertEquals($relation, $parentStory);
-
     }
 
-    public function testCharacterAnime() {
+    public function testCharacterAnime()
+    {
         $relation = array();
         $relation['anime_id'] = rand();
         $relation['title'] = 'This is a title';
-        $relation['url'] = 'http://myanimelist.net/anime/' . $relation['anime_id'];
+        $relation['url'] = 'http://myanimelist.net/anime/'.$relation['anime_id'];
 
         $anime = new Anime();
         $anime->addRelation($relation, 'character');
@@ -565,14 +573,14 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $characterAnime = $anime->getCharacterAnime();
 
         $this->assertEquals($relation, $characterAnime[0]);
-
     }
 
-    public function testSpinoffs() {
+    public function testSpinoffs()
+    {
         $relation = array();
         $relation['anime_id'] = rand();
         $relation['title'] = 'This is a title';
-        $relation['url'] = 'http://myanimelist.net/anime/' . $relation['anime_id'];
+        $relation['url'] = 'http://myanimelist.net/anime/'.$relation['anime_id'];
 
         $anime = new Anime();
         $anime->addRelation($relation, 'spin-off');
@@ -580,14 +588,14 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $spinOffs = $anime->getSpinOffs();
 
         $this->assertEquals($relation, $spinOffs[0]);
-
     }
 
-    public function testSummaries() {
+    public function testSummaries()
+    {
         $relation = array();
         $relation['anime_id'] = rand();
         $relation['title'] = 'This is a title';
-        $relation['url'] = 'http://myanimelist.net/anime/' . $relation['anime_id'];
+        $relation['url'] = 'http://myanimelist.net/anime/'.$relation['anime_id'];
 
         $anime = new Anime();
         $anime->addRelation($relation, 'summary');
@@ -595,14 +603,14 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $summaries = $anime->getSummaries();
 
         $this->assertEquals($relation, $summaries[0]);
-
     }
 
-    public function testAlternativeVersions() {
+    public function testAlternativeVersions()
+    {
         $relation = array();
         $relation['anime_id'] = rand();
         $relation['title'] = 'This is a title';
-        $relation['url'] = 'http://myanimelist.net/anime/' . $relation['anime_id'];
+        $relation['url'] = 'http://myanimelist.net/anime/'.$relation['anime_id'];
 
         $anime = new Anime();
         $anime->addRelation($relation, 'alternative_version');
@@ -610,14 +618,14 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $alternativeVersions = $anime->getAlternativeVersions();
 
         $this->assertEquals($relation, $alternativeVersions[0]);
-
     }
 
-    public function testOther() {
+    public function testOther()
+    {
         $relation = array();
         $relation['anime_id'] = rand();
         $relation['title'] = 'This is a title';
-        $relation['url'] = 'http://myanimelist.net/anime/' . $relation['anime_id'];
+        $relation['url'] = 'http://myanimelist.net/anime/'.$relation['anime_id'];
 
         $anime = new Anime();
         $anime->addRelation($relation, 'other');
@@ -625,10 +633,10 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $other = $anime->getOther();
 
         $this->assertEquals($relation, $other[0]);
-
     }
 
-    public function testWatchedEpisode() {
+    public function testWatchedEpisode()
+    {
         $episode = rand();
 
         $anime = new Anime();
@@ -637,7 +645,8 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($episode, $anime->getWatchedEpisodes());
     }
 
-    public function testScore() {
+    public function testScore()
+    {
         $score = rand(0, 10);
 
         $anime = new Anime();
@@ -646,7 +655,8 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($score, $anime->getScore());
     }
 
-    public function testListedAnimeId() {
+    public function testListedAnimeId()
+    {
         $animeId = rand();
 
         $anime = new Anime();
@@ -655,7 +665,8 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($animeId, $anime->getListedAnimeId());
     }
 
-    public function testPersonalTags() {
+    public function testPersonalTags()
+    {
         $tags = 'one, two, three, four';
 
         $anime = new Anime();
@@ -664,7 +675,8 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($tags, $anime->getPersonalTags());
     }
 
-    public function testWatchingStart() {
+    public function testWatchingStart()
+    {
         $now = new \DateTime('now');
         $watchDate = $now->format('Y-m-d');
 
@@ -674,7 +686,8 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($watchDate, $anime->getWatchingStart());
     }
 
-    public function testWatchingEnd() {
+    public function testWatchingEnd()
+    {
         $now = new \DateTime('now');
         $watchDate = $now->format('Y-m-d');
 
@@ -738,7 +751,8 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $anime->getStorage('string'));
     }
 
-    public function testStorageValue() {
+    public function testStorageValue()
+    {
         $anime = new Anime();
 
         //Get a random float between 1 and 800 with two decimal places
@@ -753,11 +767,11 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
 
         $anime->setStorageValue($storageValue);
 
-        $this->assertEquals((float)$storageValue, $anime->getStorageValue());
+        $this->assertEquals((float) $storageValue, $anime->getStorageValue());
     }
 
-
-    public function testEpsDownloaded() {
+    public function testEpsDownloaded()
+    {
         $eps = rand();
 
         $anime = new Anime();
@@ -766,7 +780,8 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($eps, $anime->getEpsDownloaded());
     }
 
-    public function testRewatching() {
+    public function testRewatching()
+    {
         $anime = new Anime();
 
         //Using Real boolean
@@ -785,7 +800,8 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals((bool) $isRewatch, $anime->getRewatching());
     }
 
-    public function testRewatchCount() {
+    public function testRewatchCount()
+    {
         $count = rand();
 
         $anime = new Anime();
@@ -794,7 +810,8 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($count, $anime->getRewatchCount());
     }
 
-    public function testRewatchValue() {
+    public function testRewatchValue()
+    {
         $anime = new Anime();
 
         /*
@@ -837,7 +854,8 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $anime->getRewatchValue('string'));
     }
 
-    public function testPersonalComments() {
+    public function testPersonalComments()
+    {
         $comments = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce fringilla, nisi sed rutrum interdum, neque neque tincidunt eros, ac euismod enim massa a quam. Vivamus maximus enim ac odio euismod tristique. Suspendisse potenti. Praesent a nulla tortor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean varius metus at sapien tempor auctor. Donec semper odio sed posuere placerat.';
 
         $anime = new Anime();
@@ -853,13 +871,11 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($comments, $anime->getPersonalComments());
     }
 
-
-
-
     //These functions being tested shouldn't be used anymore, MAL has phased the data out
     //Keeping tests in until they are removed from the model.
 
-    public function testTags() {
+    public function testTags()
+    {
         $anime = new Anime();
 
         $tags[] = 'one';
@@ -870,7 +886,8 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($tags, $anime->getTags());
     }
 
-    public function testFansubGroup() {
+    public function testFansubGroup()
+    {
         $anime = new Anime();
 
         $group = 'Static-Subs';
@@ -880,7 +897,8 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
     }
 
     //It might be better to try and do an XML compare in the future.
-    public function testMalXml() {
+    public function testMalXml()
+    {
         $anime = new Anime();
         $items = array();
 
@@ -932,5 +950,4 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($output, $anime->MALApiXml($items));
     }
-
 }

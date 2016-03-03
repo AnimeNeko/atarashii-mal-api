@@ -6,8 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Atarashii\APIBundle\Tests\Util\ConnectivityUtilities;
 
 /**
- * Class MangalistControllerTest
- * @package Atarashii\APIBundle\Tests\Controller
+ * Class MangalistControllerTest.
  */
 class MangalistControllerTest extends WebTestCase
 {
@@ -28,7 +27,6 @@ class MangalistControllerTest extends WebTestCase
 
         $this->assertStringStartsWith('Failed to find', $content->error);
 
-
         //Now, do all the checks with the reference user
         $client->request('GET', '/2/mangalist/AtarashiiApiTest');
         $rawContent = $client->getResponse()->getContent();
@@ -37,7 +35,6 @@ class MangalistControllerTest extends WebTestCase
 
         $this->assertNotNull($content);
         $this->assertEquals(200, $statusCode);
-
 
         $this->assertGreaterThanOrEqual(1, count($content->manga));
 
@@ -57,9 +54,10 @@ class MangalistControllerTest extends WebTestCase
         $this->assertEquals('completed', $mangaItem->read_status);
         $this->assertInternalType('int', $mangaItem->score);
         $this->assertEquals(9, $mangaItem->score);
-   }
+    }
 
-    public function testAddAction() {
+    public function testAddAction()
+    {
         $client = $this->client;
 
         $credentials = ConnectivityUtilities::getLoginCredentials($client->getContainer());
@@ -77,12 +75,12 @@ class MangalistControllerTest extends WebTestCase
                     'status' => $status,
                     'chapters' => $chapters,
                     'volumes' => $volumes,
-                    'score' => $score
+                    'score' => $score,
                 ),
                 array(),
                 array(
                     'PHP_AUTH_USER' => $credentials['username'],
-                    'PHP_AUTH_PW' => $credentials['password']
+                    'PHP_AUTH_PW' => $credentials['password'],
                 )
             );
 
@@ -94,13 +92,12 @@ class MangalistControllerTest extends WebTestCase
             $this->assertEquals('ok', $content);
 
             //Make sure the title actually was added to the list
-            $client->request('GET', '/2/mangalist/' . $credentials['username']);
+            $client->request('GET', '/2/mangalist/'.$credentials['username']);
             $rawContent = $client->getResponse()->getContent();
             $content = json_decode($rawContent);
 
             $this->assertNotNull($content);
             $this->assertTrue($client->getResponse()->isSuccessful());
-
 
             $this->assertGreaterThanOrEqual(1, count($content->manga));
 
@@ -129,7 +126,8 @@ class MangalistControllerTest extends WebTestCase
     /**
      * @depends testAddAction
      */
-    public function testUpdateAction() {
+    public function testUpdateAction()
+    {
         $client = $this->client;
 
         $credentials = ConnectivityUtilities::getLoginCredentials($client->getContainer());
@@ -142,26 +140,26 @@ class MangalistControllerTest extends WebTestCase
             $score = 7;
             $start = '2015-09-01';
 
-            $client->request('PUT', '/2/mangalist/manga/' . $mangaID,
+            $client->request('PUT', '/2/mangalist/manga/'.$mangaID,
                 array(
                     'manga_id' => $mangaID,
                     'status' => $status,
                     'chapters' => $chapters,
                     'volumes' => $volumes,
                     'score' => $score,
-                    'start' => $start
+                    'start' => $start,
                 ),
                 array(),
                 array(
                     'PHP_AUTH_USER' => $credentials['username'],
-                    'PHP_AUTH_PW' => $credentials['password']
+                    'PHP_AUTH_PW' => $credentials['password'],
                 )
             );
 
             $this->assertTrue($client->getResponse()->isSuccessful());
 
             //Grab personal details for the title to check values
-            $client->request('GET', '/2/manga/' . $mangaID, array('mine' => 1), array(), array(
+            $client->request('GET', '/2/manga/'.$mangaID, array('mine' => 1), array(), array(
                 'PHP_AUTH_USER' => $credentials['username'],
                 'PHP_AUTH_PW' => $credentials['password'],
             ));
@@ -191,34 +189,33 @@ class MangalistControllerTest extends WebTestCase
     /**
      * @depends testUpdateAction
      */
-    public function testDeleteAction() {
+    public function testDeleteAction()
+    {
         $client = $this->client;
 
         $credentials = ConnectivityUtilities::getLoginCredentials($client->getContainer());
 
         if ($credentials !== false) {
-
             $mangaID = 107; //Chobits
 
-            $client->request('DELETE', '/2/mangalist/manga/' . $mangaID,
+            $client->request('DELETE', '/2/mangalist/manga/'.$mangaID,
                 array(),
                 array(),
                 array(
                     'PHP_AUTH_USER' => $credentials['username'],
-                    'PHP_AUTH_PW' => $credentials['password']
+                    'PHP_AUTH_PW' => $credentials['password'],
                 )
             );
 
             $this->assertTrue($client->getResponse()->isSuccessful());
 
             //Make sure the title actually was deleted
-            $client->request('GET', '/2/mangalist/' . $credentials['username']);
+            $client->request('GET', '/2/mangalist/'.$credentials['username']);
             $rawContent = $client->getResponse()->getContent();
             $content = json_decode($rawContent);
 
             $this->assertNotNull($content);
             $this->assertTrue($client->getResponse()->isSuccessful());
-
 
             $foundItem = false;
 
@@ -230,13 +227,13 @@ class MangalistControllerTest extends WebTestCase
             }
 
             $this->assertFalse($foundItem);
-
         } else {
             $this->markTestSkipped('Username and password must be set.');
         }
     }
 
-    public static function setUpBeforeClass() {
+    public static function setUpBeforeClass()
+    {
         $client = static::createClient();
         $container = $client->getContainer();
 
@@ -247,8 +244,8 @@ class MangalistControllerTest extends WebTestCase
         }
     }
 
-    protected function setUp() {
+    protected function setUp()
+    {
         $this->client = static::createClient();
     }
-
 }

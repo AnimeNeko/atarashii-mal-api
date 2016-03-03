@@ -1,13 +1,12 @@
 <?php
 /**
-* Atarashii MAL API
+* Atarashii MAL API.
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
 * @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
-
 namespace Atarashii\APIBundle\Model;
 
 use JMS\Serializer\Annotation\Since;
@@ -17,49 +16,49 @@ use JMS\Serializer\Annotation\Until;
 class Manga
 {
     /**
-     * The ID of the manga
+     * The ID of the manga.
      *
      * @Type("integer")
      */
     private $id;
 
     /**
-     * Title of the manga
+     * Title of the manga.
      *
      * @Type("string")
      */
     private $title;
 
     /**
-     * Map of other titles for the manga
+     * Map of other titles for the manga.
      *
      * @Type("array<string, array<string>>")
      */
     private $otherTitles = array();
 
     /**
-     * The global rank of the manga
+     * The global rank of the manga.
      *
      * @Type("integer")
      */
     private $rank;
 
     /**
-     * Global rank of the manga based on popularity (number of people with the title on the list)
+     * Global rank of the manga based on popularity (number of people with the title on the list).
      *
      * @Type("integer")
      */
     private $popularityRank;
 
     /**
-     * URL of tan image to the manga
+     * URL of tan image to the manga.
      *
      * @Type("string")
      */
     private $imageUrl;
 
     /**
-     * Type of manga
+     * Type of manga.
      *
      * Defined string from the type of manga. Value will be one of Manga, Novel, One Shot, Doujin, Manwha, Manhua, OEL ("OEL manga" refers to "Original English-Language manga")
      *
@@ -86,7 +85,7 @@ class Manga
     private $volumes;
 
     /**
-     * Publishing status of the manga
+     * Publishing status of the manga.
      *
      * Defines string of the status of the manga. Value will be one of finished, publishing, not yet published.
      *
@@ -95,7 +94,7 @@ class Manga
     private $status;
 
     /**
-     * Weighted score of the manga
+     * Weighted score of the manga.
      *
      * The score is calculated based on the ratings given by members.
      *
@@ -104,21 +103,21 @@ class Manga
     private $membersScore;
 
     /**
-     * The number of members that have the manga on the list
+     * The number of members that have the manga on the list.
      *
      * @Type("integer")
      */
     private $membersCount;
 
     /**
-     * The number of members that have the manga marked as a favorite
+     * The number of members that have the manga marked as a favorite.
      *
      * @Type("integer")
      */
     private $favoritedCount;
 
     /**
-     * Description of the manga
+     * Description of the manga.
      *
      * An HTML-formatted string describing the anime
      *
@@ -127,42 +126,42 @@ class Manga
     private $synopsis;
 
     /**
-     * A list of genres for the manga
+     * A list of genres for the manga.
      *
      * @Type("array<string>")
      */
     private $genres = array();
 
     /**
-     * A list of popular tags for the manga
+     * A list of popular tags for the manga.
      *
      * @Type("array<string>")
      */
     private $tags = array();
 
     /**
-     * A list of anime adaptations of this manga (or conversely, anime from which this manga is adapted)
+     * A list of anime adaptations of this manga (or conversely, anime from which this manga is adapted).
      *
      * @Type("array")
      */
     private $animeAdaptations = array();
 
     /**
-     * A list of related manga
+     * A list of related manga.
      *
      * @Type("array")
      */
     private $relatedManga = array();
 
     /**
-     * A list of alternative versions of this manga
+     * A list of alternative versions of this manga.
      *
      * @Type("array")
      */
     private $alternativeVersions = array();
 
     /**
-     * User's read status of the manga
+     * User's read status of the manga.
      *
      * This is a string that is one of: reading, completed, on-hold, dropped, plan to read
      *
@@ -171,7 +170,7 @@ class Manga
     private $readStatus;
 
     /**
-     * Number of chapters already read by the user
+     * Number of chapters already read by the user.
      *
      * @Type("integer")
      */
@@ -185,14 +184,14 @@ class Manga
     private $volumesRead;
 
     /**
-     * User's score for the manga, from 1 to 10
+     * User's score for the manga, from 1 to 10.
      *
      * @Type("integer")
      */
     private $score;
 
     /**
-     * ID of the manga as per the user's list
+     * ID of the manga as per the user's list.
      *
      * API 1.0
      * This used to correspond to a unique ID for the title on the user's list, but is no longer used.
@@ -203,7 +202,7 @@ class Manga
     private $listedMangaId;
 
     /**
-     * Tags assigned by the user
+     * Tags assigned by the user.
      *
      * @Type("array<string>")
      * @Since("2.0")
@@ -211,7 +210,7 @@ class Manga
     private $personalTags = array();
 
     /**
-     * The date the user started reading the title
+     * The date the user started reading the title.
      *
      * @Type("DateTime<'Y-m-d'>")
      * @Since("2.0")
@@ -219,7 +218,7 @@ class Manga
     private $readingStart;
 
     /**
-     * The date the user finished reading the title
+     * The date the user finished reading the title.
      *
      * @Type("DateTime<'Y-m-d'>")
      * @Since("2.0")
@@ -237,16 +236,15 @@ class Manga
     private $priority;
 
     /**
-     * The number of chapters downloaded by the user
+     * The number of chapters downloaded by the user.
      *
      * @Type("integer")
      * @Since("2.0")
      */
     private $chapDownloaded;
 
-
     /**
-     * Set if the user is rerereading the manga
+     * Set if the user is rerereading the manga.
      *
      * @Type("boolean")
      * @Since("2.0")
@@ -254,7 +252,7 @@ class Manga
     private $rereading;
 
     /**
-     * The number of times the user has re-read the title. (Does not include the first time.)
+     * The number of times the user has re-read the title. (Does not include the first time.).
      *
      * @Type("integer")
      * @Since("2.0")
@@ -270,7 +268,7 @@ class Manga
     private $rereadValue;
 
     /**
-     * The user's personal comments on the title
+     * The user's personal comments on the title.
      *
      * @Type("string")
      * @Since("2.0")
@@ -278,11 +276,9 @@ class Manga
     private $personalComments;
 
     /**
-     * Set the id property
+     * Set the id property.
      *
      * @param int $id The id of series.
-     *
-     * @return void
      */
     public function setId($id)
     {
@@ -290,7 +286,7 @@ class Manga
     }
 
     /**
-     * Get the id property
+     * Get the id property.
      *
      * @return int
      */
@@ -300,11 +296,9 @@ class Manga
     }
 
     /**
-     * Set the title property
+     * Set the title property.
      *
      * @param string $title The title of series.
-     *
-     * @return void
      */
     public function setTitle($title)
     {
@@ -322,11 +316,9 @@ class Manga
     }
 
     /**
-     * Set the otherTitles property
+     * Set the otherTitles property.
      *
      * @param array $otherTitles Other titles of series.
-     *
-     * @return void
      */
     public function setOtherTitles($otherTitles)
     {
@@ -334,7 +326,7 @@ class Manga
     }
 
     /**
-     * Get the otherTitles property
+     * Get the otherTitles property.
      *
      * @return array
      */
@@ -344,11 +336,9 @@ class Manga
     }
 
     /**
-     * Set the rank property
+     * Set the rank property.
      *
      * @param int $rank The rank of series.
-     *
-     * @return void
      */
     public function setRank($rank)
     {
@@ -356,7 +346,7 @@ class Manga
     }
 
     /**
-     * Get the rank property
+     * Get the rank property.
      *
      * @return int
      */
@@ -366,11 +356,9 @@ class Manga
     }
 
     /**
-     * Set the popularityRank property
+     * Set the popularityRank property.
      *
      * @param int $popularityRank The Popularity Rank of series.
-     *
-     * @return void
      */
     public function setPopularityRank($popularityRank)
     {
@@ -378,7 +366,7 @@ class Manga
     }
 
     /**
-     * Get the popularityRank property
+     * Get the popularityRank property.
      *
      * @return int
      */
@@ -388,11 +376,9 @@ class Manga
     }
 
     /**
-     * Set the imageUrl property
+     * Set the imageUrl property.
      *
      * @param string $imageUrl The Image url of series.
-     *
-     * @return void
      */
     public function setImageUrl($imageUrl)
     {
@@ -400,7 +386,7 @@ class Manga
     }
 
     /**
-     * Get the imageUrl property
+     * Get the imageUrl property.
      *
      * @return string
      */
@@ -410,12 +396,10 @@ class Manga
     }
 
     /**
-     * Set the type property
+     * Set the type property.
      *
      * @param int $type The type of series.
      *                  Can be 1/Manga, 2/Novel, 3/One Shot, 4/Doujin, 5/Manwha, 6/Manhua, or 7/OEL. The default is "Manga".
-     *
-     * @return void
      */
     public function setType($type)
     {
@@ -457,7 +441,7 @@ class Manga
     }
 
     /**
-     * Get the type property
+     * Get the type property.
      *
      * @return string
      */
@@ -467,11 +451,9 @@ class Manga
     }
 
     /**
-     * Set the chapters property
+     * Set the chapters property.
      *
      * @param int $chapters The number chapters of series.
-     *
-     * @return void
      */
     public function setChapters($chapters)
     {
@@ -479,7 +461,7 @@ class Manga
     }
 
     /**
-     * Get the episodes property
+     * Get the episodes property.
      *
      * @return int
      */
@@ -489,11 +471,9 @@ class Manga
     }
 
     /**
-     * Set the volumes property
+     * Set the volumes property.
      *
      * @param int $volumes The number volumes of series.
-     *
-     * @return void
      */
     public function setVolumes($volumes)
     {
@@ -501,7 +481,7 @@ class Manga
     }
 
     /**
-     * Get the volumes property
+     * Get the volumes property.
      *
      * @return int
      */
@@ -511,12 +491,10 @@ class Manga
     }
 
     /**
-     * Set the status property
+     * Set the status property.
      *
      * @param int $status The publishing status of manga.
      *                    Can be 1 (publishing), 2 (finished) or 3 (not yet published). The default is "2".
-     *
-     * @return void
      */
     public function setStatus($status)
     {
@@ -540,7 +518,7 @@ class Manga
     }
 
     /**
-     * Get the status property
+     * Get the status property.
      *
      * @return string (currently airing/finished airing/not yet aired)
      */
@@ -550,11 +528,9 @@ class Manga
     }
 
     /**
-     * Set the membersScore property
+     * Set the membersScore property.
      *
      * @param float $membersScore The score given by MAL members.
-     *
-     * @return void
      */
     public function setMembersScore($membersScore)
     {
@@ -562,7 +538,7 @@ class Manga
     }
 
     /**
-     * Get the membersScore property
+     * Get the membersScore property.
      *
      * @return float
      */
@@ -572,11 +548,9 @@ class Manga
     }
 
     /**
-     * Set the membersCount property
+     * Set the membersCount property.
      *
      * @param int $membersCount The number of members that added this serie in their list.
-     *
-     * @return void
      */
     public function setMembersCount($membersCount)
     {
@@ -584,7 +558,7 @@ class Manga
     }
 
     /**
-     * Get the membersCount property
+     * Get the membersCount property.
      *
      * @return int
      */
@@ -594,11 +568,9 @@ class Manga
     }
 
     /**
-     * Set the favoritedCount property
+     * Set the favoritedCount property.
      *
      * @param int $favoritedCount The number of members that added this serie in their favorite list.
-     *
-     * @return void
      */
     public function setFavoritedCount($favoritedCount)
     {
@@ -606,7 +578,7 @@ class Manga
     }
 
     /**
-     * Get the favoritedCount property
+     * Get the favoritedCount property.
      *
      * @return int
      */
@@ -616,11 +588,9 @@ class Manga
     }
 
     /**
-     * Set the synopsis property
+     * Set the synopsis property.
      *
      * @param string $synopsis The Text describing the anime.
-     *
-     * @return void
      */
     public function setSynopsis($synopsis)
     {
@@ -628,7 +598,7 @@ class Manga
     }
 
     /**
-     * Get the synopsis property
+     * Get the synopsis property.
      *
      * @return string
      */
@@ -638,11 +608,9 @@ class Manga
     }
 
     /**
-     * Set the genres property
+     * Set the genres property.
      *
      * @param string $genres The genres of series.
-     *
-     * @return void
      */
     public function setGenres($genres)
     {
@@ -650,7 +618,7 @@ class Manga
     }
 
     /**
-     * Get the genres property
+     * Get the genres property.
      *
      * @return string
      */
@@ -660,11 +628,9 @@ class Manga
     }
 
     /**
-     * Set the tags property
+     * Set the tags property.
      *
      * @param string $tags The tags of series.
-     *
-     * @return void
      */
     public function setTags($tags)
     {
@@ -672,7 +638,7 @@ class Manga
     }
 
     /**
-     * Get the tags property
+     * Get the tags property.
      *
      * @return array
      */
@@ -682,11 +648,9 @@ class Manga
     }
 
     /**
-     * Set the animeAdaptations property
+     * Set the animeAdaptations property.
      *
      * @param string $animeAdaptations The anime adaptations of series.
-     *
-     * @return void
      */
     public function setAnimeAdaptations($animeAdaptations)
     {
@@ -694,7 +658,7 @@ class Manga
     }
 
     /**
-     * Get the animeAdaptations property
+     * Get the animeAdaptations property.
      *
      * @return array
      */
@@ -704,11 +668,9 @@ class Manga
     }
 
     /**
-     * Set the relatedManga property
+     * Set the relatedManga property.
      *
      * @param string $relatedManga The related mangas of series.
-     *
-     * @return void
      */
     public function setRelatedManga($relatedManga)
     {
@@ -716,7 +678,7 @@ class Manga
     }
 
     /**
-     * Get the relatedManga property
+     * Get the relatedManga property.
      *
      * @return array
      */
@@ -726,11 +688,9 @@ class Manga
     }
 
     /**
-     * Set the alternativeVersions property
+     * Set the alternativeVersions property.
      *
      * @param string $alternativeVersions The alternative versions of series.
-     *
-     * @return void
      */
     public function setAlternativeVersions($alternativeVersions)
     {
@@ -738,7 +698,7 @@ class Manga
     }
 
     /**
-     * Get the alternativeVersions property
+     * Get the alternativeVersions property.
      *
      * @return array
      */
@@ -748,12 +708,10 @@ class Manga
     }
 
     /**
-     * Set the readStatus propery
+     * Set the readStatus propery.
      *
      * @param string|int $status The input status value of an item. Accepts either integers as defined
      *                           by the MAL API module, or strings as defined by the Ruby API (mal-api.com).
-     *
-     * @return void
      */
     public function setReadStatus($statusid)
     {
@@ -817,18 +775,15 @@ class Manga
             }
 
             return $status;
-
         } else {
             return $this->readStatus;
         }
     }
 
     /**
-     * Set the chaptersRead property
+     * Set the chaptersRead property.
      *
      * @param string chaptersRead The number of read chapters.
-     *
-     * @return void
      */
     public function setChaptersRead($chaptersRead)
     {
@@ -836,7 +791,7 @@ class Manga
     }
 
     /**
-     * Get the chaptersRead property
+     * Get the chaptersRead property.
      *
      * @return int
      */
@@ -846,11 +801,9 @@ class Manga
     }
 
     /**
-     * Set the volumesRead property
+     * Set the volumesRead property.
      *
      * @param string volumesRead The number of read volumes.
-     *
-     * @return void
      */
     public function setVolumesRead($volumesRead)
     {
@@ -858,7 +811,7 @@ class Manga
     }
 
     /**
-     * Get the volumesRead property
+     * Get the volumesRead property.
      *
      * @return int
      */
@@ -868,11 +821,9 @@ class Manga
     }
 
     /**
-     * Set the score property
+     * Set the score property.
      *
      * @param int $score The score of series.
-     *
-     * @return void
      */
     public function setScore($score)
     {
@@ -880,7 +831,7 @@ class Manga
     }
 
     /**
-     * Get the score property
+     * Get the score property.
      *
      * @return int
      */
@@ -890,11 +841,9 @@ class Manga
     }
 
     /**
-     * Set the listedMangaId property
+     * Set the listedMangaId property.
      *
      * @param int $listedMangaId For internal use.
-     *
-     * @return void
      */
     public function setListedMangaId($listedMangaId)
     {
@@ -902,7 +851,7 @@ class Manga
     }
 
     /**
-     * Get the listedMangaId property
+     * Get the listedMangaId property.
      *
      * @return int
      */
@@ -942,7 +891,7 @@ class Manga
     }
 
     /**
-     * Get the current reading priority for the anime title
+     * Get the current reading priority for the anime title.
      *
      * @param string $type What type you want to get back.
      *                     Currently accepts either "string" or "int". Defaults to "int".
@@ -973,7 +922,9 @@ class Manga
         $priority = (int) $priority;
 
         //Only allow 0-2. If outside the range, force to 0.
-        if ($priority > 2 || $priority < 0) $priority = 0;
+        if ($priority > 2 || $priority < 0) {
+            $priority = 0;
+        }
 
         $this->priority = $priority;
     }
@@ -1009,7 +960,7 @@ class Manga
     }
 
     /**
-     * Get the current reading priority for the title
+     * Get the current reading priority for the title.
      *
      * @param string $type What type you want to get back.
      *                     Currently accepts either "string" or "int". Defaults to "int".
@@ -1036,7 +987,7 @@ class Manga
                     return 'Very High';
                     break;
                 default:
-                    return NULL;
+                    return;
                     break;
             }
         } else {
@@ -1060,7 +1011,7 @@ class Manga
     }
 
     /**
-     * Return a formatted XML document for updating MAL
+     * Return a formatted XML document for updating MAL.
      *
      * @return string An XML document of manga values as defined at http://myanimelist.net/modules.php?go=api#mangavalues
      */
@@ -1069,53 +1020,53 @@ class Manga
         //For now, just add in the parameters we will use. The MAL API will handle missing items just fine.
         $xml = new \SimpleXMLElement('<entry/>');
 
-        if(in_array('chapters', $update_items)) {
+        if (in_array('chapters', $update_items)) {
             $xml->addChild('chapter', $this->getChaptersRead());
         }
 
-        if(in_array('volumes', $update_items)) {
+        if (in_array('volumes', $update_items)) {
             $xml->addChild('volume', $this->getVolumesRead());
         }
 
-        if(in_array('status', $update_items)) {
+        if (in_array('status', $update_items)) {
             $xml->addChild('status', $this->getReadStatus('int')); //Use int for the MAL API to eliminate problems with strings.
         }
 
-        if(in_array('score', $update_items)) {
+        if (in_array('score', $update_items)) {
             $xml->addChild('score', $this->getScore());
         }
 
-        if(in_array('downloaded', $update_items)) {
+        if (in_array('downloaded', $update_items)) {
             $xml->addChild('downloaded_chapters', $this->getChapDownloaded());
         }
 
-        if(in_array('rereadCount', $update_items)) {
+        if (in_array('rereadCount', $update_items)) {
             $xml->addChild('times_reread', $this->getRereadCount());
         }
 
-        if(in_array('rereadValue', $update_items)) {
+        if (in_array('rereadValue', $update_items)) {
             $xml->addChild('reread_value', $this->getRereadValue('int'));
         }
 
-        if(in_array('start', $update_items)) {
+        if (in_array('start', $update_items)) {
             // Date must be MMDDYYYY.
             $xml->addChild('date_start', $this->getReadingStart()->format('mdY'));
         }
 
-        if(in_array('end', $update_items)) {
+        if (in_array('end', $update_items)) {
             // Date must be MMDDYYY.
             $xml->addChild('date_finish', $this->getReadingEnd()->format('mdY'));
         }
 
-        if(in_array('priority', $update_items)) {
+        if (in_array('priority', $update_items)) {
             $xml->addChild('priority', $this->getPriority('int'));
         }
 
-        if(in_array('comments', $update_items)) {
+        if (in_array('comments', $update_items)) {
             $xml->addChild('comments', $this->getPersonalComments());
         }
 
-        if(in_array('tags', $update_items)) {
+        if (in_array('tags', $update_items)) {
             $xml->addChild('tags', $this->getPersonalTags());
         }
 

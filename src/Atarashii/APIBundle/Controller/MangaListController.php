@@ -1,13 +1,12 @@
 <?php
 /**
-* Atarashii MAL API
+* Atarashii MAL API.
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
 * @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
-
 namespace Atarashii\APIBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
@@ -16,17 +15,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Guzzle\Http\Exception;
 use Atarashii\APIBundle\Model\Manga;
 use JMS\Serializer\SerializationContext;
-
-use \DateTime;
-use \SimpleXMLElement;
+use DateTime;
+use SimpleXMLElement;
 
 class MangaListController extends FOSRestController
 {
     /**
-     * Get the list of manga stored for a user
+     * Get the list of manga stored for a user.
      *
-     * @param string $username The MyAnimeList username of the user whose list you want.
-     * @param string  $apiVersion The API version of the request
+     * @param string $username   The MyAnimeList username of the user whose list you want.
+     * @param string $apiVersion The API version of the request
      *
      * @return View
      */
@@ -37,13 +35,13 @@ class MangaListController extends FOSRestController
         $downloader = $this->get('atarashii_api.communicator');
 
         try {
-            $mangalistcontent = $downloader->fetch('/malappinfo.php?u=' . $username . '&status=all&type=manga');
+            $mangalistcontent = $downloader->fetch('/malappinfo.php?u='.$username.'&status=all&type=manga');
         } catch (Exception\CurlException $e) {
-            return $this->view(Array('error' => 'network-error'), 500);
+            return $this->view(array('error' => 'network-error'), 500);
         }
 
         if (strpos($mangalistcontent, 'Invalid username') !== false) {
-            return $this->view(Array('error' => 'Failed to find the specified user, please try again.'), 200);
+            return $this->view(array('error' => 'Failed to find the specified user, please try again.'), 200);
         } else {
             $mangalistxml = new SimpleXMLElement($mangalistcontent);
             $mlist = array();
@@ -63,7 +61,7 @@ class MangaListController extends FOSRestController
                 $mlist[$i]->setChaptersRead((int) $manga->my_read_chapters);
                 $mlist[$i]->setScore((int) $manga->my_score);
                 $mlist[$i]->setReadStatus($manga->my_status);
-                $i++;
+                ++$i;
             }
 
             $mangalist['statistics']['days'] = (float) $mangalistxml->myinfo->user_days_spent_watching;
@@ -75,7 +73,7 @@ class MangaListController extends FOSRestController
         $serializationContext->setVersion($apiVersion);
 
         //For compatibility, API 1.0 explicitly passes null parameters.
-        if ($apiVersion == "1.0") {
+        if ($apiVersion == '1.0') {
             $serializationContext->setSerializeNull(true);
         }
 
@@ -89,18 +87,18 @@ class MangaListController extends FOSRestController
     }
 
     /**
-    * Add a manga to a user's list.
-    *
-    * Uses the contents of the HTTP Request to get the needed data for adding a title.
-    * The user must have passed the basic authentication needs and the PHP_AUTH_USER and
-    * PHP_AUTH_PW variables must be set. If so, the get variables of "manga_id", "status",
-    * "chapters", "volumes", and "score" are checked and used in the creation of a manga
-    * object. The object is used to make an XML document that is then posted to MyAnimeList.
-    *
-    * @param Request $request Contains all the needed information to add the title.
-    *
-    * @return View
-    */
+     * Add a manga to a user's list.
+     *
+     * Uses the contents of the HTTP Request to get the needed data for adding a title.
+     * The user must have passed the basic authentication needs and the PHP_AUTH_USER and
+     * PHP_AUTH_PW variables must be set. If so, the get variables of "manga_id", "status",
+     * "chapters", "volumes", and "score" are checked and used in the creation of a manga
+     * object. The object is used to make an XML document that is then posted to MyAnimeList.
+     *
+     * @param Request $request Contains all the needed information to add the title.
+     *
+     * @return View
+     */
     public function addAction(Request $request)
     {
         // http://mymangalist.net/api/mangalist/add/#{id}.xml
@@ -111,7 +109,7 @@ class MangaListController extends FOSRestController
 
         //Don't bother making a request if the user didn't send any authentication
         if ($username === null) {
-            $view = $this->view(Array('error' => 'unauthorized'), 401);
+            $view = $this->view(array('error' => 'unauthorized'), 401);
             $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
 
             return $view;
@@ -124,18 +122,17 @@ class MangaListController extends FOSRestController
         $update_items = array();
 
         try {
-
-            if($request->request->get('status') !== null) {
+            if ($request->request->get('status') !== null) {
                 $manga->setReadStatus($request->request->get('status'));
                 $update_items[] = 'status';
             }
 
-            if($request->request->get('chapters') !== null) {
+            if ($request->request->get('chapters') !== null) {
                 $manga->setChaptersRead($request->request->get('chapters'));
                 $update_items[] = 'chapters';
             }
 
-            if($request->request->get('volumes') !== null) {
+            if ($request->request->get('volumes') !== null) {
                 $manga->setVolumesRead($request->request->get('volumes'));
                 $update_items[] = 'volumes';
             }
@@ -145,7 +142,7 @@ class MangaListController extends FOSRestController
                 $update_items[] = 'score';
             }
         } catch (\Exception $e) {
-            return $this->view(Array('error' => $e->getMessage()), 500);
+            return $this->view(array('error' => $e->getMessage()), 500);
         }
 
         $xmlcontent = $manga->MALApiXml($update_items);
@@ -153,11 +150,11 @@ class MangaListController extends FOSRestController
         $connection = $this->get('atarashii_api.communicator');
 
         try {
-            $connection->sendXML('/api/mangalist/add/' . $manga->getId() . '.xml', $xmlcontent, $username, $password);
+            $connection->sendXML('/api/mangalist/add/'.$manga->getId().'.xml', $xmlcontent, $username, $password);
 
             return $this->view('ok', 201);
         } catch (Exception\ClientErrorResponseException $e) {
-            $view = $this->view(Array('error' => 'unauthorized'), 401);
+            $view = $this->view(array('error' => 'unauthorized'), 401);
             $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
 
             return $view;
@@ -166,35 +163,33 @@ class MangaListController extends FOSRestController
             //it actually was an error.
             $response = $e->getResponse()->getBody(true);
 
-            if(preg_match('/^\d+?<!DOCTYPE/', $response) === 1) {
+            if (preg_match('/^\d+?<!DOCTYPE/', $response) === 1) {
                 return $this->view('ok', 200);
-            }
-            else if(stripos($response, '201 Created') !== false) {
+            } elseif (stripos($response, '201 Created') !== false) {
                 return $this->view('ok', 200);
             }
 
-            return $this->view(Array('error' => 'not-found'), 404);
+            return $this->view(array('error' => 'not-found'), 404);
         } catch (Exception\CurlException $e) {
-            return $this->view(Array('error' => 'network-error'), 500);
+            return $this->view(array('error' => 'network-error'), 500);
         }
-
     }
 
     /**
-    * Update a manga on a user's list.
-    *
-    * Uses the contents of the HTTP Request to get the needed data for updating the
-    * requested title. The user must have passed the basic authentication needs and the
-    * PHP_AUTH_USER and PHP_AUTH_PW variables must be set. If so, the get variables of
-    * "status", "chapters", "volumes", and "score" are checked and used in the creation
-    * of a manga object. The object is used to make an XML document that is then posted
-    * to MyAnimeList.
-    *
-    * @param Request $request Contains all the needed information to update the title.
-    * @param int     $id      ID of the manga.
-    *
-    * @return View
-    */
+     * Update a manga on a user's list.
+     *
+     * Uses the contents of the HTTP Request to get the needed data for updating the
+     * requested title. The user must have passed the basic authentication needs and the
+     * PHP_AUTH_USER and PHP_AUTH_PW variables must be set. If so, the get variables of
+     * "status", "chapters", "volumes", and "score" are checked and used in the creation
+     * of a manga object. The object is used to make an XML document that is then posted
+     * to MyAnimeList.
+     *
+     * @param Request $request Contains all the needed information to update the title.
+     * @param int     $id      ID of the manga.
+     *
+     * @return View
+     */
     public function updateAction(Request $request, $id, $apiVersion)
     {
         // http://mymangalist.net/api/mangalist/update/#{id}.xml
@@ -205,7 +200,7 @@ class MangaListController extends FOSRestController
 
         //Don't bother making a request if the user didn't send any authentication
         if ($username === null) {
-            $view = $this->view(Array('error' => 'unauthorized'), 401);
+            $view = $this->view(array('error' => 'unauthorized'), 401);
             $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
 
             return $view;
@@ -218,18 +213,17 @@ class MangaListController extends FOSRestController
         $update_items = array();
 
         try {
-
-            if($request->request->get('status') !== null) {
+            if ($request->request->get('status') !== null) {
                 $manga->setReadStatus($request->request->get('status'));
                 $update_items[] = 'status';
             }
 
-            if($request->request->get('chapters') !== null) {
+            if ($request->request->get('chapters') !== null) {
                 $manga->setChaptersRead($request->request->get('chapters'));
                 $update_items[] = 'chapters';
             }
 
-            if($request->request->get('volumes') !== null) {
+            if ($request->request->get('volumes') !== null) {
                 $manga->setVolumesRead($request->request->get('volumes'));
                 $update_items[] = 'volumes';
             }
@@ -240,8 +234,7 @@ class MangaListController extends FOSRestController
             }
 
             //API 2 Items
-            if($apiVersion >= 2.0) {
-
+            if ($apiVersion >= 2.0) {
                 if ($request->request->get('downloaded_chap') !== null) {
                     $manga->setChapDownloaded($request->request->get('downloaded_chap')); //Int
                     $update_items[] = 'downloaded';
@@ -288,7 +281,7 @@ class MangaListController extends FOSRestController
                 }
             }
         } catch (\Exception $e) {
-            return $this->view(Array('error' => $e->getMessage()), 500);
+            return $this->view(array('error' => $e->getMessage()), 500);
         }
 
         $xmlcontent = $manga->MALApiXml($update_items);
@@ -296,11 +289,11 @@ class MangaListController extends FOSRestController
         $connection = $this->get('atarashii_api.communicator');
 
         try {
-            $connection->sendXML('/api/mangalist/update/' . $manga->getId() . '.xml', $xmlcontent, $username, $password);
+            $connection->sendXML('/api/mangalist/update/'.$manga->getId().'.xml', $xmlcontent, $username, $password);
 
             return $this->view('ok', 200);
         } catch (Exception\ClientErrorResponseException $e) {
-            $view = $this->view(Array('error' => 'unauthorized'), 401);
+            $view = $this->view(array('error' => 'unauthorized'), 401);
             $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
 
             return $view;
@@ -309,30 +302,29 @@ class MangaListController extends FOSRestController
             //it actually was an error.
             $response = $e->getResponse()->getBody(true);
 
-            if(stripos($response, 'Updated') === 0) {
+            if (stripos($response, 'Updated') === 0) {
                 return $this->view('ok', 200);
             }
 
-            return $this->view(Array('error' => 'not-found'), 404);
+            return $this->view(array('error' => 'not-found'), 404);
         } catch (Exception\CurlException $e) {
-            return $this->view(Array('error' => 'network-error'), 500);
+            return $this->view(array('error' => 'network-error'), 500);
         }
-
     }
 
     /**
-    * Delete a manga from a user's list.
-    *
-    * Uses the contents of the HTTP Request to get the needed data for deleting the
-    * requested title. The user must have passed the basic authentication needs and the
-    * PHP_AUTH_USER and PHP_AUTH_PW variables must be set. If so, an empty document is
-    * then posted to MyAnimeList at the right URL to delete an item.
-    *
-    * @param Request $request Contains all the needed information to delete the title.
-    * @param int     $id      ID of the manga.
-    *
-    * @return View
-    */
+     * Delete a manga from a user's list.
+     *
+     * Uses the contents of the HTTP Request to get the needed data for deleting the
+     * requested title. The user must have passed the basic authentication needs and the
+     * PHP_AUTH_USER and PHP_AUTH_PW variables must be set. If so, an empty document is
+     * then posted to MyAnimeList at the right URL to delete an item.
+     *
+     * @param Request $request Contains all the needed information to delete the title.
+     * @param int     $id      ID of the manga.
+     *
+     * @return View
+     */
     public function deleteAction(Request $request, $id)
     {
         // http://mymangalist.net/api/mangalist/delete/#{id}.xml
@@ -343,7 +335,7 @@ class MangaListController extends FOSRestController
 
         //Don't bother making a request if the user didn't send any authentication
         if ($username === null) {
-            $view = $this->view(Array('error' => 'unauthorized'), 401);
+            $view = $this->view(array('error' => 'unauthorized'), 401);
             $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
 
             return $view;
@@ -352,11 +344,11 @@ class MangaListController extends FOSRestController
         $connection = $this->get('atarashii_api.communicator');
 
         try {
-            $connection->sendXML('/api/mangalist/delete/' . $id . '.xml', '', $username, $password);
+            $connection->sendXML('/api/mangalist/delete/'.$id.'.xml', '', $username, $password);
 
             return $this->view('ok', 200);
         } catch (Exception\ClientErrorResponseException $e) {
-            $view = $this->view(Array('error' => 'unauthorized'), 401);
+            $view = $this->view(array('error' => 'unauthorized'), 401);
             $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
 
             return $view;
@@ -365,13 +357,13 @@ class MangaListController extends FOSRestController
             //it actually was an error.
             $response = $e->getResponse()->getBody(true);
 
-            if(stripos($response, 'Deleted') === 0) {
+            if (stripos($response, 'Deleted') === 0) {
                 return $this->view('ok', 200);
             }
 
-            return $this->view(Array('error' => 'not-found'), 404);
+            return $this->view(array('error' => 'not-found'), 404);
         } catch (Exception\CurlException $e) {
-            return $this->view(Array('error' => 'network-error'), 500);
+            return $this->view(array('error' => 'network-error'), 500);
         }
     }
 }

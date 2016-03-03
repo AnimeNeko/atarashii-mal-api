@@ -5,8 +5,7 @@ namespace Atarashii\APIBundle\Tests\Util;
 use Symfony\Component\DependencyInjection\Container;
 
 /**
- * Class ConnectivityUtilities
- * @package Atarashii\APIBundle\Util\ConnectivityUtilities
+ * Class ConnectivityUtilities.
  */
 class ConnectivityUtilities
 {
@@ -26,13 +25,13 @@ class ConnectivityUtilities
         $params = $container->getParameter('unit_testing');
         $doTest = $params['test_mal'];
 
-        if($doTest === false) {
+        if ($doTest === false) {
             return array(false, 'Live tests for MyAnimeList are disabled by configuration.');
         }
 
         $socket = @fsockopen('www.google.com', 80, $errno, $errstr, 30);
 
-        if(!$socket) {
+        if (!$socket) {
             return array(false, 'An Internet connection is needed for these tests');
         }
 
@@ -40,5 +39,4 @@ class ConnectivityUtilities
 
         return array(true, 'OK');
     }
-
 }

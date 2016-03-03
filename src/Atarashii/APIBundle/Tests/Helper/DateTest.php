@@ -6,7 +6,8 @@ use Atarashii\APIBundle\Helper\Date;
 
 class DateTest extends \PHPUnit_Framework_TestCase
 {
-    public function testFormatTime() {
+    public function testFormatTime()
+    {
         $date = new Date();
 
         //Grab parts of the current date for use below
@@ -20,7 +21,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
 
         // M j, g:i A
         $inputDate = 'Apr 9, 8:15 PM';
-        $expected = $currentYear . '-04-09T20:15-0700';
+        $expected = $currentYear.'-04-09T20:15-0700';
         $this->assertEquals($expected, $date::formatTime($inputDate));
 
         // M j, Y g:i A
@@ -105,7 +106,8 @@ class DateTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $date::formatTime($inputDate));
     }
 
-    public function testTZ() {
+    public function testTZ()
+    {
         $editProfileContents = file_get_contents(__DIR__.'/../InputSamples/editprofile.html');
         Date::setTimeZone($editProfileContents);
 
@@ -113,18 +115,20 @@ class DateTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, Date::$timeZone);
     }
 
-    protected function setUp() {
+    protected function setUp()
+    {
         Date::$timeZone = 'America/Los_Angeles';
     }
 
-    protected function tearDown() {
+    protected function tearDown()
+    {
         Date::$timeZone = 'America/Los_Angeles';
     }
 
-    public static function setUpBeforeClass() {
+    public static function setUpBeforeClass()
+    {
         //Our date tests assume we're in the default timezone for MAL
         //Set the PHP timezone to America/Los_Angeles to be safe.
         date_default_timezone_set('America/Los_Angeles');
     }
-
 }

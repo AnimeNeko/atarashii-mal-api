@@ -1,13 +1,12 @@
 <?php
 /**
-* Atarashii MAL API
+* Atarashii MAL API.
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
 * @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
-
 namespace Atarashii\APIBundle\Model;
 
 use JMS\Serializer\Annotation\Since;
@@ -17,7 +16,7 @@ use Atarashii\APIBundle\Helper\Date;
 class Forum
 {
     /**
-     * The ID used to get topic|board
+     * The ID used to get topic|board.
      *
      * @Since("2.0")
      */
@@ -32,7 +31,7 @@ class Forum
     private $name;
 
     /**
-     * The username of the topic creator
+     * The username of the topic creator.
      *
      * @Type("string")
      * @Since("2.0")
@@ -40,7 +39,7 @@ class Forum
     private $username;
 
     /**
-     * The number of replies of a topic
+     * The number of replies of a topic.
      *
      * @Type("integer")
      * @Since("2.0")
@@ -48,7 +47,7 @@ class Forum
     private $replies;
 
     /**
-     * The description of a board
+     * The description of a board.
      *
      * @Type("string")
      * @Since("2.0")
@@ -56,7 +55,7 @@ class Forum
     private $description;
 
     /**
-     * The info of the last reply inside a topic
+     * The info of the last reply inside a topic.
      *
      * @Type("array")
      * @Since("2.0")
@@ -64,7 +63,7 @@ class Forum
     private $reply;
 
     /**
-     * The children of a forumboard
+     * The children of a forumboard.
      *
      * @Type("array")
      * @Since("2.0")
@@ -72,7 +71,7 @@ class Forum
     private $children;
 
     /**
-     * The comment content in an post
+     * The comment content in an post.
      *
      * @Type("string")
      * @Since("2.0")
@@ -80,7 +79,7 @@ class Forum
     private $comment;
 
     /**
-     * The creation time of this post
+     * The creation time of this post.
      *
      * @Type("string")
      * @Since("2.0")
@@ -88,18 +87,16 @@ class Forum
     private $time;
 
     /**
-     * The userprofile for the user details in topics
+     * The userprofile for the user details in topics.
      *
      * @Since("2.0")
      */
     public $profile;
 
     /**
-     * Set the id property
+     * Set the id property.
      *
      * @param int $id The id of forum board.
-     *
-     * @return void
      */
     public function setId($id)
     {
@@ -113,15 +110,13 @@ class Forum
      */
     public function getId()
     {
-       return $this->id;
+        return $this->id;
     }
 
     /**
-     * Set the name property
+     * Set the name property.
      *
      * @param int $name The name of the forum board.
-     *
-     * @return void
      */
     public function setName($name)
     {
@@ -135,15 +130,13 @@ class Forum
      */
     public function getName()
     {
-       return $this->name;
+        return $this->name;
     }
 
     /**
-     * Set the username property
+     * Set the username property.
      *
      * @param string $username The username of the topic.
-     *
-     * @return void
      */
     public function setUsername($username)
     {
@@ -157,15 +150,13 @@ class Forum
      */
     public function getUsername()
     {
-       return $this->username;
+        return $this->username;
     }
 
     /**
-     * Set the replies property
+     * Set the replies property.
      *
      * @param int $replies The replies of the topic.
-     *
-     * @return void
      */
     public function setReplies($replies)
     {
@@ -179,15 +170,13 @@ class Forum
      */
     public function getReplies()
     {
-       return $this->replies;
+        return $this->replies;
     }
 
     /**
-     * Set the description property
+     * Set the description property.
      *
      * @param string $description The description of the forum board.
-     *
-     * @return void
      */
     public function setDescription($description)
     {
@@ -201,15 +190,13 @@ class Forum
      */
     public function getDescription()
     {
-       return $this->description;
+        return $this->description;
     }
 
     /**
-     * Set the reply property
+     * Set the reply property.
      *
      * @param array $reply The last reply details.
-     *
-     * @return void
      */
     public function setReply($reply)
     {
@@ -223,15 +210,13 @@ class Forum
      */
     public function getReply()
     {
-       return $this->reply;
+        return $this->reply;
     }
 
     /**
-     * Set the children property
+     * Set the children property.
      *
      * @param array $children The children of the forum board.
-     *
-     * @return void
      */
     public function setChildren($children)
     {
@@ -245,15 +230,13 @@ class Forum
      */
     public function getChildren()
     {
-       return $this->children;
+        return $this->children;
     }
 
     /**
-     * Set the comment property
+     * Set the comment property.
      *
      * @param string $comment The comment of the reply.
-     *
-     * @return void
      */
     public function setComment($comment)
     {
@@ -271,11 +254,9 @@ class Forum
     }
 
     /**
-     * Set the time property
+     * Set the time property.
      *
      * @param string $time The creation time of the reply.
-     *
-     * @return void
      */
     public function setTime($time)
     {
@@ -291,5 +272,4 @@ class Forum
     {
         return $this->time;
     }
-
 }

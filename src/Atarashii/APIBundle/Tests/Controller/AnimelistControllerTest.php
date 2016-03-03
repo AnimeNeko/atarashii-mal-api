@@ -6,8 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Atarashii\APIBundle\Tests\Util\ConnectivityUtilities;
 
 /**
- * Class AnimelistControllerTest
- * @package Atarashii\APIBundle\Tests\Controller
+ * Class AnimelistControllerTest.
  */
 class AnimelistControllerTest extends WebTestCase
 {
@@ -28,7 +27,6 @@ class AnimelistControllerTest extends WebTestCase
 
         $this->assertStringStartsWith('Failed to find', $content->error);
 
-
         //Now, do all the checks with the reference user
         $client->request('GET', '/2/animelist/AtarashiiApiTest');
         $rawContent = $client->getResponse()->getContent();
@@ -37,7 +35,6 @@ class AnimelistControllerTest extends WebTestCase
 
         $this->assertNotNull($content);
         $this->assertEquals(200, $statusCode);
-
 
         $this->assertGreaterThanOrEqual(1, count($content->anime));
 
@@ -59,7 +56,8 @@ class AnimelistControllerTest extends WebTestCase
         $this->assertEquals(7, $animeItem->score);
     }
 
-    public function testAddAction() {
+    public function testAddAction()
+    {
         $client = $this->client;
 
         $credentials = ConnectivityUtilities::getLoginCredentials($client->getContainer());
@@ -75,12 +73,12 @@ class AnimelistControllerTest extends WebTestCase
                     'anime_id' => $animeID,
                     'status' => $status,
                     'episodes' => $episodes,
-                    'score' => $score
+                    'score' => $score,
                 ),
                 array(),
                 array(
                     'PHP_AUTH_USER' => $credentials['username'],
-                    'PHP_AUTH_PW' => $credentials['password']
+                    'PHP_AUTH_PW' => $credentials['password'],
                 )
             );
 
@@ -92,13 +90,12 @@ class AnimelistControllerTest extends WebTestCase
             $this->assertEquals('ok', $content);
 
             //Make sure the title actually was added to the list
-            $client->request('GET', '/2/animelist/' . $credentials['username']);
+            $client->request('GET', '/2/animelist/'.$credentials['username']);
             $rawContent = $client->getResponse()->getContent();
             $content = json_decode($rawContent);
 
             $this->assertNotNull($content);
             $this->assertTrue($client->getResponse()->isSuccessful());
-
 
             $this->assertGreaterThanOrEqual(1, count($content->anime));
 
@@ -122,7 +119,8 @@ class AnimelistControllerTest extends WebTestCase
     /**
      * @depends testAddAction
      */
-    public function testUpdateAction() {
+    public function testUpdateAction()
+    {
         $client = $this->client;
 
         $credentials = ConnectivityUtilities::getLoginCredentials($client->getContainer());
@@ -145,24 +143,24 @@ class AnimelistControllerTest extends WebTestCase
             $isRewatching = 0;
             $rewatchCount = 2;
 
-            $client->request('PUT', '/2/animelist/anime/' . $animeID,
+            $client->request('PUT', '/2/animelist/anime/'.$animeID,
                 array(
                     'status' => $status, 'episodes' => $episodes, 'score' => $score, 'start' => $start, 'end' => $end,
                     'downloaded_eps' => $downloadedEps, 'storage_type' => $storageType, 'storage_amt' => $storageAmt,
                     'priority' => $priority, 'rewatch_value' => $rewatchValue, 'tags' => $tags, 'comments' => $comments,
-                    'fansubber' => $fansubber, 'is_rewatching' => $isRewatching, 'rewatch_count' => $rewatchCount
+                    'fansubber' => $fansubber, 'is_rewatching' => $isRewatching, 'rewatch_count' => $rewatchCount,
                 ),
                 array(),
                 array(
                     'PHP_AUTH_USER' => $credentials['username'],
-                    'PHP_AUTH_PW' => $credentials['password']
+                    'PHP_AUTH_PW' => $credentials['password'],
                 )
             );
 
             $this->assertTrue($client->getResponse()->isSuccessful());
 
             //Grab personal details for the title to check values
-            $client->request('GET', '/2/anime/' . $animeID, array('mine' => 1), array(), array(
+            $client->request('GET', '/2/anime/'.$animeID, array('mine' => 1), array(), array(
                 'PHP_AUTH_USER' => $credentials['username'],
                 'PHP_AUTH_PW' => $credentials['password'],
             ));
@@ -180,7 +178,6 @@ class AnimelistControllerTest extends WebTestCase
 
             $this->assertEquals($start, $content->watching_start);
             $this->assertEquals($rewatchCount, $content->rewatch_count);
-
         } else {
             $this->markTestSkipped('Username and password must be set.');
         }
@@ -189,34 +186,33 @@ class AnimelistControllerTest extends WebTestCase
     /**
      * @depends testUpdateAction
      */
-    public function testDeleteAction() {
+    public function testDeleteAction()
+    {
         $client = $this->client;
 
         $credentials = ConnectivityUtilities::getLoginCredentials($client->getContainer());
 
         if ($credentials !== false) {
-
             $animeID = 5941; //Cross Game
 
-            $client->request('DELETE', '/2/animelist/anime/' . $animeID,
+            $client->request('DELETE', '/2/animelist/anime/'.$animeID,
                 array(),
                 array(),
                 array(
                     'PHP_AUTH_USER' => $credentials['username'],
-                    'PHP_AUTH_PW' => $credentials['password']
+                    'PHP_AUTH_PW' => $credentials['password'],
                 )
             );
 
             $this->assertTrue($client->getResponse()->isSuccessful());
 
             //Make sure the title actually was deleted
-            $client->request('GET', '/2/animelist/' . $credentials['username']);
+            $client->request('GET', '/2/animelist/'.$credentials['username']);
             $rawContent = $client->getResponse()->getContent();
             $content = json_decode($rawContent);
 
             $this->assertNotNull($content);
             $this->assertTrue($client->getResponse()->isSuccessful());
-
 
             $foundItem = false;
 
@@ -228,13 +224,13 @@ class AnimelistControllerTest extends WebTestCase
             }
 
             $this->assertFalse($foundItem);
-
         } else {
             $this->markTestSkipped('Username and password must be set.');
         }
     }
 
-    public static function setUpBeforeClass() {
+    public static function setUpBeforeClass()
+    {
         $client = static::createClient();
         $container = $client->getContainer();
 
@@ -245,8 +241,8 @@ class AnimelistControllerTest extends WebTestCase
         }
     }
 
-    protected function setUp() {
+    protected function setUp()
+    {
         $this->client = static::createClient();
     }
-
 }

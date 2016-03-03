@@ -46,7 +46,8 @@ class MessagesTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($msgUsername, $message->getUsername());
     }
 
-    public function testTime() {
+    public function testTime()
+    {
         $msgTime = 'May 17, 2014 2:23 AM';
         $expected = '2014-05-17T02:23-0700';
 
@@ -56,7 +57,8 @@ class MessagesTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $message->getTime());
     }
 
-    public function testRead() {
+    public function testRead()
+    {
         $readStatus = true;
 
         $message = new Messages();
@@ -65,7 +67,8 @@ class MessagesTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($readStatus, $message->getRead());
     }
 
-    public function testSubject() {
+    public function testSubject()
+    {
         $subject = 'This is a subject.';
 
         $message = new Messages();
@@ -74,7 +77,8 @@ class MessagesTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($subject, $message->getSubject());
     }
 
-    public function testMessage() {
+    public function testMessage()
+    {
         $msgText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean molestie nisi sed lacus tincidunt, vel vestibulum enim facilisis. Nunc consectetur eget justo placerat scelerisque. Nullam eu augue ullamcorper, faucibus elit sed, malesuada libero. Proin pretium elit quis arcu eleifend venenatis. Vestibulum efficitur cursus tellus eu pharetra. Cras pharetra accumsan consequat.';
 
         $message = new Messages();
@@ -83,7 +87,8 @@ class MessagesTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($msgText, $message->getMessage());
     }
 
-    public function testPreview() {
+    public function testPreview()
+    {
         $msgText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...';
 
         $message = new Messages();

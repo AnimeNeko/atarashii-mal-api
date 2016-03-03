@@ -6,19 +6,18 @@ use Atarashii\APIBundle\Model\Manga;
 use Atarashii\APIBundle\Parser\MangaParser;
 
 /**
- * Class MangaTest
- * @package Atarashii\APIBundle\Tests\Parser
+ * Class MangaTest.
+ *
  * @coversDefaultClass Atarashii\APIBundle\Parser\MangaParser
  */
 class MangaTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @covers ::parse
      */
     public function testParse()
     {
-        $mangaContents = file_get_contents(__DIR__ . '/../InputSamples/manga-11977-mine.html');
+        $mangaContents = file_get_contents(__DIR__.'/../InputSamples/manga-11977-mine.html');
 
         $manga = MangaParser::parse($mangaContents);
 
@@ -39,7 +38,6 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('integer', $manga->getRank());
         $this->assertLessThan(850, $manga->getRank());
         $this->assertGreaterThan(0, $manga->getRank());
-
 
         $this->assertInternalType('integer', $manga->getPopularityRank());
         $this->assertLessThan(2500, $manga->getPopularityRank());
@@ -78,7 +76,7 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(15, $manga->getVolumesRead());
         $this->assertEquals(7, $manga->getScore());
 
-        $mangaContents = file_get_contents(__DIR__ . '/../InputSamples/manga-137-mine.html');
+        $mangaContents = file_get_contents(__DIR__.'/../InputSamples/manga-137-mine.html');
 
         $manga = MangaParser::parse($mangaContents);
 
@@ -103,7 +101,7 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertStringStartsWith('Read or Die', $altVersions[0]['title']);
         $this->assertContains('manga/10869', $altVersions[0]['url']);
 
-        $mangaContents = file_get_contents(__DIR__ . '/../InputSamples/manga-44347.html');
+        $mangaContents = file_get_contents(__DIR__.'/../InputSamples/manga-44347.html');
 
         $manga = MangaParser::parse($mangaContents);
 
@@ -120,7 +118,7 @@ class MangaTest extends \PHPUnit_Framework_TestCase
     {
         $manga = new Manga();
 
-        $mangaContents = file_get_contents(__DIR__ . '/../InputSamples/manga-11977-mine-detailed.html');
+        $mangaContents = file_get_contents(__DIR__.'/../InputSamples/manga-11977-mine-detailed.html');
 
         MangaParser::parseExtendedPersonal($mangaContents, $manga);
 
@@ -133,7 +131,7 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Medium', $manga->getRereadValue('string'));
         $this->assertStringStartsWith('An interesting spin', $manga->getPersonalComments());
 
-        $mangaContents = file_get_contents(__DIR__ . '/../InputSamples/manga-17074-mine-detailed.html');
+        $mangaContents = file_get_contents(__DIR__.'/../InputSamples/manga-17074-mine-detailed.html');
 
         MangaParser::parseExtendedPersonal($mangaContents, $manga);
 

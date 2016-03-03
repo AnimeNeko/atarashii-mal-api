@@ -1,13 +1,12 @@
 <?php
 /**
-* Atarashii MAL API
+* Atarashii MAL API.
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
 * @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
-
 namespace Atarashii\APIBundle\Controller;
 
 use Atarashii\APIBundle\Parser\ReviewParser;
@@ -22,11 +21,11 @@ use JMS\Serializer\SerializationContext;
 class AnimeController extends FOSRestController
 {
     /**
-     * Get the details of an anime
+     * Get the details of an anime.
      *
-     * @param int     $id The ID of the anime as assigned by MyAnimeList
+     * @param int     $id         The ID of the anime as assigned by MyAnimeList
      * @param string  $apiVersion The API version of the request
-     * @param Request $request HTTP Request object
+     * @param Request $request    HTTP Request object
      *
      * @return View
      */
@@ -47,37 +46,36 @@ class AnimeController extends FOSRestController
             $password = $this->getRequest()->server->get('PHP_AUTH_PW');
 
             try {
-                if (!$downloader->cookieLogin($username, $password)){
-                    $view = $this->view(Array('error' => 'unauthorized'), 401);
+                if (!$downloader->cookieLogin($username, $password)) {
+                    $view = $this->view(array('error' => 'unauthorized'), 401);
                     $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
 
                     return $view;
                 }
             } catch (Exception\CurlException $e) {
-                return $this->view(Array('error' => 'network-error'), 500);
+                return $this->view(array('error' => 'network-error'), 500);
             }
         }
 
         try {
-            $animedetails = $downloader->fetch('/anime/' . $id);
+            $animedetails = $downloader->fetch('/anime/'.$id);
         } catch (Exception\CurlException $e) {
-            return $this->view(Array('error' => 'network-error'), 500);
+            return $this->view(array('error' => 'network-error'), 500);
         } catch (Exception\ClientErrorResponseException $e) {
             $animedetails = $e->getResponse();
         }
 
         if ((strpos($animedetails, 'No series found') !== false) || (strpos($animedetails, 'This page doesn\'t exist') !== false)) {
-            return $this->view(Array('error' => 'No series found, check the series id and try again.'), 404);
+            return $this->view(array('error' => 'No series found, check the series id and try again.'), 404);
         } else {
             $anime = AnimeParser::parse($animedetails);
 
             //Parse extended personal details if API 2.0 or better and personal details are requested
-            if ($apiVersion >= "2.0" && $usepersonal) {
-
+            if ($apiVersion >= '2.0' && $usepersonal) {
                 try {
-                    $animedetails = $downloader->fetch('/editlist.php?type=anime&id=' . $id . '&hideLayout=true');
+                    $animedetails = $downloader->fetch('/editlist.php?type=anime&id='.$id.'&hideLayout=true');
                 } catch (Exception\CurlException $e) {
-                    return $this->view(Array('error' => 'network-error'), 500);
+                    return $this->view(array('error' => 'network-error'), 500);
                 }
 
                 if (strpos($animedetails, 'delete-form') !== false) {
@@ -90,7 +88,7 @@ class AnimeController extends FOSRestController
             $serializationContext->setVersion($apiVersion);
 
             //For compatibility, API 1.0 explicitly passes null parameters.
-            if ($apiVersion == "1.0") {
+            if ($apiVersion == '1.0') {
                 $serializationContext->setSerializeNull(true);
             }
 
@@ -99,7 +97,7 @@ class AnimeController extends FOSRestController
                 $response->setPublic();
                 $response->setMaxAge(3600); //One hour
                 $response->headers->addCacheControlDirective('must-revalidate', true);
-                $response->setEtag('anime/' . $id);
+                $response->setEtag('anime/'.$id);
 
                 //Also, set "expires" header for caches that don't understand Cache-Control
                 $date = new \DateTime();
@@ -118,12 +116,12 @@ class AnimeController extends FOSRestController
     }
 
     /**
-     * Get the reviews of an anime
+     * Get the reviews of an anime.
      *
      * If there isn't any page passed it will use the most helpfull voted reviews.
      * These are determined by the ratio (helpfull:all).
      *
-     * @param int     $id The ID of the anime as assigned by MyAnimeList
+     * @param int     $id      The ID of the anime as assigned by MyAnimeList
      * @param Request $request HTTP Request object
      *
      * @return View
@@ -139,16 +137,16 @@ class AnimeController extends FOSRestController
         }
 
         try {
-            $details = $downloader->fetch('/anime/' . $id . '/_/reviews&p=' . $page);
+            $details = $downloader->fetch('/anime/'.$id.'/_/reviews&p='.$page);
         } catch (Exception\CurlException $e) {
-            return $this->view(Array('error' => 'network-error'), 500);
+            return $this->view(array('error' => 'network-error'), 500);
         }
 
         $response = new Response();
         $response->setPublic();
         $response->setMaxAge(10800); //Three hour
         $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag('anime/reviews/' . $id . '?page=' . $page);
+        $response->setEtag('anime/reviews/'.$id.'?page='.$page);
 
         //Also, set "expires" header for caches that don't understand Cache-Control
         $date = new \DateTime();
@@ -156,7 +154,7 @@ class AnimeController extends FOSRestController
         $response->setExpires($date);
 
         if (strpos($details, 'No series found, check the series id and try again.') !== false) {
-            $view = $this->view(Array('error' => 'not-found'));
+            $view = $this->view(array('error' => 'not-found'));
             $view->setResponse($response);
             $view->setStatusCode(404);
 
@@ -179,7 +177,7 @@ class AnimeController extends FOSRestController
     }
 
     /**
-     * Get the cast of an anime
+     * Get the cast of an anime.
      *
      * @param int $id The ID of the anime as assigned by MyAnimeList
      *
@@ -191,13 +189,13 @@ class AnimeController extends FOSRestController
         $downloader = $this->get('atarashii_api.communicator');
 
         try {
-            $details = $downloader->fetch('/anime/' . $id . '/_/characters');
+            $details = $downloader->fetch('/anime/'.$id.'/_/characters');
         } catch (Exception\CurlException $e) {
-            return $this->view(Array('error' => 'network-error'), 500);
+            return $this->view(array('error' => 'network-error'), 500);
         }
 
         if (strpos($details, 'No characters') !== false) {
-            return $this->view(Array('error' => 'No characters were found. '), 200);
+            return $this->view(array('error' => 'No characters were found. '), 200);
         } else {
             $cast = CastParser::parse($details);
 
@@ -205,7 +203,7 @@ class AnimeController extends FOSRestController
             $response->setPublic();
             $response->setMaxAge(86400); //One day
             $response->headers->addCacheControlDirective('must-revalidate', true);
-            $response->setEtag('anime/cast/' . $id);
+            $response->setEtag('anime/cast/'.$id);
 
             //Also, set "expires" header for caches that don't understand Cache-Control
             $date = new \DateTime();

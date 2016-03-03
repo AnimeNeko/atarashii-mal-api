@@ -5,8 +5,8 @@ namespace Atarashii\APIBundle\Tests\Parser;
 use Atarashii\APIBundle\Parser\User;
 
 /**
- * Class UserTest
- * @package Atarashii\APIBundle\Tests\Parser
+ * Class UserTest.
+ *
  * @coversDefaultClass Atarashii\APIBundle\Parser\User
  */
 class UserTest extends \PHPUnit_Framework_TestCase
@@ -101,7 +101,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testParseFriends()
     {
-        $friendsContent = file_get_contents(__DIR__ . '/../InputSamples/profile-motokochan-friends.html');
+        $friendsContent = file_get_contents(__DIR__.'/../InputSamples/profile-motokochan-friends.html');
 
         $friends = User::parseFriends($friendsContent);
 
@@ -117,7 +117,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     public function testParseHistory()
     {
-        $historyContent = file_get_contents(__DIR__ . '/../InputSamples/history-motokochan.html');
+        $historyContent = file_get_contents(__DIR__.'/../InputSamples/history-motokochan.html');
 
         $history = User::parseHistory($historyContent);
 
@@ -130,9 +130,10 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('anime', $historyItem['type']);
     }
 
-    protected function setUp() {
-        $profileContents = file_get_contents(__DIR__ . '/../InputSamples/profile-motokochan.html');
-        $profile2Contents = file_get_contents(__DIR__ . '/../InputSamples/profile-xinil.html');
+    protected function setUp()
+    {
+        $profileContents = file_get_contents(__DIR__.'/../InputSamples/profile-motokochan.html');
+        $profile2Contents = file_get_contents(__DIR__.'/../InputSamples/profile-xinil.html');
 
         $this->profile = User::parse($profileContents);
         $this->profile2 = User::parse($profile2Contents);

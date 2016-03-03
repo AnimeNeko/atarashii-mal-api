@@ -26,7 +26,8 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($mangaTitle, $manga->getTitle());
     }
 
-    public function testOtherTitles() {
+    public function testOtherTitles()
+    {
         $manga = new Manga();
 
         $otherTitles = array();
@@ -71,7 +72,6 @@ class MangaTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($mangaImgUrl, $manga->getImageUrl());
     }
-
 
     public function testType()
     {
@@ -147,7 +147,8 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Manga', $manga->getType());
     }
 
-    public function testChapters() {
+    public function testChapters()
+    {
         $chapters = rand();
 
         $manga = new Manga();
@@ -156,7 +157,8 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($chapters, $manga->getChapters());
     }
 
-    public function testVolumes() {
+    public function testVolumes()
+    {
         $volumes = rand();
 
         $manga = new Manga();
@@ -300,7 +302,6 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('High', $manga->getPriority('string'));
         $this->assertEquals($mangaPriority, $manga->getPriority());
 
-
         /*
          * Default Value
          */
@@ -310,7 +311,8 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('0', $manga->getPriority());
     }
 
-    public function testMembersScore() {
+    public function testMembersScore()
+    {
         $score = 7.95;
 
         $manga = new Manga();
@@ -326,7 +328,8 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals((float) $score, $manga->getMembersScore());
     }
 
-    public function testMembersCount() {
+    public function testMembersCount()
+    {
         $count = 238793;
 
         $manga = new Manga();
@@ -342,7 +345,8 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals((int) $count, $manga->getMembersCount());
     }
 
-    public function testFavoritedCount() {
+    public function testFavoritedCount()
+    {
         $favs = 7295;
 
         $manga = new Manga();
@@ -351,7 +355,8 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($favs, $manga->getFavoritedCount());
     }
 
-    public function testSynopsis() {
+    public function testSynopsis()
+    {
         $synopsis = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce fringilla, nisi sed rutrum interdum, neque neque tincidunt eros, ac euismod enim massa a quam. Vivamus maximus enim ac odio euismod tristique. Suspendisse potenti. Praesent a nulla tortor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean varius metus at sapien tempor auctor. Donec semper odio sed posuere placerat.';
 
         $manga = new Manga();
@@ -367,7 +372,8 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($synopsis, $manga->getSynopsis());
     }
 
-    public function testGenres() {
+    public function testGenres()
+    {
         $genres = 'Comedy, Parody, School, Slice of Life';
 
         $manga = new Manga();
@@ -376,11 +382,12 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($genres, $manga->getGenres());
     }
 
-    public function testAnimeAdaptations() {
+    public function testAnimeAdaptations()
+    {
         $relation = array();
         $relation['anime_id'] = rand();
         $relation['title'] = 'This is a title';
-        $relation['url'] = 'http://myanimelist.net/anime/' . $relation['anime_id'];
+        $relation['url'] = 'http://myanimelist.net/anime/'.$relation['anime_id'];
 
         $manga = new Manga();
         $manga->setAnimeAdaptations($relation);
@@ -388,14 +395,14 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $animeAdaptations = $manga->getAnimeAdaptations();
 
         $this->assertEquals($relation, $animeAdaptations[0]);
-
     }
 
-    public function testRelatedManga() {
+    public function testRelatedManga()
+    {
         $relation = array();
         $relation['manga_id'] = rand();
         $relation['title'] = 'This is a title';
-        $relation['url'] = 'http://myanimelist.net/manga/' . $relation['manga_id'];
+        $relation['url'] = 'http://myanimelist.net/manga/'.$relation['manga_id'];
 
         $manga = new Manga();
         $manga->setRelatedManga($relation);
@@ -403,14 +410,14 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $relatedManga = $manga->getRelatedManga();
 
         $this->assertEquals($relation, $relatedManga[0]);
-
     }
 
-    public function testAlternativeVersions() {
+    public function testAlternativeVersions()
+    {
         $relation = array();
         $relation['manga_id'] = rand();
         $relation['title'] = 'This is a title';
-        $relation['url'] = 'http://myanimelist.net/manga/' . $relation['manga_id'];
+        $relation['url'] = 'http://myanimelist.net/manga/'.$relation['manga_id'];
 
         $manga = new Manga();
         $manga->setAlternativeVersions($relation);
@@ -418,10 +425,10 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $altVersions = $manga->getAlternativeVersions();
 
         $this->assertEquals($relation, $altVersions[0]);
-
     }
 
-    public function testChaptersRead() {
+    public function testChaptersRead()
+    {
         $chapter = rand();
 
         $manga = new Manga();
@@ -430,7 +437,8 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($chapter, $manga->getChaptersRead());
     }
 
-    public function testVolumesRead() {
+    public function testVolumesRead()
+    {
         $volume = rand();
 
         $manga = new Manga();
@@ -439,7 +447,8 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($volume, $manga->getVolumesRead());
     }
 
-    public function testScore() {
+    public function testScore()
+    {
         $score = rand(0, 10);
 
         $manga = new Manga();
@@ -448,7 +457,8 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($score, $manga->getScore());
     }
 
-    public function testListedMangaId() {
+    public function testListedMangaId()
+    {
         $mangaId = rand();
 
         $manga = new Manga();
@@ -457,7 +467,8 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($mangaId, $manga->getListedMangaId());
     }
 
-    public function testPersonalTags() {
+    public function testPersonalTags()
+    {
         $tags = 'one, two, three, four';
 
         $manga = new Manga();
@@ -466,7 +477,8 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($tags, $manga->getPersonalTags());
     }
 
-    public function testReadingStart() {
+    public function testReadingStart()
+    {
         $now = new \DateTime('now');
         $readDate = $now->format('Y-m-d');
 
@@ -476,7 +488,8 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($readDate, $manga->getReadingStart());
     }
 
-    public function testReadingEnd() {
+    public function testReadingEnd()
+    {
         $now = new \DateTime('now');
         $readDate = $now->format('Y-m-d');
 
@@ -486,7 +499,8 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($readDate, $manga->getReadingEnd());
     }
 
-    public function testChapDownloaded() {
+    public function testChapDownloaded()
+    {
         $chap = rand();
 
         $manga = new Manga();
@@ -495,7 +509,8 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($chap, $manga->getChapDownloaded());
     }
 
-    public function testRereading() {
+    public function testRereading()
+    {
         $manga = new Manga();
 
         //Using Real boolean
@@ -514,7 +529,8 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals((bool) $isReread, $manga->getRereading());
     }
 
-    public function testRereadCount() {
+    public function testRereadCount()
+    {
         $count = rand();
 
         $manga = new Manga();
@@ -523,7 +539,8 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($count, $manga->getRereadCount());
     }
 
-    public function testRereadValue() {
+    public function testRereadValue()
+    {
         $manga = new Manga();
 
         /*
@@ -566,7 +583,8 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $manga->getRereadValue('string'));
     }
 
-    public function testPersonalComments() {
+    public function testPersonalComments()
+    {
         $comments = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce fringilla, nisi sed rutrum interdum, neque neque tincidunt eros, ac euismod enim massa a quam. Vivamus maximus enim ac odio euismod tristique. Suspendisse potenti. Praesent a nulla tortor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean varius metus at sapien tempor auctor. Donec semper odio sed posuere placerat.';
 
         $manga = new Manga();
@@ -582,13 +600,11 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($comments, $manga->getPersonalComments());
     }
 
-
-
-
     //These functions being tested shouldn't be used anymore, MAL has phased the data out
     //Keeping tests in until they are removed from the model.
 
-    public function testTags() {
+    public function testTags()
+    {
         $manga = new Manga();
 
         $tags[] = 'one';
@@ -600,7 +616,8 @@ class MangaTest extends \PHPUnit_Framework_TestCase
     }
 
     //It might be better to try and do an XML compare in the future.
-    public function testMalXml() {
+    public function testMalXml()
+    {
         $manga = new Manga();
         $items = array();
 
@@ -646,5 +663,4 @@ class MangaTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($output, $manga->MALApiXml($items));
     }
-
 }

@@ -6,8 +6,7 @@ use Atarashii\APIBundle\Tests\Util\ConnectivityUtilities;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
- * Class MangaControllerTest
- * @package Atarashii\APIBundle\Tests\Controller
+ * Class MangaControllerTest.
  */
 class MangaControllerTest extends WebTestCase
 {
@@ -27,7 +26,6 @@ class MangaControllerTest extends WebTestCase
         $this->assertNotNull($content);
         $this->assertEquals(404, $statusCode);
         $this->assertStringStartsWith('No manga found', $content->error);
-
 
         //Test an actual title, in this case NouCome.
         $client->request('GET', '/2/manga/894');
@@ -100,13 +98,13 @@ class MangaControllerTest extends WebTestCase
             $this->assertEquals('completed', $content->read_status);
             $this->assertEquals('2013-09-17', $content->reading_start);
             $this->assertEquals('2013-11-17', $content->reading_end);
-
         } else {
             $this->markTestSkipped('Username and password must be set.');
         }
     }
 
-    public static function setUpBeforeClass() {
+    public static function setUpBeforeClass()
+    {
         $client = static::createClient();
         $container = $client->getContainer();
 
@@ -117,8 +115,8 @@ class MangaControllerTest extends WebTestCase
         }
     }
 
-    protected function setUp() {
+    protected function setUp()
+    {
         $this->client = static::createClient();
     }
-
 }

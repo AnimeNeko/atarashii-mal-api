@@ -6,8 +6,7 @@ use Atarashii\APIBundle\Tests\Util\ConnectivityUtilities;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
- * Class VerifyControllerTest
- * @package Atarashii\APIBundle\Tests\Controller
+ * Class VerifyControllerTest.
  */
 class VerifyControllerTest extends WebTestCase
 {
@@ -50,7 +49,8 @@ class VerifyControllerTest extends WebTestCase
         }
     }
 
-    public static function setUpBeforeClass() {
+    public static function setUpBeforeClass()
+    {
         $client = static::createClient();
         $container = $client->getContainer();
 
@@ -61,8 +61,8 @@ class VerifyControllerTest extends WebTestCase
         }
     }
 
-    protected function setUp() {
+    protected function setUp()
+    {
         $this->client = static::createClient();
     }
-
 }

@@ -1,13 +1,12 @@
 <?php
 /**
-* Atarashii MAL API
+* Atarashii MAL API.
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
 * @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
-
 namespace Atarashii\APIBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
@@ -22,7 +21,7 @@ use JMS\Serializer\SerializationContext;
 class MangaController extends FOSRestController
 {
     /**
-     * Get the details of a manga
+     * Get the details of a manga.
      *
      * @param int     $id         The ID of the manga as assigned by MyAnimeList
      * @param string  $apiVersion The API version of the request
@@ -59,7 +58,7 @@ class MangaController extends FOSRestController
         }
 
         try {
-            $mangadetails = $downloader->fetch('/manga/' . $id);
+            $mangadetails = $downloader->fetch('/manga/'.$id);
         } catch (Exception\CurlException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         } catch (Exception\ClientErrorResponseException $e) {
@@ -72,8 +71,8 @@ class MangaController extends FOSRestController
             $manga = MangaParser::parse($mangadetails);
 
             //Parse extended personal details if API 2.0 or better and personal details are requested
-            if ($apiVersion >= "2.0" && $usepersonal) {
-                if($manga->getListedMangaId() !== null) {
+            if ($apiVersion >= '2.0' && $usepersonal) {
+                if ($manga->getListedMangaId() !== null) {
                     try {
                         $mangaDetails = $downloader->fetch('http://myanimelist.net/panel.php?go=editmanga&id='.$manga->getListedMangaId().'&hidenav=true');
                     } catch (Exception\CurlException $e) {
@@ -89,7 +88,7 @@ class MangaController extends FOSRestController
             $serializationContext->setVersion($apiVersion);
 
             //For compatibility, API 1.0 explicitly passes null parameters.
-            if ($apiVersion == "1.0") {
+            if ($apiVersion == '1.0') {
                 $serializationContext->setSerializeNull(true);
             }
 
@@ -98,7 +97,7 @@ class MangaController extends FOSRestController
                 $response->setPublic();
                 $response->setMaxAge(3600); //One hour
                 $response->headers->addCacheControlDirective('must-revalidate', true);
-                $response->setEtag('manga/' . $id);
+                $response->setEtag('manga/'.$id);
 
                 //Also, set "expires" header for caches that don't understand Cache-Control
                 $date = new \DateTime();
@@ -117,7 +116,7 @@ class MangaController extends FOSRestController
     }
 
     /**
-     * Get the reviews of a manga
+     * Get the reviews of a manga.
      *
      * @param int     $id      The ID of the manga as assigned by MyAnimeList
      * @param Request $request HTTP Request object
@@ -136,7 +135,7 @@ class MangaController extends FOSRestController
         }
 
         try {
-            $details = $downloader->fetch('/manga/' . $id . '/_/reviews&p=' . $page);
+            $details = $downloader->fetch('/manga/'.$id.'/_/reviews&p='.$page);
         } catch (Exception\CurlException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
@@ -148,7 +147,7 @@ class MangaController extends FOSRestController
         $response->setPublic();
         $response->setMaxAge(10800); //Three hour
         $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag('manga/reviews/' . $id . '?page=' . $page);
+        $response->setEtag('manga/reviews/'.$id.'?page='.$page);
 
         //Also, set "expires" header for caches that don't understand Cache-Control
         $date = new \DateTime();
@@ -156,7 +155,7 @@ class MangaController extends FOSRestController
         $response->setExpires($date);
 
         if (strpos($details, 'No manga found, check the manga id and try again.') !== false) {
-            $view = $this->view(Array('error' => 'not-found'));
+            $view = $this->view(array('error' => 'not-found'));
             $view->setResponse($response);
             $view->setStatusCode(404);
 
@@ -180,7 +179,7 @@ class MangaController extends FOSRestController
     }
 
     /**
-     * Get the cast of a manga
+     * Get the cast of a manga.
      *
      * @param int $id The ID of the manga as assigned by MyAnimeList
      *
@@ -192,7 +191,7 @@ class MangaController extends FOSRestController
         $downloader = $this->get('atarashii_api.communicator');
 
         try {
-            $details = $downloader->fetch('/manga/' . $id . '/_/characters');
+            $details = $downloader->fetch('/manga/'.$id.'/_/characters');
         } catch (Exception\CurlException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
@@ -206,7 +205,7 @@ class MangaController extends FOSRestController
             $response->setPublic();
             $response->setMaxAge(86400); //One day
             $response->headers->addCacheControlDirective('must-revalidate', true);
-            $response->setEtag('manga/cast/' . $id);
+            $response->setEtag('manga/cast/'.$id);
 
             //Also, set "expires" header for caches that don't understand Cache-Control
             $date = new \DateTime();
