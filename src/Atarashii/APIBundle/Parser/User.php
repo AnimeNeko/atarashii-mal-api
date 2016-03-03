@@ -57,30 +57,30 @@ class User
         $userForumPosts = $userStats->filterXPath('//*[text()="Forum Posts"]/../span[2]');
         $userWebsite = $content->filterXPath('//*[@class="user-profile-sns"][1]/a');
 
-        if($userAccessLevel->count() > 0) {
+        if ($userAccessLevel->count() > 0) {
             $details->setAccessRank($userAccessLevel->text());
         } else {
             $details->setAccessRank('Member');
         }
 
-        if($userOnline->count() > 0) {
+        if ($userOnline->count() > 0) {
             $details->setLastOnline($userOnline->text());
         }
 
-        if($userGender->count() > 0) {
+        if ($userGender->count() > 0) {
             $details->setGender($userGender->text());
         } else {
             $details->setGender('Not specified');
         }
 
-        if($userBDay->count() > 0) {
+        if ($userBDay->count() > 0) {
             //MAL allows partial birthdays, even just day and year (wth?)
             //We need to check combinations to handle this correctly.
             $bdParts = explode(' ', $userBDay->text());
 
-            if(count($bdParts) == 3) { //Full date, normal processing
+            if (count($bdParts) == 3) { //Full date, normal processing
                 $details->setBirthday(\DateTime::createFromFormat('M d, Y', $userBDay->text())->format('F j, Y'));
-            } elseif(count($bdParts) == 2) { //We only have two parts, figure out what we were given
+            } elseif (count($bdParts) == 2) { //We only have two parts, figure out what we were given
                 $firstIsNumber = is_numeric($bdParts[0]);
                 $hasComma = strpos($bdParts[0], ',');
 
@@ -92,26 +92,25 @@ class User
                 } else { //Day and year make no sense, just use year
                     $details->setBirthday($bdParts[1]);
                 }
-
             } else { //It's either just one value or something else, just save the data.
                 $details->setBirthday($userBDay->text());
             }
         }
 
-        if($userJoined->count() > 0) {
+        if ($userJoined->count() > 0) {
             $details->setJoinDate(\DateTime::createFromFormat('M d, Y', $userJoined->text())->format('F j, Y'));
         }
 
-        if($userLoc->count() > 0) {
+        if ($userLoc->count() > 0) {
             $details->setLocation($userLoc->text());
         }
 
-        if($userWebsite->count() > 0) {
+        if ($userWebsite->count() > 0) {
             $details->setWebsite($userWebsite->attr('href'));
         }
 
-        if($userForumPosts->count() > 0) {
-         $details->setForumPosts((int) $userForumPosts->text());
+        if ($userForumPosts->count() > 0) {
+            $details->setForumPosts((int) $userForumPosts->text());
         }
 
         return $details;
@@ -125,7 +124,7 @@ class User
 
         $timeDays = $genStats->filterXPath('//*[normalize-space(.)="Days:"]/..');
 
-        if($timeDays->count() > 0){
+        if ($timeDays->count() > 0) {
             $days = explode(' ', $timeDays->text());
 
             $stats->setTimeDays((float) $days[1]);
@@ -135,7 +134,7 @@ class User
         $statsStatus = $content->filterXPath('//ul[contains(attribute::class,"stats-status")]');
 
         //Watching/Reading and Planned are different for anime/manga
-        if($mediaType == 'anime') {
+        if ($mediaType == 'anime') {
             $inProgress = $statsStatus->filterXPath('//*[contains(attribute::class,"watching")]/../span');
             $planned = $statsStatus->filterXPath('//*[contains(attribute::class,"plantowatch")]/../span');
 
@@ -146,7 +145,7 @@ class User
             if ($planned->count() > 0) {
                 $stats->setPlanToWatch((int) $planned->text());
             }
-        } elseif($mediaType == 'manga') {
+        } elseif ($mediaType == 'manga') {
             $inProgress = $statsStatus->filterXPath('//*[contains(attribute::class,"reading")]/../span');
             $planned = $statsStatus->filterXPath('//*[contains(attribute::class,"plantoread")]/../span');
 
@@ -163,15 +162,15 @@ class User
         $onHold = $statsStatus->filterXPath('//*[contains(attribute::class,"on-hold")]/../span');
         $dropped = $statsStatus->filterXPath('//*[contains(attribute::class,"dropped")]/../span');
 
-        if($completed->count() > 0) {
+        if ($completed->count() > 0) {
             $stats->setCompleted((int) $completed->text());
         }
 
-        if($onHold->count() > 0) {
+        if ($onHold->count() > 0) {
             $stats->setOnHold((int) $onHold->text());
         }
 
-        if($dropped->count() > 0) {
+        if ($dropped->count() > 0) {
             $stats->setDropped((int) $dropped->text());
         }
 
@@ -180,7 +179,7 @@ class User
 
         $totalEntries = $statsSummary->filterXPath('//li[1]/span[2]');
 
-        if($totalEntries->count() > 0) {
+        if ($totalEntries->count() > 0) {
             $stats->setTotalEntries((int) $totalEntries->text());
         }
 
@@ -224,7 +223,6 @@ class User
         }
 
         return $friendlist;
-
     }
 
     public static function parseHistory($contents)
@@ -240,8 +238,7 @@ class User
             $crawler = new Crawler($historyentry);
 
             // bypass for the MAL generated strings
-            if (($crawler->filter('a')->count()) > 0){
-
+            if (($crawler->filter('a')->count()) > 0) {
                 if (strpos($crawler->filter('a')->attr('href'), 'anime') !== false) {
                     $historyinfo['item'] = new Anime();
                     $historyinfo['item']->setEpisodes((int) $crawler->filter('strong')->text());
@@ -261,6 +258,5 @@ class User
         }
 
         return $historylist;
-
     }
 }

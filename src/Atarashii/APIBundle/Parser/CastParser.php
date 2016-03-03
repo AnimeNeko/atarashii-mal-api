@@ -31,6 +31,7 @@ class CastParser
             $crawler = new Crawler($item);
             if ($crawler->filter('td[width="27"]')->count() != 1) {
                 $staffitems = $crawler->children();
+
                 foreach ($staffitems as $staffitem) {
                     $staff[] = self::parseStaff($staffitem);
                 }
@@ -52,32 +53,34 @@ class CastParser
         $cast->setName($item->filter('a')->eq(1)->text());
 
         $result = preg_match('/rs\/(.*?)\?/', $item->filter('img')->attr('src'), $imageURL);
-        if ($result > 0)
+        if ($result > 0) {
             $cast->setImage('http://cdn.myanimelist.net/images/characters/'.$imageURL[1]);
-        else
+        } else {
             $cast->setImage($item->filter('img')->attr('src'));
+        }
 
         $cast->setRole($item->filter('small')->text());
 
-            foreach ($item->filter('table[class="space_table"] tr') as $actorItem) {
-                $actor = new Actor();
-                $crawler = new Crawler($actorItem);
+        foreach ($item->filter('table[class="space_table"] tr') as $actorItem) {
+            $actor = new Actor();
+            $crawler = new Crawler($actorItem);
 
-                if ($crawler->filter('td')->count() > 1) {
-                    $actorIds = explode('/', $crawler->filter('a')->attr('href'));
+            if ($crawler->filter('td')->count() > 1) {
+                $actorIds = explode('/', $crawler->filter('a')->attr('href'));
 
-                    $actor->setId($actorIds[2]);
-                    $actor->setName($crawler->filter('a')->text());
-                    $actor->setLanguage($crawler->filter('small')->last()->text());
+                $actor->setId($actorIds[2]);
+                $actor->setName($crawler->filter('a')->text());
+                $actor->setLanguage($crawler->filter('small')->last()->text());
 
-                    $result = preg_match('/rs\/(.*?)\?/', $crawler->filter('img')->last()->attr('src'), $imageURL);
-                    if ($result > 0)
-                        $actor->setImage('http://cdn.myanimelist.net/images/voiceactors/'.$imageURL[1]);
-                    else
-                        $actor->setImage($crawler->filter('img')->last()->attr('src'));
-
-                    $cast->setActors($actor);
+                $result = preg_match('/rs\/(.*?)\?/', $crawler->filter('img')->last()->attr('src'), $imageURL);
+                if ($result > 0) {
+                    $actor->setImage('http://cdn.myanimelist.net/images/voiceactors/'.$imageURL[1]);
+                } else {
+                    $actor->setImage($crawler->filter('img')->last()->attr('src'));
                 }
+
+                $cast->setActors($actor);
+            }
         }
 
         return $cast;
@@ -95,10 +98,11 @@ class CastParser
         $cast->setRank($crawler->filter('small')->last()->text());
 
         $result = preg_match('/rs\/(.*?)\?/', $crawler->filter('img')->last()->attr('src'), $imageURL);
-        if ($result > 0)
+        if ($result > 0) {
             $cast->setImage('http://cdn.myanimelist.net/images/voiceactors/'.$imageURL[1]);
-        else
+        } else {
             $cast->setImage($crawler->filter('img')->last()->attr('src'));
+        }
 
         return $cast;
     }

@@ -32,10 +32,11 @@ class MessagesParser
         }
 
         $pages = $crawler->filter('div[class="total_messages spaceit_pad"] div')->last()->text();
-        if ($pages != '')
+        if ($pages != '') {
             $result['pages'] = ((int) substr($pages, strpos($pages, ' (') + 2, strpos($pages, ')')));
-        else
+        } else {
             $result['pages'] = 1;
+        }
         $result['list'] = $resultset;
 
         return $result;

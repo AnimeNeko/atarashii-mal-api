@@ -90,10 +90,11 @@ class ForumParser
 
         try {
             $pages = $crawler->filter('div[style="height: 15px; margin: 5px 0px;"] div')->last()->text();
-            if ($pages != '')
+            if ($pages != '') {
                 $result['pages'] = ((int) substr($pages, strpos($pages, ' (') + 2, strpos($pages, ')')));
-            else
+            } else {
                 $result['pages'] = 1;
+            }
         } catch (\InvalidArgumentException $e) {
             //do nothing
         }
@@ -201,10 +202,11 @@ class ForumParser
         }
 
         $pages = $crawler->filter('div[class="fl-r pb4"]')->text();
-        if ($pages != '')
+        if ($pages != '') {
             $result['pages'] = ((int) substr($pages, strpos($pages, ' (') + 2, strpos($pages, ')')));
-        else
+        } else {
             $result['pages'] = 1;
+        }
         $result['list'] = $set;
 
         return $result;
@@ -236,10 +238,11 @@ class ForumParser
         $details = explode("\n\t\t  ", $crawler->filter('td[class="forum_boardrow2"]')->text());
         $topic->setUsername($details[0]);
         $topic->profile->details->setForumPosts(str_replace('Posts: ', '', $details[6]));
-        if ($details[1] == '')
+        if ($details[1] == '') {
             $topic->profile->details->setAccessRank('Member');
-        else
+        } else {
             $topic->profile->details->setAccessRank($details[1]);
+        }
 
         if ($topic->profile->details->getForumPosts() == '') {
             $topic->profile->details->setStatus($details[3]);
@@ -261,5 +264,4 @@ class ForumParser
 
         return $topic;
     }
-
 }

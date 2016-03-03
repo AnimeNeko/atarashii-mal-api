@@ -95,10 +95,11 @@ class Actor
      */
     public function setImage($actorImage)
     {
-        if ($actorImage === 'http://cdn.myanimelist.net/images/questionmark_23.gif')
+        if ($actorImage === 'http://cdn.myanimelist.net/images/questionmark_23.gif') {
             $this->image = 'http://cdn.myanimelist.net/images/na.gif';
-        else
+        } else {
             $this->image = $actorImage;
+        }
     }
 
     /**
@@ -130,5 +131,4 @@ class Actor
     {
         return $this->language;
     }
-
 }

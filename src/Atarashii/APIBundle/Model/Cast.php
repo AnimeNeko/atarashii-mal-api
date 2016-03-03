@@ -130,10 +130,11 @@ class Cast
      */
     public function setImage($image)
     {
-        if ($image === 'http://cdn.myanimelist.net/images/questionmark_23.gif')
+        if ($image === 'http://cdn.myanimelist.net/images/questionmark_23.gif') {
             $this->image = 'http://cdn.myanimelist.net/images/na.gif';
-        else
+        } else {
             $this->image = $image;
+        }
     }
 
     /**

@@ -32,8 +32,8 @@ class Date
      */
     public static function formatTime($time)
     {
-        $dateTime = (new DateTime);
-        $timeZone = new DateTimeZone(Date::$timeZone);
+        $dateTime = (new DateTime());
+        $timeZone = new DateTimeZone(self::$timeZone);
         $time = trim($time);
 
         if (strpos($time, '-') !== false) {
@@ -55,15 +55,17 @@ class Date
         } elseif (strpos($time, 'Yesterday') !== false) {
             return $dateTime->createFromFormat('g:i A', substr($time, 11), $timeZone)->modify('-1 day')->format('Y-m-d\TH:iO');
         } elseif (strpos($time, 'AM') !== false || strpos($time, 'PM') !== false) {
-            if (strlen($time) > 18)
+            if (strlen($time) > 18) {
                 return $dateTime->createFromFormat('M j, Y g:i A', $time, $timeZone)->format('Y-m-d\TH:iO');
-            else
+            } else {
                 return $dateTime->createFromFormat('M j, g:i A', $time, $timeZone)->format('Y-m-d\TH:iO');
+            }
         } elseif (strpos($time, ', ') !== false) { //Do not place this before the other formatters because it will break almost all dates.
-            if (strlen($time) > 12)
+            if (strlen($time) > 12) {
                 return $dateTime->createFromFormat('F d, Y', $time)->format('Y-m-d');
-            else
+            } else {
                 return $dateTime->createFromFormat('M j, Y', $time)->format('Y-m-d');
+            }
         } elseif (strpos($time, ' ') !== false) { //Do not place this before the other formatters because it will break almost all dates.
             //WARNING: PHP will fill in missing details with the current date. This can be a problem when processing
             //a month with fewer days than the current date (e.g. April, which has 30 days, on the 31st of another month).
@@ -90,6 +92,6 @@ class Date
         $crawler = new Crawler();
         $crawler->addHTMLContent($settings, 'UTF-8');
 
-        Date::$timeZone = $crawler->filter('option[selected]')->text();
+        self::$timeZone = $crawler->filter('option[selected]')->text();
     }
 }
