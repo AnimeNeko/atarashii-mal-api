@@ -31,7 +31,7 @@ class Upcoming
 
         foreach ($mediaitems as $item) {
             //tricky method to skip the menu bar which is also a <tr></tr>
-            if ($menubar == true) {
+            if ($menubar === true) {
                 $menubar = false;
             } else {
                 $resultset[] = self::parseRecord($item, $type);

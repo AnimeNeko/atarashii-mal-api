@@ -109,7 +109,7 @@ class AnimeListController extends FOSRestController
         $password = $this->getRequest()->server->get('PHP_AUTH_PW');
 
         //Don't bother making a request if the user didn't send any authentication
-        if ($username == null) {
+        if ($username === null) {
             $view = $this->view(Array('error' => 'unauthorized'), 401);
             $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
 
@@ -194,7 +194,7 @@ class AnimeListController extends FOSRestController
         $password = $this->getRequest()->server->get('PHP_AUTH_PW');
 
         //Don't bother making a request if the user didn't send any authentication
-        if ($username == null) {
+        if ($username === null) {
             $view = $this->view(Array('error' => 'unauthorized'), 401);
             $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
 
@@ -342,7 +342,7 @@ class AnimeListController extends FOSRestController
         $password = $this->getRequest()->server->get('PHP_AUTH_PW');
 
         //Don't bother making a request if the user didn't send any authentication
-        if ($username == null) {
+        if ($username === null) {
             $view = $this->view(Array('error' => 'unauthorized'), 401);
             $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
 

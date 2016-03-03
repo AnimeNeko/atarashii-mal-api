@@ -130,7 +130,7 @@ class AnimeParser
             $daterange = explode(' to ', trim(str_replace($extracted->text(), '', $extracted->parents()->text())));
 
             //MAL always provides record dates in US-style format.
-            if (strpos($daterange[0],',') == false) {
+            if (strpos($daterange[0],',') === false) {
                 if (strlen($daterange[0]) === 4) {
                     $animerecord->setStartDate(DateTime::createFromFormat('Y m d', $daterange[0] . ' 01 01'), 'year'); //Example ID 6535 or 9951
                 } elseif ($daterange[0] !== 'Not available') {

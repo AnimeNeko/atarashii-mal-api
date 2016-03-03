@@ -83,7 +83,7 @@ class ForumParser
         foreach ($topicsitems as $item) {
             //Trick to force json array and not json objects.
             $set = self::parseSubBoardsdetails($item);
-            if ($set != null) {
+            if ($set !== null) {
                 $resultset[] = $set;
             }
         }
@@ -135,7 +135,7 @@ class ForumParser
         foreach ($topicsitems as $item) {
             //Trick to force json array and not json objects.
             $set = self::parseTopicsDetails($item);
-            if ($set != null) {
+            if ($set !== null) {
                 $resultset[] = $set;
             }
         }

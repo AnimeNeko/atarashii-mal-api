@@ -245,7 +245,7 @@ class User
             // bypass for the MAL generated strings
             if (($crawler->filter('a')->count()) > 0){
 
-                if (strpos($crawler->filter('a')->attr('href'), 'anime') == true) {
+                if (strpos($crawler->filter('a')->attr('href'), 'anime') !== false) {
                     $historyinfo['item'] = new Anime();
                     $historyinfo['item']->setEpisodes((int) $crawler->filter('strong')->text());
                     $historyinfo['type'] = 'anime';

@@ -78,7 +78,7 @@ class Communicator
     public function cookieLogin($username, $password)
     {
         //Don't bother making a request if the user didn't send any authentication
-        if ($username == null || $password == null) {
+        if ($username === null || $password === null) {
             return false;
         }
 
