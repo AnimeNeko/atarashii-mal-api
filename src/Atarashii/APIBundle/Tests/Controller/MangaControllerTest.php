@@ -27,7 +27,7 @@ class MangaControllerTest extends WebTestCase
         $this->assertEquals(404, $statusCode);
         $this->assertStringStartsWith('No manga found', $content->error);
 
-        //Test an actual title, in this case NouCome.
+        //Test an actual title, in this case Rosario + Vampire.
         $client->request('GET', '/2/manga/894');
 
         $rawContent = $client->getResponse()->getContent();
@@ -101,6 +101,63 @@ class MangaControllerTest extends WebTestCase
         } else {
             $this->markTestSkipped('Username and password must be set.');
         }
+    }
+
+    public function testGetCastAction()
+    {
+        $client = $this->client;
+
+        //Test an actual title, in this case Rosario + Vampire.
+        $client->request('GET', '/2/manga/cast/894');
+
+        $rawContent = $client->getResponse()->getContent();
+        $statusCode = $client->getResponse()->getStatusCode();
+        $content = json_decode($rawContent);
+
+        $this->assertNotNull($content);
+        $this->assertEquals(200, $statusCode);
+
+        $characterList = $content->Characters;
+
+        //Moka
+        foreach ($characterList as $characterItem) {
+            if ($characterItem->id == 3861) {
+                $character = $characterItem;
+                break;
+            }
+        }
+
+        //We're already testing the parser directly, so just make sure we got some valid info.
+        $this->assertInstanceOf('stdClass', $character);
+        $this->assertEquals('Akashiya, Moka', $character->name);
+    }
+
+    public function testGetReviewsAction()
+    {
+        $client = $this->client;
+
+        //Test an actual title, in this case Rosario + Vampire.
+        $client->request('GET', '/2/manga/reviews/894');
+
+        $rawContent = $client->getResponse()->getContent();
+        $statusCode = $client->getResponse()->getStatusCode();
+        $content = json_decode($rawContent);
+
+        $this->assertNotNull($content);
+        $this->assertEquals(200, $statusCode);
+
+        $review = $content[0];
+
+        $this->assertNotNull($review->date);
+        $this->assertNotNull($review->username);
+
+        //Quick date check
+        $date = new \DateTime($review->date);
+        $this->assertInstanceOf('DateTime', $date);
+
+        //Making sure the date we grabbed was properly parsed and matches with the source
+        $date = $date->format('Y-m-d');
+        $this->assertEquals($review->date, $date);
     }
 
     public static function setUpBeforeClass()

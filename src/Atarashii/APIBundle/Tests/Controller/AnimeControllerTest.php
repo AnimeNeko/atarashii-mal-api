@@ -107,6 +107,76 @@ class AnimeControllerTest extends WebTestCase
         }
     }
 
+    public function testGetCastAction()
+    {
+        $client = $this->client;
+
+        //Test an actual title, in this case NouCome.
+        $client->request('GET', '/2/anime/cast/19221');
+
+        $rawContent = $client->getResponse()->getContent();
+        $statusCode = $client->getResponse()->getStatusCode();
+        $content = json_decode($rawContent);
+
+        $this->assertNotNull($content);
+        $this->assertEquals(200, $statusCode);
+
+        $characterList = $content->Characters;
+
+        //Yukihira Furano
+        foreach ($characterList as $characterItem) {
+            if ($characterItem->id == 81223) {
+                $character = $characterItem;
+                break;
+            }
+        }
+
+        $staffList = $content->Staff;
+
+        //Sadohara Kaori
+        foreach ($staffList as $staffItem) {
+            if ($staffItem->id == 12284) {
+                $staff = $staffItem;
+                break;
+            }
+        }
+
+        //We're already testing the parser directly, so just make sure we got some valid info.
+        $this->assertInstanceOf('stdClass', $character);
+        $this->assertEquals('Yukihira, Furano', $character->name);
+
+        $this->assertInstanceOf('stdClass', $staff);
+        $this->assertEquals('Sadohara, Kaori', $staff->name);
+    }
+
+    public function testGetReviewsAction()
+    {
+        $client = $this->client;
+
+        //Test an actual title, in this case NouCome.
+        $client->request('GET', '/2/anime/reviews/19221');
+
+        $rawContent = $client->getResponse()->getContent();
+        $statusCode = $client->getResponse()->getStatusCode();
+        $content = json_decode($rawContent);
+
+        $this->assertNotNull($content);
+        $this->assertEquals(200, $statusCode);
+
+        $review = $content[0];
+
+        $this->assertNotNull($review->date);
+        $this->assertNotNull($review->username);
+
+        //Quick date check
+        $date = new \DateTime($review->date);
+        $this->assertInstanceOf('DateTime', $date);
+
+        //Making sure the date we grabbed was properly parsed and matches with the source
+        $date = $date->format('Y-m-d');
+        $this->assertEquals($review->date, $date);
+    }
+
     public static function setUpBeforeClass()
     {
         $client = static::createClient();
