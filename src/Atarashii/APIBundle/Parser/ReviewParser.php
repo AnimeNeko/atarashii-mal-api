@@ -32,32 +32,68 @@ class ReviewParser
         $crawler = new Crawler($item);
         $review = new Review();
 
-        $episodes = explode(' ', $crawler->filter('td[style="text-align: right;"] div')->text());
+        //Review Header and Body
+        $reviewHeader = $crawler->filterXPath('//div[contains(@class,"reviewDetails")]/table');
 
-        //The review is not clean and should be separated from the other html codes
-        $firstpart = explode('div>', $crawler->filter('div[class="spaceit textReadability"]')->html());
-        $secondpart = explode('</span>', $firstpart[1]);
+        $avatar = $reviewHeader->filterXPath('//td[1]//img');
 
-        $review->setDate($crawler->filter('td[style="text-align: right;"]')->filter('div[style="text-align: right;"]')->text());
-        $review->setRating(str_replace('Overall Rating: ', '', $crawler->filter('tr td[style="text-align: right;"] div')->last()->text()));
-        $review->setAvatarUrl(str_replace('_thumb', '', str_replace('/thumbs', '', $crawler->filter('div[class="picSurround"] img')->attr('src'))));
-        $review->setUsername($crawler->filter('tr a')->eq(2)->text());
-        $review->setHelpful($crawler->filter('tr strong')->text());
-        $review->setHelpfulTotal($crawler->filter('tr strong')->eq(1)->text());
-        $review->setReview($secondpart[0]);
+        if ($avatar->count() > 0) {
+            $avatar = $avatar->attr('src');
+            $avatar = str_replace('_thumb', '', $avatar);
+            $avatar = str_replace('/thumbs', '', $avatar);
 
-        if ($type == 'A') {
-            if (count($episodes) >= 3) {
-                $review->setEpisodes($episodes[2]);
-                $review->setWatchedEpisodes($episodes[0]);
-            } elseif (count($episodes) >= 1) {
-                $review->setEpisodes($episodes[0]);
+            $review->setAvatarUrl($avatar);
+        }
+
+        $review->setUsername($reviewHeader->filterXPath('//td[2]/a')->text());
+        $review->setHelpful($reviewHeader->filterXPath('//td[2]/div//span')->text());
+        $review->setHelpfulTotal($reviewHeader->filterXPath('//td[2]/div//span')->text()); //Set to same as helpful for now, as the total votes are removed.
+
+        $review->setDate($reviewHeader->filterXPath('//td[3]/div[1]')->text());
+
+        //Progress
+        $progress = $reviewHeader->filterXPath('//td[3]/div[2]')->text();
+
+        if (preg_match('/(\d+) of (\d+|\?)/', $progress, $matches)) {
+            if ($type == 'A') {
+                $review->setWatchedEpisodes((int) $matches[1]);
+
+                if ($matches[2] != '?') {
+                    $review->setEpisodes((int) $matches[2]);
+                }
+            } else {
+                $review->setChaptersRead((int) $matches[1]);
+
+                if ($matches[2] != '?') {
+                    $review->setChapters((int) $matches[2]);
+                }
             }
+        }
+
+        //Rating
+        $rating = $reviewHeader->filterXPath('//td[3]/div[3]')->text();
+
+        if (preg_match('/(\d+)/', $rating, $matches)) {
+            $review->setRating((int) $matches[1]);
+        }
+
+        //Review Body
+        $reviewBody = $crawler->filterXPath('//div[contains(@class,"textReadability")]');
+
+        //The review text is split up a bit, and has some hidden data, so we will need to clean things up.
+        $reviewBlock = trim($reviewBody->html());
+
+        //Select which expression to use for stripping text.
+        //Some longer reviews will have a "read more" link, others are short and do not.
+        if (strpos($reviewBlock, 'reviewToggle') === false) {
+            //Short Review, no hidden text
+            preg_match('/<div .*?>.*?<\/div>(.*)/s', $reviewBlock, $reviewParts);
+            $review->setReview($reviewParts[1]);
         } else {
-            if (count($episodes) >= 3) {
-                $review->setChapters($episodes[2]);
-            }
-            $review->setChaptersRead($episodes[0]);
+            //Long review, split text, second half hidden
+            preg_match('/<div .*?>.*?<\/div>(.*?)<span .*?>(.*?)<\/span>/s', $reviewBlock, $reviewParts);
+            $reviewText = $reviewParts[1].$reviewParts[2];
+            $review->setReview($reviewText);
         }
 
         return $review;
