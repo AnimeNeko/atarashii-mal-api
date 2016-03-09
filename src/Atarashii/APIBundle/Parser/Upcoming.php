@@ -18,7 +18,7 @@ class Upcoming
 {
     public static function parse($contents, $type)
     {
-        $resultset = Array();
+        $resultset = array();
 
         $crawler = new Crawler();
         $crawler->addHTMLContent($contents, 'UTF-8');
@@ -54,7 +54,7 @@ class Upcoming
         }
 
         //Pull out all the common parts
-        $media->setId((int)str_replace('sarea', '', $crawler->filter('a[class="hoverinfo_trigger"]')->attr('id')));
+        $media->setId((int) str_replace('sarea', '', $crawler->filter('a[class="hoverinfo_trigger"]')->attr('id')));
         $media->setTitle($crawler->filter('strong')->text());
 
         //Title Image
@@ -69,7 +69,7 @@ class Upcoming
         switch ($type) {
             case 'anime':
                 //Custom parsing for anime
-                $media->setEpisodes((int)trim($crawler->filterXPath('//td[4]')->text()));
+                $media->setEpisodes((int) trim($crawler->filterXPath('//td[4]')->text()));
 
                 $start_date = trim($crawler->filterXPath('//td[6]')->text());
 
@@ -112,17 +112,18 @@ class Upcoming
                 if ($classification != '-') {
                     $media->setClassification($classification);
                 }
-                $media->setMembersScore((float)trim($crawler->filterXPath('//td[5]')->text()));
+                $media->setMembersScore((float) trim($crawler->filterXPath('//td[5]')->text()));
                 $synopsis = $crawler->filterXPath('//td[2]/div[2]')->text();
-                if ($synopsis !== '')
+                if ($synopsis !== '') {
                     $media->setSynopsis(str_replace('read more.', '', trim($synopsis)));
+                }
                 break;
             case 'manga':
                 //Custom parsing for manga
                 $media->setType(trim($crawler->filterXPath('//td[3]')->text()));
-                $media->setChapters((int)trim($crawler->filterXPath('//td[5]')->text()));
-                $media->setVolumes((int)trim($crawler->filterXPath('//td[4]')->text()));
-                $media->setMembersScore((float)trim($crawler->filterXPath('//td[6]')->text()));
+                $media->setChapters((int) trim($crawler->filterXPath('//td[5]')->text()));
+                $media->setVolumes((int) trim($crawler->filterXPath('//td[4]')->text()));
+                $media->setMembersScore((float) trim($crawler->filterXPath('//td[6]')->text()));
                 $media->setSynopsis(str_replace('read more.', '', trim($crawler->filterXPath('//td[2]/div[2]')->text())));
                 break;
         }
@@ -139,9 +140,9 @@ class Upcoming
         //for titles from the early part of the 20th century, but it's the best
         //fix at this point.
         if ($year >= 30) {
-            return '19' . $year;
+            return '19'.$year;
         } else {
-            return '20' . $year;
+            return '20'.$year;
         }
     }
 }
