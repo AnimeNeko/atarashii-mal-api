@@ -1,12 +1,12 @@
 <?php
 /**
-* Atarashii MAL API.
-*
-* @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
-* @author    Michael Johnson <youngmug@animeneko.net>
-* @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
-* @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
-*/
+ * Atarashii MAL API.
+ *
+ * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
+ * @author    Michael Johnson <youngmug@animeneko.net>
+ * @copyright 2014-2016 Ratan Dhawtal and Michael Johnson
+ * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
+ */
 namespace Atarashii\APIBundle\Parser;
 
 use Symfony\Component\DomCrawler\Crawler;
@@ -18,14 +18,14 @@ class Upcoming
 {
     public static function parse($contents, $type)
     {
-        $resultset = '';
+        $resultset = Array();
 
         $crawler = new Crawler();
         $crawler->addHTMLContent($contents, 'UTF-8');
         $menubar = true;
 
         //Filter into a set of tds from the source HTML table
-        $mediaitems = $crawler->filterXPath('//div[@id="content"]/table/tr');
+        $mediaitems = $crawler->filterXPath('//div[@id="content"]/div/table/tr');
 
         foreach ($mediaitems as $item) {
             //tricky method to skip the menu bar which is also a <tr></tr>
@@ -55,7 +55,7 @@ class Upcoming
         }
 
         //Pull out all the common parts
-        $media->setId((int) str_replace('#sarea', '', $crawler->filter('a')->attr('id')));
+        $media->setId((int)str_replace('sarea', '', $crawler->filter('a[class="hoverinfo_trigger"]')->attr('id')));
         $media->setTitle($crawler->filter('strong')->text());
 
         //Title Image
@@ -70,7 +70,7 @@ class Upcoming
         switch ($type) {
             case 'anime':
                 //Custom parsing for anime
-                $media->setEpisodes((int) trim($crawler->filterXPath('//td[4]')->text()));
+                $media->setEpisodes((int)trim($crawler->filterXPath('//td[4]')->text()));
 
                 $start_date = trim($crawler->filterXPath('//td[6]')->text());
 
@@ -86,7 +86,7 @@ class Upcoming
                         $media->setLiteralStartDate(null, DateTime::createFromFormat('Y', $start_date[2]), 'year');
                     } elseif ($start_date[0] != '?' && $start_date[1] == '?') {
                         $media->setLiteralStartDate(null, DateTime::createFromFormat('Y m', "$start_date[2] $start_date[0]"), 'month');
-                    } else {
+                    } elseif ($start_date[0] != '?' && $start_date[1] == '?' && $start_date[2] == '?') {
                         $media->setLiteralStartDate("$start_date[2]-$start_date[0]-$start_date[1]", DateTime::createFromFormat('Y m d', "$start_date[2] $start_date[0] $start_date[1]"), 'day');
                     }
                 }
@@ -104,24 +104,24 @@ class Upcoming
                         $media->setLiteralEndDate(null, DateTime::createFromFormat('Y', $end_date[2]), 'year');
                     } elseif ($end_date[0] != '?' && $end_date[1] == '?') {
                         $media->setLiteralEndDate(null, DateTime::createFromFormat('Y m', "$end_date[2] $end_date[0]"), 'month');
-                    } else {
+                    } elseif ($end_date[0] != '?' && $end_date[1] == '?' && $end_date[2] == '?') {
                         $media->setLiteralEndDate("$end_date[2]-$end_date[0]-$end_date[1]", DateTime::createFromFormat('Y m d', "$end_date[2] $end_date[0] $end_date[1]"), 'day');
                     }
                 }
 
                 $media->setClassification(trim($crawler->filterXPath('//td[9]')->text()));
-                $media->setMembersScore((float) trim($crawler->filterXPath('//td[5]')->text()));
-                $media->setSynopsis(trim($crawler->filterXPath('//td[2]/div[3]')->text()));
+                $media->setMembersScore((float)trim($crawler->filterXPath('//td[5]')->text()));
+                $media->setSynopsis(str_replace('read more.', '', trim($crawler->filterXPath('//td[2]/div[2]')->text())));
                 break;
             case 'manga':
                 //Custom parsing for manga
                 $media->setType(trim($crawler->filterXPath('//td[3]')->text()));
-                $media->setChapters((int) trim($crawler->filterXPath('//td[5]')->text()));
-                $media->setVolumes((int) trim($crawler->filterXPath('//td[4]')->text()));
-                $media->setMembersScore((float) trim($crawler->filterXPath('//td[6]')->text()));
-                $media->setSynopsis(trim($crawler->filterXPath('//td[2]/div[2]')->text()));
+                $media->setChapters((int)trim($crawler->filterXPath('//td[5]')->text()));
+                $media->setVolumes((int)trim($crawler->filterXPath('//td[4]')->text()));
+                $media->setMembersScore((float)trim($crawler->filterXPath('//td[6]')->text()));
+                $media->setSynopsis(str_replace('read more.', '', trim($crawler->filterXPath('//td[2]/div[2]')->text())));
                 break;
-            }
+        }
 
         return $media;
     }
@@ -135,9 +135,9 @@ class Upcoming
         //for titles from the early part of the 20th century, but it's the best
         //fix at this point.
         if ($year >= 30) {
-            return '19'.$year;
+            return '19' . $year;
         } else {
-            return '20'.$year;
+            return '20' . $year;
         }
     }
 }
