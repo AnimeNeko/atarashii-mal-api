@@ -19,6 +19,8 @@ class ReviewParser
         $crawler = new Crawler();
         $crawler->addHTMLContent($contents, 'UTF-8');
 
+        $result = array();
+
         $items = $crawler->filter('div [class="borderDark pt4 pb8 pl4 pr4 mb8"]');
         foreach ($items as $item) {
             $result[] = self::parseReviews($item, $type);

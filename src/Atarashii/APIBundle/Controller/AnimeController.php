@@ -159,12 +159,6 @@ class AnimeController extends FOSRestController
             $view->setStatusCode(404);
 
             return $view;
-        } elseif (strpos($details, 'no reviews submitted') !== false) {
-            $view = $this->view(array());
-            $view->setResponse($response);
-            $view->setStatusCode(200);
-
-            return $view;
         } else {
             $reviews = ReviewParser::parse($details, 'A'); //A = Anime
 
