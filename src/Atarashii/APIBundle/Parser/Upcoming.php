@@ -111,7 +111,9 @@ class Upcoming
 
                 $media->setClassification(trim($crawler->filterXPath('//td[9]')->text()));
                 $media->setMembersScore((float)trim($crawler->filterXPath('//td[5]')->text()));
-                $media->setSynopsis(str_replace('read more.', '', trim($crawler->filterXPath('//td[2]/div[2]')->text())));
+                $synopsis = $crawler->filterXPath('//td[2]/div[2]')->text();
+                if ($synopsis !== '')
+                    $media->setSynopsis(str_replace('read more.', '', trim($synopsis)));
                 break;
             case 'manga':
                 //Custom parsing for manga
