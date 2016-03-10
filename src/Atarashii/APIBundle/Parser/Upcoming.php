@@ -76,17 +76,20 @@ class Upcoming
                 if ($start_date != '-') {
                     $start_date = explode('-', trim($start_date));
 
-                    if (strlen($start_date[2]) == 2) {
+                    if (strlen($start_date[2]) == 2 && strpos($start_date[2], '?') === false) {
                         $start_date[2] = self::fixMalShortYear($start_date[2]);
                     }
 
-                    // If we don't know the month, then we can only be accurate to a year.
-                    if (strpos($start_date[0], '?') !== false) {
-                        $media->setLiteralStartDate(null, DateTime::createFromFormat('Y', $start_date[2]), 'year');
-                    } elseif (strpos($start_date[0], '?') === false && strpos($start_date[1], '?') !== false) {
-                        $media->setLiteralStartDate(null, DateTime::createFromFormat('Y m', "$start_date[2] $start_date[0]"), 'month');
-                    } elseif (strpos($start_date[0], '?') === false && strpos($start_date[1], '?') === false && strpos($start_date[2], '?') === false) {
-                        $media->setLiteralStartDate("$start_date[2]-$start_date[0]-$start_date[1]", DateTime::createFromFormat('Y m d', "$start_date[2] $start_date[0] $start_date[1]"), 'day');
+                    //We must have a year. If we don't even have that, don't set a date.
+                    if (strpos($start_date[2], '?') === false) {
+                        // If we don't know the month, then we can only be accurate to a year.
+                        if (strpos($start_date[0], '?') !== false) {
+                            $media->setLiteralStartDate(null, DateTime::createFromFormat('Y', $start_date[2]), 'year');
+                        } elseif (strpos($start_date[0], '?') === false && strpos($start_date[1], '?') !== false) {
+                            $media->setLiteralStartDate(null, DateTime::createFromFormat('Y m', "$start_date[2] $start_date[0]"), 'month');
+                        } elseif (strpos($start_date[0], '?') === false && strpos($start_date[1], '?') === false && strpos($start_date[2], '?') === false) {
+                            $media->setLiteralStartDate("$start_date[2]-$start_date[0]-$start_date[1]", DateTime::createFromFormat('Y m d', "$start_date[2] $start_date[0] $start_date[1]"), 'day');
+                        }
                     }
                 }
 
@@ -95,16 +98,19 @@ class Upcoming
                 if ($end_date != '-') {
                     $end_date = explode('-', trim($end_date));
 
-                    if (strlen($end_date[2]) == 2) {
+                    if (strlen($end_date[2]) == 2 && strpos($end_date[2], '?') === false) {
                         $end_date[2] = self::fixMalShortYear($end_date[2]);
                     }
 
-                    if (strpos($end_date[0], '?') !== false) {
-                        $media->setLiteralEndDate(null, DateTime::createFromFormat('Y', $end_date[2]), 'year');
-                    } elseif (strpos($end_date[0], '?') === false && strpos($end_date[1], '?') !== false) {
-                        $media->setLiteralEndDate(null, DateTime::createFromFormat('Y m', "$end_date[2] $end_date[0]"), 'month');
-                    } elseif (strpos($end_date[0], '?') === false && strpos($end_date[1], '?') === false && strpos($end_date[2], '?') === false) {
-                        $media->setLiteralEndDate("$end_date[2]-$end_date[0]-$end_date[1]", DateTime::createFromFormat('Y m d', "$end_date[2] $end_date[0] $end_date[1]"), 'day');
+                    //We must have a year. If we don't even have that, don't set a date.
+                    if (strpos($start_date[2], '?') === false) {
+                        if (strpos($end_date[0], '?') !== false) {
+                            $media->setLiteralEndDate(null, DateTime::createFromFormat('Y', $end_date[2]), 'year');
+                        } elseif (strpos($end_date[0], '?') === false && strpos($end_date[1], '?') !== false) {
+                            $media->setLiteralEndDate(null, DateTime::createFromFormat('Y m', "$end_date[2] $end_date[0]"), 'month');
+                        } elseif (strpos($end_date[0], '?') === false && strpos($end_date[1], '?') === false && strpos($end_date[2], '?') === false) {
+                            $media->setLiteralEndDate("$end_date[2]-$end_date[0]-$end_date[1]", DateTime::createFromFormat('Y m d', "$end_date[2] $end_date[0] $end_date[1]"), 'day');
+                        }
                     }
                 }
 
