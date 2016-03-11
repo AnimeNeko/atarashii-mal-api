@@ -82,49 +82,16 @@ class ForumParser
         $topicsitems = $crawler->filter('tr');
         foreach ($topicsitems as $item) {
             //Trick to force json array and not json objects.
-            $set = self::parseSubBoardsdetails($item);
+            $set = self::parseTopicsDetails($item);
             if ($set !== null) {
                 $resultset[] = $set;
             }
         }
 
-        try {
-            $pages = $crawler->filter('div[style="height: 15px; margin: 5px 0px;"] div')->last()->text();
-            if ($pages != '') {
-                $result['pages'] = ((int) substr($pages, strpos($pages, ' (') + 2, strpos($pages, ')')));
-            } else {
-                $result['pages'] = 1;
-            }
-        } catch (\InvalidArgumentException $e) {
-            //do nothing
-        }
+        $result['pages'] = 1;
         $result['list'] = $resultset;
 
         return $result;
-    }
-
-    private static function parseSubBoardsdetails($item)
-    {
-        $crawler = new Crawler($item);
-        if ($crawler->filter('td[class="borderClass bgColor1"]')->count() == 3) {
-            $topics = new Forum();
-
-            $topics->setId(str_replace('?mangaid=', '', str_replace('?animeid=', '', $crawler->filter('td[class="borderClass bgColor1"] a')->attr('href'))));
-
-            try {
-                $topics->setName($crawler->filter('strong')->text().' '.$crawler->filter('small')->text());
-            } catch (\InvalidArgumentException $e) {
-                $topics->setName($crawler->filter('strong')->text());
-            }
-
-            $topics->setReplies($crawler->filter('td[align="center"]')->text());
-
-            $topics->setTime($crawler->filter('td[align="center"]')->eq(1)->text());
-
-            return $topics;
-        } else {
-            return;
-        }
     }
 
     public static function parseTopics($contents)
@@ -178,6 +145,11 @@ class ForumParser
             # Example:
             # <td align="center" width="75" class="forum_boardrow2" style="border-width: 0px 1px 1px 0px;">159</td>
             $topics->setReplies(str_replace('?board=', '', $crawler->filter('td[class="forum_boardrow2"]')->eq(1)->text()));
+
+            # creation time.
+            # Example:
+            # <span class="lightLink">Jun 25, 2008</span>
+            $topics->setTime($crawler->filter('span[class="lightLink"]')->text());
 
             //note: eq(1) is the second node and !first.
             $username = $crawler->filter('td[class="forum_boardrow1"]')->eq(1)->filter('a')->text();
