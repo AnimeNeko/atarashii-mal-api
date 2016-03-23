@@ -267,7 +267,7 @@ class AnimeParser
         # Extract from sections on the right column: Synopsis, Related Anime, Characters & Voice Actors, Reviews
         # Recommendations.
         # -
-        $rightcolumn = $crawler->filterXPath('//div[@id="content"]/table/tr/td/table');
+        $rightcolumn = $crawler->filterXPath('//div[@id="content"]/table/tr/td[2]');
 
         # Synopsis
         # Example:
@@ -275,20 +275,14 @@ class AnimeParser
         # <h2>Synopsis</h2>
         # Having fun in school, doing homework together, cooking and eating, playing videogames, watching anime. All those little things make up the daily life of the anime- and chocolate-loving Izumi Konata and her friends. Sometimes relaxing but more than often simply funny! <br />
         # -From AniDB
-        $extracted = $rightcolumn->filterXPath('//h2[text()="Synopsis"]');
+        $extracted = $crawler->filterXPath('//span[@itemprop="description"]');
 
         //Compatibility Note: We don't convert extended characters to HTML entities, we just
         //use the output directly from MAL. This should be okay as our return charset is UTF-8.
+        $animerecord->setSynopsis('There is currently no synopsis for this title.');
+
         if (iterator_count($extracted) > 0) {
-            //Grab the whole containing TD that the synopsis is in.
-            $extracted = $extracted->parents()->first();
-            $rawSynopsis = $extracted->filter('span[itemprop="description"]');
-
-            $animerecord->setSynopsis('There is currently no synopsis for this title.');
-
-            if (iterator_count($rawSynopsis) > 0) {
-                $animerecord->setSynopsis($rawSynopsis->html());
-            }
+            $animerecord->setSynopsis($extracted->html());
         }
 
         # Related Anime

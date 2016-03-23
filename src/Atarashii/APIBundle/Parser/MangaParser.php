@@ -190,7 +190,7 @@ class MangaParser
         # -
         # Extract from sections on the right column: Synopsis, Related Manga
         # -
-        $rightcolumn = $crawler->filterXPath('//div[@id="content"]/table/tr/td/table');
+        $rightcolumn = $crawler->filterXPath('//div[@id="content"]/table/tr/td[2]');
 
         # Synopsis
         # Example:
@@ -198,20 +198,14 @@ class MangaParser
         # Yotsuba's daily life is full of adventure. She is energetic, curious, and a bit odd &ndash; odd enough to be called strange by her father as well as ignorant of many things that even a five-year-old should know. Because of this, the most ordinary experience can become an adventure for her. As the days progress, she makes new friends and shows those around her that every day can be enjoyable.<br />
         # <br />
         # [Written by MAL Rewrite]
-        $extracted = $rightcolumn->filterXPath('//h2[text()="Synopsis"]');
+        $extracted = $crawler->filterXPath('//span[@itemprop="description"]');
 
         //Compatibility Note: We don't convert extended characters to HTML entities, we just
         //use the output directly from MAL. This should be okay as our return charset is UTF-8.
+        $mangarecord->setSynopsis('There is currently no synopsis for this title.');
+
         if (iterator_count($extracted) > 0) {
-            //Grab the whole containing TD that the synopsis is in.
-            $extracted = $extracted->parents()->first();
-            $rawSynopsis = $extracted->filter('span[itemprop="description"]');
-
-            $mangarecord->setSynopsis('There is currently no synopsis for this title.');
-
-            if (iterator_count($rawSynopsis) > 0) {
-                $mangarecord->setSynopsis($rawSynopsis->html());
-            }
+            $mangarecord->setSynopsis($extracted->html());
         }
 
         # Related Manga
