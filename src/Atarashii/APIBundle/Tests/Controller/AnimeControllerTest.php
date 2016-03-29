@@ -67,7 +67,7 @@ class AnimeControllerTest extends WebTestCase
 
         $this->assertStringStartsWith('Kanade Amakusa is a high school student', $content->synopsis);
 
-        $this->assertContains('Mages', $content->producers);
+        $this->assertContains('MAGES.', $content->producers);
         $this->assertContains('Comedy', $content->genres);
 
         $this->assertGreaterThanOrEqual(1, count($content->manga_adaptations));
