@@ -468,9 +468,15 @@ class AnimeParser
                 if ($startYear !== '') {
                     if ($crawler->filter('select[id="add_anime_start_date_month"] option:selected')->count() > 0) {
                         $startMonth = $crawler->filter('select[id="add_anime_start_date_month"] option:selected')->attr('value');
+                        if ($startMonth === '') {
+                            $startMonth = 6;
+                        }
 
                         if ($crawler->filter('select[id="add_anime_start_date_day"] option:selected')->count() > 0) {
                             $startDay = $crawler->filter('select[id="add_anime_start_date_day"] option:selected')->attr('value');
+                            if ($startDay === '') {
+                                $startDay = 15;
+                            }
                         }
                     }
 
@@ -489,9 +495,15 @@ class AnimeParser
                 if ($endYear !== '') {
                     if ($crawler->filter('select[id="add_anime_finish_date_month"] option:selected')->count() > 0) {
                         $endMonth = $crawler->filter('select[id="add_anime_finish_date_month"] option:selected')->attr('value');
+                        if ($endMonth === '') {
+                            $endMonth = 6;
+                        }
 
                         if ($crawler->filter('select[id="add_anime_finish_date_day"] option:selected')->count() > 0) {
                             $endDay = $crawler->filter('select[id="add_anime_finish_date_day"] option:selected')->attr('value');
+                            if ($endDay === '') {
+                                $endDay = 15;
+                            }
                         }
                     }
 
