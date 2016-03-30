@@ -541,14 +541,6 @@ class AnimeParser
             $anime->setStorageValue($storageval);
         }
 
-        #Episodes Downloaded
-        #<td class="borderClass"><input type="text" name="list_downloaded_eps" id="epDownloaded" value="3" size="4" class="inputtext"> <a href="javascript:void(0);" onclick="incEpDownloadCount();">+</a> <small><a href="javascript:SetDownloadedEps();">Insert Series Eps</a></small></td>
-        $downloaded = $crawler->filter('input[id="add_anime_num_downloaded_episodes"]')->attr('value');
-
-        if ($downloaded > 0) {
-            $anime->setEpsDownloaded($downloaded);
-        }
-
         #Times Rewatched
         #<td class="borderClass"><input type="text" name="list_times_watched" value="0" size="4" class="inputtext">
         $rewatchCount = $crawler->filter('input[id="add_anime_num_watched_times"]')->attr('value');

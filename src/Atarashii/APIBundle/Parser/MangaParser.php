@@ -456,14 +456,6 @@ class MangaParser
             $manga->setPriority($priority);
         }
 
-        #Chapters Downloaded
-        #<td align="left" class="borderClass"><input type="text" class="inputtext" size="4" value="0" id="dChap" name="downloaded_chapters"> <a onclick="incChapDownloadCount();" href="javascript:void(0);">+</a></td>
-        $downloaded = $crawler->filter('input[id="add_manga_num_downloaded_chapters"]')->attr('value');
-
-        if ($downloaded > 0) {
-            $manga->setChapDownloaded($downloaded);
-        }
-
         #Times Reread
         #<td align="left" class="borderClass"><input type="text" class="inputtext" size="4" value="0" name="times_read">
         $rereadCount = $crawler->filter('input[id="add_manga_num_read_times"]')->attr('value');
