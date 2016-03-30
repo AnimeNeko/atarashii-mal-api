@@ -149,7 +149,6 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('High', $anime->getPriority('string'));
         $this->assertEquals(4, $anime->getStorage());
         $this->assertEquals(1, $anime->getStorageValue());
-        $this->assertEquals(3, $anime->getEpsDownloaded());
         $this->assertEquals(0, $anime->getRewatchCount());
         $this->assertEquals('High', $anime->getRewatchValue('string'));
         $this->assertStringStartsWith('The beautiful art direction', $anime->getPersonalComments());

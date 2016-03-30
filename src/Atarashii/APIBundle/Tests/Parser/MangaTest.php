@@ -127,7 +127,6 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('2013-09-25', $manga->getReadingStart()->format('Y-m-d'));
         $this->assertEquals('2013-10-11', $manga->getReadingEnd()->format('Y-m-d'));
         $this->assertEquals('Low', $manga->getPriority('string'));
-        $this->assertEquals(164, $manga->getChapDownloaded());
         $this->assertEquals('Medium', $manga->getRereadValue('string'));
         $this->assertStringStartsWith('An interesting spin', $manga->getPersonalComments());
 
