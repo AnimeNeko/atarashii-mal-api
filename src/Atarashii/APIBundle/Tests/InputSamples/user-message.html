@@ -3,21 +3,7 @@
 
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="http://cdn.myanimelist.net/css/messages.v4.css" />
-<script language="Javascript">
-	function delMessage(pm_id,type)
-	{
-		if (!type)
-			type = 1;
-	
-		$.post("/includes/ajax.inc.php?t=75", {id:pm_id,box:type}, function(data)
-			{
-			$("#message_"+pm_id).hide("slow");
-			}
-		);
-	}
-</script>
-
+<link rel="stylesheet" type="text/css" href="http://cdn.myanimelist.net/css/messages.v5.css" />
 
 <title>My Messages - MyAnimeList.net
 </title>
@@ -27,20 +13,21 @@
 <meta name="keywords" content="anime, myanimelist, anime news, manga" />
   
 
-<meta name='csrf_token' content='64eabc3852b50ce73bb21054aaeed7728177b200'><script type="text/javascript" src="http://cdn.myanimelist.net/static/assets/js/pc/all-b0e72743ac.js"></script><script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="http://cdn.myanimelist.net/js/hover.js?v=50"></script>
-<script type="text/javascript" src="http://cdn.myanimelist.net/js/jquery.fancybox.pack.js?v=50"></script>
+
+<meta name='csrf_token' content='54f91a423d333441dbc0466bdd1d92434c4ec473'><script type="text/javascript" src="http://cdn.myanimelist.net/static/assets/js/pc/all-c0c2c7d0f0.js"></script><script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="http://cdn.myanimelist.net/js/hover.js?v=59"></script>
+<script type="text/javascript" src="http://cdn.myanimelist.net/js/jquery.fancybox.pack.js?v=59"></script>
 
 
 
-<script type="text/javascript" src="http://cdn.myanimelist.net/js/myanimelist.js?v=50" id="myanimelistjs" data-myanimelistjs-params='{&quot;is_request_bot_filter_log&quot;:false,&quot;origin_url&quot;:&quot;http:\/\/myanimelist.net&quot;}'></script>
+<script type="text/javascript" src="http://cdn.myanimelist.net/js/myanimelist.js?v=59" id="myanimelistjs" data-myanimelistjs-params='{&quot;origin_url&quot;:&quot;http:\/\/myanimelist.net&quot;,&quot;is_request_bot_filter_log&quot;:false}'></script>
 
 
-	<link rel="stylesheet" type="text/css" href="http://cdn.myanimelist.net/css/mal.ridlayout.css?v=29" />
+	<link rel="stylesheet" type="text/css" href="http://cdn.myanimelist.net/css/mal.ridlayout.css?v=32" />
 
-<link rel="stylesheet" type="text/css" href="http://cdn.myanimelist.net/css/jquery.fancybox.css?v=29" />
-<link rel="stylesheet" type="text/css" href="http://cdn.myanimelist.net/css/dialog.css?v=29" />
-<link rel="stylesheet" type="text/css" href="http://cdn.myanimelist.net/static/assets/css/pc/style-0bdf0cd5b0.css" />
+<link rel="stylesheet" type="text/css" href="http://cdn.myanimelist.net/css/jquery.fancybox.css?v=32" />
+<link rel="stylesheet" type="text/css" href="http://cdn.myanimelist.net/css/dialog.css?v=32" />
+<link rel="stylesheet" type="text/css" href="http://cdn.myanimelist.net/static/assets/css/pc/style-b0253bfe76.css" />
 <link rel="search" type="application/opensearchdescription+xml" href="http://cdn.myanimelist.net/plugins/myanimelist.xml" title="MyAnimeList" />
 
 <link rel="shortcut icon" href="http://cdn.myanimelist.net/images/faviconv5.ico" />
@@ -81,26 +68,26 @@
 
 <body onload=" " class="page-common">
 
-
 <div id="myanimelist">
+
 
     <script type='text/javascript'>
     googletag.cmd.push(function() {
-      googletag.defineOutOfPageSlot('/84947469/Skin_Others', 'div-gpt-ad-706900581').addService(googletag.pubads());
+      googletag.defineOutOfPageSlot('/84947469/Skin_OtherPages_SAFE', 'div-gpt-ad-1300467404').addService(googletag.pubads());
       googletag.pubads().collapseEmptyDivs();
       googletag.enableServices();
     });
   </script>
   <div style="display: none !important;">
-    <div id='div-gpt-ad-706900581'>
+    <div id='div-gpt-ad-1300467404' data-code="Skin_OtherPages_SAFE">
       <script type='text/javascript'>
-        googletag.cmd.push(function() { googletag.display('div-gpt-ad-706900581'); });
+        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1300467404'); });
       </script>
     </div>
   </div>
 
     <script type='text/javascript'>
-    window.MAL.SkinAd.prepareForSkin('Skin_Others');
+    window.MAL.SkinAd.prepareForSkin('Skin_OtherPages_SAFE');
   </script>
 
     <div id="ad-skin-bg-left" class="ad-skin-side-outer ad-skin-side-bg bg-left">
@@ -112,66 +99,29 @@
   </div>
 <div class="wrapper">
 
-<div id="headerSmall"><a href="/panel.php">MyAnimeList.net</a>    <div id="header-menu" class="pulldown">
-    <div class="header-profile">
-      <div class="header-notification js-header-notification">
-
-  
-  
-  
-
-  
-  
-</div>
-
-<script>
+<div id="headerSmall"><a href="/panel.php">MyAnimeList.net</a><div id="header-menu" class="pulldown"><div class="header-menu-unit header-list js-header-menu-unit" data-id="list"><a class="header-list-button " title="List"><i class="fa fa-list"></i></a><div class="header-menu-dropdown header-list-dropdown arrow_box"><ul><li><a href="http://myanimelist.net/animelist/AtarashiiApiTest">Anime List</a></li><li><a href="http://myanimelist.net/mangalist/AtarashiiApiTest">Manga List</a></li><li><a href="http://myanimelist.net/addtolist.php">Quick Add</a></li><li><a href="http://myanimelist.net/editprofile.php?go=listpreferences">List Settings</a></li></ul></div></div><div class="border"></div><div class="header-menu-unit header-message js-header-menu-unit" data-id="message"><a href="http://myanimelist.net/mymessages.php" data-unread="0" class="header-message-button  " title="Messages"><i class="fa fa-envelope"></i></a></div><div class="border"></div><div class="header-menu-unit header-notification js-header-notification"></div><script>
 window.MAL.headerNotification = {"items":[],"countDigest":0,"dropdownOpenedAt":0};
-window.MAL.headerNotification.templates = {"root":"    <header-notification-button\n      has-unread=\"{{hasUnreadItems}}\"\n      has-new=\"{{hasNewItems}}\"\n      on-click=\"{{toggleDropdown}}\">\n    <\/header-notification-button>\n    <header-notification-dropdown\n      items=\"{{items}}\"\n      items-checked-in-this-session=\"{{itemsCheckedInThisSession}}\"\n      num-whole-unread-items=\"{{numWholeUnreadItems}}\"\n      dropdown-opened-at=\"{{dropdownOpenedAt}}\"\n      is-visible=\"{{isDropdownVisible}}\"\n      was-dropdown-closed=\"{{wasDropdownClosed}}\">\n    <\/header-notification-dropdown>\n  ","button":"    <span class=\"header-notification-button\"\n      v-class=\"'has-unread': hasUnread, new: hasNew\"\n      v-on=\"click: onClick\">\n      <i class=\"fa fa-bell\"><\/i>\n    <\/span>\n  ","dropdown":"    <div class=\"header-notification-dropdown\" v-show=\"isVisible\">\n      <div class=\"arrow_box\">\n        <div class=\"header-notification-dropdown-inner\">\n          <h3>\n            <span class=\"mark-all\"\n              v-class=\"disabled: !hasUnreadItems\"\n              v-on=\"click: checkAllItems\">\n              <i class=\"fa fa-check mr4\"><\/i>Mark All as Read\n            <\/span>\n            Newest Notifications\n          <\/h3>\n          <ol class=\"header-notification-item-list\">\n            <li class=\"header-notification-item {{item.typeIdentifier}}\"\n              v-class=\"new: isNewItem(item)\"\n              v-repeat=\"item: items\"\n              v-on=\"click: checkItem(item)\">\n              <a href=\"{{item.url}}\" class=\"background\"><\/a>\n              <div class=\"inner\"\n                v-class=\"is-read: item.isRead && !isItemCheckedInThisSession(item)\">\n                <div class=\"header-notification-item-header\">\n                                    <span class=\"is-read\"\n                    v-show=\"!item.isRead || isItemCheckedInThisSession(item)\"\n                    v-class=\"checked: item.isRead\"\n                    v-on=\"click: checkItem(item)\">\n                    <i class=\"fa fa-check\"><\/i>\n                    <i class=\"fa fa-check-circle\"><\/i>\n                  <\/span>\n                                    <span class=\"time\">{{item.createdAtForDisplay}}<\/span>\n                                    <span class=\"category\">{{item.categoryName}}<\/span>\n                <\/div>\n                                <div class=\"header-notification-item-content {{item.typeIdentifier}}\">\n                                    <component is=\"{{resolveComponent(item)}}\"\n                    item=\"{{item}}\"\n                    on-check-item={{checkItem}}>\n                  <\/component>\n                <\/div>\n              <\/div>\n            <\/li>\n            <li class=\"header-notification-item empty\" v-if=\"items.length === 0\">\n              <p>No notifications.<\/p>\n            <\/li>\n          <\/ol>\n          <div class=\"header-notification-view-all\">\n            <a href=\"http:\/\/myanimelist.net\/notifications\">\n              View All\n              <span v-if=\"numWholeUnreadItems > 0\">\n                ({{numWholeUnreadItems &lt; 100 ? numWholeUnreadItems : &quot;99+&quot;}})\n              <\/span>\n            <\/a>\n          <\/div>\n        <\/div>\n      <\/div>\n    <\/div>\n  ","itemFriendRequest":"    <p>\n      <a href=\"{{item.friendProfileUrl}}\" class=\"fl-l mr4\"><img src=\"{{item.friendImageUrl}}\" alt=\"{{item.friendName}}\"><\/a>\n      <a href=\"{{item.friendProfileUrl}}\">{{item.friendName}}<\/a>\n      sent you a friend request{{ item.message.length ? \":\" : \".\" }}\n      <q class=\"message\" v-if=\"item.message.length\">{{item.message}}<\/q>\n    <\/p>\n    <p class=\"actions mt8\">\n      <span v-if=\"!item.isApproved\">\n        <span class=\"action-button accept\" v-on=\"click: accept\">Accept<\/span><span class=\"action-button deny\" v-on=\"click: deny\">Deny<\/span>      <\/span>\n      <span v-if=\"item.isApproved\">\n        <span class=\"result\">Accepted<\/span>\n      <\/span>\n    <\/p>\n  ","itemProfileComment":"    <a href=\"{{item.commentUserProfileUrl}}\">{{item.commentUserName}}<\/a>\n    posted a comment on your profile{{ item.text.length ? \":\" : \".\" }}\n    <q class=\"message\" v-if=\"item.text.length\">{{item.text}}<\/q>\n  "};
-</script>
-<div class="border"></div>
-      <a class="profile-image" style="background-image:url(http://cdn.myanimelist.net/images/questionmark_50.gif)" href="/profile/AtarashiiApiTest"></a>
-      <span class="profile-name">AtarashiiApiTest</span>
-    </div>
-    <div id="header-menu-profile-container">
-      <ul id="header-menu-profile" class="header-menu-profile">
-        <li><a href="/profile/AtarashiiApiTest">Profile</a></li>
-        <li><a href="/editprofile.php?go=myoptions">Settings</a></li>
-        <li><form action="http://myanimelist.net/logout.php" method="post">
-  <a href="javascript:void(0);" onclick="$(this).parent().submit();">
-    Logout
-  </a>
-</form>
-</li>
-      </ul>
-    </div>
-  </div>
-</div>  <div id="menu">
+window.MAL.headerNotification.templates = {"root":"    <header-notification-button\n      :has-new=\"hasNewItems\"\n      :is-dropdown-visible=\"isDropdownVisible\"\n      :on-click=\"toggleDropdown\"\n      :num-whole-unread-items=\"numWholeUnreadItems\">\n    <\/header-notification-button>\n    <header-notification-dropdown\n      :items=\"items\"\n      :items-checked-in-this-session=\"itemsCheckedInThisSession\"\n      :num-whole-unread-items=\"numWholeUnreadItems\"\n      :dropdown-opened-at=\"dropdownOpenedAt\"\n      :is-visible=\"isDropdownVisible\"\n      :was-dropdown-closed=\"wasDropdownClosed\">\n    <\/header-notification-dropdown>\n  ","button":"    <a class=\"header-notification-button\"\n      :class=\"[(hasUnread ? 'has-unread' : ''), (hasNew ? 'new' : ''), ('text' + numWholeUnreadItemsAsString.length)]\"\n      @click=\"onClick\"\n      @keypress.enter=\"onClick\"\n      :aria-expanded=\"isDropdownVisible ? 'true' : 'false'\"\n      aria-haspopup=\"true\"\n      aria-label=\"Notifications\"\n      title=\"Notifications\"\n      tabindex=\"0\"\n            :data-unread=\"numWholeUnreadItemsAsString\">\n      <i class=\"fa fa-bell\"><\/i>\n    <\/a>\n  ","dropdown":"    <div class=\"header-notification-dropdown\" v-show=\"isVisible\">\n      <div class=\"arrow_box\">\n        <div class=\"header-notification-dropdown-inner\">\n          <h3>\n            <span class=\"settings ml8\">\n              <a href=\"\/notifications\/settings\">\n                <i class=\"fa fa-cog mr4\"><\/i>Settings\n              <\/a>\n            <\/span>\n            <span class=\"mark-all\"\n              :class=\"{disabled: !hasUnreadItems}\"\n              @click=\"checkAllItems\">\n              <i class=\"fa fa-check mr4\"><\/i>Mark All as Read\n            <\/span>\n            Notifications\n          <\/h3>\n          <ol class=\"header-notification-item-list\">\n            <li class=\"header-notification-item\"\n              :class=\"[item.typeIdentifier, isNewItem(item) ? 'new' : '']\"\n              v-for=\"item in items\">\n              <a v-if=\"item.url\" @click=\"checkItem(item)\" :href=\"item.url\" class=\"background\"><\/a>\n              <div class=\"inner\"\n                :class=\"{'is-read': item.isRead && !isItemCheckedInThisSession(item)}\">\n                <div class=\"header-notification-item-header\">\n                                    <span class=\"is-read\"\n                    v-show=\"!item.isRead || isItemCheckedInThisSession(item)\"\n                    :class=\"{checked: item.isRead}\"\n                    @click=\"checkItem(item)\">\n                    <i class=\"fa fa-check\"><\/i>\n                    <i class=\"fa fa-check-circle\"><\/i>\n                  <\/span>\n                                    <span class=\"time\">${item.createdAtForDisplay}<\/span>\n                                    <span class=\"category\">${item.categoryName}<\/span>\n                <\/div>\n                                <div class=\"header-notification-item-content\"\n                  :class=\"[item.typeIdentifier]\">\n                                    <component :is=\"resolveComponent(item)\"\n                    v-if=\"!item.isDeleted\"\n                    :item=\"item\"\n                    :on-check-item=\"checkItem\">\n                  <\/component>\n                  <div class=\"deleted\" v-if=\"item.isDeleted\">(deleted)<\/div>\n                <\/div>\n              <\/div>\n            <\/li>\n            <li class=\"header-notification-item empty\" v-if=\"items.length === 0\">\n              <p>No notifications.<\/p>\n            <\/li>\n          <\/ol>\n          <div class=\"header-notification-view-all\">\n            <a href=\"http:\/\/myanimelist.net\/notifications\">\n              View All\n              <span v-if=\"numWholeUnreadItems > 0\">\n                (${numWholeUnreadItems &lt; 100 ? numWholeUnreadItems : &quot;99+&quot;})\n              <\/span>\n            <\/a>\n          <\/div>\n        <\/div>\n      <\/div>\n    <\/div>\n  ","itemFriendRequest":"    <div>\n      <p>\n        <a :href=\"item.friendProfileUrl\" class=\"fl-l mr4\"><img :src=\"item.friendImageUrl\" :alt=\"item.friendName\"><\/a>\n        <a :href=\"item.friendProfileUrl\">${item.friendName}<\/a>\n        sent you a friend request${item.message.length ? \":\" : \".\"}\n        <q class=\"message\" v-if=\"item.message.length\">${item.message}<\/q>\n      <\/p>\n      <p class=\"actions mt8\">\n        <span v-if=\"!item.isApproved\">\n          <span class=\"action-button accept\" @click=\"accept\">Accept<\/span><span class=\"action-button deny\" @click=\"deny\">Deny<\/span><\/span>\n        <span v-if=\"item.isApproved\">\n          <span class=\"result\">Accepted<\/span>\n        <\/span>\n      <\/p>\n    <\/div>\n  ","itemFriendRequestAccept":"    <p>\n      <a :href=\"item.friendProfileUrl\" class=\"fl-l mr4\"><img :src=\"item.friendImageUrl\" :alt=\"item.friendName\"><\/a>\n      <a :href=\"item.friendProfileUrl\">${item.friendName}<\/a>\n      accepted your friend request.\n    <\/p>\n  ","itemFriendRequestDeny":"    <p>\n      <a :href=\"item.friendProfileUrl\" class=\"fl-l mr4\"><img :src=\"item.friendImageUrl\" :alt=\"item.friendName\"><\/a>\n      <a :href=\"item.friendProfileUrl\">${item.friendName}<\/a>\n      denied your friend request.\n    <\/p>\n  ","itemProfileComment":"    <div>\n      <a :href=\"item.commentUserProfileUrl\">${item.commentUserName}<\/a>\n      posted a comment on your profile${item.text.length ? \":\" : \".\"}\n      <q class=\"message\" v-if=\"item.text.length\">${item.text}<\/q>\n    <\/div>\n  ","itemForumQuote":"    <div>\n      <a :href=\"item.quoteUserProfileUrl\">${item.quoteUserName}<\/a>\n      quoted your post in the <a :href=\"item.topicUrl\">${item.topicTitle}<\/a> topic.\n    <\/div>\n  ","itemBlogComment":"    <a :href=\"item.commentUserProfileUrl\">${item.commentUserName}<\/a>\n    posted a comment on your blog.\n  ","itemWatchedTopicMessage":"    A forum reply was posted on your watched topic \n    <a :href=\"item.topicUrl\">${item.topicTitle}<\/a>.\n  ","itemUserMentions":"    <div>\n      <a :href=\"item.senderProfileUrl\">${item.senderName}<\/a>\n      has mentioned your name in the\n      <a :href=\"item.pageUrl\">${item.pageTitle}<\/a>\n      <span v-text=\"{\n        user_mention_in_forum_message: 'topic'\n      }[item.typeIdentifier]\"><\/span>.\n    <\/div>\n  ","itemOnAir":"    <div>\n      The anime you plan to watch began airing on ${item.date}:\n      <p class=\"ml8 mt4\">\n        <template v-for=\"anime in item.animes\">\n          <a :href=\"anime.url\">${anime.title}<\/a><template v-if=\"$index < item.animes.length - 1\">, <\/template>\n        <\/template>\n      <\/p>\n    <\/div>\n  "};
+</script><div class="border"></div><div class="header-menu-unit header-profile js-header-menu-unit link-bg pl8 pr8" data-id="profile"><a class="header-profile-link">AtarashiiApiTest<i class="fa fa-caret-down ml4"></i></a><div class="header-menu-dropdown header-profile-dropdown arrow_box"><ul><li><a href="http://myanimelist.net/profile/AtarashiiApiTest">Profile</a></li><li class="clearfix"><a href="http://myanimelist.net/myfriends.php">Friends</a></li><li class="clearfix"><a href="/clubs.php?action=invitations" title="You have a club invitation." class="fl-r link-count">(1)</a><a href="http://myanimelist.net/clubs.php?action=myclubs">Clubs</a></li><li><a href="http://myanimelist.net/blog/AtarashiiApiTest">Blog Posts</a></li><li><a href="http://myanimelist.net/myreviews.php">Reviews</a></li><li><a href="http://myanimelist.net/myrecommendations.php">Recommendations</a></li><li><a href="http://myanimelist.net/editprofile.php?go=myoptions"><i class="fa fa-cog mr4"></i>Account Settings</a></li><li><form action="http://myanimelist.net/logout.php" method="post"><a href="javascript:void(0);" onclick="$(this).parent().submit();"><i class="fa fa-sign-out mr4"></i>Logout</a></form></li></ul></div></div><div class="header-menu-unit header-profile pl0"><a href="http://myanimelist.net/profile/AtarashiiApiTest" class="header-profile-button" style="background-image:url(http://cdn.myanimelist.net/images/questionmark_50.gif)" title="AtarashiiApiTest"></a></div></div></div>  <div id="menu">
 
     <div id="menu_right"><form id="searchBar" method="get" class="searchBar"><div class="form-select-outer fl-l"><select name="type" id="topSearchValue" class="inputtext"><option value="anime">Anime</option><option value="manga">Manga</option><option value="character">Characters</option><option value="person">People</option><option value="club">Clubs</option><option value="user">Users</option></select></div><input id="topSearchText" type="text" name="keyword" class="inputtext js-topSearchText fl-l" placeholder="Search Anime, Manga, and more..." size="30" autocomplete="off" /><input id="topSearchButon" class="fl-l" type="submit" value="&#xf002"></form><div id="topSearchResultList" class="incrementalSearchResultList"></div></div>
     <div id="menu_left">
                         <ul id="nav">
-              <li class="x-large">
-  <a href="#" class="non-link">My Page<span class="count">2</span></a><ul class="wider"><li><span class="edit"><a href="/editprofile.php">Edit</a></span><a href="/profile/AtarashiiApiTest">Profile</a></li><li><span class="new"><a href="/mymessages.php" title="You have a message.">1</a></span><a href="/mymessages.php">Messages</a></li><li><a href="/myfriends.php">Friends</a></li><li><span class="new "><a href="/clubs.php?action=invitations" title="You have a club invitation.">1</a></span><a href="/clubs.php?action=myclubs">Clubs</a></li><li><span class="edit"><a href="/myblog.php">Edit</a></span><a href="/blog/AtarashiiApiTest">Blog</a></li><li><a href="/myreviews.php">Reviews</a></li><li><a href="/myrecommendations.php">Recommendations</a></li><li><form action="http://myanimelist.net/logout.php" method="post"><a href="javascript:void(0);" onclick="$(this).parent().submit();">
-    Logout
-  </a></form></li></ul>  <li class="small"><a href="#" class="non-link">Anime</a>
+      <li class="small"><a href="#" class="non-link">Anime</a>
     <ul class="wider">
-            <li><a href="/animelist/AtarashiiApiTest">View List</a></li>
-      <li><a href="/addtolist.php">Add Anime</a></li>
-            <li><a href="/anime.php">Anime Search</a></li>
-      <li><a href="/reviews.php?t=anime">Reviews</a></li>
-      <li><a href="/recommendations.php?s=recentrecs&t=anime">Recommendations</a></li>
+     <li><a href="/anime.php">Anime Search</a></li>
       <li><a href="/topanime.php">Top Anime</a></li>
       <li><a href="http://myanimelist.net/anime/season">Seasonal Anime</a></li>
+      <li><a href="/reviews.php?t=anime">Reviews</a></li>
+      <li><a href="/recommendations.php?s=recentrecs&t=anime">Recommendations</a></li>
     </ul>
   </li>
   <li class="small"><a href="#" class="non-link">Manga</a>
     <ul class="wider">
-            <li><a href="/mangalist/AtarashiiApiTest">View List</a></li>
-      <li><a href="/addtolist.php">Add Manga</a></li>
-            <li><a href="/manga.php">Manga Search</a></li>
+     <li><a href="/manga.php">Manga Search</a></li>
+      <li><a href="/topmanga.php">Top Manga</a></li>
       <li><a href="/reviews.php?t=manga">Reviews</a></li>
       <li><a href="/recommendations.php?s=recentrecs&t=manga">Recommendations</a></li>
-      <li><a href="/topmanga.php">Top Manga</a></li>
     </ul>
   </li>
   <li><a href="#" class="non-link">Community</a>
@@ -200,111 +150,24 @@ window.MAL.headerNotification.templates = {"root":"    <header-notification-butt
     <ul class="wide">
       <li><a href="/about.php">About</a></li>
       <li><a href="/about.php?go=support">Support</a></li>
-      <li><a href="/about.php?go=advertising">Advertising</a></li>
+      <li><a href="http://myanimelist.net/advertising">Advertising</a></li>
       <li><a href="/forum/?topicid=515949">FAQ</a></li>
       <li><a href="/modules.php?go=report">Report</a></li>
       <li><a href="/about.php?go=team">Staff</a></li>
     </ul>
   </li>
-  </ul>
+    </ul>
                   </div>
-  </div><div id="contentWrapper"><div><h1 class="h1">My Messages</h1></div><div id="content"><table id="dialog" cellpadding="0" cellspacing="0" style="width: 750px;"><tr><td class="dialog-text"><h2>Message Sent from <a href="/profile/motoko">motoko</a></h2><div style="margin-bottom: 5px;" class="lightLink"><small>2 hours ago</small></div><div style="margin-bottom: 4px; font-weight: bold;">Test Test</div>This is a test message being sent to the test user for testing.<div style="margin-top: 15px; text-align: right;">
-					<input type="button" onclick="document.location='/mymessages.php?go=send&replyid=23400788&threadid=16789855&toname=motoko'" class="inputButton" value=" Reply ">&nbsp;&nbsp;
-					<input type="button" onclick="document.location='/mymessages.php'" class="inputButton" value=" My Messages ">&nbsp;&nbsp;
-					<form method="POST" action="/mymessages.php?go=delete" style="display: inline">
-						<input type="hidden" name="id" value="23400788">
-						<input type="submit" class="inputButton" value=" Delete ">
-					</form></div></td> </tr></table><div align="center" style="text-align: center; margin: 10px;"><a href="?go=read&id=7877554&threadid=16789855">
-				View Message History</a> - 
-			<a href="/editprofile.php?go=privacy&u=motoko">Block User</a> - <a href="/modules.php?go=report&type=pm&fromid=1183995&id=7877554">Report as Spam</a>
-			</div>
-<script type="text/javascript" language="JavaScript">
-function CheckUnCheckAll(checkType)
-{
-	var theForm = document.messageForm;
-	// var overRule = (overRule == null) ? false : overRule;
-	
-	if (!checkType)
-		{
-		checkType = document.getElementById("checkSelector").value;
-		}
-	
-	// now perform what matters
-	for (z=0; z<theForm.length; z++)
-		{
-		var myVal = theForm[z].value;
-		var myCutVal = myVal.substring(0,1);
-		
-		if (checkType == "all")
-			{
-			if (theForm[z].type == "checkbox")
-				decideCheck(theForm[z]);
-			}
-		else if (checkType == "selectall")
-			{
-			if (theForm[z].type == "checkbox")
-				theForm[z].checked = true;
-			}
-		else if (checkType == "none")
-			{
-			if (theForm[z].type == "checkbox")
-				theForm[z].checked = false;
-			}
-		else if (checkType == "unread")
-			{
-			if (theForm[z].type == "checkbox")
-				{
-				if (myCutVal == 0)
-					theForm[z].checked = true;
-				else
-					theForm[z].checked = false;
-				}
-			}
-		else if (checkType == "read")
-			{
-			if (theForm[z].type == "checkbox")
-				{
-				if (myCutVal == 1 || myCutVal == 2)
-					theForm[z].checked = true;
-				else
-					theForm[z].checked = false;
-				}
-			}
-		else if (checkType == "replied")
-			{
-			if (theForm[z].type == "checkbox")
-				{
-				if (myCutVal == 2)
-					theForm[z].checked = true;
-				else
-					theForm[z].checked = false;
-				}
-			}
-		}
-}
-
-function decideCheck(obj)
-{
-	if (obj.checked == true)
-		obj.checked = false;
-	else
-		obj.checked = true;
-}
-
-function mm_displayUserBox()
-{
-	document.getElementById("inputUser").style.display = "block";
-	document.getElementById("sendmsg").style.display = "none";
-}
-
-function mm_decideText()
-{
-	if (document.getElementById("toName").value == "Member Name")
-		document.getElementById("toName").value = "";
-}
-
-</script>
-</div><!-- end of contentHome -->
+  </div><div id="contentWrapper"><div><h1 class="h1">My Messages</h1></div><div id="content"><div class="private-message-content"><table id="dialog" cellpadding="0" cellspacing="0" style="width: 810px;"><tr><td class="dialog-text"><h2>Message Sent from <a href="/profile/motoko">motoko</a></h2><div class="lightLink mb4 fs10">Jan 7, 3:01 AM</div><div class="mb4 fw-b fn-grey6">Test Test</div>This is a test message being sent to the test user for testing.<div class="border_top mt12 pt12 mb8 ac">
+                    <input type="button" onclick="document.location='/mymessages.php?go=send&replyid=23400788&threadid=16789855&toname=motoko'" class="inputButton btn-middle flat" value=" Reply ">
+          &nbsp;&nbsp;
+                    <input type="button" onclick="document.location='/mymessages.php'" class="inputButton btn-middle flat" value=" My Messages ">
+          &nbsp;&nbsp;
+                    <form method="POST" action="/mymessages.php?go=delete" style="display: inline">
+                        <input type="hidden" name="id" value="23400788">
+                        <input type="submit" class="inputButton btn-middle flat" value=" Delete ">
+                    </form></div></td> </tr></table><div class="ac mt8 mb8"><a href="?go=read&id=7877554&threadid=16789855">
+                    View Message History</a> - <a href="/editprofile.php?go=privacy&u=motoko">Block User</a> - <a href="/modules.php?go=report&type=pm&fromid=1183995&id=7877554">Report</a></div></div><!-- //end of private-message-content --></div><!-- end of contentHome -->
 
 </div><!-- end of contentWrapper -->
 
@@ -314,6 +177,7 @@ function mm_decideText()
 <!-- end rightbody -->
 
 </div><!-- wrapper -->
+
 
     <div id="ad-skin-bg-right" class="ad-skin-side-outer ad-skin-side-bg bg-right">
     <div id="ad-skin-right" class="ad-skin-side right" style="display: none;">
@@ -333,7 +197,7 @@ function mm_decideText()
       <p class="footer-link di-ib">
         <a href="http://myanimelist.net/about.php">About</a>
         <a href="http://myanimelist.net/about.php?go=contact">Support</a>
-        <a href="http://myanimelist.net/about.php?go=advertising">Advertising</a>
+        <a href="http://myanimelist.net/advertising">Advertising</a>
         <a href="http://myanimelist.net/forum/?topicid=515949">FAQ</a>
         <a href="http://myanimelist.net/about/terms_of_use">Terms</a>
         <a href="http://myanimelist.net/about/privacy_policy">Privacy</a>
@@ -364,7 +228,7 @@ function mm_decideText()
 
 </body>
 </html>
-<script language="Javascript">
+<script type="text/javascript">
   ;(function($){
     $(document).ready(function () {
       var wordwrapURL = function(obj){
