@@ -111,7 +111,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
         $editProfileContents = file_get_contents(__DIR__.'/../InputSamples/editprofile.html');
         Date::setTimeZone($editProfileContents);
 
-        $expected = 'America/New_York';
+        $expected = 'Asia/Tokyo';
         $this->assertEquals($expected, Date::$timeZone);
     }
 
