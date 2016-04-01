@@ -9,7 +9,7 @@ class MessagesTest extends \PHPUnit_Framework_TestCase
 {
     public function testParse()
     {
-        $messageIndex = file_get_contents(__DIR__.'/../InputSamples/user-messages-list.html');
+        $messageIndex = file_get_contents(__DIR__ . '/../InputSamples/user-messages-list.html');
 
         $messages = MessagesParser::parse($messageIndex);
 
@@ -30,7 +30,10 @@ class MessagesTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('string', $message->getSubject());
         $this->assertNull($message->getMessage());
         $this->assertInternalType('string', $message->getPreview());
+    }
 
+    public function testParseMessage()
+    {
         $messageContent = file_get_contents(__DIR__.'/../InputSamples/user-message.html');
 
         $message = MessagesParser::parseMessage($messageContent, 1234);
