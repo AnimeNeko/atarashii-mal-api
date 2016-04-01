@@ -43,11 +43,10 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $profileDetails = $this->profile->details;
 
         //Source says "6 hours ago"
-        $expected = new \DateTime('now');
-        $expected->modify('-6 hours');
+        $expected = new \DateTime('March 29, 2016 1:43 PM');
 
-        $this->assertEquals('6 hours ago', $profileDetails->getLastOnline());
-        $this->assertEquals($expected->format('Y-m-d\THO'), $profileDetails->getLastOnline2());
+        $this->assertEquals('Mar 29, 1:43 PM', $profileDetails->getLastOnline());
+        $this->assertEquals($expected->format('Y-m-d\TH:iO'), $profileDetails->getLastOnline2());
         $this->assertNull($profileDetails->getStatus());
         $this->assertEquals('Not specified', $profileDetails->getGender());
         $this->assertEquals('April 28, 1981', $profileDetails->getBirthday());
@@ -105,7 +104,11 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
         $friends = User::parseFriends($friendsContent);
 
-        $friend = $friends[2];
+        foreach ($friends as $friend) {
+            if ($friend['name'] == 'AnimaSA') {
+                break;
+            }
+        }
 
         $this->assertEquals('AnimaSA', $friend['name']);
         $this->assertEquals('2014-06-15T20:58-0700', $friend['friend_since']);

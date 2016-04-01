@@ -35,7 +35,7 @@ class TopTest extends \PHPUnit_Framework_TestCase
         $this->assertStringStartsWith('http://cdn.myanimelist.net/images/anime/', $topItem->getImageUrl());
         $this->assertInstanceOf('\DateTime', new \DateTime($topItem->getStartDate()));
         $this->assertGreaterThan(8, $topItem->getMembersScore());
-        $this->assertGreaterThan(200000, $topItem->getMembersCount());
+        $this->assertGreaterThan(60000, $topItem->getMembersCount());
     }
 
     public function testParseManga()
