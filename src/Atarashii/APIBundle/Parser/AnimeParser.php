@@ -31,7 +31,12 @@ class AnimeParser
         # Example:
         # <span itemprop="name">One Piece</span>
         $animerecord->setTitle(trim($crawler->filter('span[itemprop="name"]')->text()));
-        $animerecord->setRank((int) str_replace('Ranked #', '', $crawler->filter('div[id="contentWrapper"] div')->text()));
+        
+        $rank = $crawler->filterXPath('//span[contains(@class, "ranked")]');
+
+        if (count($rank) > 0) {
+            $animerecord->setRank((int) str_replace('Ranked #', '', $rank->text()));
+        }
 
         # Title Image
         # Example:

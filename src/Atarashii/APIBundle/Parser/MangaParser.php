@@ -34,7 +34,12 @@ class MangaParser
         #     <span itemprop="name">One Punch-Man</span> <span style="font-weight: normal;"><small>(Manga)</small></span>
         # </h1>
         $mangarecord->setTitle(trim($crawler->filter('span[itemprop="name"]')->text()));
-        $mangarecord->setRank((int) str_replace('Ranked #', '', $crawler->filter('div[id="contentWrapper"] div')->text()));
+
+        $rank = $crawler->filterXPath('//span[contains(@class, "ranked")]');
+
+        if (count($rank) > 0) {
+            $mangarecord->setRank((int) str_replace('Ranked #', '', $rank->text()));
+        }
 
         # Title Image
         # Example:
