@@ -293,3 +293,9 @@ _api2_1_episodes_anime:
     defaults: { _controller: AtarashiiAPIBundle:Anime:getEps, _format: json, apiVersion: '2.1' }
     requirements:
         _method: GET
+
+_api2_1_person:
+    path: /person/{id}
+    defaults: { _controller: AtarashiiAPIBundle:Person:get, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: GET
