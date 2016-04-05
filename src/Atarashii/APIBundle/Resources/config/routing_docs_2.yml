@@ -36,6 +36,13 @@ _docs2_manga:
       template: 'AtarashiiAPIBundle:DocsAPI2:manga.html.twig'
       maxAge: 10800
 
+_docs2_people:
+    path: /people/
+    defaults:
+      _controller: FrameworkBundle:Template:template
+      template: 'AtarashiiAPIBundle:DocsAPI2:people.html.twig'
+      maxAge: 10800
+
 _docs2_forum:
     path: /forum/
     defaults:

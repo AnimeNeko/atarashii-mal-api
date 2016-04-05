@@ -14,7 +14,7 @@ class PersonControllerTest extends WebTestCase
         $client = $this->client;
 
         //First, test that non-existent people are handled correctly
-        $client->request('GET', '/2/person/999999999999999');
+        $client->request('GET', '/2/people/999999999999999');
 
         $rawContent = $client->getResponse()->getContent();
         $statusCode = $client->getResponse()->getStatusCode();
@@ -27,7 +27,7 @@ class PersonControllerTest extends WebTestCase
         // Test actual people...
 
         // Test Kana Hanazawa (a "normal" profile)
-        $client->request('GET', '/2/person/185');
+        $client->request('GET', '/2/people/185');
 
         $rawContent = $client->getResponse()->getContent();
         $statusCode = $client->getResponse()->getStatusCode();
@@ -50,7 +50,7 @@ class PersonControllerTest extends WebTestCase
         $this->assertGreaterThanOrEqual(30, count($content->anime_staff_positions));
 
         // Test Miyazaki Hayao ("normal" with published manga)
-        $client->request('GET', '/2/person/1870');
+        $client->request('GET', '/2/people/1870');
 
         $rawContent = $client->getResponse()->getContent();
         $statusCode = $client->getResponse()->getStatusCode();
@@ -62,7 +62,7 @@ class PersonControllerTest extends WebTestCase
         $this->assertGreaterThan(10, count($content->published_manga));
 
         // Test Johnny Yong Bosch ("normal" with alternate names)
-        $client->request('GET', '/2/person/10');
+        $client->request('GET', '/2/people/10');
 
         $rawContent = $client->getResponse()->getContent();
         $statusCode = $client->getResponse()->getStatusCode();
@@ -74,7 +74,7 @@ class PersonControllerTest extends WebTestCase
         $this->assertGreaterThanOrEqual(1, count($content->alternate_names));
 
         // Test huke (interesting case for family name parsing)
-        $client->request('GET', '/2/person/10145');
+        $client->request('GET', '/2/people/10145');
 
         $rawContent = $client->getResponse()->getContent();
         $statusCode = $client->getResponse()->getStatusCode();
@@ -87,7 +87,7 @@ class PersonControllerTest extends WebTestCase
         $this->assertEquals('', $content->given_name);
 
         // Test Ikimono-gakari (birthday, year & month only)
-        $client->request('GET', '/2/person/7277');
+        $client->request('GET', '/2/people/7277');
 
         $rawContent = $client->getResponse()->getContent();
         $statusCode = $client->getResponse()->getStatusCode();
@@ -99,7 +99,7 @@ class PersonControllerTest extends WebTestCase
         $this->assertEquals('1999-02', $content->birthday);
 
         // Test ClairS (birthday, year only)
-        $client->request('GET', '/2/person/11746');
+        $client->request('GET', '/2/people/11746');
 
         $rawContent = $client->getResponse()->getContent();
         $statusCode = $client->getResponse()->getStatusCode();
@@ -111,7 +111,7 @@ class PersonControllerTest extends WebTestCase
         $this->assertEquals('2009', $content->birthday);
 
         // Test Miyamoto Kano (birthday, month and day only)
-        $client->request('GET', '/2/person/2608');
+        $client->request('GET', '/2/people/2608');
 
         $rawContent = $client->getResponse()->getContent();
         $statusCode = $client->getResponse()->getStatusCode();

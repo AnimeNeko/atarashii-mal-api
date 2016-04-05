@@ -1,0 +1,55 @@
+<h2>Person Details</h2>
+<p>This is an object that defines a person. It consists of the following properties.<p>
+
+<ul>
+    <li><code>id</code>: The ID of the person, as assigned by MyAnimeList</li>
+    <li><code>image_url</code>: URL to an image of the person.</li>
+    <li><code>name</code>: The name of the person</li>
+    <li><code>alternate_names</code>: A list of alternate names the person goes by, if any. Each list item is a string.</li>
+    <li><code>given_name</code>: The person's given name if present. Usually kanji (but not always).</li>
+    <li><code>family_name</code>: The person's family name, if present. Usually kanji (but not always).</li>
+    <li><code>birthday</code>: Date the person was born, if known. Formatted as an ISO 8601 date<sup><a href="#foot2">2</a></sup>.</li>
+    <li><code>website_url</code>: URL to the person's website.</li>
+    <li><code>more_details</code>: An HTML-formatted string with more details about the person. <span class="text-info">Often includes additional website links, e.g. social media accounts.</span></li>
+    <li><code>favorited_count</code>: The number of MyAnimeList members that have this person on their favorites list.</li>
+    <li><code>voice_acting_roles</code>: A list of anime voice acting roles this person has had. Each list item includes an object with the following items:
+        <ul>
+            <li><code>id</code>: ID of the character, as assigned by MyAnimeList.</li>
+            <li><code>name</code>: Name of the character.</li>
+            <li><code>image_url</code>: URL to a small image of the character.</li>
+            <li><code>main_role</code>: <code>true</code> if this is a main character, <code>false</code> if it's a supporting character.</li>
+            <li><code>anime</code>: Details about the anime the character is in. The object has the following items:
+                <ul>
+                    <li><code>id</code>: ID of the anime, as assigned by MyAnimeList</li>
+                    <li><code>title</code>: Title of the anime.</li>
+                    <li><code>image_url</code>: URL to a representative image of the title. Usually a &quot;cover&quot; image.</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li><code>anime_staff_positions</code>: A list of anime staff positions this person has had. Each list item includes an object with the following items:
+        <ul>
+            <li><code>position</code>: The person's job</li>
+            <li><code>details</code>: Details about the person's job, if present.</li>
+            <li><code>anime</code>: Details about the anime. The object has the following items:
+                <ul>
+                    <li><code>id</code>: ID of the anime, as assigned by MyAnimeList</li>
+                    <li><code>title</code>: Title of the anime.</li>
+                    <li><code>image_url</code>: URL to a representative image of the title. Usually a &quot;cover&quot; image.</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li><code>published_manga</code>: A list of manga this person has published. Each list item includes an object with the following items:
+        <ul>
+            <li><code>position</code>: The person's job</li>
+            <li><code>manga</code>: Details about the manga. The object has the following items:
+                <ul>
+                    <li><code>id</code>: ID of the manga, as assigned by MyAnimeList</li>
+                    <li><code>title</code>: Title of the manga.</li>
+                    <li><code>image_url</code>: URL to a representative image of the title. Usually a &quot;cover&quot; image.</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>

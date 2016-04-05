@@ -1,0 +1,22 @@
+{% set pageTitle = "Docs - People Methods" %}
+{% include "AtarashiiAPIBundle:includes:header.html.twig" %}
+
+<div class="row">
+    <div class="col-md-9">
+        <h1>People Methods</h1>
+        <p>All the below methods deal with reading data related to people (i.e. voice actors, anime staff, music artists, authors, etc).</p>
+
+        <h2>Methods to Get Information</h2>
+
+        <h3>Person Details</h3>
+        <dl>
+            <dt>URI Format</dt>
+                <dd><span class="label label-success">API 2.1+</span> people/<em>id</em></dd>
+            <dt>Method</dt><dd>GET</dd>
+            <dt>Authentication</dt><dd>No</dd>
+        </dl>
+        <p>Gets the details of the person specified by the id number. Output is a <a href="{{ path('_docs2_responses') }}#person">person object</a>.</p>
+    </div>
+</div>
+
+{% include "AtarashiiAPIBundle:includes:footer.html.twig" %}
