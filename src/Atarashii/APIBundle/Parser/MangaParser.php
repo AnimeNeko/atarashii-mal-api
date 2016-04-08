@@ -281,58 +281,6 @@ class MangaParser
             }
         }
 
-        # User's manga details (only available if he authenticates).
-        # <h2>My Info</h2>
-        # <div id="addtolist" style="display: block;">
-        #   <input type="hidden" id="myinfo_manga_id" value="104">
-        #   <table border="0" cellpadding="0" cellspacing="0" width="100%">
-        #   <tr>
-        #     <td class="spaceit">Status:</td>
-        #     <td class="spaceit"><select id="myinfo_status" name="myinfo_status" onchange="checkComp(this);" class="inputtext"><option value="1" selected>Reading</option><option value="2" >Completed</option><option value="3" >On-Hold</option><option value="4" >Dropped</option><option value="6" >Plan to Read</option></select></td>
-        #   </tr>
-        #   <tr>
-        #     <td class="spaceit">Chap. Read:</td>
-        #     <td class="spaceit"><input type="text" id="myinfo_chapters" size="3" maxlength="4" class="inputtext" value="62"> / <span id="totalChaps">0</span></td>
-        #   </tr>
-        #   <tr>
-        #     <td class="spaceit">Vol. Read:</td>
-        #     <td class="spaceit"><input type="text" id="myinfo_volumes" size="3" maxlength="4" class="inputtext" value="5"> / <span id="totalVols">?</span></td>
-        #   </tr>
-        #   <tr>
-        #     <td class="spaceit">Your Score:</td>
-        #     <td class="spaceit"><select id="myinfo_score" name="myinfo_score" class="inputtext"><option value="0">Select</option><option value="10" selected>(10) Masterpiece</option><option value="9" >(9) Great</option><option value="8" >(8) Very Good</option><option value="7" >(7) Good</option><option value="6" >(6) Fine</option><option value="5" >(5) Average</option><option value="4" >(4) Bad</option><option value="3" >(3) Very Bad</option><option value="2" >(2) Horrible</option><option value="1" >(1) Unwatchable</option></select></td>
-        #   </tr>
-        #   <tr>
-        #     <td>&nbsp;</td>
-        #     <td><input type="button" name="myinfo_submit" value="Update" onclick="myinfo_updateInfo();" class="inputButton"> <small><a href="http://www.myanimelist.net/panel.php?go=editmanga&id=75054">Edit Details</a></small></td>
-        #   </tr>
-        #   </table>
-        # </div>
-
-        #Read Status - Only available when user is authenticated
-        $my_data = $crawler->filter('select#myinfo_status');
-        if (iterator_count($my_data) && iterator_count($my_data->filter('option[selected="selected"]'))) {
-            $mangarecord->setReadStatus($my_data->filter('option[selected="selected"]')->attr('value'));
-        }
-
-        #Read Chapters - Only available when user is authenticated
-        $my_data = $crawler->filter('input#myinfo_chapters');
-        if (iterator_count($my_data)) {
-            $mangarecord->setChaptersRead((int) $my_data->attr('value'));
-        }
-
-        #Read Volumes - Only available when user is authenticated
-        $my_data = $crawler->filter('input#myinfo_volumes');
-        if (iterator_count($my_data)) {
-            $mangarecord->setVolumesRead((int) $my_data->attr('value'));
-        }
-
-        #User's Score - Only available when user is authenticated
-        $my_data = $crawler->filter('select#myinfo_score');
-        if (iterator_count($my_data) && iterator_count($my_data->filter('option[selected="selected"]'))) {
-            $mangarecord->setScore((int) $my_data->filter('option[selected="selected"]')->attr('value'));
-        }
-
         #Listed ID (?) - Only available when user is authenticated
         $my_data = $crawler->filterXPath('//a[text()="Edit Details"]');
         if (iterator_count($my_data)) {
@@ -361,6 +309,36 @@ class MangaParser
             }
 
             $manga->setPersonalTags($tagArray);
+        }
+
+        #Read Status
+        #<td class="borderClass"><select id="add_manga_status" name="add_manga[status]" class="inputtext">
+        #<option value="1" selected="selected">Reading</option>         </select>
+        $my_data = $crawler->filter('select#add_manga_status');
+        if (iterator_count($my_data) && iterator_count($my_data->filter('option[selected="selected"]'))) {
+            $manga->setReadStatus($my_data->filter('option[selected="selected"]')->attr('value'));
+        }
+
+        #Read Chapters
+        #<td class="borderClass"><input type="text" id="add_manga_num_read_chapters"         value="735">
+        $my_data = $crawler->filter('input#add_manga_num_read_chapters');
+        if (iterator_count($my_data)) {
+            $manga->setChaptersRead((int) $my_data->attr('value'));
+        }
+
+        #Read Volumes
+        #<td class="borderClass"><input type="text" id="add_manga_num_read_volumes"         value="735">
+        $my_data = $crawler->filter('input#add_manga_num_read_volumes');
+        if (iterator_count($my_data)) {
+            $manga->setVolumesRead((int) $my_data->attr('value'));
+        }
+
+        #User's Score
+        #<td class="borderClass"><select id="add_manga_score" name="add_manga[score]" class="inputtext">
+        #<option value="">Select score</option><option value="10">(10) Masterpiece</option>         </select>
+        $my_data = $crawler->filter('select#add_manga_score');
+        if (iterator_count($my_data) && iterator_count($my_data->filter('option[selected="selected"]'))) {
+            $manga->setScore((int) $my_data->filter('option[selected="selected"]')->attr('value'));
         }
 
         #Start and Finish Dates
