@@ -347,54 +347,39 @@ class AnimeParser
             }
         }
 
-        # <h2>My Info</h2>
-        # <a name="addtolistanchor"></a>
-        # <div id="addtolist" style="display: block;">
-        #   <input type="hidden" id="myinfo_anime_id" value="934">
-        #   <input type="hidden" id="myinfo_curstatus" value="2">
-        #
-        #   <table border="0" cellpadding="0" cellspacing="0" width="100%">
-        #     <tr>
-        #       <td class="spaceit">Status:</td>
-        #       <td class="spaceit"><select id="myinfo_status" name="myinfo_status" onchange="checkEps(this);" class="inputtext"><option value="1" selected>Watching</option><option value="2" >Completed</option><option value="3" >On-Hold</option><option value="4" >Dropped</option><option value="6" >Plan to Watch</option></select></td>
-        #     </tr>
-        #     <tr>
-        #       <td class="spaceit">Eps Seen:</td>
-        #       <td class="spaceit"><input type="text" id="myinfo_watchedeps" name="myinfo_watchedeps" size="3" class="inputtext" value="26"> / <span id="curEps">26</span></td>
-        #     </tr>
-        #     <tr>
-        #       <td class="spaceit">Your Score:</td>
-        #         <td class="spaceit"><select id="myinfo_score" name="myinfo_score" class="inputtext"><option value="0">Select</option><option value="10" >(10) Masterpiece</option><option value="9" >(9) Great</option><option value="8" >(8) Very Good</option><option value="7" >(7) Good</option><option value="6" >(6) Fine</option><option value="5" >(5) Average</option><option value="4" >(4) Bad</option><option value="3" >(3) Very Bad</option><option value="2" >(2) Horrible</option><option value="1" >(1) Unwatchable</option></select></td>
-        #     </tr>
-        #     <tr>
-        #       <td>&nbsp;</td>
-        #       <td><input type="button" name="myinfo_submit" value="Update" onclick="myinfo_updateInfo(1100070);" class="inputButton"> <small><a href="http://www.myanimelist.net/panel.php?go=edit&id=1100070">Edit Details</a></small></td>
-        #     </tr>
-        #   </table>
+        # Personal Info
+        $userPersonalInfo = $crawler->filterXPath('//div[contains(@class,"user-status-block")]');
 
-        #Watched Status - Only available when user is authenticated
-        $my_data = $crawler->filter('select#myinfo_status');
-        if (iterator_count($my_data) && iterator_count($my_data->filter('option[selected="selected"]'))) {
-            $animerecord->setWatchedStatus($my_data->filter('option[selected="selected"]')->attr('value'));
-        }
+        // Only try to parse personal info if the box is there
+        if (count($userPersonalInfo) > 0) {
+            $isNotAdded = $userPersonalInfo->filterXPath('//a[@id="myinfo_status"]');
 
-        #Watched Episodes - Only available when user is authenticated
-        $my_data = $crawler->filter('input#myinfo_watchedeps');
-        if (iterator_count($my_data)) {
-            $animerecord->setWatchedEpisodes((int) $my_data->attr('value'));
-        }
+            if (!count($isNotAdded) > 0) {
+                #Watched Status - Only available when user is authenticated
+                $my_data = $crawler->filter('select#myinfo_status');
+                if (iterator_count($my_data) && iterator_count($my_data->filter('option[selected="selected"]'))) {
+                    $animerecord->setWatchedStatus($my_data->filter('option[selected="selected"]')->attr('value'));
+                }
 
-        #User's Score - Only available when user is authenticated
-        $my_data = $crawler->filter('select#myinfo_score');
-        if (iterator_count($my_data) && iterator_count($my_data->filter('option[selected="selected"]'))) {
-            $animerecord->setScore((int) $my_data->filter('option[selected="selected"]')->attr('value'));
-        }
+                #Watched Episodes - Only available when user is authenticated
+                $my_data = $crawler->filter('input#myinfo_watchedeps');
+                if (iterator_count($my_data)) {
+                    $animerecord->setWatchedEpisodes((int) $my_data->attr('value'));
+                }
 
-        #Listed ID (?) - Only available when user is authenticated
-        $my_data = $crawler->filterXPath('//a[text()="Edit Details"]');
-        if (iterator_count($my_data)) {
-            if (preg_match('/id=(\d+)/', $my_data->attr('href'), $my_data)) {
-                $animerecord->setListedAnimeId((int) $my_data[1]);
+                #User's Score - Only available when user is authenticated
+                $my_data = $crawler->filter('select#myinfo_score');
+                if (iterator_count($my_data) && iterator_count($my_data->filter('option[selected="selected"]'))) {
+                    $animerecord->setScore((int) $my_data->filter('option[selected="selected"]')->attr('value'));
+                }
+
+                #Listed ID (?) - Only available when user is authenticated
+                $my_data = $crawler->filterXPath('//a[text()="Edit Details"]');
+                if (iterator_count($my_data)) {
+                    if (preg_match('/id=(\d+)/', $my_data->attr('href'), $my_data)) {
+                        $animerecord->setListedAnimeId((int) $my_data[1]);
+                    }
+                }
             }
         }
 
