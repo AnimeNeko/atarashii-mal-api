@@ -1,0 +1,265 @@
+# API Version 2.1 Routing
+# All Pages under the "/2.1/" prefix.
+
+_api2_anime:
+    path: /anime/{id}
+    defaults: { _controller: AtarashiiAPIBundle:Anime:get, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: GET
+        id: \d+
+
+_api2_animelist:
+    path: /animelist/{username}
+    defaults: { _controller: AtarashiiAPIBundle:AnimeList:get, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: GET
+
+_api2_animelist_add:
+    path: /animelist/anime
+    defaults: { _controller: AtarashiiAPIBundle:AnimeList:add, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: POST
+
+_api2_animelist_update:
+    path: /animelist/anime/{id}
+    defaults: { _controller: AtarashiiAPIBundle:AnimeList:update, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: PUT
+        id: \d+
+
+_api2_animelist_delete:
+    path: /animelist/anime/{id}
+    defaults: { _controller: AtarashiiAPIBundle:AnimeList:delete, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: DELETE
+        id: \d+
+
+_api2_manga:
+    path: /manga/{id}
+    defaults: { _controller: AtarashiiAPIBundle:Manga:get, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: GET
+        id: \d+
+
+_api2_mangalist:
+    path: /mangalist/{username}
+    defaults: { _controller: AtarashiiAPIBundle:MangaList:get, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: GET
+
+_api2_mangalist_add:
+    path: /mangalist/manga
+    defaults: { _controller: AtarashiiAPIBundle:MangaList:add, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: POST
+
+_api2_mangalist_update:
+    path: /mangalist/manga/{id}
+    defaults: { _controller: AtarashiiAPIBundle:MangaList:update, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: PUT
+        id: \d+
+
+_api2_mangalist_delete:
+    path: /mangalist/manga/{id}
+    defaults: { _controller: AtarashiiAPIBundle:MangaList:delete, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: DELETE
+        id: \d+
+
+_api2_userprofile:
+    path: /profile/{username}
+    defaults: { _controller: AtarashiiAPIBundle:User:getProfile, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: GET
+
+_api2_userprofile_friends:
+    path: /friends/{username}
+    defaults: { _controller: AtarashiiAPIBundle:User:getFriends, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: GET
+
+_api2_userprofile_history:
+    path: /history/{username}
+    defaults: { _controller: AtarashiiAPIBundle:User:getHistory, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: GET
+
+_api2_popular_anime:
+    path: /anime/popular
+    defaults: { _controller: AtarashiiAPIBundle:Top:getPopularAnime, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: GET
+
+_api2_popular_manga:
+    path: /manga/popular
+    defaults: { _controller: AtarashiiAPIBundle:Top:getPopularManga, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: GET
+
+_api2_top_anime:
+    path: /anime/top
+    defaults: { _controller: AtarashiiAPIBundle:Top:getTopAnime, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: GET
+
+_api2_top_manga:
+    path: /manga/top
+    defaults: { _controller: AtarashiiAPIBundle:Top:getTopManga, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: GET
+
+_api2_just_anime:
+    path: /anime/just_added
+    defaults: { _controller: AtarashiiAPIBundle:Upcoming:getAnimeJustadded, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: GET
+
+_api2_just_manga:
+    path: /manga/just_added
+    defaults: { _controller: AtarashiiAPIBundle:Upcoming:getMangaJustadded, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: GET
+
+_api2_upcoming_anime:
+    path: /anime/upcoming
+    defaults: { _controller: AtarashiiAPIBundle:Upcoming:getAnimeUpcoming, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: GET
+
+_api2_upcoming_manga:
+    path: /manga/upcoming
+    defaults: { _controller: AtarashiiAPIBundle:Upcoming:getMangaUpcoming, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: GET
+
+_api2_search_anime:
+    path: /anime/search
+    defaults: { _controller: AtarashiiAPIBundle:Search:getAnime, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: GET
+
+_api2_search_manga:
+    path: /manga/search
+    defaults: { _controller: AtarashiiAPIBundle:Search:getManga, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: GET
+
+_api2_messages_list:
+    path:  /messages
+    defaults: { _controller: AtarashiiAPIBundle:Messages:get, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: GET
+
+_api2_messages_view:
+    path:  /messages/{id}
+    defaults: { _controller: AtarashiiAPIBundle:Messages:getMessage, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: GET
+        id: \d+
+
+_api2_messages_delete:
+    path:  /messages/{id}
+    defaults: { _controller: AtarashiiAPIBundle:Messages:delete, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: DELETE
+        id: \d+
+
+_api2_messages_send:
+    path:  /messages
+    defaults: { _controller: AtarashiiAPIBundle:Messages:send, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: POST
+
+_api2_forum_board:
+    path: /forum
+    defaults: { _controller: AtarashiiAPIBundle:Forum:getForumBoard, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: GET
+
+_api2_forum_subboard:
+    path: /forum/board/{id}
+    defaults: { _controller: AtarashiiAPIBundle:Forum:getForumSubBoard, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: GET
+
+_api2_forum_anime:
+    path: /forum/anime/{id}
+    defaults: { _controller: AtarashiiAPIBundle:Forum:getForumAnime, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: GET
+
+_api2_forum_manga:
+    path: /forum/manga/{id}
+    defaults: { _controller: AtarashiiAPIBundle:Forum:getForumManga, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: GET
+
+_api2_forum_search:
+    path: /forum/search
+    defaults: { _controller: AtarashiiAPIBundle:Search:getForum, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: GET
+
+_api2_forum_topics:
+    path: /forum/{id}
+    defaults: { _controller: AtarashiiAPIBundle:Forum:getForumTopics, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: GET
+
+_api2_forum_topic:
+    path: /forum/topic/{id}
+    defaults: { _controller: AtarashiiAPIBundle:Forum:getForumTopic, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: GET
+
+_api2_forum_topic_create:
+    path:  /forum/{id}
+    defaults: { _controller: AtarashiiAPIBundle:Forum:newTopic, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: POST
+        id: \d+
+
+_api2_forum_comment_create:
+    path:  /forum/topic/{id}
+    defaults: { _controller: AtarashiiAPIBundle:Forum:newComment, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: POST
+        id: \d+
+
+_api2_forum_comment_edith:
+    path:  /forum/topic/{id}
+    defaults: { _controller: AtarashiiAPIBundle:Forum:edithComment, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: PUT
+        id: \d+
+
+_api2_verify_credentials:
+    path: /account/verify_credentials
+    defaults: { _controller: AtarashiiAPIBundle:Verify:Verify, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: GET
+
+_api2_reviews_anime:
+    path: /anime/reviews/{id}
+    defaults: { _controller: AtarashiiAPIBundle:Anime:getReviews, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: GET
+
+_api2_reviews_manga:
+    path: /manga/reviews/{id}
+    defaults: { _controller: AtarashiiAPIBundle:Manga:getReviews, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: GET
+
+_api2_cast_anime:
+    path: /anime/cast/{id}
+    defaults: { _controller: AtarashiiAPIBundle:Anime:getCast, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: GET
+
+_api2_cast_manga:
+    path: /manga/cast/{id}
+    defaults: { _controller: AtarashiiAPIBundle:Manga:getCast, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: GET
