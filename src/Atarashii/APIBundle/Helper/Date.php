@@ -66,6 +66,8 @@ class Date
             } else {
                 return $dateTime->createFromFormat('M j, Y', $time)->format('Y-m-d');
             }
+        } elseif (strpos($time, ':') !== false) {
+            return $dateTime->createFromFormat('l H:i T', $time)->format('Y-m-d\TH:iO');
         } elseif (strpos($time, ' ') !== false && (strlen($time) === 6 || strlen($time) === 5)) { //Do not place this before the other formatters because it will break almost all dates.
             return $dateTime->createFromFormat('M j Y', $time.' '.date("Y"))->format('Y-m-d');
         } elseif (strpos($time, ' ') !== false) { //Do not place this before the other formatters because it will break almost all dates.

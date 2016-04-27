@@ -13,6 +13,7 @@ use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\Since;
 use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Annotation\Until;
+use Atarashii\APIBundle\Helper\Date;
 
 class Anime
 {
@@ -29,6 +30,14 @@ class Anime
      * @Type("string")
      */
     private $title;
+
+    /**
+     * Preview of the anime.
+     *
+     * @Since("2.1")
+     * @Type("string")
+     */
+    private $preview;
 
     /**
      * Map of other titles for the anime.
@@ -144,6 +153,26 @@ class Anime
     private $endDate2;
 
     /**
+     * Airing date and time of the anime.
+     *
+     * This is the next airing date of the anime, formatted into Y-m-d\TH:iO.
+     *
+     * @Type("string")
+     * @Since("2.1")
+     */
+    private $broadcast;
+
+    /**
+     * Duration of the anime in minutes.
+     *
+     * This is the anime duration in minutes.
+     *
+     * @Type("integer")
+     * @Since("2.1")
+     */
+    private $duration;
+
+    /**
      * Rating of the anime.
      *
      * The rating is a freeform text field with no defined values.
@@ -176,6 +205,14 @@ class Anime
     private $favoritedCount;
 
     /**
+     * External links with some information for the series.
+     *
+     * @Type("array")
+     * @Since("2.1")
+     */
+    private $externalLinks = array();
+
+    /**
      * Description of the anime.
      *
      * An HTML-formatted string describing the anime
@@ -183,6 +220,15 @@ class Anime
      * @Type("string")
      */
     private $synopsis;
+
+    /**
+     * Background information of the anime.
+     *
+     * An HTML-formatted string describing the anime background
+     *
+     * @Type("string")
+     */
+    private $background;
 
     /**
      * A list of producers for the anime.
@@ -257,6 +303,32 @@ class Anime
      * @Since("2.0")
      */
     private $other = array();
+
+    /**
+     * A list of opening themes.
+     *
+     * @Type("array<string>")
+     * @Since("2.1")
+     */
+    private $openingTheme = array();
+
+    /**
+     * A list of opening themes.
+     *
+     * @Type("array<string>")
+     * @Since("2.1")
+     */
+    private $endingTheme = array();
+
+    /**
+     * A list of recommendations.
+     *
+     * This list contains anime models.
+     * 
+     * @Type("array")
+     * @Since("2.1")
+     */
+    private $recommendations = array();
 
     /**
      * Personal watched status of the anime.
@@ -430,6 +502,26 @@ class Anime
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Set the preview property.
+     *
+     * @param string $preview The preview of series.
+     */
+    public function setPreview($preview)
+    {
+        $this->preview = $preview;
+    }
+
+    /**
+     * Get the preview property.
+     *
+     * @return string
+     */
+    public function getPreview()
+    {
+        return $this->preview;
     }
 
     /**
@@ -773,6 +865,46 @@ class Anime
     }
 
     /**
+     * Set the status property.
+     *
+     * @param string $broadcast The next broadcasting time and date.
+     */
+    public function setBroadcast($broadcast)
+    {
+        $this->broadcast = Date::formatTime($broadcast);
+    }
+
+    /**
+     * Get the status property.
+     *
+     * @return string (ISO 8601)
+     */
+    public function getBroadcast()
+    {
+        return $this->broadcast;
+    }
+
+    /**
+     * Set the duration property.
+     *
+     * @param int $duration The duration in minutes
+     */
+    public function setDuration($duration)
+    {
+        $this->duration = $duration;
+    }
+
+    /**
+     * Get the duration property.
+     *
+     * @return int Time in minutes
+     */
+    public function getDuration()
+    {
+        return $this->duration;
+    }
+
+    /**
      * Set the classification property.
      *
      * @param string $classification The MAL classification of series.
@@ -853,6 +985,27 @@ class Anime
     }
 
     /**
+     * Set the externalLinks property.
+     *
+     * @param string $sourceName The website name which contains the info.
+     * @param string $sourceUrl The direct website url to access info.
+     */
+    public function setExternalLinks($sourceName, $sourceUrl)
+    {
+        $this->externalLinks[$sourceName] = $sourceUrl;
+    }
+
+    /**
+     * Get the externalLinks property.
+     *
+     * @return array With information about external urls
+     */
+    public function getExternalLinks()
+    {
+        return $this->externalLinks;
+    }
+
+    /**
      * Set the synopsis property.
      *
      * @param string $synopsis The Text describing the anime.
@@ -870,6 +1023,26 @@ class Anime
     public function getSynopsis()
     {
         return $this->synopsis;
+    }
+
+    /**
+     * Set the background property.
+     *
+     * @param string $background The Text describing the anime.
+     */
+    public function setBackground($background)
+    {
+        $this->background = $background;
+    }
+
+    /**
+     * Get the background property.
+     *
+     * @return string
+     */
+    public function getBackground()
+    {
+        return $this->background;
     }
 
     /**
@@ -1125,6 +1298,66 @@ class Anime
     public function getOther()
     {
         return $this->other;
+    }
+
+    /**
+     * Set the openingTheme property.
+     *
+     * @param string $openingTheme All the opening Themes of series.
+     */
+    public function setOpeningTheme($openingTheme)
+    {
+        $this->openingTheme[] = $openingTheme;
+    }
+
+    /**
+     * Get the openingTheme property.
+     *
+     * @return array
+     */
+    public function getOpeningTheme()
+    {
+        return $this->openingTheme;
+    }
+
+    /**
+     * Set the endingTheme property.
+     *
+     * @param string $endingTheme All the ending Themes of series.
+     */
+    public function setEndingTheme($endingTheme)
+    {
+        $this->endingTheme[] = $endingTheme;
+    }
+
+    /**
+     * Get the endingTheme property.
+     *
+     * @return array
+     */
+    public function getEndingTheme()
+    {
+        return $this->endingTheme;
+    }
+
+    /**
+     * Set the recommendations property.
+     *
+     * @param string $recommendations All the recommendations for this series.
+     */
+    public function setRecommendations($recommendations)
+    {
+        $this->recommendations[] = $recommendations;
+    }
+
+    /**
+     * Get the recommendations property.
+     *
+     * @return array Which will contain anime models
+     */
+    public function getRecommendations()
+    {
+        return $this->recommendations;
     }
 
     /**

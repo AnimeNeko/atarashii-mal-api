@@ -18,8 +18,9 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
     public function testParse()
     {
         $animeContents = file_get_contents(__DIR__.'/../InputSamples/anime-1887-mine.html');
+        $apiVersion = '2.1';
 
-        $anime = AnimeParser::parse($animeContents);
+        $anime = AnimeParser::parse($animeContents, $apiVersion);
 
         $this->assertInstanceOf('Atarashii\APIBundle\Model\Anime', $anime);
 
@@ -30,6 +31,7 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('1887', $anime->getId());
         $this->assertEquals('Lucky☆Star', $anime->getTitle());
+        $this->assertEquals('http://www.youtube.com/embed/b8bSIgE8epA', $anime->getPreview());
 
         $oTitles = $anime->getOtherTitles();
 
@@ -56,6 +58,8 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('finished airing', $anime->getStatus());
         $this->assertEquals('2007-04-08', $anime->getStartDate());
         $this->assertEquals('2007-09-17', $anime->getEndDate());
+        $this->assertEquals(null, $anime->getBroadcast());
+        $this->assertEquals(24, $anime->getDuration());
         $this->assertEquals('PG-13 - Teens 13 or older', $anime->getClassification());
 
         $this->assertInternalType('float', $anime->getMembersScore());
@@ -63,7 +67,16 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
 
         $this->assertGreaterThan(230000, $anime->getMembersCount());
         $this->assertGreaterThan(7200, $anime->getFavoritedCount());
+
+        $externalLinks = $anime->getExternalLinks();
+        $this->assertEquals('http://www.lucky-ch.com/', $externalLinks['Official Site']);
+        $this->assertEquals('http://anidb.info/perl-bin/animedb.pl?show=anime&aid=4777', $externalLinks['AnimeDB']);
+        $this->assertEquals('http://www.animenewsnetwork.com/encyclopedia/anime.php?id=7222', $externalLinks['AnimeNewsNetwork']);
+        $this->assertEquals('http://en.wikipedia.org/wiki/Lucky_Star_%28manga%29', $externalLinks['Wikipedia']);
+
+
         $this->assertStringStartsWith('Having fun in school, doing homework together', $anime->getSynopsis());
+        $this->assertStringStartsWith('<i>Lucky Star</i> also has audio CDs', $anime->getBackground());
         $this->assertContains('Lucky Paradise', $anime->getProducers());
         $this->assertContains('Lantis', $anime->getProducers());
         $this->assertContains('Comedy', $anime->getGenres());
@@ -101,6 +114,18 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($anime->getAlternativeVersions());
         $this->assertEmpty($anime->getOther());
 
+        $openingTheme = $anime->getOpeningTheme();
+        $this->assertEquals('"Motteke! Sailor Fuku" by Aya Hirano, Emiri Katou, Kaori Fukuhara & Aya Endo', $openingTheme[0]);
+
+        $endingTheme = $anime->getEndingTheme();
+        $this->assertEquals('#01: "Uchuu Tetsujin Kyoodain (宇宙鉄人キョーダイン)" by Aya Hirano (ep 1)', $endingTheme[0]);
+        $this->assertEquals('#23: "Mikuru Henshin! Soshite Sentou! (ミクル変身!そして戦闘!)" by Minoru Shiraishi (ep 23)', $endingTheme[23]);
+
+        $recommedations = $anime->getRecommendations()[0];
+        $this->assertEquals(1887, $recommedations->getId());
+        $this->assertEquals('Azumanga Daioh', $recommedations->getTitle());
+        $this->assertEquals('http://cdn.myanimelist.net/images/anime/1/66.jpg', $recommedations->getImageUrl());
+
         $this->assertEquals('completed', $anime->getWatchedStatus('string'));
         $this->assertEquals(24, $anime->getWatchedEpisodes());
 
@@ -108,7 +133,7 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
 
         $animeContents = file_get_contents(__DIR__.'/../InputSamples/anime-10236.html');
 
-        $anime = AnimeParser::parse($animeContents);
+        $anime = AnimeParser::parse($animeContents, $apiVersion);
 
         $this->assertInstanceOf('Atarashii\APIBundle\Model\Anime', $anime);
 

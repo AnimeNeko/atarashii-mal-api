@@ -26,6 +26,16 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($animeTitle, $anime->getTitle());
     }
 
+    public function testPreview()
+    {
+        $animePreview = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+
+        $anime = new Anime();
+        $anime->setPreview($animePreview);
+
+        $this->assertEquals($animePreview, $anime->getPreview());
+    }
+
     public function testOtherTitles()
     {
         $anime = new Anime();
@@ -285,6 +295,26 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($verifyDate, $anime->getEndDate());
     }
 
+    public function testBroadcast()
+    {
+        $date = new \DateTime('now');
+
+        $anime = new Anime();
+        $anime->setBroadcast($date->format('l H:i T'));
+
+        $this->assertEquals($date->format('Y-m-d\TH:iO'), $anime->getBroadcast());
+    }
+
+    public function testDuration()
+    {
+        $animeDuration = 75;
+
+        $anime = new Anime();
+        $anime->setDuration($animeDuration);
+
+        $this->assertEquals($animeDuration, $anime->getDuration());
+    }
+
     public function testWatchedStatus()
     {
         $anime = new Anime();
@@ -448,6 +478,17 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
 //        $this->assertEquals((int) $favs, $anime->getFavoritedCount());
     }
 
+    public function testExternalLinks()
+    {
+        $animerecord = new Anime();
+        $animerecord->setExternalLinks('Atarashii-API', 'https://bitbucket.org/ratan12/atarashii-api');
+
+        $externalLinks = array();
+        $externalLinks['Atarashii-API'] = 'https://bitbucket.org/ratan12/atarashii-api';
+
+        $this->assertEquals($externalLinks, $animerecord->getExternalLinks());
+    }
+
     public function testSynopsis()
     {
         $synopsis = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce fringilla, nisi sed rutrum interdum, neque neque tincidunt eros, ac euismod enim massa a quam. Vivamus maximus enim ac odio euismod tristique. Suspendisse potenti. Praesent a nulla tortor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean varius metus at sapien tempor auctor. Donec semper odio sed posuere placerat.';
@@ -463,6 +504,23 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $anime->setSynopsis($synopsis);
 
         $this->assertEquals($synopsis, $anime->getSynopsis());
+    }
+
+    public function testBackground()
+    {
+        $synopsis = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce fringilla, nisi sed rutrum interdum, neque neque tincidunt eros, ac euismod enim massa a quam. Vivamus maximus enim ac odio euismod tristique. Suspendisse potenti. Praesent a nulla tortor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean varius metus at sapien tempor auctor. Donec semper odio sed posuere placerat.';
+
+        $anime = new Anime();
+        $anime->setBackground($synopsis);
+
+        $this->assertEquals($synopsis, $anime->getBackground());
+
+        //Test unicode
+        $synopsis = '漫研で夏コミへのサークル参加を決めたが……時間がない！　恋ヶ崎にムラサキさん、小豆ちゃんも手伝ってくれることになり、合宿を行うも——あれ、お酒で変なテンションになってない!?　……締切、間に合うよね？';
+
+        $anime->setBackground($synopsis);
+
+        $this->assertEquals($synopsis, $anime->getBackground());
     }
 
     public function testProducers()
@@ -633,6 +691,45 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $other = $anime->getOther();
 
         $this->assertEquals($relation, $other[0]);
+    }
+
+    public function testOpeningTheme()
+    {
+        $OP = array();
+        $OP[] = '#10: "We Are (ウィーアー! 〜10周年Ver.〜)" by TVXQ (eps 373-394)';
+        $OP[] = '#04: "Sailor Fuku to Kikanjuu (セーラー服と機関銃)" by Emiri Kato (ep 4)';
+
+        $anime = new Anime();
+        $anime->setOpeningTheme('#10: "We Are (ウィーアー! 〜10周年Ver.〜)" by TVXQ (eps 373-394)');
+        $anime->setOpeningTheme('#04: "Sailor Fuku to Kikanjuu (セーラー服と機関銃)" by Emiri Kato (ep 4)');
+
+        $this->assertEquals($OP, $anime->getOpeningTheme());
+    }
+
+    public function testEndingTheme()
+    {
+        $OP = array();
+        $OP[] = '#10: "We Are (ウィーアー! 〜10周年Ver.〜)" by TVXQ (eps 373-394)';
+        $OP[] = '#04: "Sailor Fuku to Kikanjuu (セーラー服と機関銃)" by Emiri Kato (ep 4)';
+
+        $anime = new Anime();
+        $anime->setEndingTheme('#10: "We Are (ウィーアー! 〜10周年Ver.〜)" by TVXQ (eps 373-394)');
+        $anime->setEndingTheme('#04: "Sailor Fuku to Kikanjuu (セーラー服と機関銃)" by Emiri Kato (ep 4)');
+
+        $this->assertEquals($OP, $anime->getEndingTheme());
+    }
+
+    public function testRecommendations()
+    {
+        $animerecord = new Anime();
+
+        $anime = new Anime();
+        $anime->setId(rand());
+        $anime->setTitle('This is a title');
+        $anime->setImageUrl('http://cdn.myanimelist.net/images/anime/5/18179.jpg');
+        $animerecord->setRecommendations($anime);
+
+        $this->assertEquals($anime, $animerecord->getRecommendations()[0]);
     }
 
     public function testWatchedEpisode()

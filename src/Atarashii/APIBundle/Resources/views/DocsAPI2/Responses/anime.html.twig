@@ -5,6 +5,7 @@
 <ul>
     <li><code>id</code>: The ID of the anime, as assigned by MyAnimeList</li>
     <li><code>title</code>: The title of the item</li>
+    <li><span class="label label-default">API 2.1+</span><code>preview</code>: The embedded preview url.</li>
     <li><code>other_titles</code>
         <ul>
             <li><code>synonyms</code>: Other titles by which this anime may be commonly known. <span class="text-info">Only available in anime detail requests.</span></li>
@@ -20,11 +21,15 @@
     <li><code>status</code>: Current airing status of the title. Values are one of: finished airing, currently airing, not yet aired.</li>
     <li><span class="label label-default">UPDATED</span><code>start_date</code>: Date the anime starts airing. Formatted as an ISO 8601 date<sup><a href="#foot2">2</a></sup></li>
     <li><span class="label label-default">UPDATED</span><code>end_date</code>: Date the anime finishes airing. Formatted as an ISO 8601 date<sup><a href="#foot2">2</a></sup></li>
+    <li><span class="label label-default">API 2.1+</span><code>broadcast</code>: The next broadcast date and time. Formatted as an ISO 8601 date<sup><a href="#foot2">2</a></sup></li>
+    <li><span class="label label-default">API 2.1+</span><code>duration</code>: The duration of the show in minutes.</li>
     <li><code>classification</code>: Classification of the title. This is a freeform text field, usually based on the MPAA rating system. <span class="text-info">Only available in anime detail requests.</span></li>
     <li><code>members_score</code>: A weighted score based on the rating MyAnimeList members have given the title. <span class="text-info">Only available in anime detail requests.</span></li>
     <li><code>members_count</code>: Number of MyAnimeList members that that added the title to their list. <span class="text-info">Only available in anime detail requests.</span></li>
     <li><code>favorited_count</code>: The number of MyAnimeList members that have this title on their favorites list. <span class="text-info">Only available in anime detail requests.</span></li>
+    <li><span class="label label-default">API 2.1+</span><code>external_links</code>: A list with external link URLs. <span class="text-warning">Only available for authenticated requests.</span></li>
     <li><code>synopsis</code>: A short HTML-formatted description of the anime.</li>
+    <li><code>background</code>: A HTML-formatted background information of the anime.</li>
     <li><span class="label label-default">NEW</span> <code>producers</code>: A list of production companies for this title. <span class="text-info">Only available in anime detail requests.</span></li>
     <li><code>genres</code>: A list of genres for this title. <span class="text-info">Only available in anime detail requests.</span></li>
     <li><code>manga_adaptations</code>: A list of manga adaptations of this anime, or manga on which this anime is based. <span class="text-info">Only available in anime detail requests.</span> Each list item includes an object with the following items:
@@ -90,6 +95,16 @@
             <li><code>url</code>: URL to the MyAnimeList page for this anime.</li>
         </ul>
     </li>
+    <li><code>Other</code>: A list of other anime version for this title. <span class="text-info">Only available in anime detail requests.</span> Each list item includes an object with the following items:
+        <ul>
+            <li><code>anime_id</code>: ID of the anime, as assigned by MyAnimeList</li>
+            <li><code>title</code>: Title of the anime.</li>
+            <li><code>url</code>: URL to the MyAnimeList page for this anime.</li>
+        </ul>
+    </li>
+    <li><span class="label label-default">API 2.1+</span> <code>opening_theme</code>: A list of all opening themes with information.</li>
+    <li><span class="label label-default">API 2.1+</span> <code>ending_theme</code>: A list of all ending themes with information.</li>
+    <li><span class="label label-default">API 2.1+</span> <code>recommendations</code>: A list of Anime models which contain information about the recommended show by users.</li>
     <li><code>watched_status</code>: The watched status for the title. Values are one of: watching, completed, on-hold, dropped, plan to watch. <span class="text-warning">Only available for authenticated requests.</span></li>
     <li><code>watched_episodes</code>: The number of episodes watched for the title. <span class="text-warning">Only available for authenticated requests.</span></li>
     <li><code>score</code>: The user's rating of the anime. <span class="text-warning">Only available for authenticated requests.</span></li>

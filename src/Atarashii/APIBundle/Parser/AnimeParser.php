@@ -15,7 +15,7 @@ use DateTime;
 
 class AnimeParser
 {
-    public static function parse($contents)
+    public static function parse($contents, $apiVersion)
     {
         $crawler = new Crawler();
         $crawler->addHTMLContent($contents, 'UTF-8');
@@ -380,6 +380,74 @@ class AnimeParser
                         $animerecord->setListedAnimeId((int) $my_data[1]);
                     }
                 }
+            }
+        }
+
+        if ($apiVersion >= '2.1') {
+            # Background
+            preg_match('/div>Background<\/h2>(.+?)<div/s', $crawler->filter('span[itemprop="description"]')->parents()->html(), $matches);
+            if (strpos($matches[0], 'No background information') !== false) {
+                $animerecord->setBackground('No background information has been added to this title.');
+            } else {
+                $animerecord->setBackground(trim($matches[1]));
+            }
+
+            # Broadcast:
+            $extracted = $leftcolumn->filterXPath('//span[text()="Broadcast:"]');
+            if (iterator_count($extracted) > 0) {
+                $animerecord->setBroadcast(trim(preg_replace('/(\w.+)s at(\s\d.+)\((\w.+)\)/', '$1$2$3', str_replace($extracted->text(), '', $extracted->parents()->text()))));
+            }
+
+            # Duration:
+            $extracted = $leftcolumn->filterXPath('//span[text()="Duration:"]');
+            if (iterator_count($extracted) > 0) {
+                $duration = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
+                if (strpos($duration, 'hr.') === true) {
+                    preg_match('/(\d+) hr. (\d+) min/', $duration, $matches);
+                    $animerecord->setDuration((int) $matches[0] * 60 + $matches[2]);
+                } else {
+                    preg_match('/(\d+) min/', $duration, $matches);
+                    $animerecord->setDuration((int) $matches[0]);
+                }
+            }
+
+            // External links is only visible when an user has logged in any may be hidden on some records.
+            if ($crawler->filter('td[class="borderClass"] h2')->eq(4)->count() > 0) {
+                # External Links:
+                $extracted = $crawler->filter('div[class="pb16"]')->filter('a[target="_blank"]');
+                foreach ($extracted as $externalLinkRow) {
+                    $externalCrawler = new Crawler($externalLinkRow);
+                    $animerecord->setExternalLinks($externalCrawler->text(), $externalCrawler->attr('href'));
+                }
+            }
+
+            # Preview:
+            $extracted = $crawler->filter('div[class="video-promotion"] a');
+            if (iterator_count($extracted) > 0) {
+                $animerecord->setPreview(preg_replace('/\?(.+?)$/', '$2', $extracted->attr('href')));
+            }
+
+            # Opening Theme:
+            $extracted = $crawler->filter('div[class="theme-songs js-theme-songs opnening"] span');
+            foreach ($extracted as $openingRow) {
+                $animerecord->setOpeningTheme($openingRow->nodeValue);
+            }
+
+            # Ending Theme:
+            $extracted = $crawler->filter('div[class="theme-songs js-theme-songs ending"] span');
+            foreach ($extracted as $endingRow) {
+                $animerecord->setEndingTheme($endingRow->nodeValue);
+            }
+
+            # Recommendations
+            $extracted = $crawler->filter('div[id="anime_recommendation"] li[class="btn-anime"]');
+            foreach ($extracted as $recommendationsRow) {
+                $recommendationsCrawler = new Crawler($recommendationsRow);
+                $anime = new Anime();
+                $anime->setId(preg_replace('/(.+?)-/', '$2', $recommendationsCrawler->filter('a')->attr('href')));
+                $anime->setTitle($recommendationsCrawler->filter('span')->text());
+                $anime->setImageUrl(preg_replace('/(.+?)\'(.+?)\'(.+?)$/', '$2', $recommendationsCrawler->filter('a')->attr('style')));
+                $animerecord->setRecommendations($anime);
             }
         }
 

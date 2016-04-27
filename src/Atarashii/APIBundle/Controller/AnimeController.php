@@ -68,7 +68,7 @@ class AnimeController extends FOSRestController
         if ((strpos($animedetails, 'No series found') !== false) || (strpos($animedetails, 'This page doesn\'t exist') !== false)) {
             return $this->view(array('error' => 'No series found, check the series id and try again.'), 404);
         } else {
-            $anime = AnimeParser::parse($animedetails);
+            $anime = AnimeParser::parse($animedetails, $apiVersion);
 
             //Parse extended personal details if API 2.0 or better and personal details are requested
             if ($apiVersion >= '2.0' && $usepersonal) {
