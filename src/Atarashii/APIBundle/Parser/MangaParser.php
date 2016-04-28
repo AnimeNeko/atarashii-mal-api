@@ -58,7 +58,7 @@ class MangaParser
 
         # English:
         $extracted = $leftcolumn->filterXPath('//span[text()="English:"]');
-        if (iterator_count($extracted) > 0) {
+        if ($extracted->count() > 0) {
             $text = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
             $setother_titles['english'] = explode(', ', $text);
             $mangarecord->setOtherTitles($setother_titles);
@@ -66,7 +66,7 @@ class MangaParser
 
         # Synonyms:
         $extracted = $leftcolumn->filterXPath('//span[text()="Synonyms:"]');
-        if (iterator_count($extracted) > 0) {
+        if ($extracted->count() > 0) {
             $text = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
             $setother_titles['synonyms'] = explode(', ', $text);
             $mangarecord->setOtherTitles($setother_titles);
@@ -74,7 +74,7 @@ class MangaParser
 
         # Japanese:
         $extracted = $leftcolumn->filterXPath('//span[text()="Japanese:"]');
-        if (iterator_count($extracted) > 0) {
+        if ($extracted->count() > 0) {
             $text = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
             $setother_titles['japanese'] = explode(', ', $text);
             $mangarecord->setOtherTitles($setother_titles);
@@ -101,14 +101,14 @@ class MangaParser
 
         # Type:
         $extracted = $leftcolumn->filterXPath('//span[text()="Type:"]');
-        if (iterator_count($extracted) > 0) {
+        if ($extracted->count() > 0) {
             $mangarecord->setType(trim(str_replace($extracted->text(), '', $extracted->parents()->text())));
         }
 
         # Volumes:
         $extracted = $leftcolumn->filterXPath('//span[text()="Volumes:"]');
         $mangarecord->setVolumes(null);
-        if (iterator_count($extracted) > 0) {
+        if ($extracted->count() > 0) {
             $data = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
 
             if ($data != 'Unknown') {
@@ -121,7 +121,7 @@ class MangaParser
         # Chapters:
         $extracted = $leftcolumn->filterXPath('//span[text()="Chapters:"]');
         $mangarecord->setChapters(null);
-        if (iterator_count($extracted) > 0) {
+        if ($extracted->count() > 0) {
             $data = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
 
             if ($data != 'Unknown') {
@@ -133,13 +133,13 @@ class MangaParser
 
         # Status:
         $extracted = $leftcolumn->filterXPath('//span[text()="Status:"]');
-        if (iterator_count($extracted) > 0) {
+        if ($extracted->count() > 0) {
             $mangarecord->setStatus(strtolower(trim(str_replace($extracted->text(), '', $extracted->parents()->text()))));
         }
 
         # Genres:
         $extracted = $leftcolumn->filterXPath('//span[text()="Genres:"]');
-        if (iterator_count($extracted) > 0) {
+        if ($extracted->count() > 0) {
             $mangarecord->setGenres(explode(', ', trim(str_replace($extracted->text(), '', $extracted->parents()->text()))));
         }
 
@@ -156,7 +156,7 @@ class MangaParser
         //TODO: Rewrite to properly clean up excess tags.
         # Score:
         $extracted = $leftcolumn->filterXPath('//span[text()="Score:"]');
-        if (iterator_count($extracted) > 0) {
+        if ($extracted->count() > 0) {
             $extracted = str_replace($extracted->text(), '', $extracted->parents()->text());
             //Remove the parenthetical at the end of the string
             $extracted = trim(str_replace(strstr($extracted, '('), '', $extracted));
@@ -167,7 +167,7 @@ class MangaParser
 
         # Popularity:
         $extracted = $leftcolumn->filterXPath('//span[text()="Popularity:"]');
-        if (iterator_count($extracted) > 0) {
+        if ($extracted->count() > 0) {
             $extracted = str_replace($extracted->text(), '', $extracted->parents()->text());
             //Remove the hash at the front of the string and trim whitespace. Needed so we can cast to an int.
             $extracted = trim(str_replace('#', '', $extracted));
@@ -176,7 +176,7 @@ class MangaParser
 
         # Members:
         $extracted = $leftcolumn->filterXPath('//span[text()="Members:"]');
-        if (iterator_count($extracted) > 0) {
+        if ($extracted->count() > 0) {
             $extracted = str_replace($extracted->text(), '', $extracted->parents()->text());
             //PHP doesn't like commas in integers. Remove it.
             $extracted = trim(str_replace(',', '', $extracted));
@@ -185,7 +185,7 @@ class MangaParser
 
         # Members:
         $extracted = $leftcolumn->filterXPath('//span[text()="Favorites:"]');
-        if (iterator_count($extracted) > 0) {
+        if ($extracted->count() > 0) {
             $extracted = str_replace($extracted->text(), '', $extracted->parents()->text());
             //PHP doesn't like commas in integers. Remove it.
             $extracted = trim(str_replace(',', '', $extracted));
@@ -209,7 +209,7 @@ class MangaParser
         //use the output directly from MAL. This should be okay as our return charset is UTF-8.
         $mangarecord->setSynopsis('There is currently no synopsis for this title.');
 
-        if (iterator_count($extracted) > 0) {
+        if ($extracted->count() > 0) {
             $mangarecord->setSynopsis($extracted->html());
         }
 
