@@ -101,13 +101,17 @@
 
     <h2>Searches and Global Lists</h2>
 
-    <h3>Searching for a Manga</h3>
+    <h3>Searching for an Manga</h3>
     <dl>
       <dt>URI Format</dt><dd>manga/search?q=<em>search_terms</em></dd>
       <dt>Method</dt><dd>GET</dd>
-      <dt>Authentication</dt><dd>No</dd>
+      <dt>Authentication</dt><dd>Optional</dd>
     </dl>
-    <p>Runs a search of the title against manga on MAL. Output is a <a href="{{ path('_docs2_responses') }}#mangalist">manga list</a>.</p>
+    <p>Runs a search of the title against manga on MAL. Output is an <a href="{{ path('_docs2_responses') }}#mangalist">manga list</a>.</p>
+    <p>The following optional parameters are supported:</p>
+    <ul>
+      <li><code>mine</code>: This allows you to get <b>only details provided by the official API</b> like synonyms, english titles and a complete synopsis. Mine should be 1 and the user must be Authenticated to use the official API details.</li>
+    </ul>
 
     <h3>Top Ranking Manga</h3>
     <dl>
