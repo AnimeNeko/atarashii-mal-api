@@ -83,15 +83,15 @@
             <li><code>chapters</code>: The number of the last chapter read by the user.</li>
             <li><code>volumes</code>: The number of the last volume read by the user.</li>
             <li><code>score</code>: An integer, from 1 to 10 indicating the user's score of the title.</li>
-            <li><code>start</code> <span class="small bg-info">API 2.0+</span>: The date the user started watching the anime title in ISO-8601 format (YYYY-MM-DD).</li>
-            <li><code>end</code> <span class="small bg-info">API 2.0+</span>: The date the user finished watching the anime title in ISO-8601 format (YYYY-MM-DD).</li>
-            <li><code>downloaded_chap</code> <span class="small bg-info">API 2.0+</span>: An integer indicating the number of chapters downloaded by the user.</li>
-            <li><code>reread_count</code> <span class="small bg-info">API 2.0+</span>: An integer indicating the number of times the user has reread the title. This does not count the first completed reading.</li>
-            <li><code>reread_value</code> <span class="small bg-info">API 2.0+</span>: An integer from 1 (very low) to 5 (very high) very high indicating how much value there is in rereading the title.</li>
-            <li><code>priority</code> <span class="small bg-info">API 2.0+</span>: An integer from 0 (low) to 2 (high) indicating the priority of the title for the user.</li>
-            <li><code>is_rereading</code> <span class="small bg-info">API 2.0+</span>: An integer indicating true (1) or false (0) if the user is currently rereading the title.</li>
-            <li><code>comments</code> <span class="small bg-info">API 2.0+</span>: A string containing comments on the title.</li>
-            <li><code>tags</code> <span class="small bg-info">API 2.0+</span>: A comma-separated string of tags the user assigned to the title.</li>
+            <li><span class="label label-success">NEW</span> <code>start</code>: The date the user started watching the anime title in ISO-8601 format (YYYY-MM-DD).</li>
+            <li><span class="label label-success">NEW</span> <code>end</code>: The date the user finished watching the anime title in ISO-8601 format (YYYY-MM-DD).</li>
+            <li><span class="label label-success">NEW</span> <code>downloaded_chap</code>: An integer indicating the number of chapters downloaded by the user.</li>
+            <li><span class="label label-success">NEW</span> <code>reread_count</code>: An integer indicating the number of times the user has reread the title. This does not count the first completed reading.</li>
+            <li><span class="label label-success">NEW</span> <code>reread_value</code>: An integer from 1 (very low) to 5 (very high) very high indicating how much value there is in rereading the title.</li>
+            <li><span class="label label-success">NEW</span> <code>priority</code>: An integer from 0 (low) to 2 (high) indicating the priority of the title for the user.</li>
+            <li><span class="label label-success">NEW</span> <code>is_rereading</code>: An integer indicating true (1) or false (0) if the user is currently rereading the title.</li>
+            <li><span class="label label-success">NEW</span> <code>comments</code>: A string containing comments on the title.</li>
+            <li><span class="label label-success">NEW</span> <code>tags</code>: A comma-separated string of tags the user assigned to the title.</li>
         </ul>
 
         <h3>Deleting a Manga</h3>
@@ -114,7 +114,7 @@
         <p>Runs a search of the title against manga on MAL. Output is an <a href="{{ path('_docs2_responses') }}#mangalist">manga list</a>.</p>
         <p>The following optional parameters are supported:</p>
         <ul>
-            <li><code>mine</code>: This allows you to get <b>only details provided by the official API</b> like synonyms, english titles and a complete synopsis. Mine should be 1 and the user must be Authenticated to use the official API details.</li>
+            <li><span class="label label-success">API 2.1+</span> <code>mine</code>: This allows you to get <b>only details provided by the official API</b> like synonyms, english titles and a complete synopsis. Mine should be 1 and the user must be Authenticated to use the official API details.</li>
         </ul>
 
         <h3>Top Ranking Manga</h3>
