@@ -131,6 +131,46 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($posts, $profileDetails->getForumPosts());
     }
 
+    public function testReviews()
+    {
+        $posts = rand();
+
+        $profileDetails = new ProfileDetails();
+        $profileDetails->setReviews($posts);
+
+        $this->assertEquals($posts, $profileDetails->getReviews());
+    }
+
+    public function testRecommedations()
+    {
+        $posts = rand();
+
+        $profileDetails = new ProfileDetails();
+        $profileDetails->setRecommedations($posts);
+
+        $this->assertEquals($posts, $profileDetails->getRecommedations());
+    }
+
+    public function testBlogPosts()
+    {
+        $posts = rand();
+
+        $profileDetails = new ProfileDetails();
+        $profileDetails->setBlogPosts($posts);
+
+        $this->assertEquals($posts, $profileDetails->getBlogPosts());
+    }
+
+    public function testClubs()
+    {
+        $posts = rand();
+
+        $profileDetails = new ProfileDetails();
+        $profileDetails->setClubs($posts);
+
+        $this->assertEquals($posts, $profileDetails->getClubs());
+    }
+
     public function testComments()
     {
         $comments = rand();
@@ -179,6 +219,16 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
         $animeStats->setTimeDays($days);
 
         $this->assertEquals($days, $animeStats->getTimeDays());
+    }
+
+    public function testAnimeMeanScore()
+    {
+        $days = number_format(rand(1, 800) + (rand() / getrandmax()), 1);
+
+        $animeStats = new AnimeStats();
+        $animeStats->setMeanScore($days);
+
+        $this->assertEquals($days, $animeStats->getMeanScore());
     }
 
     public function testAnimeWatching()
@@ -241,6 +291,26 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($entries, $animeStats->getTotalEntries());
     }
 
+    public function testAnimeRewatched()
+    {
+        $entries = rand();
+
+        $AnimeStats = new AnimeStats();
+        $AnimeStats->setRewatched($entries);
+
+        $this->assertEquals($entries, $AnimeStats->getRewatched());
+    }
+
+    public function testAnimeEpisodes()
+    {
+        $entries = rand();
+
+        $AnimeStats = new AnimeStats();
+        $AnimeStats->setEpisodes($entries);
+
+        $this->assertEquals($entries, $AnimeStats->getEpisodes());
+    }
+
     public function testMangaTimeDays()
     {
         $days = number_format(rand(1, 800) + (rand() / getrandmax()), 1);
@@ -249,6 +319,16 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
         $mangaStats->setTimeDays($days);
 
         $this->assertEquals($days, $mangaStats->getTimeDays());
+    }
+
+    public function testMangaMeanScore()
+    {
+        $days = number_format(rand(1, 800) + (rand() / getrandmax()), 1);
+
+        $mangaStats = new MangaStats();
+        $mangaStats->setMeanScore($days);
+
+        $this->assertEquals($days, $mangaStats->getMeanScore());
     }
 
     public function testMangaReading()
@@ -309,5 +389,25 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
         $mangaStats->setTotalEntries($entries);
 
         $this->assertEquals($entries, $mangaStats->getTotalEntries());
+    }
+
+    public function testMangaReread()
+    {
+        $entries = rand();
+
+        $mangaStats = new MangaStats();
+        $mangaStats->setReread($entries);
+
+        $this->assertEquals($entries, $mangaStats->getReread());
+    }
+
+    public function testMangaVolumes()
+    {
+        $entries = rand();
+
+        $mangaStats = new MangaStats();
+        $mangaStats->setVolumes($entries);
+
+        $this->assertEquals($entries, $mangaStats->getVolumes());
     }
 }

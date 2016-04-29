@@ -18,7 +18,7 @@ use Atarashii\APIBundle\Helper\Date;
 
 class User
 {
-    public static function parse($contents)
+    public static function parse($contents, $apiVersion)
     {
         $user = new Profile();
 
@@ -36,14 +36,14 @@ class User
         $animeStats = $profileContent->filter('.stats')->filter('.anime');
         $mangaStats = $profileContent->filter('.stats')->filter('.manga');
 
-        $user->details = self::parseDetails($profileContent, $user->details); //Details is an object, so we need to pass it to the function.
-        $user->anime_stats = self::parseStats($animeStats, $user->anime_stats, 'anime');
-        $user->manga_stats = self::parseStats($mangaStats, $user->manga_stats, 'manga');
+        $user->details = self::parseDetails($profileContent, $user->details, $apiVersion); //Details is an object, so we need to pass it to the function.
+        $user->anime_stats = self::parseStats($animeStats, $user->anime_stats, 'anime', $apiVersion);
+        $user->manga_stats = self::parseStats($mangaStats, $user->manga_stats, 'manga', $apiVersion);
 
         return $user;
     }
 
-    private static function parseDetails(Crawler $content, ProfileDetails $details)
+    private static function parseDetails(Crawler $content, ProfileDetails $details, $apiVersion)
     {
         $userAccessLevel = $content->filterXPath('//*[contains(attribute::class,"profile-team-title")]');
 
@@ -113,10 +113,33 @@ class User
             $details->setForumPosts((int) $userForumPosts->text());
         }
 
+        if ($apiVersion >= '2.1') {
+            $userReviews = $userStats->filterXPath('//*[text()="Reviews"]/../span[2]');
+            $userRecommendations = $userStats->filterXPath('//*[text()="Recommendations"]/../span[2]');
+            $userBlogPosts = $userStats->filterXPath('//*[text()="Blog Posts"]/../span[2]');
+            $userClub = $userStats->filterXPath('//*[text()="Clubs"]/../span[2]');
+
+            if ($userReviews->count() > 0) {
+                $details->setReviews((int) $userReviews->text());
+            }
+
+            if ($userRecommendations->count() > 0) {
+                $details->setRecommedations((int) $userRecommendations->text());
+            }
+
+            if ($userBlogPosts->count() > 0) {
+                $details->setBlogPosts((int) $userBlogPosts->text());
+            }
+
+            if ($userClub->count() > 0) {
+                $details->setClubs((int) $userClub->text());
+            }
+        }
+
         return $details;
     }
 
-    private static function parseStats(Crawler $content, $stats, $mediaType)
+    private static function parseStats(Crawler $content, $stats, $mediaType, $apiVersion)
     {
 
         //General header stuff
@@ -126,7 +149,6 @@ class User
 
         if ($timeDays->count() > 0) {
             $days = explode(' ', $timeDays->text());
-
             $stats->setTimeDays((float) $days[1]);
         }
 
@@ -181,6 +203,34 @@ class User
 
         if ($totalEntries->count() > 0) {
             $stats->setTotalEntries((int) $totalEntries->text());
+        }
+
+        if ($apiVersion >= '2.1') {
+            $meanScore = $genStats->filterXPath('//*[normalize-space(.)="Mean Score:"]/..');
+            if ($meanScore->count() > 0) {
+                $score = explode(' ', $meanScore->text());
+                $stats->setMeanScore((float) $score[2]);
+            }
+
+            $reRecord = $statsSummary->filterXPath('//li[2]/span[2]');
+            $countRecord = $statsSummary->filterXPath('//li[3]/span[2]');
+            if ($mediaType == 'anime') {
+                if ($reRecord->count() > 0) {
+                    $stats->setRewatched((int) $reRecord->text());
+                }
+
+                if ($countRecord->count() > 0) {
+                    $stats->setEpisodes((int) str_replace(',', '', $countRecord->text()));
+                }
+            } else {
+                if ($reRecord->count() > 0) {
+                    $stats->setReread((int) $reRecord->text());
+                }
+
+                if ($countRecord->count() > 0) {
+                    $stats->setVolumes((int) str_replace(',', '', $countRecord->text()));
+                }
+            }
         }
 
         return $stats;

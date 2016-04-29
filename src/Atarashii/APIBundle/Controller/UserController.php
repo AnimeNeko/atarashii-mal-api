@@ -65,7 +65,7 @@ class UserController extends FOSRestController
 
             return $view;
         } else {
-            $userprofile = User::parse($profilecontent);
+            $userprofile = User::parse($profilecontent, $apiVersion);
 
             $view = $this->view($userprofile);
 

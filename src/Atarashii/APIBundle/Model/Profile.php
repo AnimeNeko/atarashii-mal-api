@@ -164,6 +164,39 @@ class ProfileDetails
     private $animeListViews = 0;
     private $mangaListViews = 0;
     private $forumPosts = 0;
+
+    /**
+     * The amount of created reviews.
+     *
+     * @Since("2.1")
+     * @Type("integer")
+     */
+    private $reviews = 0;
+
+    /**
+     * The amount of created recommendations.
+     *
+     * @Since("2.1")
+     * @Type("integer")
+     */
+    private $recommendations  = 0;
+
+    /**
+     * The amount of created blog posts.
+     *
+     * @Since("2.1")
+     * @Type("integer")
+     */
+    private $blogPosts  = 0;
+
+    /**
+     * The amount of joined clubs.
+     *
+     * @Since("2.1")
+     * @Type("integer")
+     */
+    private $clubs  = 0;
+
     private $aim;
     private $comments = 0;
     private $msn;
@@ -408,6 +441,86 @@ class ProfileDetails
     }
 
     /**
+     * Set the reviews property.
+     *
+     * @param int $reviews The number reviews which an user created.
+     */
+    public function setReviews($reviews)
+    {
+        $this->reviews = $reviews;
+    }
+
+    /**
+     * Get the reviews property.
+     *
+     * @return int
+     */
+    public function getReviews()
+    {
+        return $this->reviews;
+    }
+
+    /**
+     * Set the recommendations property.
+     *
+     * @param int $recommendations The number recommendations which an user created.
+     */
+    public function setRecommedations($recommendations)
+    {
+        $this->recommendations = $recommendations;
+    }
+
+    /**
+     * Get the recommendations property.
+     *
+     * @return int
+     */
+    public function getRecommedations()
+    {
+        return $this->recommendations;
+    }
+
+    /**
+     * Set the blogPosts property.
+     *
+     * @param int $blogPosts The number of blogPosts created by an user.
+     */
+    public function setBlogPosts($blogPosts)
+    {
+        $this->blogPosts = $blogPosts;
+    }
+
+    /**
+     * Get the blogPosts property.
+     *
+     * @return int
+     */
+    public function getBlogPosts()
+    {
+        return $this->blogPosts;
+    }
+
+    /**
+     * Set the clubs property.
+     *
+     * @param int $clubs The number clubs the user joined.
+     */
+    public function setClubs($clubs)
+    {
+        $this->clubs = $clubs;
+    }
+
+    /**
+     * Get the clubs property.
+     *
+     * @return int
+     */
+    public function getClubs()
+    {
+        return $this->clubs;
+    }
+
+    /**
      * Set the aim property.
      *
      * @param string $aim The aim of an user.
@@ -495,12 +608,37 @@ class ProfileDetails
 class AnimeStats
 {
     private $timeDays;
+
+    /**
+     * The mean score of all anime or manga records.
+     *
+     * @Since("2.1")
+     * @Type("float")
+     */
+    private $meanScore;
+
     private $watching;
     private $completed;
     private $onHold;
     private $dropped;
     private $planToWatch;
     private $totalEntries;
+
+    /**
+     * The total times of rewatched records.
+     *
+     * @Since("2.1")
+     * @Type("integer")
+     */
+    private $rewatched;
+
+    /**
+     * The amount of watched records.
+     *
+     * @Since("2.1")
+     * @Type("integer")
+     */
+    private $episodes;
 
     /**
      * Set the timeDays property.
@@ -520,6 +658,26 @@ class AnimeStats
     public function getTimeDays()
     {
         return $this->timeDays;
+    }
+
+    /**
+     * Set the meanScore property.
+     *
+     * @param float $meanScore The mean score of all the records.
+     */
+    public function setMeanScore($meanScore)
+    {
+        $this->meanScore = $meanScore;
+    }
+
+    /**
+     * Get the meanScore property.
+     *
+     * @return float
+     */
+    public function getMeanScore()
+    {
+        return $this->meanScore;
     }
 
     /**
@@ -641,6 +799,46 @@ class AnimeStats
     {
         return $this->totalEntries;
     }
+
+    /**
+     * Set the rewatched property.
+     *
+     * @param int $rewatched The total number of rewatched series.
+     */
+    public function setRewatched($rewatched)
+    {
+        $this->rewatched = $rewatched;
+    }
+
+    /**
+     * Get the rewatched property.
+     *
+     * @return int
+     */
+    public function getRewatched()
+    {
+        return $this->rewatched;
+    }
+
+    /**
+     * Set the episodes property.
+     *
+     * @param int $episodes The total of watched episodes.
+     */
+    public function setEpisodes($episodes)
+    {
+        $this->episodes = $episodes;
+    }
+
+    /**
+     * Get the episodes property.
+     *
+     * @return int
+     */
+    public function getEpisodes()
+    {
+        return $this->episodes;
+    }
 }
 
 /**
@@ -650,12 +848,37 @@ class AnimeStats
 class MangaStats
 {
     private $timeDays;
+
+    /**
+     * The mean score of all anime or manga records.
+     *
+     * @Since("2.1")
+     * @Type("float")
+     */
+    private $meanScore;
+
     private $reading;
     private $completed;
     private $onHold;
     private $dropped;
     private $planToRead;
     private $totalEntries;
+
+    /**
+     * The total times of reread records.
+     *
+     * @Since("2.1")
+     * @Type("integer")
+     */
+    private $reread;
+
+    /**
+     * The amount of read volumes.
+     *
+     * @Since("2.1")
+     * @Type("integer")
+     */
+    private $volumes;
 
     /**
      * Set the timeDays property.
@@ -675,6 +898,26 @@ class MangaStats
     public function getTimeDays()
     {
         return $this->timeDays;
+    }
+
+    /**
+     * Set the meanScore property.
+     *
+     * @param float $meanScore The mean score of all the records.
+     */
+    public function setMeanScore($meanScore)
+    {
+        $this->meanScore = $meanScore;
+    }
+
+    /**
+     * Get the meanScore property.
+     *
+     * @return float
+     */
+    public function getMeanScore()
+    {
+        return $this->meanScore;
     }
 
     /**
@@ -795,5 +1038,45 @@ class MangaStats
     public function getTotalEntries()
     {
         return $this->totalEntries;
+    }
+
+    /**
+     * Set the reread property.
+     *
+     * @param int $reread The total number of reread series.
+     */
+    public function setReread($reread)
+    {
+        $this->reread = $reread;
+    }
+
+    /**
+     * Get the reread property.
+     *
+     * @return int
+     */
+    public function getReread()
+    {
+        return $this->reread;
+    }
+
+    /**
+     * Set the volumes property.
+     *
+     * @param int $volumes The total of read volumes.
+     */
+    public function setVolumes($volumes)
+    {
+        $this->volumes = $volumes;
+    }
+
+    /**
+     * Get the volumes property.
+     *
+     * @return int
+     */
+    public function getVolumes()
+    {
+        return $this->volumes;
     }
 }

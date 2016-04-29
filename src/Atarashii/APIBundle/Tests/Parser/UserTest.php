@@ -138,7 +138,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $profileContents = file_get_contents(__DIR__.'/../InputSamples/profile-motokochan.html');
         $profile2Contents = file_get_contents(__DIR__.'/../InputSamples/profile-xinil.html');
 
-        $this->profile = User::parse($profileContents);
-        $this->profile2 = User::parse($profile2Contents);
+        $this->profile = User::parse($profileContents, '2.1');
+        $this->profile2 = User::parse($profile2Contents, '2.1');
     }
 }
