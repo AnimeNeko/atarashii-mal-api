@@ -263,3 +263,15 @@ _api2_1_cast_manga:
     defaults: { _controller: AtarashiiAPIBundle:Manga:getCast, _format: json, apiVersion: '2.1' }
     requirements:
         _method: GET
+
+_api2_1_history_anime:
+    path: /anime/history/{id}
+    defaults: { _controller: AtarashiiAPIBundle:Anime:getHistory, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: GET
+
+_api2_1_history_manga:
+    path: /manga/history/{id}
+    defaults: { _controller: AtarashiiAPIBundle:Manga:getHistory, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: GET

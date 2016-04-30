@@ -4,7 +4,7 @@
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
-* @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
+* @copyright 2014-2016 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
 namespace Atarashii\APIBundle\Helper;
@@ -66,6 +66,8 @@ class Date
             } else {
                 return $dateTime->createFromFormat('M j, Y', $time)->format('Y-m-d');
             }
+        } elseif (strpos($time, '/') !== false) {
+            return $dateTime->createFromFormat('m/d/Y H:i', $time, $timeZone)->format('Y-m-d\TH:iO');
         } elseif (strpos($time, ':') !== false) {
             return $dateTime->createFromFormat('l H:i T', $time)->format('Y-m-d\TH:iO');
         } elseif (strpos($time, ' ') !== false && (strlen($time) === 6 || strlen($time) === 5)) { //Do not place this before the other formatters because it will break almost all dates.

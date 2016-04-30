@@ -30,6 +30,16 @@
         </dl>
         <p>Retrieves the historylist of the specified user. Output is a list of <a href="{{ path('_docs2_responses') }}#history">history objects</a>.</p>
 
+        <h2>History (specific)</h2>
+        <dl>
+            <dt>URI Format</dt>
+                <dd><span class="label label-success">API 2.1+</span> anime/history/<em>id</em></dd>
+                <dd><span class="label label-success">API 2.1+</span> manga/history/<em>id</em></dd>
+            <dt>Method</dt><dd>GET</dd>
+            <dt>Authentication</dt><dd>Yes</dd>
+        </dl>
+        <p>Retrieves the historylist of the specified anime and user. Output is a list of <a href="{{ path('_docs2_responses') }}#history">history objects</a>.</p>
+
         <h2>Login Verification</h2>
         <dl>
             <dt>URI Format</dt><dd>account/<em>verify_credentials</em></dd>

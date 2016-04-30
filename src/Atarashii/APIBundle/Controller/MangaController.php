@@ -4,7 +4,7 @@
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
-* @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
+* @copyright 2014-2016 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
 namespace Atarashii\APIBundle\Controller;
@@ -16,6 +16,8 @@ use Guzzle\Http\Exception;
 use Atarashii\APIBundle\Parser\MangaParser;
 use Atarashii\APIBundle\Parser\ReviewParser;
 use Atarashii\APIBundle\Parser\CastParser;
+use Atarashii\APIBundle\Parser\HistoryParser;
+use Atarashii\APIBundle\Helper\Date;
 use JMS\Serializer\SerializationContext;
 
 class MangaController extends FOSRestController
@@ -218,5 +220,66 @@ class MangaController extends FOSRestController
 
             return $view;
         }
+    }
+
+    /**
+     * Get the reading history of an manga.
+     *
+     * @param int $id The ID of the manga as assigned by MyAnimeList
+     *
+     * @return View
+     */
+    public function getHistoryAction($id)
+    {
+        // http://myanimelist.net/ajaxtb.php?detailedmid=#{id}
+
+        $downloader = $this->get('atarashii_api.communicator');
+
+        //get the credentials we received
+        $username = $this->getRequest()->server->get('PHP_AUTH_USER');
+        $password = $this->getRequest()->server->get('PHP_AUTH_PW');
+
+        //Don't bother making a request if the user didn't send any authentication
+        if ($username === null || $password === null || $username === '' || $password === '') {
+            $view = $this->view(array('error' => 'unauthorized'), 401);
+            $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
+
+            return $view;
+        }
+
+        try {
+            if (!$downloader->cookieLogin($username, $password)) {
+                $view = $this->view(array('error' => 'unauthorized'), 401);
+                $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
+
+                return $view;
+            }
+        } catch (Exception\CurlException $e) {
+            return $this->view(array('error' => 'network-error'), 500);
+        }
+
+        try {
+            $content = $downloader->fetch('/ajaxtb.php?detailedmid='.$id);
+            Date::setTimeZone($downloader->fetch('/editprofile.php'));
+        } catch (Exception\CurlException $e) {
+            return $this->view(array('error' => 'network-error'), 500);
+        } catch (Exception\ClientErrorResponseException $e) {
+            $content = $e->getResponse();
+        }
+
+        if (strpos($content, 'Not logged in') !== false) {
+            $view = $this->view(array('error' => 'unauthorized'), 401);
+            $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
+
+            return $view;
+        } else {
+            $result = HistoryParser::parse($content, $id, 'manga');
+
+            $view = $this->view($result);
+            $view->setResponse(new Response());
+            $view->setStatusCode(200);
+        }
+
+        return $view;
     }
 }
