@@ -17,6 +17,7 @@ use Guzzle\Http\Exception;
 use Atarashii\APIBundle\Parser\AnimeParser;
 use Atarashii\APIBundle\Parser\CastParser;
 use Atarashii\APIBundle\Parser\HistoryParser;
+use Atarashii\APIBundle\Parser\RecsParser;
 use Atarashii\APIBundle\Helper\Date;
 use JMS\Serializer\SerializationContext;
 
@@ -273,5 +274,47 @@ class AnimeController extends FOSRestController
         }
 
         return $view;
+    }
+
+    /**
+     * Get the recommendations of an anime.
+     *
+     * @param int $id The ID of the anime as assigned by MyAnimeList
+     *
+     * @return View
+     */
+    public function getRecsAction($id)
+    {
+        // http://myanimelist.net/anime/#{id}/_/userrecs
+        $downloader = $this->get('atarashii_api.communicator');
+
+        try {
+            $details = $downloader->fetch('/anime/'.$id.'/_/userrecs');
+        } catch (Exception\CurlException $e) {
+            return $this->view(array('error' => 'network-error'), 500);
+        }
+
+        if (strpos($details, 'No recommendations have been made for this title.') !== false) {
+            return $this->view(array('error' => 'No recommendations were found. '), 200);
+        } else {
+            $result = RecsParser::parse($details);
+
+            $response = new Response();
+            $response->setPublic();
+            $response->setMaxAge(86400); //Two day
+            $response->headers->addCacheControlDirective('must-revalidate', true);
+            $response->setEtag('anime/recs/'.$id);
+
+            //Also, set "expires" header for caches that don't understand Cache-Control
+            $date = new \DateTime();
+            $date->modify('+86400 seconds'); //Two days
+            $response->setExpires($date);
+
+            $view = $this->view($result);
+            $view->setResponse($response);
+            $view->setStatusCode(200);
+
+            return $view;
+        }
     }
 }

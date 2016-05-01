@@ -49,6 +49,14 @@
             <li><code>page</code>: The current set of reviews to return. Each set contains at most 20 items. Default value is &quot;1&quot; if not supplied.</li>
         </ul>
 
+        <h3>Recommendations Details</h3>
+        <dl>
+            <dt>URI Format</dt><dd><span class="label label-success">API 2.1+</span> anime/recs/<em>id</em></dd>
+            <dt>Method</dt><dd>GET</dd>
+            <dt>Authentication</dt><dd>No</dd>
+        </dl>
+        <p>Gets the list of Recommendations. Output is an list of <a href="{{ path('_docs2_responses') }}#Recommendations">Recommendations objects</a>.</p>
+
 
         <h2>Methods to Change Information</h2>
 
