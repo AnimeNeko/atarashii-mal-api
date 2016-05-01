@@ -1,12 +1,12 @@
 <?php
 /**
-* Atarashii MAL API.
-*
-* @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
-* @author    Michael Johnson <youngmug@animeneko.net>
-* @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
-* @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
-*/
+ * Atarashii MAL API.
+ *
+ * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
+ * @author    Michael Johnson <youngmug@animeneko.net>
+ * @copyright 2014-2016 Ratan Dhawtal and Michael Johnson
+ * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
+ */
 namespace Atarashii\APIBundle\Parser;
 
 use Symfony\Component\DomCrawler\Crawler;
@@ -31,7 +31,7 @@ class AnimeParser
         # Example:
         # <span itemprop="name">One Piece</span>
         $animerecord->setTitle(trim($crawler->filter('span[itemprop="name"]')->text()));
-        
+
         $rank = $crawler->filterXPath('//span[contains(@class, "ranked")]');
 
         if (count($rank) > 0) {
@@ -348,37 +348,33 @@ class AnimeParser
         }
 
         # Personal Info
-        $userPersonalInfo = $crawler->filterXPath('//div[contains(@class,"user-status-block")]');
+        $userPersonalInfo = $crawler->filterXPath('//h2[text()="Edit Status"]');
 
         // Only try to parse personal info if the box is there
-        if (count($userPersonalInfo) > 0) {
-            $isNotAdded = $userPersonalInfo->filterXPath('//a[@id="myinfo_status"]');
+        if ($userPersonalInfo->count() > 0) {
+            #Watched Status - Only available when user is authenticated
+            $my_data = $crawler->filter('select#myinfo_status');
+            if (iterator_count($my_data) && iterator_count($my_data->filter('option[selected="selected"]'))) {
+                $animerecord->setWatchedStatus($my_data->filter('option[selected="selected"]')->attr('value'));
+            }
 
-            if (!count($isNotAdded) > 0) {
-                #Watched Status - Only available when user is authenticated
-                $my_data = $crawler->filter('select#myinfo_status');
-                if (iterator_count($my_data) && iterator_count($my_data->filter('option[selected="selected"]'))) {
-                    $animerecord->setWatchedStatus($my_data->filter('option[selected="selected"]')->attr('value'));
-                }
+            #Watched Episodes - Only available when user is authenticated
+            $my_data = $crawler->filter('input#myinfo_watchedeps');
+            if (iterator_count($my_data)) {
+                $animerecord->setWatchedEpisodes((int) $my_data->attr('value'));
+            }
 
-                #Watched Episodes - Only available when user is authenticated
-                $my_data = $crawler->filter('input#myinfo_watchedeps');
-                if (iterator_count($my_data)) {
-                    $animerecord->setWatchedEpisodes((int) $my_data->attr('value'));
-                }
+            #User's Score - Only available when user is authenticated
+            $my_data = $crawler->filter('select#myinfo_score');
+            if (iterator_count($my_data) && iterator_count($my_data->filter('option[selected="selected"]'))) {
+                $animerecord->setScore((int) $my_data->filter('option[selected="selected"]')->attr('value'));
+            }
 
-                #User's Score - Only available when user is authenticated
-                $my_data = $crawler->filter('select#myinfo_score');
-                if (iterator_count($my_data) && iterator_count($my_data->filter('option[selected="selected"]'))) {
-                    $animerecord->setScore((int) $my_data->filter('option[selected="selected"]')->attr('value'));
-                }
-
-                #Listed ID (?) - Only available when user is authenticated
-                $my_data = $crawler->filterXPath('//a[text()="Edit Details"]');
-                if (iterator_count($my_data)) {
-                    if (preg_match('/id=(\d+)/', $my_data->attr('href'), $my_data)) {
-                        $animerecord->setListedAnimeId((int) $my_data[1]);
-                    }
+            #Listed ID (?) - Only available when user is authenticated
+            $my_data = $crawler->filterXPath('//a[text()="Edit Details"]');
+            if (iterator_count($my_data)) {
+                if (preg_match('/id=(\d+)/', $my_data->attr('href'), $my_data)) {
+                    $animerecord->setListedAnimeId((int) $my_data[1]);
                 }
             }
         }
