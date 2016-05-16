@@ -1,12 +1,12 @@
 <?php
 /**
-* Atarashii MAL API.
-*
-* @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
-* @author    Michael Johnson <youngmug@animeneko.net>
-* @copyright 2014-2016 Ratan Dhawtal and Michael Johnson
-* @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
-*/
+ * Atarashii MAL API.
+ *
+ * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
+ * @author    Michael Johnson <youngmug@animeneko.net>
+ * @copyright 2014-2016 Ratan Dhawtal and Michael Johnson
+ * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
+ */
 namespace Atarashii\APIBundle\Controller;
 
 use Atarashii\APIBundle\Parser\ReviewParser;
@@ -18,6 +18,7 @@ use Atarashii\APIBundle\Parser\AnimeParser;
 use Atarashii\APIBundle\Parser\CastParser;
 use Atarashii\APIBundle\Parser\HistoryParser;
 use Atarashii\APIBundle\Parser\RecsParser;
+use Atarashii\APIBundle\Parser\EpsParser;
 use Atarashii\APIBundle\Helper\Date;
 use JMS\Serializer\SerializationContext;
 
@@ -295,7 +296,7 @@ class AnimeController extends FOSRestController
         }
 
         if (strpos($details, 'No recommendations have been made for this title.') !== false) {
-            return $this->view(array('error' => 'No recommendations were found. '), 200);
+            return $this->view(array('error' => 'not-found'), 200);
         } else {
             $result = RecsParser::parse($details);
 
@@ -304,6 +305,53 @@ class AnimeController extends FOSRestController
             $response->setMaxAge(86400); //Two day
             $response->headers->addCacheControlDirective('must-revalidate', true);
             $response->setEtag('anime/recs/'.$id);
+
+            //Also, set "expires" header for caches that don't understand Cache-Control
+            $date = new \DateTime();
+            $date->modify('+86400 seconds'); //Two days
+            $response->setExpires($date);
+
+            $view = $this->view($result);
+            $view->setResponse($response);
+            $view->setStatusCode(200);
+
+            return $view;
+        }
+    }
+
+    /**
+     * Get the episodes of an anime.
+     *
+     * @param int $id The ID of the anime as assigned by MyAnimeList
+     *
+     * @return View
+     */
+    public function getEpsAction($id, Request $request)
+    {
+        // http://myanimelist.net/anime/#{id}/_/episode
+        $downloader = $this->get('atarashii_api.communicator');
+
+        $page = ((int) $request->query->get('page'));
+        if ($page < 0) {
+            $page = 1;
+        }
+
+        try {
+            $details = $downloader->fetch('/anime/'.$id.'/_/episode?offset='.(($page * 100) - 100));
+        } catch (Exception\CurlException $e) {
+            return $this->view(array('error' => 'network-error'), 500);
+        }
+
+        if (strpos($details, 'No episode information has been added to this title.') !== false) {
+            return $this->view(array('error' => 'not-found'), 200);
+        } else {
+            $result = EpsParser::parse($details);
+
+            $response = new Response();
+            $response->setPublic();
+            $response->setMaxAge(86400); //Two day
+            $response->headers->addCacheControlDirective('must-revalidate', true);
+            $response->setEtag('anime/episodes/'.$id);
 
             //Also, set "expires" header for caches that don't understand Cache-Control
             $date = new \DateTime();

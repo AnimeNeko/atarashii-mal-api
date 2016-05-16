@@ -276,14 +276,20 @@ _api2_1_history_manga:
     requirements:
         _method: GET
 
-_api2_1_history_anime:
+_api2_1_recommedations_anime:
     path: /anime/recs/{id}
     defaults: { _controller: AtarashiiAPIBundle:Anime:getRecs, _format: json, apiVersion: '2.1' }
     requirements:
         _method: GET
 
-_api2_1_history_manga:
+_api2_1_recommedations_manga:
     path: /manga/recs/{id}
     defaults: { _controller: AtarashiiAPIBundle:Manga:getRecs, _format: json, apiVersion: '2.1' }
+    requirements:
+        _method: GET
+
+_api2_1_episodes_anime:
+    path: /anime/episodes/{id}
+    defaults: { _controller: AtarashiiAPIBundle:Anime:getEps, _format: json, apiVersion: '2.1' }
     requirements:
         _method: GET
