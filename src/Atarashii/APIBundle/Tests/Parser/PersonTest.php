@@ -74,6 +74,6 @@ class PersonTest extends \PHPUnit_Framework_TestCase
         $person = PersonParser::parse($personContents);
         $this->assertInstanceOf('Atarashii\APIBundle\Model\Person', $person);
 
-        $this->assertNull($person->getBirthday());
+        $this->assertEquals('-06-15', $person->getBirthday());
     }
 }
