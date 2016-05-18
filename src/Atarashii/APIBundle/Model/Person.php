@@ -250,6 +250,9 @@ class Person
             case 'month':
                 $this->birthday = $birthday->format('Y-m');
                 break;
+            case 'dayMonth':
+                $this->birthday = $birthday->format('-m-d');
+                break;
             case 'day':
             default:
                 $this->birthday = $birthday->format('Y-m-d');

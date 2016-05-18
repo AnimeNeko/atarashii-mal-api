@@ -88,7 +88,11 @@ class PersonParser
                 }
             } else {
                 $dateComponents = explode(' ', $dateStr);
-                if (count($dateComponents) == 3) { // Full date, i.e. "Feb 25, 1989", Example ID 185
+                if (count($dateComponents) == 2) { // Month + Day, i.e. "Jun 15,", Example ID 2608
+                    $month = $dateComponents[0];
+                    $day = substr($dateComponents[1], 0, -1);
+                    $personrecord->setBirthday(DateTime::createFromFormat('M d Y', $month.' '.$day.' 1970'), 'dayMonth');
+                } elseif (count($dateComponents) == 3) { // Full date, i.e. "Feb 25, 1989", Example ID 185
                     $personrecord->setBirthday(DateTime::createFromFormat('M j, Y', $dateStr), 'day');
                 }
             }
@@ -222,7 +226,7 @@ class PersonParser
                 $itemArray['manga'] = new Manga();
                 $mangaDetails = $node->filterXPath('//td[2]/a');
 
-                    // Fill in the manga details
+                // Fill in the manga details
                 $itemArray['manga']->setImageUrl($node->filterXPath('//td[1]/div/a/img')->attr('src'));
                 $itemArray['manga']->setTitle($mangaDetails->text());
 
