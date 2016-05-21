@@ -299,3 +299,15 @@ _api2_1_people:
     defaults: { _controller: AtarashiiAPIBundle:Person:get, _format: json, apiVersion: '2.1' }
     requirements:
         _method: GET
+
+_api2_1_browse_anime:
+    path: /anime/browse
+    defaults: { _controller: AtarashiiAPIBundle:Browse:getBrowse, _format: json, apiVersion: '2.1', requestType: 'anime' }
+    requirements:
+        _method: GET
+
+_api2_1_browse_manga:
+    path: /manga/browse
+    defaults: { _controller: AtarashiiAPIBundle:Browse:getBrowse, _format: json, apiVersion: '2.1', requestType: 'manga' }
+    requirements:
+        _method: GET

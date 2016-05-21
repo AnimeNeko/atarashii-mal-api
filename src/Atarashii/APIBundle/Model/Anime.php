@@ -644,6 +644,39 @@ class Anime
     }
 
     /**
+     * Return the Type ID instead of string.
+     *
+     * @param $type The type which can be a string or int
+     *
+     * @return int The type ID
+     */
+    public static function getTypeId($type)
+    {
+        switch ($type) {
+            case 1:
+            case 'TV':
+                return 1;
+            case 2:
+            case 'OVA':
+                return 2;
+            case 3:
+            case 'Movie':
+                return 3;
+            case 4:
+            case 'Special':
+                return 4;
+            case 5:
+            case 'ONA':
+                return 5;
+            case 6:
+            case 'Music':
+                return 6;
+            default:
+                return 0;
+        }
+    }
+
+    /**
      * Get the type property.
      *
      * @return string (TV/OVA/Movie/Special/ONA/Music)
@@ -988,7 +1021,7 @@ class Anime
      * Set the externalLinks property.
      *
      * @param string $sourceName The website name which contains the info.
-     * @param string $sourceUrl The direct website url to access info.
+     * @param string $sourceUrl  The direct website url to access info.
      */
     public function setExternalLinks($sourceName, $sourceUrl)
     {
@@ -1826,5 +1859,243 @@ class Anime
         }
 
         return $xml->asXML();
+    }
+
+    /**
+     * Returns a int array for MAL URL requests.
+     *
+     * @param $genreString a string of genres separated by ','
+     *
+     * @return string Int array for MAL URL requests
+     */
+    public static function getGenresId($genreString)
+    {
+        $genreArray = explode(',', str_replace(', ', '', $genreString));
+        $genreIds = Array();
+        if ($genreArray[0] !== '') {
+            foreach ($genreArray as $genre) {
+                switch ($genre) {
+                    case 1:
+                    case 'Action':
+                        $genreIds[] = 1;
+                        break;
+                    case 2:
+                    case 'Adventure':
+                        $genreIds[] = 2;
+                        break;
+                    case 3:
+                    case 'Cars':
+                        $genreIds[] = 3;
+                        break;
+                    case 4:
+                    case 'Comedy':
+                        $genreIds[] = 4;
+                        break;
+                    case 5:
+                    case 'Dementia':
+                        $genreIds[] = 5;
+                        break;
+                    case 6:
+                    case 'Demons':
+                        $genreIds[] = 6;
+                        break;
+                    case 7:
+                    case 'Mystery':
+                        $genreIds[] = 7;
+                        break;
+                    case 8:
+                    case 'Drama':
+                        $genreIds[] = 8;
+                        break;
+                    case 9:
+                    case 'Ecchi':
+                        $genreIds[] = 9;
+                        break;
+                    case 10:
+                    case 'Fantasy':
+                        $genreIds[] = 10;
+                        break;
+                    case 11:
+                    case 'Game':
+                        $genreIds[] = 11;
+                        break;
+                    case 12:
+                    case 'Hentai':
+                        $genreIds[] = 12;
+                        break;
+                    case 13:
+                    case 'Historical':
+                        $genreIds[] = 13;
+                        break;
+                    case 14:
+                    case 'Horror':
+                        $genreIds[] = 14;
+                        break;
+                    case 15:
+                    case 'Kids':
+                        $genreIds[] = 15;
+                        break;
+                    case 16:
+                    case 'Magic':
+                        $genreIds[] = 16;
+                        break;
+                    case 17:
+                    case 'Martial Arts':
+                        $genreIds[] = 17;
+                        break;
+                    case 18:
+                    case 'Mecha':
+                        $genreIds[] = 18;
+                        break;
+                    case 19:
+                    case 'Music':
+                        $genreIds[] = 19;
+                        break;
+                    case 20:
+                    case 'Parody':
+                        $genreIds[] = 20;
+                        break;
+                    case 21:
+                    case 'Samurai':
+                        $genreIds[] = 21;
+                        break;
+                    case 22:
+                    case 'Romance':
+                        $genreIds[] = 22;
+                        break;
+                    case 23:
+                    case 'School':
+                        $genreIds[] = 23;
+                        break;
+                    case 24:
+                    case 'Sci-Fi':
+                        $genreIds[] = 24;
+                        break;
+                    case 25:
+                    case 'Shoujo':
+                        $genreIds[] = 25;
+                        break;
+                    case 26:
+                    case 'Shoujo Ai':
+                        $genreIds[] = 26;
+                        break;
+                    case 27:
+                    case 'Shounen':
+                        $genreIds[] = 27;
+                        break;
+                    case 28:
+                    case 'Shounen Ai':
+                        $genreIds[] = 28;
+                        break;
+                    case 29:
+                    case 'Space':
+                        $genreIds[] = 29;
+                        break;
+                    case 30:
+                    case 'Sports':
+                        $genreIds[] = 30;
+                        break;
+                    case 31:
+                    case 'Super Power':
+                        $genreIds[] = 31;
+                        break;
+                    case 32:
+                    case 'Vampire':
+                        $genreIds[] = 32;
+                        break;
+                    case 33:
+                    case 'Yaoi':
+                        $genreIds[] = 33;
+                        break;
+                    case 34:
+                    case 'Yuri':
+                        $genreIds[] = 34;
+                        break;
+                    case 35:
+                    case 'Harem':
+                        $genreIds[] = 35;
+                        break;
+                    case 36:
+                    case 'Slice of Life':
+                        $genreIds[] = 36;
+                        break;
+                    case 37:
+                    case 'Supernatural':
+                        $genreIds[] = 37;
+                        break;
+                    case 38:
+                    case 'Military':
+                        $genreIds[] = 38;
+                        break;
+                    case 39:
+                    case 'Police':
+                        $genreIds[] = 39;
+                        break;
+                    case 40:
+                    case 'Psychological':
+                        $genreIds[] = 40;
+                        break;
+                    case 41:
+                    case 'Thriller':
+                        $genreIds[] = 41;
+                        break;
+                    case 42:
+                    case 'Seinen':
+                        $genreIds[] = 42;
+                        break;
+                    case 43:
+                    case 'Josei':
+                        $genreIds[] = 43;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            return '&genre[]='.implode('&genre[]=', $genreIds);
+        } else {
+            return '';
+        }
+    }
+
+    /**
+     * Returns the right sorting ID.
+     *
+     * @param $sort The parameter with the sorting type
+     *
+     * @return int The sortType supported by MAL
+     */
+    public static function getColumnId($sort)
+    {
+        switch (strtolower($sort)) {
+            case 1:
+            case 'title':
+                return 1;
+            case 2:
+            case 'startdate':
+            case 'start date':
+                return 2;
+            case 3:
+            case 'score':
+                return 3;
+            case 4:
+            case 'episode':
+                return 4;
+            case 5:
+            case 'enddate':
+            case 'end date':
+                return 5;
+            case 6:
+            case 'type':
+                return 6;
+            case 7:
+            case 'members':
+                return 7;
+            case 8:
+            case 'rated':
+                return 8;
+            default:
+                return 0;
+        }
     }
 }

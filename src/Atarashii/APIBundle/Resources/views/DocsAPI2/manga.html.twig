@@ -125,6 +125,29 @@
             <li><span class="label label-success">API 2.1+</span> <code>mine</code>: This allows you to get <b>only details provided by the official API</b> like synonyms, english titles and a complete synopsis. Mine should be 1 and the user must be Authenticated to use the official API details.</li>
         </ul>
 
+        <h3>Browse for an Manga</h3>
+        <dl>
+            <dt>URI Format</dt><dd><span class="label label-success">API 2.1+</span> manga/browse</dd>
+            <dt>Method</dt><dd>GET</dd>
+            <dt>Authentication</dt><dd>No</dd>
+        </dl>
+        <p>Runs an advanced search on MAL. Output is an <a href="{{ path('_docs2_responses') }}#mangalist">manga list</a>.</p>
+        <p>The following optional parameters are supported:</p>
+        <ul>
+            <li><code>genres</code>: The genres which should be included or excluded separated by ",". The genres can be ids and names given by MAL.</li>
+            <li><code>genre_type</code>: Determines if the provided genres should be included or excluded. The default is 0 which means the genres are included and 1 means excluded.</li>
+            <li><code>sort</code>: This will sort the output by the title, start date, end date, score, volume, type, members or chapter. Ids and names are both supported. The default is 0 which won't sort the list.</li>
+            <li><code>reverse</code>: This is an integer value which is by default 0 known as ascending, 1 is descending.</li>
+            <li><code>start_date</code>: This will only show records which started after this date. This must be a YYYY-MM-DD string such as "2012-11-22".</li>
+            <li><code>end_date</code>: This will only show records which ended before this date. This must be a YYYY-MM-DD string such as "2012-11-22".</li>
+            <li><code>rating</code>: The MAL records rating which goes from and integer 0 till 6. 0 equals Unrated and 6 Rx - Hentai.</li>
+            <li><code>status</code>: This defines the record status like publishing, finished or not yet. This can be ids or names which are both supported. The default value is 0 which means all.</li>
+            <li><code>type</code>: The type which can be Manga, Novel, One-shot, Doujin, Manwha, Manhua and OEL or the MAL ids as integer.</li>
+            <li><code>keyword</code>: Keyword used to search in titles. This is the same as search_terms.</li>
+            <li><code>score</code>: The minimal score as an integer value which the record should have.</li>
+            <li><code>page</code>: The page which is an integer values and is set by default on 1.</li>
+        </ul>
+
         <h3>Top Ranking Manga</h3>
         <dl>
             <dt>URI Format</dt><dd>manga/top</dd>
