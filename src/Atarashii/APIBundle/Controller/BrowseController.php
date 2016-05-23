@@ -30,6 +30,8 @@ class BrowseController extends FOSRestController
         if ($page <= 0) {
             $page = 1;
         }
+
+        // Create URL parts supported by MAL
         $page = '&show='.(($page * 50) - 50);
 
         $keyword = '&q='.$request->query->get('keyword');
@@ -40,13 +42,13 @@ class BrowseController extends FOSRestController
         $status = '&status='.$this->getStatusId($request->query->get('status'));
         $endDateArray = explode('-', $request->query->get('end_date'));
         if (count($endDateArray) == 3) {
-            $endDate = '&ey='.$endDateArray[0].'&em='.$endDateArray[1].'&ey='.$endDateArray[3];
+            $endDate = '&ey='.$endDateArray[0].'&em='.$endDateArray[1].'&ed='.$endDateArray[3];
         } else {
             $endDate = '';
         }
         $startDateArray = explode('-', $request->query->get('start_date'));
         if (count($startDateArray) == 3) {
-            $startDate = '&sy='.$startDateArray[0].'&sm='.$startDateArray[1].'&sy='.$startDateArray[3];
+            $startDate = '&sy='.$startDateArray[0].'&sm='.$startDateArray[1].'&sd='.$startDateArray[3];
         } else {
             $startDate = '';
         }
@@ -61,6 +63,7 @@ class BrowseController extends FOSRestController
             $sort = '&o='.Manga::getColumnId($request->query->get('sort'), $requestType);
         }
 
+        // Combine all URL parts for the request
         $url = $genres.$sort.$reverse.$endDate.$startDate.$rating.$status.$type.$keyword.$score.$genreType.$page;
 
         try {
