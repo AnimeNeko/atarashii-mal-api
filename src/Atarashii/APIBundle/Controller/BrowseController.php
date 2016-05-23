@@ -22,6 +22,13 @@ use JMS\Serializer\SerializationContext;
 
 class BrowseController extends FOSRestController
 {
+    /**
+     * @param         $apiVersion  The API version of the request
+     * @param         $requestType The anime or manga request string
+     * @param Request $request     HTTP Request object
+     *
+     * @return \FOS\RestBundle\View\View
+     */
     public function getBrowseAction($apiVersion, $requestType, Request $request)
     {
         $downloader = $this->get('atarashii_api.communicator');
