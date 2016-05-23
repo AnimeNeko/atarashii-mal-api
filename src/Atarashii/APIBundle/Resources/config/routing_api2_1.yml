@@ -3,7 +3,7 @@
 
 _api2_1_anime:
     path: /anime/{id}
-    defaults: { _controller: AtarashiiAPIBundle:Anime:get, _format: json, apiVersion: '2.1' }
+    defaults: { _controller: AtarashiiAPIBundle:Record:get, _format: json, apiVersion: '2.1', requestType: 'anime' }
     requirements:
         _method: GET
         id: \d+
@@ -36,7 +36,7 @@ _api2_1_animelist_delete:
 
 _api2_1_manga:
     path: /manga/{id}
-    defaults: { _controller: AtarashiiAPIBundle:Manga:get, _format: json, apiVersion: '2.1' }
+    defaults: { _controller: AtarashiiAPIBundle:Record:get, _format: json, apiVersion: '2.1', requestType: 'manga' }
     requirements:
         _method: GET
         id: \d+
@@ -242,55 +242,55 @@ _api2_1_verify_credentials:
 
 _api2_1_reviews_anime:
     path: /anime/reviews/{id}
-    defaults: { _controller: AtarashiiAPIBundle:Anime:getReviews, _format: json, apiVersion: '2.1' }
+    defaults: { _controller: AtarashiiAPIBundle:Record:getReviews, _format: json, apiVersion: '2.1', requestType: 'anime' }
     requirements:
         _method: GET
 
 _api2_1_reviews_manga:
     path: /manga/reviews/{id}
-    defaults: { _controller: AtarashiiAPIBundle:Manga:getReviews, _format: json, apiVersion: '2.1' }
+    defaults: { _controller: AtarashiiAPIBundle:Record:getReviews, _format: json, apiVersion: '2.1', requestType: 'manga' }
     requirements:
         _method: GET
 
 _api2_1_cast_anime:
     path: /anime/cast/{id}
-    defaults: { _controller: AtarashiiAPIBundle:Anime:getCast, _format: json, apiVersion: '2.1' }
+    defaults: { _controller: AtarashiiAPIBundle:Record:getCast, _format: json, apiVersion: '2.1', requestType: 'anime' }
     requirements:
         _method: GET
 
 _api2_1_cast_manga:
     path: /manga/cast/{id}
-    defaults: { _controller: AtarashiiAPIBundle:Manga:getCast, _format: json, apiVersion: '2.1' }
+    defaults: { _controller: AtarashiiAPIBundle:Record:getCast, _format: json, apiVersion: '2.1', requestType: 'manga' }
     requirements:
         _method: GET
 
 _api2_1_history_anime:
     path: /anime/history/{id}
-    defaults: { _controller: AtarashiiAPIBundle:Anime:getHistory, _format: json, apiVersion: '2.1' }
+    defaults: { _controller: AtarashiiAPIBundle:Record:getHistory, _format: json, apiVersion: '2.1', requestType: 'anime' }
     requirements:
         _method: GET
 
 _api2_1_history_manga:
     path: /manga/history/{id}
-    defaults: { _controller: AtarashiiAPIBundle:Manga:getHistory, _format: json, apiVersion: '2.1' }
+    defaults: { _controller: AtarashiiAPIBundle:Record:getHistory, _format: json, apiVersion: '2.1', requestType: 'manga' }
     requirements:
         _method: GET
 
 _api2_1_recommedations_anime:
     path: /anime/recs/{id}
-    defaults: { _controller: AtarashiiAPIBundle:Anime:getRecs, _format: json, apiVersion: '2.1' }
+    defaults: { _controller: AtarashiiAPIBundle:Record:getRecs, _format: json, apiVersion: '2.1', requestType: 'anime' }
     requirements:
         _method: GET
 
 _api2_1_recommedations_manga:
     path: /manga/recs/{id}
-    defaults: { _controller: AtarashiiAPIBundle:Manga:getRecs, _format: json, apiVersion: '2.1' }
+    defaults: { _controller: AtarashiiAPIBundle:Record:getRecs, _format: json, apiVersion: '2.1', requestType: 'manga' }
     requirements:
         _method: GET
 
 _api2_1_episodes_anime:
     path: /anime/episodes/{id}
-    defaults: { _controller: AtarashiiAPIBundle:Anime:getEps, _format: json, apiVersion: '2.1' }
+    defaults: { _controller: AtarashiiAPIBundle:Record:getEps, _format: json, apiVersion: '2.1' }
     requirements:
         _method: GET
 

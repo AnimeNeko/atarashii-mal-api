@@ -57,7 +57,7 @@ class ReviewParser
         $progress = $reviewHeader->filterXPath('//td[3]/div[2]')->text();
 
         if (preg_match('/(\d+) of (\d+|\?)/', $progress, $matches)) {
-            if ($type == 'A') {
+            if ($type === 'anime') {
                 $review->setWatchedEpisodes((int) $matches[1]);
 
                 if ($matches[2] != '?') {

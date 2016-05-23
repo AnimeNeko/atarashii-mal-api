@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Guzzle\Http\Exception;
 use Atarashii\APIBundle\Parser\AnimeParser;
+use Atarashii\APIBundle\Parser\MangaParser;
 use Atarashii\APIBundle\Parser\CastParser;
 use Atarashii\APIBundle\Parser\HistoryParser;
 use Atarashii\APIBundle\Parser\RecsParser;
@@ -22,23 +23,26 @@ use Atarashii\APIBundle\Parser\EpsParser;
 use Atarashii\APIBundle\Helper\Date;
 use JMS\Serializer\SerializationContext;
 
-class AnimeController extends FOSRestController
+class RecordController extends FOSRestController
 {
     /**
-     * Get the details of an anime.
+     * Get the details of an anime or manga.
      *
-     * @param int     $id         The ID of the anime as assigned by MyAnimeList
-     * @param string  $apiVersion The API version of the request
-     * @param Request $request    HTTP Request object
+     * @param int     $id          The ID of the anime or manga as assigned by MyAnimeList
+     * @param string  $apiVersion  The API version of the request
+     * @param Request $request     HTTP Request object
+     * @param string  $requestType The anime or manga request string
      *
      * @return View
      */
-    public function getAction($id, $apiVersion, Request $request)
+    public function getAction($id, $apiVersion, $requestType, Request $request)
     {
         //General information (and basic personal information) at:
         // http://myanimelist.net/anime/#{id}
+        // http://myanimelist.net/manga/#{id}
         //Detailed personal information at:
-        // http://myanimelist.net/editlist.php?type=anime&id={id}&hideLayout=true
+        // http://myanimelist.net/ownlist/anime/{id}/edit?hideLayout
+        // http://myanimelist.net/ownlist/manga/{id}/edit?hideLayout
 
         $usepersonal = (int) $request->query->get('mine');
 
@@ -62,28 +66,36 @@ class AnimeController extends FOSRestController
         }
 
         try {
-            $animedetails = $downloader->fetch('/anime/'.$id);
+            $recordDetails = $downloader->fetch('/'.$requestType.'/'.$id);
         } catch (Exception\CurlException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         } catch (Exception\ClientErrorResponseException $e) {
-            $animedetails = $e->getResponse();
+            $recordDetails = $e->getResponse();
         }
 
-        if ((strpos($animedetails, 'No series found') !== false) || (strpos($animedetails, 'This page doesn\'t exist') !== false)) {
-            return $this->view(array('error' => 'No series found, check the series id and try again.'), 404);
+        if ((strpos($recordDetails, 'No series found') !== false) || (strpos($recordDetails, 'This page doesn\'t exist') !== false)) {
+            return $this->view(array('error' => 'not-found'), 404);
         } else {
-            $anime = AnimeParser::parse($animedetails, $apiVersion);
+            if ($requestType === 'anime') {
+                $record = AnimeParser::parse($recordDetails, $apiVersion);
+            } else {
+                $record = MangaParser::parse($recordDetails, $apiVersion);
+            }
 
             //Parse extended personal details if API 2.0 or better and personal details are requested
             if ($apiVersion >= '2.0' && $usepersonal) {
                 try {
-                    $animedetails = $downloader->fetch('/editlist.php?type=anime&id='.$id.'&hideLayout=true');
+                    $recordDetails = $downloader->fetch('/ownlist/'.$requestType.'/'.$id.'/edit?hideLayout');
                 } catch (Exception\CurlException $e) {
                     return $this->view(array('error' => 'network-error'), 500);
                 }
 
-                if (strpos($animedetails, 'delete-form') !== false) {
-                    $anime = AnimeParser::parseExtendedPersonal($animedetails, $anime);
+                if (strpos($recordDetails, 'delete-form') !== false) {
+                    if ($requestType === 'anime') {
+                        $record = AnimeParser::parseExtendedPersonal($recordDetails, $record);
+                    } else {
+                        $record = MangaParser::parseExtendedPersonal($recordDetails, $record);
+                    }
                 }
             }
 
@@ -101,7 +113,7 @@ class AnimeController extends FOSRestController
                 $response->setPublic();
                 $response->setMaxAge(3600); //One hour
                 $response->headers->addCacheControlDirective('must-revalidate', true);
-                $response->setEtag('anime/'.$id);
+                $response->setEtag($requestType.'/'.$id);
 
                 //Also, set "expires" header for caches that don't understand Cache-Control
                 $date = new \DateTime();
@@ -109,7 +121,7 @@ class AnimeController extends FOSRestController
                 $response->setExpires($date);
             }
 
-            $view = $this->view($anime);
+            $view = $this->view($record);
 
             $view->setSerializationContext($serializationContext);
             $view->setResponse($response);
@@ -120,19 +132,21 @@ class AnimeController extends FOSRestController
     }
 
     /**
-     * Get the reviews of an anime.
+     * Get the reviews of an anime or manga.
      *
      * If there isn't any page passed it will use the most helpfull voted reviews.
      * These are determined by the ratio (helpfull:all).
      *
-     * @param int     $id      The ID of the anime as assigned by MyAnimeList
-     * @param Request $request HTTP Request object
+     * @param int     $id          The ID of the anime or manga as assigned by MyAnimeList
+     * @param Request $request     HTTP Request object
+     * @param string  $requestType The anime or manga request string
      *
      * @return View
      */
-    public function getReviewsAction($id, Request $request)
+    public function getReviewsAction($id, $requestType, Request $request)
     {
         // http://myanimelist.net/anime/#{id}/ /reviews&p=#{page}
+        // http://myanimelist.net/manga/#{id}/ /reviews&p=#{page}
         $downloader = $this->get('atarashii_api.communicator');
 
         $page = ((int) $request->query->get('page'));
@@ -141,7 +155,7 @@ class AnimeController extends FOSRestController
         }
 
         try {
-            $details = $downloader->fetch('/anime/'.$id.'/_/reviews&p='.$page);
+            $details = $downloader->fetch('/'.$requestType.'/'.$id.'/_/reviews&p='.$page);
         } catch (Exception\CurlException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
@@ -150,7 +164,7 @@ class AnimeController extends FOSRestController
         $response->setPublic();
         $response->setMaxAge(10800); //Three hour
         $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag('anime/reviews/'.$id.'?page='.$page);
+        $response->setEtag($requestType.'/reviews/'.$id.'?page='.$page);
 
         //Also, set "expires" header for caches that don't understand Cache-Control
         $date = new \DateTime();
@@ -164,7 +178,7 @@ class AnimeController extends FOSRestController
 
             return $view;
         } else {
-            $reviews = ReviewParser::parse($details, 'A'); //A = Anime
+            $reviews = ReviewParser::parse($details, $requestType);
 
             $view = $this->view($reviews);
             $view->setResponse($response);
@@ -175,25 +189,27 @@ class AnimeController extends FOSRestController
     }
 
     /**
-     * Get the cast of an anime.
+     * Get the cast of an anime or manga.
      *
-     * @param int $id The ID of the anime as assigned by MyAnimeList
+     * @param int    $id          The ID of the anime or manga as assigned by MyAnimeList
+     * @param string $requestType The anime or manga request string
      *
      * @return View
      */
-    public function getCastAction($id)
+    public function getCastAction($id, $requestType)
     {
         // http://myanimelist.net/anime/#{id}/ /characters
+        // http://myanimelist.net/manga/#{id}/ /characters
         $downloader = $this->get('atarashii_api.communicator');
 
         try {
-            $details = $downloader->fetch('/anime/'.$id.'/_/characters');
+            $details = $downloader->fetch('/'.$requestType.'/'.$id.'/_/characters');
         } catch (Exception\CurlException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
 
         if (strpos($details, 'No characters') !== false) {
-            return $this->view(array('error' => 'No characters were found. '), 200);
+            return $this->view(array('error' => 'not-found'), 200);
         } else {
             $cast = CastParser::parse($details);
 
@@ -201,7 +217,7 @@ class AnimeController extends FOSRestController
             $response->setPublic();
             $response->setMaxAge(86400); //One day
             $response->headers->addCacheControlDirective('must-revalidate', true);
-            $response->setEtag('anime/cast/'.$id);
+            $response->setEtag($requestType.'/cast/'.$id);
 
             //Also, set "expires" header for caches that don't understand Cache-Control
             $date = new \DateTime();
@@ -217,15 +233,17 @@ class AnimeController extends FOSRestController
     }
 
     /**
-     * Get the watching history of an anime.
+     * Get the watching history of an anime or manga.
      *
-     * @param int $id The ID of the anime as assigned by MyAnimeList
+     * @param int    $id          The ID of the anime or manga as assigned by MyAnimeList
+     * @param string $requestType The anime or manga request string
      *
      * @return View
      */
-    public function getHistoryAction($id)
+    public function getHistoryAction($id, $requestType)
     {
         // http://myanimelist.net/ajaxtb.php?detailedaid=#{id}
+        // http://myanimelist.net/ajaxtb.php?detailedmid=#{id}
 
         $downloader = $this->get('atarashii_api.communicator');
 
@@ -253,7 +271,11 @@ class AnimeController extends FOSRestController
         }
 
         try {
-            $content = $downloader->fetch('/ajaxtb.php?detailedaid='.$id);
+            if ($requestType === 'anime') {
+                $content = $downloader->fetch('/ajaxtb.php?detailedaid='.$id);
+            } else {
+                $content = $downloader->fetch('/ajaxtb.php?detailedmid='.$id);
+            }
             Date::setTimeZone($downloader->fetch('/editprofile.php'));
         } catch (Exception\CurlException $e) {
             return $this->view(array('error' => 'network-error'), 500);
@@ -267,7 +289,7 @@ class AnimeController extends FOSRestController
 
             return $view;
         } else {
-            $result = HistoryParser::parse($content, $id, 'anime');
+            $result = HistoryParser::parse($content, $id, $requestType);
 
             $view = $this->view($result);
             $view->setResponse(new Response());
@@ -278,19 +300,21 @@ class AnimeController extends FOSRestController
     }
 
     /**
-     * Get the recommendations of an anime.
+     * Get the recommendations of an anime or manga.
      *
-     * @param int $id The ID of the anime as assigned by MyAnimeList
+     * @param int    $id          The ID of the anime or manga as assigned by MyAnimeList
+     * @param string $requestType The anime or manga request string
      *
      * @return View
      */
-    public function getRecsAction($id)
+    public function getRecsAction($id, $requestType)
     {
         // http://myanimelist.net/anime/#{id}/_/userrecs
+        // http://myanimelist.net/manga/#{id}/_/userrecs
         $downloader = $this->get('atarashii_api.communicator');
 
         try {
-            $details = $downloader->fetch('/anime/'.$id.'/_/userrecs');
+            $details = $downloader->fetch('/'.$requestType.'/'.$id.'/_/userrecs');
         } catch (Exception\CurlException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
@@ -304,7 +328,7 @@ class AnimeController extends FOSRestController
             $response->setPublic();
             $response->setMaxAge(86400); //Two day
             $response->headers->addCacheControlDirective('must-revalidate', true);
-            $response->setEtag('anime/recs/'.$id);
+            $response->setEtag($requestType.'/recs/'.$id);
 
             //Also, set "expires" header for caches that don't understand Cache-Control
             $date = new \DateTime();
@@ -322,7 +346,8 @@ class AnimeController extends FOSRestController
     /**
      * Get the episodes of an anime.
      *
-     * @param int $id The ID of the anime as assigned by MyAnimeList
+     * @param int     $id      The ID of the anime as assigned by MyAnimeList
+     * @param Request $request HTTP Request object
      *
      * @return View
      */

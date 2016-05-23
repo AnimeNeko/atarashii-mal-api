@@ -3,7 +3,7 @@
 
 _api1_anime:
     path: /anime/{id}
-    defaults: { _controller: AtarashiiAPIBundle:Anime:get, _format: json, apiVersion: '1.0' }
+    defaults: { _controller: AtarashiiAPIBundle:Record:get, _format: json, apiVersion: '1.0', requestType: 'anime' }
     requirements:
         _method: GET
         id: \d+
@@ -36,7 +36,7 @@ _api1_animelist_delete:
 
 _api1_manga:
     path: /manga/{id}
-    defaults: { _controller: AtarashiiAPIBundle:Manga:get, _format: json, apiVersion: '1.0' }
+    defaults: { _controller: AtarashiiAPIBundle:Record:get, _format: json, apiVersion: '1.0', requestType: 'manga' }
     requirements:
         _method: GET
         id: \d+
