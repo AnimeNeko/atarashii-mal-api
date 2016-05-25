@@ -20,6 +20,7 @@ use Atarashii\APIBundle\Parser\CastParser;
 use Atarashii\APIBundle\Parser\HistoryParser;
 use Atarashii\APIBundle\Parser\RecsParser;
 use Atarashii\APIBundle\Parser\EpsParser;
+use Atarashii\APIBundle\Parser\ScheduleParser;
 use Atarashii\APIBundle\Helper\Date;
 use JMS\Serializer\SerializationContext;
 
@@ -389,5 +390,45 @@ class RecordController extends FOSRestController
 
             return $view;
         }
+    }
+
+    /**
+     * Get the airing schedule.
+     *
+     * @param Request $request HTTP Request object
+     *
+     * @return View
+     */
+    public function getScheduleAction(Request $request)
+    {
+        // http://myanimelist.net/anime/#{id}/_/episode
+        $downloader = $this->get('atarashii_api.communicator');
+
+        $timeZone = $request->query->get('timezone');
+
+        try {
+            $details = $downloader->fetch('/anime/season/schedule');
+        } catch (Exception\CurlException $e) {
+            return $this->view(array('error' => 'network-error'), 500);
+        }
+        
+        $result = ScheduleParser::parse($details, $timeZone);
+
+        $response = new Response();
+        $response->setPublic();
+        $response->setMaxAge(43200); //one day
+        $response->headers->addCacheControlDirective('must-revalidate', true);
+        $response->setEtag('anime/season/schedule'.$timeZone);
+
+        //Also, set "expires" header for caches that don't understand Cache-Control
+        $date = new \DateTime();
+        $date->modify('+43200 seconds'); //one day
+        $response->setExpires($date);
+
+        $view = $this->view($result);
+        $view->setResponse($response);
+        $view->setStatusCode(200);
+
+        return $view;
     }
 }

@@ -160,6 +160,14 @@
             <li><code>page</code>: The page which is an integer values and is set by default on 1.</li>
         </ul>
 
+        <h3>Airing schedule of Animes</h3>
+        <dl>
+            <dt>URI Format</dt><dd><span class="label label-success">API 2.1+</span> anime/schedule</dd>
+            <dt>Method</dt><dd>GET</dd>
+            <dt>Authentication</dt><dd>No</dd>
+        </dl>
+        <p>This will display the airing schedule. Output are objects with days as keys which will contain <a href="{{ path('_docs2_responses') }}#anime">anime objects</a> in an list.</p>
+
         <h3>Top Ranking Anime</h3>
         <dl>
             <dt>URI Format</dt><dd>anime/top</dd>
