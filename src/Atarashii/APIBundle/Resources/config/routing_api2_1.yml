@@ -312,7 +312,7 @@ _api2_1_browse_manga:
     requirements:
         _method: GET
 
-_api2_1_browse_anime:
+_api2_1_schedule_anime:
     path: /anime/schedule
     defaults: { _controller: AtarashiiAPIBundle:Record:getSchedule, _format: json, apiVersion: '2.1' }
     requirements:
