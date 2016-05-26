@@ -6,7 +6,7 @@ use Atarashii\APIBundle\Tests\Util\ConnectivityUtilities;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
- * Class AnimeRecordTest.
+ * Class RecordControllerTest.
  */
 class RecordControllerTest extends WebTestCase
 {
@@ -34,6 +34,33 @@ class RecordControllerTest extends WebTestCase
 
         AnimeRecordTest::testGetCastAction($this, $client);
         MangaRecordTest::testGetCastAction($this, $client);
+    }
+
+    public function testGetScheduleAction()
+    {
+        $client = $this->client;
+        
+        $client->request('GET', '/2.1/anime/schedule');
+
+        $rawContent = $client->getResponse()->getContent();
+        $statusCode = $client->getResponse()->getStatusCode();
+        $content = json_decode($rawContent);
+
+        $this->assertEquals(200, $statusCode);
+        $this->assertNotNull($content);
+
+        $item = $content->monday;
+        $item = $item[0];
+
+        $this->assertInternalType('int', $item->id);
+        $this->assertInternalType('string', $item->title);
+        $this->assertContains('cdn.myanimelist.net', $item->image_url);
+        $this->assertInternalType('int', $item->episodes);
+        $this->assertInternalType('string', $item->genres[0]);
+        $this->assertInternalType('float', $item->members_score);
+        $this->assertInternalType('int', $item->members_count);
+        $this->assertInternalType('string', $item->synopsis);
+        $this->assertInternalType('string', $item->producers[0]);
     }
 
     public function testGetReviewsAction()
