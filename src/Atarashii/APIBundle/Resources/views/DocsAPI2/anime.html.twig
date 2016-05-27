@@ -100,18 +100,18 @@
             <li><code>status</code>: An integer or specific string indicating the current status of the title for the user. Allowed values are 1/"watching", 2/"completed", 3/"on-hold"/"onhold", 4/"dropped", 6/"plan to watch"/"plantowatch".</li>
             <li><code>episodes</code>: The number of the last episode watched by the user.</li>
             <li><code>score</code>: An integer, from 1 to 10 indicating the user's score of the title.</li>
-            <li><span class="label label-success">NEW</span> <code>start</code>: The date the user started watching the anime title in ISO-8601 format (YYYY-MM-DD).</li>
-            <li><span class="label label-success">NEW</span> <code>end</code>: The date the user finished watching the anime title in ISO-8601 format (YYYY-MM-DD).</li>
-            <li><span class="label label-success">NEW</span> <code>downloaded_eps</code>: An integer indicating the number of episodes downloaded by the user.</li>
-            <li><span class="label label-success">NEW</span> <code>storage_type</code>: An integer indicating the type of storage being used by the user. Values are 1/Hard drive, 2/DVD or CD, 3/None, 4/Retail DVD, 5/VHS, 6/External HDD, or 7/NAS.</li>
-            <li><span class="label label-success">NEW</span> <code>storage_amt</code>: A decimal number indicating either disks or size in gigabytes depending on the storage type.</li>
-            <li><span class="label label-success">NEW</span> <code>priority</code>: An integer from 0 (low) to 2 (high) indicating the priority of the title for the user.</li>
-            <li><span class="label label-success">NEW</span> <code>rewatch_value</code>: An integer from 1 (very low) to 5 (very high) very high indicating how much value there is in rewatching the title.</li>
-            <li><span class="label label-success">NEW</span> <code>tags</code>: A comma-separated string of tags the user assigned to the title.</li>
-            <li><span class="label label-success">NEW</span> <code>comments</code>: A string containing comments on the title.</li>
-            <li><span class="label label-success">NEW</span> <code>fansubber</code>: A string with the name of the fansub group watched for the title.</li>
-            <li><span class="label label-success">NEW</span> <code>is_rewatching</code>: An integer indicating true (1) or false (0) if the user is currently rewatching the title.</li>
-            <li><span class="label label-success">NEW</span> <code>rewatch_count</code>: An integer indicating the number of times the user has rewatched the title. This does not count the first completed watch.</li>
+            <li><span class="label label-success">API 2+</span> <code>start</code>: The date the user started watching the anime title in ISO-8601 format (YYYY-MM-DD).</li>
+            <li><span class="label label-success">API 2+</span> <code>end</code>: The date the user finished watching the anime title in ISO-8601 format (YYYY-MM-DD).</li>
+            <li><span class="label label-success">API 2+</span> <code>downloaded_eps</code>: An integer indicating the number of episodes downloaded by the user.</li>
+            <li><span class="label label-success">API 2+</span> <code>storage_type</code>: An integer indicating the type of storage being used by the user. Values are 1/Hard drive, 2/DVD or CD, 3/None, 4/Retail DVD, 5/VHS, 6/External HDD, or 7/NAS.</li>
+            <li><span class="label label-success">API 2+</span> <code>storage_amt</code>: A decimal number indicating either disks or size in gigabytes depending on the storage type.</li>
+            <li><span class="label label-success">API 2+</span> <code>priority</code>: An integer from 0 (low) to 2 (high) indicating the priority of the title for the user.</li>
+            <li><span class="label label-success">API 2+</span> <code>rewatch_value</code>: An integer from 1 (very low) to 5 (very high) very high indicating how much value there is in rewatching the title.</li>
+            <li><span class="label label-success">API 2+</span> <code>tags</code>: A comma-separated string of tags the user assigned to the title.</li>
+            <li><span class="label label-success">API 2+</span> <code>comments</code>: A string containing comments on the title.</li>
+            <li><span class="label label-success">API 2+</span> <code>fansubber</code>: A string with the name of the fansub group watched for the title.</li>
+            <li><span class="label label-success">API 2+</span> <code>is_rewatching</code>: An integer indicating true (1) or false (0) if the user is currently rewatching the title.</li>
+            <li><span class="label label-success">API 2+</span> <code>rewatch_count</code>: An integer indicating the number of times the user has rewatched the title. This does not count the first completed watch.</li>
         </ul>
 
         <h3>Deleting an Anime</h3>
