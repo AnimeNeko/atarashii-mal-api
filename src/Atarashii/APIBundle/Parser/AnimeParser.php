@@ -401,7 +401,7 @@ class AnimeParser
                 if (strpos($duration, 'hr.') === true) {
                     preg_match('/(\d+) hr. (\d+) min/', $duration, $matches);
                     $animerecord->setDuration((int) $matches[0] * 60 + $matches[2]);
-                } else {
+                } else if (strpos($duration, 'Unknown') === false) {
                     preg_match('/(\d+) min/', $duration, $matches);
                     $animerecord->setDuration((int) $matches[0]);
                 }
