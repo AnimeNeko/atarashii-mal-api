@@ -110,7 +110,7 @@ class User
         }
 
         if ($userForumPosts->count() > 0) {
-            $details->setForumPosts((int) $userForumPosts->text());
+            $details->setForumPosts((int) str_replace(',', '', $userForumPosts->text()));
         }
 
         if ($apiVersion >= '2.1') {
