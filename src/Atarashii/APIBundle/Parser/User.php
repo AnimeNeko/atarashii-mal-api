@@ -57,6 +57,8 @@ class User
         $userForumPosts = $userStats->filterXPath('//*[text()="Forum Posts"]/../span[2]');
         $userWebsite = $content->filterXPath('//*[@class="user-profile-sns"][1]/a');
 
+        $details->setComments((int) trim(preg_replace('/(.+?)\((.+?)\)/', '$2', $content->filter('span[class="floatRightHeader ff-Verdana"]')->text())));
+        
         if ($userAccessLevel->count() > 0) {
             $details->setAccessRank($userAccessLevel->text());
         } else {
