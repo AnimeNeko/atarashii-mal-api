@@ -10,7 +10,7 @@ class ReviewTest extends \PHPUnit_Framework_TestCase
     {
         $reviewContents = file_get_contents(__DIR__.'/../InputSamples/anime-1887-reviews.html');
 
-        $reviews = ReviewParser::parse($reviewContents, 'A');
+        $reviews = ReviewParser::parse($reviewContents, 'anime');
 
         $this->assertInternalType('array', $reviews);
 
