@@ -86,13 +86,13 @@ class BrowseController extends FOSRestController
         $serializationContext->setVersion($apiVersion);
 
         $response->setPublic();
-        $response->setMaxAge(3600); //One hour
+        $response->setMaxAge(86400); //One day
         $response->headers->addCacheControlDirective('must-revalidate', true);
         $response->setEtag($type.'/'.$requestType.'?'.$url);
 
         //Also, set "expires" header for caches that don't understand Cache-Control
         $date = new \DateTime();
-        $date->modify('+3600 seconds'); //One hour
+        $date->modify('+86400 seconds'); //One day
         $response->setExpires($date);
 
         if ((strpos($content, 'No titles that matched') !== false) || (strpos($content, 'This page doesn\'t exist') !== false)) {
