@@ -39,7 +39,7 @@ class BrowseController extends FOSRestController
         }
 
         // Create URL parts supported by MAL
-        $page = '&show='.(($page * 50) - 50);
+        $pagePart = '&show='.(($page * 50) - 50);
 
         $keyword = '&q='.$request->query->get('keyword');
         $score = '&score='.((int) $request->query->get('score'));
@@ -71,7 +71,7 @@ class BrowseController extends FOSRestController
         }
 
         // Combine all URL parts for the request
-        $url = $genres.$sort.$reverse.$endDate.$startDate.$rating.$status.$type.$keyword.$score.$genreType.$page;
+        $url = $genres.$sort.$reverse.$endDate.$startDate.$rating.$status.$type.$keyword.$score.$genreType.$pagePart;
 
         try {
             $content = $downloader->fetch('/'.$requestType.'.php?c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&c[]=g'.$url);
@@ -95,8 +95,14 @@ class BrowseController extends FOSRestController
         $date->modify('+86400 seconds'); //One day
         $response->setExpires($date);
 
+        // MAL does contain a bug where excluded genres allow the same amount of pages as normal without warning
+        // To avoid issues we check if the page number does match the content page number.
+        preg_match('/>\[(\d+?)\]/', $content, $matches);
+
         if ((strpos($content, 'No titles that matched') !== false) || (strpos($content, 'This page doesn\'t exist') !== false)) {
             return $this->view(array('error' => 'not-found'), 404);
+        } else if (count($matches) > 1 && (int) $matches[1] !== $page) {
+            return $this->view(array(), 200);
         } else {
             //MAL now returns 404 on a single result. Workaround
             if (method_exists($content, 'getStatusCode') && $content->getStatusCode() === 404) {
