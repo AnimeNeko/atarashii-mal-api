@@ -1352,6 +1352,9 @@ class Manga
             case 8:
             case 'type':
                 return 8;
+            case 9:
+            case 'id':
+                return 9;
             default:
                 return 0;
         }
