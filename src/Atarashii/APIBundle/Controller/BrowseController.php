@@ -49,13 +49,13 @@ class BrowseController extends FOSRestController
         $status = '&status='.$this->getStatusId($request->query->get('status'));
         $endDateArray = explode('-', $request->query->get('end_date'));
         if (count($endDateArray) == 3) {
-            $endDate = '&ey='.$endDateArray[0].'&em='.$endDateArray[1].'&ed='.$endDateArray[3];
+            $endDate = '&ey='.$endDateArray[0].'&em='.$endDateArray[1].'&ed='.$endDateArray[2];
         } else {
             $endDate = '';
         }
         $startDateArray = explode('-', $request->query->get('start_date'));
         if (count($startDateArray) == 3) {
-            $startDate = '&sy='.$startDateArray[0].'&sm='.$startDateArray[1].'&sd='.$startDateArray[3];
+            $startDate = '&sy='.$startDateArray[0].'&sm='.$startDateArray[1].'&sd='.$startDateArray[2];
         } else {
             $startDate = '';
         }
