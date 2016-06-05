@@ -51,7 +51,7 @@ class Top
         //Pull out all the common parts
         $media->setId((int) str_replace('#area', '', $crawler->filter('a')->attr('id')));
         $media->setTitle($crawler->filter('a')->eq(1)->text());
-        $media->setImageUrl(str_replace('t.jpg', '.jpg', $crawler->filter('img')->attr('src'))); //Convert thumbnail to full size image by stripping the "t" in the filename
+        $media->setImageUrl(str_replace('t.jpg', '.jpg', $crawler->filter('img')->attr('data-src'))); //Convert thumbnail to full size image by stripping the "t" in the filename
         $media->setMembersCount((int) trim(str_replace(',', '', str_replace('members', '', $details[3]))));
 
         //Anime and manga have different details, so we grab an array of the list and then process based on the type
