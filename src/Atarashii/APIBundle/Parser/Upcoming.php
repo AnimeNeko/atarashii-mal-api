@@ -59,10 +59,7 @@ class Upcoming
 
         //Title Image
         //We need to do some string manipulation here so it doesn't return a tiny image
-        $imageUrl = $crawler->filter('img')->attr('src');
-        $imageUrl = preg_replace('/\?s.*$/', '', $imageUrl); //Remove session info
-        $imageUrl = preg_replace('/r\/[0-9]*?x[0-9]*?\//', '', $imageUrl); //Remove the resize part of the path
-        $media->setImageUrl($imageUrl);
+        $media->setImageUrl(str_replace('t.jpg', '.jpg', $crawler->filter('img')->attr('data-src')));
 
         $media->setType(trim($crawler->filterXPath('//td[3]')->text()));
 
