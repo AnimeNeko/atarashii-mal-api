@@ -44,7 +44,7 @@ class MangaParser
         # Title Image
         # Example:
         # <a href="http://myanimelist.net/manga/104/Yotsubato!/pic&pid=90029"><img src="http://cdn.myanimelist.net/images/manga/4/90029.jpg" alt="Yotsubato!" align="center"></a>
-        $mangarecord->setImageUrl($crawler->filter('div#content tr td div img')->attr('src'));
+        $mangarecord->setImageUrl(str_replace('t.jpg', '.jpg', $crawler->filter('div#content tr td div img')->attr('data-src')));
 
         // Left Column - Alt titles, info, stats, tags
         $leftcolumn = $crawler->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]');
