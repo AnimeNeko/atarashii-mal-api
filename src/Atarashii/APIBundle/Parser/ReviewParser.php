@@ -40,7 +40,7 @@ class ReviewParser
         $avatar = $reviewHeader->filterXPath('//td[1]//img');
 
         if ($avatar->count() > 0) {
-            $avatar = $avatar->attr('src');
+            $avatar = $avatar->attr('data-src');
             $avatar = str_replace('_thumb', '', $avatar);
             $avatar = str_replace('/thumbs', '', $avatar);
 
