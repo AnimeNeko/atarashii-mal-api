@@ -440,9 +440,9 @@ class AnimeParser
             foreach ($extracted as $recommendationsRow) {
                 $recommendationsCrawler = new Crawler($recommendationsRow);
                 $anime = new Anime();
-                $anime->setId(preg_replace('/(.+?)-/', '$2', $recommendationsCrawler->filter('a')->attr('href')));
+                $anime->setId(preg_replace('/(.+?)\/(\d+?)-'.$animerecord->getId().'/', '$2', $recommendationsCrawler->filter('a')->attr('href')));
                 $anime->setTitle($recommendationsCrawler->filter('span')->text());
-                $anime->setImageUrl(preg_replace('/(.+?)\'(.+?)\'(.+?)$/', '$2', $recommendationsCrawler->filter('a')->attr('style')));
+                $anime->setImageUrl(preg_replace('/r(.+?)\/(.+?)\?(.+?)$/','$2',$recommendationsCrawler->filter('img')->attr('data-src')));
                 $animerecord->setRecommendations($anime);
             }
         }
