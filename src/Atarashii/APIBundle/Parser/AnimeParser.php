@@ -440,7 +440,11 @@ class AnimeParser
             foreach ($extracted as $recommendationsRow) {
                 $recommendationsCrawler = new Crawler($recommendationsRow);
                 $anime = new Anime();
-                $anime->setId(preg_replace('/(.+?)\/(\d+?)-'.$animerecord->getId().'/', '$2', $recommendationsCrawler->filter('a')->attr('href')));
+                
+                // ID can be on either side of the hyphen
+                $tempId = preg_replace('/.*\//', '',  $recommendationsCrawler->filter('a')->attr('href')); // Put the 2 IDs into $tempId
+                $anime->setId(preg_replace('/(-|'.$animerecord->getId().')/', '', $tempId)); // Remove the hyphen and the current anime's id, leaving the desired id
+                
                 $anime->setTitle($recommendationsCrawler->filter('span')->text());
                 $anime->setImageUrl(preg_replace('/r(.+?)\/(.+?)\?(.+?)$/','$2',$recommendationsCrawler->filter('img')->attr('data-src')));
                 $animerecord->setRecommendations($anime);
