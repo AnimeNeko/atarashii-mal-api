@@ -65,7 +65,7 @@ class BrowseController extends FOSRestController
             $genres = Anime::getGenresId($request->query->get('genres'));
             $sort = '&o='.Anime::getColumnId($request->query->get('sort'), $requestType);
         } else {
-            $type = Manga::getTypeId($request->query->get('type'));
+            $type = '&type='.Manga::getTypeId($request->query->get('type'));
             $genres = Manga::getGenresId($request->query->get('genres'));
             $sort = '&o='.Manga::getColumnId($request->query->get('sort'), $requestType);
         }
