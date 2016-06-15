@@ -34,10 +34,7 @@ class ReviewParser
         $crawler = new Crawler($item);
         $review = new Review();
 
-        //Review Header and Body
-        $reviewHeader = $crawler->filterXPath('//div[contains(@class,"reviewDetails")]/table');
-
-        $avatar = $reviewHeader->filterXPath('//td[1]//img');
+        $avatar = $crawler->filterXPath('//td[1]//img');
 
         if ($avatar->count() > 0) {
             $avatar = $avatar->attr('data-src');
@@ -47,14 +44,14 @@ class ReviewParser
             $review->setAvatarUrl($avatar);
         }
 
-        $review->setUsername($reviewHeader->filterXPath('//td[2]/a')->text());
-        $review->setHelpful($reviewHeader->filterXPath('//td[2]/div//span')->text());
-        $review->setHelpfulTotal($reviewHeader->filterXPath('//td[2]/div//span')->text()); //Set to same as helpful for now, as the total votes are removed.
+        $review->setUsername($crawler->filterXPath('//td[2]/a')->text());
+        $review->setHelpful($crawler->filterXPath('//td[2]/div//span')->text());
+        $review->setHelpfulTotal($crawler->filterXPath('//td[2]/div//span')->text()); //Set to same as helpful for now, as the total votes are removed.
 
-        $review->setDate($reviewHeader->filterXPath('//td[3]/div[1]')->text());
+        $review->setDate($crawler->filterXPath('//td[3]/div[1]')->text());
 
         //Progress
-        $progress = $reviewHeader->filterXPath('//td[3]/div[2]')->text();
+        $progress = $crawler->filterXPath('//td[3]/div[2]')->text();
 
         if (preg_match('/(\d+) of (\d+|\?)/', $progress, $matches)) {
             if ($type === 'anime') {
@@ -73,7 +70,7 @@ class ReviewParser
         }
 
         //Rating
-        $rating = $reviewHeader->filterXPath('//td[3]/div[3]')->text();
+        $rating = $crawler->filterXPath('//td[3]/div[3]')->text();
 
         if (preg_match('/(\d+)/', $rating, $matches)) {
             $review->setRating((int) $matches[1]);
