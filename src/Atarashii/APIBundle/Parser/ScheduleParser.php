@@ -63,7 +63,7 @@ class ScheduleParser
                 $genreArray[] = $genreCrawler->text();
             }
             $anime->setGenres($genreArray);
-            $anime->setImageUrl(preg_replace('/background-image:url\((.+?)\);/', '$1', $crawler->filter('div[class="image"]')->attr('style')));
+            $anime->setImageUrl($crawler->filter('div[class="image lazyload"]')->attr('data-bg'));
             $anime->setSynopsis(trim($crawler->filter('div[class="synopsis js-synopsis"]')->text()));
             $detail = explode('-', $crawler->filter('div[class="info"]')->text());
             $anime->setType(trim($detail[0]));
