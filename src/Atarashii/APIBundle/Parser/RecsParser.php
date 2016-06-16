@@ -30,7 +30,7 @@ class RecsParser
             $crawler = new Crawler($historyItem);
             $anime = new Anime();
             $anime->setId(str_replace('#raArea1', '', $crawler->filter('a')->attr('id')));
-            $anime->setImageUrl(str_replace('t.jpg', '.jpg', $crawler->filter('img')->attr('data-src')));
+            $anime->setImageUrl(preg_replace('/r(.+?)\/(.+?)\?(.+?)$/', '$2', $crawler->filter('img')->attr('data-src')));
             $anime->setTitle($crawler->filter('strong')->text());
             $resultItem['item'] = $anime;
             $resultItem['recommendations'] = self::parseInformation($crawler);
