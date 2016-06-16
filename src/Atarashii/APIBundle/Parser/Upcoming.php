@@ -59,7 +59,7 @@ class Upcoming
 
         //Title Image
         //We need to do some string manipulation here so it doesn't return a tiny image
-        $media->setImageUrl(str_replace('t.jpg', '.jpg', $crawler->filter('img')->attr('data-src')));
+        $media->setImageUrl(preg_replace('/r(.+?)\/(.+?)\?(.+?)$/', '$2', $crawler->filter('img')->attr('data-src')));
 
         $media->setType(trim($crawler->filterXPath('//td[3]')->text()));
 
