@@ -76,7 +76,7 @@ class CastParser
                 if ($result > 0) {
                     $actor->setImage('http://cdn.myanimelist.net/images/voiceactors/'.$imageURL[1]);
                 } else {
-                    $actor->setImage($crawler->filter('img')->last()->attr('src'));
+                    $actor->setImage(preg_replace('/r(.+?)\/(.+?)\?(.+?)$/', '$2', $crawler->filter('img')->last()->attr('data-srcset')));
                 }
 
                 $cast->setActors($actor);
