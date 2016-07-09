@@ -20,7 +20,7 @@ class EpsParser
         $crawler = new Crawler();
         $crawler->addHTMLContent($contents, 'UTF-8');
 
-        $rows = $crawler->filter('tr[class="episode-list-data"]');
+        $rows = $crawler->filter('table[class="mt8 episode_list js-watch-episode-list ascend"] tr[class="episode-list-data"]');
 
         $result = array();
 
