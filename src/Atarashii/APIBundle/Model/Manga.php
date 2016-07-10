@@ -1120,7 +1120,7 @@ class Manga
      */
     public static function getGenresId($genreString)
     {
-        $genreArray = explode(',', str_replace(', ', '', $genreString));
+        $genreArray = explode(',', str_replace(', ', ',', $genreString));
         $genreIds = Array();
         if ($genreArray[0] !== '') {
             foreach ($genreArray as $genre) {
