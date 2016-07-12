@@ -134,7 +134,7 @@ class PersonParser
                 $characterName = $characterAnchor->text();
                 $characterUrl = $characterAnchor->attr('href');
                 $isMainCharacer = strpos($node->filterXPath('//td[3]/div')->text(), "Main") !== false;
-                $characterImage = $node->filterXPath('//td[4]/div/a/img')->attr('src');
+                $characterImage = preg_replace('/r(.+?)\/(.+?)\?(.+?)$/', '$2', $node->filterXPath('//td[4]/div/a/img')->attr('data-src'));
 
                 $match = preg_match('/\/(character)\/(\d+)\/.*?/', $characterUrl, $urlParts);
                 if ($match !== false && $match !== 0) {
@@ -152,7 +152,7 @@ class PersonParser
                 $animeDetails = $node->filterXPath('//td[2]/a');
 
                 // Fill in the anime details
-                $itemArray['anime']->setImageUrl($node->filterXPath('//td[1]/div/a/img')->attr('src'));
+                $itemArray['anime']->setImageUrl(preg_replace('/r(.+?)\/(.+?)\?(.+?)$/', '$2', $node->filterXPath('//td[1]/div/a/img')->attr('data-src')));
                 $itemArray['anime']->setTitle($animeDetails->text());
 
                 $match = preg_match('/\/(anime)\/(\d+)\/.*?/', $animeDetails->attr('href'), $urlParts);
@@ -196,7 +196,7 @@ class PersonParser
                 $animeDetails = $node->filterXPath('//td[2]/a');
 
                 // Fill in the anime details
-                $itemArray['anime']->setImageUrl($node->filterXPath('//td[1]/div/a/img')->attr('src'));
+                $itemArray['anime']->setImageUrl(preg_replace('/r(.+?)\/(.+?)\?(.+?)$/', '$2', $node->filterXPath('//td[1]/div/a/img')->attr('data-src')));
                 $itemArray['anime']->setTitle($animeDetails->text());
 
                 $match = preg_match('/\/(anime)\/(\d+)\/.*?/', $animeDetails->attr('href'), $urlParts);
@@ -227,7 +227,7 @@ class PersonParser
                 $mangaDetails = $node->filterXPath('//td[2]/a');
 
                 // Fill in the manga details
-                $itemArray['manga']->setImageUrl($node->filterXPath('//td[1]/div/a/img')->attr('src'));
+                $itemArray['manga']->setImageUrl(preg_replace('/r(.+?)\/(.+?)\?(.+?)$/', '$2', $node->filterXPath('//td[1]/div/a/img')->attr('data-src')));
                 $itemArray['manga']->setTitle($mangaDetails->text());
 
                 $match = preg_match('/\/(manga)\/(\d+)\/.*?/', $mangaDetails->attr('href'), $urlParts);
