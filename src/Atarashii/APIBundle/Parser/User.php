@@ -56,8 +56,11 @@ class User
         $userJoined = $userStats->filterXPath('//*[text()="Joined"]/../span[2]');
         $userForumPosts = $userStats->filterXPath('//*[text()="Forum Posts"]/../span[2]');
         $userWebsite = $content->filterXPath('//*[@class="user-profile-sns"][1]/a');
+        $comments = $content->filter('span[class="floatRightHeader ff-Verdana"]');
 
-        $details->setComments((int) trim(preg_replace('/(.+?)\((.+?)\)/', '$2', $content->filter('span[class="floatRightHeader ff-Verdana"]')->text())));
+        if ($comments->count() > 0) {
+            $details->setComments((int) trim(preg_replace('/(.+?)\((.+?)\)/', '$2', $comments->text())));
+        }
         
         if ($userAccessLevel->count() > 0) {
             $details->setAccessRank($userAccessLevel->text());
