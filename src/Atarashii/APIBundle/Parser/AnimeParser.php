@@ -41,7 +41,7 @@ class AnimeParser
         # Title Image
         # Example:
         # <a href="http://myanimelist.net/anime/16353/Love_Lab/pic&pid=50257"><img src="http://cdn.myanimelist.net/images/anime/12/50257.jpg" alt="Love Lab" align="center"></a>
-        $animerecord->setImageUrl(str_replace('t.jpg', '.jpg', $crawler->filter('div#content tr td div img')->attr('data-src')));
+        $animerecord->setImageUrl(str_replace('t.jpg', '.jpg', $crawler->filter('div#content tr td div img')->attr('src')));
 
         # Alternative Titles section.
         # Example:
