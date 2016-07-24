@@ -166,22 +166,22 @@ class User
             $planned = $statsStatus->filterXPath('//*[contains(attribute::class,"plantowatch")]/../span');
 
             if ($inProgress->count() > 0) {
-                $stats->setWatching((int) $inProgress->text());
+                $stats->setWatching((int) str_replace(',', '', $inProgress->text()));
             }
 
             if ($planned->count() > 0) {
-                $stats->setPlanToWatch((int) $planned->text());
+                $stats->setPlanToWatch((int) str_replace(',', '', $planned->text()));
             }
         } elseif ($mediaType == 'manga') {
             $inProgress = $statsStatus->filterXPath('//*[contains(attribute::class,"reading")]/../span');
             $planned = $statsStatus->filterXPath('//*[contains(attribute::class,"plantoread")]/../span');
 
             if ($inProgress->count() > 0) {
-                $stats->setReading((int) $inProgress->text());
+                $stats->setReading((int) str_replace(',', '', $inProgress->text()));
             }
 
             if ($planned->count() > 0) {
-                $stats->setPlanToRead((int) $planned->text());
+                $stats->setPlanToRead((int) str_replace(',', '', $planned->text()));
             }
         }
 
@@ -190,15 +190,15 @@ class User
         $dropped = $statsStatus->filterXPath('//*[contains(attribute::class,"dropped")]/../span');
 
         if ($completed->count() > 0) {
-            $stats->setCompleted((int) $completed->text());
+            $stats->setCompleted((int) str_replace(',', '', $completed->text()));
         }
 
         if ($onHold->count() > 0) {
-            $stats->setOnHold((int) $onHold->text());
+            $stats->setOnHold((int) str_replace(',', '', $onHold->text()));
         }
 
         if ($dropped->count() > 0) {
-            $stats->setDropped((int) $dropped->text());
+            $stats->setDropped((int) str_replace(',', '', $dropped->text()));
         }
 
         //Summary Stats
@@ -207,7 +207,7 @@ class User
         $totalEntries = $statsSummary->filterXPath('//li[1]/span[2]');
 
         if ($totalEntries->count() > 0) {
-            $stats->setTotalEntries((int) $totalEntries->text());
+            $stats->setTotalEntries((int) str_replace(',', '', $totalEntries->text()));
         }
 
         if ($apiVersion >= '2.1') {
