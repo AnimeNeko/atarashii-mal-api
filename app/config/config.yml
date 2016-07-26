@@ -1,6 +1,11 @@
 imports:
     - { resource: parameters.yml }
 
+# Put parameters here that don't need to change on each machine where the app is deployed
+# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: en
+
 framework:
     #esi:             ~
     #translator:      { fallbacks: ["%locale%"] }
@@ -11,12 +16,15 @@ framework:
     form:            ~
     csrf_protection: ~
     validation:      { enable_annotations: true }
+    #serializer:      { enable_annotations: true }
     templating:
         engines: ['twig']
-        #assets_version: SomeVersionScheme
     default_locale:  "%locale%"
+    trusted_hosts:   ~
     trusted_proxies: ~
-    session:         ~
+    session:
+        # handler_id set to null will use default session handler from php.ini
+        handler_id:  ~
     fragments:       ~
     http_method_override: true
 
@@ -42,7 +50,7 @@ assetic:
             apply_to: '\.less$'
 
 braincrafted_bootstrap:
-    less_filter: lessphp
+    css_preprocessor: lessphp
 
 sensio_framework_extra:
     view:

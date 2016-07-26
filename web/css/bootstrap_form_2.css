@@ -23,8 +23,14 @@
   display: inline-block;
   width: auto;
 }
+.form-group .bc-collection {
+  margin-bottom: 0;
+}
 .form-group .bc-collection li + li {
   margin-top: 10px;
+}
+.form-group .bc-collection li:nth-last-child(1) {
+  margin-bottom: 10px;
 }
 .form-inline .form-group {
   margin-left: 0;
