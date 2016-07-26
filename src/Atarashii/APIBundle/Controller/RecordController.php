@@ -13,7 +13,7 @@ use Atarashii\APIBundle\Parser\ReviewParser;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Guzzle\Http\Exception;
+use GuzzleHttp\Exception;
 use Atarashii\APIBundle\Parser\AnimeParser;
 use Atarashii\APIBundle\Parser\MangaParser;
 use Atarashii\APIBundle\Parser\CastParser;
@@ -61,17 +61,17 @@ class RecordController extends FOSRestController
 
                     return $view;
                 }
-            } catch (Exception\CurlException $e) {
+            } catch (Exception\ServerException $e) {
                 return $this->view(array('error' => 'network-error'), 500);
             }
         }
 
         try {
             $recordDetails = $downloader->fetch('/'.$requestType.'/'.$id);
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ServerException $e) {
             return $this->view(array('error' => 'network-error'), 500);
-        } catch (Exception\ClientErrorResponseException $e) {
-            $recordDetails = $e->getResponse();
+        } catch (Exception\ClientException $e) {
+            $recordDetails = $e->getResponse()->getBody();
         }
 
         if ((strpos($recordDetails, 'No series found') !== false) || (strpos($recordDetails, 'This page doesn\'t exist') !== false)) {
@@ -87,7 +87,7 @@ class RecordController extends FOSRestController
             if ($apiVersion >= '2.0' && $usepersonal) {
                 try {
                     $recordDetails = $downloader->fetch('/ownlist/'.$requestType.'/'.$id.'/edit?hideLayout');
-                } catch (Exception\CurlException $e) {
+                } catch (Exception\ServerException $e) {
                     return $this->view(array('error' => 'network-error'), 500);
                 }
 
@@ -157,7 +157,7 @@ class RecordController extends FOSRestController
 
         try {
             $details = $downloader->fetch('/'.$requestType.'/'.$id.'/_/reviews&p='.$page);
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ServerException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
 
@@ -205,7 +205,7 @@ class RecordController extends FOSRestController
 
         try {
             $details = $downloader->fetch('/'.$requestType.'/'.$id.'/_/characters');
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ServerException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
 
@@ -267,7 +267,7 @@ class RecordController extends FOSRestController
 
                 return $view;
             }
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ServerException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
 
@@ -278,10 +278,10 @@ class RecordController extends FOSRestController
                 $content = $downloader->fetch('/ajaxtb.php?detailedmid='.$id);
             }
             Date::setTimeZone($downloader->fetch('/editprofile.php'));
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ServerException $e) {
             return $this->view(array('error' => 'network-error'), 500);
-        } catch (Exception\ClientErrorResponseException $e) {
-            $content = $e->getResponse();
+        } catch (Exception\ClientException $e) {
+            $content = $e->getResponse()->getBody();
         }
 
         if (strpos($content, 'Not logged in') !== false) {
@@ -316,7 +316,7 @@ class RecordController extends FOSRestController
 
         try {
             $details = $downloader->fetch('/'.$requestType.'/'.$id.'/_/userrecs');
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ServerException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
 
@@ -364,7 +364,7 @@ class RecordController extends FOSRestController
 
         try {
             $details = $downloader->fetch('/anime/'.$id.'/_/episode?offset='.(($page * 100) - 100));
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ServerException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
 
@@ -408,7 +408,7 @@ class RecordController extends FOSRestController
 
         try {
             $details = $downloader->fetch('/anime/season/schedule');
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ServerException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
         

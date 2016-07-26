@@ -13,7 +13,7 @@ namespace Atarashii\APIBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Response;
-use Guzzle\Http\Exception;
+use GuzzleHttp\Exception;
 use Atarashii\APIBundle\Parser\PersonParser;
 
 class PersonController extends FOSRestController
@@ -32,10 +32,10 @@ class PersonController extends FOSRestController
 
         try {
             $personDetails = $downloader->fetch('/people/'.$id);
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ServerException $e) {
             return $this->view(array('error' => 'network-error'), 500);
-        } catch (Exception\ClientErrorResponseException $e) {
-            $personDetails = $e->getResponse();
+        } catch (Exception\ClientException $e) {
+            $personDetails = $e->getResponse()->getBody();
         }
 
         if (strpos($personDetails, 'This page doesn\'t exist') !== false) {

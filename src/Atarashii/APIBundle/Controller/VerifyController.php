@@ -4,13 +4,13 @@
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
-* @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
+* @copyright 2014-2016 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
 namespace Atarashii\APIBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
-use Guzzle\Http\Exception;
+use GuzzleHttp\Exception;
 
 class VerifyController extends FOSRestController
 {
@@ -50,7 +50,7 @@ class VerifyController extends FOSRestController
                 $connection->fetch('/api/account/verify_credentials.xml', $username, $password);
 
                 return $this->view(array('authorized' => 'OK'), 200);
-            } catch (Exception\ClientErrorResponseException $e) {
+            } catch (Exception\ClientException $e) {
                 if ($tryCount >= 3) {
                     $view = $this->view(array('error' => 'unauthorized'), 401);
                     $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
@@ -62,7 +62,7 @@ class VerifyController extends FOSRestController
 
                 //Sleep for 0.50 seconds (50,000 microseconds)
                 usleep(500000);
-            } catch (Exception\CurlException $e) {
+            } catch (Exception\ServerException $e) {
                 return $this->view(array('error' => 'network-error'), 500);
             }
         } while ($tryCount < 4);

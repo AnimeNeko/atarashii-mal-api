@@ -13,7 +13,7 @@ use Atarashii\APIBundle\Parser\ForumParser;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Guzzle\Http\Exception;
+use GuzzleHttp\Exception;
 use Atarashii\APIBundle\Parser\Upcoming;
 use Atarashii\APIBundle\Parser\SearchParser;
 use Atarashii\APIBundle\Parser\AnimeParser;
@@ -95,10 +95,10 @@ class SearchController extends FOSRestController
 
         try {
             $content = $downloader->fetch('/api/'.$type.'/search.xml?q='.$query, $username, $password);
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ServerException $e) {
             return $this->view(array('error' => 'network-error'), 500);
-        } catch (Exception\ClientErrorResponseException $e) {
-            $content = $e->getResponse();
+        } catch (Exception\ClientException $e) {
+            $content = $e->getResponse()->getBody();
         }
 
         $result = SearchParser::parse($content, $type);
@@ -152,9 +152,9 @@ class SearchController extends FOSRestController
 
         try {
             $content = $downloader->fetch('/'.$type.'.php?c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&q='.$query.'&show='.(($page * 50) - 50));
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ServerException $e) {
             return $this->view(array('error' => 'network-error'), 500);
-        } catch (Exception\ClientErrorResponseException $e) {
+        } catch (Exception\ClientException $e) {
             //MAL now returns 404 on searches without results.
             //We still need the content for logic purposes.
             $content = $e->getResponse();
@@ -198,7 +198,7 @@ class SearchController extends FOSRestController
                     } else {
                         $searchResult = array(MangaParser::parse($content));
                     }
-                } catch (Exception\CurlException $e) {
+                } catch (Exception\ServerException $e) {
                     return $this->view(array('error' => 'network-error'), 500);
                 }
             } else {
@@ -251,7 +251,7 @@ class SearchController extends FOSRestController
 
         try {
             $content = $downloader->fetch('/forum/?action=search&q='.$query.'&u='.$user.'&uloc='.$userCategory.'&loc='.$category);
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ServerException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
 

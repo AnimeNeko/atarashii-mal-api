@@ -12,7 +12,7 @@ namespace Atarashii\APIBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Guzzle\Http\Exception;
+use GuzzleHttp\Exception;
 use Atarashii\APIBundle\Model\Manga;
 use FOS\RestBundle\Context\Context;
 use DateTime;
@@ -36,7 +36,7 @@ class MangaListController extends FOSRestController
 
         try {
             $mangalistcontent = $downloader->fetch('/malappinfo.php?u='.$username.'&status=all&type=manga');
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ServerException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
 
@@ -153,15 +153,15 @@ class MangaListController extends FOSRestController
             $connection->sendXML('/api/mangalist/add/'.$manga->getId().'.xml', $xmlcontent, $username, $password);
 
             return $this->view('ok', 201);
-        } catch (Exception\ClientErrorResponseException $e) {
+        } catch (Exception\ClientException $e) {
             $view = $this->view(array('error' => 'unauthorized'), 401);
             $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
 
             return $view;
-        } catch (Exception\ServerErrorResponseException $e) {
+        } catch (Exception\ServerException $e) {
             //MAL broke API responses, so we have to check the content on the response to make sure
             //it actually was an error.
-            $response = $e->getResponse()->getBody(true);
+            $response = $e->getResponse()->getBody();
 
             if (preg_match('/^\d+?<!DOCTYPE/', $response) === 1) {
                 return $this->view('ok', 200);
@@ -170,7 +170,7 @@ class MangaListController extends FOSRestController
             }
 
             return $this->view(array('error' => 'not-found'), 404);
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ConnectException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
     }
@@ -292,22 +292,22 @@ class MangaListController extends FOSRestController
             $connection->sendXML('/api/mangalist/update/'.$manga->getId().'.xml', $xmlcontent, $username, $password);
 
             return $this->view('ok', 200);
-        } catch (Exception\ClientErrorResponseException $e) {
+        } catch (Exception\ClientException $e) {
             $view = $this->view(array('error' => 'unauthorized'), 401);
             $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
 
             return $view;
-        } catch (Exception\ServerErrorResponseException $e) {
+        } catch (Exception\ServerException $e) {
             //MAL broke API responses, so we have to check the content on the response to make sure
             //it actually was an error.
-            $response = $e->getResponse()->getBody(true);
+            $response = $e->getResponse()->getBody();
 
             if (stripos($response, 'Updated') === 0) {
                 return $this->view('ok', 200);
             }
 
             return $this->view(array('error' => 'not-found'), 404);
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ConnectException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
     }
@@ -347,12 +347,12 @@ class MangaListController extends FOSRestController
             $connection->sendXML('/api/mangalist/delete/'.$id.'.xml', '', $username, $password);
 
             return $this->view('ok', 200);
-        } catch (Exception\ClientErrorResponseException $e) {
+        } catch (Exception\ClientException $e) {
             $view = $this->view(array('error' => 'unauthorized'), 401);
             $view->setHeader('WWW-Authenticate', 'Basic realm="myanimelist.net"');
 
             return $view;
-        } catch (Exception\ServerErrorResponseException $e) {
+        } catch (Exception\ServerException $e) {
             //MAL broke API responses, so we have to check the content on the response to make sure
             //it actually was an error.
             $response = $e->getResponse()->getBody(true);
@@ -362,7 +362,7 @@ class MangaListController extends FOSRestController
             }
 
             return $this->view(array('error' => 'not-found'), 404);
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ConnectException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
     }

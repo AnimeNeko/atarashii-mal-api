@@ -4,39 +4,40 @@
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
-* @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
+* @copyright 2014-2016 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
 namespace Atarashii\APIBundle\Service;
 
 use Symfony\Component\DomCrawler\Crawler;
-use Guzzle\Http\Client;
-use Guzzle\Http\Exception;
-use Guzzle\Plugin\Cookie\CookiePlugin;
-use Guzzle\Plugin\Cookie\CookieJar\ArrayCookieJar;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception;
 
 class Communicator
 {
     private $useragent;
-    private $baseurl;
     private $client;
-    private $cookies;
     private $response;
 
     /**
      * Create an instance of the communicator.
      *
-     * @param string $baseurl The base URL for the communications. Do not use a terminating slash.
-     * @param string $ua      User-Agent to send.
+     * @param string $baseUrl   The base URL for the communications. Do not use a terminating slash.
+     * @param string $userAgent User-Agent to send.
      */
-    public function __construct($baseurl, $ua)
+    public function __construct($baseUrl, $userAgent)
     {
-        $this->useragent = $ua;
-        $this->cookies = new CookiePlugin(new ArrayCookieJar());
+        $this->useragent = $userAgent;
+
+        //Default Options to use in Request
+        $requestOptions = Array();
+        $requestOptions['base_uri'] = $baseUrl;
+        $requestOptions['cookies'] = true;
+        $requestOptions['headers']['User-Agent'] = $this->useragent;
+        $requestOptions['allow_redirects']['track_redirects'] = true;
 
         // create http client instance
-        $this->client = new Client($baseurl);
-        $this->client->addSubscriber($this->cookies);
+        $this->client = new Client($requestOptions);
     }
 
     /**
@@ -89,18 +90,18 @@ class Communicator
             return false;
         }
 
+        //Options for the request
+        $requestOptions = Array();
+
+        //Our post form fields are stored in an array named "form_params" in the request options.
+        $requestOptions['form_params'] = Array();
+        $requestOptions['form_params']['user_name'] = $username;
+        $requestOptions['form_params']['password'] = $password;
+        $requestOptions['form_params']['submit'] = 'Login';
+        $requestOptions['form_params']['csrf_token'] = $token;
+
         // create a request
-        $request = $this->client->post('/login.php');
-        $request->setHeader('User-Agent', $this->useragent);
-
-        //Add our data transmission - MAL requires the XML content to be in a variable named "data"
-        $request->setPostField('user_name', $username);
-        $request->setPostField('password', $password);
-        $request->setPostField('submit', 'Login');
-        $request->setPostField('csrf_token', $token);
-
-        // send request / get response
-        $this->response = $request->send();
+        $this->response = $this->client->post('/login.php', $requestOptions);
 
         if (strpos($this->response->getBody(), 'Invalid password') !== false || strpos($this->response->getBody(), 'Could not find that username') !== false) {
             return false;
@@ -120,16 +121,14 @@ class Communicator
      */
     public function fetch($url, $username = null, $password = null)
     {
-        // create a request
-        $request = $this->client->get($url);
-        $request->setHeader('User-Agent', $this->useragent);
+        $requestOptions = Array();
 
         if ($username) {
-            $request->setAuth($username, $password);
+            $requestOptions['auth'] = array($username, $password);
         }
 
-        // send request / get response
-        $this->response = $request->send();
+        // create a request
+        $this->response = $this->client->get($url, $requestOptions);
 
         // this is the response body from the requested page
         return $this->response->getBody();
@@ -146,18 +145,17 @@ class Communicator
      */
     public function sendMessage($url, $subject, $message)
     {
-        // create a request
-        $request = $this->client->post('http://myanimelist.net/mymessages.php?go=send&'.$url);
-        $request->setHeader('User-Agent', $this->useragent);
+        $requestOptions = Array();
 
-        //Add our data transmission - MAL requires the XML content to be in a variable named "data"
-        $request->setPostField('subject', $subject);
-        $request->setPostField('message', $message);
-        $request->setPostField('csrf_token', $this->getCsrfToken());
-        $request->setPostField('sendmessage', 'Send Message');
+        //Our post form fields are stored in an array named "form_params" in the request options.
+        $requestOptions['form_params'] = Array();
+        $requestOptions['form_params']['subject'] = $subject;
+        $requestOptions['form_params']['message'] = $message;
+        $requestOptions['form_params']['csrf_token'] = $this->getCsrfToken();
+        $requestOptions['form_params']['sendmessage'] = 'Send Message';
 
-        // send request / get response
-        $this->response = $request->send();
+
+        $this->response = $this->client->post('/mymessages.php?go=send&'.$url, $requestOptions);
 
         // this is the response body from the requested page
         return $this->response->getBody();
@@ -174,18 +172,16 @@ class Communicator
      */
     public function createTopic($id, $title, $message)
     {
-        // create a request
-        $request = $this->client->post('http://myanimelist.net/forum/?action=post&boardid='.$id);
-        $request->setHeader('User-Agent', $this->useragent);
+        $requestOptions = Array();
 
-        //Add our data transmission - MAL requires the XML content to be in a variable named "data"
-        $request->setPostField('topic_title', $title);
-        $request->setPostField('msg_text', $message);
-        $request->setPostField('csrf_token', $this->getCsrfToken());
-        $request->setPostField('submit', 'Submit');
+        //Our post form fields are stored in an array named "form_params" in the request options.
+        $requestOptions['form_params'] = Array();
+        $requestOptions['form_params']['topic_title'] = $title;
+        $requestOptions['form_params']['msg_text'] = $message;
+        $requestOptions['form_params']['csrf_token'] = $this->getCsrfToken();
+        $requestOptions['form_params']['submit'] = 'Submit';
 
-        // send request / get response
-        $this->response = $request->send();
+        $this->response = $this->client->post('/forum/?action=post&boardid='.$id, $requestOptions);
 
         // this is the response body from the requested page
         return $this->response->getBody();
@@ -201,17 +197,15 @@ class Communicator
      */
     public function createComment($id, $message)
     {
-        // create a request
-        $request = $this->client->post('http://myanimelist.net/forum/?action=message&topic_id='.$id);
-        $request->setHeader('User-Agent', $this->useragent);
+        $requestOptions = Array();
 
-        //Add our data transmission - MAL requires the XML content to be in a variable named "data"
-        $request->setPostField('msg_text', $message);
-        $request->setPostField('csrf_token', $this->getCsrfToken());
-        $request->setPostField('submit', 'Submit');
+        //Our post form fields are stored in an array named "form_params" in the request options.
+        $requestOptions['form_params'] = Array();
+        $requestOptions['form_params']['msg_text'] = $message;
+        $requestOptions['form_params']['csrf_token'] = $this->getCsrfToken();
+        $requestOptions['form_params']['submit'] = 'Submit';
 
-        // send request / get response
-        $this->response = $request->send();
+        $this->response = $this->client->post('/forum/?action=message&topic_id='.$id, $requestOptions);
 
         // this is the response body from the requested page
         return $this->response->getBody();
@@ -227,17 +221,15 @@ class Communicator
      */
     public function edithComment($id, $message)
     {
-        // create a request
-        $request = $this->client->post('http://myanimelist.net/forum/?action=message&msgid='.$id);
-        $request->setHeader('User-Agent', $this->useragent);
+        $requestOptions = Array();
 
-        //Add our data transmission - MAL requires the XML content to be in a variable named "data"
-        $request->setPostField('msg_text', $message);
-        $request->setPostField('csrf_token', $this->getCsrfToken());
-        $request->setPostField('submit', 'Submit');
+        //Our post form fields are stored in an array named "form_params" in the request options.
+        $requestOptions['form_params'] = Array();
+        $requestOptions['form_params']['msg_text'] = $message;
+        $requestOptions['form_params']['csrf_token'] = $this->getCsrfToken();
+        $requestOptions['form_params']['submit'] = 'Submit';
 
-        // send request / get response
-        $this->response = $request->send();
+        $this->response = $this->client->post('/forum/?action=message&msgid='.$id, $requestOptions);
 
         // this is the response body from the requested page
         return $this->response->getBody();
@@ -260,18 +252,19 @@ class Communicator
      */
     public function sendXML($url, $content, $username = null, $password = null)
     {
-        // create a request
-        $request = $this->client->post($url);
-        $request->setHeader('User-Agent', $this->useragent);
+        $requestOptions = Array();
 
         if ($username) {
-            $request->setAuth($username, $password);
+            $requestOptions['auth'] = array($username, $password);
         }
+
+        //Our post form fields are stored in an array named "form_params" in the request options.
+        $requestOptions['form_params'] = Array();
 
         //Add our data transmission - MAL requires the XML content to be in a variable named "data"
         //If the content is empty, don't send the data.
         if ($content !== '') {
-            $request->setPostField('data', $content);
+            $requestOptions['form_params']['data'] = $content;
         }
 
         // Count the times we have tried
@@ -280,11 +273,12 @@ class Communicator
         do {
             try {
                 // send request / get response
-                $this->response = $request->send();
+                // create a request
+                $this->response = $this->client->post($url, $requestOptions);
 
                 // this is the response body from the requested page
                 return $this->response->getBody();
-            } catch (Exception\ClientErrorResponseException $e) {
+            } catch (Exception\ServerException $e) {
                 if ($tryCount >= 3) {
                     throw $e;
                 }
@@ -304,7 +298,9 @@ class Communicator
      */
     public function wasRedirected()
     {
-        if ($this->response->getRedirectCount()) {
+        $redirects = $this->response->getHeader('X-Guzzle-Redirect-History');
+
+        if (count($redirects)) {
             return true;
         } else {
             return false;

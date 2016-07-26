@@ -4,7 +4,7 @@
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
-* @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
+* @copyright 2014-2016 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
 namespace Atarashii\APIBundle\Controller;
@@ -12,7 +12,7 @@ namespace Atarashii\APIBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Guzzle\Http\Exception;
+use GuzzleHttp\Exception;
 use Atarashii\APIBundle\Helper\Date;
 use Atarashii\APIBundle\Parser\MessagesParser;
 
@@ -51,7 +51,7 @@ class MessagesController extends FOSRestController
             }
             Date::setTimeZone($downloader->fetch('/editprofile.php'));
             $messagesdetails = $downloader->fetch('/mymessages.php?go=&show='.(($page * 20) - 20));
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ClientException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
 
@@ -100,7 +100,7 @@ class MessagesController extends FOSRestController
                 return $view;
             }
             $messagesdetails = $downloader->fetch('/mymessages.php?go=read&id='.$id);
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ClientException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
 
@@ -149,7 +149,7 @@ class MessagesController extends FOSRestController
                 return $view;
             }
             $messagesdetails = $downloader->fetch('http://myanimelist.net/mymessages.php?go=delete&id='.$id);
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ClientException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
 
@@ -198,7 +198,7 @@ class MessagesController extends FOSRestController
                 return $view;
             }
             $messagesdetails = $downloader->sendMessage('threadid='.$id.'&toname='.$send_username, $subject, $message);
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ClientException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
 

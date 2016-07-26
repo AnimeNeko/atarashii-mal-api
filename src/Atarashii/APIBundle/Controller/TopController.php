@@ -12,7 +12,7 @@ namespace Atarashii\APIBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Guzzle\Http\Exception;
+use GuzzleHttp\Exception;
 use Atarashii\APIBundle\Parser\Top;
 use FOS\RestBundle\Context\Context;
 
@@ -58,7 +58,7 @@ class TopController extends FOSRestController
 
         try {
             $animecontent = $downloader->fetch('/topanime.php?type='.$type.'&limit='.(($page * 50) - 50));
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ServerException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
 
@@ -149,7 +149,7 @@ class TopController extends FOSRestController
 
         try {
             $mangacontent = $downloader->fetch('/topmanga.php?type='.$type.'&limit='.(($page * 50) - 50));
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ServerException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
 
@@ -222,7 +222,7 @@ class TopController extends FOSRestController
 
         try {
             $animecontent = $downloader->fetch('/topanime.php?type=bypopularity&limit='.(($page * 50) - 50));
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ServerException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
 
@@ -290,7 +290,7 @@ class TopController extends FOSRestController
 
         try {
             $mangacontent = $downloader->fetch('/topmanga.php?type=bypopularity&limit='.(($page * 50) - 50));
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ServerException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
 

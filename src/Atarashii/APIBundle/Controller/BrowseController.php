@@ -14,7 +14,7 @@ use Atarashii\APIBundle\Model\Manga;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Guzzle\Http\Exception;
+use GuzzleHttp\Exception;
 use Atarashii\APIBundle\Parser\AnimeParser;
 use Atarashii\APIBundle\Parser\MangaParser;
 use Atarashii\APIBundle\Parser\Upcoming;
@@ -75,10 +75,10 @@ class BrowseController extends FOSRestController
 
         try {
             $content = $downloader->fetch('/'.$requestType.'.php?c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&c[]=g'.$url);
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ServerException $e) {
             return $this->view(array('error' => 'network-error'), 500);
-        } catch (Exception\ClientErrorResponseException $e) {
-            $content = $e->getResponse();
+        } catch (Exception\ClientException $e) {
+            $content = $e->getResponse()->getBody();
         }
 
         $response = new Response();
@@ -115,7 +115,7 @@ class BrowseController extends FOSRestController
                     } else {
                         $searchResult = array(MangaParser::parse($content));
                     }
-                } catch (Exception\CurlException $e) {
+                } catch (Exception\ServerException $e) {
                     return $this->view(array('error' => 'network-error'), 500);
                 }
             } else {

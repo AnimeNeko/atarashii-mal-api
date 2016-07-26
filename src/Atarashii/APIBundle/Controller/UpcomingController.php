@@ -12,7 +12,7 @@ namespace Atarashii\APIBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Guzzle\Http\Exception;
+use GuzzleHttp\Exception;
 use Atarashii\APIBundle\Parser\Upcoming;
 use FOS\RestBundle\Context\Context;
 
@@ -57,7 +57,7 @@ class UpcomingController extends FOSRestController
 
         try {
             $animecontent = $downloader->fetch('/anime.php?sd='.$startDay.'&sm='.$startMonth.'&sy='.$startYear.'&em=0&ed=0&ey=0&o=2&w=&c[]=a&c[]=d&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=1&show='.(($page * 50) - 50));
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ServerException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
 
@@ -138,7 +138,7 @@ class UpcomingController extends FOSRestController
 
         try {
             $mangacontent = $downloader->fetch('/manga.php?sd='.$startDay.'&sm='.$startMonth.'&sy='.$startYear.'&em=0&ed=0&ey=0&o=2&w=&c[]=a&c[]=d&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=1&show='.(($page * 50) - 50));
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ServerException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
 
@@ -206,7 +206,7 @@ class UpcomingController extends FOSRestController
 
         try {
             $animecontent = $downloader->fetch('/anime.php?o=9&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=2&w=1&show='.(($page * 20) - 20));
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ServerException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
 
@@ -274,7 +274,7 @@ class UpcomingController extends FOSRestController
 
         try {
             $mangacontent = $downloader->fetch('/manga.php?o=9&c[]=a&c[]=b&c[]=c&c[]=d&c[]=e&c[]=f&c[]=g&cv=2&w=1&show='.(($page * 20) - 20));
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ServerException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
 

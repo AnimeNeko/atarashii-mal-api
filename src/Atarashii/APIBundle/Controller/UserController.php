@@ -11,7 +11,7 @@ namespace Atarashii\APIBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Response;
-use Guzzle\Http\Exception;
+use GuzzleHttp\Exception;
 use Atarashii\APIBundle\Parser\User;
 use FOS\RestBundle\Context\Context;
 
@@ -33,10 +33,10 @@ class UserController extends FOSRestController
 
         try {
             $profilecontent = $downloader->fetch('/profile/'.$username);
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ServerException $e) {
             return $this->view(array('error' => 'network-error'), 500);
-        } catch (Exception\ClientErrorResponseException $e) {
-            $profilecontent = $e->getResponse();
+        } catch (Exception\ClientException $e) {
+            $profilecontent = $e->getResponse()->getBody();
         }
 
         $response = new Response();
@@ -96,10 +96,10 @@ class UserController extends FOSRestController
 
         try {
             $friendscontent = $downloader->fetch('/profile/'.$username.'/friends');
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ServerException $e) {
             return $this->view(array('error' => 'network-error'), 500);
-        } catch (Exception\ClientErrorResponseException $e) {
-            $friendscontent = $e->getResponse();
+        } catch (Exception\ClientException $e) {
+            $friendscontent = $e->getResponse()->getBody();
         }
 
         $response = new Response();
@@ -162,7 +162,7 @@ class UserController extends FOSRestController
 
         try {
             $historycontent = $downloader->fetch('/history/'.$username);
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ServerException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
 

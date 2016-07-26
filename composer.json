@@ -27,7 +27,7 @@
         "friendsofsymfony/rest-bundle": "^2.0",
         "symfony/dom-crawler": "2.8.*",
         "symfony/css-selector": "2.8.*",
-        "guzzle/guzzle": "~3.7",
+        "guzzlehttp/guzzle": "~6.0",
         "braincrafted/bootstrap-bundle": "~2.2",
         "oyejorge/less.php": "~1.7",
         "twbs/bootstrap": "3.3.*",

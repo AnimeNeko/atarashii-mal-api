@@ -4,7 +4,7 @@
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
-* @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
+* @copyright 2014-2016 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
 namespace Atarashii\APIBundle\Controller;
@@ -12,7 +12,7 @@ namespace Atarashii\APIBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use Guzzle\Http\Exception;
+use GuzzleHttp\Exception;
 use Atarashii\APIBundle\Parser\ForumParser;
 
 class ForumController extends FOSRestController
@@ -29,7 +29,7 @@ class ForumController extends FOSRestController
 
         try {
             $forumcontent = $downloader->fetch('/forum/index.php');
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ServerException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
 
@@ -76,7 +76,7 @@ class ForumController extends FOSRestController
 
         try {
             $forumcontent = $downloader->fetch('/forum/?subboard='.$id.'&show='.(($page * 50) - 50));
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ServerException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
 
@@ -129,9 +129,9 @@ class ForumController extends FOSRestController
 
         try {
             $forumcontent = $downloader->fetch('/forum/index.php?board='.$id.'&show='.(($page * 50) - 50));
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ServerException $e) {
             return $this->view(array('error' => 'network-error'), 500);
-        } catch (Exception\ClientErrorResponseException $e) {
+        } catch (Exception\ClientException $e) {
             return $this->view(array('error' => 'Invalid board ID or page number'), 200);
         }
 
@@ -180,7 +180,7 @@ class ForumController extends FOSRestController
 
         try {
             $forumcontent = $downloader->fetch('/forum/?animeid='.$id.'&show='.(($page * 50) - 50));
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ServerException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
 
@@ -229,7 +229,7 @@ class ForumController extends FOSRestController
 
         try {
             $forumcontent = $downloader->fetch('/forum/?mangaid='.$id.'&show='.(($page * 50) - 50));
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ServerException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
 
@@ -277,7 +277,7 @@ class ForumController extends FOSRestController
 
         try {
             $forumcontent = $downloader->fetch('/forum/?topicid='.$id.'&show='.(($page * 50) - 50));
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ServerException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
 
@@ -335,7 +335,7 @@ class ForumController extends FOSRestController
                 return $view;
             }
             $topicdetails = $downloader->createTopic($id, $title, $message);
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ServerException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
 
@@ -379,7 +379,7 @@ class ForumController extends FOSRestController
                 return $view;
             }
             $topicdetails = $downloader->createComment($id, $message);
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ServerException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
 
@@ -425,7 +425,7 @@ class ForumController extends FOSRestController
                 return $view;
             }
             $topicdetails = $downloader->edithComment($id, $message);
-        } catch (Exception\CurlException $e) {
+        } catch (Exception\ServerException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
 
