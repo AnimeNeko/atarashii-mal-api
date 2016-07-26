@@ -18,7 +18,7 @@ use Atarashii\APIBundle\Parser\Upcoming;
 use Atarashii\APIBundle\Parser\SearchParser;
 use Atarashii\APIBundle\Parser\AnimeParser;
 use Atarashii\APIBundle\Parser\MangaParser;
-use JMS\Serializer\SerializationContext;
+use FOS\RestBundle\Context\Context;
 
 class SearchController extends FOSRestController
 {
@@ -104,7 +104,7 @@ class SearchController extends FOSRestController
         $result = SearchParser::parse($content, $type);
 
         $response = new Response();
-        $serializationContext = SerializationContext::create();
+        $serializationContext = new Context();
         $serializationContext->setVersion($apiVersion);
 
         //Only include cache info if it doesn't include personal data.
@@ -120,7 +120,7 @@ class SearchController extends FOSRestController
 
         $view = $this->view($result);
 
-        $view->setSerializationContext($serializationContext);
+        $view->setContext($serializationContext);
         $view->setResponse($response);
         $view->setStatusCode(200);
 
@@ -161,7 +161,7 @@ class SearchController extends FOSRestController
         }
 
         $response = new Response();
-        $serializationContext = SerializationContext::create();
+        $serializationContext = new Context();
         $serializationContext->setVersion($apiVersion);
 
         $response->setPublic();
@@ -215,7 +215,7 @@ class SearchController extends FOSRestController
 
             $view = $this->view($searchResult);
 
-            $view->setSerializationContext($serializationContext);
+            $view->setContext($serializationContext);
             $view->setResponse($response);
             $view->setStatusCode(200);
 

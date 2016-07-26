@@ -54,7 +54,9 @@ braincrafted_bootstrap:
 
 sensio_framework_extra:
     view:
-        annotations: false
+        annotations: true
+    router:
+        annotations: true
 
 fos_rest:
     routing_loader:
@@ -63,7 +65,3 @@ fos_rest:
         view_response_listener: force
     serializer:
         serialize_null: false
-
-sensio_framework_extra:
-    view:    { annotations: false }
-    router:  { annotations: true }

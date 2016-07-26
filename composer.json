@@ -24,7 +24,7 @@
         "symfony/assetic-bundle": "~2.7",
         "jms/serializer-bundle": "^1.1",
         "symfony/finder": "2.8.*",
-        "friendsofsymfony/rest-bundle": "1.0.*",
+        "friendsofsymfony/rest-bundle": "^2.0",
         "symfony/dom-crawler": "2.8.*",
         "symfony/css-selector": "2.8.*",
         "guzzle/guzzle": "~3.7",

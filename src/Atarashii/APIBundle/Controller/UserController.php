@@ -4,7 +4,7 @@
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
-* @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
+* @copyright 2014-2016 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
 namespace Atarashii\APIBundle\Controller;
@@ -13,7 +13,7 @@ use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Response;
 use Guzzle\Http\Exception;
 use Atarashii\APIBundle\Parser\User;
-use JMS\Serializer\SerializationContext;
+use FOS\RestBundle\Context\Context;
 
 class UserController extends FOSRestController
 {
@@ -40,7 +40,7 @@ class UserController extends FOSRestController
         }
 
         $response = new Response();
-        $serializationContext = SerializationContext::create();
+        $serializationContext = new Context();
         $serializationContext->setVersion($apiVersion);
 
         //For compatibility, API 1.0 explicitly passes null parameters.
@@ -69,7 +69,7 @@ class UserController extends FOSRestController
 
             $view = $this->view($userprofile);
 
-            $view->setSerializationContext($serializationContext);
+            $view->setContext($serializationContext);
             $view->setResponse($response);
             $view->setStatusCode(200);
 
@@ -103,7 +103,7 @@ class UserController extends FOSRestController
         }
 
         $response = new Response();
-        $serializationContext = SerializationContext::create();
+        $serializationContext = new Context();
         $serializationContext->setVersion($apiVersion);
 
         //For compatibility, API 1.0 explicitly passes null parameters.
@@ -136,7 +136,7 @@ class UserController extends FOSRestController
 
             $view = $this->view($friendlist);
 
-            $view->setSerializationContext($serializationContext);
+            $view->setContext($serializationContext);
             $view->setResponse($response);
             $view->setStatusCode(200);
 

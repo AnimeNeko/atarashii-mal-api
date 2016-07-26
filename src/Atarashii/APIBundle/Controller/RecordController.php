@@ -22,7 +22,7 @@ use Atarashii\APIBundle\Parser\RecsParser;
 use Atarashii\APIBundle\Parser\EpsParser;
 use Atarashii\APIBundle\Parser\ScheduleParser;
 use Atarashii\APIBundle\Helper\Date;
-use JMS\Serializer\SerializationContext;
+use FOS\RestBundle\Context\Context;
 
 class RecordController extends FOSRestController
 {
@@ -101,7 +101,7 @@ class RecordController extends FOSRestController
             }
 
             $response = new Response();
-            $serializationContext = SerializationContext::create();
+            $serializationContext = new Context();
             $serializationContext->setVersion($apiVersion);
 
             //For compatibility, API 1.0 explicitly passes null parameters.
@@ -124,7 +124,7 @@ class RecordController extends FOSRestController
 
             $view = $this->view($record);
 
-            $view->setSerializationContext($serializationContext);
+            $view->setContext($serializationContext);
             $view->setResponse($response);
             $view->setStatusCode(200);
 

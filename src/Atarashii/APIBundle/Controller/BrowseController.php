@@ -18,7 +18,7 @@ use Guzzle\Http\Exception;
 use Atarashii\APIBundle\Parser\AnimeParser;
 use Atarashii\APIBundle\Parser\MangaParser;
 use Atarashii\APIBundle\Parser\Upcoming;
-use JMS\Serializer\SerializationContext;
+use FOS\RestBundle\Context\Context;
 
 class BrowseController extends FOSRestController
 {
@@ -82,7 +82,7 @@ class BrowseController extends FOSRestController
         }
 
         $response = new Response();
-        $serializationContext = SerializationContext::create();
+        $serializationContext = new Context();
         $serializationContext->setVersion($apiVersion);
 
         $response->setPublic();
@@ -132,7 +132,7 @@ class BrowseController extends FOSRestController
 
             $view = $this->view($searchResult);
 
-            $view->setSerializationContext($serializationContext);
+            $view->setContext($serializationContext);
             $view->setResponse($response);
             $view->setStatusCode(200);
 

@@ -4,7 +4,7 @@
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
-* @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
+* @copyright 2014-2016 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
 namespace Atarashii\APIBundle\Controller;
@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Guzzle\Http\Exception;
 use Atarashii\APIBundle\Parser\Upcoming;
-use JMS\Serializer\SerializationContext;
+use FOS\RestBundle\Context\Context;
 
 class UpcomingController extends FOSRestController
 {
@@ -62,7 +62,7 @@ class UpcomingController extends FOSRestController
         }
 
         $response = new Response();
-        $serializationContext = SerializationContext::create();
+        $serializationContext = new Context();
         $serializationContext->setVersion($apiVersion);
 
         //For compatibility, API 1.0 explicitly passes null parameters.
@@ -91,7 +91,7 @@ class UpcomingController extends FOSRestController
 
             $view = $this->view($Upcominganime);
 
-            $view->setSerializationContext($serializationContext);
+            $view->setContext($serializationContext);
             $view->setResponse($response);
             $view->setStatusCode(200);
 
@@ -143,7 +143,7 @@ class UpcomingController extends FOSRestController
         }
 
         $response = new Response();
-        $serializationContext = SerializationContext::create();
+        $serializationContext = new Context();
         $serializationContext->setVersion($apiVersion);
 
         //For compatibility, API 1.0 explicitly passes null parameters.
@@ -172,7 +172,7 @@ class UpcomingController extends FOSRestController
 
             $view = $this->view($Upcomingmanga);
 
-            $view->setSerializationContext($serializationContext);
+            $view->setContext($serializationContext);
             $view->setResponse($response);
             $view->setStatusCode(200);
 
@@ -211,7 +211,7 @@ class UpcomingController extends FOSRestController
         }
 
         $response = new Response();
-        $serializationContext = SerializationContext::create();
+        $serializationContext = new Context();
         $serializationContext->setVersion($apiVersion);
 
         //For compatibility, API 1.0 explicitly passes null parameters.
@@ -240,7 +240,7 @@ class UpcomingController extends FOSRestController
 
             $view = $this->view($Justaddedanime);
 
-            $view->setSerializationContext($serializationContext);
+            $view->setContext($serializationContext);
             $view->setResponse($response);
             $view->setStatusCode(200);
 
@@ -279,7 +279,7 @@ class UpcomingController extends FOSRestController
         }
 
         $response = new Response();
-        $serializationContext = SerializationContext::create();
+        $serializationContext = new Context();
         $serializationContext->setVersion($apiVersion);
 
         //For compatibility, API 1.0 explicitly passes null parameters.
@@ -308,7 +308,7 @@ class UpcomingController extends FOSRestController
 
             $view = $this->view($Justaddedmanga);
 
-            $view->setSerializationContext($serializationContext);
+            $view->setContext($serializationContext);
             $view->setResponse($response);
             $view->setStatusCode(200);
 
