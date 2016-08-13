@@ -10,6 +10,7 @@
 namespace Atarashii\APIBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
+use Symfony\Component\HttpFoundation\Request;
 use GuzzleHttp\Exception;
 
 class VerifyController extends FOSRestController
@@ -24,13 +25,13 @@ class VerifyController extends FOSRestController
      *
      * @return View
      */
-    public function verifyAction()
+    public function verifyAction(Request $request)
     {
         // http://http://myanimelist.net/api/account/verify_credentials.xml
 
         //get the credentials we received
-        $username = $this->getRequest()->server->get('PHP_AUTH_USER');
-        $password = $this->getRequest()->server->get('PHP_AUTH_PW');
+        $username = $request->server->get('PHP_AUTH_USER');
+        $password = $request->server->get('PHP_AUTH_PW');
 
         //Don't bother making a request if the user didn't send any authentication
         if ($username === null) {

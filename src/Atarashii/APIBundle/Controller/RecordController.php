@@ -51,8 +51,8 @@ class RecordController extends FOSRestController
 
         if ($usepersonal) {
             //get the credentials we received
-            $username = $this->getRequest()->server->get('PHP_AUTH_USER');
-            $password = $this->getRequest()->server->get('PHP_AUTH_PW');
+            $username = $request->server->get('PHP_AUTH_USER');
+            $password = $request->server->get('PHP_AUTH_PW');
 
             try {
                 if (!$downloader->cookieLogin($username, $password)) {
@@ -241,7 +241,7 @@ class RecordController extends FOSRestController
      *
      * @return View
      */
-    public function getHistoryAction($id, $requestType)
+    public function getHistoryAction($id, $requestType, Request $request)
     {
         // http://myanimelist.net/ajaxtb.php?detailedaid=#{id}
         // http://myanimelist.net/ajaxtb.php?detailedmid=#{id}
@@ -249,8 +249,8 @@ class RecordController extends FOSRestController
         $downloader = $this->get('atarashii_api.communicator');
 
         //get the credentials we received
-        $username = $this->getRequest()->server->get('PHP_AUTH_USER');
-        $password = $this->getRequest()->server->get('PHP_AUTH_PW');
+        $username = $request->server->get('PHP_AUTH_USER');
+        $password = $request->server->get('PHP_AUTH_PW');
 
         //Don't bother making a request if the user didn't send any authentication
         if ($username === null || $password === null || $username === '' || $password === '') {

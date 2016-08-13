@@ -324,8 +324,8 @@ class ForumController extends FOSRestController
         $downloader = $this->get('atarashii_api.communicator');
 
         //get the credentials we received
-        $username = $this->getRequest()->server->get('PHP_AUTH_USER');
-        $password = $this->getRequest()->server->get('PHP_AUTH_PW');
+        $username = $request->server->get('PHP_AUTH_USER');
+        $password = $request->server->get('PHP_AUTH_PW');
 
         try {
             if (!$downloader->cookieLogin($username, $password)) {
@@ -368,8 +368,8 @@ class ForumController extends FOSRestController
         $downloader = $this->get('atarashii_api.communicator');
 
         //get the credentials we received
-        $username = $this->getRequest()->server->get('PHP_AUTH_USER');
-        $password = $this->getRequest()->server->get('PHP_AUTH_PW');
+        $username = $request->server->get('PHP_AUTH_USER');
+        $password = $request->server->get('PHP_AUTH_PW');
 
         try {
             if (!$downloader->cookieLogin($username, $password)) {
@@ -414,8 +414,8 @@ class ForumController extends FOSRestController
         $downloader = $this->get('atarashii_api.communicator');
 
         //get the credentials we received
-        $username = $this->getRequest()->server->get('PHP_AUTH_USER');
-        $password = $this->getRequest()->server->get('PHP_AUTH_PW');
+        $username = $request->server->get('PHP_AUTH_USER');
+        $password = $request->server->get('PHP_AUTH_PW');
 
         try {
             if (!$downloader->cookieLogin($username, $password)) {

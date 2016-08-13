@@ -104,8 +104,8 @@ class MangaListController extends FOSRestController
         // http://mymangalist.net/api/mangalist/add/#{id}.xml
 
         //get the credentials we received
-        $username = $this->getRequest()->server->get('PHP_AUTH_USER');
-        $password = $this->getRequest()->server->get('PHP_AUTH_PW');
+        $username = $request->server->get('PHP_AUTH_USER');
+        $password = $request->server->get('PHP_AUTH_PW');
 
         //Don't bother making a request if the user didn't send any authentication
         if ($username === null) {
@@ -195,8 +195,8 @@ class MangaListController extends FOSRestController
         // http://mymangalist.net/api/mangalist/update/#{id}.xml
 
         //get the credentials we received
-        $username = $this->getRequest()->server->get('PHP_AUTH_USER');
-        $password = $this->getRequest()->server->get('PHP_AUTH_PW');
+        $username = $request->server->get('PHP_AUTH_USER');
+        $password = $request->server->get('PHP_AUTH_PW');
 
         //Don't bother making a request if the user didn't send any authentication
         if ($username === null) {
@@ -330,8 +330,8 @@ class MangaListController extends FOSRestController
         // http://mymangalist.net/api/mangalist/delete/#{id}.xml
 
         //get the credentials we received
-        $username = $this->getRequest()->server->get('PHP_AUTH_USER');
-        $password = $this->getRequest()->server->get('PHP_AUTH_PW');
+        $username = $request->server->get('PHP_AUTH_USER');
+        $password = $request->server->get('PHP_AUTH_PW');
 
         //Don't bother making a request if the user didn't send any authentication
         if ($username === null) {

@@ -39,8 +39,8 @@ class MessagesController extends FOSRestController
         }
 
         //get the credentials we received
-        $username = $this->getRequest()->server->get('PHP_AUTH_USER');
-        $password = $this->getRequest()->server->get('PHP_AUTH_PW');
+        $username = $request->server->get('PHP_AUTH_USER');
+        $password = $request->server->get('PHP_AUTH_PW');
 
         try {
             if (!$downloader->cookieLogin($username, $password)) {
@@ -77,7 +77,7 @@ class MessagesController extends FOSRestController
      *
      * @return View
      */
-    public function getMessageAction($id)
+    public function getMessageAction(Request $request, $id)
     {
         // http://myanimelist.net/mymessages.php?go=read&id=#{id}
 
@@ -89,8 +89,8 @@ class MessagesController extends FOSRestController
         }
 
         //get the credentials we received
-        $username = $this->getRequest()->server->get('PHP_AUTH_USER');
-        $password = $this->getRequest()->server->get('PHP_AUTH_PW');
+        $username = $request->server->get('PHP_AUTH_USER');
+        $password = $request->server->get('PHP_AUTH_PW');
 
         try {
             if (!$downloader->cookieLogin($username, $password)) {
@@ -126,7 +126,7 @@ class MessagesController extends FOSRestController
      *
      * @return View
      */
-    public function deleteAction($id)
+    public function deleteAction(Request $request, $id)
     {
         // http://myanimelist.net/mymessages.php?go=delete&id=#{id}
 
@@ -138,8 +138,8 @@ class MessagesController extends FOSRestController
         }
 
         //get the credentials we received
-        $username = $this->getRequest()->server->get('PHP_AUTH_USER');
-        $password = $this->getRequest()->server->get('PHP_AUTH_PW');
+        $username = $request->server->get('PHP_AUTH_USER');
+        $password = $request->server->get('PHP_AUTH_PW');
 
         try {
             if (!$downloader->cookieLogin($username, $password)) {
@@ -187,8 +187,8 @@ class MessagesController extends FOSRestController
         $message = $request->request->get('message');
 
         //get the credentials we received
-        $username = $this->getRequest()->server->get('PHP_AUTH_USER');
-        $password = $this->getRequest()->server->get('PHP_AUTH_PW');
+        $username = $request->server->get('PHP_AUTH_USER');
+        $password = $request->server->get('PHP_AUTH_PW');
 
         try {
             if (!$downloader->cookieLogin($username, $password)) {

@@ -37,7 +37,7 @@ class SearchController extends FOSRestController
         $query = $request->query->get('q');
 
         //get the credentials we received
-        $username = $this->getRequest()->server->get('PHP_AUTH_USER');
+        $username = $request->server->get('PHP_AUTH_USER');
 
         //Only make an Official request if API 2.1+ is used and we got credentials
         if ($username === null || $username === '' || $apiVersion < '2.1' || $mine !== 1) {
@@ -62,7 +62,7 @@ class SearchController extends FOSRestController
         $query = $request->query->get('q');
 
         //get the credentials we received
-        $username = $this->getRequest()->server->get('PHP_AUTH_USER');
+        $username = $request->server->get('PHP_AUTH_USER');
 
         //Only make an Official request if API 2.1+ is used and we got credentials
         if ($username === null || $username === '' || $apiVersion < '2.1' || $mine !== 1) {
@@ -85,13 +85,13 @@ class SearchController extends FOSRestController
      *
      * @return \FOS\RestBundle\View\View
      */
-    private function officialSearch($type, $query, $username, $apiVersion)
+    private function officialSearch($type, $query, $username, $apiVersion, Request $request)
     {
         //http://myanimelist.net/api/manga/search.xml?q=full+metal
         //http://myanimelist.net/api/anime/search.xml?q=full+metal
 
         $downloader = $this->get('atarashii_api.communicator');
-        $password = $this->getRequest()->server->get('PHP_AUTH_PW');
+        $password = $request->server->get('PHP_AUTH_PW');
 
         try {
             $content = $downloader->fetch('/api/'.$type.'/search.xml?q='.$query, $username, $password);
