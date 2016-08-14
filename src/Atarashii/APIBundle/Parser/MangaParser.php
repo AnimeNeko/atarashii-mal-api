@@ -439,6 +439,15 @@ class MangaParser
             $manga->setPriority($priority);
         }
 
+        #Rewatched
+        #<label><input type="checkbox" id="add_manga_is_rereading" name="add_manga[is_rereading]" value="1" checked="checked">
+        $reread = $crawler->filter('input[id="add_manga_is_rereading"]')->attr('checked');
+        if ($reread == null) {
+            $manga->setRereading(false);
+        } else {
+            $manga->setRereading(true);
+        }
+
         #Times Reread
         #<td align="left" class="borderClass"><input type="text" class="inputtext" size="4" value="0" name="times_read">
         $rereadCount = $crawler->filter('input[id="add_manga_num_read_times"]')->attr('value');

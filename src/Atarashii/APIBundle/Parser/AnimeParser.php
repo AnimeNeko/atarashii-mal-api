@@ -599,6 +599,15 @@ class AnimeParser
             $anime->setStorageValue($storageval);
         }
 
+        #Rewatched
+        #<label><input type="checkbox" id="add_anime_is_rewatching" name="add_anime[is_rewatching]" value="1" checked="checked">
+        $rewatch = $crawler->filter('input[id="add_anime_is_rewatching"]')->attr('checked');
+        if ($rewatch == null) {
+            $anime->setRewatching(false);
+        } else {
+            $anime->setRewatching(true);
+        }
+
         #Times Rewatched
         #<td class="borderClass"><input type="text" name="list_times_watched" value="0" size="4" class="inputtext">
         $rewatchCount = $crawler->filter('input[id="add_anime_num_watched_times"]')->attr('value');
