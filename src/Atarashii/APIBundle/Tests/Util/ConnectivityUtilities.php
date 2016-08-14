@@ -2,6 +2,8 @@
 
 namespace Atarashii\APIBundle\Tests\Util;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 use Symfony\Component\DependencyInjection\Container;
 
 /**
@@ -29,14 +31,12 @@ class ConnectivityUtilities
             return array(false, 'Live tests for MyAnimeList are disabled by configuration.');
         }
 
-        $socket = @fsockopen('www.google.com', 80, $errno, $errstr, 30);
-
-        if (!$socket) {
+        try {
+            $client = new Client();
+            $response = $client->request('GET', 'http://myanimelist.net/');
+            return array(true, $response->getStatusCode());
+        } catch (RequestException $e) {
             return array(false, 'An Internet connection is needed for these tests');
         }
-
-        fclose($socket);
-
-        return array(true, 'OK');
     }
 }
