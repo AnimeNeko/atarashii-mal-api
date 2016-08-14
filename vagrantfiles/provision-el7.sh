@@ -1,10 +1,10 @@
 #! /bin/sh
 
-# Install EPEL as it has XDebug packaged
-yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+# Install IUS and EPEL Repos for PHP and XDebug
+curl -sS https://setup.ius.io/ | bash
 
 # Required minimum packages to use the software
-yum -y install httpd mod_php php-xml php-intl php-mbstring php-pecl-xdebug git
+yum -y install httpd php55u php55u-xml php55u-intl php55u-mbstring php55u-pecl-xdebug git
 
 # Virtual host configuration for Symfony use
 cp /var/www/html/vagrantfiles/virtualhost.conf /etc/httpd/conf.d
@@ -27,5 +27,5 @@ systemctl stop firewalld
 curl -sS https://getcomposer.org/installer | php -- --filename=composer --install-dir=/usr/local/bin
 
 # Download PHPUnit
-curl -sS -o /usr/local/bin/phpunit https://phar.phpunit.de/phpunit-old.phar
+curl -L -sS -o /usr/local/bin/phpunit https://phar.phpunit.de/phpunit-old.phar
 chmod +x /usr/local/bin/phpunit
