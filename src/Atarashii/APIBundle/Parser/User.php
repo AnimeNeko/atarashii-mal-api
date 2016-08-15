@@ -296,11 +296,11 @@ class User
             if (($crawler->filter('a')->count()) > 0) {
                 if (strpos($crawler->filter('a')->attr('href'), 'anime') !== false) {
                     $historyinfo['item'] = new Anime();
-                    $historyinfo['item']->setEpisodes((int) $crawler->filter('strong')->text());
+                    $historyinfo['item']->setWatchedEpisodes((int) $crawler->filter('strong')->text());
                     $historyinfo['type'] = 'anime';
                 } else {
                     $historyinfo['item'] = new Manga();
-                    $historyinfo['item']->setChapters((int) $crawler->filter('strong')->text());
+                    $historyinfo['item']->setChaptersRead((int) $crawler->filter('strong')->text());
                     $historyinfo['type'] = 'manga';
                 }
 
