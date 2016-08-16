@@ -16,27 +16,11 @@ Download
 
 Bitbucket: https://bitbucket.org/ratan12/atarashii-api
 
-Installation and Configuration
-------------------------------
+More Information
+----------------
 
-Note: If you want to try out the API, or develop against a fully working
-environment, a configuration for Vagrant is provided. Please see VAGRANT for
-details.
-
-You will need [Composer](https://getcomposer.org/) to set up the project.
-
-Additionally, you will need to get a user agent whitelisted with MyAnimeList.
-See [this forum topic](http://myanimelist.net/forum/?topicid=682709) for
-information on what to do.
-
-Once downloaded, run `composer install` in the root directory to install the
-Symfony components and configure the core application parameters.
-
-You can either run the application on PHP's built-in web server or configure it
-as an application on a full web server.
-
-For the built-in server, run `php app/console server:run`. If you configure on a
-web server, set the document root as the web directory.
+Details on requirements to use, installation, and other topics is in the `docs`
+directory.
 
 Contributing
 ------------
@@ -51,6 +35,7 @@ This code was inspired by the Unofficial MAL API by Chu Yeow.
 It makes use of the following major components:
 
 * [Symfony PHP framework](http://symfony.com/)
+* [Guzzle extensible HTTP Client](http://guzzlephp.org/)
 * [FOSRestBundle](https://github.com/FriendsOfSymfony/FOSRestBundle) by Friends of Symfony
 * [JMSSerializerBundle](http://jmsyst.com/bundles/JMSSerializerBundle) by Johannes Schmitt
 
@@ -60,5 +45,5 @@ property of MyAnimeList, LLC.
 License
 -------
 
-The Atarashii MAL API is Copyright © 2015 Ratan Dhawtal and Michael Johnson. It
-is licensed under the Apache Public License 2.0.
+The Atarashii MAL API is Copyright © 2015-2016 Ratan Dhawtal and Michael Johnson.
+It is licensed under the Apache Public License 2.0.

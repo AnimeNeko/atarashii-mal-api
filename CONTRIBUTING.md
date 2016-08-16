@@ -23,7 +23,7 @@ directions below to make the process easy.
 
 * Make a fork of the project on Bitbucket.
 * Make a new branch to store your changes.
-  * This should usually be branched from "master".
+  * This should usually be branched from "develop".
   * Only branch off something different if you are certain the changes must be
     on that branch.
 * Make each commit a logical unit of changes. If you like to commit often, use
