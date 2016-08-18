@@ -408,12 +408,12 @@ class AnimeParser
             }
 
             // External links is only visible when an user has logged in any may be hidden on some records.
-            if ($crawler->filter('td[class="borderClass"] h2')->eq(4)->count() > 0) {
+            $externalLinks = $crawler->filterXPath('//h2[text()="External Links"]');
+            if ($externalLinks->count() > 0) {
+                $extracted = $externalLinks->nextAll()->filter('a');
                 # External Links:
-                $extracted = $crawler->filter('div[class="pb16"]')->filter('a[target="_blank"]');
                 foreach ($extracted as $externalLinkRow) {
-                    $externalCrawler = new Crawler($externalLinkRow);
-                    $animerecord->setExternalLinks($externalCrawler->text(), $externalCrawler->attr('href'));
+                    $animerecord->setExternalLinks($externalLinkRow->nodeValue, $externalLinkRow->getAttribute('href'));
                 }
             }
 

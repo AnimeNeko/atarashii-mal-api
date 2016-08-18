@@ -21,7 +21,7 @@ class PersonTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('花澤', $person->getFamilyName());
         $this->assertEquals('1989-02-25', $person->getBirthday());
         $this->assertEquals('http://www.hanazawakana-music.net/', $person->getWebsiteUrl());
-        $this->assertEquals('30238', $person->getFavoritedCount());
+        $this->assertGreaterThan('30000', $person->getFavoritedCount());
         $this->assertContains('Height: 156 cm', $person->getMoreDetails());
 
         $this->assertGreaterThan(250, count($person->getVoiceActingRoles()));

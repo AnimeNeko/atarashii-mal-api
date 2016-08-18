@@ -22,26 +22,23 @@ class ScheduleTest extends \PHPUnit_Framework_TestCase
         $schedule = ScheduleParser::parse($contents, $apiVersion);
 
         $this->assertInternalType('array', $schedule);
+        $this->assertNotEmpty($schedule['monday']);
         $item = $schedule['monday'][0];
 
-        /* As this test is against a static downloaded copy, we know what the exact values should be. As such, rather
-         * than testing based on type for many of the items, we're checking for exact values. Obviously, this test
-         * will need to be updated when the source file is re-downloaded to update any values.
-         */
+        $this->assertNotNull($item->getId());
+        $this->assertInternalType('int', $item->getId());
 
-        $this->assertEquals(32601, $item->getId());
-        $this->assertEquals('12-sai.: Chicchana Mune no Tokimeki', $item->getTitle());
-        $this->assertEquals('http://cdn.myanimelist.net/images/anime/11/78391.jpg', $item->getImageUrl());
-        $this->assertEquals(12, $item->getEpisodes());
-        $this->assertContains('Romance', $item->getGenres()[0]);
+        $this->assertInternalType('string', $item->getTitle());
+
+        $this->assertContains('cdn.myanimelist.net/images/anime', $item->getImageUrl());
+
+        $this->assertNotEmpty($item->getGenres());
 
         $this->assertInternalType('float', $item->getMembersScore());
-        $this->assertGreaterThan(6.0, $item->getMembersScore());
 
         $this->assertInternalType('int', $item->getMembersCount());
-        $this->assertEquals(8991, $item->getMembersCount());
 
-        $this->assertStringStartsWith('The story begins with Hanabi, a sixth-grade girl', $item->getSynopsis());
-        $this->assertContains('OLM', $item->getProducers()[0]);
+        $this->assertNotNull($item->getSynopsis());
+        $this->assertNotEmpty($item->getProducers());
     }
 }

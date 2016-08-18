@@ -30,7 +30,6 @@ class UserControllerTest extends WebTestCase
         $this->assertEquals('http://api.atarashiiapp.com', $content->details->website);
         $this->assertEquals('Member', $content->details->access_rank);
 
-        $this->assertInternalType('float', $content->anime_stats->time_days);
         $this->assertGreaterThanOrEqual(0.1, $content->anime_stats->time_days);
         $this->assertInternalType('int', $content->anime_stats->watching);
         $this->assertInternalType('int', $content->anime_stats->completed);
@@ -40,7 +39,6 @@ class UserControllerTest extends WebTestCase
         $this->assertInternalType('int', $content->anime_stats->total_entries);
         $this->assertGreaterThanOrEqual(1, $content->anime_stats->total_entries);
 
-        $this->assertInternalType('float', $content->manga_stats->time_days);
         $this->assertGreaterThanOrEqual(0.1, $content->manga_stats->time_days);
         $this->assertInternalType('int', $content->manga_stats->reading);
         $this->assertInternalType('int', $content->manga_stats->completed);

@@ -42,10 +42,16 @@ class UserTest extends \PHPUnit_Framework_TestCase
         // Profile Details
         $profileDetails = $this->profile->details;
 
-        //Source says "6 hours ago"
-        $expected = new \DateTime('March 29, 2016 1:43 PM');
+        //Source will vary, so store the expected values based on the source.
+        $expectedString = 'Yesterday, 4:21 PM';
+        $expected = new \DateTime();
 
-        $this->assertEquals('Mar 29, 1:43 PM', $profileDetails->getLastOnline());
+        //MAL defaults to this timezone for general dates when not logged in.
+        $expected->setTimezone(new \DateTimeZone('America/Los_Angeles'));
+        $expected->setTime(16, 21);
+        $expected->modify('-1 day');
+
+        $this->assertEquals($expectedString, $profileDetails->getLastOnline());
         $this->assertEquals($expected->format('Y-m-d\TH:iO'), $profileDetails->getLastOnline2());
         $this->assertNull($profileDetails->getStatus());
         $this->assertEquals('Not specified', $profileDetails->getGender());

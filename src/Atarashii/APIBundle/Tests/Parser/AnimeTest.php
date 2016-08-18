@@ -31,7 +31,7 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('1887', $anime->getId());
         $this->assertEquals('Lucky☆Star', $anime->getTitle());
-        $this->assertEquals('http://www.youtube.com/embed/b8bSIgE8epA', $anime->getPreview());
+        $this->assertContains('youtube.com/embed/b8bSIgE8epA', $anime->getPreview());
 
         $oTitles = $anime->getOtherTitles();
 
@@ -75,7 +75,7 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://en.wikipedia.org/wiki/Lucky_Star_%28manga%29', $externalLinks['Wikipedia']);
 
 
-        $this->assertStringStartsWith('Having fun in school, doing homework together', $anime->getSynopsis());
+        $this->assertStringStartsWith('<i>Lucky☆Star</i> follows the daily lives of four cute high school girls', $anime->getSynopsis());
         $this->assertStringStartsWith('<i>Lucky Star</i> also has audio CDs', $anime->getBackground());
         $this->assertContains('Lucky Paradise', $anime->getProducers());
         $this->assertContains('Lantis', $anime->getProducers());
@@ -122,14 +122,9 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('#23: "Mikuru Henshin! Soshite Sentou! (ミクル変身!そして戦闘!)" by Minoru Shiraishi (ep 23)', $endingTheme[23]);
 
         $recommedations = $anime->getRecommendations()[0];
-        $this->assertEquals(1887, $recommedations->getId());
+        $this->assertEquals(66, $recommedations->getId());
         $this->assertEquals('Azumanga Daioh', $recommedations->getTitle());
         $this->assertEquals('http://cdn.myanimelist.net/images/anime/1/66.jpg', $recommedations->getImageUrl());
-
-        $this->assertEquals('completed', $anime->getWatchedStatus('string'));
-        $this->assertEquals(24, $anime->getWatchedEpisodes());
-
-        $this->assertEquals(7, $anime->getScore());
 
         $animeContents = file_get_contents(__DIR__.'/../InputSamples/anime-10236.html');
 

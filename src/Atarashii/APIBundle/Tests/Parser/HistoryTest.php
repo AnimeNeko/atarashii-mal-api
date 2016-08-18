@@ -9,7 +9,7 @@ use Atarashii\APIBundle\Parser\HistoryParser;
  *
  * @coversDefaultClass Atarashii\APIBundle\Parser\HistoryParser
  */
-class HistoryrTest extends \PHPUnit_Framework_TestCase
+class HistoryTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -17,8 +17,8 @@ class HistoryrTest extends \PHPUnit_Framework_TestCase
      */
     public function testParse()
     {
-        $anime = file_get_contents(__DIR__.'/../InputSamples/anime-21-history.html');
-        $manga = file_get_contents(__DIR__.'/../InputSamples/manga-21-history.html');
+        $anime = file_get_contents(__DIR__.'/../InputSamples/anime-1689-history.html');
+        $manga = file_get_contents(__DIR__.'/../InputSamples/manga-11977-history.html');
 
         $animeRes = HistoryParser::parse($anime, 21, 'anime');
         $this->assertNotNull($animeRes);

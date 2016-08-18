@@ -36,7 +36,7 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('バンビ～ノ！', $otherTitles['japanese']);
 
         $this->assertInternalType('integer', $manga->getRank());
-        $this->assertLessThan(850, $manga->getRank());
+        $this->assertLessThan(1200, $manga->getRank());
         $this->assertGreaterThan(0, $manga->getRank());
 
         $this->assertInternalType('integer', $manga->getPopularityRank());
@@ -76,7 +76,7 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(15, $manga->getVolumesRead());
         $this->assertEquals(7, $manga->getScore());
 
-        $mangaContents = file_get_contents(__DIR__.'/../InputSamples/manga-137-mine.html');
+        $mangaContents = file_get_contents(__DIR__.'/../InputSamples/manga-137.html');
 
         $manga = MangaParser::parse($mangaContents);
 
@@ -87,19 +87,13 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('Read or Die', $otherTitles['english']);
 
         $this->assertArrayHasKey('synonyms', $otherTitles);
-        $this->assertContains('R.O.D.', $otherTitles['synonyms']);
+        $this->assertContains('RoD', $otherTitles['synonyms']);
 
         $animeAdaptations = $manga->getAnimeAdaptations();
         $this->assertInternalType('array', $animeAdaptations[0]);
         $this->assertEquals('208', $animeAdaptations[0]['anime_id']);
         $this->assertStringStartsWith('R.O.D OVA', $animeAdaptations[0]['title']);
         $this->assertContains('anime/208', $animeAdaptations[0]['url']);
-
-        $altVersions = $manga->getAlternativeVersions();
-        $this->assertInternalType('array', $altVersions[0]);
-        $this->assertEquals('10869', $altVersions[0]['manga_id']);
-        $this->assertStringStartsWith('Read or Die', $altVersions[0]['title']);
-        $this->assertContains('manga/10869', $altVersions[0]['url']);
 
         $mangaContents = file_get_contents(__DIR__.'/../InputSamples/manga-44347.html');
 
