@@ -34,11 +34,13 @@ class EpsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('I\'m Luffy! The Man Who\'s Gonna Be King of the Pirates!', $eps->getTitle());
         $this->assertInstanceOf('\DateTime', new \DateTime($eps->getAirDate()));
         $this->assertGreaterThan(0, $eps->getNumber());
-        
-        $this->assertArrayHasKey('english', $eps->getOtherTitles());
-        $this->assertEquals('Ore wa Luffy! Kaizoku Ou ni Naru Otoko Da!', $eps->getOtherTitles()['english'][0]);
 
-        $this->assertArrayHasKey('japanese', $eps->getOtherTitles());
-        $this->assertEquals('俺はルフィ!海賊王になる男だ!', $eps->getOtherTitles()['japanese'][0]);
+        $otherTitles = $eps->getOtherTitles();
+
+        $this->assertArrayHasKey('english', $otherTitles);
+        $this->assertEquals('Ore wa Luffy! Kaizoku Ou ni Naru Otoko Da!', $otherTitles['english'][0]);
+
+        $this->assertArrayHasKey('japanese', $otherTitles);
+        $this->assertEquals('俺はルフィ!海賊王になる男だ!', $otherTitles['japanese'][0]);
     }
 }

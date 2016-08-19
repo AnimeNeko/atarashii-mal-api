@@ -39,7 +39,7 @@ assetic:
         #    jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar"
         lessphp:
             file: %kernel.root_dir%/../vendor/oyejorge/less.php/lessc.inc.php
-            apply_to: "\.less$"
+            apply_to: '\.less$'
 
 braincrafted_bootstrap:
     less_filter: lessphp

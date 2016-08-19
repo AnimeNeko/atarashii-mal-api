@@ -729,7 +729,8 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $anime->setImageUrl('http://cdn.myanimelist.net/images/anime/5/18179.jpg');
         $animerecord->setRecommendations($anime);
 
-        $this->assertEquals($anime, $animerecord->getRecommendations()[0]);
+        $recommendations = $animerecord->getRecommendations();
+        $this->assertEquals($anime, $recommendations[0]);
     }
 
     public function testWatchedEpisode()

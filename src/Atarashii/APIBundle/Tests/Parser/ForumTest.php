@@ -69,9 +69,10 @@ class ForumTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\DateTime', new \DateTime($topic->getTime()));
 
         //Some sanity checking on the reply class in the topic details
-        $this->assertInternalType('array', $topic->getReply());
-        $this->assertInternalType('string', $topic->getReply()['username']);
-        $this->assertInstanceOf('\DateTime', new \DateTime($topic->getReply()['time']));
+        $topicReply = $topic->getReply();
+        $this->assertInternalType('array', $topicReply);
+        $this->assertInternalType('string', $topicReply['username']);
+        $this->assertInstanceOf('\DateTime', new \DateTime($topicReply['time']));
     }
 
     public function testParseTopics()
@@ -97,9 +98,10 @@ class ForumTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\DateTime', new \DateTime($topic->getTime()));
 
         //Some sanity checking on the reply class in the topic details
-        $this->assertInternalType('array', $topic->getReply());
-        $this->assertInternalType('string', $topic->getReply()['username']);
-        $this->assertInstanceOf('\DateTime', new \DateTime($topic->getReply()['time']));
+        $topicReply = $topic->getReply();
+        $this->assertInternalType('array', $topicReply);
+        $this->assertInternalType('string', $topicReply['username']);
+        $this->assertInstanceOf('\DateTime', new \DateTime($topicReply['time']));
     }
 
     public function testParseTopic()

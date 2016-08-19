@@ -33,7 +33,8 @@ class EpsParser
             // MAL does not always provide the air date!
             $date = $crawler->filter('td[class="episode-aired"]')->text();
             if ($date !== 'N/A') {
-                $episode->setAirDate((new DateTime())->createFromFormat('M j, Y', $date));
+                $dateTime = new DateTime();
+                $episode->setAirDate($dateTime->createFromFormat('M j, Y', $date));
             }
 
             $extracted = $crawler->filter('td[class="episode-title"] span[class="di-ib"]');

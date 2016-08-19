@@ -75,7 +75,7 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://en.wikipedia.org/wiki/Lucky_Star_%28manga%29', $externalLinks['Wikipedia']);
 
 
-        $this->assertStringStartsWith('<i>Lucky☆Star</i> follows the daily lives of four cute high school girls', $anime->getSynopsis());
+        $this->assertContains('the daily lives of four cute high school girls', $anime->getSynopsis());
         $this->assertStringStartsWith('<i>Lucky Star</i> also has audio CDs', $anime->getBackground());
         $this->assertContains('Lucky Paradise', $anime->getProducers());
         $this->assertContains('Lantis', $anime->getProducers());
@@ -121,7 +121,8 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('#01: "Uchuu Tetsujin Kyoodain (宇宙鉄人キョーダイン)" by Aya Hirano (ep 1)', $endingTheme[0]);
         $this->assertEquals('#23: "Mikuru Henshin! Soshite Sentou! (ミクル変身!そして戦闘!)" by Minoru Shiraishi (ep 23)', $endingTheme[23]);
 
-        $recommedations = $anime->getRecommendations()[0];
+        $recommedations = $anime->getRecommendations();
+        $recommedations = $recommedations[0];
         $this->assertEquals(66, $recommedations->getId());
         $this->assertEquals('Azumanga Daioh', $recommedations->getTitle());
         $this->assertEquals('http://cdn.myanimelist.net/images/anime/1/66.jpg', $recommedations->getImageUrl());
