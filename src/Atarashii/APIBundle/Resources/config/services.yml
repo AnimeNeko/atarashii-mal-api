@@ -4,5 +4,5 @@ parameters:
 
 services:
     atarashii_api.communicator:
-        class: %atarashii_api.comm.class%
-        arguments: [%atarashii_api.comm.base_url%, %api_user_agent%]
+        class: '%atarashii_api.comm.class%'
+        arguments: ['%atarashii_api.comm.base_url%', '%api_user_agent%']

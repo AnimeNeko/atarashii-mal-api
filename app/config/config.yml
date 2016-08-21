@@ -41,7 +41,7 @@ assetic:
     #java: /usr/bin/java
     filters:
         lessphp:
-            file: %kernel.root_dir%/../vendor/oyejorge/less.php/lessc.inc.php
+            file: '%kernel.root_dir%/../vendor/oyejorge/less.php/lessc.inc.php'
             apply_to: '\.less$'
         cssrewrite: ~
 
