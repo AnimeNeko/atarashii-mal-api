@@ -6,4 +6,5 @@ parameters:
     unit_testing:
         username: CHANGEME
         password: CHANGEME
+        message_id: 123456
         test_mal: false
