@@ -1,6 +1,6 @@
 parameters:
     atarashii_api.comm.class: Atarashii\APIBundle\Service\Communicator
-    atarashii_api.comm.base_url: http://myanimelist.net
+    atarashii_api.comm.base_url: https://myanimelist.net
 
 services:
     atarashii_api.communicator:
