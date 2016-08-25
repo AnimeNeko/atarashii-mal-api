@@ -30,7 +30,7 @@ class ScheduleTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInternalType('string', $item->getTitle());
 
-        $this->assertContains('cdn.myanimelist.net/images/anime', $item->getImageUrl());
+        $this->assertContains('myanimelist.cdn-dena.com/images/anime', $item->getImageUrl());
 
         $this->assertNotEmpty($item->getGenres());
 

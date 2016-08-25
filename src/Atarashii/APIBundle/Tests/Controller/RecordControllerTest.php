@@ -72,7 +72,7 @@ class RecordControllerTest extends WebTestCase
         $this->assertInternalType('int', $record->id);
         $this->assertGreaterThan(0, $record->id);
         $this->assertInternalType('string', $record->title);
-        $this->assertContains('cdn.myanimelist.net', $record->image_url);
+        $this->assertContains('myanimelist.cdn-dena.com', $record->image_url);
 
         $recommendations = $item->recommendations;
         $this->assertInternalType('array', $recommendations);
@@ -129,7 +129,7 @@ class RecordControllerTest extends WebTestCase
         $this->assertInternalType('int', $item->id);
         $this->assertGreaterThan(0, $item->id);
         $this->assertInternalType('string', $item->title);
-        $this->assertContains('cdn.myanimelist.net', $item->image_url);
+        $this->assertContains('myanimelist.cdn-dena.com', $item->image_url);
         $this->assertInternalType('int', $item->episodes);
         $this->assertInternalType('string', $item->genres[0]);
         $this->assertInternalType('float', $item->members_score);

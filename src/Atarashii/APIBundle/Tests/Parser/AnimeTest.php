@@ -52,7 +52,7 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertLessThan(100, $anime->getPopularityRank());
         $this->assertGreaterThan(0, $anime->getPopularityRank());
 
-        $this->assertEquals('http://cdn.myanimelist.net/images/anime/13/15010.jpg', $anime->getImageUrl());
+        $this->assertEquals('https://myanimelist.cdn-dena.com/images/anime/13/15010.jpg', $anime->getImageUrl());
         $this->assertEquals('TV', $anime->getType());
         $this->assertEquals(24, $anime->getEpisodes());
         $this->assertEquals('finished airing', $anime->getStatus());
@@ -125,7 +125,7 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $recommedations = $recommedations[0];
         $this->assertEquals(66, $recommedations->getId());
         $this->assertEquals('Azumanga Daioh', $recommedations->getTitle());
-        $this->assertEquals('http://cdn.myanimelist.net/images/anime/1/66.jpg', $recommedations->getImageUrl());
+        $this->assertEquals('https://myanimelist.cdn-dena.com/images/anime/1/66.jpg', $recommedations->getImageUrl());
 
         $animeContents = file_get_contents(__DIR__.'/../InputSamples/anime-10236.html');
 

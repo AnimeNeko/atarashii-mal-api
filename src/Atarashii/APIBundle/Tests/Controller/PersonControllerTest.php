@@ -37,7 +37,7 @@ class PersonControllerTest extends WebTestCase
         $this->assertEquals(200, $statusCode);
 
         $this->assertEquals(185, $content->id);
-        $this->assertEquals('http://cdn.myanimelist.net/images/voiceactors/3/43500.jpg', $content->image_url);
+        $this->assertEquals('https://myanimelist.cdn-dena.com/images/voiceactors/3/43500.jpg', $content->image_url);
         $this->assertEquals('Hanazawa, Kana', $content->name);
         $this->assertEquals('香菜', $content->given_name);
         $this->assertEquals('花澤', $content->family_name);

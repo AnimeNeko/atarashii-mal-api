@@ -32,7 +32,7 @@ class UpcomingTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('string', $upcomingItem->getStartDate());
 
         //Check some data that should remain consistent
-        $this->assertStringStartsWith('http://cdn.myanimelist.net/images/anime/', $upcomingItem->getImageUrl());
+        $this->assertStringStartsWith('https://myanimelist.cdn-dena.com/images/anime/', $upcomingItem->getImageUrl());
         $this->assertInstanceOf('\DateTime', new \DateTime($upcomingItem->getStartDate()));
 
         // Get some older titles to test date parsing and wrapping for two-digit years
@@ -73,6 +73,6 @@ class UpcomingTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('string', $upcomingItem->getSynopsis());
 
         //Check some data that should remain consistent
-        $this->assertStringStartsWith('http://cdn.myanimelist.net/images/manga/', $upcomingItem->getImageUrl());
+        $this->assertStringStartsWith('https://myanimelist.cdn-dena.com/images/manga/', $upcomingItem->getImageUrl());
     }
 }

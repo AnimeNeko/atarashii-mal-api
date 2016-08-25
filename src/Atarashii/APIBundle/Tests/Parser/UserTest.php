@@ -31,7 +31,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
          * will need to be updated when the source file is re-downloaded to update any values.
          */
 
-        $this->assertEquals('http://cdn.myanimelist.net/images/userimages/1183995.jpg', $profile->getAvatarUrl());
+        $this->assertEquals('https://myanimelist.cdn-dena.com/images/userimages/1183995.jpg', $profile->getAvatarUrl());
     }
 
     /**

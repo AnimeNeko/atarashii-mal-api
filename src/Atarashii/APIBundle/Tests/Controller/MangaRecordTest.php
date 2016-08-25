@@ -40,7 +40,7 @@ class MangaRecordTest
         $main->assertInternalType('int', $content->rank);
         $main->assertInternalType('int', $content->popularity_rank);
 
-        $main->assertStringStartsWith('http://cdn.myanimelist.net/images', $content->image_url);
+        $main->assertStringStartsWith('https://myanimelist.cdn-dena.com/images', $content->image_url);
 
         $main->assertEquals('Manga', $content->type);
 
