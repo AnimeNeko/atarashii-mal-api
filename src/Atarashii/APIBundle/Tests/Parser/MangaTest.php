@@ -43,7 +43,7 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertLessThan(2500, $manga->getPopularityRank());
         $this->assertGreaterThan(0, $manga->getPopularityRank());
 
-        $this->assertEquals('http://cdn.myanimelist.net/images/manga/5/74977.jpg', $manga->getImageUrl());
+        $this->assertEquals('https://myanimelist.cdn-dena.com/images/manga/5/74977.jpg', $manga->getImageUrl());
         $this->assertEquals('Manga', $manga->getType());
         $this->assertEquals(164, $manga->getChapters());
         $this->assertEquals(15, $manga->getVolumes());

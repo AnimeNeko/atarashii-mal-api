@@ -726,7 +726,7 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $anime = new Anime();
         $anime->setId(rand());
         $anime->setTitle('This is a title');
-        $anime->setImageUrl('http://cdn.myanimelist.net/images/anime/5/18179.jpg');
+        $anime->setImageUrl('https://myanimelist.cdn-dena.com/images/anime/5/18179.jpg');
         $animerecord->setRecommendations($anime);
 
         $recommendations = $animerecord->getRecommendations();

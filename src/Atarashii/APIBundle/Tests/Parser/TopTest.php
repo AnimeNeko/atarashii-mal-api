@@ -32,7 +32,7 @@ class TopTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('int', $topItem->getMembersCount());
 
         //Check some data that should remain consistent
-        $this->assertStringStartsWith('http://cdn.myanimelist.net/images/anime/', $topItem->getImageUrl());
+        $this->assertStringStartsWith('https://myanimelist.cdn-dena.com/images/anime/', $topItem->getImageUrl());
         $this->assertInstanceOf('\DateTime', new \DateTime($topItem->getStartDate()));
         $this->assertGreaterThan(8, $topItem->getMembersScore());
         $this->assertGreaterThan(60000, $topItem->getMembersCount());
@@ -63,7 +63,7 @@ class TopTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('int', $topItem->getMembersCount());
 
         //Check some data that should remain consistent
-        $this->assertStringStartsWith('http://cdn.myanimelist.net/images/manga/', $topItem->getImageUrl());
+        $this->assertStringStartsWith('https://myanimelist.cdn-dena.com/images/manga/', $topItem->getImageUrl());
         $this->assertGreaterThan(8, $topItem->getMembersScore());
         $this->assertGreaterThan(50000, $topItem->getMembersCount());
     }

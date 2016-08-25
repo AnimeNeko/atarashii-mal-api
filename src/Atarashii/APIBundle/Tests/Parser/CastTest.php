@@ -51,18 +51,18 @@ class CastTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(2171, $character->getId());
         $this->assertEquals('Hiiragi, Kagami', $character->getName());
         $this->assertEquals('Main', $character->getRole());
-        $this->assertStringStartsWith('http://cdn.myanimelist.net/images/characters/', $character->getImage());
+        $this->assertStringStartsWith('https://myanimelist.cdn-dena.com/images/characters/', $character->getImage());
 
         //Actor Tests
         $this->assertEquals(52, $actor->getId());
         $this->assertEquals('Katou, Emiri', $actor->getActorName());
-        $this->assertStringStartsWith('http://cdn.myanimelist.net/images/voiceactors/', $actor->getActorImage());
+        $this->assertStringStartsWith('https://myanimelist.cdn-dena.com/images/voiceactors/', $actor->getActorImage());
         $this->assertEquals('Japanese', $actor->getActorLanguage());
 
         //Staff Tests
         $this->assertEquals(6771, $staff->getId());
         $this->assertEquals('Takemoto, Yasuhiro', $staff->getName());
         $this->assertContains('Director', $staff->getRank());
-        $this->assertStringStartsWith('http://cdn.myanimelist.net/images/voiceactors/', $staff->getImage()); //Note the path is correct. MAL re-uses this for other non-VA staff images.
+        $this->assertStringStartsWith('https://myanimelist.cdn-dena.com/images/voiceactors/', $staff->getImage()); //Note the path is correct. MAL re-uses this for other non-VA staff images.
     }
 }
