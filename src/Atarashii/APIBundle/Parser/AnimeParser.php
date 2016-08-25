@@ -321,24 +321,26 @@ class AnimeParser
                         $url = $relatedItem->attributes->getNamedItem('href')->nodeValue;
                         $id = preg_match('/\/(anime|manga)\/(\d+)\/.*?/', $url, $urlParts);
 
-                        if ($id !== false || $id !== 0) {
-                            $itemId = (int) $urlParts[2];
-                            $itemTitle = $relatedItem->textContent;
-                            $itemUrl = $url;
+                        if (count($urlParts) > 2) {
+                            if ($id !== false || $id !== 0) {
+                                $itemId = (int)$urlParts[2];
+                                $itemTitle = $relatedItem->textContent;
+                                $itemUrl = $url;
+                            }
+
+                            $itemArray = array();
+
+                            if ($urlParts[1] == 'anime') {
+                                $itemArray['anime_id'] = $itemId;
+                            } else {
+                                $itemArray['manga_id'] = $itemId;
+                            }
+
+                            $itemArray['title'] = $itemTitle;
+                            $itemArray['url'] = 'https://myanimelist.net' . $itemUrl;
+
+                            $animerecord->addRelation($itemArray, $relationType);
                         }
-
-                        $itemArray = array();
-
-                        if ($urlParts[1] == 'anime') {
-                            $itemArray['anime_id'] = $itemId;
-                        } else {
-                            $itemArray['manga_id'] = $itemId;
-                        }
-
-                        $itemArray['title'] = $itemTitle;
-                        $itemArray['url'] = 'http://myanimelist.net'.$itemUrl;
-
-                        $animerecord->addRelation($itemArray, $relationType);
                     }
 
                     //Grab next item

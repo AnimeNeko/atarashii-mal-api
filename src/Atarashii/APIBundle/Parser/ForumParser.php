@@ -45,7 +45,7 @@ class ForumParser
             $board->setName($crawler->filter('a')->text());
 
             # id.
-            $board->setId(str_replace('http://myanimelist.net/forum/?board=', '', $crawler->filter('a')->attr('href')));
+            $board->setId(str_replace('https://myanimelist.net/forum/?board=', '', $crawler->filter('a')->attr('href')));
 
             # description.
             $board->setDescription($crawler->filter('span')->text());
@@ -65,7 +65,7 @@ class ForumParser
                 $child->setName($crawler->filter('a')->text());
 
                 # id.
-                $child->setId(str_replace('http://myanimelist.net/forum/?subboard=', '', $crawler->attr('href')));
+                $child->setId(str_replace('https://myanimelist.net/forum/?subboard=', '', $crawler->attr('href')));
 
                 $board->setChildren($child);
             }
