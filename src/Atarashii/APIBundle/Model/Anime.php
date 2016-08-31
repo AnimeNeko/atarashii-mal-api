@@ -1824,6 +1824,10 @@ class Anime
             $xml->addChild('storage_value', $this->getStorageValue());
         }
 
+        if (in_array('isRewatching', $update_items)) {
+            $xml->addChild('enable_rewatching', $this->getRewatching());
+        }
+
         if (in_array('rewatchCount', $update_items)) {
             $xml->addChild('times_rewatched', $this->getRewatchCount());
         }
