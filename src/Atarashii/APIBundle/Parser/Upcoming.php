@@ -100,7 +100,7 @@ class Upcoming
                     }
 
                     //We must have a year. If we don't even have that, don't set a date.
-                    if (strpos($start_date[2], '?') === false) {
+                    if (strpos($end_date[2], '?') === false) {
                         if (strpos($end_date[0], '?') !== false) {
                             $media->setLiteralEndDate(null, DateTime::createFromFormat('Y', $end_date[2]), 'year');
                         } elseif (strpos($end_date[0], '?') === false && strpos($end_date[1], '?') !== false) {
