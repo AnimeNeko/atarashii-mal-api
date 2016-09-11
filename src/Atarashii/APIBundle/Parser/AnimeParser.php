@@ -400,10 +400,13 @@ class AnimeParser
             $extracted = $leftcolumn->filterXPath('//span[text()="Duration:"]');
             if ($extracted->count() > 0) {
                 $duration = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
-                if (strpos($duration, 'hr.') === true) {
+                if (strpos($duration, 'hr.') == true && strpos($duration, 'min.') == true) {
                     preg_match('/(\d+) hr. (\d+) min/', $duration, $matches);
                     $animerecord->setDuration((int) $matches[0] * 60 + $matches[2]);
-                } else if (strpos($duration, 'Unknown') === false) {
+                } else if (strpos($duration, 'hr.') == true) {
+                    preg_match('/(\d+) hr./', $duration, $matches);
+                    $animerecord->setDuration((int) $matches[0] * 60);
+                } else if (strpos($duration, 'Unknown') == false) {
                     preg_match('/(\d+) min/', $duration, $matches);
                     $animerecord->setDuration((int) $matches[0]);
                 }
