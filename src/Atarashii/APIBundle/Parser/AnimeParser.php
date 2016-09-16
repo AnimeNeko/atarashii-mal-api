@@ -400,16 +400,25 @@ class AnimeParser
             $extracted = $leftcolumn->filterXPath('//span[text()="Duration:"]');
             if ($extracted->count() > 0) {
                 $duration = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
-                if (strpos($duration, 'hr.') == true && strpos($duration, 'min.') == true) {
-                    preg_match('/(\d+) hr. (\d+) min/', $duration, $matches);
-                    $animerecord->setDuration((int) $matches[0] * 60 + $matches[2]);
-                } else if (strpos($duration, 'hr.') == true) {
-                    preg_match('/(\d+) hr./', $duration, $matches);
-                    $animerecord->setDuration((int) $matches[0] * 60);
-                } else if (strpos($duration, 'Unknown') == false) {
-                    preg_match('/(\d+) min/', $duration, $matches);
-                    $animerecord->setDuration((int) $matches[0]);
+
+                // Handle varations that include minutes
+                if(strpos($duration, 'min.') !== false) {
+                    if(strpos($duration, 'hr.') !== false) { //contains hours and minutes
+                        preg_match('/([0-9]+) hr\. ([0-9]+) min\./', $duration, $durationParts);
+                        //This could all be done in one line, but it's more understandable and maintainable broken up.
+                        $hours = (int) $durationParts[1];
+                        $minutes = (int) $durationParts[2];
+                        $animerecord->setDuration(($hours * 60) + $minutes);
+                    } else { //contains only minutes
+                        preg_match('/([0-9]+) min\./', $duration, $durationParts);
+                        $animerecord->setDuration((int) $durationParts[1]);
+                    }
+                //Handle hour-only durations
+                } elseif (strpos($duration, 'hr.') !== false) {
+                    preg_match('/([0-9]+) hr\./', $duration, $durationParts);
+                    $animerecord->setDuration((int) $durationParts[1] * 60);
                 }
+                // Any other format (such as just "Unknown") isn't understood and is ignored
             }
 
             // External links is only visible when an user has logged in any may be hidden on some records.
