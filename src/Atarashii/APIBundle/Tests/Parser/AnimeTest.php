@@ -58,6 +58,7 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('finished airing', $anime->getStatus());
         $this->assertEquals('2007-04-08', $anime->getStartDate());
         $this->assertEquals('2007-09-17', $anime->getEndDate());
+        $this->assertEquals(24, $anime->getDuration());
         $this->assertEquals(null, $anime->getBroadcast());
         $this->assertEquals(24, $anime->getDuration());
         $this->assertEquals('PG-13 - Teens 13 or older', $anime->getClassification());
@@ -134,6 +135,36 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Atarashii\APIBundle\Model\Anime', $anime);
 
         $this->assertEquals('1981', $anime->getEndDate());
+
+
+        $animeContents = file_get_contents(__DIR__.'/../InputSamples/anime-47.html');
+
+        $anime = AnimeParser::parse($animeContents, $apiVersion);
+
+        $this->assertInstanceOf('Atarashii\APIBundle\Model\Anime', $anime);
+
+        $this->assertEquals('124', $anime->getDuration());
+
+
+        $animeContents = file_get_contents(__DIR__.'/../InputSamples/anime-10758.html');
+
+        $anime = AnimeParser::parse($animeContents, $apiVersion);
+
+        $this->assertInstanceOf('Atarashii\APIBundle\Model\Anime', $anime);
+
+        $this->assertNull($anime->getDuration());
+
+
+        $animeContents = file_get_contents(__DIR__.'/../InputSamples/anime-18617.html');
+
+        $anime = AnimeParser::parse($animeContents, $apiVersion);
+
+        $this->assertInstanceOf('Atarashii\APIBundle\Model\Anime', $anime);
+
+        $this->assertEquals('120', $anime->getDuration());
+
+
+
     }
 
     /**

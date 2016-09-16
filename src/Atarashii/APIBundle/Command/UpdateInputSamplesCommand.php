@@ -63,12 +63,27 @@ class UpdateInputSamplesCommand extends ContainerAwareCommand
     private function fetchAnonPages($io, $fs, $downloader, $outputDir) {
         $io->section('Fetching pages that don\'t need auth.');
 
-        $io->progressStart(31);
+        $io->progressStart(34);
+
+        $io->progressAdvance();
+        $io->text('Anime 47 (Akira)');
+        $pageContent = $downloader->fetch('/anime/47');
+        $fs->dumpFile($outputDir . '/anime-47.html', $pageContent);
 
         $io->progressAdvance();
         $io->text('Anime 10236 (Kagee Grimm Douwa)');
         $pageContent = $downloader->fetch('/anime/10236');
         $fs->dumpFile($outputDir . '/anime-10236.html', $pageContent);
+
+        $io->progressAdvance();
+        $io->text('Anime 10758 (Momotarou)');
+        $pageContent = $downloader->fetch('/anime/10758');
+        $fs->dumpFile($outputDir . '/anime-10758.html', $pageContent);
+
+        $io->progressAdvance();
+        $io->text('Anime 18617 (Girls und Panzer Movie)');
+        $pageContent = $downloader->fetch('/anime/18617');
+        $fs->dumpFile($outputDir . '/anime-18617.html', $pageContent);
 
         $io->progressAdvance();
         $io->text('Manga 137 (R.O.D: Read or Die)');
