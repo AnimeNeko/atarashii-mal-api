@@ -68,6 +68,8 @@ class MangalistControllerTest extends WebTestCase
             $chapters = 5;
             $volumes = 1;
             $score = 8;
+            $start = '2013-02-01';
+            $end = '2013-06-05';
 
             $client->request('POST', '/2/mangalist/manga',
                 array(
@@ -76,6 +78,8 @@ class MangalistControllerTest extends WebTestCase
                     'chapters' => $chapters,
                     'volumes' => $volumes,
                     'score' => $score,
+		    'start' => $start,
+		    'end' => $end,
                 ),
                 array(),
                 array(
@@ -91,33 +95,31 @@ class MangalistControllerTest extends WebTestCase
             $this->assertTrue($client->getResponse()->isSuccessful());
             $this->assertEquals('ok', $content);
 
-            //Make sure the title actually was added to the list
-            $client->request('GET', '/2/mangalist/'.$credentials['username']);
+            //Grab personal details for the title to check values
+            $client->request('GET', '/2/manga/'.$mangaID, array('mine' => 1), array(), array(
+                'PHP_AUTH_USER' => $credentials['username'],
+                'PHP_AUTH_PW' => $credentials['password'],
+            ));
+
             $rawContent = $client->getResponse()->getContent();
             $content = json_decode($rawContent);
 
             $this->assertNotNull($content);
             $this->assertTrue($client->getResponse()->isSuccessful());
 
-            $this->assertGreaterThanOrEqual(1, count($content->manga));
+            $this->assertEquals('reading', $content->read_status);
 
-            foreach ($content->manga as $listItem) {
-                if ($listItem->id === $mangaID) {
-                    $mangaItem = $listItem;
-                    break;
-                }
-            }
+            $this->assertInternalType('int', $content->score);
+            $this->assertEquals($score, $content->score);
 
-            $this->assertEquals('reading', $mangaItem->read_status);
+            $this->assertInternalType('int', $content->chapters_read);
+            $this->assertEquals($chapters, $content->chapters_read);
 
-            $this->assertInternalType('int', $mangaItem->score);
-            $this->assertEquals($score, $mangaItem->score);
+            $this->assertInternalType('int', $content->volumes_read);
+            $this->assertEquals($volumes, $content->volumes_read);
 
-            $this->assertInternalType('int', $mangaItem->chapters_read);
-            $this->assertEquals($chapters, $mangaItem->chapters_read);
-
-            $this->assertInternalType('int', $mangaItem->volumes_read);
-            $this->assertEquals($volumes, $mangaItem->volumes_read);
+            $this->assertEquals($start, $content->reading_start);
+            $this->assertEquals($end, $content->reading_end);
         } else {
             $this->markTestSkipped('Username and password must be set.');
         }
