@@ -141,6 +141,16 @@ class MangaListController extends FOSRestController
                 $manga->setScore($request->request->get('score'));
                 $update_items[] = 'score';
             }
+
+	    if ($request->request->get('start') !== null) {
+	        $manga->setReadingStart(DateTime::createFromFormat('Y-m-d', $request->request->get('start'))); //Needs to be DT!
+	        $update_items[] = 'start';
+	    }
+
+	    if ($request->request->get('end') !== null) {
+	        $manga->setReadingEnd(DateTime::createFromFormat('Y-m-d', $request->request->get('end'))); //Needs to be DT!
+	        $update_items[] = 'end';
+	    }
         } catch (\Exception $e) {
             return $this->view(array('error' => $e->getMessage()), 500);
         }
