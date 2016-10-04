@@ -133,6 +133,17 @@ class AnimeListController extends FOSRestController
                 $anime->setScore($request->request->get('score'));
                 $update_items[] = 'score';
             }
+
+	    if ($request->request->get('start') !== null) {
+	        $anime->setWatchingStart(DateTime::createFromFormat('Y-m-d', $request->request->get('start'))); //Needs to be DT!
+	        $update_items[] = 'start';
+	    }
+
+	    if ($request->request->get('end') !== null) {
+	        $anime->setWatchingEnd(DateTime::createFromFormat('Y-m-d', $request->request->get('end'))); //Needs to be DT!
+	        $update_items[] = 'end';
+	    }
+
         } catch (\Exception $e) {
             return $this->view(array('error' => $e->getMessage()), 500);
         }

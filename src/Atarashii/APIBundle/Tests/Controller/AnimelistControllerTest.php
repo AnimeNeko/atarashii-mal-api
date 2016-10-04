@@ -67,6 +67,8 @@ class AnimelistControllerTest extends WebTestCase
             $status = 1; //Watching
             $episodes = 3;
             $score = 8;
+            $start = '2013-01-02';
+            $end = '2014-03-04';
 
             $client->request('POST', '/2/animelist/anime',
                 array(
@@ -74,6 +76,8 @@ class AnimelistControllerTest extends WebTestCase
                     'status' => $status,
                     'episodes' => $episodes,
                     'score' => $score,
+		    'start' => $start,
+		    'end' => $end,
                 ),
                 array(),
                 array(
@@ -89,28 +93,26 @@ class AnimelistControllerTest extends WebTestCase
             $this->assertTrue($client->getResponse()->isSuccessful());
             $this->assertEquals('ok', $content);
 
-            //Make sure the title actually was added to the list
-            $client->request('GET', '/2/animelist/'.$credentials['username']);
+            //Grab personal details for the title to check values
+            $client->request('GET', '/2/anime/'.$animeID, array('mine' => 1), array(), array(
+                'PHP_AUTH_USER' => $credentials['username'],
+                'PHP_AUTH_PW' => $credentials['password'],
+            ));
+
             $rawContent = $client->getResponse()->getContent();
             $content = json_decode($rawContent);
 
             $this->assertNotNull($content);
             $this->assertTrue($client->getResponse()->isSuccessful());
 
-            $this->assertGreaterThanOrEqual(1, count($content->anime));
+            $this->assertEquals('watching', $content->watched_status);
+            $this->assertInternalType('int', $content->score);
+            $this->assertEquals($score, $content->score);
+            $this->assertInternalType('int', $content->watched_episodes);
+            $this->assertEquals($episodes, $content->watched_episodes);
 
-            foreach ($content->anime as $listItem) {
-                if ($listItem->id === $animeID) {
-                    $animeItem = $listItem;
-                    break;
-                }
-            }
-
-            $this->assertEquals('watching', $animeItem->watched_status);
-            $this->assertInternalType('int', $animeItem->score);
-            $this->assertEquals($score, $animeItem->score);
-            $this->assertInternalType('int', $animeItem->watched_episodes);
-            $this->assertEquals($episodes, $animeItem->watched_episodes);
+            $this->assertEquals($start, $content->watching_start);
+            $this->assertEquals($end, $content->watching_end);
         } else {
             $this->markTestSkipped('Username and password must be set.');
         }
