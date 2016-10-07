@@ -96,10 +96,11 @@ class MangaListController extends FOSRestController
      * object. The object is used to make an XML document that is then posted to MyAnimeList.
      *
      * @param Request $request Contains all the needed information to add the title.
+     * @param float   $apiVersion The API version for the request
      *
      * @return View
      */
-    public function addAction(Request $request)
+    public function addAction(Request $request, $apiVersion)
     {
         // http://mymangalist.net/api/mangalist/add/#{id}.xml
 
@@ -142,15 +143,18 @@ class MangaListController extends FOSRestController
                 $update_items[] = 'score';
             }
 
-	    if ($request->request->get('start') !== null) {
-	        $manga->setReadingStart(DateTime::createFromFormat('Y-m-d', $request->request->get('start'))); //Needs to be DT!
-	        $update_items[] = 'start';
-	    }
+            //API 2.2 Items
+            if ($apiVersion >= 2.2) {
+                if ($request->request->get('start') !== null) {
+                    $manga->setReadingStart(DateTime::createFromFormat('Y-m-d', $request->request->get('start'))); //Needs to be DT!
+                    $update_items[] = 'start';
+                }
 
-	    if ($request->request->get('end') !== null) {
-	        $manga->setReadingEnd(DateTime::createFromFormat('Y-m-d', $request->request->get('end'))); //Needs to be DT!
-	        $update_items[] = 'end';
-	    }
+                if ($request->request->get('end') !== null) {
+                    $manga->setReadingEnd(DateTime::createFromFormat('Y-m-d', $request->request->get('end'))); //Needs to be DT!
+                    $update_items[] = 'end';
+                }
+            }
         } catch (\Exception $e) {
             return $this->view(array('error' => $e->getMessage()), 500);
         }

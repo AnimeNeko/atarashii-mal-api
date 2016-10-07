@@ -70,14 +70,14 @@ class AnimelistControllerTest extends WebTestCase
             $start = '2013-01-02';
             $end = '2014-03-04';
 
-            $client->request('POST', '/2/animelist/anime',
+            $client->request('POST', '/2.2/animelist/anime',
                 array(
                     'anime_id' => $animeID,
                     'status' => $status,
                     'episodes' => $episodes,
                     'score' => $score,
-		    'start' => $start,
-		    'end' => $end,
+                    'start' => $start,
+                    'end' => $end,
                 ),
                 array(),
                 array(

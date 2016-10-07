@@ -71,15 +71,15 @@ class MangalistControllerTest extends WebTestCase
             $start = '2013-02-01';
             $end = '2013-06-05';
 
-            $client->request('POST', '/2/mangalist/manga',
+            $client->request('POST', '/2.2/mangalist/manga',
                 array(
                     'manga_id' => $mangaID,
                     'status' => $status,
                     'chapters' => $chapters,
                     'volumes' => $volumes,
                     'score' => $score,
-		    'start' => $start,
-		    'end' => $end,
+                    'start' => $start,
+                    'end' => $end,
                 ),
                 array(),
                 array(
