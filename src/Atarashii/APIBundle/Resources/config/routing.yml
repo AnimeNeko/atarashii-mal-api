@@ -20,3 +20,7 @@ _api2:
 _api2_1:
     prefix: /2.1
     resource: '@AtarashiiAPIBundle/Resources/config/routing_api2_1.yml'
+
+_api2_2:
+    prefix: /2.2
+    resource: '@AtarashiiAPIBundle/Resources/config/routing_api2_2.yml'

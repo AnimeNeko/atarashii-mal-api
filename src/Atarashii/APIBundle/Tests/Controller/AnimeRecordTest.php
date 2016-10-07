@@ -60,7 +60,7 @@ class AnimeRecordTest
         $main->assertInternalType('int', $content->favorited_count);
         $main->assertGreaterThan(600, $content->favorited_count);
 
-        $main->assertStringStartsWith('Kanade Amakusa is a high school student', $content->synopsis);
+        $main->assertStringStartsWith('For Kanade Amakusa, life as a high schooler', $content->synopsis);
 
         $main->assertContains('MAGES.', $content->producers);
         $main->assertContains('Comedy', $content->genres);
