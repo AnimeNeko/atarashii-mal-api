@@ -383,11 +383,12 @@ class AnimeParser
 
         if ($apiVersion >= '2.1') {
             # Background
-            preg_match('/div>Background<\/h2>(.+?)<div/s', $crawler->filter('span[itemprop="description"]')->parents()->html(), $matches);
-            if (strpos($matches[0], 'No background information') !== false) {
-                $animerecord->setBackground('No background information has been added to this title.');
-            } else {
-                $animerecord->setBackground(trim($matches[1]));
+            $extracted = $crawler->filter('span[itemprop="description"]');
+            if ($extracted->count() > 0) {
+                preg_match('/div>Background<\/h2>(.+?)<div/s', $extracted->parents()->html(), $matches);
+                if (strpos($matches[0], 'No background information') === false) {
+                    $animerecord->setBackground(trim($matches[1]));
+                }
             }
 
             # Broadcast:
