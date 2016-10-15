@@ -3,7 +3,7 @@
 namespace Atarashii\APIBundle\Tests\Parser;
 
 use Atarashii\APIBundle\Model\Manga;
-use Atarashii\APIBundle\Parser\MangaParser;
+use Atarashii\APIBundle\Parser\RecordParser;
 
 /**
  * Class MangaTest.
@@ -18,8 +18,9 @@ class MangaTest extends \PHPUnit_Framework_TestCase
     public function testParse()
     {
         $mangaContents = file_get_contents(__DIR__.'/../InputSamples/manga-11977-mine.html');
+        $apiVersion = '2.2';
 
-        $manga = MangaParser::parse($mangaContents);
+        $manga = RecordParser::parse($mangaContents, $apiVersion, false);
 
         $this->assertInstanceOf('Atarashii\APIBundle\Model\Manga', $manga);
 
@@ -78,7 +79,7 @@ class MangaTest extends \PHPUnit_Framework_TestCase
 
         $mangaContents = file_get_contents(__DIR__.'/../InputSamples/manga-137.html');
 
-        $manga = MangaParser::parse($mangaContents);
+        $manga = RecordParser::parse($mangaContents, $apiVersion, false);
 
         $this->assertInstanceOf('Atarashii\APIBundle\Model\Manga', $manga);
 
@@ -97,7 +98,7 @@ class MangaTest extends \PHPUnit_Framework_TestCase
 
         $mangaContents = file_get_contents(__DIR__.'/../InputSamples/manga-44347.html');
 
-        $manga = MangaParser::parse($mangaContents);
+        $manga = RecordParser::parse($mangaContents, $apiVersion, false);
 
         $this->assertInstanceOf('Atarashii\APIBundle\Model\Manga', $manga);
 
@@ -114,7 +115,7 @@ class MangaTest extends \PHPUnit_Framework_TestCase
 
         $mangaContents = file_get_contents(__DIR__.'/../InputSamples/manga-11977-mine-detailed.html');
 
-        MangaParser::parseExtendedPersonal($mangaContents, $manga);
+        RecordParser::parseExtendedPersonal($mangaContents, $manga, 'manga');
 
         $this->assertContains('drama', $manga->getPersonalTags());
         $this->assertContains('seinen', $manga->getPersonalTags());
@@ -126,7 +127,7 @@ class MangaTest extends \PHPUnit_Framework_TestCase
 
         $mangaContents = file_get_contents(__DIR__.'/../InputSamples/manga-17074-mine-detailed.html');
 
-        MangaParser::parseExtendedPersonal($mangaContents, $manga);
+        RecordParser::parseExtendedPersonal($mangaContents, $manga, 'manga');
 
         $this->assertEquals('Medium', $manga->getPriority('string'));
         $this->assertEquals(3, $manga->getRereadValue());

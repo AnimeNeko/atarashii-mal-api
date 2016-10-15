@@ -746,9 +746,30 @@ class Manga
     }
 
     /**
+     * Add a relation.
+     *
+     * @param array  $item An array containing details of the related item
+     * @param string $type The type of relation, all lowercase with the underscore replacing spaces
+     */
+    public function addRelation($item, $type)
+    {
+        switch ($type) {
+            case 'adaptation':
+                $this->setAnimeAdaptations($item);
+                break;
+            case 'alternative_version':
+                $this->setAlternativeVersions($item);
+                break;
+            case 'related_manga':
+                $this->setRelatedManga($item);
+                break;
+        }
+    }
+
+    /**
      * Set the readStatus propery.
      *
-     * @param string|int $status The input status value of an item. Accepts either integers as defined
+     * @param string|int $statusid The input status value of an item. Accepts either integers as defined
      *                           by the MAL API module, or strings as defined by the Ruby API (mal-api.com).
      */
     public function setReadStatus($statusid)
