@@ -206,7 +206,7 @@ class RecordParser
         #</table>
         $related = $rightcolumn->filter('table.anime_detail_related_anime');
 
-        //NOTE: Not all relations are currently supported.
+        //NOTE: Not all relations are supported in API 2.1 and below.
         if (iterator_count($related)) {
             $rows = $related->children();
             foreach ($rows as $row) {
@@ -239,10 +239,6 @@ class RecordParser
 
                             $itemArray['title'] = $itemTitle;
                             $itemArray['url'] = 'https://myanimelist.net'.$itemUrl;
-
-                            if ($relationType !== 'adaptation' && $relationType !== 'alternative_version' && !$anime) {
-                                $relationType = 'related_manga';
-                            }
 
                             $record->addRelation($itemArray, $relationType);
                         }

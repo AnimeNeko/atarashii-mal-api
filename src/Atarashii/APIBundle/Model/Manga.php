@@ -4,7 +4,7 @@
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
-* @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
+* @copyright 2014-2016 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
 namespace Atarashii\APIBundle\Model;
@@ -141,23 +141,37 @@ class Manga
     private $tags = array();
 
     /**
-     * A list of anime adaptations of this manga (or conversely, anime from which this manga is adapted).
+     * A list of relations returned by MAL, each containing a list of items for that relation.
      *
      * @Type("array")
+     * @Since("2.2")
+     */
+    private $related = array();
+
+    /**
+     * A list of anime adaptations of this manga (or conversely, anime from which this manga is adapted).
+     *
+     * @deprecated
+     * @Type("array")
+     * @until("3.0")
      */
     private $animeAdaptations = array();
 
     /**
      * A list of related manga.
      *
+     * @deprecated
      * @Type("array")
+     * @until("3.0")
      */
     private $relatedManga = array();
 
     /**
      * A list of alternative versions of this manga.
      *
+     * @deprecated
      * @Type("array")
+     * @until("3.0")
      */
     private $alternativeVersions = array();
 
@@ -765,6 +779,8 @@ class Manga
      */
     public function addRelation($item, $type)
     {
+        $this->related[$type][] = $item;
+
         switch ($type) {
             case 'adaptation':
                 $this->setAnimeAdaptations($item);
@@ -772,7 +788,7 @@ class Manga
             case 'alternative_version':
                 $this->setAlternativeVersions($item);
                 break;
-            case 'related_manga':
+            default:
                 $this->setRelatedManga($item);
                 break;
         }

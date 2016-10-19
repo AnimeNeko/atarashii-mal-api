@@ -4,7 +4,7 @@
 *
 * @author    Ratan Dhawtal <ratandhawtal@hotmail.com>
 * @author    Michael Johnson <youngmug@animeneko.net>
-* @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
+* @copyright 2014-2016 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
 namespace Atarashii\APIBundle\Model;
@@ -253,54 +253,91 @@ class Anime
     private $tags = array();
 
     /**
+     * A list of relations returned by MAL, each containing a list of items for that relation.
+     *
+     * @Type("array")
+     * @Since("2.2")
+     */
+    private $related = array();
+
+    /**
      * A list of manga adaptations of this anime (or conversely, manga from which this anime is adapted).
+     *
+     * @deprecated
+     * @until("3.0")
      */
     private $mangaAdaptations = array();
 
     /**
      * A list of anime prequels of this anime.
+     *
+     * @deprecated
+     * @until("3.0")
      */
     private $prequels = array();
 
     /**
      * A list of anime sequels of this anime.
+     *
+     * @deprecated
+     * @until("3.0")
      */
     private $sequels = array();
 
     /**
      * A list of anime side stories of this anime.
+     *
+     * @deprecated
+     * @until("3.0")
      */
     private $sideStories = array();
 
     /**
      * Parent story of this anime.
+     *
+     * @deprecated
+     * @until("3.0")
      */
     private $parentStory;
 
     /**
      * A list of character anime of this anime.
+     *
+     * @deprecated
+     * @until("3.0")
      */
     private $characterAnime = array();
 
     /**
      * A list of spin-offs of this anime.
+     *
+     * @deprecated
+     * @until("3.0")
      */
     private $spinOffs = array();
 
     /**
      * A list of summaries of this anime.
+     *
+     * @deprecated
+     * @until("3.0")
      */
     private $summaries = array();
 
     /**
      * A list of alternative versions of this anime.
+     *
+     * @deprecated
+     * @until("3.0")
      */
     private $alternativeVersions = array();
 
     /**
      * A list of other related animes.
      *
+     * @deprecated
      * @Since("2.0")
+     * @until("3.0")
      */
     private $other = array();
 
@@ -1412,6 +1449,8 @@ class Anime
      */
     public function addRelation($item, $type)
     {
+        $this->related[$type][] = $item;
+
         switch ($type) {
             case 'adaptation':
                 $this->setMangaAdaptations($item);
@@ -1440,7 +1479,7 @@ class Anime
             case 'alternative_version':
                 $this->setAlternativeVersions($item);
                 break;
-            case 'other':
+            default:
                 $this->setOther($item);
                 break;
         }
