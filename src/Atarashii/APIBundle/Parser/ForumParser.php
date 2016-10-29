@@ -211,22 +211,24 @@ class ForumParser
             //do nothing
         }
 
-        $details = explode("\n\t\t  ", $crawler->filter('td[class="forum_boardrow2"]')->text());
-        $topic->setUsername($details[0]);
-        $topic->profile->details->setForumPosts(str_replace('Posts: ', '', $details[6]));
-        if ($details[1] == '') {
+        $detailsBase = $crawler->filter('td[class="forum_boardrow2"]');
+        $details = explode("\n        ", $detailsBase->text());
+        $topic->setUsername($detailsBase->filter('strong')->text());
+        $topic->profile->details->setForumPosts(str_replace('Posts: ', '', $details[4]));
+        if ($detailsBase->filter('a')->count() !== 3) {
             $topic->profile->details->setAccessRank('Member');
         } else {
-            $topic->profile->details->setAccessRank($details[1]);
+            $topic->profile->details->setAccessRank($detailsBase->filter('a')->eq(1)->text());
         }
 
-        if ($topic->profile->details->getForumPosts() == '') {
-            $topic->profile->details->setStatus($details[3]);
-            $topic->profile->details->setJoinDate(str_replace('Joined: ', '', $details[4]));
-            $topic->profile->details->setForumPosts(str_replace('Posts: ', '', $details[5]));
+        if (count($details) === 7) {
+            $topic->profile->details->setStatus($details[2]);
+            $topic->profile->details->setJoinDate(str_replace('Joined: ', '', $details[3]));
+            $topic->profile->details->setForumPosts(str_replace('Posts: ', '', $details[4]));
         } else {
-            $topic->profile->details->setStatus($details[4]);
-            $topic->profile->details->setJoinDate(str_replace('Joined: ', '', $details[5]));
+            $topic->profile->details->setStatus(trim($details[1]));
+            $topic->profile->details->setJoinDate(str_replace('Joined: ', '', $details[2]));
+            $topic->profile->details->setForumPosts(str_replace('Posts: ', '', $details[3]));
         }
 
         //to force json array and !objects.
