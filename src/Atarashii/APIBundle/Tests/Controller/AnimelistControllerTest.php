@@ -25,7 +25,7 @@ class AnimelistControllerTest extends WebTestCase
         $this->assertNotNull($content);
         $this->assertEquals(200, $statusCode);
 
-        $this->assertStringStartsWith('Failed to find', $content->error);
+        $this->assertStringStartsWith('Empty list received', $content->error);
 
         //Now, do all the checks with the reference user
         $client->request('GET', '/2/animelist/AtarashiiApiTest');

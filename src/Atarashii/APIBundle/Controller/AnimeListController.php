@@ -40,8 +40,8 @@ class AnimeListController extends FOSRestController
             return $this->view(array('error' => 'network-error'), 500);
         }
 
-        if (strpos($animelistcontent, 'Invalid username') !== false) {
-            return $this->view(array('error' => 'Failed to find the specified user, please try again.'), 200);
+        if (strpos($animelistcontent, '<myanimelist></myanimelist>') !== false) {
+            return $this->view(array('error' => 'Empty list received, please check the username.'), 200);
         } else {
             $animelistxml = new SimpleXMLElement($animelistcontent);
             $alist = array();
