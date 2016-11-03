@@ -163,7 +163,7 @@ class User
         //Watching/Reading and Planned are different for anime/manga
         if ($mediaType == 'anime') {
             $inProgress = $statsStatus->filterXPath('//*[contains(attribute::class,"watching")]/../span');
-            $planned = $statsStatus->filterXPath('//*[contains(attribute::class,"plantowatch")]/../span');
+            $planned = $statsStatus->filterXPath('//*[contains(attribute::class,"plan_to_watch")]/../span');
 
             if ($inProgress->count() > 0) {
                 $stats->setWatching((int) str_replace(',', '', $inProgress->text()));
@@ -174,7 +174,7 @@ class User
             }
         } elseif ($mediaType == 'manga') {
             $inProgress = $statsStatus->filterXPath('//*[contains(attribute::class,"reading")]/../span');
-            $planned = $statsStatus->filterXPath('//*[contains(attribute::class,"plantoread")]/../span');
+            $planned = $statsStatus->filterXPath('//*[contains(attribute::class,"plan_to_read")]/../span');
 
             if ($inProgress->count() > 0) {
                 $stats->setReading((int) str_replace(',', '', $inProgress->text()));
@@ -186,7 +186,7 @@ class User
         }
 
         $completed = $statsStatus->filterXPath('//*[contains(attribute::class,"completed")]/../span');
-        $onHold = $statsStatus->filterXPath('//*[contains(attribute::class,"on-hold")]/../span');
+        $onHold = $statsStatus->filterXPath('//*[contains(attribute::class,"on_hold")]/../span');
         $dropped = $statsStatus->filterXPath('//*[contains(attribute::class,"dropped")]/../span');
 
         if ($completed->count() > 0) {
