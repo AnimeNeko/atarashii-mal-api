@@ -88,7 +88,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->assertGreaterThanOrEqual(247, $animeStats->getCompleted());
         $this->assertGreaterThanOrEqual(20, $animeStats->getOnHold());
         $this->assertGreaterThanOrEqual(3, $animeStats->getDropped());
-        $this->assertGreaterThanOrEqual(62, $animeStats->getPlanToWatch());
+        $this->assertGreaterThanOrEqual(60, $animeStats->getPlanToWatch());
         $this->assertGreaterThanOrEqual(345, $animeStats->getTotalEntries());
 
         //Manga Stats
