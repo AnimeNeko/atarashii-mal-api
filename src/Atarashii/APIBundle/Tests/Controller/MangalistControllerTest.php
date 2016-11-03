@@ -141,6 +141,15 @@ class MangalistControllerTest extends WebTestCase
             $volumes = 3;
             $score = 7;
             $start = '2015-09-01';
+            $downloadedChap = $chapters;
+            $rereadCount = 2;
+            $rereadValue = 3; //Medium
+            $end = '2015-10-30';
+            $priority = 2; //High
+            $isRereading = 0;
+            $comments  = 'romance, drama, comedy';
+            $tags = 'None';
+
 
             $client->request('PUT', '/2/mangalist/manga/'.$mangaID,
                 array(
@@ -150,6 +159,14 @@ class MangalistControllerTest extends WebTestCase
                     'volumes' => $volumes,
                     'score' => $score,
                     'start' => $start,
+                    'downloaded_chap' => $downloadedChap,
+                    'reread_count' => $rereadCount,
+                    'reread_value' => $rereadValue,
+                    'end' => $end,
+                    'priority' => $priority,
+                    'is_rereading' => $isRereading,
+                    'comments' => $comments,
+                    'tags' => $tags,
                 ),
                 array(),
                 array(
@@ -183,6 +200,26 @@ class MangalistControllerTest extends WebTestCase
             $this->assertEquals($volumes, $content->volumes_read);
 
             $this->assertEquals($start, $content->reading_start);
+
+            $this->assertEquals($end, $content->reading_end);
+
+            $this->assertInternalType('int', $content->reread_count);
+            $this->assertEquals($rereadCount, $content->reread_count);
+
+            $this->assertInternalType('int', $content->reread_value);
+            $this->assertEquals($rereadValue, $content->reread_value);
+
+            $this->assertInternalType('int', $content->priority);
+            $this->assertEquals($priority, $content->priority);
+
+            $this->assertInternalType('boolean', $content->rereading);
+            $this->assertEquals($isRereading === 1, $content->rereading);
+
+            $this->assertInternalType('string', $content->personal_comments);
+            $this->assertEquals($comments, $content->personal_comments);
+
+            $this->assertInternalType('array', $content->personal_tags);
+            $this->assertEquals($tags, $content->personal_tags[0]);
         } else {
             $this->markTestSkipped('Username and password must be set.');
         }
