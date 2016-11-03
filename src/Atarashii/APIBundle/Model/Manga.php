@@ -1078,6 +1078,10 @@ class Manga
             $xml->addChild('downloaded_chapters', $this->getChapDownloaded());
         }
 
+        if (in_array('isRereading', $update_items)) {
+            $xml->addChild('enable_rereading', $this->getRereading());
+        }
+
         if (in_array('rereadCount', $update_items)) {
             $xml->addChild('times_reread', $this->getRereadCount());
         }
