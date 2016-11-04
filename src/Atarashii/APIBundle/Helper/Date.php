@@ -81,6 +81,8 @@ class Date
             if ($date !== false) {
                 return $date->format('Y-m');
             }
+        } elseif (is_numeric($time)) { // UNIX timestamp
+            return $dateTime->createFromFormat('U', $time)->format(DateTime::ISO8601);
         }
 
         //All else has failed, just return

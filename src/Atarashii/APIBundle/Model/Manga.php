@@ -12,6 +12,7 @@ namespace Atarashii\APIBundle\Model;
 use JMS\Serializer\Annotation\Since;
 use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Annotation\Until;
+use Atarashii\APIBundle\Helper\Date;
 
 class Manga
 {
@@ -274,6 +275,17 @@ class Manga
      * @Since("2.0")
      */
     private $personalComments;
+
+    /**
+     * The date of the last update from the user.
+     *
+     * This is the update date of the anime, formatted as an ISO8601 string.
+     * This ISO8601 will allow seconds!
+     *
+     * @Type("string")
+     * @Since("2.2")
+     */
+    private $lastUpdated;
 
     /**
      * Set the id property.
@@ -1016,6 +1028,16 @@ class Manga
     public function setRereadCount($count)
     {
         $this->rereadCount = (int) $count;
+    }
+
+    public function getLastUpdated()
+    {
+        return $this->lastUpdated;
+    }
+
+    public function setLastUpdated($lastUpdated)
+    {
+        $this->lastUpdated = Date::formatTime($lastUpdated);
     }
 
     /**

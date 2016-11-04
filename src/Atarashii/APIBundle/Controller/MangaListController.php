@@ -61,6 +61,21 @@ class MangaListController extends FOSRestController
                 $mlist[$i]->setChaptersRead((int) $manga->my_read_chapters);
                 $mlist[$i]->setScore((int) $manga->my_score);
                 $mlist[$i]->setReadStatus($manga->my_status);
+                $mlist[$i]->setLastUpdated((int) $manga->my_last_updated);
+                $mlist[$i]->setRereading(((int) $manga->my_rereadingg) === 1);
+
+                // The personal tags are passed by MAL as string.
+                // This will convert it into an array.
+                $myTags = (string) $manga->my_tags;
+                if (strlen($myTags) > 0) {
+                    $personalTags = explode(',', trim($myTags));
+
+                    foreach ($personalTags as $tag) {
+                        $tagArray[] = trim($tag);
+                    }
+
+                    $mlist[$i]->setPersonalTags($tagArray);
+                }
                 ++$i;
             }
 

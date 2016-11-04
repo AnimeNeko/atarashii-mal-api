@@ -59,6 +59,21 @@ class AnimeListController extends FOSRestController
                 $alist[$i]->setWatchedEpisodes((int) $anime->my_watched_episodes);
                 $alist[$i]->setScore((int) $anime->my_score);
                 $alist[$i]->setWatchedStatus((int) $anime->my_status);
+                $alist[$i]->setLastUpdated((int) $anime->my_last_updated);
+                $alist[$i]->setRewatching(((int) $anime->my_rewatching) === 1);
+
+                // The personal tags are passed by MAL as string.
+                // This will convert it into an array.
+                $myTags = (string) $anime->my_tags;
+                if (strlen($myTags) > 0) {
+                    $personalTags = explode(',', trim($myTags));
+
+                    foreach ($personalTags as $tag) {
+                        $tagArray[] = trim($tag);
+                    }
+
+                    $alist[$i]->setPersonalTags($tagArray);
+                }
                 ++$i;
             }
 
