@@ -68,6 +68,7 @@ class MangaListController extends FOSRestController
                 // This will convert it into an array.
                 $myTags = (string) $manga->my_tags;
                 if (strlen($myTags) > 0) {
+                    $tagArray = array();
                     $personalTags = explode(',', trim($myTags));
 
                     foreach ($personalTags as $tag) {

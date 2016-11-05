@@ -66,6 +66,7 @@ class AnimeListController extends FOSRestController
                 // This will convert it into an array.
                 $myTags = (string) $anime->my_tags;
                 if (strlen($myTags) > 0) {
+                    $tagArray = array();
                     $personalTags = explode(',', trim($myTags));
 
                     foreach ($personalTags as $tag) {
