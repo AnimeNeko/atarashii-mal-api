@@ -207,10 +207,10 @@ class Anime
     /**
      * External links with some information for the series.
      *
-     * @Type("array")
+     * @Type("array<string, string>")
      * @Since("2.1")
      */
-    private $externalLinks = array();
+    private $externalLinks;
 
     /**
      * Description of the anime.
