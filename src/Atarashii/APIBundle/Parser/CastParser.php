@@ -73,7 +73,7 @@ class CastParser
                 $actor->setName($crawler->filter('a')->text());
                 $actor->setLanguage($crawler->filter('small')->last()->text());
 
-                $imageUrl = $item->filter('img')->last()->attr('data-src');
+                $imageUrl = $crawler->filter('img')->last()->attr('data-src');
                 $imageUrl = preg_replace('/\/r\/.*?x.*?\//', '/', $imageUrl);
                 $imageUrl = preg_replace('/\?s=.*$/', '', $imageUrl);
                 $actor->setImage($imageUrl);
