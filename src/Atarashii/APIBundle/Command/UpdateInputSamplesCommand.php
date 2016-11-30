@@ -38,7 +38,7 @@ class UpdateInputSamplesCommand extends ContainerAwareCommand
 
         $downloader = $this->getContainer()->get('atarashii_api.communicator');
         $rootDir = $this->getContainer()->getParameter('kernel.root_dir');
-        $outputDir = $rootDir . '/../src/Atarashii/ApiBundle/Tests/InputSamples';
+        $outputDir = $rootDir . '/../src/Atarashii/APIBundle/Tests/InputSamples';
 
         $io->title('Input Sample Updater');
 
