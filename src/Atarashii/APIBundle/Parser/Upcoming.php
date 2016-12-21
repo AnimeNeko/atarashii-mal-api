@@ -59,7 +59,11 @@ class Upcoming
 
         //Title Image
         //We need to do some string manipulation here so it doesn't return a tiny image
-        $media->setImageUrl(preg_replace('/r(.+?)\/(.+?)\?(.+?)$/', '$2', $crawler->filter('img')->attr('data-src')));
+        $mediaImage = $crawler->filterXPath('//div[@class="picSurround"]//img');
+        if ($mediaImage->count() > 0) {
+            $mediaImage = $mediaImage->attr('src');
+            $media->setImageUrl(preg_replace('/\/r\/\d+x\d+/', '', $mediaImage));
+        }
 
         $media->setType(trim($crawler->filterXPath('//td[3]')->text()));
 
