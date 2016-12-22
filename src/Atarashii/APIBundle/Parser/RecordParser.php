@@ -415,9 +415,11 @@ class RecordParser
                 }
 
                 # Broadcast:
-                $extracted = $leftcolumn->filterXPath('//span[text()="Broadcast:"]');
-                if ($extracted->count() > 0) {
-                    $record->setBroadcast(trim(preg_replace('/(\w.+)s at(\s\d.+)\((\w.+)\)/', '$1$2$3', str_replace($extracted->text(), '', $extracted->parents()->text()))));
+                if (strpos($record->getStatus(), 'finished') === false) {
+                    $extracted = $leftcolumn->filterXPath('//span[text()="Broadcast:"]');
+                    if ($extracted->count() > 0) {
+                        $record->setBroadcast(trim(preg_replace('/(\w.+)s at(\s\d.+)\((\w.+)\)/', '$1$2$3', str_replace($extracted->text(), '', $extracted->parents()->text()))));
+                    }
                 }
 
                 # Duration:
