@@ -56,14 +56,24 @@ class ScheduleParser
             }
             $anime->setEpisodes((int) str_replace(' eps','' , $crawler->filter('div[class="eps"] span')->text()));
 
-            $genres = $crawler->filter('div[class="genres-inner js-genre-inner"] a');
-            $genreArray = Array();
+            $genres = $crawler->filterXPath('//div[contains(@class, "genres")]//span[@class="genre"]');
+
+            $genreArray = array();
+
             foreach ($genres as $genre) {
-                $genreCrawler = new Crawler($genre);
-                $genreArray[] = $genreCrawler->text();
+                $genreArray[] = trim($genre->nodeValue);
             }
+
             $anime->setGenres($genreArray);
-            $anime->setImageUrl($crawler->filter('div[class="image lazyload"]')->attr('data-bg'));
+
+            //Image
+            $image = $crawler->filterXPath('//div[@class="image"]');
+            if ($image->count() > 0) {
+                if (preg_match('/url\((.*?)\)/', $image->attr('style'), $imageParts)) {
+                    $anime->setImageUrl($imageParts[1]);
+                }
+            }
+
             $anime->setSynopsis(trim($crawler->filter('div[class="synopsis js-synopsis"]')->text()));
             $detail = explode('-', $crawler->filter('div[class="info"]')->text());
             $anime->setType(trim($detail[0]));
