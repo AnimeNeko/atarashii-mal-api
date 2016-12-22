@@ -17,9 +17,8 @@ class ScheduleTest extends \PHPUnit_Framework_TestCase
     public function testParse()
     {
         $contents = file_get_contents(__DIR__.'/../InputSamples/schedule-26052016.html');
-        $apiVersion = '2.1';
 
-        $schedule = ScheduleParser::parse($contents, $apiVersion);
+        $schedule = ScheduleParser::parse($contents);
 
         $this->assertInternalType('array', $schedule);
         $this->assertNotEmpty($schedule['monday']);
