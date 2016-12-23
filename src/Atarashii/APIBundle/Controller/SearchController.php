@@ -107,11 +107,11 @@ class SearchController extends FOSRestController
         $serializationContext = new Context();
         $serializationContext->setVersion($apiVersion);
 
-        //Only include cache info if it doesn't include personal data.
+
         $response->setPublic();
         $response->setMaxAge(3600); //One hour
         $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag($type.'/search?q='.urlencode($query));
+        $response->setEtag(md5(serialize($result)));
 
         //Also, set "expires" header for caches that don't understand Cache-Control
         $date = new \DateTime();
@@ -164,16 +164,6 @@ class SearchController extends FOSRestController
         $serializationContext = new Context();
         $serializationContext->setVersion($apiVersion);
 
-        $response->setPublic();
-        $response->setMaxAge(3600); //One hour
-        $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag($type.'/search?q='.urlencode($query).'page='.$page);
-
-        //Also, set "expires" header for caches that don't understand Cache-Control
-        $date = new \DateTime();
-        $date->modify('+3600 seconds'); //One hour
-        $response->setExpires($date);
-
         if ((strpos($content, 'No titles that matched') !== false) || (strpos($content, 'This page doesn\'t exist') !== false)) {
             $view = $this->view(array('error' => 'not-found'));
             $view->setResponse($response);
@@ -212,6 +202,16 @@ class SearchController extends FOSRestController
                     $searchResult = Upcoming::parse($content, $type);
                 }
             }
+
+            $response->setPublic();
+            $response->setMaxAge(3600); //One hour
+            $response->headers->addCacheControlDirective('must-revalidate', true);
+            $response->setEtag(md5(serialize($searchResult)));
+
+            //Also, set "expires" header for caches that don't understand Cache-Control
+            $date = new \DateTime();
+            $date->modify('+3600 seconds'); //One hour
+            $response->setExpires($date);
 
             $view = $this->view($searchResult);
 
@@ -257,16 +257,6 @@ class SearchController extends FOSRestController
 
         $response = new Response();
 
-        $response->setPublic();
-        $response->setMaxAge(3600); //One hour
-        $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag('forum/search?q='.urlencode($query.$user));
-
-        //Also, set "expires" header for caches that don't understand Cache-Control
-        $date = new \DateTime();
-        $date->modify('+3600 seconds'); //One hour
-        $response->setExpires($date);
-
         if (strpos($content, 'User not found') !== false || !strpos($content, 'Topic') !== false) {
             $view = $this->view(array('error' => 'not-found'));
             $view->setResponse($response);
@@ -275,6 +265,16 @@ class SearchController extends FOSRestController
             return $view;
         } else {
             $result = ForumParser::parseTopics($content);
+
+            $response->setPublic();
+            $response->setMaxAge(3600); //One hour
+            $response->headers->addCacheControlDirective('must-revalidate', true);
+            $response->setEtag(md5(serialize($result)));
+
+            //Also, set "expires" header for caches that don't understand Cache-Control
+            $date = new \DateTime();
+            $date->modify('+3600 seconds'); //One hour
+            $response->setExpires($date);
 
             $view = $this->view($result);
 

@@ -62,11 +62,6 @@ class TopController extends FOSRestController
             return $this->view(array('error' => 'network-error'), 500);
         }
 
-        $etag = 'anime/top?page='.urlencode($page);
-        if ($type) {
-            $etag = $etag.'&amp;type='.urlencode($type);
-        }
-
         $response = new Response();
         $serializationContext = new Context();
         $serializationContext->setVersion($apiVersion);
@@ -76,16 +71,6 @@ class TopController extends FOSRestController
             $serializationContext->setSerializeNull(true);
         }
 
-        $response->setPublic();
-        $response->setMaxAge(10800); //Three hours
-        $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag($etag);
-
-        //Also, set "expires" header for caches that don't understand Cache-Control
-        $date = new \DateTime();
-        $date->modify('+10800 seconds'); //Three hours
-        $response->setExpires($date);
-
         if (strpos($animecontent, 'No anime titles') !== false) {
             $view = $this->view(array('error' => 'not-found'));
             $view->setResponse($response);
@@ -94,6 +79,16 @@ class TopController extends FOSRestController
             return $view;
         } else {
             $topanime = Top::parse($animecontent, 'anime');
+
+            $response->setPublic();
+            $response->setMaxAge(10800); //Three hours
+            $response->headers->addCacheControlDirective('must-revalidate', true);
+            $response->setEtag(md5(serialize($topanime)));
+
+            //Also, set "expires" header for caches that don't understand Cache-Control
+            $date = new \DateTime();
+            $date->modify('+10800 seconds'); //Three hours
+            $response->setExpires($date);
 
             $view = $this->view($topanime);
 
@@ -153,11 +148,6 @@ class TopController extends FOSRestController
             return $this->view(array('error' => 'network-error'), 500);
         }
 
-        $etag = 'manga/top?page='.urlencode($page);
-        if ($type) {
-            $etag = $etag.'&amp;type='.urlencode($type);
-        }
-
         $response = new Response();
         $serializationContext = new Context();
         $serializationContext->setVersion($apiVersion);
@@ -167,16 +157,6 @@ class TopController extends FOSRestController
             $serializationContext->setSerializeNull(true);
         }
 
-        $response->setPublic();
-        $response->setMaxAge(10800); //Three hours
-        $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag($etag);
-
-        //Also, set "expires" header for caches that don't understand Cache-Control
-        $date = new \DateTime();
-        $date->modify('+10800 seconds'); //Three hours
-        $response->setExpires($date);
-
         if (strpos($mangacontent, 'No manga titles') !== false) {
             $view = $this->view(array('error' => 'not-found'));
             $view->setResponse($response);
@@ -185,6 +165,16 @@ class TopController extends FOSRestController
             return $view;
         } else {
             $topmanga = Top::parse($mangacontent, 'manga');
+
+            $response->setPublic();
+            $response->setMaxAge(10800); //Three hours
+            $response->headers->addCacheControlDirective('must-revalidate', true);
+            $response->setEtag(md5(serialize($topmanga)));
+
+            //Also, set "expires" header for caches that don't understand Cache-Control
+            $date = new \DateTime();
+            $date->modify('+10800 seconds'); //Three hours
+            $response->setExpires($date);
 
             $view = $this->view($topmanga);
 
@@ -235,16 +225,6 @@ class TopController extends FOSRestController
             $serializationContext->setSerializeNull(true);
         }
 
-        $response->setPublic();
-        $response->setMaxAge(10800); //Three hours
-        $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag('anime/popular?page='.urlencode($page));
-
-        //Also, set "expires" header for caches that don't understand Cache-Control
-        $date = new \DateTime();
-        $date->modify('+10800 seconds'); //Three hours
-        $response->setExpires($date);
-
         if (strpos($animecontent, 'No anime titles') !== false) {
             $view = $this->view(array('error' => 'not-found'));
             $view->setResponse($response);
@@ -253,6 +233,16 @@ class TopController extends FOSRestController
             return $view;
         } else {
             $popularanime = Top::parse($animecontent, 'anime');
+
+            $response->setPublic();
+            $response->setMaxAge(10800); //Three hours
+            $response->headers->addCacheControlDirective('must-revalidate', true);
+            $response->setEtag(md5(serialize($popularanime)));
+
+            //Also, set "expires" header for caches that don't understand Cache-Control
+            $date = new \DateTime();
+            $date->modify('+10800 seconds'); //Three hours
+            $response->setExpires($date);
 
             $view = $this->view($popularanime);
 
@@ -303,16 +293,6 @@ class TopController extends FOSRestController
             $serializationContext->setSerializeNull(true);
         }
 
-        $response->setPublic();
-        $response->setMaxAge(10800); //Three hours
-        $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag('manga/popular?page='.urlencode($page));
-
-        //Also, set "expires" header for caches that don't understand Cache-Control
-        $date = new \DateTime();
-        $date->modify('+10800 seconds'); //Three hours
-        $response->setExpires($date);
-
         if (strpos($mangacontent, 'No manga titles') !== false) {
             $view = $this->view(array('error' => 'not-found'));
             $view->setResponse($response);
@@ -321,6 +301,16 @@ class TopController extends FOSRestController
             return $view;
         } else {
             $popularmanga = Top::parse($mangacontent, 'manga');
+
+            $response->setPublic();
+            $response->setMaxAge(10800); //Three hours
+            $response->headers->addCacheControlDirective('must-revalidate', true);
+            $response->setEtag(md5(serialize($popularmanga)));
+
+            //Also, set "expires" header for caches that don't understand Cache-Control
+            $date = new \DateTime();
+            $date->modify('+10800 seconds'); //Three hours
+            $response->setExpires($date);
 
             $view = $this->view($popularmanga);
 

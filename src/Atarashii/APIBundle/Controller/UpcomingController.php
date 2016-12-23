@@ -70,16 +70,6 @@ class UpcomingController extends FOSRestController
             $serializationContext->setSerializeNull(true);
         }
 
-        $response->setPublic();
-        $response->setMaxAge(10800); //Three hours
-        $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag('anime/upcoming?page='.urlencode($page).'&amp;start_date='.urlencode($startYear.$startMonth.$startDay));
-
-        //Also, set "expires" header for caches that don't understand Cache-Control
-        $date = new \DateTime();
-        $date->modify('+10800 seconds'); //Three hours
-        $response->setExpires($date);
-
         if (strpos($animecontent, 'No titles that matched') !== false) {
             $view = $this->view(array('error' => 'not-found'));
             $view->setResponse($response);
@@ -88,6 +78,16 @@ class UpcomingController extends FOSRestController
             return $view;
         } else {
             $Upcominganime = Upcoming::parse($animecontent, 'anime');
+
+            $response->setPublic();
+            $response->setMaxAge(10800); //Three hours
+            $response->headers->addCacheControlDirective('must-revalidate', true);
+            $response->setEtag(md5(serialize($Upcominganime)));
+
+            //Also, set "expires" header for caches that don't understand Cache-Control
+            $date = new \DateTime();
+            $date->modify('+10800 seconds'); //Three hours
+            $response->setExpires($date);
 
             $view = $this->view($Upcominganime);
 
@@ -151,16 +151,6 @@ class UpcomingController extends FOSRestController
             $serializationContext->setSerializeNull(true);
         }
 
-        $response->setPublic();
-        $response->setMaxAge(10800); //Three hours
-        $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag('manga/upcoming?page='.urlencode($page).'&amp;start_date='.urlencode($startYear.$startMonth.$startDay));
-
-        //Also, set "expires" header for caches that don't understand Cache-Control
-        $date = new \DateTime();
-        $date->modify('+10800 seconds'); //Three hours
-        $response->setExpires($date);
-
         if (strpos($mangacontent, 'No titles that matched') !== false) {
             $view = $this->view(array('error' => 'not-found'));
             $view->setResponse($response);
@@ -169,6 +159,16 @@ class UpcomingController extends FOSRestController
             return $view;
         } else {
             $Upcomingmanga = Upcoming::parse($mangacontent, 'manga');
+
+            $response->setPublic();
+            $response->setMaxAge(10800); //Three hours
+            $response->headers->addCacheControlDirective('must-revalidate', true);
+            $response->setEtag(md5(serialize($Upcomingmanga)));
+
+            //Also, set "expires" header for caches that don't understand Cache-Control
+            $date = new \DateTime();
+            $date->modify('+10800 seconds'); //Three hours
+            $response->setExpires($date);
 
             $view = $this->view($Upcomingmanga);
 
@@ -219,16 +219,6 @@ class UpcomingController extends FOSRestController
             $serializationContext->setSerializeNull(true);
         }
 
-        $response->setPublic();
-        $response->setMaxAge(10800); //Three hours
-        $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag('manga/just_added?page='.urlencode($page));
-
-        //Also, set "expires" header for caches that don't understand Cache-Control
-        $date = new \DateTime();
-        $date->modify('+10800 seconds'); //Three hours
-        $response->setExpires($date);
-
         if (strpos($animecontent, 'No titles that matched') !== false) {
             $view = $this->view(array('error' => 'not-found'));
             $view->setResponse($response);
@@ -237,6 +227,16 @@ class UpcomingController extends FOSRestController
             return $view;
         } else {
             $Justaddedanime = Upcoming::parse($animecontent, 'anime');
+            
+            $response->setPublic();
+            $response->setMaxAge(10800); //Three hours
+            $response->headers->addCacheControlDirective('must-revalidate', true);
+            $response->setEtag(md5(serialize($Justaddedanime)));
+
+            //Also, set "expires" header for caches that don't understand Cache-Control
+            $date = new \DateTime();
+            $date->modify('+10800 seconds'); //Three hours
+            $response->setExpires($date);
 
             $view = $this->view($Justaddedanime);
 
@@ -287,16 +287,6 @@ class UpcomingController extends FOSRestController
             $serializationContext->setSerializeNull(true);
         }
 
-        $response->setPublic();
-        $response->setMaxAge(10800); //Three hours
-        $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag('manga/just_added?page='.urlencode($page));
-
-        //Also, set "expires" header for caches that don't understand Cache-Control
-        $date = new \DateTime();
-        $date->modify('+10800 seconds'); //Three hours
-        $response->setExpires($date);
-
         if (strpos($mangacontent, 'No titles that matched') !== false) {
             $view = $this->view(array('error' => 'not-found'));
             $view->setResponse($response);
@@ -305,6 +295,16 @@ class UpcomingController extends FOSRestController
             return $view;
         } else {
             $Justaddedmanga = Upcoming::parse($mangacontent, 'manga');
+
+            $response->setPublic();
+            $response->setMaxAge(10800); //Three hours
+            $response->headers->addCacheControlDirective('must-revalidate', true);
+            $response->setEtag(md5(serialize($Justaddedmanga)));
+
+            //Also, set "expires" header for caches that don't understand Cache-Control
+            $date = new \DateTime();
+            $date->modify('+10800 seconds'); //Three hours
+            $response->setExpires($date);
 
             $view = $this->view($Justaddedmanga);
 

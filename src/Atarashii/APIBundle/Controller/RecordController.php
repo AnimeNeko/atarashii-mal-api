@@ -113,7 +113,7 @@ class RecordController extends FOSRestController
                 $response->setPublic();
                 $response->setMaxAge(3600); //One hour
                 $response->headers->addCacheControlDirective('must-revalidate', true);
-                $response->setEtag($requestType.'/'.$id);
+                $response->setEtag(md5(serialize($record)));
 
                 //Also, set "expires" header for caches that don't understand Cache-Control
                 $date = new \DateTime();
@@ -160,17 +160,6 @@ class RecordController extends FOSRestController
             return $this->view(array('error' => 'network-error'), 500);
         }
 
-        $response = new Response();
-        $response->setPublic();
-        $response->setMaxAge(10800); //Three hour
-        $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag($requestType.'/reviews/'.$id.'?page='.$page);
-
-        //Also, set "expires" header for caches that don't understand Cache-Control
-        $date = new \DateTime();
-        $date->modify('+10800 seconds'); //Three hour
-        $response->setExpires($date);
-
         if (strpos($details, 'No series found, check the series id and try again.') !== false) {
             $view = $this->view(array('error' => 'not-found'));
             $view->setResponse($response);
@@ -179,6 +168,17 @@ class RecordController extends FOSRestController
             return $view;
         } else {
             $reviews = ReviewParser::parse($details, $requestType);
+
+            $response = new Response();
+            $response->setPublic();
+            $response->setMaxAge(10800); //Three hour
+            $response->headers->addCacheControlDirective('must-revalidate', true);
+            $response->setEtag(md5(serialize($reviews)));
+
+            //Also, set "expires" header for caches that don't understand Cache-Control
+            $date = new \DateTime();
+            $date->modify('+10800 seconds'); //Three hour
+            $response->setExpires($date);
 
             $view = $this->view($reviews);
             $view->setResponse($response);
@@ -217,7 +217,7 @@ class RecordController extends FOSRestController
             $response->setPublic();
             $response->setMaxAge(86400); //One day
             $response->headers->addCacheControlDirective('must-revalidate', true);
-            $response->setEtag($requestType.'/cast/'.$id);
+            $response->setEtag(md5(serialize($cast)));
 
             //Also, set "expires" header for caches that don't understand Cache-Control
             $date = new \DateTime();
@@ -326,13 +326,13 @@ class RecordController extends FOSRestController
 
             $response = new Response();
             $response->setPublic();
-            $response->setMaxAge(86400); //Two day
+            $response->setMaxAge(86400); //One day
             $response->headers->addCacheControlDirective('must-revalidate', true);
-            $response->setEtag($requestType.'/recs/'.$id);
+            $response->setEtag(md5(serialize($result)));
 
             //Also, set "expires" header for caches that don't understand Cache-Control
             $date = new \DateTime();
-            $date->modify('+86400 seconds'); //Two days
+            $date->modify('+86400 seconds'); //One day
             $response->setExpires($date);
 
             $view = $this->view($result);
@@ -374,13 +374,13 @@ class RecordController extends FOSRestController
 
             $response = new Response();
             $response->setPublic();
-            $response->setMaxAge(86400); //Two day
+            $response->setMaxAge(86400); //One day
             $response->headers->addCacheControlDirective('must-revalidate', true);
-            $response->setEtag('anime/episodes/'.$id);
+            $response->setEtag(md5(serialize($result)));
 
             //Also, set "expires" header for caches that don't understand Cache-Control
             $date = new \DateTime();
-            $date->modify('+86400 seconds'); //Two days
+            $date->modify('+86400 seconds'); //One day
             $response->setExpires($date);
 
             $view = $this->view($result);
@@ -415,13 +415,13 @@ class RecordController extends FOSRestController
 
         $response = new Response();
         $response->setPublic();
-        $response->setMaxAge(43200); //one day
+        $response->setMaxAge(43200); //Twelve hours
         $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag('anime/season/schedule'.$timeZone);
+        $response->setEtag(md5(serialize($result)));
 
         //Also, set "expires" header for caches that don't understand Cache-Control
         $date = new \DateTime();
-        $date->modify('+43200 seconds'); //one day
+        $date->modify('+43200 seconds'); //Twelve hours
         $response->setExpires($date);
 
         $view = $this->view($result);
