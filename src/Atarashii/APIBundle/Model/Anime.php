@@ -227,6 +227,7 @@ class Anime
      * An HTML-formatted string describing the anime background
      *
      * @Type("string")
+     * @Since("2.1")
      */
     private $background;
 
@@ -237,6 +238,30 @@ class Anime
      * @Since("2.0")
      */
     private $producers = array();
+
+    /**
+     * A list of licensors for the anime.
+     *
+     * @Type("array<string>")
+     * @Since("2.2")
+     */
+    private $licensors = array();
+
+    /**
+     * A list of studios for the anime.
+     *
+     * @Type("array<string>")
+     * @Since("2.2")
+     */
+    private $studios = array();
+
+    /**
+     * The source for the anime.
+     *
+     * @Type("string")
+     * @Since("2.2")
+     */
+    private $source;
 
     /**
      * A list of genres for the anime.
@@ -1137,6 +1162,36 @@ class Anime
     }
 
     /**
+     * Set the licensors property.
+     *
+     * @param array $licensors The licensors of series.
+     */
+    public function setLicensors($licensors)
+    {
+        $this->licensors = $licensors;
+    }
+
+    /**
+     * Set the studios property.
+     *
+     * @param array $studios The studios of the series.
+     */
+    public function setStudios($studios)
+    {
+        $this->studios = $studios;
+    }
+
+    /**
+     * Set the source property.
+     *
+     * @param string $source The source of the anime.
+     */
+    public function setSource($source)
+    {
+        $this->source = $source;
+    }
+
+    /**
      * Get the producers property.
      *
      * @return string
@@ -1144,6 +1199,36 @@ class Anime
     public function getProducers()
     {
         return $this->producers;
+    }
+
+    /**
+     * Get the licensors property.
+     *
+     * @return string
+     */
+    public function getLicensors()
+    {
+        return $this->licensors;
+    }
+
+    /**
+     * Get the studios property.
+     *
+     * @return string
+     */
+    public function getStudios()
+    {
+        return $this->studios;
+    }
+
+    /**
+     * Get the source property.
+     *
+     * @return string
+     */
+    public function getSource()
+    {
+        return $this->source;
     }
 
     /**

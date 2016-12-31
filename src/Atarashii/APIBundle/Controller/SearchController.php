@@ -16,8 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use GuzzleHttp\Exception;
 use Atarashii\APIBundle\Parser\Upcoming;
 use Atarashii\APIBundle\Parser\SearchParser;
-use Atarashii\APIBundle\Parser\AnimeParser;
-use Atarashii\APIBundle\Parser\MangaParser;
+use Atarashii\APIBundle\Parser\TitleParser;
 use FOS\RestBundle\Context\Context;
 
 class SearchController extends FOSRestController
@@ -194,9 +193,9 @@ class SearchController extends FOSRestController
                 try {
                     $content = $downloader->fetch($location);
                     if ($type === 'anime') {
-                        $searchResult = array(AnimeParser::parse($content));
+                        $searchResult = array(TitleParser::parse($content, $apiVersion, 'anime'));
                     } else {
-                        $searchResult = array(MangaParser::parse($content));
+                        $searchResult = array(TitleParser::parse($content, $apiVersion, 'manga'));
                     }
                 } catch (Exception\ServerException $e) {
                     return $this->view(array('error' => 'network-error'), 500);
@@ -204,9 +203,9 @@ class SearchController extends FOSRestController
             } else {
                 if ($downloader->wasRedirected()) {
                     if ($type === 'anime') {
-                        $searchResult = array(AnimeParser::parse($content));
+                        $searchResult = array(TitleParser::parse($content, $apiVersion, 'anime'));
                     } else {
-                        $searchResult = array(MangaParser::parse($content));
+                        $searchResult = array(TitleParser::parse($content, $apiVersion, 'manga'));
                     }
                 } else {
                     $searchResult = Upcoming::parse($content, $type);

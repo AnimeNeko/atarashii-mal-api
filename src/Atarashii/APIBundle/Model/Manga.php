@@ -95,6 +95,32 @@ class Manga
     private $status;
 
     /**
+     * Beginning date from which this manga/work was published
+     *
+     * This is the starting date of the anime, formatted as an ISO8601-compatible string.
+     * The contents my be formatted as a year, year and month, or year, month and day.
+     * The value is null if the date is unknown.
+     * Example: "2004-10-07", "2004-10", or "2004".
+     *
+     * @Type("string")
+     * @Since("2.2")
+     */
+    private $startDate;
+
+    /**
+     * Publishing end date for the title.
+     *
+     * This is the starting date of the anime, formatted as an ISO8601-compatible string.
+     * The contents my be formatted as a year, year and month, or year, month and day.
+     * The value is null if the date is unknown.
+     * Example: "2004-10-07", "2004-10", or "2004".
+     *
+     * @Type("string")
+     * @Since("2.2")
+     */
+    private $endDate;
+
+    /**
      * Weighted score of the manga.
      *
      * The score is calculated based on the ratings given by members.
@@ -118,6 +144,14 @@ class Manga
     private $favoritedCount;
 
     /**
+     * External links with some information for the series.
+     *
+     * @Type("array<string, string>")
+     * @Since("2.2")
+     */
+    private $externalLinks;
+
+    /**
      * Description of the manga.
      *
      * An HTML-formatted string describing the anime
@@ -127,12 +161,37 @@ class Manga
     private $synopsis;
 
     /**
+     * Background information of the anime.
+     *
+     * An HTML-formatted string describing the anime background
+     *
+     * @Type("string")
+     * @Since("2.2")
+     */
+    private $background;
+
+    /**
      * A list of genres for the manga.
      *
      * @Type("array<string>")
      */
     private $genres = array();
 
+    /**
+     * The Authors of the title
+     *
+     * @Type("array")
+     * @Since("2.2")
+     */
+    private $authors = array();
+
+    /**
+     * The name of the publication in which the title was published/serialized
+     *
+     * @Type("string")
+     * @Since("2.2")
+     */
+    private $serialization;
     /**
      * A list of popular tags for the manga.
      *
@@ -592,6 +651,68 @@ class Manga
     }
 
     /**
+     * Set the startDate property.
+     *
+     * @param \DateTime $startDate The start date of the series
+     * @param string    $accuracy  To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day".
+     */
+    public function setStartDate(\DateTime $startDate, $accuracy = 'day')
+    {
+        switch ($accuracy) {
+            case 'year':
+                $this->startDate = $startDate->format('Y');
+                break;
+            case 'month':
+                $this->startDate = $startDate->format('Y-m');
+                break;
+            case 'day':
+            default:
+                $this->startDate = $startDate->format('Y-m-d');
+        }
+    }
+
+    /**
+     * Get the startDate property.
+     *
+     * @return string (ISO 8601)
+     */
+    public function getStartDate()
+    {
+        return $this->startDate;
+    }
+
+    /**
+     * Set the endDate property.
+     *
+     * @param \DateTime $endDate  The end date of the series
+     * @param string    $accuracy To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day".
+     */
+    public function setEndDate(\DateTime $endDate, $accuracy = 'day')
+    {
+        switch ($accuracy) {
+            case 'year':
+                $this->endDate = $endDate->format('Y');
+                break;
+            case 'month':
+                $this->endDate = $endDate->format('Y-m');
+                break;
+            case 'day':
+            default:
+                $this->endDate = $endDate->format('Y-m-d');
+        }
+    }
+
+    /**
+     * Get the endDate property.
+     *
+     * @return string (ISO 8601)
+     */
+    public function getEndDate()
+    {
+        return $this->endDate;
+    }
+
+    /**
      * Set the membersScore property.
      *
      * @param float $membersScore The score given by MAL members.
@@ -652,6 +773,27 @@ class Manga
     }
 
     /**
+     * Set the externalLinks property.
+     *
+     * @param string $sourceName The website name which contains the info.
+     * @param string $sourceUrl  The direct website url to access info.
+     */
+    public function setExternalLinks($sourceName, $sourceUrl)
+    {
+        $this->externalLinks[$sourceName] = $sourceUrl;
+    }
+
+    /**
+     * Get the externalLinks property.
+     *
+     * @return array With information about external urls
+     */
+    public function getExternalLinks()
+    {
+        return $this->externalLinks;
+    }
+
+    /**
      * Set the synopsis property.
      *
      * @param string $synopsis The Text describing the anime.
@@ -672,6 +814,26 @@ class Manga
     }
 
     /**
+     * Set the background property.
+     *
+     * @param string $background The Text describing the anime.
+     */
+    public function setBackground($background)
+    {
+        $this->background = $background;
+    }
+
+    /**
+     * Get the background property.
+     *
+     * @return string
+     */
+    public function getBackground()
+    {
+        return $this->background;
+    }
+
+    /**
      * Set the genres property.
      *
      * @param string $genres The genres of series.
@@ -689,6 +851,46 @@ class Manga
     public function getGenres()
     {
         return $this->genres;
+    }
+
+    /**
+     * Set the authors of the series
+     *
+     * @param array $authors The authors, as an array.
+     */
+    public function setAuthors($authors)
+    {
+        $this->authors = $authors;
+    }
+
+    /**
+     * Return the list of authors
+     *
+     * @return array
+     */
+    public function getAuthors()
+    {
+        return $this->authors;
+    }
+
+    /**
+     * Set the Serialization/Publisher
+     *
+     * @param string $serialization The publication of serialization
+     */
+    public function setSerialization($serialization)
+    {
+        $this->serialization = $serialization;
+    }
+
+    /**
+     * Get the serialization/publisher
+     *
+     * @return string
+     */
+    public function getSerialization()
+    {
+        return $this->serialization;
     }
 
     /**

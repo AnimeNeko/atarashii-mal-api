@@ -3,24 +3,16 @@
 namespace Atarashii\APIBundle\Tests\Parser;
 
 use Atarashii\APIBundle\Model\Anime;
-use Atarashii\APIBundle\Parser\RecordParser;
+use Atarashii\APIBundle\Parser\TitleParser;
 
-/**
- * Class AnimeTest.
- *
- * @coversDefaultClass Atarashii\APIBundle\Parser\AnimeParser
- */
 class AnimeTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @covers ::parse
-     */
     public function testParse()
     {
         $animeContents = file_get_contents(__DIR__.'/../InputSamples/anime-1887-mine.html');
         $apiVersion = '2.2';
 
-        $anime = RecordParser::parse($animeContents, $apiVersion, true);
+        $anime = TitleParser::parse($animeContents, $apiVersion, 'anime');
 
         $this->assertInstanceOf('Atarashii\APIBundle\Model\Anime', $anime);
 
@@ -130,7 +122,7 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
 
         $animeContents = file_get_contents(__DIR__.'/../InputSamples/anime-10236.html');
 
-        $anime = RecordParser::parse($animeContents, $apiVersion, true);
+        $anime = TitleParser::parse($animeContents, $apiVersion, 'anime');
 
         $this->assertInstanceOf('Atarashii\APIBundle\Model\Anime', $anime);
 
@@ -139,7 +131,7 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
 
         $animeContents = file_get_contents(__DIR__.'/../InputSamples/anime-47.html');
 
-        $anime = RecordParser::parse($animeContents, $apiVersion, true);
+        $anime = TitleParser::parse($animeContents, $apiVersion, 'anime');
 
         $this->assertInstanceOf('Atarashii\APIBundle\Model\Anime', $anime);
 
@@ -148,7 +140,7 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
 
         $animeContents = file_get_contents(__DIR__.'/../InputSamples/anime-10758.html');
 
-        $anime = RecordParser::parse($animeContents, $apiVersion, true);
+        $anime = TitleParser::parse($animeContents, $apiVersion, 'anime');
 
         $this->assertInstanceOf('Atarashii\APIBundle\Model\Anime', $anime);
 
@@ -157,7 +149,7 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
 
         $animeContents = file_get_contents(__DIR__.'/../InputSamples/anime-18617.html');
 
-        $anime = RecordParser::parse($animeContents, $apiVersion, true);
+        $anime = TitleParser::parse($animeContents, $apiVersion, 'anime');
 
         $this->assertInstanceOf('Atarashii\APIBundle\Model\Anime', $anime);
 
@@ -167,16 +159,13 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    /**
-     * @covers ::parseExtendedPersonal
-     */
     public function testParseExtendedPersonal()
     {
         $anime = new Anime();
 
         $animeContents = file_get_contents(__DIR__.'/../InputSamples/anime-1689-mine-detailed.html');
 
-        RecordParser::parseExtendedPersonal($animeContents, $anime, 'anime');
+        TitleParser::parseExtendedPersonal($animeContents, $anime, 'anime');
 
         $this->assertInternalType('array', $anime->getPersonalTags());
         $this->assertContains('beautiful', $anime->getPersonalTags());

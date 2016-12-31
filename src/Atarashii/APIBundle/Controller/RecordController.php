@@ -9,7 +9,7 @@
  */
 namespace Atarashii\APIBundle\Controller;
 
-use Atarashii\APIBundle\Parser\RecordParser;
+use Atarashii\APIBundle\Parser\TitleParser;
 use Atarashii\APIBundle\Parser\ReviewParser;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
@@ -77,9 +77,9 @@ class RecordController extends FOSRestController
             return $this->view(array('error' => 'not-found'), 404);
         } else {
             if ($requestType === 'anime') {
-                $record = RecordParser::parse($recordDetails, $apiVersion, true);
+                $record = TitleParser::parse($recordDetails, $apiVersion, 'anime');
             } else {
-                $record = RecordParser::parse($recordDetails, $apiVersion, false);
+                $record = TitleParser::parse($recordDetails, $apiVersion, 'manga');
             }
 
             //Parse extended personal details if API 2.0 or better and personal details are requested
@@ -92,9 +92,9 @@ class RecordController extends FOSRestController
 
                 if (strpos($recordDetails, 'delete-form') !== false) {
                     if ($requestType === 'anime') {
-                        $record = RecordParser::parseExtendedPersonal($recordDetails, $record, $requestType);
+                        $record = TitleParser::parseExtendedPersonal($recordDetails, $record, $requestType);
                     } else {
-                        $record = RecordParser::parseExtendedPersonal($recordDetails, $record, $requestType);
+                        $record = TitleParser::parseExtendedPersonal($recordDetails, $record, $requestType);
                     }
                 }
             }
