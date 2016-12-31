@@ -212,9 +212,6 @@ class MangalistControllerTest extends WebTestCase
             $this->assertInternalType('int', $content->priority);
             $this->assertEquals($priority, $content->priority);
 
-            $this->assertInternalType('boolean', $content->rereading);
-            $this->assertEquals($isRereading === 1, $content->rereading);
-
             $this->assertInternalType('string', $content->personal_comments);
             $this->assertEquals($comments, $content->personal_comments);
 
