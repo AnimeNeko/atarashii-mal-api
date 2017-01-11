@@ -48,16 +48,6 @@ class UserController extends FOSRestController
             $serializationContext->setSerializeNull(true);
         }
 
-        $response->setPublic();
-        $response->setMaxAge(900); //15 minutes
-        $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag('profile/'.$username);
-
-        //Also, set "expires" header for caches that don't understand Cache-Control
-        $date = new \DateTime();
-        $date->modify('+900 seconds'); //15 minutes
-        $response->setExpires($date);
-
         if (strpos($profilecontent, 'Failed to find') !== false || (strpos($profilecontent, 'This page doesn\'t exist') !== false)) {
             $view = $this->view(array('error' => 'not-found'));
             $view->setResponse($response);
@@ -66,6 +56,16 @@ class UserController extends FOSRestController
             return $view;
         } else {
             $userprofile = User::parse($profilecontent, $apiVersion);
+
+            $response->setPublic();
+            $response->setMaxAge(900); //15 minutes
+            $response->headers->addCacheControlDirective('must-revalidate', true);
+            $response->setEtag(md5(serialize($userprofile)));
+
+            //Also, set "expires" header for caches that don't understand Cache-Control
+            $date = new \DateTime();
+            $date->modify('+900 seconds'); //15 minutes
+            $response->setExpires($date);
 
             $view = $this->view($userprofile);
 
@@ -111,16 +111,6 @@ class UserController extends FOSRestController
             $serializationContext->setSerializeNull(true);
         }
 
-        $response->setPublic();
-        $response->setMaxAge(900); //15 minutes
-        $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag('friends/'.$username);
-
-        //Also, set "expires" header for caches that don't understand Cache-Control
-        $date = new \DateTime();
-        $date->modify('+900 seconds'); //15 minutes
-        $response->setExpires($date);
-
         if (strpos($friendscontent, 'Failed to find') !== false) {
             $view = $this->view(array('error' => 'not-found'));
             $view->setResponse($response);
@@ -133,6 +123,16 @@ class UserController extends FOSRestController
             } else {
                 $friendlist = array();
             }
+
+            $response->setPublic();
+            $response->setMaxAge(900); //15 minutes
+            $response->headers->addCacheControlDirective('must-revalidate', true);
+            $response->setEtag(md5(serialize($friendlist)));
+
+            //Also, set "expires" header for caches that don't understand Cache-Control
+            $date = new \DateTime();
+            $date->modify('+900 seconds'); //15 minutes
+            $response->setExpires($date);
 
             $view = $this->view($friendlist);
 
@@ -166,17 +166,6 @@ class UserController extends FOSRestController
             return $this->view(array('error' => 'network-error'), 500);
         }
 
-        $response = new Response();
-        $response->setPublic();
-        $response->setMaxAge(900); //15 minutes
-        $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag('history/'.$username);
-
-        //Also, set "expires" header for caches that don't understand Cache-Control
-        $date = new \DateTime();
-        $date->modify('+900 seconds'); //15 minutes
-        $response->setExpires($date);
-
         if (strpos($historycontent, 'Invalid member username provided') !== false) {
             $view = $this->view(array('error' => 'not-found'));
             $view->setResponse($response);
@@ -191,6 +180,17 @@ class UserController extends FOSRestController
             return $view;
         } else {
             $historylist = User::parseHistory($historycontent);
+
+            $response = new Response();
+            $response->setPublic();
+            $response->setMaxAge(900); //15 minutes
+            $response->headers->addCacheControlDirective('must-revalidate', true);
+            $response->setEtag(md5(serialize($historylist)));
+
+            //Also, set "expires" header for caches that don't understand Cache-Control
+            $date = new \DateTime();
+            $date->modify('+900 seconds'); //15 minutes
+            $response->setExpires($date);
 
             $view = $this->view($historylist);
             $view->setResponse($response);

@@ -39,7 +39,7 @@ class ForumController extends FOSRestController
         $response->setPublic();
         $response->setMaxAge(86400); //One day
         $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag('forum/board');
+        $response->setEtag(md5(serialize($forumboard)));
 
         //Also, set "expires" header for caches that don't understand Cache-Control
         $date = new \DateTime();
@@ -90,7 +90,7 @@ class ForumController extends FOSRestController
         $response->setPublic();
         $response->setMaxAge(300); //5 minutes
         $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag('forum/topic/'.$id);
+        $response->setEtag(md5(serialize($forumtopic)));
 
         //Also, set "expires" header for caches that don't understand Cache-Control
         $date = new \DateTime();
@@ -141,7 +141,7 @@ class ForumController extends FOSRestController
         $response->setPublic();
         $response->setMaxAge(900); //15 minutes
         $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag('forum/'.$id);
+        $response->setEtag(md5(serialize($forumtopics)));
 
         //Also, set "expires" header for caches that don't understand Cache-Control
         $date = new \DateTime();
@@ -190,7 +190,7 @@ class ForumController extends FOSRestController
         $response->setPublic();
         $response->setMaxAge(900); //15 minutes
         $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag('forum/anime/'.$id);
+        $response->setEtag(md5(serialize($forumtopics)));
 
         //Also, set "expires" header for caches that don't understand Cache-Control
         $date = new \DateTime();
@@ -239,7 +239,7 @@ class ForumController extends FOSRestController
         $response->setPublic();
         $response->setMaxAge(900); //15 minutes
         $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag('forum/manga/'.$id);
+        $response->setEtag(md5(serialize($forumtopics)));
 
         //Also, set "expires" header for caches that don't understand Cache-Control
         $date = new \DateTime();
@@ -287,7 +287,7 @@ class ForumController extends FOSRestController
         $response->setPublic();
         $response->setMaxAge(300); //5 minutes
         $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->setEtag('forum/topic/'.$id);
+        $response->setEtag(md5(serialize($forumtopic)));
 
         //Also, set "expires" header for caches that don't understand Cache-Control
         $date = new \DateTime();

@@ -47,6 +47,7 @@ class PersonController extends FOSRestController
             $response->setPublic();
             $response->setMaxAge(86400); //One day
             $response->headers->addCacheControlDirective('must-revalidate', true);
+            $response->setEtag(md5(serialize($person)));
 
             //Also, set "expires" header for caches that don't understand Cache-Control
             $date = new \DateTime();
