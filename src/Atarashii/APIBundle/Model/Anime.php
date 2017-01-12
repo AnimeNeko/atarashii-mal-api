@@ -1571,6 +1571,14 @@ class Anime
     }
 
     /**
+     * Get the array of relations
+     */
+    public function getRelated()
+    {
+        return $this->related;
+    }
+
+    /**
      * Set the watchedStatus property.
      *
      * @param string|int $status The input status value of an item.

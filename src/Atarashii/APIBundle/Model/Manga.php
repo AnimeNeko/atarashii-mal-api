@@ -997,6 +997,14 @@ class Manga
     }
 
     /**
+     * Get the array of relations
+     */
+    public function getRelated()
+    {
+        return $this->related;
+    }
+
+    /**
      * Set the readStatus propery.
      *
      * @param string|int $statusid The input status value of an item. Accepts either integers as defined
