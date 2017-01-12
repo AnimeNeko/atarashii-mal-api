@@ -554,8 +554,10 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $anime->addRelation($relation, 'adaptation');
 
         $adaptations = $anime->getMangaAdaptations();
+        $adaptations2 = $anime->getRelated()['adaptation'];
 
         $this->assertEquals($relation, $adaptations[0]);
+        $this->assertEquals($relation, $adaptations2[0]);
     }
 
     public function testPrequels()
@@ -569,8 +571,10 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $anime->addRelation($relation, 'prequel');
 
         $prequels = $anime->getPrequels();
+        $prequels2 = $anime->getRelated()['prequel'];
 
         $this->assertEquals($relation, $prequels[0]);
+        $this->assertEquals($relation, $prequels2[0]);
     }
 
     public function testSequels()
@@ -584,8 +588,10 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $anime->addRelation($relation, 'sequel');
 
         $sequels = $anime->getSequels();
+        $sequels2 = $anime->getRelated()['sequel'];
 
         $this->assertEquals($relation, $sequels[0]);
+        $this->assertEquals($relation, $sequels2[0]);
     }
 
     public function testSideStories()
@@ -599,8 +605,10 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $anime->addRelation($relation, 'side_story');
 
         $sideStories = $anime->getSideStories();
+        $sideStories2 = $anime->getRelated()['side_story'];
 
         $this->assertEquals($relation, $sideStories[0]);
+        $this->assertEquals($relation, $sideStories2[0]);
     }
 
     public function testParentStory()
@@ -614,8 +622,10 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $anime->addRelation($relation, 'parent_story');
 
         $parentStory = $anime->getParentStory();
+        $parentStory2 = $anime->getRelated()['parent_story'];
 
         $this->assertEquals($relation, $parentStory);
+        $this->assertEquals($relation, $parentStory2[0]);
     }
 
     public function testCharacterAnime()
@@ -994,13 +1004,60 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($group, $anime->getFansubGroup());
     }
 
+    public function testLicensors()
+    {
+        $anime = new Anime();
+
+        $licensors[] = 'Example';
+        $licensors[] = 'Example 2';
+        $licensors[] = 'Example 3';
+
+        $anime->setLicensors($licensors);
+
+        $this->assertEquals($licensors, $anime->getLicensors());
+    }
+
+    public function testStudios()
+    {
+        $anime = new Anime();
+
+        $studios[] = 'Example';
+        $studios[] = 'Example 2';
+        $studios[] = 'Example 3';
+
+        $anime->setStudios($studios);
+
+        $this->assertEquals($studios, $anime->getStudios());
+    }
+
+    public function testSource()
+    {
+        $source = 'Mind Thoughts';
+
+        $anime = new Anime();
+
+        $anime->setSource($source);
+        $this->assertEquals($source, $anime->getSource());
+    }
+
+    public function testLastUpdated()
+    {
+        $timestamp = 1485036039;
+        $convertedTime = '2017-01-21T22:00:39+0000';
+
+        $anime = new Anime();
+        $anime->setLastUpdated($timestamp);
+
+        $this->assertEquals($convertedTime, $anime->getLastUpdated());
+    }
+
     //It might be better to try and do an XML compare in the future.
     public function testMalXml()
     {
         $anime = new Anime();
         $items = array();
 
-        $output = "<?xml version=\"1.0\"?>\n<entry><episode>7</episode><status>1</status><score>9</score><downloaded_episodes>8</downloaded_episodes><storage_type>2</storage_type><storage_value>3.7</storage_value><times_rewatched>1</times_rewatched><rewatch_value>4</rewatch_value><date_start>01012015</date_start><date_finish>01022015</date_finish><priority>0</priority><comments>This is a comment.</comments><fansub_group>GG</fansub_group><tags>one,two,three</tags></entry>\n";
+        $output = "<?xml version=\"1.0\"?>\n<entry><episode>7</episode><status>1</status><score>9</score><downloaded_episodes>8</downloaded_episodes><storage_type>2</storage_type><storage_value>3.7</storage_value><enable_rewatching>1</enable_rewatching><times_rewatched>1</times_rewatched><rewatch_value>4</rewatch_value><date_start>01012015</date_start><date_finish>01022015</date_finish><priority>0</priority><comments>This is a comment.</comments><fansub_group>GG</fansub_group><tags>one,two,three</tags></entry>\n";
 
         $anime->setId(1);
 
@@ -1021,6 +1078,9 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
 
         $anime->setStorageValue(3.7);
         $items[] = 'storageAmt';
+
+        $anime->setRewatching(1);
+        $items[] = 'isRewatching';
 
         $anime->setRewatchCount(1);
         $items[] = 'rewatchCount';

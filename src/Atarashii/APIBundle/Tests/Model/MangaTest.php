@@ -2,6 +2,7 @@
 
 namespace Atarashii\APIBundle\Tests\Model;
 
+use Atarashii\APIBundle\Helper\Date;
 use Atarashii\APIBundle\Model\Manga;
 
 class MangaTest extends \PHPUnit_Framework_TestCase
@@ -209,6 +210,52 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('finished', $manga->getStatus());
     }
 
+    public function testStartDate()
+    {
+        $startDate = new \DateTime('now');
+
+        // Day
+        $manga = new manga();
+        $manga->setStartDate($startDate, 'day');
+        $verifyDate = $startDate->format('Y-m-d');
+        $this->assertEquals($verifyDate, $manga->getStartDate());
+
+        // Month
+        $manga = new manga();
+        $manga->setStartDate($startDate, 'month');
+        $verifyDate = $startDate->format('Y-m');
+        $this->assertEquals($verifyDate, $manga->getStartDate());
+
+        // Day
+        $manga = new manga();
+        $manga->setStartDate($startDate, 'year');
+        $verifyDate = $startDate->format('Y');
+        $this->assertEquals($verifyDate, $manga->getStartDate());
+    }
+
+    public function testEndDate()
+    {
+        $EndDate = new \DateTime('now');
+
+        // Day
+        $manga = new manga();
+        $manga->setEndDate($EndDate, 'day');
+        $verifyDate = $EndDate->format('Y-m-d');
+        $this->assertEquals($verifyDate, $manga->getEndDate());
+
+        // Month
+        $manga = new manga();
+        $manga->setEndDate($EndDate, 'month');
+        $verifyDate = $EndDate->format('Y-m');
+        $this->assertEquals($verifyDate, $manga->getEndDate());
+
+        // Day
+        $manga = new manga();
+        $manga->setEndDate($EndDate, 'year');
+        $verifyDate = $EndDate->format('Y');
+        $this->assertEquals($verifyDate, $manga->getEndDate());
+    }
+
     public function testReadStatus()
     {
         $manga = new Manga();
@@ -355,6 +402,17 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($favs, $manga->getFavoritedCount());
     }
 
+    public function testExternalLinks()
+    {
+        $mangarecord = new Manga();
+        $mangarecord->setExternalLinks('Atarashii-API', 'https://bitbucket.org/ratan12/atarashii-api');
+
+        $externalLinks = array();
+        $externalLinks['Atarashii-API'] = 'https://bitbucket.org/ratan12/atarashii-api';
+
+        $this->assertEquals($externalLinks, $mangarecord->getExternalLinks());
+    }
+
     public function testSynopsis()
     {
         $synopsis = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce fringilla, nisi sed rutrum interdum, neque neque tincidunt eros, ac euismod enim massa a quam. Vivamus maximus enim ac odio euismod tristique. Suspendisse potenti. Praesent a nulla tortor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean varius metus at sapien tempor auctor. Donec semper odio sed posuere placerat.';
@@ -372,6 +430,23 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($synopsis, $manga->getSynopsis());
     }
 
+    public function testBackground()
+    {
+        $background = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce fringilla, nisi sed rutrum interdum, neque neque tincidunt eros, ac euismod enim massa a quam. Vivamus maximus enim ac odio euismod tristique. Suspendisse potenti. Praesent a nulla tortor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean varius metus at sapien tempor auctor. Donec semper odio sed posuere placerat.';
+
+        $manga = new Manga();
+        $manga->setBackground($background);
+
+        $this->assertEquals($background, $manga->getBackground());
+
+        //Test unicode
+        $background = '漫研で夏コミへのサークル参加を決めたが……時間がない！　恋ヶ崎にムラサキさん、小豆ちゃんも手伝ってくれることになり、合宿を行うも——あれ、お酒で変なテンションになってない!?　……締切、間に合うよね？';
+
+        $manga->setBackground($background);
+
+        $this->assertEquals($background, $manga->getBackground());
+    }
+
     public function testGenres()
     {
         $genres = 'Comedy, Parody, School, Slice of Life';
@@ -380,6 +455,28 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $manga->setGenres($genres);
 
         $this->assertEquals($genres, $manga->getGenres());
+    }
+
+    public function testAuthors()
+    {
+        $manga = new Manga();
+
+        $authors[] = 'John Smith';
+        $authors[] = 'Jane Doe';
+        $authors[] = 'Chrétien de Troyes';
+
+        $manga->setAuthors($authors);
+        $this->assertEquals($authors, $manga->getAuthors());
+    }
+
+    public function testSerialization()
+    {
+        $serialization = 'Anime Neko Monthly';
+
+        $manga = new Manga();
+        $manga->setSerialization($serialization);
+
+        $this->assertEquals($serialization, $manga->getSerialization());
     }
 
     public function testAnimeAdaptations()
@@ -425,6 +522,27 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $altVersions = $manga->getAlternativeVersions();
 
         $this->assertEquals($relation, $altVersions[0]);
+    }
+
+    public function testAddRelations()
+    {
+        $relation = array();
+        $relation['manga_id'] = rand();
+        $relation['title'] = 'This is a title';
+        $relation['url'] = 'http://myanimelist.net/manga/'.$relation['manga_id'];
+
+        $manga = new Manga();
+        $manga->addRelation($relation, 'adaptation');
+        $manga->addRelation($relation, 'alternative_version');
+        $manga->addRelation($relation, 'sequel');
+        $manga->addRelation($relation, 'other');
+
+        $relations = $manga->getRelated();
+
+        $this->assertEquals($relations['adaptation'][0], $relation);
+        $this->assertEquals($relations['alternative_version'][0], $relation);
+        $this->assertEquals($relations['sequel'][0], $relation);
+        $this->assertEquals($relations['other'][0], $relation);
     }
 
     public function testChaptersRead()
@@ -529,6 +647,17 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals((bool) $isReread, $manga->getRereading());
     }
 
+    public function testLastUpdated()
+    {
+        $timestamp = 1331012503;
+        $formattedTimestamp = Date::formatTime($timestamp);
+
+        $manga = new Manga();
+        $manga->setLastUpdated($timestamp);
+
+        $this->assertEquals($formattedTimestamp, $manga->getLastUpdated());
+    }
+
     public function testRereadCount()
     {
         $count = rand();
@@ -621,7 +750,7 @@ class MangaTest extends \PHPUnit_Framework_TestCase
         $manga = new Manga();
         $items = array();
 
-        $output = "<?xml version=\"1.0\"?>\n<entry><chapter>7</chapter><volume>7</volume><status>1</status><score>9</score><downloaded_chapters>8</downloaded_chapters><times_reread>1</times_reread><reread_value>4</reread_value><date_start>01012015</date_start><date_finish>01022015</date_finish><priority>0</priority><comments>This is a comment.</comments><tags>one,two,three</tags></entry>\n";
+        $output = "<?xml version=\"1.0\"?>\n<entry><chapter>7</chapter><volume>7</volume><status>1</status><score>9</score><downloaded_chapters>8</downloaded_chapters><enable_rereading>1</enable_rereading><times_reread>1</times_reread><reread_value>4</reread_value><date_start>01012015</date_start><date_finish>01022015</date_finish><priority>0</priority><comments>This is a comment.</comments><tags>one,two,three</tags></entry>\n";
 
         $manga->setId(1);
 
@@ -639,6 +768,9 @@ class MangaTest extends \PHPUnit_Framework_TestCase
 
         $manga->setChapDownloaded(8);
         $items[] = 'downloaded';
+
+        $manga->setRereading(1);
+        $items[] = 'isRereading';
 
         $manga->setRereadCount(1);
         $items[] = 'rereadCount';

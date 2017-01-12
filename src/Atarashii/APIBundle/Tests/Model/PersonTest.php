@@ -24,6 +24,10 @@ class PersonTest extends \PHPUnit_Framework_TestCase
         $imageUrl = 'http://www.example.com/image.jpg';
         $person->setImageUrl($imageUrl);
         $this->assertEquals($imageUrl, $person->getImageUrl());
+
+        $imageUrl = null;
+        $person->setImageUrl($imageUrl);
+        $this->assertContains('na.gif', $person->getImageUrl());
     }
 
     public function testName()
@@ -81,6 +85,11 @@ class PersonTest extends \PHPUnit_Framework_TestCase
         // Year
         $person->setBirthday($birthday, 'year');
         $verifyDate = $birthday->format('Y');
+        $this->assertEquals($verifyDate, $person->getBirthday());
+
+        // Day and Month, but no year
+        $person->setBirthday($birthday, 'dayMonth');
+        $verifyDate = $birthday->format('-m-d');
         $this->assertEquals($verifyDate, $person->getBirthday());
     }
 

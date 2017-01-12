@@ -24,6 +24,10 @@ class ActorTest extends \PHPUnit_Framework_TestCase
         $actor->setImage($actImgUrl);
 
         $this->assertEquals($actImgUrl, $actor->getActorImage());
+
+        $imageUrl = 'https://myanimelist.cdn-dena.com/images/questionmark_23.gif';
+        $actor->setImage($imageUrl);
+        $this->assertContains('na.gif', $actor->getActorImage());
     }
 
     public function testLanguage()

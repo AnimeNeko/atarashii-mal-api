@@ -45,6 +45,14 @@ class CastTest extends \PHPUnit_Framework_TestCase
         $cast->setImage($castImgUrl);
 
         $this->assertEquals($castImgUrl, $cast->getImage());
+
+        //Unknown Image
+        $unknownImage = 'https://myanimelist.cdn-dena.com/images/questionmark_23.gif';
+        $expectedImage = 'https://myanimelist.cdn-dena.com/images/na.gif';
+
+        $cast->setImage($unknownImage);
+
+        $this->assertEquals($expectedImage, $cast->getImage());
     }
 
     public function testRank()
