@@ -93,8 +93,8 @@ class Actor
      */
     public function setImage($actorImage)
     {
-        if ($actorImage === 'http://cdn.myanimelist.net/images/questionmark_23.gif') {
-            $this->image = 'http://cdn.myanimelist.net/images/na.gif';
+        if ($actorImage === 'https://myanimelist.cdn-dena.com/images/questionmark_23.gif') {
+            $this->image = 'https://myanimelist.cdn-dena.com/images/na.gif';
         } else {
             $this->image = $actorImage;
         }
