@@ -146,8 +146,8 @@ class Person
      */
     public function setImageUrl($imageUrl)
     {
-        if ($imageUrl === 'http://cdn.myanimelist.net/images/questionmark_23.gif') {
-            $this->imageUrl = 'http://cdn.myanimelist.net/images/na.gif';
+        if ($imageUrl === null) {
+            $this->imageUrl = 'https://myanimelist.cdn-dena.com/images/na.gif';
         } else {
             $this->imageUrl = $imageUrl;
         }
