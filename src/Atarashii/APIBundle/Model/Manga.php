@@ -1201,13 +1201,10 @@ class Manga
             switch ($this->priority) {
                 case 1:
                     return 'Medium';
-                    break;
                 case 2:
                     return 'High';
-                    break;
                 default:
                     return 'Low';
-                    break;
             }
         } else {
             return $this->priority;
@@ -1280,22 +1277,16 @@ class Manga
             switch ($this->rereadValue) {
                 case 1:
                     return 'Very Low';
-                    break;
                 case 2:
                     return 'Low';
-                    break;
                 case 3:
                     return 'Medium';
-                    break;
                 case 4:
                     return 'High';
-                    break;
                 case 5:
                     return 'Very High';
-                    break;
                 default:
                     return;
-                    break;
             }
         } else {
             return $this->rereadValue;

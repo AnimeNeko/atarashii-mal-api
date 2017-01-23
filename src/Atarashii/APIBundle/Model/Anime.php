@@ -1764,13 +1764,10 @@ class Anime
             switch ($this->priority) {
                 case 1:
                     return 'Medium';
-                    break;
                 case 2:
                     return 'High';
-                    break;
                 default:
                     return 'Low';
-                    break;
             }
         } else {
             return $this->priority;
@@ -1803,28 +1800,20 @@ class Anime
             switch ($this->storage) {
                 case 1:
                     return 'Hard Drive';
-                    break;
                 case 2:
                     return 'DVD / CD';
-                    break;
                 case 3:
                     return 'None';
-                    break;
                 case 4:
                     return 'Retail DVD';
-                    break;
                 case 5:
                     return 'VHS';
-                    break;
                 case 6:
                     return 'External HD';
-                    break;
                 case 7:
                     return 'NAS';
-                    break;
                 default:
                     return;
-                    break;
             }
         } else {
             return $this->storage;
@@ -1904,22 +1893,16 @@ class Anime
             switch ($this->rewatchValue) {
                 case 1:
                     return 'Very Low';
-                    break;
                 case 2:
                     return 'Low';
-                    break;
                 case 3:
                     return 'Medium';
-                    break;
                 case 4:
                     return 'High';
-                    break;
                 case 5:
                     return 'Very High';
-                    break;
                 default:
                     return;
-                    break;
             }
         } else {
             return $this->rewatchValue;
