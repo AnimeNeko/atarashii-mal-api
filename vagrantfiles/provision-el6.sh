@@ -29,5 +29,5 @@ service ip6tables stop
 curl -sS https://getcomposer.org/installer | php -- --filename=composer --install-dir=/usr/local/bin
 
 # Download PHPUnit
-curl -sS -o /usr/local/bin/phpunit https://phar.phpunit.de/phpunit-old.phar
+curl -L -sS -o /usr/local/bin/phpunit https://phar.phpunit.de/phpunit-4.8.phar
 chmod +x /usr/local/bin/phpunit
