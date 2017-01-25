@@ -444,7 +444,7 @@ class TitleParser
             //Serialization
             //There only appears to ever be one linked item.
             $extracted = $sidebarContent->filterXPath('//span[text()="Serialization:"]');
-            if ($extracted->count() > 0 && strpos($extracted->parents()->text(), 'None found') === false) {
+            if ($extracted->count() > 0 && strpos($extracted->parents()->text(), 'None') === false) {
                 $extracted = $extracted->parents()->first()->filterXPath('//a');
                 $record->setSerialization($extracted->text());
             }
