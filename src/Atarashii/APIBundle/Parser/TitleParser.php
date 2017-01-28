@@ -495,11 +495,15 @@ class TitleParser
                 //Personal Status
                 //The exact name depends on the item type, so it's not set until the type-specific section below.
                 $extracted = $personalContent->filterXPath('//select[@id="myinfo_status"]/option[@selected="selected"]');
-                $personalStatus = (int) $extracted->attr('value');
+                if ($extracted->count() > 0) {
+                    $personalStatus = (int)$extracted->attr('value');
+                }
 
                 //Personal Score
                 $extracted = $personalContent->filterXPath('//select[@id="myinfo_score"]/option[@selected="selected"]');
-                $record->setScore((int) $extracted->attr('value'));
+                if ($extracted->count() > 0) {
+                    $record->setScore((int) $extracted->attr('value'));
+                }
 
                 //Listed ID (For getting the detailed status info)
                 //The exact name depends on the item type, so it's not set until the type-specific section below.
