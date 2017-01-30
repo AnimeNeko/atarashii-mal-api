@@ -41,7 +41,7 @@ class AnimeTest extends \PHPUnit_Framework_TestCase
         $this->assertGreaterThan(0, $anime->getRank());
 
         $this->assertInternalType('integer', $anime->getPopularityRank());
-        $this->assertLessThan(100, $anime->getPopularityRank());
+        $this->assertLessThan(150, $anime->getPopularityRank());
         $this->assertGreaterThan(0, $anime->getPopularityRank());
 
         $this->assertEquals('https://myanimelist.cdn-dena.com/images/anime/13/15010.jpg', $anime->getImageUrl());
