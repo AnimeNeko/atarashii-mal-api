@@ -19,11 +19,10 @@ Monica Rial - MyAnimeList.net
 
 <link rel="manifest" href="/manifest.json">
 
-<meta name='csrf_token' content='1b59b854bad72c1efac911a1d9a65e8d794fcf06'><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300">
-<link rel="stylesheet" type="text/css" href="https://myanimelist.cdn-dena.com/static/assets/css/pc/style-537e84bc04.css" />
+<meta name='csrf_token' content='38e8b7a8cd11aff61dcbb2242efeecb9af0cc827'><link rel="stylesheet" type="text/css" href="https://myanimelist.cdn-dena.com/static/assets/css/pc/style-39551116e4.css" />
 
-<script type="text/javascript" src="https://myanimelist.cdn-dena.com/static/assets/js/pc/header-74fc5a2666.js"></script>
-<script type="text/javascript" src="https://myanimelist.cdn-dena.com/static/assets/js/pc/all-c67a40d31f.js"
+<script type="text/javascript" src="https://myanimelist.cdn-dena.com/static/assets/js/pc/header-372c33dc23.js"></script>
+<script type="text/javascript" src="https://myanimelist.cdn-dena.com/static/assets/js/pc/all-2e18abd198.js"
         id="alljs" data-params='{&quot;origin_url&quot;:&quot;https:\/\/myanimelist.net&quot;,&quot;is_request_bot_filter_log&quot;:true}' defer></script>
 
 
@@ -72,8 +71,7 @@ Monica Rial - MyAnimeList.net
         <script type='text/javascript'>
           googletag.cmd.push(function() {
                       var slot = googletag.defineOutOfPageSlot("/84947469/skin_detail", "skin_detail").addService(googletag.pubads())
-      .setTargeting("adult", "white")
-      .setCollapseEmptyDiv(true,true);googletag.enableServices();
+      .setTargeting("adult", "white").setCollapseEmptyDiv(true,true);googletag.enableServices();
 
       googletag.display("skin_detail");
               });</script>
@@ -92,10 +90,13 @@ Monica Rial - MyAnimeList.net
   </div>
         <div class="wrapper"><div id="headerSmall"><a href="/" class="link-mal-logo">MyAnimeList.net</a>
 
-<a href="https://myanimelist.net/membership?_location=mal_h_b"
+<a href="https://myanimelist.net/manga_translation_battle_vol5?_location=mal_h_b&amp;_type=1"
    class="banner-header-anime-straming" target="_blank">
-  <img src="https://myanimelist.cdn-dena.com/images/membership/tom-banner-small.png" width="250" height="36" alt="About MAL Supporter" title="About MAL Supporter">
+  <img src="https://myanimelist.cdn-dena.com/images/mtb/banner-mtb5-winners.png?v=1" width="250" height="36"
+       srcset="https://myanimelist.cdn-dena.com/images/mtb/banner-mtb5-winners.png?v=1 1x, https://myanimelist.cdn-dena.com/images/mtb/banner-mtb5-winners@2x.png?v=1 2x"
+       alt="Winners Announced! - Manga Translation Battle Vol.5" title="Winners Announced! - Manga Translation Battle Vol.5">
 </a>
+
 <div id="header-menu" ><div class="header-menu-login"><a class="btn-mal-service" href="https://myanimelist.net/membership?_location=mal_h_u">Hide Ads</a><a class="btn-login" href="https://myanimelist.net/login.php?from=%2Fpeople%2F159" id="malLogin">Login</a><a class="btn-signup" href="https://myanimelist.net/register.php?from=%2Fpeople%2F159">Sign Up</a></div></div></div>  <div id="menu" class="">
     <div id="menu_right"><script type="text/x-template" id="incremental-result-item-anime"><div class="list anime" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info anime"><div class="name">${ item.name } <span class="media-type">(${ item.payload.media_type })</span></div><div class="extra-info">Aired: ${ item.payload.aired }<br>Score: ${ item.payload.score }<br>Status: ${ item.payload.status }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info anime"><div class="name">${ item.name }</div><div class="media-type">(${ mediaTypeWithStartYear })</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-manga"><div class="list manga" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info manga"><div class="name">${ item.name } <span class="media-type">(${ item.payload.media_type })</span></div><div class="extra-info">Published: ${ item.payload.published }<br>Score: ${ item.payload.score }<br>Status: ${ item.payload.status }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info manga"><div class="name">${ item.name }</div><div class="media-type">(${ mediaTypeWithStartYear })</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-character"><div class="list character" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info character"><div class="name">${ item.name }</div><div class="extra-info"><ul class="related-works"><li v-for="work in item.payload.related_works" class="fs-i">- ${ work }</li></ul>Favorites: ${ item.payload.favorites }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info character"><div class="name">${ item.name }</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-person"><div class="list person" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info person"><div class="name">${ item.name }</div><div class="extra-info"><span v-if="item.payload.alternative_name">${ item.payload.alternative_name }<br></span>Birthday: ${ item.payload.birthday }<br>Favorites: ${ item.payload.favorites }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info person"><div class="name">${ item.name }</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-club"><div class="list club" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info club"><div class="name">${ item.name }</div><div class="extra-info">Members: ${ item.payload.members }<br>Category: ${ item.payload.category }<br>Created by: ${ item.payload.created_by }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info club"><div class="name">${ item.name }</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-user"><div class="list user" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info user"><div class="name">${ item.name }</div><div class="extra-info"><span v-if="item.payload.authority">${ item.payload.authority }<br></span>Joined: ${ item.payload.joined }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info user"><div class="name">${ item.name }</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-news"><div class="list news" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info news"><div class="name">${ item.name }</div><div class="extra-info">${ item.payload.date }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info news"><div class="name">${ item.name }</div><div class="media-type">${ item.payload.date }</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-featured"><div class="list featured" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info featured"><div class="name">${ item.name }</div><div class="extra-info">${ item.payload.date }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info featured"><div class="name">${ item.name }</div><div class="media-type">${ item.payload.date }</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-forum"><div class="list forum" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info forum"><div class="name"><span v-show="item.payload.work_title">${ item.payload.work_title}
                       <i class="fa fa-caret-right"></i></span> ${ item.name }</div><div class="extra-info">${ item.payload.date }<br><span>in ${ item.payload.category }</span></div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info forum"><div class="name"><span v-show="item.payload.work_title">${ item.payload.work_title}
@@ -115,6 +116,7 @@ Monica Rial - MyAnimeList.net
                         <li><a href="https://myanimelist.net/watch/episode?_location=mal_h_m_a">Videos</a></li>
             <li><a href="https://myanimelist.net/reviews.php?t=anime&amp;_location=mal_h_m">Reviews</a></li>
             <li><a href="https://myanimelist.net/recommendations.php?s=recentrecs&amp;t=anime&amp;_location=mal_h_m">Recommendations</a></li>
+            <li><a href="https://myanimelist.net/forum?topicid=1582476&amp;_location=mal_h_m">2017 Challenge</a></li>
           </ul>
         </li>
         <li class="small"><a href="#" class="non-link">Manga</a>
@@ -123,6 +125,7 @@ Monica Rial - MyAnimeList.net
             <li><a href="https://myanimelist.net/topmanga.php?_location=mal_h_m">Top Manga</a></li>
             <li><a href="https://myanimelist.net/reviews.php?t=manga&amp;_location=mal_h_m">Reviews</a></li>
             <li><a href="https://myanimelist.net/recommendations.php?s=recentrecs&amp;t=manga&amp;_location=mal_h_m">Recommendations</a></li>
+            <li><a href="https://myanimelist.net/forum?topicid=1582478&amp;_location=mal_h_m">2017 Challenge</a></li>
           </ul>
         </li>
         <li><a href="#" class="non-link">Community</a>
@@ -175,7 +178,7 @@ Monica Rial - MyAnimeList.net
     <div class="borderClass" :class="isError? 'fn-red1': 'fn-grey5'" v-html="msg"></div>
   </template>
 </div>
-</div><div class="js-sns-icon-container icon-block "><a data-ga-network="facebook" data-ga-screen="Share Button Location: common" class="js-share-button-popup js-share-button-tracking sprite-icon-social icon-social icon-facebook" target="_blank" href="http://www.facebook.com/share.php?u=https%3A%2F%2Fmyanimelist.net%2Fpeople%2F159%2FRial_Monica"></a><a data-ga-network="twitter" data-ga-screen="Share Button Location: common" class="js-share-button-popup js-share-button-tracking sprite-icon-social icon-social icon-twitter" target="_blank" href="http://twitter.com/share?related=MyAnimeList.net&amp;via=myanimelist&amp;url=https%3A%2F%2Fmyanimelist.net%2Fpeople%2F159%2FRial_Monica&amp;text=Monica%20Rial&amp;hashtags="></a><a data-ga-network="google+" data-ga-screen="Share Button Location: common" class="js-share-button-popup js-share-button-tracking sprite-icon-social icon-social icon-google" target="_blank" href="https://plus.google.com/share?url=https%3A%2F%2Fmyanimelist.net%2Fpeople%2F159%2FRial_Monica"></a><a data-ga-network="reddit" data-ga-screen="Share Button Location: common" class="js-share-button-popup js-share-button-tracking sprite-icon-social icon-social icon-reddit" target="_blank" href="http://reddit.com/submit?url=https%3A%2F%2Fmyanimelist.net%2Fpeople%2F159%2FRial_Monica&amp;title=Monica%20Rial"></a><a data-ga-network="tumblr" data-ga-screen="Share Button Location: common" class="js-share-button-popup js-share-button-tracking sprite-icon-social icon-social icon-tumblr" target="_blank" href="http://www.tumblr.com/share/link?url=https%3A%2F%2Fmyanimelist.net%2Fpeople%2F159%2FRial_Monica&amp;name=Monica%20Rial"></a></div><br><div class="spaceit_pad"><span class="dark_text">Alternate names:</span> Dorothy Garrett, Lisa Blanchard</div><div class="spaceit_pad"><span class="dark_text">Birthday:</span> Oct  5, 1975</div><span class="dark_text">Website:</span> <a href="www.TheMonicaRial.com">www.TheMonicaRial.com</a><div class="spaceit_pad"><span class="dark_text">Member Favorites:</span> 2100</div><div><span class="dark_text">More:</span></div><div class="people-informantion-more js-people-informantion-more">Birthplace: Houston, Texas, United States<br />
+</div><div class="js-sns-icon-container icon-block "><a data-ga-network="facebook" data-ga-screen="Share Button Location: common" class="js-share-button-popup js-share-button-tracking sprite-icon-social icon-social icon-facebook" target="_blank" href="http://www.facebook.com/share.php?u=https%3A%2F%2Fmyanimelist.net%2Fpeople%2F159%2FRial_Monica"></a><a data-ga-network="twitter" data-ga-screen="Share Button Location: common" class="js-share-button-popup js-share-button-tracking sprite-icon-social icon-social icon-twitter" target="_blank" href="http://twitter.com/share?related=MyAnimeList.net&amp;via=myanimelist&amp;url=https%3A%2F%2Fmyanimelist.net%2Fpeople%2F159%2FRial_Monica&amp;text=Monica%20Rial&amp;hashtags="></a><a data-ga-network="google+" data-ga-screen="Share Button Location: common" class="js-share-button-popup js-share-button-tracking sprite-icon-social icon-social icon-google" target="_blank" href="https://plus.google.com/share?url=https%3A%2F%2Fmyanimelist.net%2Fpeople%2F159%2FRial_Monica"></a><a data-ga-network="reddit" data-ga-screen="Share Button Location: common" class="js-share-button-popup js-share-button-tracking sprite-icon-social icon-social icon-reddit" target="_blank" href="http://reddit.com/submit?url=https%3A%2F%2Fmyanimelist.net%2Fpeople%2F159%2FRial_Monica&amp;title=Monica%20Rial"></a><a data-ga-network="tumblr" data-ga-screen="Share Button Location: common" class="js-share-button-popup js-share-button-tracking sprite-icon-social icon-social icon-tumblr" target="_blank" href="http://www.tumblr.com/share/link?url=https%3A%2F%2Fmyanimelist.net%2Fpeople%2F159%2FRial_Monica&amp;name=Monica%20Rial"></a></div><br><div class="spaceit_pad"><span class="dark_text">Alternate names:</span> Dorothy Garrett, Lisa Blanchard</div><div class="spaceit_pad"><span class="dark_text">Birthday:</span> Oct  5, 1975</div><span class="dark_text">Website:</span> <a href="http://www.TheMonicaRial.com">http://www.TheMonicaRia...</a><div class="spaceit_pad"><span class="dark_text">Member Favorites:</span> 2153</div><div><span class="dark_text">More:</span></div><div class="people-informantion-more js-people-informantion-more">Birthplace: Houston, Texas, United States<br />
 <br />
 Awards:<br />
 - Voice Actress of the Year at 1st Annual BTVA Anime Dub Awards (People&#039;s Choice)<br />
@@ -271,6 +274,14 @@ Twitter: @<a href="https://twitter.com/Rialisms" target="_blank" rel="nofollow">
 <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> </div></td>
                     <td valign="top" class="borderClass" align="right" nowrap><a href="/character/53429/Yuuka_Ichijou">Ichijou, Yuuka</a>&nbsp;<div class="spaceit_pad">Main&nbsp;</div></td>
                     <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/53429/Yuuka_Ichijou"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/13/175905.jpg?s=89f33bacc62e557bb2cac80ce61c4d72" border="0" alt="Ichijou, Yuuka" width="23" class="lazyload"></a></div></td>
+                </tr>
+                
+                <tr>
+                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/34051/Akibas_Trip_The_Animation"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/9/83185.jpg?s=c854a0855f56cd306d561d5e95be59ec" border="0" width="23" class="lazyload"></a></div></td>
+                    <td valign="top" class="borderClass"><a href="/anime/34051/Akibas_Trip_The_Animation">Akiba's Trip The Animation</a><div class="spaceit_pad">
+<a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a>  <small>Airing</small></div></td>
+                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/146659/Tasujin_Ratu">Ratu, Tasujin</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
+                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/146659/Tasujin_Ratu"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/12/317947.jpg?s=3543e17a4fa584b8373f1c5c60de7079" border="0" alt="Ratu, Tasujin" width="23" class="lazyload"></a></div></td>
                 </tr>
                 
                 <tr>
@@ -405,16 +416,16 @@ Twitter: @<a href="https://twitter.com/Rialisms" target="_blank" rel="nofollow">
                     <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/808/Bakuretsu_Hunters_OVA"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/9/26728.jpg?s=a0643a5c9c9c584c363cfb346f445886" border="0" width="23" class="lazyload"></a></div></td>
                     <td valign="top" class="borderClass"><a href="/anime/808/Bakuretsu_Hunters_OVA">Bakuretsu Hunters OVA</a><div class="spaceit_pad">
 <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> </div></td>
-                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/38777/Marris">Marris</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
-                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/38777/Marris"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/8/106302.jpg?s=b1e9adaa767e0c5eb9733c47d7ce93b4" border="0" alt="Marris" width="23" class="lazyload"></a></div></td>
+                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/38773/Salad_Chips">Chips, Salad</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
+                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/38773/Salad_Chips"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/13/106289.jpg?s=3fc2259b1ef3c3a74a75ce419ebc9808" border="0" alt="Chips, Salad" width="23" class="lazyload"></a></div></td>
                 </tr>
                 
                 <tr>
                     <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/808/Bakuretsu_Hunters_OVA"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/9/26728.jpg?s=a0643a5c9c9c584c363cfb346f445886" border="0" width="23" class="lazyload"></a></div></td>
                     <td valign="top" class="borderClass"><a href="/anime/808/Bakuretsu_Hunters_OVA">Bakuretsu Hunters OVA</a><div class="spaceit_pad">
 <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> </div></td>
-                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/38773/Salad_Chips">Chips, Salad</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
-                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/38773/Salad_Chips"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/13/106289.jpg?s=3fc2259b1ef3c3a74a75ce419ebc9808" border="0" alt="Chips, Salad" width="23" class="lazyload"></a></div></td>
+                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/38777/Marris">Marris</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
+                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/38777/Marris"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/8/106302.jpg?s=b1e9adaa767e0c5eb9733c47d7ce93b4" border="0" alt="Marris" width="23" class="lazyload"></a></div></td>
                 </tr>
                 
                 <tr>
@@ -578,6 +589,14 @@ Twitter: @<a href="https://twitter.com/Rialisms" target="_blank" rel="nofollow">
                 </tr>
                 
                 <tr>
+                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/34753/ChäoS_Child_Episode_0"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/9/83904.jpg?s=edbf3e18886c13c5a578a5fbdf99cd7d" border="0" width="23" class="lazyload"></a></div></td>
+                    <td valign="top" class="borderClass"><a href="/anime/34753/ChäoS_Child_Episode_0">ChäoS;Child Episode 0</a><div class="spaceit_pad">
+<a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> </div></td>
+                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/17470/Hazuki_Shino">Shino, Hazuki</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
+                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/17470/Hazuki_Shino"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/15/153187.jpg?s=65808b4df47840ef2b28da414e67b4fa" border="0" alt="Shino, Hazuki" width="23" class="lazyload"></a></div></td>
+                </tr>
+                
+                <tr>
                     <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/4975/ChäoS_HEAd"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/13/15443.jpg?s=1bd4a8752c18e777e2a20f45548dce3c" border="0" width="23" class="lazyload"></a></div></td>
                     <td valign="top" class="borderClass"><a href="/anime/4975/ChäoS_HEAd">ChäoS;HEAd</a><div class="spaceit_pad">
 <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> </div></td>
@@ -685,16 +704,16 @@ Twitter: @<a href="https://twitter.com/Rialisms" target="_blank" rel="nofollow">
                     <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/1482/DGray-man"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/13/75194.jpg?s=28a1b6424ac2c41879fa69c55377c499" border="0" width="23" class="lazyload"></a></div></td>
                     <td valign="top" class="borderClass"><a href="/anime/1482/DGray-man">D.Gray-man</a><div class="spaceit_pad">
 <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> </div></td>
-                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/13293/Lero">Lero</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
-                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/13293/Lero"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/4/73275.jpg?s=f56c47779af5e2173b14b03706b13648" border="0" alt="Lero" width="23" class="lazyload"></a></div></td>
+                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/5229/Lulu_Bell">Lulu Bell</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
+                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/5229/Lulu_Bell"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/7/74303.jpg?s=f783a3e2410292a465779256cb88e93a" border="0" alt="Lulu Bell" width="23" class="lazyload"></a></div></td>
                 </tr>
                 
                 <tr>
                     <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/1482/DGray-man"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/13/75194.jpg?s=28a1b6424ac2c41879fa69c55377c499" border="0" width="23" class="lazyload"></a></div></td>
                     <td valign="top" class="borderClass"><a href="/anime/1482/DGray-man">D.Gray-man</a><div class="spaceit_pad">
 <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> </div></td>
-                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/5229/Lulu_Bell">Lulu Bell</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
-                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/5229/Lulu_Bell"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/7/74303.jpg?s=f783a3e2410292a465779256cb88e93a" border="0" alt="Lulu Bell" width="23" class="lazyload"></a></div></td>
+                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/13293/Lero">Lero</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
+                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/13293/Lero"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/4/73275.jpg?s=f56c47779af5e2173b14b03706b13648" border="0" alt="Lero" width="23" class="lazyload"></a></div></td>
                 </tr>
                 
                 <tr>
@@ -996,7 +1015,7 @@ Twitter: @<a href="https://twitter.com/Rialisms" target="_blank" rel="nofollow">
                 <tr>
                     <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/31339/Drifters"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/10/80271.jpg?s=b4eb9ae831a4d527e2fdefb16b92751b" border="0" width="23" class="lazyload"></a></div></td>
                     <td valign="top" class="borderClass"><a href="/anime/31339/Drifters">Drifters</a><div class="spaceit_pad">
-<a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a>  <small>Airing</small></div></td>
+<a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> </div></td>
                     <td valign="top" class="borderClass" align="right" nowrap><a href="/character/43719/Easy">Easy</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
                     <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/43719/Easy"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/13/316466.jpg?s=9b178ac423ff76b36f9db38fd7cc3eab" border="0" alt="Easy" width="23" class="lazyload"></a></div></td>
                 </tr>
@@ -1077,22 +1096,14 @@ Twitter: @<a href="https://twitter.com/Rialisms" target="_blank" rel="nofollow">
                     <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/6702/Fairy_Tail"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/5/18179.jpg?s=6f5f149460692bb4b116c6a4c1315224" border="0" width="23" class="lazyload"></a></div></td>
                     <td valign="top" class="borderClass"><a href="/anime/6702/Fairy_Tail">Fairy Tail</a><div class="spaceit_pad">
 <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> </div></td>
-                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/5879/Plue">Plue</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
-                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/5879/Plue"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/2/44743.jpg?s=5f348e9016ca3b47973c10e96244488d" border="0" alt="Plue" width="23" class="lazyload"></a></div></td>
+                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/5190/Mirajane_Strauss">Strauss, Mirajane</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
+                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/5190/Mirajane_Strauss"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/15/196491.jpg?s=050a51e1c25b9a96bffac69c3a4a4feb" border="0" alt="Strauss, Mirajane" width="23" class="lazyload"></a></div></td>
                 </tr>
                 
                 <tr>
                     <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/6702/Fairy_Tail"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/5/18179.jpg?s=6f5f149460692bb4b116c6a4c1315224" border="0" width="23" class="lazyload"></a></div></td>
                     <td valign="top" class="borderClass"><a href="/anime/6702/Fairy_Tail">Fairy Tail</a><div class="spaceit_pad">
 <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> </div></td>
-                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/5190/Mirajane_Strauss">Strauss, Mirajane</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
-                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/5190/Mirajane_Strauss"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/15/196491.jpg?s=050a51e1c25b9a96bffac69c3a4a4feb" border="0" alt="Strauss, Mirajane" width="23" class="lazyload"></a></div></td>
-                </tr>
-                
-                <tr>
-                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/22043/Fairy_Tail_2014"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/3/60551.jpg?s=86ad5699d7a760967ebe633bc4a37640" border="0" width="23" class="lazyload"></a></div></td>
-                    <td valign="top" class="borderClass"><a href="/anime/22043/Fairy_Tail_2014">Fairy Tail (2014)</a><div class="spaceit_pad">
-<a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> </div></td>
                     <td valign="top" class="borderClass" align="right" nowrap><a href="/character/5879/Plue">Plue</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
                     <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/5879/Plue"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/2/44743.jpg?s=5f348e9016ca3b47973c10e96244488d" border="0" alt="Plue" width="23" class="lazyload"></a></div></td>
                 </tr>
@@ -1103,6 +1114,14 @@ Twitter: @<a href="https://twitter.com/Rialisms" target="_blank" rel="nofollow">
 <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> </div></td>
                     <td valign="top" class="borderClass" align="right" nowrap><a href="/character/5190/Mirajane_Strauss">Strauss, Mirajane</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
                     <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/5190/Mirajane_Strauss"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/15/196491.jpg?s=050a51e1c25b9a96bffac69c3a4a4feb" border="0" alt="Strauss, Mirajane" width="23" class="lazyload"></a></div></td>
+                </tr>
+                
+                <tr>
+                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/22043/Fairy_Tail_2014"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/3/60551.jpg?s=86ad5699d7a760967ebe633bc4a37640" border="0" width="23" class="lazyload"></a></div></td>
+                    <td valign="top" class="borderClass"><a href="/anime/22043/Fairy_Tail_2014">Fairy Tail (2014)</a><div class="spaceit_pad">
+<a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> </div></td>
+                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/5879/Plue">Plue</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
+                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/5879/Plue"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/2/44743.jpg?s=5f348e9016ca3b47973c10e96244488d" border="0" alt="Plue" width="23" class="lazyload"></a></div></td>
                 </tr>
                 
                 <tr>
@@ -1306,7 +1325,7 @@ Twitter: @<a href="https://twitter.com/Rialisms" target="_blank" rel="nofollow">
                 </tr>
                 
                 <tr>
-                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/1140/Giniro_no_Kami_no_Agito"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/7/32011.jpg?s=45d9393419d0cc559c7a83f30518156c" border="0" width="23" class="lazyload"></a></div></td>
+                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/1140/Giniro_no_Kami_no_Agito"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/9/83824.jpg?s=4202196f8559c32871f1de67c82d3ba7" border="0" width="23" class="lazyload"></a></div></td>
                     <td valign="top" class="borderClass"><a href="/anime/1140/Giniro_no_Kami_no_Agito">Giniro no Kami no Agito</a><div class="spaceit_pad">
 <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> </div></td>
                     <td valign="top" class="borderClass" align="right" nowrap><a href="/character/83355/Zerui">Zerui</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
@@ -1426,6 +1445,14 @@ Twitter: @<a href="https://twitter.com/Rialisms" target="_blank" rel="nofollow">
                 </tr>
                 
                 <tr>
+                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/32981/Hand_Shakers"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/7/83395.jpg?s=b9c261e8cb5becddfb5029b379c1632d" border="0" width="23" class="lazyload"></a></div></td>
+                    <td valign="top" class="borderClass"><a href="/anime/32981/Hand_Shakers">Hand Shakers</a><div class="spaceit_pad">
+<a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a>  <small>Airing</small></div></td>
+                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/144749/Bind">Bind</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
+                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/144749/Bind"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/5/312686.jpg?s=d5c61d0731cf6db93468cae5a43e01b1" border="0" alt="Bind" width="23" class="lazyload"></a></div></td>
+                </tr>
+                
+                <tr>
                     <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/28211/Harmony"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/3/73667.jpg?s=9bd702830e117b206230bd0b206eec2f" border="0" width="23" class="lazyload"></a></div></td>
                     <td valign="top" class="borderClass"><a href="/anime/28211/Harmony">Harmony</a><div class="spaceit_pad">
 <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> </div></td>
@@ -1461,16 +1488,16 @@ Twitter: @<a href="https://twitter.com/Rialisms" target="_blank" rel="nofollow">
                     <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/2002/Heroic_Age"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/12/50435.jpg?s=bc519e2a9ea466317f2b65e53732d9d6" border="0" width="23" class="lazyload"></a></div></td>
                     <td valign="top" class="borderClass"><a href="/anime/2002/Heroic_Age">Heroic Age</a><div class="spaceit_pad">
 <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> </div></td>
-                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/14210/Tail_Ol_Mehelim">Mehelim, Tail Ol</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
-                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/14210/Tail_Ol_Mehelim"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/4/35266.jpg?s=2806bd063b6dd08733d5b08d7058aa9e" border="0" alt="Mehelim, Tail Ol" width="23" class="lazyload"></a></div></td>
+                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/4617/Mail_Al_Mehelim">Mehelim, Mail Al</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
+                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/4617/Mail_Al_Mehelim"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/8/35265.jpg?s=18e8d26628fce4436495da5239d8131e" border="0" alt="Mehelim, Mail Al" width="23" class="lazyload"></a></div></td>
                 </tr>
                 
                 <tr>
                     <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/2002/Heroic_Age"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/12/50435.jpg?s=bc519e2a9ea466317f2b65e53732d9d6" border="0" width="23" class="lazyload"></a></div></td>
                     <td valign="top" class="borderClass"><a href="/anime/2002/Heroic_Age">Heroic Age</a><div class="spaceit_pad">
 <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> </div></td>
-                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/4617/Mail_Al_Mehelim">Mehelim, Mail Al</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
-                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/4617/Mail_Al_Mehelim"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/8/35265.jpg?s=18e8d26628fce4436495da5239d8131e" border="0" alt="Mehelim, Mail Al" width="23" class="lazyload"></a></div></td>
+                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/14210/Tail_Ol_Mehelim">Mehelim, Tail Ol</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
+                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/14210/Tail_Ol_Mehelim"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/4/35266.jpg?s=2806bd063b6dd08733d5b08d7058aa9e" border="0" alt="Mehelim, Tail Ol" width="23" class="lazyload"></a></div></td>
                 </tr>
                 
                 <tr>
@@ -1503,6 +1530,14 @@ Twitter: @<a href="https://twitter.com/Rialisms" target="_blank" rel="nofollow">
 <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> </div></td>
                     <td valign="top" class="borderClass" align="right" nowrap><a href="/character/14795/United_Kingdom">United Kingdom</a>&nbsp;<div class="spaceit_pad">Main&nbsp;</div></td>
                     <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/14795/United_Kingdom"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/14/89432.jpg?s=d809c576a7a8d4775c8e16edc456bb16" border="0" alt="United Kingdom" width="23" class="lazyload"></a></div></td>
+                </tr>
+                
+                <tr>
+                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/28883/Hidan_no_Aria_AA"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/12/76700.jpg?s=7d2618632d91cbfdee32fdae059f9f5b" border="0" width="23" class="lazyload"></a></div></td>
+                    <td valign="top" class="borderClass"><a href="/anime/28883/Hidan_no_Aria_AA">Hidan no Aria AA</a><div class="spaceit_pad">
+<a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> </div></td>
+                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/120805/Kirin_Shima">Shima, Kirin</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
+                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/120805/Kirin_Shima"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/10/297450.jpg?s=b40f3851e977b5bdd89196f54bc165ac" border="0" alt="Shima, Kirin" width="23" class="lazyload"></a></div></td>
                 </tr>
                 
                 <tr>
@@ -1866,6 +1901,14 @@ Twitter: @<a href="https://twitter.com/Rialisms" target="_blank" rel="nofollow">
                 </tr>
                 
                 <tr>
+                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/34389/Koro-sensei_Quest"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/10/83452.jpg?s=ed76943bbb6a5bcc679cc4b18f153ecf" border="0" width="23" class="lazyload"></a></div></td>
+                    <td valign="top" class="borderClass"><a href="/anime/34389/Koro-sensei_Quest">Koro-sensei Quest!</a><div class="spaceit_pad">
+<a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a>  <small>Airing</small></div></td>
+                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/85291/Kaede_Kayano">Kayano, Kaede</a>&nbsp;<div class="spaceit_pad">Main&nbsp;</div></td>
+                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/85291/Kaede_Kayano"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/6/274395.jpg?s=a4c9c058e84f9ef605e620aa74468d01" border="0" alt="Kayano, Kaede" width="23" class="lazyload"></a></div></td>
+                </tr>
+                
+                <tr>
                     <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/32214/Koukaku_no_Pandora"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/10/78805.jpg?s=e65814c89b9f4b206db5b851a8eb34fe" border="0" width="23" class="lazyload"></a></div></td>
                     <td valign="top" class="borderClass"><a href="/anime/32214/Koukaku_no_Pandora">Koukaku no Pandora</a><div class="spaceit_pad">
 <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> </div></td>
@@ -2213,16 +2256,16 @@ Twitter: @<a href="https://twitter.com/Rialisms" target="_blank" rel="nofollow">
                     <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/14527/Medaka_Box_Abnormal"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/11/62919.jpg?s=11cd4ce5674a3646570dbfa6604f81dd" border="0" width="23" class="lazyload"></a></div></td>
                     <td valign="top" class="borderClass"><a href="/anime/14527/Medaka_Box_Abnormal">Medaka Box Abnormal</a><div class="spaceit_pad">
 <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> </div></td>
-                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/39406/Nekomi_Nabeshima">Nabeshima, Nekomi</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
-                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/39406/Nekomi_Nabeshima"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/9/164215.jpg?s=3610b44c42404f13ce3a093dd2965d88" border="0" alt="Nabeshima, Nekomi" width="23" class="lazyload"></a></div></td>
+                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/82313/Royal_Hirado">Hirado, Royal</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
+                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/82313/Royal_Hirado"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/7/202215.jpg?s=2c0111660a81eee14faf544ba1da9acc" border="0" alt="Hirado, Royal" width="23" class="lazyload"></a></div></td>
                 </tr>
                 
                 <tr>
                     <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/14527/Medaka_Box_Abnormal"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/11/62919.jpg?s=11cd4ce5674a3646570dbfa6604f81dd" border="0" width="23" class="lazyload"></a></div></td>
                     <td valign="top" class="borderClass"><a href="/anime/14527/Medaka_Box_Abnormal">Medaka Box Abnormal</a><div class="spaceit_pad">
 <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> </div></td>
-                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/82313/Royal_Hirado">Hirado, Royal</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
-                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/82313/Royal_Hirado"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/7/202215.jpg?s=2c0111660a81eee14faf544ba1da9acc" border="0" alt="Hirado, Royal" width="23" class="lazyload"></a></div></td>
+                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/39406/Nekomi_Nabeshima">Nabeshima, Nekomi</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
+                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/39406/Nekomi_Nabeshima"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/9/164215.jpg?s=3610b44c42404f13ce3a093dd2965d88" border="0" alt="Nabeshima, Nekomi" width="23" class="lazyload"></a></div></td>
                 </tr>
                 
                 <tr>
@@ -2453,6 +2496,14 @@ Twitter: @<a href="https://twitter.com/Rialisms" target="_blank" rel="nofollow">
                     <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/1210/NHK_ni_Youkoso"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/3/52675.jpg?s=b00baec13b9ee7fa8369ed92daf93a33" border="0" width="23" class="lazyload"></a></div></td>
                     <td valign="top" class="borderClass"><a href="/anime/1210/NHK_ni_Youkoso">NHK ni Youkoso!</a><div class="spaceit_pad">
 <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> </div></td>
+                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/14823/Nanako_Midorikawa">Midorikawa, Nanako</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
+                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/14823/Nanako_Midorikawa"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/4/51590.jpg?s=9de4fd943c4ec1b2826732d1beb29fd2" border="0" alt="Midorikawa, Nanako" width="23" class="lazyload"></a></div></td>
+                </tr>
+                
+                <tr>
+                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/1210/NHK_ni_Youkoso"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/3/52675.jpg?s=b00baec13b9ee7fa8369ed92daf93a33" border="0" width="23" class="lazyload"></a></div></td>
+                    <td valign="top" class="borderClass"><a href="/anime/1210/NHK_ni_Youkoso">NHK ni Youkoso!</a><div class="spaceit_pad">
+<a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> </div></td>
                     <td valign="top" class="borderClass" align="right" nowrap><a href="/character/9334/Purin">Purin</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
                     <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/9334/Purin"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/9/51594.jpg?s=e1b7cf553ec643ca5fde7baa0c7cf10f" border="0" alt="Purin" width="23" class="lazyload"></a></div></td>
                 </tr>
@@ -2463,14 +2514,6 @@ Twitter: @<a href="https://twitter.com/Rialisms" target="_blank" rel="nofollow">
 <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> </div></td>
                     <td valign="top" class="borderClass" align="right" nowrap><a href="/character/11941/Megumi_Kobayashi">Kobayashi, Megumi</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
                     <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/11941/Megumi_Kobayashi"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/15/55340.jpg?s=f7a8a1979c9f6e032acc23e0632108d4" border="0" alt="Kobayashi, Megumi" width="23" class="lazyload"></a></div></td>
-                </tr>
-                
-                <tr>
-                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/1210/NHK_ni_Youkoso"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/3/52675.jpg?s=b00baec13b9ee7fa8369ed92daf93a33" border="0" width="23" class="lazyload"></a></div></td>
-                    <td valign="top" class="borderClass"><a href="/anime/1210/NHK_ni_Youkoso">NHK ni Youkoso!</a><div class="spaceit_pad">
-<a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> </div></td>
-                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/14823/Nanako_Midorikawa">Midorikawa, Nanako</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
-                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/14823/Nanako_Midorikawa"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/4/51590.jpg?s=9de4fd943c4ec1b2826732d1beb29fd2" border="0" alt="Midorikawa, Nanako" width="23" class="lazyload"></a></div></td>
                 </tr>
                 
                 <tr>
@@ -2599,6 +2642,14 @@ Twitter: @<a href="https://twitter.com/Rialisms" target="_blank" rel="nofollow">
 <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> </div></td>
                     <td valign="top" class="borderClass" align="right" nowrap><a href="/character/7246/Ruri_Mihashi">Mihashi, Ruri</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
                     <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/7246/Ruri_Mihashi"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/8/299642.jpg?s=644c69718f2691ba990ab5e8c463a6d1" border="0" alt="Mihashi, Ruri" width="23" class="lazyload"></a></div></td>
+                </tr>
+                
+                <tr>
+                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/32729/Orange"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/4/80110.jpg?s=95abcc23423c7ad64a470f43a04843b5" border="0" width="23" class="lazyload"></a></div></td>
+                    <td valign="top" class="borderClass"><a href="/anime/32729/Orange">Orange</a><div class="spaceit_pad">
+<a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> </div></td>
+                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/144550/Mother_Naruse">Naruse, Mother</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
+                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/144550/Mother_Naruse"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/4/312295.jpg?s=4701bd36fc23700fdc93f6e2ebb595c8" border="0" alt="Naruse, Mother" width="23" class="lazyload"></a></div></td>
                 </tr>
                 
                 <tr>
@@ -2813,16 +2864,16 @@ Twitter: @<a href="https://twitter.com/Rialisms" target="_blank" rel="nofollow">
                     <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/11499/Sankarea"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/13/79033.jpg?s=16e61cae0610c740ec1f964e73a7156f" border="0" width="23" class="lazyload"></a></div></td>
                     <td valign="top" class="borderClass"><a href="/anime/11499/Sankarea">Sankarea</a><div class="spaceit_pad">
 <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> </div></td>
-                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/63335/Miko_Yasaka">Yasaka, Miko</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
-                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/63335/Miko_Yasaka"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/6/168975.jpg?s=7e2cfa83898ab65573a9684c35ee419c" border="0" alt="Yasaka, Miko" width="23" class="lazyload"></a></div></td>
+                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/36495/Baabu">Baabu</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
+                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/36495/Baabu"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/10/162117.jpg?s=1bc02191e27df4bd2b53fb8e187257d0" border="0" alt="Baabu" width="23" class="lazyload"></a></div></td>
                 </tr>
                 
                 <tr>
                     <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/11499/Sankarea"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/13/79033.jpg?s=16e61cae0610c740ec1f964e73a7156f" border="0" width="23" class="lazyload"></a></div></td>
                     <td valign="top" class="borderClass"><a href="/anime/11499/Sankarea">Sankarea</a><div class="spaceit_pad">
 <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> </div></td>
-                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/36495/Baabu">Baabu</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
-                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/36495/Baabu"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/10/162117.jpg?s=1bc02191e27df4bd2b53fb8e187257d0" border="0" alt="Baabu" width="23" class="lazyload"></a></div></td>
+                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/63335/Miko_Yasaka">Yasaka, Miko</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
+                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/63335/Miko_Yasaka"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/6/168975.jpg?s=7e2cfa83898ab65573a9684c35ee419c" border="0" alt="Yasaka, Miko" width="23" class="lazyload"></a></div></td>
                 </tr>
                 
                 <tr>
@@ -3053,7 +3104,7 @@ Twitter: @<a href="https://twitter.com/Rialisms" target="_blank" rel="nofollow">
                     <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/29786/Shimoneta_to_Iu_Gainen_ga_Sonzai_Shinai_Taikutsu_na_Sekai"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/6/75106.jpg?s=9ebd892ed3914619a4fda3d199a5f4a2" border="0" width="23" class="lazyload"></a></div></td>
                     <td valign="top" class="borderClass"><a href="/anime/29786/Shimoneta_to_Iu_Gainen_ga_Sonzai_Shinai_Taikutsu_na_Sekai">Shimoneta to Iu Gainen ga Sonzai Shinai Taikutsu na Sekai</a><div class="spaceit_pad">
 <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> </div></td>
-                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/115699/Anna_Nishikinomiya">Nishikinomiya, Anna</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
+                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/115699/Anna_Nishikinomiya">Nishikinomiya, Anna</a>&nbsp;<div class="spaceit_pad">Main&nbsp;</div></td>
                     <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/115699/Anna_Nishikinomiya"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/3/290523.jpg?s=1b43c8fad460a19dbb944177c7377162" border="0" alt="Nishikinomiya, Anna" width="23" class="lazyload"></a></div></td>
                 </tr>
                 
@@ -3357,16 +3408,16 @@ Twitter: @<a href="https://twitter.com/Rialisms" target="_blank" rel="nofollow">
                     <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/16011/Tokyo_Ravens"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/13/75094.jpg?s=e4ede2d989367da558dc63d44a402f2d" border="0" width="23" class="lazyload"></a></div></td>
                     <td valign="top" class="borderClass"><a href="/anime/16011/Tokyo_Ravens">Tokyo Ravens</a><div class="spaceit_pad">
 <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> </div></td>
-                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/95291/Hishamaru">Hishamaru</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
-                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/95291/Hishamaru"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/11/240145.jpg?s=759e033980cc69d28512eea3d9d83ec4" border="0" alt="Hishamaru" width="23" class="lazyload"></a></div></td>
+                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/84559/Kon">Kon</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
+                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/84559/Kon"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/3/242253.jpg?s=c44cce29c31261dda7938fa0e05fbb5e" border="0" alt="Kon" width="23" class="lazyload"></a></div></td>
                 </tr>
                 
                 <tr>
                     <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/16011/Tokyo_Ravens"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/13/75094.jpg?s=e4ede2d989367da558dc63d44a402f2d" border="0" width="23" class="lazyload"></a></div></td>
                     <td valign="top" class="borderClass"><a href="/anime/16011/Tokyo_Ravens">Tokyo Ravens</a><div class="spaceit_pad">
 <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> </div></td>
-                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/84559/Kon">Kon</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
-                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/84559/Kon"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/3/242253.jpg?s=c44cce29c31261dda7938fa0e05fbb5e" border="0" alt="Kon" width="23" class="lazyload"></a></div></td>
+                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/95291/Hishamaru">Hishamaru</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
+                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/95291/Hishamaru"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/11/240145.jpg?s=759e033980cc69d28512eea3d9d83ec4" border="0" alt="Hishamaru" width="23" class="lazyload"></a></div></td>
                 </tr>
                 
                 <tr>
@@ -3538,6 +3589,14 @@ Twitter: @<a href="https://twitter.com/Rialisms" target="_blank" rel="nofollow">
                 </tr>
                 
                 <tr>
+                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/30385/Valkyrie_Drive__Mermaid"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/13/75528.jpg?s=f38c5ab4ad8a1db8a3a34878e4752170" border="0" width="23" class="lazyload"></a></div></td>
+                    <td valign="top" class="borderClass"><a href="/anime/30385/Valkyrie_Drive__Mermaid">Valkyrie Drive: Mermaid</a><div class="spaceit_pad">
+<a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> </div></td>
+                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/129264/Charlotte_Scherzen">Scherzen, Charlotte</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
+                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/129264/Charlotte_Scherzen"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/14/293507.jpg?s=5edc9b84a6ac69bde5ad42a10f094403" border="0" alt="Scherzen, Charlotte" width="23" class="lazyload"></a></div></td>
+                </tr>
+                
+                <tr>
                     <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/16742/Watashi_ga_Motenai_no_wa_Dou_Kangaetemo_Omaera_ga_Warui"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/12/51619.jpg?s=ea18b50f02cc00c4d76cf45f6df578c1" border="0" width="23" class="lazyload"></a></div></td>
                     <td valign="top" class="borderClass"><a href="/anime/16742/Watashi_ga_Motenai_no_wa_Dou_Kangaetemo_Omaera_ga_Warui">Watashi ga Motenai no wa Dou Kangaetemo Omaera ga Warui!</a><div class="spaceit_pad">
 <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> </div></td>
@@ -3578,6 +3637,14 @@ Twitter: @<a href="https://twitter.com/Rialisms" target="_blank" rel="nofollow">
                 </tr>
                 
                 <tr>
+                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/32615/Youjo_Senki"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/5/82890.jpg?s=7e38f0d2ecadc6bbbf8ed086544438f6" border="0" width="23" class="lazyload"></a></div></td>
+                    <td valign="top" class="borderClass"><a href="/anime/32615/Youjo_Senki">Youjo Senki</a><div class="spaceit_pad">
+<a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a>  <small>Airing</small></div></td>
+                    <td valign="top" class="borderClass" align="right" nowrap><a href="/character/137825/Tanya_Degurechaff">Degurechaff, Tanya</a>&nbsp;<div class="spaceit_pad">Main&nbsp;</div></td>
+                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/137825/Tanya_Degurechaff"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/11/319996.jpg?s=5e09e2ad4b1e65650e5ca5e48f85be1a" border="0" alt="Degurechaff, Tanya" width="23" class="lazyload"></a></div></td>
+                </tr>
+                
+                <tr>
                     <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/9331/Yumekui_Merry"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/3/30869.jpg?s=a975f72f7d1ecc789ee6094cc2892347" border="0" width="23" class="lazyload"></a></div></td>
                     <td valign="top" class="borderClass"><a href="/anime/9331/Yumekui_Merry">Yumekui Merry</a><div class="spaceit_pad">
 <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> </div></td>
@@ -3602,8 +3669,8 @@ Twitter: @<a href="https://twitter.com/Rialisms" target="_blank" rel="nofollow">
                 </tr>
                 
                 <tr>
-                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/32995/Yuri_on_Ice"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/6/81149.jpg?s=786167d204f9dc245ec54e86f5b91cac" border="0" width="23" class="lazyload"></a></div></td>
-                    <td valign="top" class="borderClass"><a href="/anime/32995/Yuri_on_Ice">Yuri!!! on Ice</a><div class="spaceit_pad">
+                    <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/32995/Yuri_on_ICE"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/6/81149.jpg?s=786167d204f9dc245ec54e86f5b91cac" border="0" width="23" class="lazyload"></a></div></td>
+                    <td valign="top" class="borderClass"><a href="/anime/32995/Yuri_on_ICE">Yuri!!! on ICE</a><div class="spaceit_pad">
 <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> </div></td>
                     <td valign="top" class="borderClass" align="right" nowrap><a href="/character/145666/Mila_Babicheva">Babicheva, Mila</a>&nbsp;<div class="spaceit_pad">Supporting&nbsp;</div></td>
                     <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/character/145666/Mila_Babicheva"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/characters/7/318074.jpg?s=5316d00e042d44205db6467e328571a6" border="0" alt="Babicheva, Mila" width="23" class="lazyload"></a></div></td>
@@ -3652,13 +3719,13 @@ Twitter: @<a href="https://twitter.com/Rialisms" target="_blank" rel="nofollow">
             <tr>
                 <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/2002/Heroic_Age"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/12/50435.jpg?s=bc519e2a9ea466317f2b65e53732d9d6" border="0" width="23" class="lazyload"></a></div></td>
                 <td valign="top" class="borderClass"><a href="/anime/2002/Heroic_Age">Heroic Age</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> <small>Script</small>  (Ep. 21-22, 25) </div></td>
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> <small>ADR Director</small>  (Ep. 7-10) </div></td>
             </tr>
             
             <tr>
                 <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/2002/Heroic_Age"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/12/50435.jpg?s=bc519e2a9ea466317f2b65e53732d9d6" border="0" width="23" class="lazyload"></a></div></td>
                 <td valign="top" class="borderClass"><a href="/anime/2002/Heroic_Age">Heroic Age</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> <small>ADR Director</small>  (Ep. 7-10) </div></td>
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F159" title="Quick add anime to my list" class="button_add">add</a> <small>Script</small>  (Ep. 21-22, 25) </div></td>
             </tr>
             
             <tr>
@@ -3727,80 +3794,37 @@ Twitter: @<a href="https://twitter.com/Rialisms" target="_blank" rel="nofollow">
     <div class="normal_header"><span class="floatRightHeader"><a href="/dbchanges.php?go=voiceactor&do=publishedmanga&id=159">Add Work</a></span>Published Manga</div>No published manga have been added to this person. Help improve our database by adding a published manga <a href="/dbchanges.php?go=voiceactor&do=publishedmanga&id=159">here</a>.
     <br><br>
     <h2><div class="floatRightHeader"><a href="/people/159/Monica_Rial/news">See More</a></div>Recent News</h2><div class="normal_header" style="margin-top: 17px;">Comments</div>
-            <a name="com381966"></a>
+            <a name="com386614"></a>
             <table border="0" cellpadding="0" cellspacing="0" width="100%"  class="bgColor1">
             <tr class="people-comment">
-              <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/kyomi666"><img src="https://myanimelist.cdn-dena.com/images/questionmark_50.gif" border="0"></a></div></td>
+              <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/bananyaishope"><img src="https://myanimelist.cdn-dena.com/images/userimages/thumbs/5267895_thumb.jpg" border="0"></a></div></td>
               <td class="borderClass people-comment-text" style="border: 0;" valign="top">
-              <div class="dark_text mb4 fw-b"><a href="/profile/kyomi666">kyomi666</a> <small><span class="fw-n"> | Nov 29, 8:53 AM</span></small></div>
+              <div class="dark_text mb4 fw-b"><a href="/profile/bananyaishope">bananyaishope</a> <small><span class="fw-n"> | Jan 26, 2:52 AM</span></small></div>
               <div class="comment word-break">
-              x</div></td>
+              <div class="quotetext"><strong>Phantom-Brave12 said:</strong><br>Praise Jesus for this voice actor lol</div>Lol Ghost Stories reference? :P</div></td>
                 </tr>
                 </table>
                 <br><br>
-            <a name="com381964"></a>
+            <a name="com384539"></a>
             <table border="0" cellpadding="0" cellspacing="0" width="100%" >
             <tr class="people-comment">
-              <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/kyomi666"><img src="https://myanimelist.cdn-dena.com/images/questionmark_50.gif" border="0"></a></div></td>
+              <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/The-Sublimer-One"><img src="https://myanimelist.cdn-dena.com/images/userimages/thumbs/4741939_thumb.jpg" border="0"></a></div></td>
               <td class="borderClass people-comment-text" style="border: 0;" valign="top">
-              <div class="dark_text mb4 fw-b"><a href="/profile/kyomi666">kyomi666</a> <small><span class="fw-n"> | Nov 29, 8:53 AM</span></small></div>
+              <div class="dark_text mb4 fw-b"><a href="/profile/The-Sublimer-One">The-Sublimer-One</a> <small><span class="fw-n"> | Jan 2, 8:50 PM</span></small></div>
               <div class="comment word-break">
-              x</div></td>
+              I call all her good characters Index and her evil characters Dante.<br />
+I have no life.</div></td>
                 </tr>
                 </table>
                 <br><br>
-            <a name="com381963"></a>
+            <a name="com384455"></a>
             <table border="0" cellpadding="0" cellspacing="0" width="100%"  class="bgColor1">
             <tr class="people-comment">
-              <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/kyomi666"><img src="https://myanimelist.cdn-dena.com/images/questionmark_50.gif" border="0"></a></div></td>
+              <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/LoveGame"><img src="https://myanimelist.cdn-dena.com/images/userimages/thumbs/4674509_thumb.jpg" border="0"></a></div></td>
               <td class="borderClass people-comment-text" style="border: 0;" valign="top">
-              <div class="dark_text mb4 fw-b"><a href="/profile/kyomi666">kyomi666</a> <small><span class="fw-n"> | Nov 29, 8:53 AM</span></small></div>
+              <div class="dark_text mb4 fw-b"><a href="/profile/LoveGame">LoveGame</a> <small><span class="fw-n"> | Jan 1, 8:59 PM</span></small></div>
               <div class="comment word-break">
-              x</div></td>
-                </tr>
-                </table>
-                <br><br>
-            <a name="com381962"></a>
-            <table border="0" cellpadding="0" cellspacing="0" width="100%" >
-            <tr class="people-comment">
-              <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/kyomi666"><img src="https://myanimelist.cdn-dena.com/images/questionmark_50.gif" border="0"></a></div></td>
-              <td class="borderClass people-comment-text" style="border: 0;" valign="top">
-              <div class="dark_text mb4 fw-b"><a href="/profile/kyomi666">kyomi666</a> <small><span class="fw-n"> | Nov 29, 8:52 AM</span></small></div>
-              <div class="comment word-break">
-              x</div></td>
-                </tr>
-                </table>
-                <br><br>
-            <a name="com381961"></a>
-            <table border="0" cellpadding="0" cellspacing="0" width="100%"  class="bgColor1">
-            <tr class="people-comment">
-              <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/kyomi666"><img src="https://myanimelist.cdn-dena.com/images/questionmark_50.gif" border="0"></a></div></td>
-              <td class="borderClass people-comment-text" style="border: 0;" valign="top">
-              <div class="dark_text mb4 fw-b"><a href="/profile/kyomi666">kyomi666</a> <small><span class="fw-n"> | Nov 29, 8:52 AM</span></small></div>
-              <div class="comment word-break">
-              x</div></td>
-                </tr>
-                </table>
-                <br><br>
-            <a name="com381960"></a>
-            <table border="0" cellpadding="0" cellspacing="0" width="100%" >
-            <tr class="people-comment">
-              <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/kyomi666"><img src="https://myanimelist.cdn-dena.com/images/questionmark_50.gif" border="0"></a></div></td>
-              <td class="borderClass people-comment-text" style="border: 0;" valign="top">
-              <div class="dark_text mb4 fw-b"><a href="/profile/kyomi666">kyomi666</a> <small><span class="fw-n"> | Nov 29, 8:51 AM</span></small></div>
-              <div class="comment word-break">
-              x</div></td>
-                </tr>
-                </table>
-                <br><br>
-            <a name="com381959"></a>
-            <table border="0" cellpadding="0" cellspacing="0" width="100%"  class="bgColor1">
-            <tr class="people-comment">
-              <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/kyomi666"><img src="https://myanimelist.cdn-dena.com/images/questionmark_50.gif" border="0"></a></div></td>
-              <td class="borderClass people-comment-text" style="border: 0;" valign="top">
-              <div class="dark_text mb4 fw-b"><a href="/profile/kyomi666">kyomi666</a> <small><span class="fw-n"> | Nov 29, 8:51 AM</span></small></div>
-              <div class="comment word-break">
-              x</div></td>
+              Loved her as Anna.</div></td>
                 </tr>
                 </table>
                 <br><br>
@@ -3809,32 +3833,76 @@ Twitter: @<a href="https://twitter.com/Rialisms" target="_blank" rel="nofollow">
             <tr class="people-comment">
               <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/kyomi666"><img src="https://myanimelist.cdn-dena.com/images/questionmark_50.gif" border="0"></a></div></td>
               <td class="borderClass people-comment-text" style="border: 0;" valign="top">
-              <div class="dark_text mb4 fw-b"><a href="/profile/kyomi666">kyomi666</a> <small><span class="fw-n"> | Nov 28, 6:52 AM</span></small></div>
+              <div class="dark_text mb4 fw-b"><a href="/profile/kyomi666">kyomi666</a> <small><span class="fw-n"> | Nov 28, 2016 6:52 AM</span></small></div>
               <div class="comment word-break">
               Keep up the good work.</div></td>
                 </tr>
                 </table>
                 <br><br>
-            <a name="com381889"></a>
+            <a name="com380949"></a>
             <table border="0" cellpadding="0" cellspacing="0" width="100%"  class="bgColor1">
             <tr class="people-comment">
-              <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/kyomi666"><img src="https://myanimelist.cdn-dena.com/images/questionmark_50.gif" border="0"></a></div></td>
+              <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/OmegaOtaku"><img src="https://myanimelist.cdn-dena.com/images/userimages/thumbs/4025379_thumb.jpg" border="0"></a></div></td>
               <td class="borderClass people-comment-text" style="border: 0;" valign="top">
-              <div class="dark_text mb4 fw-b"><a href="/profile/kyomi666">kyomi666</a> <small><span class="fw-n"> | Nov 28, 6:51 AM</span></small></div>
+              <div class="dark_text mb4 fw-b"><a href="/profile/OmegaOtaku">OmegaOtaku</a> <small><span class="fw-n"> | Nov 16, 2016 9:31 AM</span></small></div>
               <div class="comment word-break">
-              @SakurasouBusters The voice &amp; ADR directors are the ones in charge of casting ,not her you moron.</div></td>
+              Worst. VA. Ever. No joke.<br />
+No range and so annoying to listen to. Cannot believe they cast her as Yona.</div></td>
                 </tr>
                 </table>
                 <br><br>
-            <a name="com381422"></a>
+            <a name="com380221"></a>
             <table border="0" cellpadding="0" cellspacing="0" width="100%" >
             <tr class="people-comment">
-              <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/kyomi666"><img src="https://myanimelist.cdn-dena.com/images/questionmark_50.gif" border="0"></a></div></td>
+              <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/M0M0I"><img src="https://myanimelist.cdn-dena.com/images/userimages/thumbs/3705079_thumb.jpg" border="0"></a></div></td>
               <td class="borderClass people-comment-text" style="border: 0;" valign="top">
-              <div class="dark_text mb4 fw-b"><a href="/profile/kyomi666">kyomi666</a> <small><span class="fw-n"> | Nov 22, 9:02 AM</span></small></div>
+              <div class="dark_text mb4 fw-b"><a href="/profile/M0M0I">M0M0I</a> <small><span class="fw-n"> | Nov 6, 2016 1:13 PM</span></small></div>
               <div class="comment word-break">
-              @OmegaOtaku<br />
-You are the biggest dumbass on the planet.</div></td>
+              shit at himari in penguindrum. 13 yr old girl should not sound like a 30 yr old hooker </div></td>
+                </tr>
+                </table>
+                <br><br>
+            <a name="com377743"></a>
+            <table border="0" cellpadding="0" cellspacing="0" width="100%"  class="bgColor1">
+            <tr class="people-comment">
+              <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/Phantom-Brave12"><img src="https://myanimelist.cdn-dena.com/images/userimages/thumbs/157026_thumb.jpg" border="0"></a></div></td>
+              <td class="borderClass people-comment-text" style="border: 0;" valign="top">
+              <div class="dark_text mb4 fw-b"><a href="/profile/Phantom-Brave12">Phantom-Brave12</a> <small><span class="fw-n"> | Oct 9, 2016 6:23 AM</span></small></div>
+              <div class="comment word-break">
+              Praise Jesus for this voice actor lol</div></td>
+                </tr>
+                </table>
+                <br><br>
+            <a name="com377036"></a>
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" >
+            <tr class="people-comment">
+              <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/nDroae"><img src="https://myanimelist.cdn-dena.com/images/userimages/thumbs/402625_thumb.jpg" border="0"></a></div></td>
+              <td class="borderClass people-comment-text" style="border: 0;" valign="top">
+              <div class="dark_text mb4 fw-b"><a href="/profile/nDroae">nDroae</a> <small><span class="fw-n"> | Sep 30, 2016 2:07 PM</span></small></div>
+              <div class="comment word-break">
+              Now I kind of want to start watching dubs again so I can participate in this lovely conversation</div></td>
+                </tr>
+                </table>
+                <br><br>
+            <a name="com376888"></a>
+            <table border="0" cellpadding="0" cellspacing="0" width="100%"  class="bgColor1">
+            <tr class="people-comment">
+              <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/The-Sublimer-One"><img src="https://myanimelist.cdn-dena.com/images/userimages/thumbs/4741939_thumb.jpg" border="0"></a></div></td>
+              <td class="borderClass people-comment-text" style="border: 0;" valign="top">
+              <div class="dark_text mb4 fw-b"><a href="/profile/The-Sublimer-One">The-Sublimer-One</a> <small><span class="fw-n"> | Sep 28, 2016 3:45 PM</span></small></div>
+              <div class="comment word-break">
+              You know you&#039;ve made it big when your MAL page is just a bunch of weebs arguing about how much effort you put into your work.</div></td>
+                </tr>
+                </table>
+                <br><br>
+            <a name="com376809"></a>
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" >
+            <tr class="people-comment">
+              <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/SakurasouBusters"><img src="https://myanimelist.cdn-dena.com/images/userimages/thumbs/2698755_thumb.jpg" border="0"></a></div></td>
+              <td class="borderClass people-comment-text" style="border: 0;" valign="top">
+              <div class="dark_text mb4 fw-b"><a href="/profile/SakurasouBusters">SakurasouBusters</a> <small><span class="fw-n"> | Sep 27, 2016 1:46 PM</span></small></div>
+              <div class="comment word-break">
+              I Agree with the ones saying shes not horrible, the problem that i have with her is that shes just in Everything and after awhile you get sick of her voice, I just wish she would give other people at funimation an oppurtunity.</div></td>
                 </tr>
                 </table>
                 <br><br><div style="margin: 12px 0px;">
@@ -3879,8 +3947,7 @@ You are the biggest dumbass on the planet.</div></td>
         <script type='text/javascript'>
           googletag.cmd.push(function() {
                       var slot = googletag.defineSlot("/84947469/pc_anime_detail_side_sky_l", [[160,600],[1,1]], "pc_anime_detail_side_sky_l").addService(googletag.pubads())
-      .setTargeting("adult", "white")
-              .setCollapseEmptyDiv(true,true);googletag.enableServices();
+      .setTargeting("adult", "white")        .setCollapseEmptyDiv(true,true);googletag.enableServices();
 
               window.MAL.SkinAd.pushSKTag("pc_anime_detail_side_sky_l");
               });</script>
@@ -3894,8 +3961,7 @@ You are the biggest dumbass on the planet.</div></td>
         <script type='text/javascript'>
           googletag.cmd.push(function() {
                       var slot = googletag.defineSlot("/84947469/pc_anime_detail_side_sky_r", [[160,600],[1,1]], "pc_anime_detail_side_sky_r").addService(googletag.pubads())
-      .setTargeting("adult", "white")
-              .setCollapseEmptyDiv(true,true);googletag.enableServices();
+      .setTargeting("adult", "white")        .setCollapseEmptyDiv(true,true);googletag.enableServices();
 
               window.MAL.SkinAd.pushSKTag("pc_anime_detail_side_sky_r");
               });</script>
@@ -3935,11 +4001,11 @@ You are the biggest dumbass on the planet.</div></td>
           <div class="ranking-unit ranking-top_airing">
         <h3 class="title"><a href="https://myanimelist.net/topanime.php?type=airing" class="view_more fl-r">More</a>Top Airing Anime</h3>
         <ol>
-                      <li><span class="rank">1</span><a href="https://myanimelist.net/anime/31933/JoJo_no_Kimyou_na_Bouken__Diamond_wa_Kudakenai">JoJo no Kimyou na Bouken: Diamond wa Kudakenai</a></li>
+                      <li><span class="rank">1</span><a href="https://myanimelist.net/anime/34096/Gintama">Gintama.</a></li>
                       <li><span class="rank">2</span><a href="https://myanimelist.net/anime/21/One_Piece">One Piece</a></li>
-                      <li><span class="rank">3</span><a href="https://myanimelist.net/anime/10937/Mobile_Suit_Gundam__The_Origin">Mobile Suit Gundam: The Origin</a></li>
-                      <li><span class="rank">4</span><a href="https://myanimelist.net/anime/33255/Saiki_Kusuo_no_Ψ-nan_TV">Saiki Kusuo no Ψ-nan (TV)</a></li>
-                      <li><span class="rank">5</span><a href="https://myanimelist.net/anime/235/Detective_Conan">Detective Conan</a></li>
+                      <li><span class="rank">3</span><a href="https://myanimelist.net/anime/32937/Kono_Subarashii_Sekai_ni_Shukufuku_wo_2">Kono Subarashii Sekai ni Shukufuku wo! 2</a></li>
+                      <li><span class="rank">4</span><a href="https://myanimelist.net/anime/10937/Mobile_Suit_Gundam__The_Origin">Mobile Suit Gundam: The Origin</a></li>
+                      <li><span class="rank">5</span><a href="https://myanimelist.net/anime/33095/Shouwa_Genroku_Rakugo_Shinjuu__Sukeroku_Futatabi-hen">Shouwa Genroku Rakugo Shinjuu: Sukeroku Futatabi-hen</a></li>
                   </ol>
       </div>
           <div class="ranking-unit ranking-top_upcoming">
@@ -3948,18 +4014,18 @@ You are the biggest dumbass on the planet.</div></td>
                       <li><span class="rank">1</span><a href="https://myanimelist.net/anime/25777/Shingeki_no_Kyojin_Season_2">Shingeki no Kyojin Season 2</a></li>
                       <li><span class="rank">2</span><a href="https://myanimelist.net/anime/34134/One_Punch_Man_2">One Punch Man 2</a></li>
                       <li><span class="rank">3</span><a href="https://myanimelist.net/anime/3786/Evangelion__30_10">Evangelion: 3.0+1.0</a></li>
-                      <li><span class="rank">4</span><a href="https://myanimelist.net/anime/32937/Kono_Subarashii_Sekai_ni_Shukufuku_wo_2">Kono Subarashii Sekai ni Shukufuku wo! 2</a></li>
-                      <li><span class="rank">5</span><a href="https://myanimelist.net/anime/30484/Steins_Gate_0">Steins;Gate 0</a></li>
+                      <li><span class="rank">4</span><a href="https://myanimelist.net/anime/30484/Steins_Gate_0">Steins;Gate 0</a></li>
+                      <li><span class="rank">5</span><a href="https://myanimelist.net/anime/31765/Sword_Art_Online_Movie__Ordinal_Scale">Sword Art Online Movie: Ordinal Scale</a></li>
                   </ol>
       </div>
           <div class="ranking-unit ranking-top_page_views">
         <h3 class="title">Top Page Views</h3>
         <ol>
-                      <li><span class="rank">1</span><a href="https://myanimelist.net/anime/32995/Yuri_on_Ice">Yuri!!! on Ice</a></li>
-                      <li><span class="rank">2</span><a href="https://myanimelist.net/anime/32281/Kimi_no_Na_wa">Kimi no Na wa.</a></li>
-                      <li><span class="rank">3</span><a href="https://myanimelist.net/anime/33487/Masamune-kun_no_Revenge">Masamune-kun no Revenge</a></li>
-                      <li><span class="rank">4</span><a href="https://myanimelist.net/anime/32937/Kono_Subarashii_Sekai_ni_Shukufuku_wo_2">Kono Subarashii Sekai ni Shukufuku wo! 2</a></li>
-                      <li><span class="rank">5</span><a href="https://myanimelist.net/anime/33506/Ao_no_Exorcist__Kyoto_Fujouou-hen">Ao no Exorcist: Kyoto Fujouou-hen</a></li>
+                      <li><span class="rank">1</span><a href="https://myanimelist.net/anime/32949/Kuzu_no_Honkai">Kuzu no Honkai</a></li>
+                      <li><span class="rank">2</span><a href="https://myanimelist.net/anime/33487/Masamune-kun_no_Revenge">Masamune-kun no Revenge</a></li>
+                      <li><span class="rank">3</span><a href="https://myanimelist.net/anime/32615/Youjo_Senki">Youjo Senki</a></li>
+                      <li><span class="rank">4</span><a href="https://myanimelist.net/anime/32281/Kimi_no_Na_wa">Kimi no Na wa.</a></li>
+                      <li><span class="rank">5</span><a href="https://myanimelist.net/anime/33836/Seiren">Seiren</a></li>
                   </ol>
       </div>
           <div class="ranking-unit ranking-popular_ranking">
@@ -4025,6 +4091,9 @@ You are the biggest dumbass on the planet.</div></td>
 <script type="text/javascript">
     window.MAL.magia = "06410c4e6b2518e9add8f6df0ccb2da2876bb8c980aacb43a8dcaa8153c0f92c";
   window.MAL.madoka = "hZrDKm9k6FVRnqd3i%=K";
+
+  window.MAL.SLVK = "g4OvMLVOmEI3J8u7dt8f8+mAuualsqCo";
+  window.MAL.CDN_URL = "https://myanimelist.cdn-dena.com";
 </script>
 </body>
 </html>

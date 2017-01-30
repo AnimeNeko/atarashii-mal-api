@@ -19,11 +19,10 @@ ClariS - MyAnimeList.net
 
 <link rel="manifest" href="/manifest.json">
 
-<meta name='csrf_token' content='1b59b854bad72c1efac911a1d9a65e8d794fcf06'><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300">
-<link rel="stylesheet" type="text/css" href="https://myanimelist.cdn-dena.com/static/assets/css/pc/style-537e84bc04.css" />
+<meta name='csrf_token' content='38e8b7a8cd11aff61dcbb2242efeecb9af0cc827'><link rel="stylesheet" type="text/css" href="https://myanimelist.cdn-dena.com/static/assets/css/pc/style-39551116e4.css" />
 
-<script type="text/javascript" src="https://myanimelist.cdn-dena.com/static/assets/js/pc/header-74fc5a2666.js"></script>
-<script type="text/javascript" src="https://myanimelist.cdn-dena.com/static/assets/js/pc/all-c67a40d31f.js"
+<script type="text/javascript" src="https://myanimelist.cdn-dena.com/static/assets/js/pc/header-372c33dc23.js"></script>
+<script type="text/javascript" src="https://myanimelist.cdn-dena.com/static/assets/js/pc/all-2e18abd198.js"
         id="alljs" data-params='{&quot;origin_url&quot;:&quot;https:\/\/myanimelist.net&quot;,&quot;is_request_bot_filter_log&quot;:true}' defer></script>
 
 
@@ -72,8 +71,7 @@ ClariS - MyAnimeList.net
         <script type='text/javascript'>
           googletag.cmd.push(function() {
                       var slot = googletag.defineOutOfPageSlot("/84947469/skin_detail", "skin_detail").addService(googletag.pubads())
-      .setTargeting("adult", "white")
-      .setCollapseEmptyDiv(true,true);googletag.enableServices();
+      .setTargeting("adult", "white").setCollapseEmptyDiv(true,true);googletag.enableServices();
 
       googletag.display("skin_detail");
               });</script>
@@ -92,10 +90,13 @@ ClariS - MyAnimeList.net
   </div>
         <div class="wrapper"><div id="headerSmall"><a href="/" class="link-mal-logo">MyAnimeList.net</a>
 
-<a href="https://myanimelist.net/membership?_location=mal_h_b"
+<a href="https://myanimelist.net/manga_translation_battle_vol5?_location=mal_h_b&amp;_type=1"
    class="banner-header-anime-straming" target="_blank">
-  <img src="https://myanimelist.cdn-dena.com/images/membership/tom-banner-small.png" width="250" height="36" alt="About MAL Supporter" title="About MAL Supporter">
+  <img src="https://myanimelist.cdn-dena.com/images/mtb/banner-mtb5-winners.png?v=1" width="250" height="36"
+       srcset="https://myanimelist.cdn-dena.com/images/mtb/banner-mtb5-winners.png?v=1 1x, https://myanimelist.cdn-dena.com/images/mtb/banner-mtb5-winners@2x.png?v=1 2x"
+       alt="Winners Announced! - Manga Translation Battle Vol.5" title="Winners Announced! - Manga Translation Battle Vol.5">
 </a>
+
 <div id="header-menu" ><div class="header-menu-login"><a class="btn-mal-service" href="https://myanimelist.net/membership?_location=mal_h_u">Hide Ads</a><a class="btn-login" href="https://myanimelist.net/login.php?from=%2Fpeople%2F11746" id="malLogin">Login</a><a class="btn-signup" href="https://myanimelist.net/register.php?from=%2Fpeople%2F11746">Sign Up</a></div></div></div>  <div id="menu" class="">
     <div id="menu_right"><script type="text/x-template" id="incremental-result-item-anime"><div class="list anime" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info anime"><div class="name">${ item.name } <span class="media-type">(${ item.payload.media_type })</span></div><div class="extra-info">Aired: ${ item.payload.aired }<br>Score: ${ item.payload.score }<br>Status: ${ item.payload.status }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info anime"><div class="name">${ item.name }</div><div class="media-type">(${ mediaTypeWithStartYear })</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-manga"><div class="list manga" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info manga"><div class="name">${ item.name } <span class="media-type">(${ item.payload.media_type })</span></div><div class="extra-info">Published: ${ item.payload.published }<br>Score: ${ item.payload.score }<br>Status: ${ item.payload.status }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info manga"><div class="name">${ item.name }</div><div class="media-type">(${ mediaTypeWithStartYear })</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-character"><div class="list character" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info character"><div class="name">${ item.name }</div><div class="extra-info"><ul class="related-works"><li v-for="work in item.payload.related_works" class="fs-i">- ${ work }</li></ul>Favorites: ${ item.payload.favorites }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info character"><div class="name">${ item.name }</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-person"><div class="list person" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info person"><div class="name">${ item.name }</div><div class="extra-info"><span v-if="item.payload.alternative_name">${ item.payload.alternative_name }<br></span>Birthday: ${ item.payload.birthday }<br>Favorites: ${ item.payload.favorites }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info person"><div class="name">${ item.name }</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-club"><div class="list club" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info club"><div class="name">${ item.name }</div><div class="extra-info">Members: ${ item.payload.members }<br>Category: ${ item.payload.category }<br>Created by: ${ item.payload.created_by }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info club"><div class="name">${ item.name }</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-user"><div class="list user" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info user"><div class="name">${ item.name }</div><div class="extra-info"><span v-if="item.payload.authority">${ item.payload.authority }<br></span>Joined: ${ item.payload.joined }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info user"><div class="name">${ item.name }</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-news"><div class="list news" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info news"><div class="name">${ item.name }</div><div class="extra-info">${ item.payload.date }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info news"><div class="name">${ item.name }</div><div class="media-type">${ item.payload.date }</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-featured"><div class="list featured" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info featured"><div class="name">${ item.name }</div><div class="extra-info">${ item.payload.date }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info featured"><div class="name">${ item.name }</div><div class="media-type">${ item.payload.date }</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-forum"><div class="list forum" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info forum"><div class="name"><span v-show="item.payload.work_title">${ item.payload.work_title}
                       <i class="fa fa-caret-right"></i></span> ${ item.name }</div><div class="extra-info">${ item.payload.date }<br><span>in ${ item.payload.category }</span></div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info forum"><div class="name"><span v-show="item.payload.work_title">${ item.payload.work_title}
@@ -115,6 +116,7 @@ ClariS - MyAnimeList.net
                         <li><a href="https://myanimelist.net/watch/episode?_location=mal_h_m_a">Videos</a></li>
             <li><a href="https://myanimelist.net/reviews.php?t=anime&amp;_location=mal_h_m">Reviews</a></li>
             <li><a href="https://myanimelist.net/recommendations.php?s=recentrecs&amp;t=anime&amp;_location=mal_h_m">Recommendations</a></li>
+            <li><a href="https://myanimelist.net/forum?topicid=1582476&amp;_location=mal_h_m">2017 Challenge</a></li>
           </ul>
         </li>
         <li class="small"><a href="#" class="non-link">Manga</a>
@@ -123,6 +125,7 @@ ClariS - MyAnimeList.net
             <li><a href="https://myanimelist.net/topmanga.php?_location=mal_h_m">Top Manga</a></li>
             <li><a href="https://myanimelist.net/reviews.php?t=manga&amp;_location=mal_h_m">Reviews</a></li>
             <li><a href="https://myanimelist.net/recommendations.php?s=recentrecs&amp;t=manga&amp;_location=mal_h_m">Recommendations</a></li>
+            <li><a href="https://myanimelist.net/forum?topicid=1582478&amp;_location=mal_h_m">2017 Challenge</a></li>
           </ul>
         </li>
         <li><a href="#" class="non-link">Community</a>
@@ -175,7 +178,7 @@ ClariS - MyAnimeList.net
     <div class="borderClass" :class="isError? 'fn-red1': 'fn-grey5'" v-html="msg"></div>
   </template>
 </div>
-</div><div class="js-sns-icon-container icon-block "><a data-ga-network="facebook" data-ga-screen="Share Button Location: common" class="js-share-button-popup js-share-button-tracking sprite-icon-social icon-social icon-facebook" target="_blank" href="http://www.facebook.com/share.php?u=https%3A%2F%2Fmyanimelist.net%2Fpeople%2F11746%2FClariS"></a><a data-ga-network="twitter" data-ga-screen="Share Button Location: common" class="js-share-button-popup js-share-button-tracking sprite-icon-social icon-social icon-twitter" target="_blank" href="http://twitter.com/share?related=MyAnimeList.net&amp;via=myanimelist&amp;url=https%3A%2F%2Fmyanimelist.net%2Fpeople%2F11746%2FClariS&amp;text=%20ClariS&amp;hashtags="></a><a data-ga-network="google+" data-ga-screen="Share Button Location: common" class="js-share-button-popup js-share-button-tracking sprite-icon-social icon-social icon-google" target="_blank" href="https://plus.google.com/share?url=https%3A%2F%2Fmyanimelist.net%2Fpeople%2F11746%2FClariS"></a><a data-ga-network="reddit" data-ga-screen="Share Button Location: common" class="js-share-button-popup js-share-button-tracking sprite-icon-social icon-social icon-reddit" target="_blank" href="http://reddit.com/submit?url=https%3A%2F%2Fmyanimelist.net%2Fpeople%2F11746%2FClariS&amp;title=%20ClariS"></a><a data-ga-network="tumblr" data-ga-screen="Share Button Location: common" class="js-share-button-popup js-share-button-tracking sprite-icon-social icon-social icon-tumblr" target="_blank" href="http://www.tumblr.com/share/link?url=https%3A%2F%2Fmyanimelist.net%2Fpeople%2F11746%2FClariS&amp;name=%20ClariS"></a></div><br><div class="spaceit_pad"><span class="dark_text">Birthday:</span> 2009</div><span class="dark_text">Website:</span> <a href="http://www.clarismusic.jp/">http://www.clarismusic....</a><div class="spaceit_pad"><span class="dark_text">Member Favorites:</span> 2024</div><div><span class="dark_text">More:</span></div><div class="people-informantion-more js-people-informantion-more">ClariS is a singing group consisting of two high school girls who gained popularity through the video sharing site Nico Nico Douga as &ldquo;アリス☆クララ&quot; (&quot;Alice☆Clara&quot;) in 2009 and 2010. They have since changed their name to &ldquo;ClariS&rdquo; for their major debut in 2010, which means &ldquo;sunny, clean and bright&rdquo; in Latin. <br />
+</div><div class="js-sns-icon-container icon-block "><a data-ga-network="facebook" data-ga-screen="Share Button Location: common" class="js-share-button-popup js-share-button-tracking sprite-icon-social icon-social icon-facebook" target="_blank" href="http://www.facebook.com/share.php?u=https%3A%2F%2Fmyanimelist.net%2Fpeople%2F11746%2FClariS"></a><a data-ga-network="twitter" data-ga-screen="Share Button Location: common" class="js-share-button-popup js-share-button-tracking sprite-icon-social icon-social icon-twitter" target="_blank" href="http://twitter.com/share?related=MyAnimeList.net&amp;via=myanimelist&amp;url=https%3A%2F%2Fmyanimelist.net%2Fpeople%2F11746%2FClariS&amp;text=%20ClariS&amp;hashtags="></a><a data-ga-network="google+" data-ga-screen="Share Button Location: common" class="js-share-button-popup js-share-button-tracking sprite-icon-social icon-social icon-google" target="_blank" href="https://plus.google.com/share?url=https%3A%2F%2Fmyanimelist.net%2Fpeople%2F11746%2FClariS"></a><a data-ga-network="reddit" data-ga-screen="Share Button Location: common" class="js-share-button-popup js-share-button-tracking sprite-icon-social icon-social icon-reddit" target="_blank" href="http://reddit.com/submit?url=https%3A%2F%2Fmyanimelist.net%2Fpeople%2F11746%2FClariS&amp;title=%20ClariS"></a><a data-ga-network="tumblr" data-ga-screen="Share Button Location: common" class="js-share-button-popup js-share-button-tracking sprite-icon-social icon-social icon-tumblr" target="_blank" href="http://www.tumblr.com/share/link?url=https%3A%2F%2Fmyanimelist.net%2Fpeople%2F11746%2FClariS&amp;name=%20ClariS"></a></div><br><div class="spaceit_pad"><span class="dark_text">Birthday:</span> 2009</div><span class="dark_text">Website:</span> <a href="http://www.clarismusic.jp/">http://www.clarismusic....</a><div class="spaceit_pad"><span class="dark_text">Member Favorites:</span> 2043</div><div><span class="dark_text">More:</span></div><div class="people-informantion-more js-people-informantion-more">ClariS is a singing group consisting of two high school girls who gained popularity through the video sharing site Nico Nico Douga as &ldquo;アリス☆クララ&quot; (&quot;Alice☆Clara&quot;) in 2009 and 2010. They have since changed their name to &ldquo;ClariS&rdquo; for their major debut in 2010, which means &ldquo;sunny, clean and bright&rdquo; in Latin. <br />
 <br />
 Since they are still high school students and want to focus on their school studies, they will not reveal their identities. Therefore, they will only be shown as illustrations. They both started their high school education in April 2012, according to their official Twitter.<br />
 <br />
@@ -274,13 +277,13 @@ Twitter: @<a href="http://twitter.com/ClariS_Staff" target="_blank" rel="nofollo
             <tr>
                 <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/8769/Ore_no_Imouto_ga_Konnani_Kawaii_Wake_ga_Nai"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/8/24875.jpg?s=d75c452795be9c332ba1b6ba395c279c" border="0" width="23" class="lazyload"></a></div></td>
                 <td valign="top" class="borderClass"><a href="/anime/8769/Ore_no_Imouto_ga_Konnani_Kawaii_Wake_ga_Nai">Ore no Imouto ga Konnani Kawaii Wake ga Nai</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F11746" title="Quick add anime to my list" class="button_add">add</a> <small>Theme Song Performance</small>  (OP) </div></td>
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F11746" title="Quick add anime to my list" class="button_add">add</a> <small>Inserted Song Performance</small>  </div></td>
             </tr>
             
             <tr>
                 <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/8769/Ore_no_Imouto_ga_Konnani_Kawaii_Wake_ga_Nai"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/8/24875.jpg?s=d75c452795be9c332ba1b6ba395c279c" border="0" width="23" class="lazyload"></a></div></td>
                 <td valign="top" class="borderClass"><a href="/anime/8769/Ore_no_Imouto_ga_Konnani_Kawaii_Wake_ga_Nai">Ore no Imouto ga Konnani Kawaii Wake ga Nai</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F11746" title="Quick add anime to my list" class="button_add">add</a> <small>Inserted Song Performance</small>  </div></td>
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F11746" title="Quick add anime to my list" class="button_add">add</a> <small>Theme Song Performance</small>  (OP) </div></td>
             </tr>
             
             <tr>
@@ -349,7 +352,7 @@ Twitter: @<a href="http://twitter.com/ClariS_Staff" target="_blank" rel="nofollo
           <p class="info pr8">
             by <a href="https://myanimelist.net/profile/Jankenpopp">Jankenpopp</a>
           </p><p class="di-tc pv pr8">
-              <b>6,151</b> views
+              <b>6,925</b> views
             </p><div class="tags">
               <div class="tags-inner"><a href="https://myanimelist.net/featured/tag/collection" class="tag tag-color-feature-collection" title="Collection">Collection</a><a href="https://myanimelist.net/featured/tag/analysis" class="tag tag-color-feature-analysis" title="Analysis">Analysis</a><a href="https://myanimelist.net/featured/tag/music" class="tag tag-color-feature-music" title="Music">Music</a><a href="https://myanimelist.net/featured/tag/video" class="tag tag-color-feature-video" title="Video">Video</a></div>
             </div></div>
@@ -357,34 +360,45 @@ Twitter: @<a href="http://twitter.com/ClariS_Staff" target="_blank" rel="nofollo
     </div>
   </div>
 </div><div class="normal_header" style="margin-top: 17px;">Comments</div>
-            <a name="com367869"></a>
+            <a name="com383816"></a>
             <table border="0" cellpadding="0" cellspacing="0" width="100%"  class="bgColor1">
+            <tr class="people-comment">
+              <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/MihoWittmann"><img src="https://myanimelist.cdn-dena.com/images/userimages/thumbs/3490805_thumb.jpg" border="0"></a></div></td>
+              <td class="borderClass people-comment-text" style="border: 0;" valign="top">
+              <div class="dark_text mb4 fw-b"><a href="/profile/MihoWittmann">MihoWittmann</a> <small><span class="fw-n"> | Dec 24, 2016 1:50 PM</span></small></div>
+              <div class="comment word-break">
+              Looking forward to the new ClariS&#039;s first full album&mdash;<i>Fairy Castle</i>, coming in a month!</div></td>
+                </tr>
+                </table>
+                <br><br>
+            <a name="com367869"></a>
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" >
             <tr class="people-comment">
               <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/Yamada_Ryu"><img src="https://myanimelist.cdn-dena.com/images/userimages/thumbs/5263378_thumb.jpg" border="0"></a></div></td>
               <td class="borderClass people-comment-text" style="border: 0;" valign="top">
-              <div class="dark_text mb4 fw-b"><a href="/profile/Yamada_Ryu">Yamada_Ryu</a> <small><span class="fw-n"> | Jun 24, 12:40 AM</span></small></div>
+              <div class="dark_text mb4 fw-b"><a href="/profile/Yamada_Ryu">Yamada_Ryu</a> <small><span class="fw-n"> | Jun 24, 2016 12:40 AM</span></small></div>
               <div class="comment word-break">
                Almost all my favorite OP and ED are sang by ClariS that&#039;s why i idolize them :D</div></td>
                 </tr>
                 </table>
                 <br><br>
             <a name="com365351"></a>
-            <table border="0" cellpadding="0" cellspacing="0" width="100%" >
+            <table border="0" cellpadding="0" cellspacing="0" width="100%"  class="bgColor1">
             <tr class="people-comment">
               <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/tkebrick"><img src="https://myanimelist.cdn-dena.com/images/questionmark_50.gif" border="0"></a></div></td>
               <td class="borderClass people-comment-text" style="border: 0;" valign="top">
-              <div class="dark_text mb4 fw-b"><a href="/profile/tkebrick">tkebrick</a> <small><span class="fw-n"> | May 24, 1:57 PM</span></small></div>
+              <div class="dark_text mb4 fw-b"><a href="/profile/tkebrick">tkebrick</a> <small><span class="fw-n"> | May 24, 2016 1:57 PM</span></small></div>
               <div class="comment word-break">
               <a href="https://www.youtube.com/watch?v=6tmb1zRxppQ" target="_blank" rel="nofollow">https://www.youtube.com/watch?v=6tmb1zRxppQ</a></div></td>
                 </tr>
                 </table>
                 <br><br>
             <a name="com365136"></a>
-            <table border="0" cellpadding="0" cellspacing="0" width="100%"  class="bgColor1">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" >
             <tr class="people-comment">
               <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/Chiffres"><img src="https://myanimelist.cdn-dena.com/images/userimages/thumbs/3730727_thumb.jpg" border="0"></a></div></td>
               <td class="borderClass people-comment-text" style="border: 0;" valign="top">
-              <div class="dark_text mb4 fw-b"><a href="/profile/Chiffres">Chiffres</a> <small><span class="fw-n"> | May 22, 7:14 AM</span></small></div>
+              <div class="dark_text mb4 fw-b"><a href="/profile/Chiffres">Chiffres</a> <small><span class="fw-n"> | May 22, 2016 7:14 AM</span></small></div>
               <div class="comment word-break">
               Their EP Haru no Uta is so amazing. &lt;3<br />
 <br />
@@ -393,79 +407,68 @@ Can&#039;t wait to listent to &#039;Gravity&#039; in July ! </div></td>
                 </table>
                 <br><br>
             <a name="com362644"></a>
-            <table border="0" cellpadding="0" cellspacing="0" width="100%" >
+            <table border="0" cellpadding="0" cellspacing="0" width="100%"  class="bgColor1">
             <tr class="people-comment">
               <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/ZickZack"><img src="https://myanimelist.cdn-dena.com/images/userimages/thumbs/4676907_thumb.jpg" border="0"></a></div></td>
               <td class="borderClass people-comment-text" style="border: 0;" valign="top">
-              <div class="dark_text mb4 fw-b"><a href="/profile/ZickZack">ZickZack</a> <small><span class="fw-n"> | Apr 24, 2:41 AM</span></small></div>
+              <div class="dark_text mb4 fw-b"><a href="/profile/ZickZack">ZickZack</a> <small><span class="fw-n"> | Apr 24, 2016 2:41 AM</span></small></div>
               <div class="comment word-break">
               &quot;border&quot; is so underrated, love it so much</div></td>
                 </tr>
                 </table>
                 <br><br>
             <a name="com361430"></a>
-            <table border="0" cellpadding="0" cellspacing="0" width="100%"  class="bgColor1">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" >
             <tr class="people-comment">
               <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/RVMathew"><img src="https://myanimelist.cdn-dena.com/images/userimages/thumbs/3594379_thumb.jpg" border="0"></a></div></td>
               <td class="borderClass people-comment-text" style="border: 0;" valign="top">
-              <div class="dark_text mb4 fw-b"><a href="/profile/RVMathew">RVMathew</a> <small><span class="fw-n"> | Apr 11, 5:03 PM</span></small></div>
+              <div class="dark_text mb4 fw-b"><a href="/profile/RVMathew">RVMathew</a> <small><span class="fw-n"> | Apr 11, 2016 5:03 PM</span></small></div>
               <div class="comment word-break">
               I like &#039;Kokoro no Inryoku&#039; a lot.</div></td>
                 </tr>
                 </table>
                 <br><br>
             <a name="com359542"></a>
-            <table border="0" cellpadding="0" cellspacing="0" width="100%" >
+            <table border="0" cellpadding="0" cellspacing="0" width="100%"  class="bgColor1">
             <tr class="people-comment">
               <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/Macaw"><img src="https://myanimelist.cdn-dena.com/images/userimages/thumbs/4612714_thumb.jpg" border="0"></a></div></td>
               <td class="borderClass people-comment-text" style="border: 0;" valign="top">
-              <div class="dark_text mb4 fw-b"><a href="/profile/Macaw">Macaw</a> <small><span class="fw-n"> | Mar 26, 7:54 PM</span></small></div>
+              <div class="dark_text mb4 fw-b"><a href="/profile/Macaw">Macaw</a> <small><span class="fw-n"> | Mar 26, 2016 7:54 PM</span></small></div>
               <div class="comment word-break">
               Absolutely love their songs, especially &quot;Wake Up&quot; and &quot;Kimi no Yume wo Miyou&quot;! Their songs are upbeat and catchy like the mix of happiness and dreams.</div></td>
                 </tr>
                 </table>
                 <br><br>
             <a name="com359469"></a>
-            <table border="0" cellpadding="0" cellspacing="0" width="100%"  class="bgColor1">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" >
             <tr class="people-comment">
               <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/pokemasify"><img src="https://myanimelist.cdn-dena.com/images/userimages/thumbs/4182669_thumb.jpg" border="0"></a></div></td>
               <td class="borderClass people-comment-text" style="border: 0;" valign="top">
-              <div class="dark_text mb4 fw-b"><a href="/profile/pokemasify">pokemasify</a> <small><span class="fw-n"> | Mar 26, 6:25 AM</span></small></div>
+              <div class="dark_text mb4 fw-b"><a href="/profile/pokemasify">pokemasify</a> <small><span class="fw-n"> | Mar 26, 2016 6:25 AM</span></small></div>
               <div class="comment word-break">
               Really like their songs (as they&#039;re pretty catchy).</div></td>
                 </tr>
                 </table>
                 <br><br>
             <a name="com358256"></a>
-            <table border="0" cellpadding="0" cellspacing="0" width="100%" >
+            <table border="0" cellpadding="0" cellspacing="0" width="100%"  class="bgColor1">
             <tr class="people-comment">
               <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/Amanda-san"><img src="https://myanimelist.cdn-dena.com/images/userimages/thumbs/4600997_thumb.jpg" border="0"></a></div></td>
               <td class="borderClass people-comment-text" style="border: 0;" valign="top">
-              <div class="dark_text mb4 fw-b"><a href="/profile/Amanda-san">Amanda-san</a> <small><span class="fw-n"> | Mar 12, 6:48 AM</span></small></div>
+              <div class="dark_text mb4 fw-b"><a href="/profile/Amanda-san">Amanda-san</a> <small><span class="fw-n"> | Mar 12, 2016 6:48 AM</span></small></div>
               <div class="comment word-break">
               <iframe class="movie youtube" width="425" height="355" frameborder="0" src="https://youtube.com/embed/0oCSOY8gOks?rel=1"></iframe></div></td>
                 </tr>
                 </table>
                 <br><br>
             <a name="com356948"></a>
-            <table border="0" cellpadding="0" cellspacing="0" width="100%"  class="bgColor1">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" >
             <tr class="people-comment">
               <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/Revaq"><img src="https://myanimelist.cdn-dena.com/images/userimages/thumbs/4137613_thumb.jpg" border="0"></a></div></td>
               <td class="borderClass people-comment-text" style="border: 0;" valign="top">
-              <div class="dark_text mb4 fw-b"><a href="/profile/Revaq">Revaq</a> <small><span class="fw-n"> | Feb 25, 5:17 PM</span></small></div>
+              <div class="dark_text mb4 fw-b"><a href="/profile/Revaq">Revaq</a> <small><span class="fw-n"> | Feb 25, 2016 5:17 PM</span></small></div>
               <div class="comment word-break">
               The new song Hirahira Hirara is damn amazing! Their best song to date.</div></td>
-                </tr>
-                </table>
-                <br><br>
-            <a name="com353658"></a>
-            <table border="0" cellpadding="0" cellspacing="0" width="100%" >
-            <tr class="people-comment">
-              <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/Kirinno"><img src="https://myanimelist.cdn-dena.com/images/userimages/thumbs/3953015_thumb.jpg" border="0"></a></div></td>
-              <td class="borderClass people-comment-text" style="border: 0;" valign="top">
-              <div class="dark_text mb4 fw-b"><a href="/profile/Kirinno">Kirinno</a> <small><span class="fw-n"> | Jan 18, 11:31 AM</span></small></div>
-              <div class="comment word-break">
-              I know i should support the &quot;new&quot; Claris, but i just cant let the ClariS that sang irony go :((((((((</div></td>
                 </tr>
                 </table>
                 <br><br><div style="margin: 12px 0px;">
@@ -510,8 +513,7 @@ Can&#039;t wait to listent to &#039;Gravity&#039; in July ! </div></td>
         <script type='text/javascript'>
           googletag.cmd.push(function() {
                       var slot = googletag.defineSlot("/84947469/pc_anime_detail_side_sky_l", [[160,600],[1,1]], "pc_anime_detail_side_sky_l").addService(googletag.pubads())
-      .setTargeting("adult", "white")
-              .setCollapseEmptyDiv(true,true);googletag.enableServices();
+      .setTargeting("adult", "white")        .setCollapseEmptyDiv(true,true);googletag.enableServices();
 
               window.MAL.SkinAd.pushSKTag("pc_anime_detail_side_sky_l");
               });</script>
@@ -525,8 +527,7 @@ Can&#039;t wait to listent to &#039;Gravity&#039; in July ! </div></td>
         <script type='text/javascript'>
           googletag.cmd.push(function() {
                       var slot = googletag.defineSlot("/84947469/pc_anime_detail_side_sky_r", [[160,600],[1,1]], "pc_anime_detail_side_sky_r").addService(googletag.pubads())
-      .setTargeting("adult", "white")
-              .setCollapseEmptyDiv(true,true);googletag.enableServices();
+      .setTargeting("adult", "white")        .setCollapseEmptyDiv(true,true);googletag.enableServices();
 
               window.MAL.SkinAd.pushSKTag("pc_anime_detail_side_sky_r");
               });</script>
@@ -566,11 +567,11 @@ Can&#039;t wait to listent to &#039;Gravity&#039; in July ! </div></td>
           <div class="ranking-unit ranking-top_airing">
         <h3 class="title"><a href="https://myanimelist.net/topanime.php?type=airing" class="view_more fl-r">More</a>Top Airing Anime</h3>
         <ol>
-                      <li><span class="rank">1</span><a href="https://myanimelist.net/anime/31933/JoJo_no_Kimyou_na_Bouken__Diamond_wa_Kudakenai">JoJo no Kimyou na Bouken: Diamond wa Kudakenai</a></li>
+                      <li><span class="rank">1</span><a href="https://myanimelist.net/anime/34096/Gintama">Gintama.</a></li>
                       <li><span class="rank">2</span><a href="https://myanimelist.net/anime/21/One_Piece">One Piece</a></li>
-                      <li><span class="rank">3</span><a href="https://myanimelist.net/anime/10937/Mobile_Suit_Gundam__The_Origin">Mobile Suit Gundam: The Origin</a></li>
-                      <li><span class="rank">4</span><a href="https://myanimelist.net/anime/33255/Saiki_Kusuo_no_Ψ-nan_TV">Saiki Kusuo no Ψ-nan (TV)</a></li>
-                      <li><span class="rank">5</span><a href="https://myanimelist.net/anime/235/Detective_Conan">Detective Conan</a></li>
+                      <li><span class="rank">3</span><a href="https://myanimelist.net/anime/32937/Kono_Subarashii_Sekai_ni_Shukufuku_wo_2">Kono Subarashii Sekai ni Shukufuku wo! 2</a></li>
+                      <li><span class="rank">4</span><a href="https://myanimelist.net/anime/10937/Mobile_Suit_Gundam__The_Origin">Mobile Suit Gundam: The Origin</a></li>
+                      <li><span class="rank">5</span><a href="https://myanimelist.net/anime/33095/Shouwa_Genroku_Rakugo_Shinjuu__Sukeroku_Futatabi-hen">Shouwa Genroku Rakugo Shinjuu: Sukeroku Futatabi-hen</a></li>
                   </ol>
       </div>
           <div class="ranking-unit ranking-top_upcoming">
@@ -579,18 +580,18 @@ Can&#039;t wait to listent to &#039;Gravity&#039; in July ! </div></td>
                       <li><span class="rank">1</span><a href="https://myanimelist.net/anime/25777/Shingeki_no_Kyojin_Season_2">Shingeki no Kyojin Season 2</a></li>
                       <li><span class="rank">2</span><a href="https://myanimelist.net/anime/34134/One_Punch_Man_2">One Punch Man 2</a></li>
                       <li><span class="rank">3</span><a href="https://myanimelist.net/anime/3786/Evangelion__30_10">Evangelion: 3.0+1.0</a></li>
-                      <li><span class="rank">4</span><a href="https://myanimelist.net/anime/32937/Kono_Subarashii_Sekai_ni_Shukufuku_wo_2">Kono Subarashii Sekai ni Shukufuku wo! 2</a></li>
-                      <li><span class="rank">5</span><a href="https://myanimelist.net/anime/30484/Steins_Gate_0">Steins;Gate 0</a></li>
+                      <li><span class="rank">4</span><a href="https://myanimelist.net/anime/30484/Steins_Gate_0">Steins;Gate 0</a></li>
+                      <li><span class="rank">5</span><a href="https://myanimelist.net/anime/31765/Sword_Art_Online_Movie__Ordinal_Scale">Sword Art Online Movie: Ordinal Scale</a></li>
                   </ol>
       </div>
           <div class="ranking-unit ranking-top_page_views">
         <h3 class="title">Top Page Views</h3>
         <ol>
-                      <li><span class="rank">1</span><a href="https://myanimelist.net/anime/32995/Yuri_on_Ice">Yuri!!! on Ice</a></li>
-                      <li><span class="rank">2</span><a href="https://myanimelist.net/anime/32281/Kimi_no_Na_wa">Kimi no Na wa.</a></li>
-                      <li><span class="rank">3</span><a href="https://myanimelist.net/anime/33487/Masamune-kun_no_Revenge">Masamune-kun no Revenge</a></li>
-                      <li><span class="rank">4</span><a href="https://myanimelist.net/anime/32937/Kono_Subarashii_Sekai_ni_Shukufuku_wo_2">Kono Subarashii Sekai ni Shukufuku wo! 2</a></li>
-                      <li><span class="rank">5</span><a href="https://myanimelist.net/anime/33506/Ao_no_Exorcist__Kyoto_Fujouou-hen">Ao no Exorcist: Kyoto Fujouou-hen</a></li>
+                      <li><span class="rank">1</span><a href="https://myanimelist.net/anime/32949/Kuzu_no_Honkai">Kuzu no Honkai</a></li>
+                      <li><span class="rank">2</span><a href="https://myanimelist.net/anime/33487/Masamune-kun_no_Revenge">Masamune-kun no Revenge</a></li>
+                      <li><span class="rank">3</span><a href="https://myanimelist.net/anime/32615/Youjo_Senki">Youjo Senki</a></li>
+                      <li><span class="rank">4</span><a href="https://myanimelist.net/anime/32281/Kimi_no_Na_wa">Kimi no Na wa.</a></li>
+                      <li><span class="rank">5</span><a href="https://myanimelist.net/anime/33836/Seiren">Seiren</a></li>
                   </ol>
       </div>
           <div class="ranking-unit ranking-popular_ranking">
@@ -656,6 +657,9 @@ Can&#039;t wait to listent to &#039;Gravity&#039; in July ! </div></td>
 <script type="text/javascript">
     window.MAL.magia = "06410c4e6b2518e9add8f6df0ccb2da2876bb8c980aacb43a8dcaa8153c0f92c";
   window.MAL.madoka = "hZrDKm9k6FVRnqd3i%=K";
+
+  window.MAL.SLVK = "g4OvMLVOmEI3J8u7dt8f8+mAuualsqCo";
+  window.MAL.CDN_URL = "https://myanimelist.cdn-dena.com";
 </script>
 </body>
 </html>
