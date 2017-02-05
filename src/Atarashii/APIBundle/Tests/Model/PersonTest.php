@@ -6,7 +6,7 @@ use Atarashii\APIBundle\Model\Anime;
 use Atarashii\APIBundle\Model\Manga;
 use Atarashii\APIBundle\Model\Person;
 
-class PersonTest extends \PHPUnit_Framework_TestCase
+class PersonTest extends \PHPUnit\Framework\TestCase
 {
     public function testId()
     {

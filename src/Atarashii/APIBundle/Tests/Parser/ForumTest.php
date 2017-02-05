@@ -4,7 +4,7 @@ namespace Atarashii\APIBundle\Tests\Parser;
 
 use Atarashii\APIBundle\Parser\ForumParser;
 
-class ForumTest extends \PHPUnit_Framework_TestCase
+class ForumTest extends \PHPUnit\Framework\TestCase
 {
     public function testParseBoard()
     {

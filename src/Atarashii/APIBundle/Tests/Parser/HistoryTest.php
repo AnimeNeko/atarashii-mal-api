@@ -9,7 +9,7 @@ use Atarashii\APIBundle\Parser\HistoryParser;
  *
  * @coversDefaultClass Atarashii\APIBundle\Parser\HistoryParser
  */
-class HistoryTest extends \PHPUnit_Framework_TestCase
+class HistoryTest extends \PHPUnit\Framework\TestCase
 {
 
     /**

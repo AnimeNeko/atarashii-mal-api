@@ -4,7 +4,7 @@ namespace Atarashii\APIBundle\Tests\Parser;
 
 use Atarashii\APIBundle\Parser\ReviewParser;
 
-class ReviewTest extends \PHPUnit_Framework_TestCase
+class ReviewTest extends \PHPUnit\Framework\TestCase
 {
     public function testParse()
     {

@@ -4,7 +4,7 @@ namespace Atarashii\APIBundle\Tests\Model;
 
 use Atarashii\APIBundle\Model\Messages;
 
-class MessagesTest extends \PHPUnit_Framework_TestCase
+class MessagesTest extends \PHPUnit\Framework\TestCase
 {
     public function testId()
     {

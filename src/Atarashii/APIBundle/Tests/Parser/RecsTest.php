@@ -4,7 +4,7 @@ namespace Atarashii\APIBundle\Tests\Parser;
 
 use Atarashii\APIBundle\Parser\RecsParser;
 
-class RecsTest extends \PHPUnit_Framework_TestCase
+class RecsTest extends \PHPUnit\Framework\TestCase
 {
     public function testParse()
     {

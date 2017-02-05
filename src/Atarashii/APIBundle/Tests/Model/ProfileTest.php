@@ -7,7 +7,7 @@ use Atarashii\APIBundle\Model\MangaStats;
 use Atarashii\APIBundle\Model\Profile;
 use Atarashii\APIBundle\Model\ProfileDetails;
 
-class ProfileTest extends \PHPUnit_Framework_TestCase
+class ProfileTest extends \PHPUnit\Framework\TestCase
 {
     public function testAvatarUrl()
     {

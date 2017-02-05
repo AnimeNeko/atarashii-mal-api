@@ -5,7 +5,7 @@ namespace Atarashii\APIBundle\Tests\Model;
 use Atarashii\APIBundle\Model\Actor;
 use Atarashii\APIBundle\Model\Cast;
 
-class CastTest extends \PHPUnit_Framework_TestCase
+class CastTest extends \PHPUnit\Framework\TestCase
 {
     public function testId()
     {

@@ -4,7 +4,7 @@ namespace Atarashii\APIBundle\Tests\Model;
 
 use Atarashii\APIBundle\Model\Forum;
 
-class ForumTest extends \PHPUnit_Framework_TestCase
+class ForumTest extends \PHPUnit\Framework\TestCase
 {
     public function testId()
     {

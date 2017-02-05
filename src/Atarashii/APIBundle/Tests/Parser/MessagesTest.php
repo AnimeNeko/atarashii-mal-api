@@ -5,7 +5,7 @@ namespace Atarashii\APIBundle\Tests\Messages;
 use Atarashii\APIBundle\Parser\Messages;
 use Atarashii\APIBundle\Parser\MessagesParser;
 
-class MessagesTest extends \PHPUnit_Framework_TestCase
+class MessagesTest extends \PHPUnit\Framework\TestCase
 {
     public function testParse()
     {

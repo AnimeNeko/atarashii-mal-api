@@ -9,7 +9,7 @@ use Atarashii\APIBundle\Parser\ScheduleParser;
  *
  * @coversDefaultClass Atarashii\APIBundle\Parser\ScheduleParser
  */
-class ScheduleTest extends \PHPUnit_Framework_TestCase
+class ScheduleTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers ::parse

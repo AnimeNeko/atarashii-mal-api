@@ -5,7 +5,7 @@ namespace Atarashii\APIBundle\Tests\Parser;
 use Atarashii\APIBundle\Model\Anime;
 use Atarashii\APIBundle\Parser\TitleParser;
 
-class AnimeTest extends \PHPUnit_Framework_TestCase
+class AnimeTest extends \PHPUnit\Framework\TestCase
 {
     public function testParse()
     {

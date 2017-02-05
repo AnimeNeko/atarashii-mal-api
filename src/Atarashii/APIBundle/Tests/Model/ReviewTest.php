@@ -4,7 +4,7 @@ namespace Atarashii\APIBundle\Tests\Model;
 
 use Atarashii\APIBundle\Model\Review;
 
-class ReviewTest extends \PHPUnit_Framework_TestCase
+class ReviewTest extends \PHPUnit\Framework\TestCase
 {
     public function testAvatarUrl()
     {

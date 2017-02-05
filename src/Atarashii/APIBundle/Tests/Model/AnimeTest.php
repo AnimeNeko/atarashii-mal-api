@@ -4,7 +4,7 @@ namespace Atarashii\APIBundle\Tests\Model;
 
 use Atarashii\APIBundle\Model\Anime;
 
-class AnimeTest extends \PHPUnit_Framework_TestCase
+class AnimeTest extends \PHPUnit\Framework\TestCase
 {
     public function testId()
     {

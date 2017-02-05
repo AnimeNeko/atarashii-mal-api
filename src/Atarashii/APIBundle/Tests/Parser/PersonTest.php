@@ -5,7 +5,7 @@ namespace Atarashii\APIBundle\Tests\Parser;
 use Atarashii\APIBundle\Model\Person;
 use Atarashii\APIBundle\Parser\PersonParser;
 
-class PersonTest extends \PHPUnit_Framework_TestCase
+class PersonTest extends \PHPUnit\Framework\TestCase
 {
     public function testParse()
     {

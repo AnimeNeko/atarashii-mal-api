@@ -4,7 +4,7 @@ namespace Atarashii\APIBundle\Tests\Parser;
 
 use Atarashii\APIBundle\Parser\Top;
 
-class TopTest extends \PHPUnit_Framework_TestCase
+class TopTest extends \PHPUnit\Framework\TestCase
 {
     public function testParseAnime()
     {

@@ -5,7 +5,7 @@ namespace Atarashii\APIBundle\Tests\Model;
 use Atarashii\APIBundle\Helper\Date;
 use Atarashii\APIBundle\Model\Manga;
 
-class MangaTest extends \PHPUnit_Framework_TestCase
+class MangaTest extends \PHPUnit\Framework\TestCase
 {
     public function testId()
     {

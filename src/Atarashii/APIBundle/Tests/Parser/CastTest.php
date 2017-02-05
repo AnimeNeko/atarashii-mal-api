@@ -4,7 +4,7 @@ namespace Atarashii\APIBundle\Tests\Parser;
 
 use Atarashii\APIBundle\Parser\CastParser;
 
-class CastTest extends \PHPUnit_Framework_TestCase
+class CastTest extends \PHPUnit\Framework\TestCase
 {
     public function testParseAnime()
     {

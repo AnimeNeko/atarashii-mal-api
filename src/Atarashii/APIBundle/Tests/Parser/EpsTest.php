@@ -9,7 +9,7 @@ use Atarashii\APIBundle\Parser\EpsParser;
  *
  * @coversDefaultClass Atarashii\APIBundle\Parser\EpsParser
  */
-class EpsTest extends \PHPUnit_Framework_TestCase
+class EpsTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers ::parse

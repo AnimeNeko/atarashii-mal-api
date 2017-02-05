@@ -4,7 +4,7 @@ namespace Atarashii\APIBundle\Tests\Episode;
 
 use Atarashii\APIBundle\Model\Episode;
 
-class EpisodeTest extends \PHPUnit_Framework_TestCase
+class EpisodeTest extends \PHPUnit\Framework\TestCase
 {
     public function testNumber()
     {

@@ -4,7 +4,7 @@ namespace Atarashii\APIBundle\Tests\Parser;
 
 use Atarashii\APIBundle\Parser\Upcoming;
 
-class UpcomingTest extends \PHPUnit_Framework_TestCase
+class UpcomingTest extends \PHPUnit\Framework\TestCase
 {
     public function testParseAnime()
     {

@@ -9,7 +9,7 @@ use Atarashii\APIBundle\Parser\User;
  *
  * @coversDefaultClass Atarashii\APIBundle\Parser\User
  */
-class UserTest extends \PHPUnit_Framework_TestCase
+class UserTest extends \PHPUnit\Framework\TestCase
 {
     private $profile;
     private $profile2;
