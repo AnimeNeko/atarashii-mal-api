@@ -26,12 +26,13 @@ class EpsParser
 
         foreach ($rows as $episodeItem) {
             $crawler = new Crawler($episodeItem);
+
             $episode = new Episode();
             $episode->setNumber($crawler->filter('td[class="episode-number nowrap"]')->text());
             $episode->setTitle($crawler->filter('td[class="episode-title"] a')->text());
 
             // MAL does not always provide the air date!
-            $date = $crawler->filter('td[class="episode-aired"]')->text();
+            $date = $crawler->filterXPath('//td[contains(@class, "episode-aired")]')->text();
             if ($date !== 'N/A') {
                 $dateTime = new DateTime();
                 $episode->setAirDate($dateTime->createFromFormat('M j, Y', $date));
