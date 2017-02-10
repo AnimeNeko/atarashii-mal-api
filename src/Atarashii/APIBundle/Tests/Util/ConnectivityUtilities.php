@@ -34,6 +34,7 @@ class ConnectivityUtilities
         try {
             $client = new Client();
             $response = $client->request('GET', 'http://myanimelist.net/');
+
             return array(true, $response->getStatusCode());
         } catch (RequestException $e) {
             return array(false, 'An Internet connection is needed for these tests');

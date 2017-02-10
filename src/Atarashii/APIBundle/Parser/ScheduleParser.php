@@ -7,11 +7,11 @@
  * @copyright 2014-2016 Ratan Dhawtal and Michael Johnson
  * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
  */
+
 namespace Atarashii\APIBundle\Parser;
 
 use Atarashii\APIBundle\Model\Anime;
 use Symfony\Component\DomCrawler\Crawler;
-use DateTime;
 
 class ScheduleParser
 {
@@ -24,20 +24,21 @@ class ScheduleParser
         $recordContainer = 'div[class="seasonal-anime js-seasonal-anime"]';
 
         $result = array();
-        $result['monday'] = ScheduleParser::parseDay($crawler->filter('div[class="'.$classDay.'monday clearfix"] '.$recordContainer));
-        $result['tuesday'] = ScheduleParser::parseDay($crawler->filter('div[class="'.$classDay.'tuesday clearfix"] '.$recordContainer));
-        $result['wednesday'] = ScheduleParser::parseDay($crawler->filter('div[class="'.$classDay.'wednesday clearfix"] '.$recordContainer));
-        $result['thursday'] = ScheduleParser::parseDay($crawler->filter('div[class="'.$classDay.'thursday clearfix"] '.$recordContainer));
-        $result['friday'] = ScheduleParser::parseDay($crawler->filter('div[class="'.$classDay.'friday clearfix"] '.$recordContainer));
-        $result['saturday'] = ScheduleParser::parseDay($crawler->filter('div[class="'.$classDay.'saturday clearfix"] '.$recordContainer));
-        $result['sunday'] = ScheduleParser::parseDay($crawler->filter('div[class="'.$classDay.'sunday clearfix"] '.$recordContainer));
-        $result['other'] = ScheduleParser::parseDay($crawler->filter('div[class="'.$classDay.'other clearfix"] '.$recordContainer));
-        $result['unknown'] = ScheduleParser::parseDay($crawler->filter('div[class="'.$classDay.'unknown clearfix"] '.$recordContainer));
+        $result['monday'] = self::parseDay($crawler->filter('div[class="'.$classDay.'monday clearfix"] '.$recordContainer));
+        $result['tuesday'] = self::parseDay($crawler->filter('div[class="'.$classDay.'tuesday clearfix"] '.$recordContainer));
+        $result['wednesday'] = self::parseDay($crawler->filter('div[class="'.$classDay.'wednesday clearfix"] '.$recordContainer));
+        $result['thursday'] = self::parseDay($crawler->filter('div[class="'.$classDay.'thursday clearfix"] '.$recordContainer));
+        $result['friday'] = self::parseDay($crawler->filter('div[class="'.$classDay.'friday clearfix"] '.$recordContainer));
+        $result['saturday'] = self::parseDay($crawler->filter('div[class="'.$classDay.'saturday clearfix"] '.$recordContainer));
+        $result['sunday'] = self::parseDay($crawler->filter('div[class="'.$classDay.'sunday clearfix"] '.$recordContainer));
+        $result['other'] = self::parseDay($crawler->filter('div[class="'.$classDay.'other clearfix"] '.$recordContainer));
+        $result['unknown'] = self::parseDay($crawler->filter('div[class="'.$classDay.'unknown clearfix"] '.$recordContainer));
 
         return $result;
     }
 
-    public static function parseDay($rows) {
+    public static function parseDay($rows)
+    {
         $result = array();
         foreach ($rows as $item) {
             $crawler = new Crawler($item);
@@ -54,7 +55,7 @@ class ScheduleParser
             if ($producer->count() > 0) {
                 $anime->setProducers(explode(', ', $crawler->filter('span[class="producer"] a')->text()));
             }
-            $anime->setEpisodes((int) str_replace(' eps','' , $crawler->filter('div[class="eps"] span')->text()));
+            $anime->setEpisodes((int) str_replace(' eps', '', $crawler->filter('div[class="eps"] span')->text()));
 
             $genres = $crawler->filterXPath('//div[contains(@class, "genres")]//span[@class="genre"]');
 

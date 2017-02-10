@@ -71,7 +71,6 @@ class MangaRecordTest
         $credentials = ConnectivityUtilities::getLoginCredentials($client->getContainer());
 
         if ($credentials !== false) {
-
             //Now, test grabbing personal details for a title
             $client->request('GET', '/2/manga/436', array('mine' => 1), array(), array(
                 'PHP_AUTH_USER' => $credentials['username'],

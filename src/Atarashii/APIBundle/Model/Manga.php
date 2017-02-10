@@ -7,6 +7,7 @@
 * @copyright 2014-2016 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
+
 namespace Atarashii\APIBundle\Model;
 
 use JMS\Serializer\Annotation\Since;
@@ -95,7 +96,7 @@ class Manga
     private $status;
 
     /**
-     * Beginning date from which this manga/work was published
+     * Beginning date from which this manga/work was published.
      *
      * This is the starting date of the anime, formatted as an ISO8601-compatible string.
      * The contents my be formatted as a year, year and month, or year, month and day.
@@ -178,7 +179,7 @@ class Manga
     private $genres = array();
 
     /**
-     * The Authors of the title
+     * The Authors of the title.
      *
      * @Type("array")
      * @Since("2.2")
@@ -186,7 +187,7 @@ class Manga
     private $authors = array();
 
     /**
-     * The name of the publication in which the title was published/serialized
+     * The name of the publication in which the title was published/serialized.
      *
      * @Type("string")
      * @Since("2.2")
@@ -363,7 +364,7 @@ class Manga
     /**
      * Set the id property.
      *
-     * @param int $id The id of series.
+     * @param int $id The id of series
      */
     public function setId($id)
     {
@@ -383,7 +384,7 @@ class Manga
     /**
      * Set the title property.
      *
-     * @param string $title The title of series.
+     * @param string $title The title of series
      */
     public function setTitle($title)
     {
@@ -403,7 +404,7 @@ class Manga
     /**
      * Set the otherTitles property.
      *
-     * @param array $otherTitles Other titles of series.
+     * @param array $otherTitles Other titles of series
      */
     public function setOtherTitles($otherTitles)
     {
@@ -423,7 +424,7 @@ class Manga
     /**
      * Set the rank property.
      *
-     * @param int $rank The rank of series.
+     * @param int $rank The rank of series
      */
     public function setRank($rank)
     {
@@ -443,7 +444,7 @@ class Manga
     /**
      * Set the popularityRank property.
      *
-     * @param int $popularityRank The Popularity Rank of series.
+     * @param int $popularityRank The Popularity Rank of series
      */
     public function setPopularityRank($popularityRank)
     {
@@ -463,7 +464,7 @@ class Manga
     /**
      * Set the imageUrl property.
      *
-     * @param string $imageUrl The Image url of series.
+     * @param string $imageUrl The Image url of series
      */
     public function setImageUrl($imageUrl)
     {
@@ -483,7 +484,7 @@ class Manga
     /**
      * Set the type property.
      *
-     * @param int $type The type of series.
+     * @param int $type The type of series
      *                  Can be 1/Manga, 2/Novel, 3/One Shot, 4/Doujin, 5/Manwha, 6/Manhua, or 7/OEL. The default is "Manga".
      */
     public function setType($type)
@@ -527,7 +528,7 @@ class Manga
 
     /**
      * Return the Type ID instead of string.
-     * 
+     *
      * @param $type The type which can be a string or int
      *
      * @return int The type ID
@@ -576,7 +577,7 @@ class Manga
     /**
      * Set the chapters property.
      *
-     * @param int $chapters The number chapters of series.
+     * @param int $chapters The number chapters of series
      */
     public function setChapters($chapters)
     {
@@ -596,7 +597,7 @@ class Manga
     /**
      * Set the volumes property.
      *
-     * @param int $volumes The number volumes of series.
+     * @param int $volumes The number volumes of series
      */
     public function setVolumes($volumes)
     {
@@ -616,7 +617,7 @@ class Manga
     /**
      * Set the status property.
      *
-     * @param int $status The publishing status of manga.
+     * @param int $status The publishing status of manga
      *                    Can be 1 (publishing), 2 (finished) or 3 (not yet published). The default is "2".
      */
     public function setStatus($status)
@@ -654,7 +655,7 @@ class Manga
      * Set the startDate property.
      *
      * @param \DateTime $startDate The start date of the series
-     * @param string    $accuracy  To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day".
+     * @param string    $accuracy  To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day"
      */
     public function setStartDate(\DateTime $startDate, $accuracy = 'day')
     {
@@ -685,7 +686,7 @@ class Manga
      * Set the endDate property.
      *
      * @param \DateTime $endDate  The end date of the series
-     * @param string    $accuracy To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day".
+     * @param string    $accuracy To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day"
      */
     public function setEndDate(\DateTime $endDate, $accuracy = 'day')
     {
@@ -715,7 +716,7 @@ class Manga
     /**
      * Set the membersScore property.
      *
-     * @param float $membersScore The score given by MAL members.
+     * @param float $membersScore The score given by MAL members
      */
     public function setMembersScore($membersScore)
     {
@@ -735,7 +736,7 @@ class Manga
     /**
      * Set the membersCount property.
      *
-     * @param int $membersCount The number of members that added this serie in their list.
+     * @param int $membersCount The number of members that added this serie in their list
      */
     public function setMembersCount($membersCount)
     {
@@ -755,7 +756,7 @@ class Manga
     /**
      * Set the favoritedCount property.
      *
-     * @param int $favoritedCount The number of members that added this serie in their favorite list.
+     * @param int $favoritedCount The number of members that added this serie in their favorite list
      */
     public function setFavoritedCount($favoritedCount)
     {
@@ -775,8 +776,8 @@ class Manga
     /**
      * Set the externalLinks property.
      *
-     * @param string $sourceName The website name which contains the info.
-     * @param string $sourceUrl  The direct website url to access info.
+     * @param string $sourceName The website name which contains the info
+     * @param string $sourceUrl  The direct website url to access info
      */
     public function setExternalLinks($sourceName, $sourceUrl)
     {
@@ -796,7 +797,7 @@ class Manga
     /**
      * Set the synopsis property.
      *
-     * @param string $synopsis The Text describing the anime.
+     * @param string $synopsis The Text describing the anime
      */
     public function setSynopsis($synopsis)
     {
@@ -816,7 +817,7 @@ class Manga
     /**
      * Set the background property.
      *
-     * @param string $background The Text describing the anime.
+     * @param string $background The Text describing the anime
      */
     public function setBackground($background)
     {
@@ -836,7 +837,7 @@ class Manga
     /**
      * Set the genres property.
      *
-     * @param string $genres The genres of series.
+     * @param string $genres The genres of series
      */
     public function setGenres($genres)
     {
@@ -854,9 +855,9 @@ class Manga
     }
 
     /**
-     * Set the authors of the series
+     * Set the authors of the series.
      *
-     * @param array $authors The authors, as an array.
+     * @param array $authors The authors, as an array
      */
     public function setAuthors($authors)
     {
@@ -864,7 +865,7 @@ class Manga
     }
 
     /**
-     * Return the list of authors
+     * Return the list of authors.
      *
      * @return array
      */
@@ -874,7 +875,7 @@ class Manga
     }
 
     /**
-     * Set the Serialization/Publisher
+     * Set the Serialization/Publisher.
      *
      * @param string $serialization The publication of serialization
      */
@@ -884,7 +885,7 @@ class Manga
     }
 
     /**
-     * Get the serialization/publisher
+     * Get the serialization/publisher.
      *
      * @return string
      */
@@ -896,7 +897,7 @@ class Manga
     /**
      * Set the tags property.
      *
-     * @param string $tags The tags of series.
+     * @param string $tags The tags of series
      */
     public function setTags($tags)
     {
@@ -916,7 +917,7 @@ class Manga
     /**
      * Set the animeAdaptations property.
      *
-     * @param string $animeAdaptations The anime adaptations of series.
+     * @param string $animeAdaptations The anime adaptations of series
      */
     public function setAnimeAdaptations($animeAdaptations)
     {
@@ -936,7 +937,7 @@ class Manga
     /**
      * Set the relatedManga property.
      *
-     * @param string $relatedManga The related mangas of series.
+     * @param string $relatedManga The related mangas of series
      */
     public function setRelatedManga($relatedManga)
     {
@@ -956,7 +957,7 @@ class Manga
     /**
      * Set the alternativeVersions property.
      *
-     * @param string $alternativeVersions The alternative versions of series.
+     * @param string $alternativeVersions The alternative versions of series
      */
     public function setAlternativeVersions($alternativeVersions)
     {
@@ -997,7 +998,7 @@ class Manga
     }
 
     /**
-     * Get the array of relations
+     * Get the array of relations.
      */
     public function getRelated()
     {
@@ -1007,8 +1008,8 @@ class Manga
     /**
      * Set the readStatus propery.
      *
-     * @param string|int $statusid The input status value of an item. Accepts either integers as defined
-     *                           by the MAL API module, or strings as defined by the Ruby API (mal-api.com).
+     * @param string|int $statusid The input status value of an item Accepts either integers as defined
+     *                             by the MAL API module, or strings as defined by the Ruby API (mal-api.com).
      */
     public function setReadStatus($statusid)
     {
@@ -1044,7 +1045,7 @@ class Manga
     /**
      * Get the current value of the read status.
      *
-     * @param string $type What type you want to get back. Currently accepts either "string" or "int".
+     * @param string $type What type you want to get back. Currently accepts either "string" or "int"
      *                     Defaults to "string".
      *
      * @return string|int
@@ -1080,7 +1081,7 @@ class Manga
     /**
      * Set the chaptersRead property.
      *
-     * @param string chaptersRead The number of read chapters.
+     * @param string chaptersRead The number of read chapters
      */
     public function setChaptersRead($chaptersRead)
     {
@@ -1100,7 +1101,7 @@ class Manga
     /**
      * Set the volumesRead property.
      *
-     * @param string volumesRead The number of read volumes.
+     * @param string volumesRead The number of read volumes
      */
     public function setVolumesRead($volumesRead)
     {
@@ -1120,7 +1121,7 @@ class Manga
     /**
      * Set the score property.
      *
-     * @param int $score The score of series.
+     * @param int $score The score of series
      */
     public function setScore($score)
     {
@@ -1140,7 +1141,7 @@ class Manga
     /**
      * Set the listedMangaId property.
      *
-     * @param int $listedMangaId For internal use.
+     * @param int $listedMangaId For internal use
      */
     public function setListedMangaId($listedMangaId)
     {
@@ -1190,7 +1191,7 @@ class Manga
     /**
      * Get the current reading priority for the anime title.
      *
-     * @param string $type What type you want to get back.
+     * @param string $type What type you want to get back
      *                     Currently accepts either "string" or "int". Defaults to "int".
      *
      * @return string|int
@@ -1266,7 +1267,7 @@ class Manga
     /**
      * Get the current reading priority for the title.
      *
-     * @param string $type What type you want to get back.
+     * @param string $type What type you want to get back
      *                     Currently accepts either "string" or "int". Defaults to "int".
      *
      * @return string|int
@@ -1385,7 +1386,7 @@ class Manga
     public static function getGenresId($genreString)
     {
         $genreArray = explode(',', str_replace(', ', ',', $genreString));
-        $genreIds = Array();
+        $genreIds = array();
         if ($genreArray[0] !== '') {
             foreach ($genreArray as $genre) {
                 switch ($genre) {

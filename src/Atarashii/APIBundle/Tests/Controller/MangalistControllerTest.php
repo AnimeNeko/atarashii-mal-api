@@ -147,9 +147,8 @@ class MangalistControllerTest extends WebTestCase
             $end = '2015-10-30';
             $priority = 2; //High
             $isRereading = 0;
-            $comments  = 'romance, drama, comedy';
+            $comments = 'romance, drama, comedy';
             $tags = 'None';
-
 
             $client->request('PUT', '/2/mangalist/manga/'.$mangaID,
                 array(

@@ -7,6 +7,7 @@
 * @copyright 2014-2016 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
+
 namespace Atarashii\APIBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
@@ -28,7 +29,7 @@ class UpcomingController extends FOSRestController
      * defaults to the current date.
      *
      * @param string  $apiVersion The API version of the request
-     * @param Request $request    Contains all the needed information to get the list.
+     * @param Request $request    Contains all the needed information to get the list
      *
      * @return View
      */
@@ -109,7 +110,7 @@ class UpcomingController extends FOSRestController
      * invalid value defaults to the current date.
      *
      * @param string  $apiVersion The API version of the request
-     * @param Request $request    Contains all the needed information to get the list.
+     * @param Request $request    Contains all the needed information to get the list
      *
      * @return View
      */
@@ -188,7 +189,7 @@ class UpcomingController extends FOSRestController
      * items per set). An invalid or missing value defaults to page 1.
      *
      * @param string  $apiVersion The API version of the request
-     * @param Request $request    Contains all the needed information to get the list.
+     * @param Request $request    Contains all the needed information to get the list
      *
      * @return View
      */
@@ -227,7 +228,7 @@ class UpcomingController extends FOSRestController
             return $view;
         } else {
             $Justaddedanime = Upcoming::parse($animecontent, 'anime');
-            
+
             $response->setPublic();
             $response->setMaxAge(10800); //Three hours
             $response->headers->addCacheControlDirective('must-revalidate', true);
@@ -256,7 +257,7 @@ class UpcomingController extends FOSRestController
      * items per set). An invalid or missing value defaults to page 1.
      *
      * @param string  $apiVersion The API version of the request
-     * @param Request $request    Contains all the needed information to get the list.
+     * @param Request $request    Contains all the needed information to get the list
      *
      * @return View
      */

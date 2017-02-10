@@ -7,6 +7,7 @@
 * @copyright 2014-2016 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
+
 namespace Atarashii\APIBundle\Model;
 
 use JMS\Serializer\Annotation\SerializedName;
@@ -386,7 +387,7 @@ class Anime
      * A list of recommendations.
      *
      * This list contains anime models.
-     * 
+     *
      * @Type("array")
      * @Since("2.1")
      */
@@ -540,7 +541,7 @@ class Anime
     /**
      * Set the id property.
      *
-     * @param int $id The id of series.
+     * @param int $id The id of series
      */
     public function setId($id)
     {
@@ -560,7 +561,7 @@ class Anime
     /**
      * Set the title property.
      *
-     * @param string $title The title of series.
+     * @param string $title The title of series
      */
     public function setTitle($title)
     {
@@ -580,7 +581,7 @@ class Anime
     /**
      * Set the preview property.
      *
-     * @param string $preview The preview of series.
+     * @param string $preview The preview of series
      */
     public function setPreview($preview)
     {
@@ -600,7 +601,7 @@ class Anime
     /**
      * Set the otherTitles property.
      *
-     * @param array $otherTitles Other titles of series.
+     * @param array $otherTitles Other titles of series
      */
     public function setOtherTitles($otherTitles)
     {
@@ -620,7 +621,7 @@ class Anime
     /**
      * Set the rank property.
      *
-     * @param int $rank The rank of series.
+     * @param int $rank The rank of series
      */
     public function setRank($rank)
     {
@@ -640,7 +641,7 @@ class Anime
     /**
      * Set the popularityRank property.
      *
-     * @param int $popularityRank The Popularity Rank of series.
+     * @param int $popularityRank The Popularity Rank of series
      */
     public function setPopularityRank($popularityRank)
     {
@@ -660,7 +661,7 @@ class Anime
     /**
      * Set the imageUrl property.
      *
-     * @param string $imageUrl The Image url of series.
+     * @param string $imageUrl The Image url of series
      */
     public function setImageUrl($imageUrl)
     {
@@ -680,7 +681,7 @@ class Anime
     /**
      * Set the type property.
      *
-     * @param string|int $type The type of series.
+     * @param string|int $type The type of series
      *                         Can be 1/TV, 2/OVA, 3/Movie, 4/Special, 5/ONA, or 6/Music. The default is "TV".
      */
     public function setType($type)
@@ -762,7 +763,7 @@ class Anime
     /**
      * Set the episodes property.
      *
-     * @param int $episodes The number episodes of series.
+     * @param int $episodes The number episodes of series
      */
     public function setEpisodes($episodes)
     {
@@ -782,7 +783,7 @@ class Anime
     /**
      * Set the status property.
      *
-     * @param int $status The broadcasting status of series.
+     * @param int $status The broadcasting status of series
      *                    Can be 1 (currently airing), 2 (finished airing) or 3 (not yet aired). The default is "2".
      */
     public function setStatus($status)
@@ -822,9 +823,9 @@ class Anime
      * This function is for compatibility with certain parts of API1 where the date format for the start and end dates
      * is not in a "parsed" format and instead is however is passed by MAL
      *
-     * @param string   $literalDate The string that should be used as the start date.
+     * @param string   $literalDate The string that should be used as the start date
      * @param DateTime $startDate   The start date of the series
-     * @param string   $accuracy    To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day".
+     * @param string   $accuracy    To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day"
      */
     public function setLiteralStartDate($literalDate, $startDate, $accuracy = 'day')
     {
@@ -837,7 +838,7 @@ class Anime
      * Set the startDate property and call the setter for startDate2.
      *
      * @param \DateTime $startDate The start date of the series
-     * @param string    $accuracy  To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day".
+     * @param string    $accuracy  To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day"
      */
     public function setStartDate(\DateTime $startDate, $accuracy = 'day')
     {
@@ -866,7 +867,7 @@ class Anime
      * Set the startDate2 property.
      *
      * @param \DateTime $startDate The start date of the series
-     * @param string    $accuracy  To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day".
+     * @param string    $accuracy  To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day"
      */
     private function setStartDate2(\DateTime $startDate, $accuracy = 'day')
     {
@@ -899,9 +900,9 @@ class Anime
      * This function is for compatibility with certain parts of API1 where the date format for the start and end dates
      * is not in a "parsed" format and instead is however is passed by MAL
      *
-     * @param string    $literalDate The string that should be used as the end date.
+     * @param string    $literalDate The string that should be used as the end date
      * @param \DateTime $endDate     The end date of the series
-     * @param string    $accuracy    To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day".
+     * @param string    $accuracy    To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day"
      */
     public function setLiteralEndDate($literalDate, \DateTime $endDate, $accuracy = 'day')
     {
@@ -914,7 +915,7 @@ class Anime
      * Set the endDate property and call the setter for endDate2.
      *
      * @param \DateTime $endDate  The end date of the series
-     * @param string    $accuracy To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day".
+     * @param string    $accuracy To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day"
      */
     public function setEndDate(\DateTime $endDate, $accuracy = 'day')
     {
@@ -943,7 +944,7 @@ class Anime
      * Set the endDate2 property.
      *
      * @param \DateTime $endDate  The end date of the series
-     * @param string    $accuracy To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day".
+     * @param string    $accuracy To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day"
      */
     private function setEndDate2(\DateTime $endDate, $accuracy = 'day')
     {
@@ -973,7 +974,7 @@ class Anime
     /**
      * Set the status property.
      *
-     * @param string $broadcast The next broadcasting time and date.
+     * @param string $broadcast The next broadcasting time and date
      */
     public function setBroadcast($broadcast)
     {
@@ -1013,7 +1014,7 @@ class Anime
     /**
      * Set the classification property.
      *
-     * @param string $classification The MAL classification of series.
+     * @param string $classification The MAL classification of series
      */
     public function setClassification($classification)
     {
@@ -1033,7 +1034,7 @@ class Anime
     /**
      * Set the membersScore property.
      *
-     * @param float $membersScore The score given by MAL members.
+     * @param float $membersScore The score given by MAL members
      */
     public function setMembersScore($membersScore)
     {
@@ -1053,7 +1054,7 @@ class Anime
     /**
      * Set the membersCount property.
      *
-     * @param int $membersCount The number of members that added this serie in their list.
+     * @param int $membersCount The number of members that added this serie in their list
      */
     public function setMembersCount($membersCount)
     {
@@ -1073,7 +1074,7 @@ class Anime
     /**
      * Set the favoritedCount property.
      *
-     * @param int $favoritedCount The number of members that added this serie in their favorite list.
+     * @param int $favoritedCount The number of members that added this serie in their favorite list
      */
     public function setFavoritedCount($favoritedCount)
     {
@@ -1093,8 +1094,8 @@ class Anime
     /**
      * Set the externalLinks property.
      *
-     * @param string $sourceName The website name which contains the info.
-     * @param string $sourceUrl  The direct website url to access info.
+     * @param string $sourceName The website name which contains the info
+     * @param string $sourceUrl  The direct website url to access info
      */
     public function setExternalLinks($sourceName, $sourceUrl)
     {
@@ -1114,7 +1115,7 @@ class Anime
     /**
      * Set the synopsis property.
      *
-     * @param string $synopsis The Text describing the anime.
+     * @param string $synopsis The Text describing the anime
      */
     public function setSynopsis($synopsis)
     {
@@ -1134,7 +1135,7 @@ class Anime
     /**
      * Set the background property.
      *
-     * @param string $background The Text describing the anime.
+     * @param string $background The Text describing the anime
      */
     public function setBackground($background)
     {
@@ -1154,7 +1155,7 @@ class Anime
     /**
      * Set the producers property.
      *
-     * @param string $producers The producers of series.
+     * @param string $producers The producers of series
      */
     public function setProducers($producers)
     {
@@ -1164,7 +1165,7 @@ class Anime
     /**
      * Set the licensors property.
      *
-     * @param array $licensors The licensors of series.
+     * @param array $licensors The licensors of series
      */
     public function setLicensors($licensors)
     {
@@ -1174,7 +1175,7 @@ class Anime
     /**
      * Set the studios property.
      *
-     * @param array $studios The studios of the series.
+     * @param array $studios The studios of the series
      */
     public function setStudios($studios)
     {
@@ -1184,7 +1185,7 @@ class Anime
     /**
      * Set the source property.
      *
-     * @param string $source The source of the anime.
+     * @param string $source The source of the anime
      */
     public function setSource($source)
     {
@@ -1234,7 +1235,7 @@ class Anime
     /**
      * Set the genres property.
      *
-     * @param string $genres The genres of series.
+     * @param string $genres The genres of series
      */
     public function setGenres($genres)
     {
@@ -1254,7 +1255,7 @@ class Anime
     /**
      * Set the tags property.
      *
-     * @param string $tags The tags of series.
+     * @param string $tags The tags of series
      */
     public function setTags($tags)
     {
@@ -1274,7 +1275,7 @@ class Anime
     /**
      * Set the mangaAdaptations property.
      *
-     * @param string $mangaAdaptations The manga adaptations of series.
+     * @param string $mangaAdaptations The manga adaptations of series
      */
     public function setMangaAdaptations($mangaAdaptations)
     {
@@ -1294,7 +1295,7 @@ class Anime
     /**
      * Set the prequels property.
      *
-     * @param string prequels The prequels of series.
+     * @param string prequels The prequels of series
      */
     public function setPrequels($prequels)
     {
@@ -1314,7 +1315,7 @@ class Anime
     /**
      * Set the sequels property.
      *
-     * @param string $sequels The sequels of series.
+     * @param string $sequels The sequels of series
      */
     public function setSequels($sequels)
     {
@@ -1334,7 +1335,7 @@ class Anime
     /**
      * Set the sideStories property.
      *
-     * @param string $sideStories The side stories of series.
+     * @param string $sideStories The side stories of series
      */
     public function setSideStories($sideStories)
     {
@@ -1354,7 +1355,7 @@ class Anime
     /**
      * Set the parentStory property.
      *
-     * @param string $parentStory The parent stories of series.
+     * @param string $parentStory The parent stories of series
      */
     public function setParentStory($parentStory)
     {
@@ -1389,7 +1390,7 @@ class Anime
     /**
      * Set the spinOffs property.
      *
-     * @param string $spinOffs The spin offs of series.
+     * @param string $spinOffs The spin offs of series
      */
     public function setSpinOffs($spinOffs)
     {
@@ -1409,7 +1410,7 @@ class Anime
     /**
      * Set the summaries property.
      *
-     * @param string $summaries The summaries of series.
+     * @param string $summaries The summaries of series
      */
     public function setSummaries($summaries)
     {
@@ -1429,7 +1430,7 @@ class Anime
     /**
      * Set the alternativeVersions property.
      *
-     * @param string $alternativeVersions The alternative versions of series.
+     * @param string $alternativeVersions The alternative versions of series
      */
     public function setAlternativeVersions($alternativeVersions)
     {
@@ -1449,7 +1450,7 @@ class Anime
     /**
      * Set the other property.
      *
-     * @param string $other The other animes of series.
+     * @param string $other The other animes of series
      */
     public function setOther($other)
     {
@@ -1469,7 +1470,7 @@ class Anime
     /**
      * Set the openingTheme property.
      *
-     * @param string $openingTheme All the opening Themes of series.
+     * @param string $openingTheme All the opening Themes of series
      */
     public function setOpeningTheme($openingTheme)
     {
@@ -1489,7 +1490,7 @@ class Anime
     /**
      * Set the endingTheme property.
      *
-     * @param string $endingTheme All the ending Themes of series.
+     * @param string $endingTheme All the ending Themes of series
      */
     public function setEndingTheme($endingTheme)
     {
@@ -1509,7 +1510,7 @@ class Anime
     /**
      * Set the recommendations property.
      *
-     * @param string $recommendations All the recommendations for this series.
+     * @param string $recommendations All the recommendations for this series
      */
     public function setRecommendations($recommendations)
     {
@@ -1571,7 +1572,7 @@ class Anime
     }
 
     /**
-     * Get the array of relations
+     * Get the array of relations.
      */
     public function getRelated()
     {
@@ -1581,7 +1582,7 @@ class Anime
     /**
      * Set the watchedStatus property.
      *
-     * @param string|int $status The input status value of an item.
+     * @param string|int $status The input status value of an item
      *                           Accepts either integers as defined by the MAL API module, or strings as defined by the Ruby API (mal-api.com).
      */
     public function setWatchedStatus($status)
@@ -1618,7 +1619,7 @@ class Anime
     /**
      * Get the current value of the watched status.
      *
-     * @param string $type What type you want to get back.
+     * @param string $type What type you want to get back
      *                     Currently accepts either "string" or "int". Defaults to "string".
      *
      * @return string|int
@@ -1653,7 +1654,7 @@ class Anime
     /**
      * Set the watchedEpisodes property.
      *
-     * @param string $watchedEpisodes The number of watched episodes.
+     * @param string $watchedEpisodes The number of watched episodes
      */
     public function setWatchedEpisodes($watchedEpisodes)
     {
@@ -1673,7 +1674,7 @@ class Anime
     /**
      * Set the score property.
      *
-     * @param int $score The score of series.
+     * @param int $score The score of series
      */
     public function setScore($score)
     {
@@ -1693,7 +1694,7 @@ class Anime
     /**
      * Set the listedAnimeId property.
      *
-     * @param int $listedAnimeId For internal use.
+     * @param int $listedAnimeId For internal use
      */
     public function setListedAnimeId($listedAnimeId)
     {
@@ -1753,7 +1754,7 @@ class Anime
     /**
      * Get the current watching priority for the anime title.
      *
-     * @param string $type What type you want to get back.
+     * @param string $type What type you want to get back
      *                     Currently accepts either "string" or "int". Defaults to "int".
      *
      * @return string|int
@@ -1789,7 +1790,7 @@ class Anime
     /**
      * Get the current value for the storage type that the anime is on.
      *
-     * @param string $type What type you want to get back.
+     * @param string $type What type you want to get back
      *                     Currently accepts either "string" or "int". Defaults to "int".
      *
      * @return string|int
@@ -1882,7 +1883,7 @@ class Anime
     /**
      * Get the current watching priority for the anime title.
      *
-     * @param string $type What type you want to get back.
+     * @param string $type What type you want to get back
      *                     Currently accepts either "string" or "int". Defaults to "int".
      *
      * @return string|int
@@ -2011,7 +2012,7 @@ class Anime
     public static function getGenresId($genreString)
     {
         $genreArray = explode(',', str_replace(', ', ',', $genreString));
-        $genreIds = Array();
+        $genreIds = array();
         if ($genreArray[0] !== '') {
             foreach ($genreArray as $genre) {
                 switch (strtolower($genre)) {

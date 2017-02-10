@@ -7,6 +7,7 @@
  * @copyright 2014-2016 Ratan Dhawtal and Michael Johnson
  * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
  */
+
 namespace Atarashii\APIBundle\Parser;
 
 use Symfony\Component\DomCrawler\Crawler;
@@ -24,7 +25,6 @@ class RecsParser
         $rows = $crawler->filter('div[class="borderClass"]');
 
         $result = array();
-
 
         foreach ($rows as $historyItem) {
             $crawler = new Crawler($historyItem);

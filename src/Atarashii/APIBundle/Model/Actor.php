@@ -7,6 +7,7 @@
 * @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
+
 namespace Atarashii\APIBundle\Model;
 
 use JMS\Serializer\Annotation\Since;
@@ -69,7 +70,7 @@ class Actor
     /**
      * Set the actorName property.
      *
-     * @param string $actorName The name of the voice actor.
+     * @param string $actorName The name of the voice actor
      */
     public function setName($actorName)
     {
@@ -89,7 +90,7 @@ class Actor
     /**
      * Set the actorImage property.
      *
-     * @param string $actorImage The image of the voice actor.
+     * @param string $actorImage The image of the voice actor
      */
     public function setImage($actorImage)
     {
@@ -113,7 +114,7 @@ class Actor
     /**
      * Set the actorLanguage property.
      *
-     * @param string $actorLanguage The language of the voice actor.
+     * @param string $actorLanguage The language of the voice actor
      */
     public function setLanguage($actorLanguage)
     {

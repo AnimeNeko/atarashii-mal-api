@@ -7,6 +7,7 @@
 * @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
+
 namespace Atarashii\APIBundle\Parser;
 
 use Symfony\Component\DomCrawler\Crawler;
@@ -49,11 +50,11 @@ class Top
         $subDetails = explode(' ', trim($details[1]));
 
         //Pull out all the common parts
-        $media->setId((int)str_replace('#area', '', $crawler->filter('a')->attr('id')));
+        $media->setId((int) str_replace('#area', '', $crawler->filter('a')->attr('id')));
         $media->setTitle($crawler->filter('a')->eq(1)->text());
         //Convert thumbnail to full size image by stripping the "t" in the filename
         $media->setImageUrl(preg_replace('/r(.+?)\/(.+?)\?(.+?)$/', '$2', $crawler->filter('img')->attr('src')));
-        $media->setMembersCount((int)trim(str_replace(',', '', str_replace('members', '', $details[3]))));
+        $media->setMembersCount((int) trim(str_replace(',', '', str_replace('members', '', $details[3]))));
 
         //Anime and manga have different details, so we grab an array of the list and then process based on the type
         switch ($type) {

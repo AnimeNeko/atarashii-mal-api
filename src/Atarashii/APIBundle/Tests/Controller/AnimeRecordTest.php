@@ -75,7 +75,6 @@ class AnimeRecordTest
         $credentials = ConnectivityUtilities::getLoginCredentials($client->getContainer());
 
         if ($credentials !== false) {
-
             //Now, test grabbing personal details for a title
             $client->request('GET', '/2/anime/189', array('mine' => 1), array(), array(
                 'PHP_AUTH_USER' => $credentials['username'],

@@ -7,6 +7,7 @@
 * @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
+
 namespace Atarashii\APIBundle\Model;
 
 use JMS\Serializer\Annotation\Since;
@@ -90,7 +91,7 @@ class Messages
     /**
      * Set the id property.
      *
-     * @param int $id The id of messages.
+     * @param int $id The id of messages
      */
     public function setId($id)
     {
@@ -110,7 +111,7 @@ class Messages
     /**
      * Set the actionId property.
      *
-     * @param int $actionId The action ID of messages.
+     * @param int $actionId The action ID of messages
      */
     public function setActionId($actionId)
     {
@@ -130,7 +131,7 @@ class Messages
     /**
      * Set the threadId property.
      *
-     * @param int $threadId The thread ID of messages.
+     * @param int $threadId The thread ID of messages
      */
     public function setThreadId($threadId)
     {
@@ -150,7 +151,7 @@ class Messages
     /**
      * Set the username property.
      *
-     * @param string $username The username of messages.
+     * @param string $username The username of messages
      */
     public function setUsername($username)
     {
@@ -170,7 +171,7 @@ class Messages
     /**
      * Set the time property.
      *
-     * @param DateTime $time The time of messages.
+     * @param DateTime $time The time of messages
      */
     public function setTime($time)
     {
@@ -190,7 +191,7 @@ class Messages
     /**
      * Set the read property.
      *
-     * @param bool $read The read status of messages.
+     * @param bool $read The read status of messages
      */
     public function setRead($read)
     {
@@ -210,7 +211,7 @@ class Messages
     /**
      * Set the subject property.
      *
-     * @param string $subject The subject of messages.
+     * @param string $subject The subject of messages
      */
     public function setSubject($subject)
     {
@@ -230,7 +231,7 @@ class Messages
     /**
      * Set the message property.
      *
-     * @param string $message The message of messages.
+     * @param string $message The message of messages
      */
     public function setMessage($message)
     {
@@ -250,7 +251,7 @@ class Messages
     /**
      * Set the preview property.
      *
-     * @param string $preview The preview of messages.
+     * @param string $preview The preview of messages
      */
     public function setPreview($preview)
     {

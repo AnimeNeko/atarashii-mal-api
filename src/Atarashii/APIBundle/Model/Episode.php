@@ -7,13 +7,10 @@
 * @copyright 2014-2016 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
+
 namespace Atarashii\APIBundle\Model;
 
-use JMS\Serializer\Annotation\SerializedName;
-use JMS\Serializer\Annotation\Since;
 use JMS\Serializer\Annotation\Type;
-use JMS\Serializer\Annotation\Until;
-use Atarashii\APIBundle\Helper\Date;
 
 class Episode
 {
@@ -50,7 +47,7 @@ class Episode
     /**
      * Set the episode number property.
      *
-     * @param int $number The episode number.
+     * @param int $number The episode number
      */
     public function setNumber($number)
     {
@@ -70,7 +67,7 @@ class Episode
     /**
      * Set the title property.
      *
-     * @param string $title The title of series.
+     * @param string $title The title of series
      */
     public function setTitle($title)
     {
@@ -90,7 +87,7 @@ class Episode
     /**
      * Set the otherTitles property.
      *
-     * @param array $otherTitles Other titles of series.
+     * @param array $otherTitles Other titles of series
      */
     public function setOtherTitles($otherTitles)
     {
@@ -110,8 +107,8 @@ class Episode
     /**
      * Set the airDate property.
      *
-     * @param \DateTime $airDate The airing date of the series
-     * @param string    $accuracy  To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day".
+     * @param \DateTime $airDate  The airing date of the series
+     * @param string    $accuracy To what level of accuracy this item is. May be "year", "month", or "day". Defaults to "day"
      */
     public function setAirDate(\DateTime $airDate, $accuracy = 'day')
     {

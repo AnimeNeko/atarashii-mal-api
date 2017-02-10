@@ -7,6 +7,7 @@
 * @copyright 2014-2016 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
+
 namespace Atarashii\APIBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
@@ -23,7 +24,7 @@ class AnimeListController extends FOSRestController
     /**
      * Get the list of anime stored for a user.
      *
-     * @param string $username   The MyAnimeList username of the user whose list you want.
+     * @param string $username   The MyAnimeList username of the user whose list you want
      * @param string $apiVersion The API version of the request
      *
      * @return View
@@ -109,7 +110,7 @@ class AnimeListController extends FOSRestController
      * "episodes", and "score" are checked and used in the creation of an Anime object. The
      * object is used to make an XML document that is then posted to MyAnimeList.
      *
-     * @param Request $request Contains all the needed information to add the title.
+     * @param Request $request    Contains all the needed information to add the title
      * @param float   $apiVersion The API version for the request
      *
      * @return View
@@ -163,7 +164,6 @@ class AnimeListController extends FOSRestController
                     $update_items[] = 'end';
                 }
             }
-
         } catch (\Exception $e) {
             return $this->view(array('error' => $e->getMessage()), 500);
         }
@@ -205,8 +205,8 @@ class AnimeListController extends FOSRestController
      * "status", "episodes", and "score" are checked and used in the creation of an Anime
      * object. The object is used to make an XML document that is then posted to MyAnimeList.
      *
-     * @param Request $request    Contains all the needed information to update the title.
-     * @param int     $id         ID of the anime.
+     * @param Request $request    Contains all the needed information to update the title
+     * @param int     $id         ID of the anime
      * @param float   $apiVersion The API version for the request
      *
      * @return View
@@ -329,7 +329,6 @@ class AnimeListController extends FOSRestController
 
             return $view;
         } catch (Exception\BadResponseException $e) {
-
             //MAL broke API responses, so we have to check the content on the response to make sure
             //it actually was an error.
             $response = $e->getResponse()->getBody(true);
@@ -352,7 +351,7 @@ class AnimeListController extends FOSRestController
      * PHP_AUTH_USER and PHP_AUTH_PW variables must be set. If so, an empty document is
      * then posted to MyAnimeList at the right URL to delete an item.
      *
-     * @param int $id ID of the anime.
+     * @param int $id ID of the anime
      *
      * @return View
      */

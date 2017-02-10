@@ -7,6 +7,7 @@
 * @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
+
 namespace Atarashii\APIBundle\Parser;
 
 use Atarashii\APIBundle\Model\ProfileDetails;
@@ -61,7 +62,7 @@ class User
         if ($comments->count() > 0) {
             $details->setComments((int) trim(preg_replace('/(.+?)\((.+?)\)/', '$2', $comments->text())));
         }
-        
+
         if ($userAccessLevel->count() > 0) {
             $details->setAccessRank($userAccessLevel->text());
         } else {
@@ -146,7 +147,6 @@ class User
 
     private static function parseStats(Crawler $content, $stats, $mediaType, $apiVersion)
     {
-
         //General header stuff
         $genStats = $content->filterXPath('//*[contains(attribute::class,"stat-score")]');
 

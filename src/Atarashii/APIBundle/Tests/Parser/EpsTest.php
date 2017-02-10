@@ -7,7 +7,7 @@ use Atarashii\APIBundle\Parser\EpsParser;
 /**
  * Class AnimeTest.
  *
- * @coversDefaultClass Atarashii\APIBundle\Parser\EpsParser
+ * @coversDefaultClass \Atarashii\APIBundle\Parser\EpsParser
  */
 class EpsTest extends \PHPUnit\Framework\TestCase
 {

@@ -16,49 +16,49 @@ use JMS\Serializer\Annotation\Type;
 class Person
 {
     /**
-     * The id of a person
+     * The id of a person.
      *
      * @Type("integer")
      */
     private $id;
 
     /**
-     * The person image URL
+     * The person image URL.
      *
      * @Type("string")
      */
     private $imageUrl;
 
     /**
-     * The person's name
+     * The person's name.
      *
      * @Type("string")
      */
     private $name;
 
     /**
-     * The person's alternate names
+     * The person's alternate names.
      *
      * @Type("array")
      */
     private $alternateNames = array();
 
     /**
-     * The person's given name
+     * The person's given name.
      *
      * @Type("string")
      */
     private $givenName;
 
     /**
-     * The person's family name
+     * The person's family name.
      *
      * @Type("string")
      */
     private $familyName;
 
     /**
-     * The person's birthday
+     * The person's birthday.
      *
      * This is the person's birthday, formatted as an ISO8601-compatible string.
      * The contents my be formatted as a year; month and day; or year, month and day.
@@ -70,14 +70,14 @@ class Person
     private $birthday;
 
     /**
-     * The person's personal website URL
+     * The person's personal website URL.
      *
      * @Type("string")
      */
     private $websiteUrl;
 
     /**
-     * More details about the person
+     * More details about the person.
      *
      * An HTML-formatted string with more details about the person
      *
@@ -86,35 +86,36 @@ class Person
     private $moreDetails;
 
     /**
-     * The number of members that have the person marked as a favorite
+     * The number of members that have the person marked as a favorite.
      *
      * @Type("integer")
      */
     private $favoritedCount;
 
     /**
-     * Voice acting roles a person has had
+     * Voice acting roles a person has had.
      *
      * @Type("array")
      */
     private $voiceActingRoles = array();
 
     /**
-     * Anime staff positions a person has had
+     * Anime staff positions a person has had.
      *
      * @Type("array")
      */
     private $animeStaffPositions = array();
 
     /**
-     * Manga that a person has had published
+     * Manga that a person has had published.
      *
      * @Type("array")
      */
     private $publishedManga = array();
 
     /**
-     * Get the id property
+     * Get the id property.
+     *
      * @return int
      */
     public function getId()
@@ -123,7 +124,8 @@ class Person
     }
 
     /**
-     * Set the id property
+     * Set the id property.
+     *
      * @param int $id
      */
     public function setId($id)
@@ -132,7 +134,8 @@ class Person
     }
 
     /**
-     * Get the imageUrl property
+     * Get the imageUrl property.
+     *
      * @return string
      */
     public function getImageUrl()
@@ -141,7 +144,8 @@ class Person
     }
 
     /**
-     * Set the imageUrl property
+     * Set the imageUrl property.
+     *
      * @param string $imageUrl
      */
     public function setImageUrl($imageUrl)
@@ -154,7 +158,8 @@ class Person
     }
 
     /**
-     * Get the name property
+     * Get the name property.
+     *
      * @return string
      */
     public function getName()
@@ -163,7 +168,8 @@ class Person
     }
 
     /**
-     * Set the name property
+     * Set the name property.
+     *
      * @param string $name
      */
     public function setName($name)
@@ -172,7 +178,8 @@ class Person
     }
 
     /**
-     * Get the alternateNames property
+     * Get the alternateNames property.
+     *
      * @return array
      */
     public function getAlternateNames()
@@ -181,7 +188,8 @@ class Person
     }
 
     /**
-     * Set the alternateNames property
+     * Set the alternateNames property.
+     *
      * @param array $alternateNames
      */
     public function setAlternateNames($alternateNames)
@@ -190,7 +198,8 @@ class Person
     }
 
     /**
-     * Get the givenName property
+     * Get the givenName property.
+     *
      * @return string
      */
     public function getGivenName()
@@ -199,7 +208,8 @@ class Person
     }
 
     /**
-     * Set the givenName property
+     * Set the givenName property.
+     *
      * @param string $givenName
      */
     public function setGivenName($givenName)
@@ -208,7 +218,8 @@ class Person
     }
 
     /**
-     * Get the familyName property
+     * Get the familyName property.
+     *
      * @return string
      */
     public function getFamilyName()
@@ -217,7 +228,8 @@ class Person
     }
 
     /**
-     * Set the familyName property
+     * Set the familyName property.
+     *
      * @param string $familyName
      */
     public function setFamilyName($familyName)
@@ -226,7 +238,8 @@ class Person
     }
 
     /**
-     * Get the birthday property
+     * Get the birthday property.
+     *
      * @return string
      */
     public function getBirthday()
@@ -238,8 +251,8 @@ class Person
      * Set the startDate2 property.
      *
      * @param \DateTime $birthday The start date of the series
-     * @param string    $accuracy  To what level of accuracy this item is. May be "year", "month", "dayMonth", or "day".
-     *                             Defaults to "day".
+     * @param string    $accuracy To what level of accuracy this item is. May be "year", "month", "dayMonth", or "day"
+     *                            Defaults to "day".
      */
     public function setBirthday(\DateTime $birthday, $accuracy = 'day')
     {
@@ -260,7 +273,8 @@ class Person
     }
 
     /**
-     * Get the websiteUrl property
+     * Get the websiteUrl property.
+     *
      * @return string
      */
     public function getWebsiteUrl()
@@ -269,7 +283,8 @@ class Person
     }
 
     /**
-     * Set the websiteUrl property
+     * Set the websiteUrl property.
+     *
      * @param string $websiteUrl
      */
     public function setWebsiteUrl($websiteUrl)
@@ -278,7 +293,8 @@ class Person
     }
 
     /**
-     * Get the moreDetails property
+     * Get the moreDetails property.
+     *
      * @return string
      */
     public function getMoreDetails()
@@ -287,7 +303,8 @@ class Person
     }
 
     /**
-     * Set the moreDetails property
+     * Set the moreDetails property.
+     *
      * @param string $moreDetails
      */
     public function setMoreDetails($moreDetails)
@@ -296,7 +313,8 @@ class Person
     }
 
     /**
-     * Get the favoritedCount property
+     * Get the favoritedCount property.
+     *
      * @return int
      */
     public function getFavoritedCount()
@@ -305,7 +323,8 @@ class Person
     }
 
     /**
-     * Set the favoritedCount property
+     * Set the favoritedCount property.
+     *
      * @param int $favoritedCount
      */
     public function setFavoritedCount($favoritedCount)
@@ -314,7 +333,8 @@ class Person
     }
 
     /**
-     * Get the voiceActingRoles property
+     * Get the voiceActingRoles property.
+     *
      * @return array
      */
     public function getVoiceActingRoles()
@@ -323,7 +343,8 @@ class Person
     }
 
     /**
-     * Set the voiceActingRoles property
+     * Set the voiceActingRoles property.
+     *
      * @param array $voiceActingRoles
      */
     public function setVoiceActingRoles($voiceActingRoles)
@@ -332,7 +353,8 @@ class Person
     }
 
     /**
-     * Get the animeStaffPositions property
+     * Get the animeStaffPositions property.
+     *
      * @return array
      */
     public function getAnimeStaffPositions()
@@ -341,7 +363,8 @@ class Person
     }
 
     /**
-     * Set the animeStaffPositions property
+     * Set the animeStaffPositions property.
+     *
      * @param array $animeStaffPositions
      */
     public function setAnimeStaffPositions($animeStaffPositions)
@@ -350,7 +373,8 @@ class Person
     }
 
     /**
-     * Get the publishedManga property
+     * Get the publishedManga property.
+     *
      * @return array
      */
     public function getPublishedManga()
@@ -359,7 +383,8 @@ class Person
     }
 
     /**
-     * Set the publishedManga property
+     * Set the publishedManga property.
+     *
      * @param array $publishedManga
      */
     public function setPublishedManga($publishedManga)

@@ -7,6 +7,7 @@
  * @copyright 2014-2016 Ratan Dhawtal and Michael Johnson
  * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
  */
+
 namespace Atarashii\APIBundle\Controller;
 
 use Atarashii\APIBundle\Parser\ForumParser;
@@ -25,7 +26,7 @@ class SearchController extends FOSRestController
      * Search for an anime.
      *
      * @param string  $apiVersion The API version of the request
-     * @param Request $request    The HTTP Request object.
+     * @param Request $request    The HTTP Request object
      *
      * @return View
      */
@@ -50,7 +51,7 @@ class SearchController extends FOSRestController
      * Search for a manga.
      *
      * @param string  $apiVersion The API version of the request
-     * @param Request $request    The HTTP Request object.
+     * @param Request $request    The HTTP Request object
      *
      * @return View
      */
@@ -105,7 +106,6 @@ class SearchController extends FOSRestController
         $response = new Response();
         $serializationContext = new Context();
         $serializationContext->setVersion($apiVersion);
-
 
         $response->setPublic();
         $response->setMaxAge(3600); //One hour
@@ -170,7 +170,6 @@ class SearchController extends FOSRestController
 
             return $view;
         } else {
-
             //For compatibility, API 1.0 explicitly passes null parameters.
             if ($apiVersion == '1.0') {
                 $serializationContext->setSerializeNull(true);
@@ -225,7 +224,7 @@ class SearchController extends FOSRestController
     /**
      * Search for a topic in the forum.
      *
-     * @param Request $request The HTTP Request object.
+     * @param Request $request The HTTP Request object
      *
      * @return View
      */

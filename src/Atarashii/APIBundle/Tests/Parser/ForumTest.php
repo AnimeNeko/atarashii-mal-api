@@ -23,7 +23,6 @@ class ForumTest extends \PHPUnit\Framework\TestCase
         foreach ($forumCategory as $forumBoard) {
             $this->assertInstanceOf('Atarashii\APIBundle\Model\Forum', $forumBoard);
 
-
             if ($forumBoard->getId() == 5) { //The main "Updates and Announcements" Board
                 $board1 = $forumBoard;
             } elseif ($forumBoard->getId() === null) { //A board that has children doesn't have its own ID.

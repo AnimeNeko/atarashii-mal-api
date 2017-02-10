@@ -138,7 +138,7 @@ class PersonTest extends \PHPUnit\Framework\TestCase
             'id' => rand(),
             'name' => 'Sengoku, Nadeko',
             'image_url' => 'http://www.example.com/image.jpg',
-            'main_role' => true
+            'main_role' => true,
         );
 
         $itemArray['anime'] = new Anime();
@@ -157,7 +157,7 @@ class PersonTest extends \PHPUnit\Framework\TestCase
 
         $itemArray = array(
             'position' => 'Opening Theme',
-            'details' => 'OP 1, 2, 3'
+            'details' => 'OP 1, 2, 3',
         );
 
         $itemArray['anime'] = new Anime();
@@ -175,7 +175,7 @@ class PersonTest extends \PHPUnit\Framework\TestCase
         $person = new Person();
 
         $itemArray = array(
-            'position' => 'Story'
+            'position' => 'Story',
         );
 
         $itemArray['manga'] = new Manga();
@@ -188,5 +188,4 @@ class PersonTest extends \PHPUnit\Framework\TestCase
         $person->setPublishedManga($publishedManga);
         $this->assertEquals($publishedManga, $person->getPublishedManga());
     }
-
 }

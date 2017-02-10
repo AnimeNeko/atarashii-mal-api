@@ -7,6 +7,7 @@
  * @copyright 2014-2016 Ratan Dhawtal and Michael Johnson
  * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
  */
+
 namespace Atarashii\APIBundle\Controller;
 
 use Atarashii\APIBundle\Model\Anime;
@@ -90,7 +91,7 @@ class BrowseController extends FOSRestController
 
         if ((strpos($content, 'No titles that matched') !== false) || (strpos($content, 'This page doesn\'t exist') !== false)) {
             return $this->view(array('error' => 'not-found'), 404);
-        } else if (count($matches) > 1 && (int) $matches[1] !== $page) {
+        } elseif (count($matches) > 1 && (int) $matches[1] !== $page) {
             return $this->view(array(), 200);
         } else {
             //MAL now returns 404 on a single result. Workaround

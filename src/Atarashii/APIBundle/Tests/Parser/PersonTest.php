@@ -2,7 +2,6 @@
 
 namespace Atarashii\APIBundle\Tests\Parser;
 
-use Atarashii\APIBundle\Model\Person;
 use Atarashii\APIBundle\Parser\PersonParser;
 
 class PersonTest extends \PHPUnit\Framework\TestCase
@@ -27,7 +26,6 @@ class PersonTest extends \PHPUnit\Framework\TestCase
         $this->assertGreaterThan(250, count($person->getVoiceActingRoles()));
         $this->assertGreaterThanOrEqual(30, count($person->getAnimeStaffPositions()));
 
-
         // Test Miyazaki Hayao ("normal" with published manga)
         $personContents = file_get_contents(__DIR__.'/../InputSamples/people-1870.html');
         $person = PersonParser::parse($personContents);
@@ -35,14 +33,12 @@ class PersonTest extends \PHPUnit\Framework\TestCase
 
         $this->assertGreaterThan(10, count($person->getPublishedManga()));
 
-
         // Test Johnny Yong Bosch ("normal" with alternate names)
         $personContents = file_get_contents(__DIR__.'/../InputSamples/people-10.html');
         $person = PersonParser::parse($personContents);
         $this->assertInstanceOf('Atarashii\APIBundle\Model\Person', $person);
 
         $this->assertGreaterThanOrEqual(1, count($person->getAlternateNames()));
-
 
         // Test huke (interesting case for family name parsing)
         $personContents = file_get_contents(__DIR__.'/../InputSamples/people-10145.html');
@@ -52,7 +48,6 @@ class PersonTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('huke', $person->getFamilyName());
         $this->assertEquals('', $person->getGivenName());
 
-
         // Test Ikimono-gakari (birthday, year & month only)
         $personContents = file_get_contents(__DIR__.'/../InputSamples/people-7277.html');
         $person = PersonParser::parse($personContents);
@@ -60,14 +55,12 @@ class PersonTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals('1999-02', $person->getBirthday());
 
-
         // Test ClairS (birthday, year only)
         $personContents = file_get_contents(__DIR__.'/../InputSamples/people-11746.html');
         $person = PersonParser::parse($personContents);
         $this->assertInstanceOf('Atarashii\APIBundle\Model\Person', $person);
 
         $this->assertEquals('2009', $person->getBirthday());
-
 
         // Test Miyamoto Kano (birthday, month and day only)
         $personContents = file_get_contents(__DIR__.'/../InputSamples/people-2608.html');

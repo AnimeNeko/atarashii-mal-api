@@ -7,6 +7,7 @@
  * @copyright 2014-2016 Ratan Dhawtal and Michael Johnson
  * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
  */
+
 namespace Atarashii\APIBundle\Parser;
 
 use Symfony\Component\DomCrawler\Crawler;
@@ -39,14 +40,13 @@ class EpsParser
 
             $extracted = $crawler->filter('td[class="episode-title"] span[class="di-ib"]');
             if ($extracted->text() !== '' && $extracted->count() > 0) {
-
-                # English:
+                // English:
                 $extracted = explode('(', $extracted->text());
                 if (count($extracted) > 0) {
                     $other_titles['english'] = array(trim($extracted[0], chr(0xC2).chr(0xA0)));
                 }
 
-                # Japanese:
+                // Japanese:
                 if (count($extracted) > 1) {
                     $other_titles['japanese'] = array(trim(str_replace(')', '', $extracted[1])));
                 }

@@ -7,6 +7,7 @@
 * @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
+
 namespace Atarashii\APIBundle\Model;
 
 use JMS\Serializer\Annotation\Since;
@@ -124,7 +125,7 @@ class Cast
     /**
      * Set the image property.
      *
-     * @param string $image The character image.
+     * @param string $image The character image
      */
     public function setImage($image)
     {
@@ -148,7 +149,7 @@ class Cast
     /**
      * Set the rank property.
      *
-     * @param string $rank The rank of the staff member.
+     * @param string $rank The rank of the staff member
      */
     public function setRank($rank)
     {
@@ -168,7 +169,7 @@ class Cast
     /**
      * Set the actors array property.
      *
-     * @param Actor $actors The actors.
+     * @param Actor $actors The actors
      */
     public function setActors($actors)
     {

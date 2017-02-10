@@ -26,37 +26,37 @@ class PersonParser
 
         $personrecord = new Person();
 
-        # Person ID.
-        # Example:
-        # <input type="hidden" name="vaid" value="185">
+        // Person ID.
+        // Example:
+        // <input type="hidden" name="vaid" value="185">
         $personrecord->setId((int) $crawler->filter('input[name="vaid"]')->attr('value'));
 
-        # Name
-        # Example:
-        # <div><h1 class="h1">Hanazawa, Kana</h1></div>
+        // Name
+        // Example:
+        // <div><h1 class="h1">Hanazawa, Kana</h1></div>
         $personrecord->setName(trim($crawler->filter('div h1')->text()));
 
-        # Image
-        # Example:
-        # <a href="/people/185/Kana_Hanazawa/pictures"><img src="http://cdn.myanimelist.net/images/voiceactors/3/43500.jpg" alt="Hanazawa, Kana"></a>
+        // Image
+        // Example:
+        // <a href="/people/185/Kana_Hanazawa/pictures"><img src="http://cdn.myanimelist.net/images/voiceactors/3/43500.jpg" alt="Hanazawa, Kana"></a>
         $personrecord->setImageUrl($crawler->filter('div#content tr td div img')->attr('src'));
 
         $leftcolumn = $crawler->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]');
 
-        # Given name
+        // Given name
         $extracted = $leftcolumn->filterXPath('//span[text()="Given name:"]');
         if ($extracted->count() > 0) {
             $personrecord->setGivenName(trim(str_replace($extracted->text(), '', $extracted->parents()->text())));
         }
 
-        # Family name
-        # MAL messed this field up. It's not wrapped in a div, so the text is floating out in the td.
+        // Family name
+        // MAL messed this field up. It's not wrapped in a div, so the text is floating out in the td.
         $extracted = $leftcolumn->filterXPath('//span[text()="Family name:"]');
         if ($extracted->count() > 0) {
             $matches = array();
 
-            # This regex matches "Family name:..." until it hits Birthday/Website/Alternate [name], one of which should
-            # be the field following the Family name field
+            // This regex matches "Family name:..." until it hits Birthday/Website/Alternate [name], one of which should
+            // be the field following the Family name field
             preg_match('/Family name:.*?(?:(?!Birthday|Website|Alternate).)*/', $leftcolumn->text(), $matches);
 
             if (count($matches) > 0) {
@@ -64,7 +64,7 @@ class PersonParser
             }
         }
 
-        # Alternate names
+        // Alternate names
         $extracted = $leftcolumn->filterXPath('//span[text()="Alternate names:"]');
         if ($extracted->count() > 0) {
             $text = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
@@ -72,7 +72,7 @@ class PersonParser
             $personrecord->setAlternateNames($alternateNames);
         }
 
-        # Birthday
+        // Birthday
         $extracted = $leftcolumn->filterXPath('//span[text()="Birthday:"]');
         if ($extracted->count() > 0) {
             $dateStr = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
@@ -98,27 +98,27 @@ class PersonParser
             }
         }
 
-        # Website
-        # This isn't in a div, but the anchor element is the next sibling of the span
+        // Website
+        // This isn't in a div, but the anchor element is the next sibling of the span
         $extracted = $leftcolumn->filterXPath('//span[text()="Website:"]');
         if ($extracted->count() > 0) {
-            $personrecord->setWebsiteUrl(trim(str_replace($extracted->text(), '', $extracted->nextAll()->attr("href"))));
+            $personrecord->setWebsiteUrl(trim(str_replace($extracted->text(), '', $extracted->nextAll()->attr('href'))));
         }
 
-        # Favorites count
+        // Favorites count
         $extracted = $leftcolumn->filterXPath('//span[text()="Member Favorites:"]');
         if ($extracted->count() > 0) {
             $personrecord->setFavoritedCount(trim(str_replace($extracted->text(), '', $extracted->parents()->text())));
         }
 
-        # More Details
-        # Note: CSS classes are misspelled, need to keep an eye on this
+        // More Details
+        // Note: CSS classes are misspelled, need to keep an eye on this
         $extracted = $leftcolumn->filter('div[class="people-informantion-more js-people-informantion-more"]');
         if ($extracted->count() > 0) {
             $personrecord->setMoreDetails($extracted->html());
         }
 
-        # Extract from sections on the right column: Voice acting roles, anime staff positions, published manga
+        // Extract from sections on the right column: Voice acting roles, anime staff positions, published manga
         $rightcolumn = $crawler->filter('div[id="content"] td[style="padding-left: 5px;"]');
 
         // Voice acting roles
@@ -133,7 +133,7 @@ class PersonParser
                 $characterAnchor = $node->filterXPath('//td[3]/a');
                 $characterName = $characterAnchor->text();
                 $characterUrl = $characterAnchor->attr('href');
-                $isMainCharacer = strpos($node->filterXPath('//td[3]/div')->text(), "Main") !== false;
+                $isMainCharacer = strpos($node->filterXPath('//td[3]/div')->text(), 'Main') !== false;
                 $characterImage = preg_replace('/r(.+?)\/(.+?)\?(.+?)$/', '$2', $node->filterXPath('//td[4]/div/a/img')->attr('data-src'));
 
                 $match = preg_match('/\/(character)\/(\d+)\/.*?/', $characterUrl, $urlParts);
@@ -204,7 +204,6 @@ class PersonParser
                     $itemArray['anime']->setId($urlParts[2]);
                 }
                 $positionsArray[] = $itemArray;
-
             }
             $personrecord->setAnimeStaffPositions($positionsArray);
         }

@@ -7,11 +7,10 @@ use Atarashii\APIBundle\Parser\HistoryParser;
 /**
  * Class UserTest.
  *
- * @coversDefaultClass Atarashii\APIBundle\Parser\HistoryParser
+ * @coversDefaultClass \Atarashii\APIBundle\Parser\HistoryParser
  */
 class HistoryTest extends \PHPUnit\Framework\TestCase
 {
-
     /**
      * @covers ::parse
      */

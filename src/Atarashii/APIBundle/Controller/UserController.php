@@ -7,6 +7,7 @@
 * @copyright 2014-2016 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
+
 namespace Atarashii\APIBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
@@ -21,7 +22,7 @@ class UserController extends FOSRestController
      * Get the details for a username.
      *
      * @param string $apiVersion The API version of the request
-     * @param string $username   The MyAnimeList username of the user.
+     * @param string $username   The MyAnimeList username of the user
      *
      * @return View
      */
@@ -84,7 +85,7 @@ class UserController extends FOSRestController
      * is MyAnimeList default, in order of the most recently active user.
      *
      * @param string $apiVersion The API version of the request
-     * @param string $username   The MyAnimeList username of the user.
+     * @param string $username   The MyAnimeList username of the user
      *
      * @return View
      */
@@ -150,7 +151,7 @@ class UserController extends FOSRestController
      * Returns a view of history objects constituting history of the specified user. Sorting
      * is MyAnimeList default, in order of the leastest update.
      *
-     * @param string $username The MyAnimeList username of the user.
+     * @param string $username The MyAnimeList username of the user
      *
      * @return View
      */

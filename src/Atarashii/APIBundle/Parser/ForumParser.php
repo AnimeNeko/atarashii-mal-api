@@ -7,6 +7,7 @@
 * @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
+
 namespace Atarashii\APIBundle\Parser;
 
 use Symfony\Component\DomCrawler\Crawler;
@@ -41,19 +42,19 @@ class ForumParser
 
         // contains no childeren
         if ($crawler->filter('span[class="forum-subboards"]')->count() < 1) {
-            # name.
+            // name.
             $board->setName($crawler->filter('a')->text());
 
-            # id.
+            // id.
             $board->setId(str_replace('https://myanimelist.net/forum/?board=', '', $crawler->filter('a')->attr('href')));
 
-            # description.
+            // description.
             $board->setDescription($crawler->filter('span')->text());
         } else {
-            # name.
+            // name.
             $board->setName($crawler->filter('span')->text());
 
-            # description.
+            // description.
             $board->setDescription($crawler->filter('span[class="forum-board-description"]')->text());
 
             $childerenitems = $crawler->filter('span[class="forum-subboards"] a');
@@ -61,10 +62,10 @@ class ForumParser
                 $crawler = new Crawler($children);
                 $child = new Forum();
 
-                # name.
+                // name.
                 $child->setName($crawler->filter('a')->text());
 
-                # id.
+                // id.
                 $child->setId(str_replace('https://myanimelist.net/forum/?subboard=', '', $crawler->attr('href')));
 
                 $board->setChildren($child);
@@ -130,34 +131,34 @@ class ForumParser
         if ($crawler->filter('td')->count() >= 4) {
             $topics = new Forum();
 
-            # id.
-            # Example:
-            # <span id="wt439011">...</span>
-            $topics->setId(str_replace('/forum/?topicid=', '', $crawler->filter('td[class="forum_boardrow1"] a')->attr('href')));//->filter('span')->attr('id')));
+            // id.
+            // Example:
+            // <span id="wt439011">...</span>
+            $topics->setId(str_replace('/forum/?topicid=', '', $crawler->filter('td[class="forum_boardrow1"] a')->attr('href'))); //->filter('span')->attr('id')));
 
-            # name.
-            # Example:
-            # <a href="/forum/?topicid=439011">BBCode Fixes</a>
+            // name.
+            // Example:
+            // <a href="/forum/?topicid=439011">BBCode Fixes</a>
             $topics->setName($crawler->filter('td[class="forum_boardrow1"] a')->text());
 
-            # username.
-            # Example:
-            # <a href="/profile/ratan12">ratan12</a>
+            // username.
+            // Example:
+            // <a href="/profile/ratan12">ratan12</a>
             $topics->setUsername(str_replace('?board=', '', $crawler->filter('span[class="forum_postusername"] a')->text()));
 
-            # replies.
-            # Example:
-            # <td align="center" width="75" class="forum_boardrow2" style="border-width: 0px 1px 1px 0px;">159</td>
+            // replies.
+            // Example:
+            // <td align="center" width="75" class="forum_boardrow2" style="border-width: 0px 1px 1px 0px;">159</td>
             $topics->setReplies(str_replace('?board=', '', $crawler->filter('td[class="forum_boardrow2"]')->eq(1)->text()));
 
-            # creation time.
-            # Example:
-            # <span class="lightLink">Jun 25, 2008</span>
+            // creation time.
+            // Example:
+            // <span class="lightLink">Jun 25, 2008</span>
             $topics->setTime($crawler->filter('span[class="lightLink"]')->text());
 
             //note: eq(1) is the second node and !first.
             $username = $crawler->filter('td[class="forum_boardrow1"]')->eq(1)->filter('a')->text();
-            $time = explode("»»", $crawler->filter('td[class="forum_boardrow1"]')->eq(1)->text());
+            $time = explode('»»', $crawler->filter('td[class="forum_boardrow1"]')->eq(1)->text());
 
             $topics->setReply(array('username' => $username, 'time' => Date::formatTime($time[1])));
 
@@ -196,14 +197,14 @@ class ForumParser
 
         $topic->setTime($crawler->filter('div[style="padding-left: 3px;"]')->text());
 
-        # message id.
-        # Example:
-        # <div class="forum_border_around" id="forumMsg30902219">...</div>
+        // message id.
+        // Example:
+        // <div class="forum_border_around" id="forumMsg30902219">...</div>
         $topic->setid(str_replace('forumMsg', '', $crawler->attr('id')));
 
-        # image url.
-        # Example:
-        # <img src="http://cdn.myanimelist.net/images/useravatars/1901304.jpg" vspace="2" border="0">
+        // image url.
+        // Example:
+        // <img src="http://cdn.myanimelist.net/images/useravatars/1901304.jpg" vspace="2" border="0">
         //Note: Some MAL users do not have any avatars in the forum!
         try {
             $topic->profile->setAvatarUrl($crawler->filter('img')->attr('src'));
@@ -235,9 +236,9 @@ class ForumParser
         $topic->profile->manga_stats = null;
         $topic->profile->anime_stats = null;
 
-        # comment.
-        # Example:
-        # <div id="message25496275">...</div>
+        // comment.
+        // Example:
+        // <div id="message25496275">...</div>
         $topic->setComment($crawler->filter('div[id="message'.$topic->getId().'"]')->html());
 
         return $topic;

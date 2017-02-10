@@ -7,6 +7,7 @@
  * @copyright 2014-2016 Ratan Dhawtal and Michael Johnson
  * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
  */
+
 namespace Atarashii\APIBundle\Controller;
 
 use Atarashii\APIBundle\Parser\TitleParser;
@@ -410,7 +411,7 @@ class RecordController extends FOSRestController
         } catch (Exception\ServerException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
-        
+
         $result = ScheduleParser::parse($details, $timeZone);
 
         $response = new Response();

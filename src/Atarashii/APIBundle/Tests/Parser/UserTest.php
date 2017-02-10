@@ -7,7 +7,7 @@ use Atarashii\APIBundle\Parser\User;
 /**
  * Class UserTest.
  *
- * @coversDefaultClass Atarashii\APIBundle\Parser\User
+ * @coversDefaultClass \Atarashii\APIBundle\Parser\User
  */
 class UserTest extends \PHPUnit\Framework\TestCase
 {

@@ -7,6 +7,7 @@
 * @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
+
 namespace Atarashii\APIBundle\Model;
 
 use JMS\Serializer\Annotation\Since;
@@ -146,7 +147,7 @@ class Review
     /**
      * Set the username property.
      *
-     * @param string $username The username of the creator.
+     * @param string $username The username of the creator
      */
     public function setUsername($username)
     {
@@ -186,7 +187,7 @@ class Review
     /**
      * Set the watched_episodes property.
      *
-     * @param string $watched_episodes The number of watched episodes.
+     * @param string $watched_episodes The number of watched episodes
      */
     public function setWatchedEpisodes($watched_episodes)
     {
@@ -206,7 +207,7 @@ class Review
     /**
      * Set the chapters property.
      *
-     * @param int $chapters The number chapters of series.
+     * @param int $chapters The number chapters of series
      */
     public function setChapters($chapters)
     {
@@ -226,7 +227,7 @@ class Review
     /**
      * Set the chaptersRead property.
      *
-     * @param string chaptersRead The number of read chapters.
+     * @param string chaptersRead The number of read chapters
      */
     public function setChaptersRead($chaptersRead)
     {
@@ -286,7 +287,7 @@ class Review
     /**
      * Set the review property.
      *
-     * @param string $review The review content.
+     * @param string $review The review content
      */
     public function setReview($review)
     {
@@ -306,7 +307,7 @@ class Review
     /**
      * Set the review property.
      *
-     * @param string $avatarUrl The user avatar.
+     * @param string $avatarUrl The user avatar
      */
     public function setAvatarUrl($avatarUrl)
     {

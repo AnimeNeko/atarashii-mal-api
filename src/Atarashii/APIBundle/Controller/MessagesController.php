@@ -7,6 +7,7 @@
 * @copyright 2014-2016 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
+
 namespace Atarashii\APIBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
@@ -23,7 +24,7 @@ class MessagesController extends FOSRestController
      *
      * @param Request $request HTTP Request object
      *
-     * @internal param int $page The pagenumber assigned by MAL.
+     * @internal param int $page The pagenumber assigned by MAL
      *
      * @return View
      */

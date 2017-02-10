@@ -7,6 +7,7 @@
 * @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
+
 namespace Atarashii\APIBundle\Parser;
 
 use Symfony\Component\DomCrawler\Crawler;
@@ -24,7 +25,7 @@ class MessagesParser
         $messageList = $crawler->filterXPath('//div[@class="message-container"]//div[contains(@class,"message")]');
 
         foreach ($messageList as $message) {
-            $isRead = strstr($message->getAttribute("class"), 'unread') ? false : true;
+            $isRead = strstr($message->getAttribute('class'), 'unread') ? false : true;
             $resultset[] = self::parseListview($message, $isRead);
         }
 
@@ -48,33 +49,33 @@ class MessagesParser
         $crawler = new Crawler($item);
         $message = new Messages();
 
-        # Message id.
+        // Message id.
         $message->setId((int) str_replace('?go=read&id=', '', $crawler->filterXPath('//div[contains(@class, "mym_subject")]/a')->attr('href')));
 
-        # Action id.
+        // Action id.
         $message->setActionId((int) str_replace('msgchecker', '', $crawler->filterXPath('//div[contains(@class, "mym_checkboxes")]/input')->attr('id')));
 
-        # Thread id.
+        // Thread id.
         $message->setThreadId((int) str_replace('&toname='.$message->getUsername(), '', str_replace('?go=send&replyid='.$message->GetActionId().'&threadid=', '', $crawler->filterXPath('//span[contains(@class, "mym_actions")]/a')->attr('href'))));
 
-        # Username of the sender.
+        // Username of the sender.
         $message->setUsername($crawler->filterXPath('//div[contains(@class, "mym_user")]/a')->text());
 
-        # Time of the received message.
+        // Time of the received message.
         $message->setTime($crawler->filterXPath('//span[@class="mym_date"]')->text());
 
-        # Read (if the user has read this message).
+        // Read (if the user has read this message).
         $message->setRead($read);
 
-        # Subject and Preview are linked together
+        // Subject and Preview are linked together
         $messagePreview = trim($crawler->filterXPath('//div[contains(@class, "mym_subject")]/a/span')->text());
         $messageSubject = trim(str_replace($messagePreview, '', $crawler->filterXPath('//div[contains(@class, "mym_subject")]/a')->text()));
         $messageSubject = preg_replace('/ -$/', '', $messageSubject);
 
-        # Subject.
+        // Subject.
         $message->setSubject($messageSubject);
 
-        # Preview message.
+        // Preview message.
         $message->setPreview($messagePreview);
 
         return $message;
@@ -89,15 +90,15 @@ class MessagesParser
 
         $message->setId((int) $id);
 
-        # Action id of the message.
-        # Example:
-        # <input type="button" onclick="document.location='/mymessages.php?go=send&replyid=21193061&threadid=16092543&toname=Ratan12'" class="inputButton" value=" Reply ">
+        // Action id of the message.
+        // Example:
+        // <input type="button" onclick="document.location='/mymessages.php?go=send&replyid=21193061&threadid=16092543&toname=Ratan12'" class="inputButton" value=" Reply ">
         $actionId = $crawler->filterXPath('//form[contains(@action,"delete")]/input[@name="id"]');
         $message->setActionId((int) $actionId->attr('value'));
 
-        # Thread id of the message.
-        # Example:
-        # <a href="?go=read&id=0000000&threadid=00000000">
+        // Thread id of the message.
+        // Example:
+        // <a href="?go=read&id=0000000&threadid=00000000">
         $threadId = $crawler->filterXPath('//div/input[contains(@value,"Reply")]');
         $threadId = $threadId->attr('onclick');
 
@@ -105,27 +106,27 @@ class MessagesParser
             $message->setThreadId((int) $threadMatches[1]);
         }
 
-        # Username of the sender.
-        # Example:
-        # <a href="http://myanimelist.net/profile/ratan12">ratan12</a>
+        // Username of the sender.
+        // Example:
+        // <a href="http://myanimelist.net/profile/ratan12">ratan12</a>
         $message->setUsername($crawler->filterXPath('//td[@class="dialog-text"]/h2/a')->text());
 
-        # Time of the received message.
-        # Example:
-        # <small>50 minutes ago</small>
+        // Time of the received message.
+        // Example:
+        // <small>50 minutes ago</small>
         $time = $crawler->filterXPath('//td[@class="dialog-text"]/div[contains(@class,"lightLink")]');
 
         if (count($time) > 0) {
             $message->setTime($time->text());
         }
 
-        # Subject.
-        # Example:
-        # <div style="margin-bottom: 4px; font-weight: bold;">re: coolmessage</div>
+        // Subject.
+        // Example:
+        // <div style="margin-bottom: 4px; font-weight: bold;">re: coolmessage</div>
         $messageSubject = $crawler->filterXPath('//td[@class="dialog-text"]/div[contains(@class,"fw-b")]')->text();
         $message->setSubject($messageSubject);
 
-        # Message.
+        // Message.
         $messageText = $crawler->filterXPath('//td[@class="dialog-text"]');
 
         if (preg_match('/Test Test<\/div>(.*?)<div/s', $messageText->html(), $messageBody)) {

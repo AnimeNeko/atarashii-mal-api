@@ -7,6 +7,7 @@
 * @copyright 2014-2016 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
+
 namespace Atarashii\APIBundle\Service;
 
 use Symfony\Component\DomCrawler\Crawler;
@@ -22,15 +23,15 @@ class Communicator
     /**
      * Create an instance of the communicator.
      *
-     * @param string $baseUrl   The base URL for the communications. Do not use a terminating slash.
-     * @param string $userAgent User-Agent to send.
+     * @param string $baseUrl   The base URL for the communications. Do not use a terminating slash
+     * @param string $userAgent User-Agent to send
      */
     public function __construct($baseUrl, $userAgent)
     {
         $this->useragent = $userAgent;
 
         //Default Options to use in Request
-        $requestOptions = Array();
+        $requestOptions = array();
         $requestOptions['base_uri'] = $baseUrl;
         $requestOptions['cookies'] = true;
         $requestOptions['headers']['User-Agent'] = $this->useragent;
@@ -74,7 +75,7 @@ class Communicator
      * @param string $username MAL Username
      * @param string $password MAL Password
      *
-     * @return bool The confirmation of a login.
+     * @return bool The confirmation of a login
      */
     public function cookieLogin($username, $password)
     {
@@ -91,10 +92,10 @@ class Communicator
         }
 
         //Options for the request
-        $requestOptions = Array();
+        $requestOptions = array();
 
         //Our post form fields are stored in an array named "form_params" in the request options.
-        $requestOptions['form_params'] = Array();
+        $requestOptions['form_params'] = array();
         $requestOptions['form_params']['user_name'] = $username;
         $requestOptions['form_params']['password'] = $password;
         $requestOptions['form_params']['submit'] = 'Login';
@@ -114,14 +115,14 @@ class Communicator
      * Fetch content from a URL.
      *
      * @param string $url      Path to access
-     * @param string $username Optional MAL Username. Default is null.
-     * @param string $password Optional MAL Password. Default is null.
+     * @param string $username Optional MAL Username. Default is null
+     * @param string $password Optional MAL Password. Default is null
      *
-     * @return string Contents of the resource at the supplied path.
+     * @return string Contents of the resource at the supplied path
      */
     public function fetch($url, $username = null, $password = null)
     {
-        $requestOptions = Array();
+        $requestOptions = array();
 
         if ($username) {
             $requestOptions['auth'] = array($username, $password);
@@ -145,15 +146,14 @@ class Communicator
      */
     public function sendMessage($url, $subject, $message)
     {
-        $requestOptions = Array();
+        $requestOptions = array();
 
         //Our post form fields are stored in an array named "form_params" in the request options.
-        $requestOptions['form_params'] = Array();
+        $requestOptions['form_params'] = array();
         $requestOptions['form_params']['subject'] = $subject;
         $requestOptions['form_params']['message'] = $message;
         $requestOptions['form_params']['csrf_token'] = $this->getCsrfToken();
         $requestOptions['form_params']['sendmessage'] = 'Send Message';
-
 
         $this->response = $this->client->post('/mymessages.php?go=send&'.$url, $requestOptions);
 
@@ -172,10 +172,10 @@ class Communicator
      */
     public function createTopic($id, $title, $message)
     {
-        $requestOptions = Array();
+        $requestOptions = array();
 
         //Our post form fields are stored in an array named "form_params" in the request options.
-        $requestOptions['form_params'] = Array();
+        $requestOptions['form_params'] = array();
         $requestOptions['form_params']['topic_title'] = $title;
         $requestOptions['form_params']['msg_text'] = $message;
         $requestOptions['form_params']['csrf_token'] = $this->getCsrfToken();
@@ -197,10 +197,10 @@ class Communicator
      */
     public function createComment($id, $message)
     {
-        $requestOptions = Array();
+        $requestOptions = array();
 
         //Our post form fields are stored in an array named "form_params" in the request options.
-        $requestOptions['form_params'] = Array();
+        $requestOptions['form_params'] = array();
         $requestOptions['form_params']['msg_text'] = $message;
         $requestOptions['form_params']['csrf_token'] = $this->getCsrfToken();
         $requestOptions['form_params']['submit'] = 'Submit';
@@ -221,10 +221,10 @@ class Communicator
      */
     public function edithComment($id, $message)
     {
-        $requestOptions = Array();
+        $requestOptions = array();
 
         //Our post form fields are stored in an array named "form_params" in the request options.
-        $requestOptions['form_params'] = Array();
+        $requestOptions['form_params'] = array();
         $requestOptions['form_params']['msg_text'] = $message;
         $requestOptions['form_params']['csrf_token'] = $this->getCsrfToken();
         $requestOptions['form_params']['submit'] = 'Submit';
@@ -244,22 +244,22 @@ class Communicator
      * supply username and password.
      *
      * @param string $url      Path for posting
-     * @param string $content  Content to post to the $url. Generally an XML document.
-     * @param string $username Optional MAL Username. Default is null.
-     * @param string $password Optional MAL Password. Default is null.
+     * @param string $content  Content to post to the $url. Generally an XML document
+     * @param string $username Optional MAL Username. Default is null
+     * @param string $password Optional MAL Password. Default is null
      *
-     * @return string Contents of the resource at the supplied path.
+     * @return string Contents of the resource at the supplied path
      */
     public function sendXML($url, $content, $username = null, $password = null)
     {
-        $requestOptions = Array();
+        $requestOptions = array();
 
         if ($username) {
             $requestOptions['auth'] = array($username, $password);
         }
 
         //Our post form fields are stored in an array named "form_params" in the request options.
-        $requestOptions['form_params'] = Array();
+        $requestOptions['form_params'] = array();
 
         //Add our data transmission - MAL requires the XML content to be in a variable named "data"
         //If the content is empty, don't send the data.

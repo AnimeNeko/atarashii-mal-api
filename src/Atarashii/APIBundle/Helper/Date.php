@@ -7,6 +7,7 @@
 * @copyright 2014-2016 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
+
 namespace Atarashii\APIBundle\Helper;
 
 use DateTime;
@@ -26,7 +27,7 @@ class Date
      * The timezone is only used when there is at least a hour in the $time parameter.
      * Using the timezone will result in 1 day difference depending on the server location.
      *
-     * @param string $time The time that needs to be standardized.
+     * @param string $time The time that needs to be standardized
      *
      * @return string
      */
@@ -71,7 +72,7 @@ class Date
         } elseif (strpos($time, ':') !== false) {
             return $dateTime->createFromFormat('l H:i T', $time)->format('Y-m-d\TH:iO');
         } elseif (strpos($time, ' ') !== false && (strlen($time) === 6 || strlen($time) === 5)) { //Do not place this before the other formatters because it will break almost all dates.
-            return $dateTime->createFromFormat('M j Y', $time.' '.date("Y"))->format('Y-m-d');
+            return $dateTime->createFromFormat('M j Y', $time.' '.date('Y'))->format('Y-m-d');
         } elseif (strpos($time, ' ') !== false) { //Do not place this before the other formatters because it will break almost all dates.
             //WARNING: PHP will fill in missing details with the current date. This can be a problem when processing
             //a month with fewer days than the current date (e.g. April, which has 30 days, on the 31st of another month).
@@ -96,7 +97,7 @@ class Date
      * This depends on the location of the country when a user joined.
      * After parsing it stores the timezone in a static variable.
      *
-     * @param string $settings The HTML source  of the settings page that contains the timezone.
+     * @param string $settings The HTML source  of the settings page that contains the timezone
      *
      * @return string
      */

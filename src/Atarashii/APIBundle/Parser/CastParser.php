@@ -7,6 +7,7 @@
 * @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
+
 namespace Atarashii\APIBundle\Parser;
 
 use Atarashii\APIBundle\Model\Actor;
@@ -46,7 +47,6 @@ class CastParser
     private static function parseCharacters(Crawler $item)
     {
         $cast = new Cast();
-
 
         if (preg_match('/character\/(.*?)\/.*$/', $item->filter('a')->attr('href'), $characterIds)) {
             $cast->setId($characterIds[1]);

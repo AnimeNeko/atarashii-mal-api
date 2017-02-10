@@ -67,7 +67,6 @@ class AnimeTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('http://www.animenewsnetwork.com/encyclopedia/anime.php?id=7222', $externalLinks['AnimeNewsNetwork']);
         $this->assertEquals('http://en.wikipedia.org/wiki/Lucky_Star_%28manga%29', $externalLinks['Wikipedia']);
 
-
         $this->assertContains('the daily lives of four cute high school girls', $anime->getSynopsis());
         $this->assertStringStartsWith('<i>Lucky Star</i> also has audio CDs', $anime->getBackground());
         $this->assertContains('Lucky Paradise', $anime->getProducers());
@@ -128,7 +127,6 @@ class AnimeTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals('1981', $anime->getEndDate());
 
-
         $animeContents = file_get_contents(__DIR__.'/../InputSamples/anime-47.html');
 
         $anime = TitleParser::parse($animeContents, $apiVersion, 'anime');
@@ -136,7 +134,6 @@ class AnimeTest extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf('Atarashii\APIBundle\Model\Anime', $anime);
 
         $this->assertEquals('124', $anime->getDuration());
-
 
         $animeContents = file_get_contents(__DIR__.'/../InputSamples/anime-10758.html');
 
@@ -146,7 +143,6 @@ class AnimeTest extends \PHPUnit\Framework\TestCase
 
         $this->assertNull($anime->getDuration());
 
-
         $animeContents = file_get_contents(__DIR__.'/../InputSamples/anime-18617.html');
 
         $anime = TitleParser::parse($animeContents, $apiVersion, 'anime');
@@ -154,9 +150,6 @@ class AnimeTest extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf('Atarashii\APIBundle\Model\Anime', $anime);
 
         $this->assertEquals('120', $anime->getDuration());
-
-
-
     }
 
     public function testParseExtendedPersonal()

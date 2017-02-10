@@ -15,7 +15,7 @@ class RecordControllerTest extends WebTestCase
     public function testGetAction()
     {
         $client = $this->client;
-        
+
         AnimeRecordTest::testGetAction($this, $client);
         MangaRecordTest::testGetAction($this, $client);
     }
@@ -43,7 +43,7 @@ class RecordControllerTest extends WebTestCase
         // One Piece
         $client->request('GET', '/2.1/anime/recs/21');
         $this->checkRecs($client);
-        
+
         // Death Note
         $client->request('GET', '/2.1/manga/recs/21');
         $this->checkRecs($client);
@@ -51,12 +51,13 @@ class RecordControllerTest extends WebTestCase
 
     /**
      * Test records for phpUnit.
-     * 
+     *
      * This function was created to reduce the amount of codes.
-     * 
+     *
      * @param $client The passed client
      */
-    private function checkRecs($client) {
+    private function checkRecs($client)
+    {
         $rawContent = $client->getResponse()->getContent();
         $statusCode = $client->getResponse()->getStatusCode();
         $content = json_decode($rawContent);
@@ -123,7 +124,7 @@ class RecordControllerTest extends WebTestCase
 
         $item = $content->monday;
         $this->assertInternalType('array', $item);
-        
+
         $item = $item[0];
 
         $this->assertInternalType('int', $item->id);

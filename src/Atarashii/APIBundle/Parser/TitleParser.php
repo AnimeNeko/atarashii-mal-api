@@ -7,6 +7,7 @@
  * @copyright 2014-2016 Ratan Dhawtal and Michael Johnson
  * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
  */
+
 namespace Atarashii\APIBundle\Parser;
 
 use Atarashii\APIBundle\Model\Anime;
@@ -67,7 +68,6 @@ class TitleParser
      * @param string $contents The HTML page source
      * @param object $record   An Anime or Manga model
      * @param string $type     A string detailing the record type (anime or manga)
-     *
      */
     public static function parseExtendedPersonal($contents, $record, $type)
     {
@@ -76,7 +76,6 @@ class TitleParser
 
         $crawler = $crawler->filterXPath('//form[@id="main-form"]');
         if ($crawler->count() > 0) {
-
             //Rewatching
             $extracted = $crawler->filterXPath('//input[@id="add_anime_is_rewatching"]');
             if ($extracted->count() > 0) {
@@ -110,7 +109,7 @@ class TitleParser
             }
 
             //Tags
-            $extracted = $crawler->filterXPath('//textarea[@id="add_' . $type . '_tags"]');
+            $extracted = $crawler->filterXPath('//textarea[@id="add_'.$type.'_tags"]');
             if ($extracted->count() > 0 && strlen($extracted->text()) > 0) {
                 $personalTags = explode(',', $extracted->text());
 
@@ -122,7 +121,7 @@ class TitleParser
             }
 
             //Priority
-            $extracted = $crawler->filterXPath('//select[@id="add_' . $type . '_priority"]/option[@selected]');
+            $extracted = $crawler->filterXPath('//select[@id="add_'.$type.'_priority"]/option[@selected]');
             if ($extracted->count() > 0) {
                 $record->setPriority((int) $extracted->attr('value'));
             }
@@ -130,9 +129,9 @@ class TitleParser
             //Rewatch/Reread Count
             $reConsumedCount = null;
             if ($type === 'anime') {
-                $extracted = $crawler->filterXPath('//input[@id="add_' . $type . '_num_watched_times"]');
+                $extracted = $crawler->filterXPath('//input[@id="add_'.$type.'_num_watched_times"]');
             } else {
-                $extracted = $crawler->filterXPath('//input[@id="add_' . $type . '_num_read_times"]');
+                $extracted = $crawler->filterXPath('//input[@id="add_'.$type.'_num_read_times"]');
             }
             if ($extracted->count() > 0) {
                 $extracted = (int) $extracted->attr('value');
@@ -144,9 +143,9 @@ class TitleParser
             //Rewatch/Reread Value
             $reConsumeValue = null;
             if ($type === 'anime') {
-                $extracted = $crawler->filterXPath('//select[@id="add_' . $type . '_rewatch_value"]/option[@selected]');
+                $extracted = $crawler->filterXPath('//select[@id="add_'.$type.'_rewatch_value"]/option[@selected]');
             } else {
-                $extracted = $crawler->filterXPath('//select[@id="add_' . $type . '_reread_value"]/option[@selected]');
+                $extracted = $crawler->filterXPath('//select[@id="add_'.$type.'_reread_value"]/option[@selected]');
             }
             if ($extracted->count() > 0) {
                 $extracted = (int) $extracted->attr('value');
@@ -156,7 +155,7 @@ class TitleParser
             }
 
             //Comments
-            $extracted = $crawler->filterXPath('//textarea[@id="add_' . $type . '_comments"]');
+            $extracted = $crawler->filterXPath('//textarea[@id="add_'.$type.'_comments"]');
             if ($extracted->count() > 0 && strlen($extracted->text()) > 0) {
                 $record->setPersonalComments(trim($extracted->text()));
             }
@@ -175,7 +174,7 @@ class TitleParser
                 }
 
                 //Storage Type
-                $extracted = $crawler->filterXPath('//select[@id="add_' . $type . '_storage_type"]/option[@selected]');
+                $extracted = $crawler->filterXPath('//select[@id="add_'.$type.'_storage_type"]/option[@selected]');
                 if ($extracted->count() > 0) {
                     $extracted = (int) $extracted->attr('value');
                     if ($extracted > 0) {
@@ -184,8 +183,8 @@ class TitleParser
                 }
 
                 //Storage Value
-                $extracted = $crawler->filterXPath('//input[@id="add_' . $type . '_storage_value"]');
-                if ($extracted->count() > 0 ) {
+                $extracted = $crawler->filterXPath('//input[@id="add_'.$type.'_storage_value"]');
+                if ($extracted->count() > 0) {
                     $extracted = (float) $extracted->attr('value');
                     if ($extracted > 0) {
                         $record->setStorageValue($extracted);
@@ -308,7 +307,6 @@ class TitleParser
 
         //Type specific properties
         if ($type === 'anime') {
-
             //Episodes
             $extracted = $sidebarContent->filterXPath('//span[text()="Episodes:"]');
             if ($extracted->count() > 0) {
@@ -414,7 +412,7 @@ class TitleParser
             if ($extracted->count() > 0) {
                 $extracted = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
                 if (strpos($extracted, 'Unknown') === false) {
-                    $record->setChapters((int)$extracted);
+                    $record->setChapters((int) $extracted);
                 }
             }
 
@@ -491,12 +489,11 @@ class TitleParser
         if ($extracted->count() > 0) {
             $personalContent = $sidebarContent->filterXPath('//div[@id="addtolist"]/table');
             if ($personalContent->count() > 0) {
-
                 //Personal Status
                 //The exact name depends on the item type, so it's not set until the type-specific section below.
                 $extracted = $personalContent->filterXPath('//select[@id="myinfo_status"]/option[@selected="selected"]');
                 if ($extracted->count() > 0) {
-                    $personalStatus = (int)$extracted->attr('value');
+                    $personalStatus = (int) $extracted->attr('value');
                 }
 
                 //Personal Score
@@ -532,7 +529,6 @@ class TitleParser
                     $record->setVolumesRead((int) $extracted->attr('value'));
                 }
             }
-
         }
 
         return $record;
@@ -716,7 +712,7 @@ class TitleParser
     {
         if (strpos($date, ',') === false) { //Date doesn't contain a comma
             if (strlen($date) === 4) {
-                return array(\DateTime::createFromFormat('Y m d', $date .' 01 01'), 'year'); //Year only - "1963" (ex id 6535)
+                return array(\DateTime::createFromFormat('Y m d', $date.' 01 01'), 'year'); //Year only - "1963" (ex id 6535)
             } elseif ($date !== 'Not Available') {
                 return array(\DateTime::createFromFormat('M Y d', $date.' 01'), 'month'); //Month and Year - "Dec 1981" - MAL doesn't seem to use this
             }
@@ -725,6 +721,7 @@ class TitleParser
             if (count($dateComponents) == 2) { //Month and Year with comma - "Dec, 1981" - Weird MAL formatting (ex id 21275)
                 $month = substr($dateComponents[0], 0, -1); //Remove the comma
                 $year = $dateComponents[1];
+
                 return array(\DateTime::createFromFormat('M Y d', $month.' '.$year.' 01'), 'month');
             } elseif (strlen($date) !== 7 && strlen($date) !== 8) { //Full Date. Not sure why we're checking the length here.
                 return array(\DateTime::createFromFormat('M j, Y', $date), 'day');
@@ -738,7 +735,7 @@ class TitleParser
     {
         //MAL allows users to just submit year, year and month, or all three.
         //The below code is so we can return full dates and make it all standard.
-        $extracted = $content->filterXPath('//select[@id="add_' . $type . '_' . $startOrFinish . '_date_year"]/option[@selected]');
+        $extracted = $content->filterXPath('//select[@id="add_'.$type.'_'.$startOrFinish.'_date_year"]/option[@selected]');
         if ($extracted->count() > 0) {
             $year = (int) $extracted->attr('value');
 
@@ -749,21 +746,20 @@ class TitleParser
             //In some cases, MAL doesn't check "unknown" and you get blank values. MAL is weird.
             //Make sure that we have a valid year before continuing.
             if ($year != 0) {
-                $extracted = $content->filterXPath('//select[@id="add_' . $type . '_' . $startOrFinish . '_date_month"]/option[@selected]');
+                $extracted = $content->filterXPath('//select[@id="add_'.$type.'_'.$startOrFinish.'_date_month"]/option[@selected]');
                 if ($extracted->count() > 0 && $extracted->attr('value') != '') {
                     $month = (int) $extracted->attr('value');
 
-                    $extracted = $content->filterXPath('//select[@id="add_' . $type . '_' . $startOrFinish . '_date_day"]/option[@selected]');
+                    $extracted = $content->filterXPath('//select[@id="add_'.$type.'_'.$startOrFinish.'_date_day"]/option[@selected]');
                     if ($extracted->count() > 0 && $extracted->attr('value') != '') {
                         $day = (int) $extracted->attr('value');
                     }
                 }
+
                 return \DateTime::createFromFormat('Y-n-j', "$year-$month-$day");
             }
 
             return;
         }
-
     }
-
 }

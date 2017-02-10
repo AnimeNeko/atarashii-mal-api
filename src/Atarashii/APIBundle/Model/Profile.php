@@ -7,6 +7,7 @@
 * @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
+
 namespace Atarashii\APIBundle\Model;
 
 use JMS\Serializer\Annotation\SerializedName;
@@ -62,7 +63,7 @@ class Profile
     /**
      * Set the avatarUrl property.
      *
-     * @param string $avatarUrl The avatar url of an user.
+     * @param string $avatarUrl The avatar url of an user
      */
     public function setAvatarUrl($avatarUrl)
     {
@@ -179,7 +180,7 @@ class ProfileDetails
      * @Since("2.1")
      * @Type("integer")
      */
-    private $recommendations  = 0;
+    private $recommendations = 0;
 
     /**
      * The amount of created blog posts.
@@ -187,7 +188,7 @@ class ProfileDetails
      * @Since("2.1")
      * @Type("integer")
      */
-    private $blogPosts  = 0;
+    private $blogPosts = 0;
 
     /**
      * The amount of joined clubs.
@@ -195,7 +196,7 @@ class ProfileDetails
      * @Since("2.1")
      * @Type("integer")
      */
-    private $clubs  = 0;
+    private $clubs = 0;
 
     private $aim;
     private $comments = 0;
@@ -207,7 +208,7 @@ class ProfileDetails
      *
      * This function is for compatibility with certain parts of API1
      *
-     * @param string $lastOnline The last time when an user was online.
+     * @param string $lastOnline The last time when an user was online
      */
     public function setLastOnline($lastOnline)
     {
@@ -234,7 +235,7 @@ class ProfileDetails
     /**
      * Set the status property.
      *
-     * @param string $status The status of an user.
+     * @param string $status The status of an user
      */
     public function setStatus($status)
     {
@@ -254,7 +255,7 @@ class ProfileDetails
     /**
      * Set the gender property.
      *
-     * @param string $gender The gender of an user.
+     * @param string $gender The gender of an user
      */
     public function setGender($gender)
     {
@@ -274,7 +275,7 @@ class ProfileDetails
     /**
      * Set the birthday property.
      *
-     * @param string $birthday The birthday of an user.
+     * @param string $birthday The birthday of an user
      */
     public function setBirthday($birthday)
     {
@@ -294,7 +295,7 @@ class ProfileDetails
     /**
      * Set the location property.
      *
-     * @param string $location The location of an user.
+     * @param string $location The location of an user
      */
     public function setLocation($location)
     {
@@ -314,7 +315,7 @@ class ProfileDetails
     /**
      * Set the website property.
      *
-     * @param string $website The website of an user.
+     * @param string $website The website of an user
      */
     public function setWebsite($website)
     {
@@ -336,7 +337,7 @@ class ProfileDetails
      *
      * This function is for compatibility with certain parts of API1
      *
-     * @param string $joinDate The MAL join date of an user.
+     * @param string $joinDate The MAL join date of an user
      */
     public function setJoinDate($joinDate)
     {
@@ -363,7 +364,7 @@ class ProfileDetails
     /**
      * Set the accessRank property.
      *
-     * @param string $accessRank The MAL access rank of an user.
+     * @param string $accessRank The MAL access rank of an user
      */
     public function setAccessRank($accessRank)
     {
@@ -383,7 +384,7 @@ class ProfileDetails
     /**
      * Set the animeListViews property.
      *
-     * @param int $animeListViews The animelist views of an user.
+     * @param int $animeListViews The animelist views of an user
      */
     public function setAnimeListViews($animeListViews)
     {
@@ -403,7 +404,7 @@ class ProfileDetails
     /**
      * Set the mangaListViews property.
      *
-     * @param int $mangaListViews The mangalist views of an user.
+     * @param int $mangaListViews The mangalist views of an user
      */
     public function setMangaListViews($mangaListViews)
     {
@@ -423,7 +424,7 @@ class ProfileDetails
     /**
      * Set the forumPosts property.
      *
-     * @param int $forumPosts The number forum posts of an user.
+     * @param int $forumPosts The number forum posts of an user
      */
     public function setForumPosts($forumPosts)
     {
@@ -443,7 +444,7 @@ class ProfileDetails
     /**
      * Set the reviews property.
      *
-     * @param int $reviews The number reviews which an user created.
+     * @param int $reviews The number reviews which an user created
      */
     public function setReviews($reviews)
     {
@@ -463,7 +464,7 @@ class ProfileDetails
     /**
      * Set the recommendations property.
      *
-     * @param int $recommendations The number recommendations which an user created.
+     * @param int $recommendations The number recommendations which an user created
      */
     public function setRecommedations($recommendations)
     {
@@ -483,7 +484,7 @@ class ProfileDetails
     /**
      * Set the blogPosts property.
      *
-     * @param int $blogPosts The number of blogPosts created by an user.
+     * @param int $blogPosts The number of blogPosts created by an user
      */
     public function setBlogPosts($blogPosts)
     {
@@ -503,7 +504,7 @@ class ProfileDetails
     /**
      * Set the clubs property.
      *
-     * @param int $clubs The number clubs the user joined.
+     * @param int $clubs The number clubs the user joined
      */
     public function setClubs($clubs)
     {
@@ -523,7 +524,7 @@ class ProfileDetails
     /**
      * Set the aim property.
      *
-     * @param string $aim The aim of an user.
+     * @param string $aim The aim of an user
      */
     public function setAim($aim)
     {
@@ -543,7 +544,7 @@ class ProfileDetails
     /**
      * Set the comments property.
      *
-     * @param int $comments The number comments of an user.
+     * @param int $comments The number comments of an user
      */
     public function setComments($comments)
     {
@@ -563,7 +564,7 @@ class ProfileDetails
     /**
      * Set the msn property.
      *
-     * @param string $msn The msn of an user.
+     * @param string $msn The msn of an user
      */
     public function setMsn($msn)
     {
@@ -583,7 +584,7 @@ class ProfileDetails
     /**
      * Set the yahoo property.
      *
-     * @param string $yahoo The yahoo of an user.
+     * @param string $yahoo The yahoo of an user
      */
     public function setYahoo($yahoo)
     {
@@ -643,7 +644,7 @@ class AnimeStats
     /**
      * Set the timeDays property.
      *
-     * @param float $timeDays The time of days of profiles.
+     * @param float $timeDays The time of days of profiles
      */
     public function setTimeDays($timeDays)
     {
@@ -663,7 +664,7 @@ class AnimeStats
     /**
      * Set the meanScore property.
      *
-     * @param float $meanScore The mean score of all the records.
+     * @param float $meanScore The mean score of all the records
      */
     public function setMeanScore($meanScore)
     {
@@ -683,7 +684,7 @@ class AnimeStats
     /**
      * Set the watching property.
      *
-     * @param int $reading The number of watching animes.
+     * @param int $reading The number of watching animes
      */
     public function setWatching($watching)
     {
@@ -703,7 +704,7 @@ class AnimeStats
     /**
      * Set the completed property.
      *
-     * @param int $completed The number of completed animes.
+     * @param int $completed The number of completed animes
      */
     public function setCompleted($completed)
     {
@@ -723,7 +724,7 @@ class AnimeStats
     /**
      * Set the onHold property.
      *
-     * @param int $onHold The number of onHold animes.
+     * @param int $onHold The number of onHold animes
      */
     public function setOnHold($onHold)
     {
@@ -743,7 +744,7 @@ class AnimeStats
     /**
      * Set the dropped property.
      *
-     * @param int $dropped The number of dropped animes.
+     * @param int $dropped The number of dropped animes
      */
     public function setDropped($dropped)
     {
@@ -763,7 +764,7 @@ class AnimeStats
     /**
      * Set the planToWatch property.
      *
-     * @param int $id The number of planned to watched animes.
+     * @param int $id The number of planned to watched animes
      */
     public function setPlanToWatch($planToWatch)
     {
@@ -783,7 +784,7 @@ class AnimeStats
     /**
      * Set the totalEntries property.
      *
-     * @param int $totalEntries The total number of series.
+     * @param int $totalEntries The total number of series
      */
     public function setTotalEntries($totalEntries)
     {
@@ -803,7 +804,7 @@ class AnimeStats
     /**
      * Set the rewatched property.
      *
-     * @param int $rewatched The total number of rewatched series.
+     * @param int $rewatched The total number of rewatched series
      */
     public function setRewatched($rewatched)
     {
@@ -823,7 +824,7 @@ class AnimeStats
     /**
      * Set the episodes property.
      *
-     * @param int $episodes The total of watched episodes.
+     * @param int $episodes The total of watched episodes
      */
     public function setEpisodes($episodes)
     {
@@ -883,7 +884,7 @@ class MangaStats
     /**
      * Set the timeDays property.
      *
-     * @param float $timeDays The time of days of profiles.
+     * @param float $timeDays The time of days of profiles
      */
     public function setTimeDays($timeDays)
     {
@@ -903,7 +904,7 @@ class MangaStats
     /**
      * Set the meanScore property.
      *
-     * @param float $meanScore The mean score of all the records.
+     * @param float $meanScore The mean score of all the records
      */
     public function setMeanScore($meanScore)
     {
@@ -923,7 +924,7 @@ class MangaStats
     /**
      * Set the reading property.
      *
-     * @param int $reading The number of reading mangas.
+     * @param int $reading The number of reading mangas
      */
     public function setReading($reading)
     {
@@ -943,7 +944,7 @@ class MangaStats
     /**
      * Set the completed property.
      *
-     * @param int $completed The number of completed mangas.
+     * @param int $completed The number of completed mangas
      */
     public function setCompleted($completed)
     {
@@ -963,7 +964,7 @@ class MangaStats
     /**
      * Set the onHold property.
      *
-     * @param int $onHold The number of onHold mangas.
+     * @param int $onHold The number of onHold mangas
      */
     public function setOnHold($onHold)
     {
@@ -983,7 +984,7 @@ class MangaStats
     /**
      * Set the dropped property.
      *
-     * @param int $dropped The number of dropped mangas.
+     * @param int $dropped The number of dropped mangas
      */
     public function setDropped($dropped)
     {
@@ -1003,7 +1004,7 @@ class MangaStats
     /**
      * Set the planToRead property.
      *
-     * @param int $id The number of planned to read mangas.
+     * @param int $id The number of planned to read mangas
      */
     public function setPlanToRead($planToRead)
     {
@@ -1023,7 +1024,7 @@ class MangaStats
     /**
      * Set the totalEntries property.
      *
-     * @param int $totalEntries The total number of series.
+     * @param int $totalEntries The total number of series
      */
     public function setTotalEntries($totalEntries)
     {
@@ -1043,7 +1044,7 @@ class MangaStats
     /**
      * Set the reread property.
      *
-     * @param int $reread The total number of reread series.
+     * @param int $reread The total number of reread series
      */
     public function setReread($reread)
     {
@@ -1063,7 +1064,7 @@ class MangaStats
     /**
      * Set the volumes property.
      *
-     * @param int $volumes The total of read volumes.
+     * @param int $volumes The total of read volumes
      */
     public function setVolumes($volumes)
     {

@@ -7,6 +7,7 @@
 * @copyright 2014-2015 Ratan Dhawtal and Michael Johnson
 * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache Public License 2.0
 */
+
 namespace Atarashii\APIBundle\Model;
 
 use JMS\Serializer\Annotation\Since;
@@ -96,7 +97,7 @@ class Forum
     /**
      * Set the id property.
      *
-     * @param int $id The id of forum board.
+     * @param int $id The id of forum board
      */
     public function setId($id)
     {
@@ -116,7 +117,7 @@ class Forum
     /**
      * Set the name property.
      *
-     * @param int $name The name of the forum board.
+     * @param int $name The name of the forum board
      */
     public function setName($name)
     {
@@ -136,7 +137,7 @@ class Forum
     /**
      * Set the username property.
      *
-     * @param string $username The username of the topic.
+     * @param string $username The username of the topic
      */
     public function setUsername($username)
     {
@@ -156,7 +157,7 @@ class Forum
     /**
      * Set the replies property.
      *
-     * @param int $replies The replies of the topic.
+     * @param int $replies The replies of the topic
      */
     public function setReplies($replies)
     {
@@ -176,7 +177,7 @@ class Forum
     /**
      * Set the description property.
      *
-     * @param string $description The description of the forum board.
+     * @param string $description The description of the forum board
      */
     public function setDescription($description)
     {
@@ -196,7 +197,7 @@ class Forum
     /**
      * Set the reply property.
      *
-     * @param array $reply The last reply details.
+     * @param array $reply The last reply details
      */
     public function setReply($reply)
     {
@@ -216,7 +217,7 @@ class Forum
     /**
      * Set the children property.
      *
-     * @param array $children The children of the forum board.
+     * @param array $children The children of the forum board
      */
     public function setChildren($children)
     {
@@ -236,7 +237,7 @@ class Forum
     /**
      * Set the comment property.
      *
-     * @param string $comment The comment of the reply.
+     * @param string $comment The comment of the reply
      */
     public function setComment($comment)
     {
@@ -256,7 +257,7 @@ class Forum
     /**
      * Set the time property.
      *
-     * @param string $time The creation time of the reply.
+     * @param string $time The creation time of the reply
      */
     public function setTime($time)
     {

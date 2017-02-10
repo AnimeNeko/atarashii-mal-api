@@ -9,7 +9,7 @@ class MessagesTest extends \PHPUnit\Framework\TestCase
 {
     public function testParse()
     {
-        $messageIndex = file_get_contents(__DIR__ . '/../InputSamples/user-messages-list.html');
+        $messageIndex = file_get_contents(__DIR__.'/../InputSamples/user-messages-list.html');
 
         $messages = MessagesParser::parse($messageIndex);
 

@@ -19,7 +19,6 @@ class VerifyControllerTest extends WebTestCase
         $credentials = ConnectivityUtilities::getLoginCredentials($client->getContainer());
 
         if ($credentials !== false) {
-
             // Make sure we get a 401 if we don't pass credentials
             $client->request('GET', '/2/account/verify_credentials');
 
