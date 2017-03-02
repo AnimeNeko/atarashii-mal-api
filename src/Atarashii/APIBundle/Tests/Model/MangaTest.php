@@ -99,7 +99,7 @@ class MangaTest extends \PHPUnit\Framework\TestCase
 
         $mangaType = 5;
         $manga->setType($mangaType);
-        $this->assertEquals('Manwha', $manga->getType());
+        $this->assertEquals('Manhwa', $manga->getType());
 
         $mangaType = 6;
         $manga->setType($mangaType);
@@ -128,7 +128,7 @@ class MangaTest extends \PHPUnit\Framework\TestCase
         $manga->setType($mangaType);
         $this->assertEquals($mangaType, $manga->getType());
 
-        $mangaType = 'Manwha';
+        $mangaType = 'Manhwa';
         $manga->setType($mangaType);
         $this->assertEquals($mangaType, $manga->getType());
 

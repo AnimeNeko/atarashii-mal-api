@@ -62,7 +62,7 @@ class Manga
     /**
      * Type of manga.
      *
-     * Defined string from the type of manga. Value will be one of Manga, Novel, One Shot, Doujin, Manwha, Manhua, OEL ("OEL manga" refers to "Original English-Language manga")
+     * Defined string from the type of manga. Value will be one of Manga, Novel, One Shot, Doujin, Manhwa, Manhua, OEL ("OEL manga" refers to "Original English-Language manga")
      *
      * @Type("string")
      */
@@ -484,8 +484,8 @@ class Manga
     /**
      * Set the type property.
      *
-     * @param int $type The type of series
-     *                  Can be 1/Manga, 2/Novel, 3/One Shot, 4/Doujin, 5/Manwha, 6/Manhua, or 7/OEL. The default is "Manga".
+     * @param int $type The type of series.
+     *                  Can be 1/Manga, 2/Novel, 3/One Shot, 4/Doujin, 5/Manhwa, 6/Manhua, or 7/OEL. The default is "Manga".
      */
     public function setType($type)
     {
@@ -509,8 +509,9 @@ class Manga
                 $this->type = 'Doujin';
                 break;
             case 5:
-            case 'Manwha':
-                $this->type = 'Manwha'; //Korean comics
+            case 'Manwha': //Old MAL mis-spelling
+            case 'Manhwa':
+                $this->type = 'Manhwa'; //Korean comics
                 break;
             case 6:
             case 'Manhua':
@@ -551,7 +552,8 @@ class Manga
             case 'Doujinshi':
                 return 4;
             case 5:
-            case 'Manwha':
+            case 'Manwha': //Old MAL mis-spelling
+            case 'Manhwa':
                 return 5; //Korean comics
             case 6:
             case 'Manhua':
