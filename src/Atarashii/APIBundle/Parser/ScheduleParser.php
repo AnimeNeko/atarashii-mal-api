@@ -68,10 +68,12 @@ class ScheduleParser
             $anime->setGenres($genreArray);
 
             //Image
-            $image = $crawler->filterXPath('//div[@class="image"]');
+            $image = $crawler->filterXPath('//div[@class="image"]/img');
             if ($image->count() > 0) {
-                if (preg_match('/url\((.*?)\)/', $image->attr('style'), $imageParts)) {
-                    $anime->setImageUrl($imageParts[1]);
+                $imageUrl = $image->attr('data-src');
+
+                if (preg_match('/(.*?)\?/', $imageUrl, $imageUrlMatches) === 1) { //Remove Query String parameters
+                    $anime->setImageUrl(preg_replace('/\/r\/\d+x\d+/', '', $imageUrlMatches[1])); //Remove size parameter (to get largest size)
                 }
             }
 
