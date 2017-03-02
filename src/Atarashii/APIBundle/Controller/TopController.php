@@ -112,7 +112,7 @@ class TopController extends FOSRestController
      * to select the set of results to return (in a default of 30 items per set). An
      * invalid or missing value defaults to page 1. The get variable "type" is used to
      * select the type of manga you want to see and can be one of "manga", "novels",
-     * "oneshots", "doujin", "manwha", "manhua", or "oels". A missing or invalid value
+     * "oneshots", "doujin", "manwha/manhwa", "manhua", or "oels". A missing or invalid value
      * defaults to show all types.
      *
      * @param string  $apiVersion The API version of the request
@@ -135,7 +135,8 @@ class TopController extends FOSRestController
             case 'novels':
             case 'oneshots':
             case 'doujin':
-            case 'manwha':
+            case 'manwha': //Old MAL mis-spelling
+            case 'manhwa':
             case 'manhua':
             case 'oels':
                 $type = $request->query->get('type');
