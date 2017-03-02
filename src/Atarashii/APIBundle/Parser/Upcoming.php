@@ -61,7 +61,7 @@ class Upcoming
         //We need to do some string manipulation here so it doesn't return a tiny image
         $mediaImage = $crawler->filterXPath('//div[@class="picSurround"]//img');
         if ($mediaImage->count() > 0) {
-            $mediaImage = $mediaImage->attr('src');
+            $mediaImage = $mediaImage->attr('data-src');
             $media->setImageUrl(preg_replace('/\/r\/\d+x\d+/', '', $mediaImage));
         }
 

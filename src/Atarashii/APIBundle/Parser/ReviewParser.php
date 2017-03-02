@@ -21,7 +21,7 @@ class ReviewParser
 
         $result = array();
 
-        $items = $crawler->filter('div [class="borderDark pt4 pb8 pl4 pr4 mb8"]');
+        $items = $crawler->filterXPath('//div[@id="content"]//table//div[@class="js-scrollfix-bottom-rel"]//div[@class="borderDark"]');
         foreach ($items as $item) {
             $result[] = self::parseReviews($item, $type);
         }
@@ -48,10 +48,11 @@ class ReviewParser
         $review->setHelpful($crawler->filterXPath('//td[2]/div//span')->text());
         $review->setHelpfulTotal($crawler->filterXPath('//td[2]/div//span')->text()); //Set to same as helpful for now, as the total votes are removed.
 
-        $review->setDate($crawler->filterXPath('//td[3]/div[1]')->text());
+        //Details Box
+        $details = $crawler->filterXPath('//div[@class="mb8"]');
 
         //Progress
-        $progress = $crawler->filterXPath('//td[3]/div[2]')->text();
+        $progress = $details->filterXPath('//div[contains(@class, "lightLink")]')->text();
 
         if (preg_match('/(\d+) of (\d+|\?)/', $progress, $matches)) {
             if ($type === 'anime') {
@@ -70,11 +71,16 @@ class ReviewParser
         }
 
         //Rating
-        $rating = $crawler->filterXPath('//td[3]/div[3]')->text();
+        $rating = $details->filterXPath('//div/a');
+        $ratingText = str_replace($rating->text(), '', $rating->parents()->text());
 
-        if (preg_match('/(\d+)/', $rating, $matches)) {
+        if (preg_match('/(\d+)/', $ratingText, $matches)) {
             $review->setRating((int) $matches[1]);
         }
+
+        //Date
+        $date = trim(str_replace($rating->parents()->text(), '', str_replace($progress, '', $details->text())));
+        $review->setDate($date);
 
         //Review Body
         $reviewBody = $crawler->filterXPath('//div[contains(@class,"textReadability")]');
@@ -87,13 +93,21 @@ class ReviewParser
         if (strpos($reviewBlock, 'reviewToggle') === false) {
             //Short Review, no hidden text
             preg_match('/<div .*?>.*?<\/div>(.*)/s', $reviewBlock, $reviewParts);
-            $review->setReview($reviewParts[1]);
+            $reviewText = $reviewParts[1];
         } else {
             //Long review, split text, second half hidden
             preg_match('/<div .*?>.*?<\/div>(.*?)<span .*?>(.*?)<\/span>/s', $reviewBlock, $reviewParts);
             $reviewText = $reviewParts[1].$reviewParts[2];
-            $review->setReview($reviewText);
         }
+
+        //Remove ending div and link, if present, from the review body
+        if(strpos($reviewText, 'Helpful</a>') !== false) {
+            if(preg_match('/(.*?)<div .*?>.*?<\/div>/s', $reviewText, $reviewMain)) {
+                $reviewText = $reviewMain[1];
+            }
+        }
+
+        $review->setReview(trim($reviewText));
 
         return $review;
     }
