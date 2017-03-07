@@ -286,21 +286,24 @@ class TitleParser
         }
         if ($extracted->count() > 0) {
             $extracted = trim(str_replace($extracted->text(), '', $extracted->parents()->text()));
-            $dateRange = explode(' to ', $extracted);
 
-            //Start Date
-            $startDate = self::parseTitleDate($dateRange[0]);
+            if ($extracted !== 'Not available') {
+                $dateRange = explode(' to ', $extracted);
 
-            if ($startDate !== null) {
-                $record->setStartDate($startDate[0], $startDate[1]);
-            }
+                //Start Date
+                $startDate = self::parseTitleDate($dateRange[0]);
 
-            //End Date
-            //Series yet to air won't list a range, and currently airing use a "?" for the end.
-            if (count($dateRange) > 1 && $dateRange[1] !== '?') {
-                $endDate = self::parseTitleDate($dateRange[1]);
-                if ($endDate !== null) {
-                    $record->setEndDate($endDate[0], $endDate[1]);
+                if ($startDate !== null) {
+                    $record->setStartDate($startDate[0], $startDate[1]);
+                }
+
+                //End Date
+                //Series yet to air won't list a range, and currently airing use a "?" for the end.
+                if (count($dateRange) > 1 && $dateRange[1] !== '?') {
+                    $endDate = self::parseTitleDate($dateRange[1]);
+                    if ($endDate !== null) {
+                        $record->setEndDate($endDate[0], $endDate[1]);
+                    }
                 }
             }
         }
