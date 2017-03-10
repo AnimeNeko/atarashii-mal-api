@@ -213,9 +213,12 @@ class TitleParser
         /*
          * Title Image
          */
-        $extracted = $sidebarContent->filterXPath('//img[@itemprop="image"]')->attr('src');
-        $extracted = str_replace('t.jpg', '.jpg', $extracted); //Sometimes we get a thumbnail. Remove the thumbnail suffix.
-        $record->setImageUrl($extracted);
+        $extracted = $sidebarContent->filterXPath('//img[@itemprop="image"]');
+        if (count($extracted) > 0) {
+            $extracted = $extracted->attr('src');
+            $extracted = str_replace('t.jpg', '.jpg', $extracted); //Sometimes we get a thumbnail. Remove the thumbnail suffix.
+            $record->setImageUrl($extracted);
+        }
 
         /*
          * Alternative Titles
