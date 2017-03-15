@@ -147,6 +147,14 @@ class RecordControllerTest extends WebTestCase
         MangaRecordTest::testGetReviewsAction($this, $client);
     }
 
+    public function testGetPicsAction()
+    {
+        $client = $this->client;
+
+        AnimeRecordTest::testGetReviewsAction($this, $client);
+        MangaRecordTest::testGetPicturesAction($this, $client);
+    }
+
     public static function setUpBeforeClass()
     {
         $client = static::createClient();

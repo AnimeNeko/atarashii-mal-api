@@ -768,4 +768,26 @@ class TitleParser
             return;
         }
     }
+
+    public static function parsePics($contents, $type)
+    {
+        $crawler = new Crawler();
+        $crawler->addHtmlContent($contents, 'UTF-8');
+
+        $titlePics = array();
+
+        //The main content of the page
+        $mainContent = $crawler->filterXPath('//div[@id="content"]/table/tr/td[2]');
+
+        //Grab just the gallery images inside the main content
+        $picsContent = $mainContent->filterXPath('//a[@rel="gallery-'.$type.'"]/img');
+
+        if (count($picsContent) > 0) {
+            foreach ($picsContent as $pic) {
+                $titlePics[] = $pic->getAttribute('src');
+            }
+        }
+
+        return $titlePics;
+    }
 }

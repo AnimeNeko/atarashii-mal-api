@@ -277,3 +277,17 @@ _api2_2_schedule_anime:
     path: /anime/schedule
     defaults: { _controller: AtarashiiAPIBundle:Record:getSchedule, _format: json, apiVersion: '2.2' }
     methods: [GET]
+
+_api2_2_anime_pictures:
+    path: /anime/{id}/pics
+    defaults: { _controller: AtarashiiAPIBundle:Record:getPictures, _format: json, apiVersion: '2.2', requestType: 'anime' }
+    methods: [GET]
+    requirements:
+        id: \d+
+
+_api2_2_manga_pictures:
+    path: /manga/{id}/pics
+    defaults: { _controller: AtarashiiAPIBundle:Record:getPictures, _format: json, apiVersion: '2.2', requestType: 'manga' }
+    methods: [GET]
+    requirements:
+        id: \d+

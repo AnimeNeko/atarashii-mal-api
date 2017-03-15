@@ -431,4 +431,44 @@ class RecordController extends FOSRestController
 
         return $view;
     }
+
+    /**
+     * Get pictures associated with the anime title.
+     *
+     * @param int     $id          The ID of the anime as assigned by MyAnimeList
+     * @param string  $requestType Either 'anime' or 'manga'
+     * @param Request $request     HTTP Request object
+     *
+     * @return View
+     */
+    public function getPicturesAction($id, $requestType, Request $request)
+    {
+        // https://myanimelist.net/anime/1887/_/pics
+        $downloader = $this->get('atarashii_api.communicator');
+
+        try {
+            $details = $downloader->fetch('/'.$requestType.'/'.$id.'/_/pics');
+        } catch (Exception\ServerException $e) {
+            return $this->view(array('error' => 'network-error'), 500);
+        }
+
+        $result = TitleParser::parsePics($details, $requestType);
+
+        $response = new Response();
+        $response->setPublic();
+        $response->setMaxAge(43200); //Twelve hours
+        $response->headers->addCacheControlDirective('must-revalidate', true);
+        $response->setEtag(md5(serialize($result)));
+
+        //Also, set "expires" header for caches that don't understand Cache-Control
+        $date = new \DateTime();
+        $date->modify('+43200 seconds'); //Twelve hours
+        $response->setExpires($date);
+
+        $view = $this->view($result);
+        $view->setResponse($response);
+        $view->setStatusCode(200);
+
+        return $view;
+    }
 }

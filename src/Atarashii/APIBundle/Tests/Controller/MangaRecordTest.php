@@ -147,4 +147,20 @@ class MangaRecordTest
         $date = $date->format('Y-m-d');
         $main->assertEquals($review->date, $date);
     }
+
+    public static function testGetPicturesAction($main, $client)
+    {
+        $client->request('GET', '/2.2/manga/894/pics');
+
+        $rawContent = $client->getResponse()->getContent();
+        $statusCode = $client->getResponse()->getStatusCode();
+        $content = json_decode($rawContent);
+
+        $main->assertNotNull($content);
+        $main->assertEquals(200, $statusCode);
+
+        $pic = $content[0];
+
+        $main->assertContains('myanimelist.cdn-dena.com/images/manga', $pic);
+    }
 }
