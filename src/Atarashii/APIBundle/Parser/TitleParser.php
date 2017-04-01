@@ -779,12 +779,22 @@ class TitleParser
         //The main content of the page
         $mainContent = $crawler->filterXPath('//div[@id="content"]/table/tr/td[2]');
 
-        //Grab just the gallery images inside the main content
-        $picsContent = $mainContent->filterXPath('//a[@rel="gallery-'.$type.'"]/img');
+        //Grab the gallery image blocks inside the main content
+        $picsContent = $mainContent->filterXPath('//div[@class="picSurround"]');
 
         if (count($picsContent) > 0) {
             foreach ($picsContent as $pic) {
-                $titlePics[] = $pic->getAttribute('src');
+                // Some images are linked to a "large" version.
+                // Use linked version if it exists, otherwise use the image itself.
+                $picNode = new Crawler($pic);
+                $possibleAnchor = $picNode->filterXPath('//a');
+                $possibleImage = $picNode->filterXPath('//img');
+
+                if ($possibleAnchor->count() > 0) {
+                    $titlePics[] = $possibleAnchor->attr('href');
+                } elseif ($possibleImage->count() > 0) {
+                    $titlePics[] = $possibleImage->attr('src');
+                }
             }
         }
 

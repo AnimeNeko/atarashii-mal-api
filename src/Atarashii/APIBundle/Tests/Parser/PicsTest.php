@@ -10,7 +10,6 @@ class PicsTest extends \PHPUnit\Framework\TestCase
     {
         $animePicsContents = file_get_contents(__DIR__.'/../InputSamples/anime-1887-pics.html');
         $mangaPicsContents = file_get_contents(__DIR__.'/../InputSamples/manga-11977-pics.html');
-        $apiVersion = '2.2';
 
         $animePics = TitleParser::parsePics($animePicsContents, 'anime');
         $mangaPics = TitleParser::parsePics($mangaPicsContents, 'manga');
