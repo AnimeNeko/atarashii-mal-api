@@ -100,7 +100,7 @@ class BrowseController extends FOSRestController
 
                 try {
                     $content = $downloader->fetch($location);
-                    if ($type === 'anime') {
+                    if ($requestType === 'anime') {
                         $searchResult = array(TitleParser::parse($content, $apiVersion, 'anime'));
                     } else {
                         $searchResult = array(TitleParser::parse($content, $apiVersion, 'manga'));
@@ -110,7 +110,7 @@ class BrowseController extends FOSRestController
                 }
             } else {
                 if ($downloader->wasRedirected()) {
-                    if ($type === 'anime') {
+                    if ($requestType === 'anime') {
                         $searchResult = array(TitleParser::parse($content, $apiVersion, 'anime'));
                     } else {
                         $searchResult = array(TitleParser::parse($content, $apiVersion, 'manga'));
