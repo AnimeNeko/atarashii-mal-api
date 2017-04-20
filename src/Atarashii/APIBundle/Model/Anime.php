@@ -2011,7 +2011,7 @@ class Anime
      */
     public static function getGenresId($genreString)
     {
-        $genreArray = explode(',', str_replace(', ', ',', $genreString));
+        $genreArray = explode(',', str_replace(', ', ',', strtolower($genreString)));
         $genreIds = array();
         if ($genreArray[0] !== '') {
             foreach ($genreArray as $genre) {

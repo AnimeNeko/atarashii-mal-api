@@ -1387,189 +1387,189 @@ class Manga
      */
     public static function getGenresId($genreString)
     {
-        $genreArray = explode(',', str_replace(', ', ',', $genreString));
+        $genreArray = explode(',', str_replace(', ', ',', strtolower($genreString)));
         $genreIds = array();
         if ($genreArray[0] !== '') {
             foreach ($genreArray as $genre) {
                 switch ($genre) {
                     case 1:
-                    case 'Action':
+                    case 'action':
                         $genreIds[] = 1;
                         break;
                     case 2:
-                    case 'Adventure':
+                    case 'adventure':
                         $genreIds[] = 2;
                         break;
                     case 3:
-                    case 'Cars':
+                    case 'cars':
                         $genreIds[] = 3;
                         break;
                     case 4:
-                    case 'Comedy':
+                    case 'comedy':
                         $genreIds[] = 4;
                         break;
                     case 5:
-                    case 'Dementia':
+                    case 'dementia':
                         $genreIds[] = 5;
                         break;
                     case 6:
-                    case 'Demons':
+                    case 'demons':
                         $genreIds[] = 6;
                         break;
                     case 7:
-                    case 'Mystery':
+                    case 'mystery':
                         $genreIds[] = 7;
                         break;
                     case 8:
-                    case 'Drama':
+                    case 'drama':
                         $genreIds[] = 8;
                         break;
                     case 9:
-                    case 'Ecchi':
+                    case 'ecchi':
                         $genreIds[] = 9;
                         break;
                     case 10:
-                    case 'Fantasy':
+                    case 'fantasy':
                         $genreIds[] = 10;
                         break;
                     case 11:
-                    case 'Game':
+                    case 'game':
                         $genreIds[] = 11;
                         break;
                     case 12:
-                    case 'Hentai':
+                    case 'hentai':
                         $genreIds[] = 12;
                         break;
                     case 13:
-                    case 'Historical':
+                    case 'historical':
                         $genreIds[] = 13;
                         break;
                     case 14:
-                    case 'Horror':
+                    case 'horror':
                         $genreIds[] = 14;
                         break;
                     case 15:
-                    case 'Kids':
+                    case 'kids':
                         $genreIds[] = 15;
                         break;
                     case 16:
-                    case 'Magic':
+                    case 'magic':
                         $genreIds[] = 16;
                         break;
                     case 17:
-                    case 'Martial Arts':
+                    case 'martial arts':
                         $genreIds[] = 17;
                         break;
                     case 18:
-                    case 'Mecha':
+                    case 'mecha':
                         $genreIds[] = 18;
                         break;
                     case 19:
-                    case 'Music':
+                    case 'music':
                         $genreIds[] = 19;
                         break;
                     case 20:
-                    case 'Parody':
+                    case 'parody':
                         $genreIds[] = 20;
                         break;
                     case 21:
-                    case 'Samurai':
+                    case 'samurai':
                         $genreIds[] = 21;
                         break;
                     case 22:
-                    case 'Romance':
+                    case 'romance':
                         $genreIds[] = 22;
                         break;
                     case 23:
-                    case 'School':
+                    case 'school':
                         $genreIds[] = 23;
                         break;
                     case 24:
-                    case 'Sci-Fi':
+                    case 'sci-fi':
                         $genreIds[] = 24;
                         break;
                     case 25:
-                    case 'Shoujo':
+                    case 'shoujo':
                         $genreIds[] = 25;
                         break;
                     case 26:
-                    case 'Shoujo Ai':
+                    case 'shoujo ai':
                         $genreIds[] = 26;
                         break;
                     case 27:
-                    case 'Shounen':
+                    case 'shounen':
                         $genreIds[] = 27;
                         break;
                     case 28:
-                    case 'Shounen Ai':
+                    case 'shounen ai':
                         $genreIds[] = 28;
                         break;
                     case 29:
-                    case 'Space':
+                    case 'space':
                         $genreIds[] = 29;
                         break;
                     case 30:
-                    case 'Sports':
+                    case 'sports':
                         $genreIds[] = 30;
                         break;
                     case 31:
-                    case 'Super Power':
+                    case 'super power':
                         $genreIds[] = 31;
                         break;
                     case 32:
-                    case 'Vampire':
+                    case 'vampire':
                         $genreIds[] = 32;
                         break;
                     case 33:
-                    case 'Yaoi':
+                    case 'yaoi':
                         $genreIds[] = 33;
                         break;
                     case 34:
-                    case 'Yuri':
+                    case 'yuri':
                         $genreIds[] = 34;
                         break;
                     case 35:
-                    case 'Harem':
+                    case 'harem':
                         $genreIds[] = 35;
                         break;
                     case 36:
-                    case 'Slice of Life':
+                    case 'slice of life':
                         $genreIds[] = 36;
                         break;
                     case 37:
-                    case 'Supernatural':
+                    case 'supernatural':
                         $genreIds[] = 37;
                         break;
                     case 38:
-                    case 'Military':
+                    case 'military':
                         $genreIds[] = 38;
                         break;
                     case 39:
-                    case 'Police':
+                    case 'police':
                         $genreIds[] = 39;
                         break;
                     case 40:
-                    case 'Psychological':
+                    case 'psychological':
                         $genreIds[] = 40;
                         break;
                     case 41:
-                    case 'Seinen':
+                    case 'seinen':
                         $genreIds[] = 41;
                         break;
                     case 42:
-                    case 'Josei':
+                    case 'josei':
                         $genreIds[] = 42;
                         break;
                     case 43:
-                    case 'Doujinshi':
+                    case 'doujinshi':
                         $genreIds[] = 43;
                         break;
                     case 44:
-                    case 'Gender Blender':
+                    case 'gender blender':
                         $genreIds[] = 44;
                         break;
                     case 45:
-                    case 'Thriller':
+                    case 'thriller':
                         $genreIds[] = 45;
                         break;
                     default:
