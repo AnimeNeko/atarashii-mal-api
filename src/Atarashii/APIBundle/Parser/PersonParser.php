@@ -108,7 +108,9 @@ class PersonParser
         // Favorites count
         $extracted = $leftcolumn->filterXPath('//span[text()="Member Favorites:"]');
         if ($extracted->count() > 0) {
-            $personrecord->setFavoritedCount(trim(str_replace($extracted->text(), '', $extracted->parents()->text())));
+            $extracted = str_replace($extracted->text(), '', $extracted->parents()->text());
+            $extracted = trim(str_replace(',', '', $extracted)); // Remove commas so we can convert to an int.
+            $personrecord->setFavoritedCount((int) $extracted);
         }
 
         // More Details
