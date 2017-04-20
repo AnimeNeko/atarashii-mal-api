@@ -70,7 +70,11 @@ class ScheduleParser
             //Image
             $image = $crawler->filterXPath('//div[@class="image"]/img');
             if ($image->count() > 0) {
-                $imageUrl = $image->attr('data-src');
+                if (empty($image->attr('src'))) {
+                    $imageUrl = $image->attr('data-src');
+                } else {
+                    $imageUrl = $image->attr('src');
+                }
 
                 if (preg_match('/(.*?)\?/', $imageUrl, $imageUrlMatches) === 1) { //Remove Query String parameters
                     $anime->setImageUrl(preg_replace('/\/r\/\d+x\d+/', '', $imageUrlMatches[1])); //Remove size parameter (to get largest size)
