@@ -129,8 +129,8 @@ class MessagesParser
         // Message.
         $messageText = $crawler->filterXPath('//td[@class="dialog-text"]');
 
-        if (preg_match('/Test Test<\/div>(.*?)<div/s', $messageText->html(), $messageBody)) {
-            $message->setMessage($messageBody[1]);
+        if (preg_match_all('/<\/div>(.*?)<div/s', $messageText->html(), $messageBody)) {
+            $message->setMessage($messageBody[1][1]);
         }
 
         return $message;
