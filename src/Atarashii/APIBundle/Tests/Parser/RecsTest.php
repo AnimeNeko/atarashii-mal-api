@@ -10,7 +10,7 @@ class RecsTest extends \PHPUnit\Framework\TestCase
     {
         $recsContents = file_get_contents(__DIR__.'/../InputSamples/anime-21-recs.html');
 
-        $content = RecsParser::parse($recsContents);
+        $content = RecsParser::parse($recsContents, 'anime');
 
         $this->assertInternalType('array', $content);
 
@@ -26,7 +26,7 @@ class RecsTest extends \PHPUnit\Framework\TestCase
 
         $recsContents = file_get_contents(__DIR__.'/../InputSamples/manga-21-recs.html');
 
-        $content = RecsParser::parse($recsContents);
+        $content = RecsParser::parse($recsContents, 'manga');
 
         $this->assertInternalType('array', $content);
 

@@ -13,11 +13,10 @@ namespace Atarashii\APIBundle\Parser;
 use Symfony\Component\DomCrawler\Crawler;
 use Atarashii\APIBundle\Model\Anime;
 use Atarashii\APIBundle\Model\Manga;
-use Atarashii\APIBundle\Helper\Date;
 
 class RecsParser
 {
-    public static function parse($contents)
+    public static function parse($contents, $mediaType)
     {
         $crawler = new Crawler();
         $crawler->addHTMLContent($contents, 'UTF-8');
@@ -27,12 +26,17 @@ class RecsParser
         $result = array();
 
         foreach ($rows as $historyItem) {
+            if ($mediaType == 'anime') {
+                $mediaItem = new Anime();
+            } else {
+                $mediaItem = new Manga();
+            }
+
             $crawler = new Crawler($historyItem);
-            $anime = new Anime();
-            $anime->setId(str_replace('#raArea1', '', $crawler->filter('a')->attr('id')));
-            $anime->setImageUrl(preg_replace('/r(.+?)\/(.+?)\?(.+?)$/', '$2', $crawler->filter('img')->attr('data-src')));
-            $anime->setTitle($crawler->filter('strong')->text());
-            $resultItem['item'] = $anime;
+            $mediaItem->setId(str_replace('#raArea1', '', $crawler->filter('a')->attr('id')));
+            $mediaItem->setImageUrl(preg_replace('/r(.+?)\/(.+?)\?(.+?)$/', '$2', $crawler->filter('img')->attr('data-src')));
+            $mediaItem->setTitle($crawler->filter('strong')->text());
+            $resultItem['item'] = $mediaItem;
             $resultItem['recommendations'] = self::parseInformation($crawler);
             $result[] = $resultItem;
         }

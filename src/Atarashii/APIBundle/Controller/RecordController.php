@@ -323,7 +323,7 @@ class RecordController extends FOSRestController
         if (strpos($details, 'No recommendations have been made for this title.') !== false) {
             return $this->view(array('error' => 'not-found'), 200);
         } else {
-            $result = RecsParser::parse($details);
+            $result = RecsParser::parse($details, $requestType);
 
             $response = new Response();
             $response->setPublic();
