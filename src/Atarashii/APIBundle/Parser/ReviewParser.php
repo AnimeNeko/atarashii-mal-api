@@ -102,8 +102,8 @@ class ReviewParser
         }
 
         //Remove ending div and link, if present, from the review body
-        if(strpos($reviewText, 'Helpful</a>') !== false) {
-            if(preg_match('/(.*?)<div .*?>.*?<\/div>/s', $reviewText, $reviewMain)) {
+        if (strpos($reviewText, 'Helpful</a>') !== false) {
+            if (preg_match('/(.*?)<div .*?>.*?<\/div>/s', $reviewText, $reviewMain)) {
                 $reviewText = $reviewMain[1];
             }
         }
