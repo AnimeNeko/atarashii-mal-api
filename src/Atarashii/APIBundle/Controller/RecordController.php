@@ -207,10 +207,12 @@ class RecordController extends FOSRestController
             $details = $downloader->fetch('/'.$requestType.'/'.$id.'/_/characters');
         } catch (Exception\ServerException $e) {
             return $this->view(array('error' => 'network-error'), 500);
+        } catch (Exception\ClientException $e) {
+            $details = $e->getResponse()->getBody();
         }
 
-        if (strpos($details, 'No characters') !== false) {
-            return $this->view(array('error' => 'not-found'), 200);
+        if ((strpos($details, 'No characters') !== false) || (strpos($details, 'This page doesn\'t exist') !== false)) {
+            return $this->view(array('error' => 'not-found'), 404);
         } else {
             $cast = CastParser::parse($details);
 
