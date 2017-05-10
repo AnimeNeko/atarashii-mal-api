@@ -133,10 +133,10 @@ class AnimeRecordTest
 
         //We're already testing the parser directly, so just make sure we got some valid info.
         $main->assertInstanceOf('stdClass', $character);
-        $main->assertEquals('Yukihira, Furano', $character->name);
+        $main->assertEquals('Furano Yukihira', $character->name);
 
         $main->assertInstanceOf('stdClass', $staff);
-        $main->assertEquals('Sadohara, Kaori', $staff->name);
+        $main->assertEquals('Kaori Sadohara', $staff->name);
     }
 
     public static function testGetReviewsAction($main, $client)

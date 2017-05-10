@@ -28,16 +28,16 @@ class CastParser
         $characters = null;
 
         foreach ($items as $item) {
-            //Bypass to determine if the last table contains the staff members
             $crawler = new Crawler($item);
-            if ($crawler->filter('td[width="27"]')->count() != 1) {
-                $staffitems = $crawler->children();
 
-                foreach ($staffitems as $staffitem) {
-                    $staff[] = self::parseStaff($staffitem);
-                }
-            } else {
+            //MAL doesn't easily separate the character and staff information.
+            //This is a dirty hack to tell if it's a character or staff
+
+            $url = $crawler->filterXPath('//td/div[@class="picSurround"]/a')->attr('href');
+            if (stristr($url, 'character')) {
                 $characters[] = self::parseCharacters($crawler);
+            } else {
+                $staff[] = self::parseStaff($crawler);
             }
         }
 
@@ -85,19 +85,20 @@ class CastParser
         return $cast;
     }
 
-    private static function parseStaff($item)
+    private static function parseStaff(Crawler $item)
     {
-        $crawler = new Crawler($item);
         $cast = new Cast();
 
-        if (preg_match('/people\/(.*?)\/.*$/', $crawler->filter('a')->attr('href'), $castId)) {
+        $url = $item->filterXPath('//td[2]/a');
+
+        if (preg_match('/people\/(.*?)\/.*$/', $url->attr('href'), $castId)) {
             $cast->setId($castId[1]);
         }
 
-        $cast->setName($crawler->filter('a')->eq(1)->text());
-        $cast->setRank($crawler->filter('small')->last()->text());
+        $cast->setName($item->filter('a')->eq(1)->text());
+        $cast->setRank($item->filter('small')->last()->text());
 
-        $imageUrl = $crawler->filter('img')->last()->attr('data-src');
+        $imageUrl = $item->filter('img')->last()->attr('data-src');
         $imageUrl = preg_replace('/\/r\/.*?x.*?\//', '/', $imageUrl);
         $imageUrl = preg_replace('/\?s=.*$/', '', $imageUrl);
         $cast->setImage($imageUrl);
