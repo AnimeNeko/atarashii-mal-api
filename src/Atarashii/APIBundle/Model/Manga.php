@@ -1565,7 +1565,7 @@ class Manga
                         $genreIds[] = 43;
                         break;
                     case 44:
-                    case 'gender blender':
+                    case 'gender bender':
                         $genreIds[] = 44;
                         break;
                     case 45:
