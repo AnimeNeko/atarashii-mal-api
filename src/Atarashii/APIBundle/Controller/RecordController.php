@@ -277,7 +277,6 @@ class RecordController extends FOSRestController
             } else {
                 $content = $downloader->fetch('/ajaxtb.php?detailedmid='.$id);
             }
-            Date::setTimeZone($downloader->fetch('/editprofile.php'));
         } catch (Exception\ServerException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         } catch (Exception\ClientException $e) {
@@ -290,6 +289,8 @@ class RecordController extends FOSRestController
 
             return $view;
         } else {
+            Date::setTimeZone($downloader->fetch('/editprofile.php'));
+
             $result = HistoryParser::parse($content, $id, $requestType);
 
             $view = $this->view($result);
