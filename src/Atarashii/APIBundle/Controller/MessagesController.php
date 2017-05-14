@@ -129,7 +129,8 @@ class MessagesController extends FOSRestController
      */
     public function deleteAction(Request $request, $id)
     {
-        // http://myanimelist.net/mymessages.php?go=delete&id=#{id}
+        // POST http://myanimelist.net/mymessages.php?go=delete
+        // Send id = actionid
 
         $downloader = $this->get('atarashii_api.communicator');
 
@@ -149,7 +150,7 @@ class MessagesController extends FOSRestController
 
                 return $view;
             }
-            $messagesdetails = $downloader->fetch('http://myanimelist.net/mymessages.php?go=delete&id='.$id);
+            $messagesdetails = $downloader->deleteMessage($id);
         } catch (Exception\ClientException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }
@@ -178,9 +179,25 @@ class MessagesController extends FOSRestController
 
         $downloader = $this->get('atarashii_api.communicator');
 
-        $id = (int) $request->request->get('id');
-        if ($id <= 0) {
-            return $this->view(array('error' => 'Invalid thread ID'), 404);
+        $urlParts[] = 'go=send';
+
+        $id = $request->request->get('id');
+        $aid = $request->request->get('actionid');
+
+        if ($id !== null && $aid !== null) {
+            $id = (int) $id;
+            $aid = (int) $aid;
+
+            if ($id <= 0) {
+                return $this->view(array('error' => 'Invalid thread ID'), 404);
+            }
+
+            if ($aid <= 0) {
+                return $this->view(array('error' => 'Invalid action ID'), 404);
+            }
+
+            $urlParts[] = 'threadid='.$id;
+            $urlParts[] = 'replyid='.$aid;
         }
 
         $send_username = $request->request->get('username');
@@ -191,6 +208,8 @@ class MessagesController extends FOSRestController
         $username = $request->server->get('PHP_AUTH_USER');
         $password = $request->server->get('PHP_AUTH_PW');
 
+        $urlParts[] = 'toname='.$send_username;
+
         try {
             if (!$downloader->cookieLogin($username, $password)) {
                 $view = $this->view(array('error' => 'unauthorized'), 401);
@@ -198,7 +217,8 @@ class MessagesController extends FOSRestController
 
                 return $view;
             }
-            $messagesdetails = $downloader->sendMessage('threadid='.$id.'&toname='.$send_username, $subject, $message);
+            $url = implode('&', $urlParts);
+            $messagesdetails = $downloader->sendMessage($url, $subject, $message);
         } catch (Exception\ClientException $e) {
             return $this->view(array('error' => 'network-error'), 500);
         }

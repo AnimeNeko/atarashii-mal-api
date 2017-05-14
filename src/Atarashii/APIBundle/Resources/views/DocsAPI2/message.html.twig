@@ -39,12 +39,15 @@
             <dt>Method</dt><dd>POST</dd>
             <dt>Authentication</dt><dd>Required</dd>
         </dl>
-        <p>Sends a message to the specified user.</p>
+        <p>Sends a message to the specified user. This can either start a new topic or be a reply to an existing message.</p>
+        <p>If the message is a reply to an existing message, both the thread and action IDs of the message to which you are replying must be sent.</p>
         <p>The values that can be sent in the post body:</p>
         <ul>
-            <li><code>username</code>: The username of the receiver</li>
+            <li><code>username</code>: The username of the receiver.</li>
             <li><code>subject</code>: The subject for the message.</li>
             <li><code>message</code>: The message.</li>
+            <li><code>id</code>: If replying to a message, the thread ID of that message.</li>
+            <li><code>actionid</code>: If replying to a message, the action ID of that message.</li>
         </ul>
 
         <h3>Deleting the message</h3>
@@ -53,7 +56,7 @@
             <dt>Method</dt><dd>DELETE</dd>
             <dt>Authentication</dt><dd>Required</dd>
         </dl>
-        <p>deletes a message from your list.</p>
+        <p>Deletes a message. The id should be the action id of the message you intend to delete, <em>not</em> the message or thread id. (This is a limitation of MAL.)</p>
 
         <hr>
     </div>

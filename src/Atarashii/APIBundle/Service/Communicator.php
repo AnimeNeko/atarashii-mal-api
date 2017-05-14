@@ -162,6 +162,30 @@ class Communicator
     }
 
     /**
+     * Delete a message on MAL.
+     *
+     * @param string $url     The parameters of the url
+     * @param string $subject Subject of the message
+     * @param string $message body of the message
+     *
+     * @return string
+     */
+    public function deleteMessage($id)
+    {
+        $requestOptions = array();
+
+        //Our post form fields are stored in an array named "form_params" in the request options.
+        $requestOptions['form_params'] = array();
+        $requestOptions['form_params']['csrf_token'] = $this->getCsrfToken();
+        $requestOptions['form_params']['id'] = (int) $id;
+
+        $this->response = $this->client->post('/mymessages.php?go=delete', $requestOptions);
+
+        // this is the response body from the requested page
+        return $this->response->getBody();
+    }
+
+    /**
      * Create a topic on MAL.
      *
      * @param int    $id      The board id
