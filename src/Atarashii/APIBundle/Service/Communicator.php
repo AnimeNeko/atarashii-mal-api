@@ -11,31 +11,44 @@
 namespace Atarashii\APIBundle\Service;
 
 use Symfony\Component\DomCrawler\Crawler;
+use Symfony\Component\HttpFoundation\RequestStack;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception;
 
 class Communicator
 {
-    private $useragent;
     private $client;
     private $response;
 
     /**
      * Create an instance of the communicator.
      *
-     * @param string $baseUrl   The base URL for the communications. Do not use a terminating slash
-     * @param string $userAgent User-Agent to send
+     * @param string       $baseUrl      The base URL for the communications. Do not use a terminating slash
+     * @param string       $userAgent    User-Agent to send
+     * @param RequestStack $requestStack The Symfony request stack object
      */
-    public function __construct($baseUrl, $userAgent)
+    public function __construct($baseUrl, $userAgent, RequestStack $requestStack)
     {
-        $this->useragent = $userAgent;
-
         //Default Options to use in Request
         $requestOptions = array();
         $requestOptions['base_uri'] = $baseUrl;
         $requestOptions['cookies'] = true;
-        $requestOptions['headers']['User-Agent'] = $this->useragent;
+        $requestOptions['headers']['User-Agent'] = $userAgent;
         $requestOptions['allow_redirects']['track_redirects'] = true;
+
+        //Send the client's IP and user agent to MAL if we have one
+        if ($requestStack->getCurrentRequest() !== null) {
+            $clientIp = $requestStack->getCurrentRequest()->getClientIp();
+
+            $requestOptions['headers']['X-Client-IP'] = $clientIp;
+            $requestOptions['headers']['X-Forwarded-For'] = $clientIp;
+
+            $clientUserAgent = $requestStack->getCurrentRequest()->headers->get('user-agent');
+
+            if ($clientUserAgent !== null) {
+                $requestOptions['headers']['User-Agent'] = $clientUserAgent;
+            }
+        }
 
         // create http client instance
         $this->client = new Client($requestOptions);
