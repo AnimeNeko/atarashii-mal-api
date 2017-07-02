@@ -2,7 +2,7 @@
 parameters:
     locale: en
     secret: SetMe
-    api_user_agent: Custom API UA (See http://myanimelist.net/forum/?topicid=692311)
+    api_user_agent: Atarashii API
     unit_testing:
         username: CHANGEME
         password: CHANGEME
