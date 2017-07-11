@@ -119,7 +119,7 @@ class MangaRecordTest
 
         //We're already testing the parser directly, so just make sure we got some valid info.
         $main->assertInstanceOf('stdClass', $character);
-        $main->assertEquals('Moka Akashiya', $character->name);
+        $main->assertEquals('Akashiya, Moka', $character->name);
     }
 
     public static function testGetReviewsAction($main, $client)
