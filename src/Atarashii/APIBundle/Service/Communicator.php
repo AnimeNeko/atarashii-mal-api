@@ -42,12 +42,6 @@ class Communicator
 
             $requestOptions['headers']['X-Client-IP'] = $clientIp;
             $requestOptions['headers']['X-Forwarded-For'] = $clientIp;
-
-            $clientUserAgent = $requestStack->getCurrentRequest()->headers->get('user-agent');
-
-            if ($clientUserAgent !== null) {
-                $requestOptions['headers']['User-Agent'] = $clientUserAgent;
-            }
         }
 
         // create http client instance
