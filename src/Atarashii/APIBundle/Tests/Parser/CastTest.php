@@ -49,19 +49,19 @@ class CastTest extends \PHPUnit\Framework\TestCase
 
         //Character Tests
         $this->assertEquals(2171, $character->getId());
-        $this->assertEquals('Kagami Hiiragi', $character->getName());
+        $this->assertEquals('Hiiragi, Kagami', $character->getName());
         $this->assertEquals('Main', $character->getRole());
         $this->assertStringStartsWith('https://myanimelist.cdn-dena.com/images/characters/', $character->getImage());
 
         //Actor Tests
         $this->assertEquals(52, $actor->getId());
-        $this->assertEquals('Emiri Katou', $actor->getActorName());
+        $this->assertEquals('Katou, Emiri', $actor->getActorName());
         $this->assertStringStartsWith('https://myanimelist.cdn-dena.com/images/voiceactors/', $actor->getActorImage());
         $this->assertEquals('Japanese', $actor->getActorLanguage());
 
         //Staff Tests
         $this->assertEquals(6771, $staff->getId());
-        $this->assertEquals('Yasuhiro Takemoto', $staff->getName());
+        $this->assertEquals('Takemoto, Yasuhiro', $staff->getName());
         $this->assertContains('Director', $staff->getRank());
         $this->assertStringStartsWith('https://myanimelist.cdn-dena.com/images/voiceactors/', $staff->getImage()); //Note the path is correct. MAL re-uses this for other non-VA staff images.
     }

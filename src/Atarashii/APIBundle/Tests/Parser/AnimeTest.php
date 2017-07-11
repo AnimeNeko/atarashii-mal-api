@@ -107,7 +107,7 @@ class AnimeTest extends \PHPUnit\Framework\TestCase
         $this->assertEmpty($anime->getOther());
 
         $openingTheme = $anime->getOpeningTheme();
-        $this->assertEquals('"Motteke! Sailor Fuku" by Aya Hirano, Emiri Katou, Kaori Fukuhara & Aya Endo', $openingTheme[0]);
+        $this->assertStringStartsWith('"Motteke! Sailor Fuku" by', $openingTheme[0]);
 
         $endingTheme = $anime->getEndingTheme();
         $this->assertEquals('#01: "Uchuu Tetsujin Kyoodain (宇宙鉄人キョーダイン)" by Aya Hirano (ep 1)', $endingTheme[0]);

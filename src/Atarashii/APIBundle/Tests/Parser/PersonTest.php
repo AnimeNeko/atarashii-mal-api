@@ -14,7 +14,7 @@ class PersonTest extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf('Atarashii\APIBundle\Model\Person', $person);
 
         $this->assertEquals('185', $person->getId());
-        $this->assertEquals('https://myanimelist.cdn-dena.com/images/voiceactors/3/43500.jpg', $person->getImageUrl());
+        $this->assertStringStartsWith('https://myanimelist.cdn-dena.com/images/voiceactors/', $person->getImageUrl());
         $this->assertEquals('Hanazawa, Kana', $person->getName());
         $this->assertEquals('香菜', $person->getGivenName());
         $this->assertEquals('花澤', $person->getFamilyName());
