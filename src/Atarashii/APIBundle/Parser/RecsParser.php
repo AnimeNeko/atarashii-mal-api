@@ -51,8 +51,13 @@ class RecsParser
 
         foreach ($rows as $historyItem) {
             $crawler = new Crawler($historyItem);
-            $resultItem['information'] = str_replace('&nbspread more', '', $crawler->filter('div[class="spaceit_pad"]')->text());
-            $resultItem['username'] = $crawler->filter('div[class="spaceit_pad"]')->eq(1)->filter('a')->eq(1)->text();
+
+            $reviewTextBox = $crawler->filterXPath('//div[contains(@class, "detail-user-recs-text")]');
+            $reviewAuthor = $crawler->filterXPath('//div[@class="spaceit_pad"]/a[starts-with(@href, "/profile")]');
+
+            $resultItem['information'] = str_replace('&nbspread more', '', $reviewTextBox->text());
+            $resultItem['username'] = $reviewAuthor->text();
+
             $result[] = $resultItem;
         }
 
