@@ -19,10 +19,10 @@ Bambino! | Manga - MyAnimeList.net
 
 <link rel="manifest" href="/manifest.json">
 
-<meta name='csrf_token' content='7530df9a2a58b4c1b96900f5817c6cd4639263c6'><link rel="stylesheet" type="text/css" href="https://myanimelist.cdn-dena.com/static/assets/css/pc/style-0761696b57.css" />
+<meta name='csrf_token' content='27bb7ab8d5fa481e39d151cc7efca8289d48b543'><link rel="stylesheet" type="text/css" href="https://myanimelist.cdn-dena.com/static/assets/css/pc/style-256db3456e.css" />
 
-<script type="text/javascript" src="https://myanimelist.cdn-dena.com/static/assets/js/pc/header-61a5e90384.js"></script>
-<script type="text/javascript" src="https://myanimelist.cdn-dena.com/static/assets/js/pc/all-2c21754fe3.js"
+<script type="text/javascript" src="https://myanimelist.cdn-dena.com/static/assets/js/pc/header-c4f7891876.js"></script>
+<script type="text/javascript" src="https://myanimelist.cdn-dena.com/static/assets/js/pc/all-dbd9ac4e66.js"
         id="alljs" data-params='{&quot;origin_url&quot;:&quot;https:\/\/myanimelist.net&quot;,&quot;is_request_bot_filter_log&quot;:true}' defer></script>
 
 
@@ -92,14 +92,14 @@ Bambino! | Manga - MyAnimeList.net
         <div class="wrapper"><div id="headerSmall"><a href="/panel.php" class="link-mal-logo">MyAnimeList.net</a>
 <a href="https://myanimelist.net/account/membership?_location=mal_h_b&amp;_type=2"
    class="banner-header-anime-straming" target="_self">
-  <img src="https://myanimelist.cdn-dena.com/images/membership/banner.gif?v=1" width="250" height="36"
-       srcset="https://myanimelist.cdn-dena.com/images/membership/banner.gif?v=1 1x, https://myanimelist.cdn-dena.com/images/membership/banner@2x.gif?v=1 2x"
-       alt="Become a MAL Supporter" title="Become a MAL Supporter">
+  <img src="https://myanimelist.cdn-dena.com/images/membership/banner-paypal.png?v=1" width="250" height="36"
+       srcset="https://myanimelist.cdn-dena.com/images/membership/banner-paypal.png?v=1 1x, https://myanimelist.cdn-dena.com/images/membership/banner-paypal@2x.png?v=1 2x"
+       alt="MAL Supporter is now accepting Paypal Checkout" title="MAL Supporter is now accepting Paypal Checkout">
 </a><div id="header-menu" class="pulldown"><div class="header-menu-unit header-list js-header-menu-unit" data-id="list"><a class="header-list-button " title="List"><i class="fa fa-list"></i></a><div class="header-menu-dropdown header-list-dropdown arrow_box"><ul><li><a href="https://myanimelist.net/animelist/AtarashiiApiTest">Anime List</a></li><li><a href="https://myanimelist.net/mangalist/AtarashiiApiTest">Manga List</a></li><li><a href="https://myanimelist.net/addtolist.php">Quick Add</a></li><li><a href="https://myanimelist.net/editprofile.php?go=listpreferences">List Settings</a></li></ul></div></div><div class="border"></div><div class="header-menu-unit header-message js-header-menu-unit" data-id="message"><a href="https://myanimelist.net/mymessages.php"
-         data-unread="0"
-         class="header-message-button 
-           "
-         title="Messages"><i class="fa fa-envelope"></i></a></div><div class="border"></div><div class="header-menu-unit header-notification"><div class="js-header-notification"></div></div><script>
+         data-unread="1"
+         class="header-message-button has-unread
+           text1"
+         title="You have 1 message."><i class="fa fa-envelope"></i></a></div><div class="border"></div><div class="header-menu-unit header-notification"><div class="js-header-notification"></div></div><script>
 window.MAL.headerNotification = {"countDigest":0,"dropdownOpenedAt":0,"hasNewItems":false};
 window.MAL.headerNotification.templates = {"root":"  <div>\n    <header-notification-button\n      :has-not-seen=\"hasNotSeenItems\"\n      :is-dropdown-visible=\"isDropdownVisible\"\n      :on-click=\"toggleDropdown\"\n      :num-whole-unread-items=\"numWholeUnreadItems\">\n    <\/header-notification-button>\n    <header-notification-dropdown\n      :items=\"items\"\n      :items-checked-in-this-session=\"itemsCheckedInThisSession\"\n      :num-whole-unread-items=\"numWholeUnreadItems\"\n      :dropdown-opened-at=\"dropdownOpenedAt\"\n      :is-visible=\"isDropdownVisible\"\n      :was-dropdown-closed=\"wasDropdownClosed\"\n      :is-loaded=\"isLoaded\"\n      v-on:checkItems=\"checkItems\"\n      v-on:acceptFriendRequests=\"acceptFriendRequests\"\n      v-on:denyFriendRequests=\"denyFriendRequests\"\n    >\n    <\/header-notification-dropdown>\n  <\/div>\n  ","button":"    <a class=\"header-notification-button\"\n      :class=\"[(hasUnread ? 'has-unread' : ''), (hasNotSeen ? 'new' : ''), ('text' + numWholeUnreadItemsAsString.length)]\"\n      @click=\"onClick\"\n      @keypress.enter=\"onClick\"\n      :aria-expanded=\"isDropdownVisible ? 'true' : 'false'\"\n      aria-haspopup=\"true\"\n      aria-label=\"Notifications\"\n      title=\"Notifications\"\n      tabindex=\"0\"\n            :data-unread=\"numWholeUnreadItemsAsString\">\n      <i class=\"fa fa-bell\"><\/i>\n    <\/a>\n  ","dropdown":"    <div class=\"header-notification-dropdown\" v-show=\"isVisible\">\n      <div class=\"arrow_box\">\n        <div class=\"header-notification-dropdown-inner\">\n          <h3>\n            <span class=\"settings ml8\">\n              <a href=\"\/notification\/setting\">\n                <i class=\"fa fa-cog mr4\"><\/i>Settings\n              <\/a>\n            <\/span>\n            <span class=\"mark-all\"\n              :class=\"{disabled: !hasUnreadItems}\"\n              @click=\"checkAllItems\">\n              <i class=\"fa fa-check mr4\"><\/i>Mark All as Read\n            <\/span>\n            Notifications\n          <\/h3>\n          <ol class=\"header-notification-item-list\">\n            <li class=\"header-notification-item\"\n              :class=\"[item.typeIdentifier, isNewItem(item) ? 'new' : '']\"\n              v-for=\"item in items\">\n              <a v-if=\"item.url\" @click=\"checkItem(item)\" :href=\"item.url\" class=\"background\"><\/a>\n              <div class=\"inner\"\n                :class=\"{'is-read': item.isRead && !isItemCheckedInThisSession(item)}\">\n                <div class=\"header-notification-item-header\">\n                                    <span class=\"is-read\"\n                    v-show=\"!item.isRead || isItemCheckedInThisSession(item)\"\n                    :class=\"{checked: item.isRead}\"\n                    @click=\"checkItem(item)\">\n                    <i class=\"fa fa-check\"><\/i>\n                    <i class=\"fa fa-check-circle\"><\/i>\n                  <\/span>\n                                    <span class=\"time\">${item.createdAtForDisplay}<\/span>\n                                    <span class=\"category\">${item.categoryName}<\/span>\n                <\/div>\n                                <div class=\"header-notification-item-content\"\n                  :class=\"[item.typeIdentifier]\" :on-check-item=\"checkItem\">\n                                    <component :is=\"resolveComponent(item)\"\n                    v-if=\"!item.isDeleted\"\n                    v-on:acceptFriendRequest=\"acceptFriendRequest\"\n                    v-on:denyFriendRequest=\"denyFriendRequest\"\n                    :item=\"item\"\n                    >\n                  <\/component>\n                  <div class=\"deleted\" v-if=\"item.isDeleted\">(deleted)<\/div>\n                <\/div>\n              <\/div>\n            <\/li>\n            <li class=\"header-notification-item empty\" v-if=\"isLoaded && items.length === 0\">\n              <p>No notifications.<\/p>\n            <\/li>\n            <li class=\"header-notification-item empty\" v-if=\"!isLoaded\">\n              <i class=\"fa fa-spinner fa-spin fa-2x fa-fw\" style=\"width:100%;color:#bbb;\"><\/i>\n            <\/li>\n          <\/ol>\n          <div class=\"header-notification-view-all\">\n            <a href=\"https:\/\/myanimelist.net\/notification\">\n              View All\n              <span v-if=\"numWholeUnreadItems > 0\">\n                (${numWholeUnreadItems &lt; 100 ? numWholeUnreadItems : &quot;99+&quot;})\n              <\/span>\n            <\/a>\n          <\/div>\n        <\/div>\n      <\/div>\n    <\/div>\n  ","itemFriendRequest":"    <div>\n      <p>\n        <a :href=\"item.friendProfileUrl\" class=\"fl-l mr4\"><img :src=\"item.friendImageUrl\" :alt=\"item.friendName\"><\/a>\n        <a :href=\"item.friendProfileUrl\">${item.friendName}<\/a>\n        sent you a friend request${item.message.length ? \":\" : \".\"}\n        <q class=\"message\" v-if=\"item.message.length\">${item.message}<\/q>\n      <\/p>\n      <p class=\"actions mt8\">\n        <span v-if=\"!item.isApproved\">\n          <span class=\"action-button accept\" @click=\"accept\">Accept<\/span><span class=\"action-button deny\" @click=\"deny\">Deny<\/span><\/span>\n        <span v-if=\"item.isApproved\">\n          <span class=\"result\">Accepted<\/span>\n        <\/span>\n      <\/p>\n    <\/div>\n  ","itemFriendRequestAccept":"    <p>\n      <a :href=\"item.friendProfileUrl\" class=\"fl-l mr4\"><img :src=\"item.friendImageUrl\" :alt=\"item.friendName\"><\/a>\n      <a :href=\"item.friendProfileUrl\">${item.friendName}<\/a>\n      accepted your friend request.\n    <\/p>\n  ","itemFriendRequestDeny":"    <p>\n      <a :href=\"item.friendProfileUrl\" class=\"fl-l mr4\"><img :src=\"item.friendImageUrl\" :alt=\"item.friendName\"><\/a>\n      <a :href=\"item.friendProfileUrl\">${item.friendName}<\/a>\n      denied your friend request.\n    <\/p>\n  ","itemProfileComment":"    <span>\n      <a :href=\"item.commentUserProfileUrl\">${item.commentUserName}<\/a>\n      posted a comment on your profile${item.text.length ? \":\" : \".\"}\n      <q class=\"message\" v-if=\"item.text.length\">${item.text}<\/q>\n    <\/span>\n  ","itemForumQuote":"    <span>\n      <a :href=\"item.quoteUserProfileUrl\">${item.quoteUserName}<\/a>\n      quoted your post in the <a :href=\"item.topicUrl\">${item.topicTitle}<\/a> topic.\n    <\/span>\n  ","itemBlogComment":"    <span>\n      <a :href=\"item.quoteUserProfileUrl\">${item.quoteUserName}<\/a>\n      <a :href=\"item.commentUserProfileUrl\">${item.commentUserName}<\/a>\n      posted a comment on your blog.\n    <\/span>\n  ","itemWatchedTopicMessage":"    <span>\n      <a :href=\"item.quoteUserProfileUrl\">${item.quoteUserName}<\/a>\n      A forum reply was posted on your watched topic\n      <a :href=\"item.topicUrl\">${item.topicTitle}<\/a>.\n    <\/span>\n  ","itemClubMassMessageInForum":"    <span>\n      <a :href=\"item.quoteUserProfileUrl\">${item.quoteUserName}<\/a>\n      <a :href=\"item.sharedUserProfileUrl\">${item.sharedUserName}<\/a> shared the discussion\n      <a :href=\"item.topicUrl\" :title=\"item.topicTitle\">${item.topicTitle}<\/a>\n      in <a :href=\"item.clubUrl\" :title=\"item.clubName\">${item.clubName}<\/a>.\n    <\/span>\n  ","itemRelatedAnimeAdd":"    <span>\n      <a :href=\"item.url\">${item.anime.title}<\/a>&nbsp;(${item.anime.mediaType}) has just been added to the database.\n    <\/span>\n  ","itemPaymentStripe":"    <span>\n      <i>${item.planName}<\/i> has been suspended, because the payment for your subscription was unable to be processed.\n    <\/span>\n  ","itemUserMentions":"    <span>\n      <a :href=\"item.senderProfileUrl\">${item.senderName}<\/a>\n      has mentioned your name in the\n      <a :href=\"item.pageUrl\">${item.pageTitle}<\/a>\n      <span v-text=\"{\n        user_mention_in_forum_message: 'topic',\n        user_mention_in_club_comment: 'club'\n      }[item.typeIdentifier]\"><\/span>.\n    <\/span>\n  ","itemOnAir":"    <span>\n      The anime you plan to watch will begin airing on ${item.date}:\n      <span class=\"ml8 mt4\">\n        <template v-for=\"(anime, i) in item.animes\">\n          <a :href=\"anime.url\">${anime.title}<\/a><template v-if=\"i < item.animes.length - 1\">, <\/template>\n        <\/template>\n      <\/span>\n    <\/span>\n  "};
 </script><div class="border"></div><div class="header-menu-unit header-profile js-header-menu-unit link-bg pl8 pr8" data-id="profile"><a class="header-profile-link">AtarashiiApiTest<i class="fa fa-caret-down ml4"></i></a><div class="header-menu-dropdown header-profile-dropdown arrow_box"><ul><li><a href="https://myanimelist.net/profile/AtarashiiApiTest">Profile</a></li><li class="clearfix"><a href="https://myanimelist.net/myfriends.php">Friends</a></li><li class="clearfix"><a href="/clubs.php?action=invitations"
@@ -141,6 +141,7 @@ window.MAL.headerNotification.templates = {"root":"  <div>\n    <header-notifica
             <li><a href="https://myanimelist.net/clubs.php?_location=mal_h_m">Clubs</a></li>
             <li><a href="https://myanimelist.net/blog.php?_location=mal_h_m">Blogs</a></li>
             <li><a href="https://myanimelist.net/users.php?_location=mal_h_m">Users</a></li>
+            <li><a href="https://discord.gg/g443UVv">Discord Chat</a></li>
           </ul>
         </li>
         <li class="small2"><a href="#" class="non-link">Industry</a>
@@ -237,8 +238,8 @@ window.MAL.headerNotification.templates = {"root":"  <div>\n    <header-notifica
   <a href="/manga/genre/8/Drama" title="Drama">Drama</a>, <a href="/manga/genre/36/Slice_of_Life" title="Slice of Life">Slice of Life</a>, <a href="/manga/genre/41/Seinen" title="Seinen">Seinen</a></div><div><span class="dark_text">Authors:</span>
     <a href="/people/9118/Tetsuji_Sekiya">Sekiya, Tetsuji</a> (Story & Art)</div><div class="spaceit"><span class="dark_text">Serialization:</span>
     <a href="/manga/magazine/3/Big_Comic_Spirits" title="Big Comic Spirits">Big Comic Spirits</a></div><br>
-<h2>Statistics</h2><div class="po-r js-statistics-info di-ib" data-id="info1"><span itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating" ><span class="dark_text">Score:</span> <span itemprop="ratingValue">7.99</span><sup><small>1</small></sup> <small>(scored by <span itemprop="ratingCount">1515</span> users)</small><meta itemprop="bestRating" content="10"><meta itemprop="worstRating" content="1"></span><div class="statistics-info info1"><small><sup>1</sup> indicates a weighted score. Please note that 'Not yet published' titles are excluded.</small></div></div><div class="spaceit po-r js-statistics-info di-ib" data-id="info2">  <span class="dark_text">Ranked:</span> #939<sup><small>2</small></sup>  <div class="statistics-info info2"><small><sup>2</sup> based on the <a href="/topmanga.php">top manga</a> page. Please note that 'R18+' titles are excluded.</small></div></div><div><span class="dark_text">Popularity:</span> #2258</div>
-<div class="spaceit"><span class="dark_text">Members:</span> 3,153</div>
+<h2>Statistics</h2><div class="po-r js-statistics-info di-ib" data-id="info1"><span itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating" ><span class="dark_text">Score:</span> <span itemprop="ratingValue">7.99</span><sup><small>1</small></sup> <small>(scored by <span itemprop="ratingCount">1549</span> users)</small><meta itemprop="bestRating" content="10"><meta itemprop="worstRating" content="1"></span><div class="statistics-info info1"><small><sup>1</sup> indicates a weighted score. Please note that 'Not yet published' titles are excluded.</small></div></div><div class="spaceit po-r js-statistics-info di-ib" data-id="info2">  <span class="dark_text">Ranked:</span> #939<sup><small>2</small></sup>  <div class="statistics-info info2"><small><sup>2</sup> based on the <a href="/topmanga.php">top manga</a> page. Please note that 'R18+' titles are excluded.</small></div></div><div><span class="dark_text">Popularity:</span> #2280</div>
+<div class="spaceit"><span class="dark_text">Members:</span> 3,227</div>
 <div><span class="dark_text">Favorites:</span> 53</div><br><h2>External Links</h2><div class="pb16"><a href="http://ja.wikipedia.org/wiki/%E3%83%90%E3%83%B3%E3%83%93%E3%80%9C%E3%83%8E!" target="_blank">Wikipedia</a></div><div class="clearfix mauto mt16" style="width:160px;padding-right10px;">    
         <div class="_unit " style="width:160px;display: block !important;" data-height="600">
       <div id="pc_manga_detail_side_sky" class="" style="width:160px;">
@@ -280,9 +281,9 @@ window.MAL.headerNotification.templates = {"root":"  <div>\n    <header-notifica
 
 <table border="0" cellspacing="0" cellpadding="0" width="100%">
 	<tr>
-	<td valign="top"><div class="pb24"><div class="di-t w100 mt12"><div class="anime-detail-header-stats di-tc va-t "><div class="stats-block po-r clearfix"><div class="fl-l score" data-title="score" data-user="1,515 users" title="indicates a weighted score. Please note that 'Not yet published' titles are excluded.">
+	<td valign="top"><div class="pb24"><div class="di-t w100 mt12"><div class="anime-detail-header-stats di-tc va-t "><div class="stats-block po-r clearfix"><div class="fl-l score" data-title="score" data-user="1,549 users" title="indicates a weighted score. Please note that 'Not yet published' titles are excluded.">
         7.99
-      </div><div class="di-ib ml12 pl20 pt8"><span class="numbers ranked" title="based on the top anime page. Please note that 'Not yet aired' and 'R18+' titles are excluded.">Ranked <strong>#939</strong></span><span class="numbers popularity">Popularity <strong>#2258</strong></span><span class="numbers members">Members <strong>3,153</strong></span></div><div class="information-block di-ib clearfix"><span class="information type"><a href="https://myanimelist.net/topmanga.php?type=manga">Manga</a></span><span class="information season"><a href="/manga/magazine/3/Big_Comic_Spirits" title="Big Comic Spirits">Big Comic Spirits</a></span><span class="information studio author"><a href="/people/9118/Tetsuji_Sekiya">Sekiya, Tetsuji</a> (Story & Art)
+      </div><div class="di-ib ml12 pl20 pt8"><span class="numbers ranked" title="based on the top anime page. Please note that 'Not yet aired' and 'R18+' titles are excluded.">Ranked <strong>#939</strong></span><span class="numbers popularity">Popularity <strong>#2280</strong></span><span class="numbers members">Members <strong>3,227</strong></span></div><div class="information-block di-ib clearfix"><span class="information type"><a href="https://myanimelist.net/topmanga.php?type=manga">Manga</a></span><span class="information season"><a href="/manga/magazine/3/Big_Comic_Spirits" title="Big Comic Spirits">Big Comic Spirits</a></span><span class="information studio author"><a href="/people/9118/Tetsuji_Sekiya">Sekiya, Tetsuji</a> (Story & Art)
         </span></div></div><div class="user-status-block js-user-status-block fn-grey6 clearfix al mt8 pl12 po-r" data-type="manga"><input type="hidden" id="myinfo_anime_id" value="11977"><select name="myinfo_status" id="myinfo_status" class="form-user-status js-form-user-status myinfo_updateInfo"><option value="1">Reading</option><option selected="selected" value="2">Completed</option><option value="3">On-Hold</option><option value="4">Dropped</option><option value="6">Plan to Read</option></select><select name="myinfo_score" id="myinfo_score" class="form-user-score js-form-user-score ml8"><option value="0">Select</option><option value="10">(10) Masterpiece</option><option value="9">(9) Great</option><option value="8">(8) Very Good</option><option selected="selected" value="7">(7) Good</option><option value="6">(6) Fine</option><option value="5">(5) Average</option><option value="4">(4) Bad</option><option value="3">(3) Very Bad</option><option value="2">(2) Horrible</option><option value="1">(1) Appalling</option></select><div class="di-ib form-user-episode ml8 ">
         Volumes: <input type="text" id="myinfo_volumes" name="myinfo_volumes" size="3" class="inputtext js-user-episode-seen" value="15" >/<span id="totalVols" data-num="15">15</span><a href="javascript:void(0);" class="js-btn-count increase volume ml4"><i class="fa fa-plus-circle"></i></a></div><div class="di-ib form-user-episode ml8 ">
         Chapters: <input type="text" id="myinfo_chapters" name="myinfo_chapters" size="3" class="inputtext js-user-episode-seen" value="164" >/<span id="totalChaps" data-num="164">164</span><a href="javascript:void(0);" class="js-btn-count increase chapter ml4"><i class="fa fa-plus-circle"></i></a></div><a href="https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords=Bambino%21%20Manga&_encoding=UTF8&tag=mangadetailstatus-multi-20&linkCode=ur2&linkId=8c613d92a6ba2baa881f9297649d430a&camp=1789&creative=9325" class="btn-affiliate amazon js-shop-anime js-shop-selecter icon-shop-default" data-shop='{&quot;user_id&quot;:4743994,&quot;shop&quot;:&quot;amazon&quot;,&quot;id&quot;:11977,&quot;type&quot;:&quot;manga&quot;}' target="_blank"><img src="https://myanimelist.cdn-dena.com/images/affiliates/buy_amazon5.gif" width="118" height="25" alt="buy from amazon"></a><div class="anime-detail-header-affiliate-dialog js-shop-selecter-dialog" style="display:none"><a href="https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords=Bambino%21%20Manga&_encoding=UTF8&tag=mangadetailstatus-multi-20&linkCode=ur2&linkId=8c613d92a6ba2baa881f9297649d430a&camp=1789&creative=9325" class="btn-affiliate amazon js-shop-anime" data-shop='{&quot;user_id&quot;:4743994,&quot;shop&quot;:&quot;amazon&quot;,&quot;id&quot;:11977,&quot;type&quot;:&quot;manga&quot;}' target="_blank"><img src="https://myanimelist.cdn-dena.com/images/affiliates/buy_amazon5.gif" width="118" height="25" alt="buy from amazon"></a><a href="http://www.shareasale.com/r.cfm?u=1384175&b=866986&m=65886&afftrack=&urllink=www.rightstufanime.com%2Fsearch%3Fkeywords%3DBambino%21" class="btn-affiliate right_stuf js-shop-anime" data-shop='{&quot;user_id&quot;:4743994,&quot;shop&quot;:&quot;right_stuf&quot;,&quot;id&quot;:11977,&quot;type&quot;:&quot;manga&quot;}' target="_blank"><img src="https://myanimelist.cdn-dena.com/images/affiliates/buy_right_stuf.png" width="118" height="25" alt="buy from Rightstuf"></a></div></div></div></div><div class="js-myinfo-error badresult-text al pb4" style="display:none;"></div>
@@ -295,7 +296,7 @@ This series received live-action adaptation in 2007.<div class="border_top" styl
       <div id="pc_manga_detail_middle_rec_l" class="" style="width:336px;">
         <script type='text/javascript'>
           googletag.cmd.push(function() {
-                      var slot = googletag.defineSlot("/84947469/pc_manga_detail_middle_rec_l", [[300,250],[336,280],[728,120],[728,90],[1,1]], "pc_manga_detail_middle_rec_l").addService(googletag.pubads())
+                      var slot = googletag.defineSlot("/84947469/pc_manga_detail_middle_rec_l", [[300,250],[336,280],[728,120],[728,90],[718,250],[1,1]], "pc_manga_detail_middle_rec_l").addService(googletag.pubads())
       .setTargeting("adult", "white").setTargeting("title", "Bambino!").setTargeting("utm_campaign", "ad_mal_manga_11977").setTargeting("genres", ["Slice of Life","Drama","Seinen"]).setCollapseEmptyDiv(true);googletag.enableServices();
 
       googletag.display("pc_manga_detail_middle_rec_l");
@@ -317,15 +318,15 @@ This series received live-action adaptation in 2007.<div class="border_top" styl
 	<tr>
 	  <td class="pb24"><br><h2><div class="floatRightHeader"><a href="/dbchanges.php?mid=11977&t=relations" style="font-weight: normal;">Edit</a></div>Related Manga</h2><table class="anime_detail_related_anime" style="border-spacing:0px;"><tr><td nowrap="" valign="top" class="ar fw-n borderClass">Sequel:</td><td width="100%" class="borderClass"><a href="/manga/19008/Bambino_Secondo">Bambino! Secondo</a></td></table><br><h2><div class="floatRightHeader"><a href="/manga/11977/Bambino/characters" style="font-weight: normal;">More characters</a></div>Characters</h2><div class="detail-characters-list clearfix"><div class="left-column fl-l divider" style="width:392px;"><table border="0" cellpadding="0" cellspacing="0" width="100%">
     <tr>
-      <td valign="top" width="27" class="ac borderClass ">
+      <td valign="top" width="27" class="ac borderClass">
         <div class="picSurround">
           <a href="https://myanimelist.net/character/33768/Shogo_Ban" class="fw-n">
-            <img alt="Shogo Ban" width="23" height="32" data-src="https://myanimelist.cdn-dena.com/r/23x32/images/characters/12/274203.jpg?s=32c5638aea5925212054ed23db9c70c4" data-srcset="https://myanimelist.cdn-dena.com/r/23x32/images/characters/12/274203.jpg?s=32c5638aea5925212054ed23db9c70c4 1x, https://myanimelist.cdn-dena.com/r/46x64/images/characters/12/274203.jpg?s=9557d7a0c0416aa5fd6841d8a74b5fae 2x" class="lazyload" />
+            <img alt="Ban, Shogo" width="23" height="32" data-src="https://myanimelist.cdn-dena.com/r/23x32/images/characters/12/274203.jpg?s=32c5638aea5925212054ed23db9c70c4" data-srcset="https://myanimelist.cdn-dena.com/r/23x32/images/characters/12/274203.jpg?s=32c5638aea5925212054ed23db9c70c4 1x, https://myanimelist.cdn-dena.com/r/46x64/images/characters/12/274203.jpg?s=9557d7a0c0416aa5fd6841d8a74b5fae 2x" class="lazyload" />
           </a>
         </div>
       </td>
-      <td valign="top" class="borderClass ">
-        <a href="https://myanimelist.net/character/33768/Shogo_Ban">Shogo Ban</a>
+      <td valign="top" class="borderClass">
+        <a href="https://myanimelist.net/character/33768/Shogo_Ban">Ban, Shogo</a>
         <div class="spaceit_pad">
           <small>Main</small>
         </div>
@@ -333,15 +334,15 @@ This series received live-action adaptation in 2007.<div class="border_top" styl
     </tr>
   </table></div><div class="left-right fl-r" style="width:392px;"><table border="0" cellpadding="0" cellspacing="0" width="100%">
     <tr>
-      <td valign="top" width="27" class="ac borderClass ">
+      <td valign="top" width="27" class="ac borderClass">
         <div class="picSurround">
           <a href="https://myanimelist.net/character/95357/Asuka_Hibino" class="fw-n">
-            <img alt="Asuka Hibino" width="23" height="32" data-src="https://myanimelist.cdn-dena.com/r/23x32/images/questionmark_23.gif?s=f0d17be5a46f7de113f7dbbb23ae5e1a" data-srcset="https://myanimelist.cdn-dena.com/r/23x32/images/questionmark_23.gif?s=f0d17be5a46f7de113f7dbbb23ae5e1a 1x, https://myanimelist.cdn-dena.com/r/46x64/images/questionmark_23.gif?s=368162569b0f2cedaed4ee70adb1f59e 2x" class="lazyload" />
+            <img alt="Hibino, Asuka" width="23" height="32" data-src="https://myanimelist.cdn-dena.com/r/23x32/images/questionmark_23.gif?s=f0d17be5a46f7de113f7dbbb23ae5e1a" data-srcset="https://myanimelist.cdn-dena.com/r/23x32/images/questionmark_23.gif?s=f0d17be5a46f7de113f7dbbb23ae5e1a 1x, https://myanimelist.cdn-dena.com/r/46x64/images/questionmark_23.gif?s=368162569b0f2cedaed4ee70adb1f59e 2x" class="lazyload" />
           </a>
         </div>
       </td>
-      <td valign="top" class="borderClass ">
-        <a href="https://myanimelist.net/character/95357/Asuka_Hibino">Asuka Hibino</a>
+      <td valign="top" class="borderClass">
+        <a href="https://myanimelist.net/character/95357/Asuka_Hibino">Hibino, Asuka</a>
         <div class="spaceit_pad">
           <small>Supporting</small>
         </div>
@@ -382,7 +383,7 @@ This series received live-action adaptation in 2007.<div class="border_top" styl
 <div class="borderDark" style="padding: 4px 0;">
   <div class="spaceit">
     <div class="mb8" style="float: right; text-align: right;">
-      Oct 30, 2013
+      <div title="5:48 PM">Oct 30, 2013</div>
       <div class="lightLink spaceit">
                   164 of 164 chapters read
               </div>
@@ -484,7 +485,7 @@ At the heart of Ban&#039;s story however is the drive and desire which fuel the 
 <div class="borderDark" style="padding: 4px 0;">
   <div class="spaceit">
     <div class="mb8" style="float: right; text-align: right;">
-      Jun 12, 2016
+      <div title="12:42 AM">Jun 12, 2016</div>
       <div class="lightLink spaceit">
                   164 of 164 chapters read
               </div>
@@ -587,7 +588,7 @@ If you want something life changing, exciting, fresh or just want to learn more 
 <div class="borderDark" style="padding: 4px 0;">
   <div class="spaceit">
     <div class="mb8" style="float: right; text-align: right;">
-      Jan 20, 2015
+      <div title="2:48 AM">Jan 20, 2015</div>
       <div class="lightLink spaceit">
                   164 of 164 chapters read
               </div>
@@ -675,7 +676,7 @@ the only bad thing about this manga is that things or events happen to suddenly 
 <div class="borderDark" style="padding: 4px 0;">
   <div class="spaceit">
     <div class="mb8" style="float: right; text-align: right;">
-      Mar 6, 2012
+      <div title="5:59 AM">Mar 6, 2012</div>
       <div class="lightLink spaceit">
                   133 of 164 chapters read
               </div>
