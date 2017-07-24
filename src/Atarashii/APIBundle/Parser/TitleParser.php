@@ -270,7 +270,11 @@ class TitleParser
 
         //Genres
         $extracted = $sidebarContent->filterXPath('//span[text()="Genres:"]');
-        if ($extracted->count() > 0 && strpos($extracted->parents()->text(), 'None found') === false) {
+        $hasGenre = $extracted->count() > 0 
+            && strpos($extracted->parents()->text(), 'None found') === false 
+            && strpos($extracted->parents()->text(), 'No genres') === false;
+
+        if ($hasGenre) {
             $records = $extracted->parents()->first()->filterXPath('//a');
 
             foreach ($records as $genreRecord) {
