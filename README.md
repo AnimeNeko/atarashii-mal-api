@@ -45,5 +45,5 @@ property of MyAnimeList, LLC.
 License
 -------
 
-The Atarashii MAL API is Copyright © 2015-2016 Ratan Dhawtal and Michael Johnson.
+The Atarashii MAL API is Copyright © 2015-2017 Ratan Dhawtal and Michael Johnson.
 It is licensed under the Apache Public License 2.0.

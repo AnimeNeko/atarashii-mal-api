@@ -3,7 +3,7 @@ System Requirements
 
 Following are base system requirements needed to run this software.
 
- * [PHP](https://secure.php.net/) 5.5.9 or higher with the following modules
+ * [PHP](https://secure.php.net/) 5.6 or higher with the following modules
    * ctype
    * Internationalization (intl)
    * JSON
