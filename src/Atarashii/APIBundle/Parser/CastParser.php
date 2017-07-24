@@ -61,7 +61,7 @@ class CastParser
 
         $cast->setRole($item->filter('small')->text());
 
-        foreach ($item->filter('table[class="space_table"] tr') as $actorItem) {
+        foreach ($item->filter('td[align="right"] tr') as $actorItem) {
             $actor = new Actor();
             $crawler = new Crawler($actorItem);
 
