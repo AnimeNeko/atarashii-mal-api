@@ -97,6 +97,7 @@ class UpdateInputSamplesCommand extends ContainerAwareCommand
         $outputDir = $rootDir.'/../src/Atarashii/APIBundle/Tests/InputSamples';
 
         $io->title('Input Sample Updater');
+        $io->note('Please keep in mind that we need to pause after each page fetch because of a rate limit.');
 
         try {
             $this->fetchAnonPages($io, $fs, $downloader, $outputDir);
@@ -131,6 +132,7 @@ class UpdateInputSamplesCommand extends ContainerAwareCommand
             $io->text($pageTitle);
             $pageContent = $downloader->fetch($pageUrl);
             $fs->dumpFile($outputDir.$pageFilename, $pageContent);
+            sleep(2); //Need to cool down a bit when hitting MAL. They rate limit page fetches.
         }
     }
 
@@ -157,6 +159,7 @@ class UpdateInputSamplesCommand extends ContainerAwareCommand
                     $io->text($pageTitle);
                     $pageContent = $downloader->fetch($pageUrl);
                     $fs->dumpFile($outputDir.$pageFilename, $pageContent);
+                    sleep(2); //Need to cool down a bit when hitting MAL. They rate limit page fetches.
                 }
             } else {
                 $io->error('Username and password did not work. Please check that they are set correctly in the unit_testing parameters.');

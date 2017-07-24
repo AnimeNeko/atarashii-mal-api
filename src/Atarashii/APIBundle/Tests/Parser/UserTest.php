@@ -43,13 +43,11 @@ class UserTest extends \PHPUnit\Framework\TestCase
         $profileDetails = $this->profile->details;
 
         //Source will vary, so store the expected values based on the source.
-        $expectedString = 'Yesterday, 9:37 PM';
+        $expectedString = 'Now';
 
         //MAL defaults to this timezone for general dates when not logged in.
         $expected = new \DateTime();
-        $expected->modify('-1 day');
-        $expected->setTime(21, 37);
-        $expectedTimeString = $expected->format('Y-m-d\TH:iO'); // Full ISO-8601 is Y-m-d\TH:iO
+        $expectedTimeString = $expected->format('Y-m-d\TH:i:sO'); // Full ISO-8601 is Y-m-d\TH:i:sO
 
         $this->assertEquals($expectedString, $profileDetails->getLastOnline());
         $this->assertEquals($expectedTimeString, $profileDetails->getLastOnline2());

@@ -19,7 +19,7 @@ Hayao Miyazaki - MyAnimeList.net
 
 <link rel="manifest" href="/manifest.json">
 
-<meta name='csrf_token' content='27bb7ab8d5fa481e39d151cc7efca8289d48b543'><link rel="stylesheet" type="text/css" href="https://myanimelist.cdn-dena.com/static/assets/css/pc/style-256db3456e.css" />
+<meta name='csrf_token' content='01f89f079058166ed5aa04f8a1429cfb64778894'><link rel="stylesheet" type="text/css" href="https://myanimelist.cdn-dena.com/static/assets/css/pc/style-256db3456e.css" />
 
 <script type="text/javascript" src="https://myanimelist.cdn-dena.com/static/assets/js/pc/header-c4f7891876.js"></script>
 <script type="text/javascript" src="https://myanimelist.cdn-dena.com/static/assets/js/pc/all-dbd9ac4e66.js"
@@ -89,11 +89,11 @@ Hayao Miyazaki - MyAnimeList.net
     </div>
   </div>
         <div class="wrapper"><div id="headerSmall"><a href="/" class="link-mal-logo">MyAnimeList.net</a>
-<a href="https://myanimelist.net/account/membership?_location=mal_h_b&amp;_type=2"
+<a href="https://myanimelist.net/account/membership?_location=mal_h_b&amp;_type=3"
    class="banner-header-anime-straming" target="_self">
-  <img src="https://myanimelist.cdn-dena.com/images/membership/banner-paypal.png?v=1" width="250" height="36"
-       srcset="https://myanimelist.cdn-dena.com/images/membership/banner-paypal.png?v=1 1x, https://myanimelist.cdn-dena.com/images/membership/banner-paypal@2x.png?v=1 2x"
-       alt="MAL Supporter is now accepting Paypal Checkout" title="MAL Supporter is now accepting Paypal Checkout">
+  <img src="https://myanimelist.cdn-dena.com/images/membership/banner2.gif?v=1" width="250" height="36"
+       srcset="https://myanimelist.cdn-dena.com/images/membership/banner2.gif?v=1 1x, https://myanimelist.cdn-dena.com/images/membership/banner2@2x.gif?v=1 2x"
+       alt="Become a MAL Supporter" title="Become a MAL Supporter">
 </a><div id="header-menu" ><div class="header-menu-login"><a class="btn-mal-service" href="https://myanimelist.net/membership?_location=mal_h_u">Hide Ads</a><a class="btn-login" href="https://myanimelist.net/login.php?from=%2Fpeople%2F1870" id="malLogin">Login</a><a class="btn-signup" href="https://myanimelist.net/register.php?from=%2Fpeople%2F1870">Sign Up</a></div></div></div>  <div id="menu" class="">
     <div id="menu_right"><script type="text/x-template" id="incremental-result-item-anime"><div class="list anime" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info anime"><div class="name">${ item.name } <span class="media-type">(${ item.payload.media_type })</span></div><div class="extra-info">Aired: ${ item.payload.aired }<br>Score: ${ item.payload.score }<br>Status: ${ item.payload.status }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info anime"><div class="name">${ item.name }</div><div class="media-type">(${ mediaTypeWithStartYear })</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-manga"><div class="list manga" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info manga"><div class="name">${ item.name } <span class="media-type">(${ item.payload.media_type })</span></div><div class="extra-info">Published: ${ item.payload.published }<br>Score: ${ item.payload.score }<br>Status: ${ item.payload.status }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info manga"><div class="name">${ item.name }</div><div class="media-type">(${ mediaTypeWithStartYear })</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-character"><div class="list character" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info character"><div class="name">${ item.name }</div><div class="extra-info"><ul class="related-works"><li v-for="work in item.payload.related_works" class="fs-i">- ${ work }</li></ul>Favorites: ${ item.payload.favorites }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info character"><div class="name">${ item.name }</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-person"><div class="list person" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info person"><div class="name">${ item.name }</div><div class="extra-info"><span v-if="item.payload.alternative_name">${ item.payload.alternative_name }<br></span>Birthday: ${ item.payload.birthday }<br>Favorites: ${ item.payload.favorites }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info person"><div class="name">${ item.name }</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-club"><div class="list club" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info club"><div class="name">${ item.name }</div><div class="extra-info">Members: ${ item.payload.members }<br>Category: ${ item.payload.category }<br>Created by: ${ item.payload.created_by }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info club"><div class="name">${ item.name }</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-user"><div class="list user" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info user"><div class="name">${ item.name }</div><div class="extra-info"><span v-if="item.payload.authority">${ item.payload.authority }<br></span>Joined: ${ item.payload.joined }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info user"><div class="name">${ item.name }</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-news"><div class="list news" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info news"><div class="name">${ item.name }</div><div class="extra-info">${ item.payload.date }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info news"><div class="name">${ item.name }</div><div class="media-type">${ item.payload.date }</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-featured"><div class="list featured" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info featured"><div class="name">${ item.name }</div><div class="extra-info">${ item.payload.date }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info featured"><div class="name">${ item.name }</div><div class="media-type">${ item.payload.date }</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-forum"><div class="list forum" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info forum"><div class="name"><span v-show="item.payload.work_title">${ item.payload.work_title}
                       <i class="fa fa-caret-right"></i></span> ${ item.name }</div><div class="extra-info">${ item.payload.date }<br><span>in ${ item.payload.category }</span></div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info forum"><div class="name"><span v-show="item.payload.work_title">${ item.payload.work_title}
@@ -179,7 +179,7 @@ Hayao Miyazaki - MyAnimeList.net
 </div>
 </div><div class="js-sns-icon-container icon-block "><a data-ga-network="facebook" data-ga-screen="Share Button Location: common" class="js-share-button-popup js-share-button-tracking sprite-icon-social icon-social icon-facebook" target="_blank" href="http://www.facebook.com/share.php?u=https%3A%2F%2Fmyanimelist.net%2Fpeople%2F1870%2FMiyazaki_Hayao"></a><a data-ga-network="twitter" data-ga-screen="Share Button Location: common" class="js-share-button-popup js-share-button-tracking sprite-icon-social icon-social icon-twitter" target="_blank" href="http://twitter.com/share?related=MyAnimeList.net&amp;via=myanimelist&amp;url=https%3A%2F%2Fmyanimelist.net%2Fpeople%2F1870%2FMiyazaki_Hayao&amp;text=Hayao%20Miyazaki&amp;hashtags="></a><a data-ga-network="google+" data-ga-screen="Share Button Location: common" class="js-share-button-popup js-share-button-tracking sprite-icon-social icon-social icon-google" target="_blank" href="https://plus.google.com/share?url=https%3A%2F%2Fmyanimelist.net%2Fpeople%2F1870%2FMiyazaki_Hayao"></a><a data-ga-network="reddit" data-ga-screen="Share Button Location: common" class="js-share-button-popup js-share-button-tracking sprite-icon-social icon-social icon-reddit" target="_blank" href="http://reddit.com/submit?url=https%3A%2F%2Fmyanimelist.net%2Fpeople%2F1870%2FMiyazaki_Hayao&amp;title=Hayao%20Miyazaki"></a><a data-ga-network="tumblr" data-ga-screen="Share Button Location: common" class="js-share-button-popup js-share-button-tracking sprite-icon-social icon-social icon-tumblr" target="_blank" href="http://www.tumblr.com/share/link?url=https%3A%2F%2Fmyanimelist.net%2Fpeople%2F1870%2FMiyazaki_Hayao&amp;name=Hayao%20Miyazaki"></a></div><br>
              <div class="spaceit_pad"><span class="dark_text">Given name:</span> 駿</div>
-             <span class="dark_text">Family name:</span> 宮崎<div class="spaceit_pad"><span class="dark_text">Birthday:</span> Jan  5, 1941</div><span class="dark_text">Website:</span> <a href="http://www.ghibli.jp/">http://www.ghibli.jp/</a><div class="spaceit_pad"><span class="dark_text">Member Favorites:</span> 34,670</div><div><span class="dark_text">More:</span></div><div class="people-informantion-more js-people-informantion-more">Miyazaki, the second of four brothers, was born in the town of Akebono-cho, part of Tokyo's Bunkyō-ku. During World War II, Miyazaki's father Katsuji was director of Miyazaki Airplane, owned by his brother (Hayao Miyazaki's uncle), which made rudders for A6M Zero fighter planes. During this time, Miyazaki drew airplanes and developed a lifelong fascination with aviation, a penchant that later manifested as a recurring theme in his films.<br />
+             <span class="dark_text">Family name:</span> 宮崎<div class="spaceit_pad"><span class="dark_text">Birthday:</span> Jan  5, 1941</div><span class="dark_text">Website:</span> <a href="http://www.ghibli.jp/">http://www.ghibli.jp/</a><div class="spaceit_pad"><span class="dark_text">Member Favorites:</span> 34,999</div><div><span class="dark_text">More:</span></div><div class="people-informantion-more js-people-informantion-more">Miyazaki, the second of four brothers, was born in the town of Akebono-cho, part of Tokyo's Bunkyō-ku. During World War II, Miyazaki's father Katsuji was director of Miyazaki Airplane, owned by his brother (Hayao Miyazaki's uncle), which made rudders for A6M Zero fighter planes. During this time, Miyazaki drew airplanes and developed a lifelong fascination with aviation, a penchant that later manifested as a recurring theme in his films.<br />
 <br />
 Miyazaki's mother was a voracious reader who often questioned socially accepted norms. Miyazaki later said that he inherited his questioning and skeptical mind from her. His mother underwent treatment for spinal tuberculosis from 1947 until 1955, and so the family moved frequently. Miyazaki's film My Neighbor Totoro is set in that time period and features a family whose mother is similarly afflicted.<br />
 <br />
@@ -1181,7 +1181,7 @@ Hayao Miyazaki's dedication to his work has often been reported to have impacted
           <p class="info pr8">
             by <a href="https://myanimelist.net/profile/Unnamedhero">Unnamedhero</a>
           </p><p class="di-tc pv pr8">
-              <b>8,425</b> views
+              <b>8,516</b> views
             </p></div>
       </div>
     </div>
@@ -1197,14 +1197,25 @@ Hayao Miyazaki's dedication to his work has often been reported to have impacted
           <p class="info pr8">
             by <a href="https://myanimelist.net/profile/MisterD98">MisterD98</a>
           </p><p class="di-tc pv pr8">
-              <b>13,823</b> views
+              <b>14,074</b> views
             </p></div>
       </div>
     </div>
   </div>
 </div><div class="normal_header" style="margin-top: 17px;">Comments</div>
-            <a name="com400442"></a>
+            <a name="com401457"></a>
             <table border="0" cellpadding="0" cellspacing="0" width="100%"  class="bgColor1">
+            <tr class="people-comment">
+              <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/refladovans"><img src="https://myanimelist.cdn-dena.com/images/userimages/thumbs/6187234_thumb.jpg" border="0"></a></div></td>
+              <td class="borderClass people-comment-text" style="border: 0;" valign="top">
+              <div class="dark_text mb4 fw-b"><a href="/profile/refladovans">refladovans</a> <small><span class="fw-n"> | Jul 18, 6:55 AM</span></small></div>
+              <div class="comment word-break">
+              ah the man who created my childhood</div></td>
+                </tr>
+                </table>
+                <br><br>
+            <a name="com400442"></a>
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" >
             <tr class="people-comment">
               <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/sunfukung"><img src="https://myanimelist.cdn-dena.com/images/userimages/thumbs/5938820_thumb.jpg" border="0"></a></div></td>
               <td class="borderClass people-comment-text" style="border: 0;" valign="top">
@@ -1215,7 +1226,7 @@ Hayao Miyazaki's dedication to his work has often been reported to have impacted
                 </table>
                 <br><br>
             <a name="com396841"></a>
-            <table border="0" cellpadding="0" cellspacing="0" width="100%" >
+            <table border="0" cellpadding="0" cellspacing="0" width="100%"  class="bgColor1">
             <tr class="people-comment">
               <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/Rizaluxe"><img src="https://myanimelist.cdn-dena.com/images/userimages/thumbs/4725778_thumb.jpg" border="0"></a></div></td>
               <td class="borderClass people-comment-text" style="border: 0;" valign="top">
@@ -1226,7 +1237,7 @@ Hayao Miyazaki's dedication to his work has often been reported to have impacted
                 </table>
                 <br><br>
             <a name="com396797"></a>
-            <table border="0" cellpadding="0" cellspacing="0" width="100%"  class="bgColor1">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" >
             <tr class="people-comment">
               <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/mehmehperson"><img src="https://myanimelist.cdn-dena.com/images/userimages/thumbs/5001490_thumb.jpg" border="0"></a></div></td>
               <td class="borderClass people-comment-text" style="border: 0;" valign="top">
@@ -1237,7 +1248,7 @@ Hayao Miyazaki's dedication to his work has often been reported to have impacted
                 </table>
                 <br><br>
             <a name="com396419"></a>
-            <table border="0" cellpadding="0" cellspacing="0" width="100%" >
+            <table border="0" cellpadding="0" cellspacing="0" width="100%"  class="bgColor1">
             <tr class="people-comment">
               <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/TheDoggoneGirl"><img src="https://myanimelist.cdn-dena.com/images/userimages/thumbs/5466849_thumb.jpg" border="0"></a></div></td>
               <td class="borderClass people-comment-text" style="border: 0;" valign="top">
@@ -1248,7 +1259,7 @@ Hayao Miyazaki's dedication to his work has often been reported to have impacted
                 </table>
                 <br><br>
             <a name="com396123"></a>
-            <table border="0" cellpadding="0" cellspacing="0" width="100%"  class="bgColor1">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" >
             <tr class="people-comment">
               <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/R_TF"><img src="https://myanimelist.cdn-dena.com/images/userimages/thumbs/5368313_thumb.jpg" border="0"></a></div></td>
               <td class="borderClass people-comment-text" style="border: 0;" valign="top">
@@ -1259,7 +1270,7 @@ Hayao Miyazaki's dedication to his work has often been reported to have impacted
                 </table>
                 <br><br>
             <a name="com395834"></a>
-            <table border="0" cellpadding="0" cellspacing="0" width="100%" >
+            <table border="0" cellpadding="0" cellspacing="0" width="100%"  class="bgColor1">
             <tr class="people-comment">
               <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/PorcupineHead"><img src="https://myanimelist.cdn-dena.com/images/userimages/thumbs/1137841_thumb.jpg" border="0"></a></div></td>
               <td class="borderClass people-comment-text" style="border: 0;" valign="top">
@@ -1270,7 +1281,7 @@ Hayao Miyazaki's dedication to his work has often been reported to have impacted
                 </table>
                 <br><br>
             <a name="com394848"></a>
-            <table border="0" cellpadding="0" cellspacing="0" width="100%"  class="bgColor1">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" >
             <tr class="people-comment">
               <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/Victorian-Doll"><img src="https://myanimelist.cdn-dena.com/images/userimages/thumbs/4485295_thumb.jpg" border="0"></a></div></td>
               <td class="borderClass people-comment-text" style="border: 0;" valign="top">
@@ -1281,7 +1292,7 @@ Hayao Miyazaki's dedication to his work has often been reported to have impacted
                 </table>
                 <br><br>
             <a name="com394044"></a>
-            <table border="0" cellpadding="0" cellspacing="0" width="100%" >
+            <table border="0" cellpadding="0" cellspacing="0" width="100%"  class="bgColor1">
             <tr class="people-comment">
               <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/FlorianYuzuriha"><img src="https://myanimelist.cdn-dena.com/images/userimages/thumbs/5334595_thumb.jpg" border="0"></a></div></td>
               <td class="borderClass people-comment-text" style="border: 0;" valign="top">
@@ -1297,24 +1308,13 @@ One should at least give respect to that. ~</div></td>
                 </table>
                 <br><br>
             <a name="com393814"></a>
-            <table border="0" cellpadding="0" cellspacing="0" width="100%"  class="bgColor1">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" >
             <tr class="people-comment">
               <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/malmod"><img src="https://myanimelist.cdn-dena.com/images/questionmark_50.gif" border="0"></a></div></td>
               <td class="borderClass people-comment-text" style="border: 0;" valign="top">
               <div class="dark_text mb4 fw-b"><a href="/profile/malmod">malmod</a> <small><span class="fw-n"> | Apr 20, 12:51 PM</span></small></div>
               <div class="comment word-break">
               probably the most overrated person in the industry</div></td>
-                </tr>
-                </table>
-                <br><br>
-            <a name="com393743"></a>
-            <table border="0" cellpadding="0" cellspacing="0" width="100%" >
-            <tr class="people-comment">
-              <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/Konakana"><img src="https://myanimelist.cdn-dena.com/images/userimages/thumbs/4046179_thumb.jpg" border="0"></a></div></td>
-              <td class="borderClass people-comment-text" style="border: 0;" valign="top">
-              <div class="dark_text mb4 fw-b"><a href="/profile/Konakana">Konakana</a> <small><span class="fw-n"> | Apr 19, 5:01 PM</span></small></div>
-              <div class="comment word-break">
-              Nausicaa of the Valley of the Wind manga is a true masterpiece.</div></td>
                 </tr>
                 </table>
                 <br><br><div style="margin: 12px 0px;">
@@ -1432,11 +1432,11 @@ One should at least give respect to that. ~</div></td>
         <ol>
                       <li>
               <span class="rank">1</span>
-              <a href="https://myanimelist.net/anime/33352/Violet_Evergarden">Violet Evergarden</a>
+              <a href="https://myanimelist.net/anime/33486/Boku_no_Hero_Academia_2nd_Season">Boku no Hero Academia 2nd Season</a>
             </li>
                       <li>
               <span class="rank">2</span>
-              <a href="https://myanimelist.net/anime/33486/Boku_no_Hero_Academia_2nd_Season">Boku no Hero Academia 2nd Season</a>
+              <a href="https://myanimelist.net/anime/33352/Violet_Evergarden">Violet Evergarden</a>
             </li>
                       <li>
               <span class="rank">3</span>
@@ -1458,23 +1458,23 @@ One should at least give respect to that. ~</div></td>
         <ol>
                       <li>
               <span class="rank">1</span>
-              <a href="https://myanimelist.net/anime/34933/Kakegurui">Kakegurui</a>
+              <a href="https://myanimelist.net/anime/34449/The_Reflection">The Reflection</a>
             </li>
                       <li>
               <span class="rank">2</span>
-              <a href="https://myanimelist.net/anime/34662/Fate_Apocrypha">Fate/Apocrypha</a>
+              <a href="https://myanimelist.net/anime/34933/Kakegurui">Kakegurui</a>
             </li>
                       <li>
               <span class="rank">3</span>
-              <a href="https://myanimelist.net/anime/35203/Isekai_wa_Smartphone_to_Tomo_ni">Isekai wa Smartphone to Tomo ni.</a>
+              <a href="https://myanimelist.net/anime/33486/Boku_no_Hero_Academia_2nd_Season">Boku no Hero Academia 2nd Season</a>
             </li>
                       <li>
               <span class="rank">4</span>
-              <a href="https://myanimelist.net/anime/35240/Princess_Principal">Princess Principal</a>
+              <a href="https://myanimelist.net/anime/34403/Hajimete_no_Gal">Hajimete no Gal</a>
             </li>
                       <li>
               <span class="rank">5</span>
-              <a href="https://myanimelist.net/anime/34934/Koi_to_Uso">Koi to Uso</a>
+              <a href="https://myanimelist.net/anime/34662/Fate_Apocrypha">Fate/Apocrypha</a>
             </li>
                   </ol>
       </div>

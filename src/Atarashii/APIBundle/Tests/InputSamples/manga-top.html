@@ -17,7 +17,7 @@
 <meta property="og:locale" content="en_US"><meta property="fb:app_id" content="360769957454434"><meta property="og:site_name" content="MyAnimeList.net"><meta name="twitter:card" content="summary"><meta name="twitter:site" content="@myanimelist"><meta property="og:title" content=" Top Manga - MyAnimeList.net "><meta property="og:image" content="https://myanimelist.cdn-dena.com/img/sp/icon/apple-touch-icon-256.png"><meta name="twitter:image:src" content="https://myanimelist.cdn-dena.com/img/sp/icon/apple-touch-icon-256.png"><meta property="og:url" content="https://myanimelist.net/topmanga.php"><meta property="og:description" content="Browse the highest-ranked manga on MyAnimeList, the internet&#039;s largest manga database. Find the top manga, novels, one-shots and more!">
 <link rel="manifest" href="/manifest.json">
 
-<meta name='csrf_token' content='27bb7ab8d5fa481e39d151cc7efca8289d48b543'><link rel="stylesheet" type="text/css" href="https://myanimelist.cdn-dena.com/static/assets/css/pc/style-256db3456e.css" />
+<meta name='csrf_token' content='01f89f079058166ed5aa04f8a1429cfb64778894'><link rel="stylesheet" type="text/css" href="https://myanimelist.cdn-dena.com/static/assets/css/pc/style-256db3456e.css" />
 
 <script type="text/javascript" src="https://myanimelist.cdn-dena.com/static/assets/js/pc/header-c4f7891876.js"></script>
 <script type="text/javascript" src="https://myanimelist.cdn-dena.com/static/assets/js/pc/all-dbd9ac4e66.js"
@@ -87,11 +87,11 @@
     </div>
   </div>
         <div class="wrapper"><div id="headerSmall"><a href="/" class="link-mal-logo">MyAnimeList.net</a>
-<a href="https://myanimelist.net/account/membership?_location=mal_h_b&amp;_type=2"
+<a href="https://myanimelist.net/account/membership?_location=mal_h_b&amp;_type=3"
    class="banner-header-anime-straming" target="_self">
-  <img src="https://myanimelist.cdn-dena.com/images/membership/banner-paypal.png?v=1" width="250" height="36"
-       srcset="https://myanimelist.cdn-dena.com/images/membership/banner-paypal.png?v=1 1x, https://myanimelist.cdn-dena.com/images/membership/banner-paypal@2x.png?v=1 2x"
-       alt="MAL Supporter is now accepting Paypal Checkout" title="MAL Supporter is now accepting Paypal Checkout">
+  <img src="https://myanimelist.cdn-dena.com/images/membership/banner2.gif?v=1" width="250" height="36"
+       srcset="https://myanimelist.cdn-dena.com/images/membership/banner2.gif?v=1 1x, https://myanimelist.cdn-dena.com/images/membership/banner2@2x.gif?v=1 2x"
+       alt="Become a MAL Supporter" title="Become a MAL Supporter">
 </a><div id="header-menu" ><div class="header-menu-login"><a class="btn-mal-service" href="https://myanimelist.net/membership?_location=mal_h_u">Hide Ads</a><a class="btn-login" href="https://myanimelist.net/login.php?from=%2Ftopmanga.php%3Flimit%3D0" id="malLogin">Login</a><a class="btn-signup" href="https://myanimelist.net/register.php?from=%2Ftopmanga.php%3Flimit%3D0">Sign Up</a></div></div></div>  <div id="menu" class="">
     <div id="menu_right"><script type="text/x-template" id="incremental-result-item-anime"><div class="list anime" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info anime"><div class="name">${ item.name } <span class="media-type">(${ item.payload.media_type })</span></div><div class="extra-info">Aired: ${ item.payload.aired }<br>Score: ${ item.payload.score }<br>Status: ${ item.payload.status }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info anime"><div class="name">${ item.name }</div><div class="media-type">(${ mediaTypeWithStartYear })</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-manga"><div class="list manga" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info manga"><div class="name">${ item.name } <span class="media-type">(${ item.payload.media_type })</span></div><div class="extra-info">Published: ${ item.payload.published }<br>Score: ${ item.payload.score }<br>Status: ${ item.payload.status }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info manga"><div class="name">${ item.name }</div><div class="media-type">(${ mediaTypeWithStartYear })</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-character"><div class="list character" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info character"><div class="name">${ item.name }</div><div class="extra-info"><ul class="related-works"><li v-for="work in item.payload.related_works" class="fs-i">- ${ work }</li></ul>Favorites: ${ item.payload.favorites }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info character"><div class="name">${ item.name }</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-person"><div class="list person" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info person"><div class="name">${ item.name }</div><div class="extra-info"><span v-if="item.payload.alternative_name">${ item.payload.alternative_name }<br></span>Birthday: ${ item.payload.birthday }<br>Favorites: ${ item.payload.favorites }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info person"><div class="name">${ item.name }</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-club"><div class="list club" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info club"><div class="name">${ item.name }</div><div class="extra-info">Members: ${ item.payload.members }<br>Category: ${ item.payload.category }<br>Created by: ${ item.payload.created_by }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info club"><div class="name">${ item.name }</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-user"><div class="list user" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info user"><div class="name">${ item.name }</div><div class="extra-info"><span v-if="item.payload.authority">${ item.payload.authority }<br></span>Joined: ${ item.payload.joined }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info user"><div class="name">${ item.name }</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-news"><div class="list news" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info news"><div class="name">${ item.name }</div><div class="extra-info">${ item.payload.date }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info news"><div class="name">${ item.name }</div><div class="media-type">${ item.payload.date }</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-featured"><div class="list featured" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info featured"><div class="name">${ item.name }</div><div class="extra-info">${ item.payload.date }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info featured"><div class="name">${ item.name }</div><div class="media-type">${ item.payload.date }</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-forum"><div class="list forum" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info forum"><div class="name"><span v-show="item.payload.work_title">${ item.payload.work_title}
                       <i class="fa fa-caret-right"></i></span> ${ item.name }</div><div class="extra-info">${ item.payload.date }<br><span>in ${ item.payload.category }</span></div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info forum"><div class="name"><span v-show="item.payload.work_title">${ item.payload.work_title}
@@ -205,7 +205,7 @@
       <div class="information di-ib mt4">
         Manga (? vols)<br>
         Aug 1989 - <br>
-        150,334 members
+        152,281 members
       </div>
     </div>
   </td>
@@ -239,12 +239,12 @@
       <div class="information di-ib mt4">
         Manga (24 vols)<br>
         Jan 2004 - Apr 2011<br>
-        27,077 members
+        27,631 members
       </div>
     </div>
   </td>
 
-    <td class="score ac fs14"><div class="js-top-ranking-score-col di-ib al"><i class="icon-score-star mr4 on"></i><span class="text on">9.15</span></div>
+    <td class="score ac fs14"><div class="js-top-ranking-score-col di-ib al"><i class="icon-score-star mr4 on"></i><span class="text on">9.16</span></div>
   </td>
 
     <td class="your-score ac fs14">
@@ -273,7 +273,7 @@
       <div class="information di-ib mt4">
         Manga (27 vols)<br>
         Jul 2001 - Sep 2010<br>
-        129,419 members
+        130,435 members
       </div>
     </div>
   </td>
@@ -307,12 +307,12 @@
       <div class="information di-ib mt4">
         Novel (7 vols)<br>
         Jan 2009 - Jun 2015<br>
-        48,553 members
+        49,215 members
       </div>
     </div>
   </td>
 
-    <td class="score ac fs14"><div class="js-top-ranking-score-col di-ib al"><i class="icon-score-star mr4 on"></i><span class="text on">9.10</span></div>
+    <td class="score ac fs14"><div class="js-top-ranking-score-col di-ib al"><i class="icon-score-star mr4 on"></i><span class="text on">9.09</span></div>
   </td>
 
     <td class="your-score ac fs14">
@@ -341,7 +341,7 @@
       <div class="information di-ib mt4">
         Manga (13 vols)<br>
         Mar 2007 - Nov 2013<br>
-        88,682 members
+        89,881 members
       </div>
     </div>
   </td>
@@ -375,7 +375,7 @@
       <div class="information di-ib mt4">
         Manga (18 vols)<br>
         Dec 1994 - Dec 2001<br>
-        53,179 members
+        53,743 members
       </div>
     </div>
   </td>
@@ -409,7 +409,7 @@
       <div class="information di-ib mt4">
         Manga (? vols)<br>
         Jul 1997 - <br>
-        173,601 members
+        175,241 members
       </div>
     </div>
   </td>
@@ -431,6 +431,40 @@
     <span class="lightLink top-anime-rank-text rank1">8</span>
   </td>
     <td class="title al va-t clearfix word-break">
+    <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/70345/Grand_Blue" id="#area70345" rel="#info70345">
+      <img width="50" height="70" alt="Manga: Grand Blue" class="lazyload" border="0" data-src="https://myanimelist.cdn-dena.com/r/50x70/images/manga/2/166124.jpg?s=3a3e1279dd192ea90a32ff6bdfdbe4dc" data-srcset="https://myanimelist.cdn-dena.com/r/50x70/images/manga/2/166124.jpg?s=3a3e1279dd192ea90a32ff6bdfdbe4dc 1x, https://myanimelist.cdn-dena.com/r/100x140/images/manga/2/166124.jpg?s=301c4f4a748279a248049f8913c213f2 2x" />
+    </a>
+
+    <div class="detail">
+              <div id="area70345">
+  <div id="info70345" rel="m70345" class="hoverinfo"></div>
+</div>
+            <a class="hoverinfo_trigger fs14 fw-b" href="https://myanimelist.net/manga/70345/Grand_Blue" id="#area70345" rel="#info70345">Grand Blue</a><br>
+      <div class="information di-ib mt4">
+        Manga (? vols)<br>
+        Apr 2014 - <br>
+        16,249 members
+      </div>
+    </div>
+  </td>
+
+    <td class="score ac fs14"><div class="js-top-ranking-score-col di-ib al"><i class="icon-score-star mr4 on"></i><span class="text on">9.01</span></div>
+  </td>
+
+    <td class="your-score ac fs14">
+    <div class="js-top-ranking-your-score-col di-ib al">      <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Ftopmanga.php%3Flimit%3D0" class=""><i class="icon-score-star mr4 "></i><span class="text ">N/A</span></a>
+</div>
+  </td>
+
+    <td class="status ac">      <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Ftopmanga.php%3Flimit%3D0" class=" btn-addEdit-large  btn-anime-watch-status js-anime-watch-status notinmylist"><i class="fa fa-plus-square-o mr4"></i>Add to list</a>
+</td>
+</tr>
+
+<tr class="ranking-list">
+    <td class="rank ac" valign="top">
+    <span class="lightLink top-anime-rank-text rank1">9</span>
+  </td>
+    <td class="title al va-t clearfix word-break">
     <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/3/20th_Century_Boys" id="#area3" rel="#info3">
       <img width="50" height="70" alt="Manga: 20th Century Boys" class="lazyload" border="0" data-src="https://myanimelist.cdn-dena.com/r/50x70/images/manga/1/54437.jpg?s=2dfac509e795f7cc672f1b4c4930bf92" data-srcset="https://myanimelist.cdn-dena.com/r/50x70/images/manga/1/54437.jpg?s=2dfac509e795f7cc672f1b4c4930bf92 1x, https://myanimelist.cdn-dena.com/r/100x140/images/manga/1/54437.jpg?s=26af1bac059187fea168c7b52cdfdb27 2x" />
     </a>
@@ -443,7 +477,7 @@
       <div class="information di-ib mt4">
         Manga (22 vols)<br>
         Sep 1999 - Apr 2006<br>
-        58,764 members
+        59,352 members
       </div>
     </div>
   </td>
@@ -462,7 +496,7 @@
 
 <tr class="ranking-list">
     <td class="rank ac" valign="top">
-    <span class="lightLink top-anime-rank-text rank1">9</span>
+    <span class="lightLink top-anime-rank-text rank2">10</span>
   </td>
     <td class="title al va-t clearfix word-break">
     <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/16765/Kingdom" id="#area16765" rel="#info16765">
@@ -477,41 +511,7 @@
       <div class="information di-ib mt4">
         Manga (? vols)<br>
         Jan 2006 - <br>
-        28,097 members
-      </div>
-    </div>
-  </td>
-
-    <td class="score ac fs14"><div class="js-top-ranking-score-col di-ib al"><i class="icon-score-star mr4 on"></i><span class="text on">8.99</span></div>
-  </td>
-
-    <td class="your-score ac fs14">
-    <div class="js-top-ranking-your-score-col di-ib al">      <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Ftopmanga.php%3Flimit%3D0" class=""><i class="icon-score-star mr4 "></i><span class="text ">N/A</span></a>
-</div>
-  </td>
-
-    <td class="status ac">      <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Ftopmanga.php%3Flimit%3D0" class=" btn-addEdit-large  btn-anime-watch-status js-anime-watch-status notinmylist"><i class="fa fa-plus-square-o mr4"></i>Add to list</a>
-</td>
-</tr>
-
-<tr class="ranking-list">
-    <td class="rank ac" valign="top">
-    <span class="lightLink top-anime-rank-text rank2">10</span>
-  </td>
-    <td class="title al va-t clearfix word-break">
-    <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/70345/Grand_Blue" id="#area70345" rel="#info70345">
-      <img width="50" height="70" alt="Manga: Grand Blue" class="lazyload" border="0" data-src="https://myanimelist.cdn-dena.com/r/50x70/images/manga/2/166124.jpg?s=3a3e1279dd192ea90a32ff6bdfdbe4dc" data-srcset="https://myanimelist.cdn-dena.com/r/50x70/images/manga/2/166124.jpg?s=3a3e1279dd192ea90a32ff6bdfdbe4dc 1x, https://myanimelist.cdn-dena.com/r/100x140/images/manga/2/166124.jpg?s=301c4f4a748279a248049f8913c213f2 2x" />
-    </a>
-
-    <div class="detail">
-              <div id="area70345">
-  <div id="info70345" rel="m70345" class="hoverinfo"></div>
-</div>
-            <a class="hoverinfo_trigger fs14 fw-b" href="https://myanimelist.net/manga/70345/Grand_Blue" id="#area70345" rel="#info70345">Grand Blue</a><br>
-      <div class="information di-ib mt4">
-        Manga (? vols)<br>
-        Apr 2014 - <br>
-        15,415 members
+        28,570 members
       </div>
     </div>
   </td>
@@ -545,7 +545,7 @@
       <div class="information di-ib mt4">
         Manga (37 vols)<br>
         Mar 1999 - May 2015<br>
-        64,902 members
+        65,734 members
       </div>
     </div>
   </td>
@@ -579,7 +579,7 @@
       <div class="information di-ib mt4">
         Manga (31 vols)<br>
         Sep 1990 - Jun 1996<br>
-        35,711 members
+        36,062 members
       </div>
     </div>
   </td>
@@ -613,7 +613,7 @@
       <div class="information di-ib mt4">
         Manga (25 vols)<br>
         Dec 1996 - Jan 2002<br>
-        52,870 members
+        53,329 members
       </div>
     </div>
   </td>
@@ -647,7 +647,7 @@
       <div class="information di-ib mt4">
         Manga (7 vols)<br>
         Oct 1982 - Feb 1994<br>
-        21,189 members
+        21,346 members
       </div>
     </div>
   </td>
@@ -681,7 +681,7 @@
       <div class="information di-ib mt4">
         Novel (6 vols)<br>
         Nov 2006 - Jul 2010<br>
-        16,656 members
+        16,933 members
       </div>
     </div>
   </td>
@@ -715,7 +715,7 @@
       <div class="information di-ib mt4">
         Novel (? vols)<br>
         Mar 2011 - <br>
-        18,549 members
+        18,887 members
       </div>
     </div>
   </td>
@@ -749,7 +749,7 @@
       <div class="information di-ib mt4">
         Novel (? vols)<br>
         Feb 2006 - <br>
-        25,173 members
+        25,460 members
       </div>
     </div>
   </td>
@@ -783,7 +783,7 @@
       <div class="information di-ib mt4">
         Manga (? vols)<br>
         Mar 2003 - <br>
-        63,841 members
+        64,269 members
       </div>
     </div>
   </td>
@@ -817,7 +817,7 @@
       <div class="information di-ib mt4">
         Manga (? vols)<br>
         Aug 2009 - <br>
-        38,728 members
+        39,273 members
       </div>
     </div>
   </td>
@@ -851,7 +851,7 @@
       <div class="information di-ib mt4">
         Manga (1 vols)<br>
         Mar 2008 - Aug 2008<br>
-        56,824 members
+        57,238 members
       </div>
     </div>
   </td>
@@ -885,7 +885,7 @@
       <div class="information di-ib mt4">
         Manga (? vols)<br>
         Jun 2012 - <br>
-        123,199 members
+        124,979 members
       </div>
     </div>
   </td>
@@ -919,12 +919,12 @@
       <div class="information di-ib mt4">
         Manga (7 vols)<br>
         Aug 2013 - Nov 2014<br>
-        99,137 members
+        100,819 members
       </div>
     </div>
   </td>
 
-    <td class="score ac fs14"><div class="js-top-ranking-score-col di-ib al"><i class="icon-score-star mr4 on"></i><span class="text on">8.80</span></div>
+    <td class="score ac fs14"><div class="js-top-ranking-score-col di-ib al"><i class="icon-score-star mr4 on"></i><span class="text on">8.81</span></div>
   </td>
 
     <td class="your-score ac fs14">
@@ -953,7 +953,7 @@
       <div class="information di-ib mt4">
         Manga (12 vols)<br>
         Dec 2003 - May 2006<br>
-        167,367 members
+        168,622 members
       </div>
     </div>
   </td>
@@ -987,7 +987,7 @@
       <div class="information di-ib mt4">
         Manga (10 vols)<br>
         Nov 1999 - Aug 2008<br>
-        26,085 members
+        26,283 members
       </div>
     </div>
   </td>
@@ -1021,7 +1021,7 @@
       <div class="information di-ib mt4">
         Manga (? vols)<br>
         Feb 2012 - <br>
-        43,194 members
+        43,768 members
       </div>
     </div>
   </td>
@@ -1043,24 +1043,24 @@
     <span class="lightLink top-anime-rank-text rank2">26</span>
   </td>
     <td class="title al va-t clearfix word-break">
-    <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/664/Akira" id="#area664" rel="#info664">
-      <img width="50" height="70" alt="Manga: Akira" class="lazyload" border="0" data-src="https://myanimelist.cdn-dena.com/r/50x70/images/manga/2/157929.jpg?s=721c68c609abd2587e8dae8eeed7e65c" data-srcset="https://myanimelist.cdn-dena.com/r/50x70/images/manga/2/157929.jpg?s=721c68c609abd2587e8dae8eeed7e65c 1x, https://myanimelist.cdn-dena.com/r/100x140/images/manga/2/157929.jpg?s=0b71515212708c7b10ab63f199dfa210 2x" />
+    <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/14483/Uchuu_Kyoudai" id="#area14483" rel="#info14483">
+      <img width="50" height="70" alt="Manga: Uchuu Kyoudai" class="lazyload" border="0" data-src="https://myanimelist.cdn-dena.com/r/50x70/images/manga/3/166256.jpg?s=1d3e9084ba8828ce8938ad1d5777febf" data-srcset="https://myanimelist.cdn-dena.com/r/50x70/images/manga/3/166256.jpg?s=1d3e9084ba8828ce8938ad1d5777febf 1x, https://myanimelist.cdn-dena.com/r/100x140/images/manga/3/166256.jpg?s=1d686ccaa7770a752224de05727e9d3d 2x" />
     </a>
 
     <div class="detail">
-              <div id="area664">
-  <div id="info664" rel="m664" class="hoverinfo"></div>
+              <div id="area14483">
+  <div id="info14483" rel="m14483" class="hoverinfo"></div>
 </div>
-            <a class="hoverinfo_trigger fs14 fw-b" href="https://myanimelist.net/manga/664/Akira" id="#area664" rel="#info664">Akira</a><br>
+            <a class="hoverinfo_trigger fs14 fw-b" href="https://myanimelist.net/manga/14483/Uchuu_Kyoudai" id="#area14483" rel="#info14483">Uchuu Kyoudai</a><br>
       <div class="information di-ib mt4">
-        Manga (6 vols)<br>
-        Dec 1982 - Jun 1990<br>
-        35,484 members
+        Manga (? vols)<br>
+        Dec 2007 - <br>
+        9,409 members
       </div>
     </div>
   </td>
 
-    <td class="score ac fs14"><div class="js-top-ranking-score-col di-ib al"><i class="icon-score-star mr4 on"></i><span class="text on">8.75</span></div>
+    <td class="score ac fs14"><div class="js-top-ranking-score-col di-ib al"><i class="icon-score-star mr4 on"></i><span class="text on">8.76</span></div>
   </td>
 
     <td class="your-score ac fs14">
@@ -1077,19 +1077,19 @@
     <span class="lightLink top-anime-rank-text rank2">27</span>
   </td>
     <td class="title al va-t clearfix word-break">
-    <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/14483/Uchuu_Kyoudai" id="#area14483" rel="#info14483">
-      <img width="50" height="70" alt="Manga: Uchuu Kyoudai" class="lazyload" border="0" data-src="https://myanimelist.cdn-dena.com/r/50x70/images/manga/3/166256.jpg?s=1d3e9084ba8828ce8938ad1d5777febf" data-srcset="https://myanimelist.cdn-dena.com/r/50x70/images/manga/3/166256.jpg?s=1d3e9084ba8828ce8938ad1d5777febf 1x, https://myanimelist.cdn-dena.com/r/100x140/images/manga/3/166256.jpg?s=1d686ccaa7770a752224de05727e9d3d 2x" />
+    <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/664/Akira" id="#area664" rel="#info664">
+      <img width="50" height="70" alt="Manga: Akira" class="lazyload" border="0" data-src="https://myanimelist.cdn-dena.com/r/50x70/images/manga/2/157929.jpg?s=721c68c609abd2587e8dae8eeed7e65c" data-srcset="https://myanimelist.cdn-dena.com/r/50x70/images/manga/2/157929.jpg?s=721c68c609abd2587e8dae8eeed7e65c 1x, https://myanimelist.cdn-dena.com/r/100x140/images/manga/2/157929.jpg?s=0b71515212708c7b10ab63f199dfa210 2x" />
     </a>
 
     <div class="detail">
-              <div id="area14483">
-  <div id="info14483" rel="m14483" class="hoverinfo"></div>
+              <div id="area664">
+  <div id="info664" rel="m664" class="hoverinfo"></div>
 </div>
-            <a class="hoverinfo_trigger fs14 fw-b" href="https://myanimelist.net/manga/14483/Uchuu_Kyoudai" id="#area14483" rel="#info14483">Uchuu Kyoudai</a><br>
+            <a class="hoverinfo_trigger fs14 fw-b" href="https://myanimelist.net/manga/664/Akira" id="#area664" rel="#info664">Akira</a><br>
       <div class="information di-ib mt4">
-        Manga (? vols)<br>
-        Dec 2007 - <br>
-        9,308 members
+        Manga (6 vols)<br>
+        Dec 1982 - Jun 1990<br>
+        35,874 members
       </div>
     </div>
   </td>
@@ -1111,19 +1111,19 @@
     <span class="lightLink top-anime-rank-text rank2">28</span>
   </td>
     <td class="title al va-t clearfix word-break">
-    <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/44307/Kakukaku_Shikajika" id="#area44307" rel="#info44307">
-      <img width="50" height="70" alt="Manga: Kakukaku Shikajika" class="lazyload" border="0" data-src="https://myanimelist.cdn-dena.com/r/50x70/images/manga/1/154270.jpg?s=589cf622b1fc913bddbc7edca03957e3" data-srcset="https://myanimelist.cdn-dena.com/r/50x70/images/manga/1/154270.jpg?s=589cf622b1fc913bddbc7edca03957e3 1x, https://myanimelist.cdn-dena.com/r/100x140/images/manga/1/154270.jpg?s=458860df161e1403d600ee9d048a8409 2x" />
+    <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/1859/Natsume_Yuujinchou" id="#area1859" rel="#info1859">
+      <img width="50" height="70" alt="Manga: Natsume Yuujinchou" class="lazyload" border="0" data-src="https://myanimelist.cdn-dena.com/r/50x70/images/manga/4/154023.jpg?s=2507c4a239ca800e10e4427b0e60351b" data-srcset="https://myanimelist.cdn-dena.com/r/50x70/images/manga/4/154023.jpg?s=2507c4a239ca800e10e4427b0e60351b 1x, https://myanimelist.cdn-dena.com/r/100x140/images/manga/4/154023.jpg?s=8442b15b7f9e56d06548652a4f97c185 2x" />
     </a>
 
     <div class="detail">
-              <div id="area44307">
-  <div id="info44307" rel="m44307" class="hoverinfo"></div>
+              <div id="area1859">
+  <div id="info1859" rel="m1859" class="hoverinfo"></div>
 </div>
-            <a class="hoverinfo_trigger fs14 fw-b" href="https://myanimelist.net/manga/44307/Kakukaku_Shikajika" id="#area44307" rel="#info44307">Kakukaku Shikajika</a><br>
+            <a class="hoverinfo_trigger fs14 fw-b" href="https://myanimelist.net/manga/1859/Natsume_Yuujinchou" id="#area1859" rel="#info1859">Natsume Yuujinchou</a><br>
       <div class="information di-ib mt4">
-        Manga (5 vols)<br>
-        Nov 2011 - Jan 2015<br>
-        6,628 members
+        Manga (? vols)<br>
+        Jun 2003 - <br>
+        20,128 members
       </div>
     </div>
   </td>
@@ -1145,24 +1145,24 @@
     <span class="lightLink top-anime-rank-text rank2">29</span>
   </td>
     <td class="title al va-t clearfix word-break">
-    <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/642/Vinland_Saga" id="#area642" rel="#info642">
-      <img width="50" height="70" alt="Manga: Vinland Saga" class="lazyload" border="0" data-src="https://myanimelist.cdn-dena.com/r/50x70/images/manga/2/188925.jpg?s=18b1d30b74bf96b476068901f579e408" data-srcset="https://myanimelist.cdn-dena.com/r/50x70/images/manga/2/188925.jpg?s=18b1d30b74bf96b476068901f579e408 1x, https://myanimelist.cdn-dena.com/r/100x140/images/manga/2/188925.jpg?s=a2df0a0c933caf33570baebc02721284 2x" />
+    <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/44307/Kakukaku_Shikajika" id="#area44307" rel="#info44307">
+      <img width="50" height="70" alt="Manga: Kakukaku Shikajika" class="lazyload" border="0" data-src="https://myanimelist.cdn-dena.com/r/50x70/images/manga/1/154270.jpg?s=589cf622b1fc913bddbc7edca03957e3" data-srcset="https://myanimelist.cdn-dena.com/r/50x70/images/manga/1/154270.jpg?s=589cf622b1fc913bddbc7edca03957e3 1x, https://myanimelist.cdn-dena.com/r/100x140/images/manga/1/154270.jpg?s=458860df161e1403d600ee9d048a8409 2x" />
     </a>
 
     <div class="detail">
-              <div id="area642">
-  <div id="info642" rel="m642" class="hoverinfo"></div>
+              <div id="area44307">
+  <div id="info44307" rel="m44307" class="hoverinfo"></div>
 </div>
-            <a class="hoverinfo_trigger fs14 fw-b" href="https://myanimelist.net/manga/642/Vinland_Saga" id="#area642" rel="#info642">Vinland Saga</a><br>
+            <a class="hoverinfo_trigger fs14 fw-b" href="https://myanimelist.net/manga/44307/Kakukaku_Shikajika" id="#area44307" rel="#info44307">Kakukaku Shikajika</a><br>
       <div class="information di-ib mt4">
-        Manga (? vols)<br>
-        Jul 2005 - <br>
-        47,574 members
+        Manga (5 vols)<br>
+        Nov 2011 - Jan 2015<br>
+        6,784 members
       </div>
     </div>
   </td>
 
-    <td class="score ac fs14"><div class="js-top-ranking-score-col di-ib al"><i class="icon-score-star mr4 on"></i><span class="text on">8.74</span></div>
+    <td class="score ac fs14"><div class="js-top-ranking-score-col di-ib al"><i class="icon-score-star mr4 on"></i><span class="text on">8.75</span></div>
   </td>
 
     <td class="your-score ac fs14">
@@ -1179,19 +1179,19 @@
     <span class="lightLink top-anime-rank-text rank2">30</span>
   </td>
     <td class="title al va-t clearfix word-break">
-    <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/904/Kozure_Ookami" id="#area904" rel="#info904">
-      <img width="50" height="70" alt="Manga: Kozure Ookami" class="lazyload" border="0" data-src="https://myanimelist.cdn-dena.com/r/50x70/images/manga/1/159264.jpg?s=6c5b2505e8f1fc6df6bc8bc94e4e5b91" data-srcset="https://myanimelist.cdn-dena.com/r/50x70/images/manga/1/159264.jpg?s=6c5b2505e8f1fc6df6bc8bc94e4e5b91 1x, https://myanimelist.cdn-dena.com/r/100x140/images/manga/1/159264.jpg?s=01ff4ac9c24cd8fbc59408240e073843 2x" />
+    <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/642/Vinland_Saga" id="#area642" rel="#info642">
+      <img width="50" height="70" alt="Manga: Vinland Saga" class="lazyload" border="0" data-src="https://myanimelist.cdn-dena.com/r/50x70/images/manga/2/188925.jpg?s=18b1d30b74bf96b476068901f579e408" data-srcset="https://myanimelist.cdn-dena.com/r/50x70/images/manga/2/188925.jpg?s=18b1d30b74bf96b476068901f579e408 1x, https://myanimelist.cdn-dena.com/r/100x140/images/manga/2/188925.jpg?s=a2df0a0c933caf33570baebc02721284 2x" />
     </a>
 
     <div class="detail">
-              <div id="area904">
-  <div id="info904" rel="m904" class="hoverinfo"></div>
+              <div id="area642">
+  <div id="info642" rel="m642" class="hoverinfo"></div>
 </div>
-            <a class="hoverinfo_trigger fs14 fw-b" href="https://myanimelist.net/manga/904/Kozure_Ookami" id="#area904" rel="#info904">Kozure Ookami</a><br>
+            <a class="hoverinfo_trigger fs14 fw-b" href="https://myanimelist.net/manga/642/Vinland_Saga" id="#area642" rel="#info642">Vinland Saga</a><br>
       <div class="information di-ib mt4">
-        Manga (28 vols)<br>
-        Sep 1970 - Apr 1976<br>
-        14,200 members
+        Manga (? vols)<br>
+        Jul 2005 - <br>
+        48,211 members
       </div>
     </div>
   </td>
@@ -1213,19 +1213,19 @@
     <span class="lightLink top-anime-rank-text rank2">31</span>
   </td>
     <td class="title al va-t clearfix word-break">
-    <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/1859/Natsume_Yuujinchou" id="#area1859" rel="#info1859">
-      <img width="50" height="70" alt="Manga: Natsume Yuujinchou" class="lazyload" border="0" data-src="https://myanimelist.cdn-dena.com/r/50x70/images/manga/4/154023.jpg?s=2507c4a239ca800e10e4427b0e60351b" data-srcset="https://myanimelist.cdn-dena.com/r/50x70/images/manga/4/154023.jpg?s=2507c4a239ca800e10e4427b0e60351b 1x, https://myanimelist.cdn-dena.com/r/100x140/images/manga/4/154023.jpg?s=8442b15b7f9e56d06548652a4f97c185 2x" />
+    <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/904/Kozure_Ookami" id="#area904" rel="#info904">
+      <img width="50" height="70" alt="Manga: Kozure Ookami" class="lazyload" border="0" data-src="https://myanimelist.cdn-dena.com/r/50x70/images/manga/1/159264.jpg?s=6c5b2505e8f1fc6df6bc8bc94e4e5b91" data-srcset="https://myanimelist.cdn-dena.com/r/50x70/images/manga/1/159264.jpg?s=6c5b2505e8f1fc6df6bc8bc94e4e5b91 1x, https://myanimelist.cdn-dena.com/r/100x140/images/manga/1/159264.jpg?s=01ff4ac9c24cd8fbc59408240e073843 2x" />
     </a>
 
     <div class="detail">
-              <div id="area1859">
-  <div id="info1859" rel="m1859" class="hoverinfo"></div>
+              <div id="area904">
+  <div id="info904" rel="m904" class="hoverinfo"></div>
 </div>
-            <a class="hoverinfo_trigger fs14 fw-b" href="https://myanimelist.net/manga/1859/Natsume_Yuujinchou" id="#area1859" rel="#info1859">Natsume Yuujinchou</a><br>
+            <a class="hoverinfo_trigger fs14 fw-b" href="https://myanimelist.net/manga/904/Kozure_Ookami" id="#area904" rel="#info904">Kozure Ookami</a><br>
       <div class="information di-ib mt4">
-        Manga (? vols)<br>
-        Jun 2003 - <br>
-        19,970 members
+        Manga (28 vols)<br>
+        Sep 1970 - Apr 1976<br>
+        14,361 members
       </div>
     </div>
   </td>
@@ -1247,24 +1247,24 @@
     <span class="lightLink top-anime-rank-text rank2">32</span>
   </td>
     <td class="title al va-t clearfix word-break">
-    <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/28/Nana" id="#area28" rel="#info28">
-      <img width="50" height="70" alt="Manga: Nana" class="lazyload" border="0" data-src="https://myanimelist.cdn-dena.com/r/50x70/images/manga/1/163191.jpg?s=0f2e6fea0853b7ca2608c6ec213727d1" data-srcset="https://myanimelist.cdn-dena.com/r/50x70/images/manga/1/163191.jpg?s=0f2e6fea0853b7ca2608c6ec213727d1 1x, https://myanimelist.cdn-dena.com/r/100x140/images/manga/1/163191.jpg?s=8040b5b0cad195af03fe5abbb8ba1462 2x" />
+    <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/74697/Re_Zero_kara_Hajimeru_Isekai_Seikatsu" id="#area74697" rel="#info74697">
+      <img width="50" height="70" alt="Manga: Re:Zero kara Hajimeru Isekai Seikatsu" class="lazyload" border="0" data-src="https://myanimelist.cdn-dena.com/r/50x70/images/manga/1/129447.jpg?s=59022093f8f6937a00b6dc9c9f668c00" data-srcset="https://myanimelist.cdn-dena.com/r/50x70/images/manga/1/129447.jpg?s=59022093f8f6937a00b6dc9c9f668c00 1x, https://myanimelist.cdn-dena.com/r/100x140/images/manga/1/129447.jpg?s=ce9abb80855fba39236d229ca866df8e 2x" />
     </a>
 
     <div class="detail">
-              <div id="area28">
-  <div id="info28" rel="m28" class="hoverinfo"></div>
+              <div id="area74697">
+  <div id="info74697" rel="m74697" class="hoverinfo"></div>
 </div>
-            <a class="hoverinfo_trigger fs14 fw-b" href="https://myanimelist.net/manga/28/Nana" id="#area28" rel="#info28">Nana</a><br>
+            <a class="hoverinfo_trigger fs14 fw-b" href="https://myanimelist.net/manga/74697/Re_Zero_kara_Hajimeru_Isekai_Seikatsu" id="#area74697" rel="#info74697">Re:Zero kara Hajimeru Isekai Seikatsu</a><br>
       <div class="information di-ib mt4">
-        Manga (21 vols)<br>
-        May 2000 - May 2009<br>
-        42,504 members
+        Novel (? vols)<br>
+        Jan 2014 - <br>
+        12,353 members
       </div>
     </div>
   </td>
 
-    <td class="score ac fs14"><div class="js-top-ranking-score-col di-ib al"><i class="icon-score-star mr4 on"></i><span class="text on">8.73</span></div>
+    <td class="score ac fs14"><div class="js-top-ranking-score-col di-ib al"><i class="icon-score-star mr4 on"></i><span class="text on">8.74</span></div>
   </td>
 
     <td class="your-score ac fs14">
@@ -1293,7 +1293,7 @@
       <div class="information di-ib mt4">
         Manga (34 vols)<br>
         Feb 2000 - Jun 2008<br>
-        24,922 members
+        25,115 members
       </div>
     </div>
   </td>
@@ -1327,7 +1327,7 @@
       <div class="information di-ib mt4">
         Manga (? vols)<br>
         1999 - <br>
-        15,782 members
+        15,947 members
       </div>
     </div>
   </td>
@@ -1349,19 +1349,19 @@
     <span class="lightLink top-anime-rank-text rank2">35</span>
   </td>
     <td class="title al va-t clearfix word-break">
-    <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/24875/Shinyaku_Toaru_Majutsu_no_Index" id="#area24875" rel="#info24875">
-      <img width="50" height="70" alt="Manga: Shinyaku Toaru Majutsu no Index" class="lazyload" border="0" data-src="https://myanimelist.cdn-dena.com/r/50x70/images/manga/4/86883.jpg?s=36302be13ae1141770b8d2025295c2e5" data-srcset="https://myanimelist.cdn-dena.com/r/50x70/images/manga/4/86883.jpg?s=36302be13ae1141770b8d2025295c2e5 1x, https://myanimelist.cdn-dena.com/r/100x140/images/manga/4/86883.jpg?s=384d55dddae936812f115094b39f6dfc 2x" />
+    <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/28/Nana" id="#area28" rel="#info28">
+      <img width="50" height="70" alt="Manga: Nana" class="lazyload" border="0" data-src="https://myanimelist.cdn-dena.com/r/50x70/images/manga/1/163191.jpg?s=0f2e6fea0853b7ca2608c6ec213727d1" data-srcset="https://myanimelist.cdn-dena.com/r/50x70/images/manga/1/163191.jpg?s=0f2e6fea0853b7ca2608c6ec213727d1 1x, https://myanimelist.cdn-dena.com/r/100x140/images/manga/1/163191.jpg?s=8040b5b0cad195af03fe5abbb8ba1462 2x" />
     </a>
 
     <div class="detail">
-              <div id="area24875">
-  <div id="info24875" rel="m24875" class="hoverinfo"></div>
+              <div id="area28">
+  <div id="info28" rel="m28" class="hoverinfo"></div>
 </div>
-            <a class="hoverinfo_trigger fs14 fw-b" href="https://myanimelist.net/manga/24875/Shinyaku_Toaru_Majutsu_no_Index" id="#area24875" rel="#info24875">Shinyaku Toaru Majutsu no Index</a><br>
+            <a class="hoverinfo_trigger fs14 fw-b" href="https://myanimelist.net/manga/28/Nana" id="#area28" rel="#info28">Nana</a><br>
       <div class="information di-ib mt4">
-        Novel (? vols)<br>
-        Mar 2011 - <br>
-        5,900 members
+        Manga (21 vols)<br>
+        May 2000 - May 2009<br>
+        42,755 members
       </div>
     </div>
   </td>
@@ -1383,19 +1383,19 @@
     <span class="lightLink top-anime-rank-text rank2">36</span>
   </td>
     <td class="title al va-t clearfix word-break">
-    <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/37707/Shigatsu_wa_Kimi_no_Uso" id="#area37707" rel="#info37707">
-      <img width="50" height="70" alt="Manga: Shigatsu wa Kimi no Uso" class="lazyload" border="0" data-src="https://myanimelist.cdn-dena.com/r/50x70/images/manga/3/102691.jpg?s=89085d4c2de4ab464691632c842ed9a6" data-srcset="https://myanimelist.cdn-dena.com/r/50x70/images/manga/3/102691.jpg?s=89085d4c2de4ab464691632c842ed9a6 1x, https://myanimelist.cdn-dena.com/r/100x140/images/manga/3/102691.jpg?s=de34db277bde5dcec4adc724e722847e 2x" />
+    <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/24875/Shinyaku_Toaru_Majutsu_no_Index" id="#area24875" rel="#info24875">
+      <img width="50" height="70" alt="Manga: Shinyaku Toaru Majutsu no Index" class="lazyload" border="0" data-src="https://myanimelist.cdn-dena.com/r/50x70/images/manga/4/86883.jpg?s=36302be13ae1141770b8d2025295c2e5" data-srcset="https://myanimelist.cdn-dena.com/r/50x70/images/manga/4/86883.jpg?s=36302be13ae1141770b8d2025295c2e5 1x, https://myanimelist.cdn-dena.com/r/100x140/images/manga/4/86883.jpg?s=384d55dddae936812f115094b39f6dfc 2x" />
     </a>
 
     <div class="detail">
-              <div id="area37707">
-  <div id="info37707" rel="m37707" class="hoverinfo"></div>
+              <div id="area24875">
+  <div id="info24875" rel="m24875" class="hoverinfo"></div>
 </div>
-            <a class="hoverinfo_trigger fs14 fw-b" href="https://myanimelist.net/manga/37707/Shigatsu_wa_Kimi_no_Uso" id="#area37707" rel="#info37707">Shigatsu wa Kimi no Uso</a><br>
+            <a class="hoverinfo_trigger fs14 fw-b" href="https://myanimelist.net/manga/24875/Shinyaku_Toaru_Majutsu_no_Index" id="#area24875" rel="#info24875">Shinyaku Toaru Majutsu no Index</a><br>
       <div class="information di-ib mt4">
-        Manga (11 vols)<br>
-        Apr 2011 - Feb 2015<br>
-        27,397 members
+        Novel (? vols)<br>
+        Mar 2011 - <br>
+        5,947 members
       </div>
     </div>
   </td>
@@ -1417,19 +1417,19 @@
     <span class="lightLink top-anime-rank-text rank2">37</span>
   </td>
     <td class="title al va-t clearfix word-break">
-    <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/70261/Mushoku_Tensei__Isekai_Ittara_Honki_Dasu" id="#area70261" rel="#info70261">
-      <img width="50" height="70" alt="Manga: Mushoku Tensei: Isekai Ittara Honki Dasu" class="lazyload" border="0" data-src="https://myanimelist.cdn-dena.com/r/50x70/images/manga/3/120337.jpg?s=bac74eab7cfacca199e1674799dfe095" data-srcset="https://myanimelist.cdn-dena.com/r/50x70/images/manga/3/120337.jpg?s=bac74eab7cfacca199e1674799dfe095 1x, https://myanimelist.cdn-dena.com/r/100x140/images/manga/3/120337.jpg?s=c2c5c6a5598aabf6590343c3822d706e 2x" />
+    <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/37707/Shigatsu_wa_Kimi_no_Uso" id="#area37707" rel="#info37707">
+      <img width="50" height="70" alt="Manga: Shigatsu wa Kimi no Uso" class="lazyload" border="0" data-src="https://myanimelist.cdn-dena.com/r/50x70/images/manga/3/102691.jpg?s=89085d4c2de4ab464691632c842ed9a6" data-srcset="https://myanimelist.cdn-dena.com/r/50x70/images/manga/3/102691.jpg?s=89085d4c2de4ab464691632c842ed9a6 1x, https://myanimelist.cdn-dena.com/r/100x140/images/manga/3/102691.jpg?s=de34db277bde5dcec4adc724e722847e 2x" />
     </a>
 
     <div class="detail">
-              <div id="area70261">
-  <div id="info70261" rel="m70261" class="hoverinfo"></div>
+              <div id="area37707">
+  <div id="info37707" rel="m37707" class="hoverinfo"></div>
 </div>
-            <a class="hoverinfo_trigger fs14 fw-b" href="https://myanimelist.net/manga/70261/Mushoku_Tensei__Isekai_Ittara_Honki_Dasu" id="#area70261" rel="#info70261">Mushoku Tensei: Isekai Ittara Honki Dasu</a><br>
+            <a class="hoverinfo_trigger fs14 fw-b" href="https://myanimelist.net/manga/37707/Shigatsu_wa_Kimi_no_Uso" id="#area37707" rel="#info37707">Shigatsu wa Kimi no Uso</a><br>
       <div class="information di-ib mt4">
-        Novel (? vols)<br>
-        Jan 2014 - <br>
-        12,563 members
+        Manga (11 vols)<br>
+        Apr 2011 - Feb 2015<br>
+        27,732 members
       </div>
     </div>
   </td>
@@ -1451,19 +1451,19 @@
     <span class="lightLink top-anime-rank-text rank2">38</span>
   </td>
     <td class="title al va-t clearfix word-break">
-    <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/74697/Re_Zero_kara_Hajimeru_Isekai_Seikatsu" id="#area74697" rel="#info74697">
-      <img width="50" height="70" alt="Manga: Re:Zero kara Hajimeru Isekai Seikatsu" class="lazyload" border="0" data-src="https://myanimelist.cdn-dena.com/r/50x70/images/manga/1/129447.jpg?s=59022093f8f6937a00b6dc9c9f668c00" data-srcset="https://myanimelist.cdn-dena.com/r/50x70/images/manga/1/129447.jpg?s=59022093f8f6937a00b6dc9c9f668c00 1x, https://myanimelist.cdn-dena.com/r/100x140/images/manga/1/129447.jpg?s=ce9abb80855fba39236d229ca866df8e 2x" />
+    <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/70261/Mushoku_Tensei__Isekai_Ittara_Honki_Dasu" id="#area70261" rel="#info70261">
+      <img width="50" height="70" alt="Manga: Mushoku Tensei: Isekai Ittara Honki Dasu" class="lazyload" border="0" data-src="https://myanimelist.cdn-dena.com/r/50x70/images/manga/3/120337.jpg?s=bac74eab7cfacca199e1674799dfe095" data-srcset="https://myanimelist.cdn-dena.com/r/50x70/images/manga/3/120337.jpg?s=bac74eab7cfacca199e1674799dfe095 1x, https://myanimelist.cdn-dena.com/r/100x140/images/manga/3/120337.jpg?s=c2c5c6a5598aabf6590343c3822d706e 2x" />
     </a>
 
     <div class="detail">
-              <div id="area74697">
-  <div id="info74697" rel="m74697" class="hoverinfo"></div>
+              <div id="area70261">
+  <div id="info70261" rel="m70261" class="hoverinfo"></div>
 </div>
-            <a class="hoverinfo_trigger fs14 fw-b" href="https://myanimelist.net/manga/74697/Re_Zero_kara_Hajimeru_Isekai_Seikatsu" id="#area74697" rel="#info74697">Re:Zero kara Hajimeru Isekai Seikatsu</a><br>
+            <a class="hoverinfo_trigger fs14 fw-b" href="https://myanimelist.net/manga/70261/Mushoku_Tensei__Isekai_Ittara_Honki_Dasu" id="#area70261" rel="#info70261">Mushoku Tensei: Isekai Ittara Honki Dasu</a><br>
       <div class="information di-ib mt4">
         Novel (? vols)<br>
         Jan 2014 - <br>
-        11,933 members
+        12,726 members
       </div>
     </div>
   </td>
@@ -1497,7 +1497,7 @@
       <div class="information di-ib mt4">
         Manga (28 vols)<br>
         Apr 1994 - Sep 1999<br>
-        50,188 members
+        50,480 members
       </div>
     </div>
   </td>
@@ -1531,7 +1531,7 @@
       <div class="information di-ib mt4">
         Manga (18 vols)<br>
         Apr 1992 - Nov 1995<br>
-        29,292 members
+        29,646 members
       </div>
     </div>
   </td>
@@ -1553,24 +1553,24 @@
     <span class="lightLink top-anime-rank-text rank2">41</span>
   </td>
     <td class="title al va-t clearfix word-break">
-    <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/610/Skip_Beat" id="#area610" rel="#info610">
-      <img width="50" height="70" alt="Manga: Skip Beat!" class="lazyload" border="0" data-src="https://myanimelist.cdn-dena.com/r/50x70/images/manga/2/26110.jpg?s=901f052c5af2a61a5740677edf9df01a" data-srcset="https://myanimelist.cdn-dena.com/r/50x70/images/manga/2/26110.jpg?s=901f052c5af2a61a5740677edf9df01a 1x, https://myanimelist.cdn-dena.com/r/100x140/images/manga/2/26110.jpg?s=18ead68c2e8e1f0ec6d747eda7255edb 2x" />
+    <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/81211/Shuumatsu_Nani_Shitemasu_ka_Isogashii_desu_ka_Sukutte_Moratte_Ii_desu_ka" id="#area81211" rel="#info81211">
+      <img width="50" height="70" alt="Manga: Shuumatsu Nani Shitemasu ka? Isogashii desu ka? Sukutte Moratte Ii desu ka?" class="lazyload" border="0" data-src="https://myanimelist.cdn-dena.com/r/50x70/images/manga/3/174609.jpg?s=4439d8f145e369d2152c57a26aba97ae" data-srcset="https://myanimelist.cdn-dena.com/r/50x70/images/manga/3/174609.jpg?s=4439d8f145e369d2152c57a26aba97ae 1x, https://myanimelist.cdn-dena.com/r/100x140/images/manga/3/174609.jpg?s=cd8408856c706e49bcd03c0421fbbb2b 2x" />
     </a>
 
     <div class="detail">
-              <div id="area610">
-  <div id="info610" rel="m610" class="hoverinfo"></div>
+              <div id="area81211">
+  <div id="info81211" rel="m81211" class="hoverinfo"></div>
 </div>
-            <a class="hoverinfo_trigger fs14 fw-b" href="https://myanimelist.net/manga/610/Skip_Beat" id="#area610" rel="#info610">Skip Beat!</a><br>
+            <a class="hoverinfo_trigger fs14 fw-b" href="https://myanimelist.net/manga/81211/Shuumatsu_Nani_Shitemasu_ka_Isogashii_desu_ka_Sukutte_Moratte_Ii_desu_ka" id="#area81211" rel="#info81211">Shuumatsu Nani Shitemasu ka? Isogashii desu ka? Sukutte Moratte Ii desu ka?</a><br>
       <div class="information di-ib mt4">
-        Manga (? vols)<br>
-        Feb 2002 - <br>
-        56,525 members
+        Novel (5 vols)<br>
+        Nov 2014 - Apr 2016<br>
+        3,454 members
       </div>
     </div>
   </td>
 
-    <td class="score ac fs14"><div class="js-top-ranking-score-col di-ib al"><i class="icon-score-star mr4 on"></i><span class="text on">8.70</span></div>
+    <td class="score ac fs14"><div class="js-top-ranking-score-col di-ib al"><i class="icon-score-star mr4 on"></i><span class="text on">8.71</span></div>
   </td>
 
     <td class="your-score ac fs14">
@@ -1587,19 +1587,19 @@
     <span class="lightLink top-anime-rank-text rank2">42</span>
   </td>
     <td class="title al va-t clearfix word-break">
-    <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/1303/Ashita_no_Joe" id="#area1303" rel="#info1303">
-      <img width="50" height="70" alt="Manga: Ashita no Joe" class="lazyload" border="0" data-src="https://myanimelist.cdn-dena.com/r/50x70/images/manga/4/75029.jpg?s=9888e364738fc189aab5408ebeb63435" data-srcset="https://myanimelist.cdn-dena.com/r/50x70/images/manga/4/75029.jpg?s=9888e364738fc189aab5408ebeb63435 1x, https://myanimelist.cdn-dena.com/r/100x140/images/manga/4/75029.jpg?s=bd8986792e93d5cb4ee656df96c6152f 2x" />
+    <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/610/Skip_Beat" id="#area610" rel="#info610">
+      <img width="50" height="70" alt="Manga: Skip Beat!" class="lazyload" border="0" data-src="https://myanimelist.cdn-dena.com/r/50x70/images/manga/2/26110.jpg?s=901f052c5af2a61a5740677edf9df01a" data-srcset="https://myanimelist.cdn-dena.com/r/50x70/images/manga/2/26110.jpg?s=901f052c5af2a61a5740677edf9df01a 1x, https://myanimelist.cdn-dena.com/r/100x140/images/manga/2/26110.jpg?s=18ead68c2e8e1f0ec6d747eda7255edb 2x" />
     </a>
 
     <div class="detail">
-              <div id="area1303">
-  <div id="info1303" rel="m1303" class="hoverinfo"></div>
+              <div id="area610">
+  <div id="info610" rel="m610" class="hoverinfo"></div>
 </div>
-            <a class="hoverinfo_trigger fs14 fw-b" href="https://myanimelist.net/manga/1303/Ashita_no_Joe" id="#area1303" rel="#info1303">Ashita no Joe</a><br>
+            <a class="hoverinfo_trigger fs14 fw-b" href="https://myanimelist.net/manga/610/Skip_Beat" id="#area610" rel="#info610">Skip Beat!</a><br>
       <div class="information di-ib mt4">
-        Manga (20 vols)<br>
-        Jan 1968 - May 1973<br>
-        8,437 members
+        Manga (? vols)<br>
+        Feb 2002 - <br>
+        56,794 members
       </div>
     </div>
   </td>
@@ -1621,19 +1621,19 @@
     <span class="lightLink top-anime-rank-text rank2">43</span>
   </td>
     <td class="title al va-t clearfix word-break">
-    <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/3649/Fate_Zero" id="#area3649" rel="#info3649">
-      <img width="50" height="70" alt="Manga: Fate/Zero" class="lazyload" border="0" data-src="https://myanimelist.cdn-dena.com/r/50x70/images/manga/3/186073.jpg?s=5bff4e6932a81c9a27b3bb5848849f53" data-srcset="https://myanimelist.cdn-dena.com/r/50x70/images/manga/3/186073.jpg?s=5bff4e6932a81c9a27b3bb5848849f53 1x, https://myanimelist.cdn-dena.com/r/100x140/images/manga/3/186073.jpg?s=981223993c8c59ce81e0ad13e2508a2a 2x" />
+    <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/1303/Ashita_no_Joe" id="#area1303" rel="#info1303">
+      <img width="50" height="70" alt="Manga: Ashita no Joe" class="lazyload" border="0" data-src="https://myanimelist.cdn-dena.com/r/50x70/images/manga/4/75029.jpg?s=9888e364738fc189aab5408ebeb63435" data-srcset="https://myanimelist.cdn-dena.com/r/50x70/images/manga/4/75029.jpg?s=9888e364738fc189aab5408ebeb63435 1x, https://myanimelist.cdn-dena.com/r/100x140/images/manga/4/75029.jpg?s=bd8986792e93d5cb4ee656df96c6152f 2x" />
     </a>
 
     <div class="detail">
-              <div id="area3649">
-  <div id="info3649" rel="m3649" class="hoverinfo"></div>
+              <div id="area1303">
+  <div id="info1303" rel="m1303" class="hoverinfo"></div>
 </div>
-            <a class="hoverinfo_trigger fs14 fw-b" href="https://myanimelist.net/manga/3649/Fate_Zero" id="#area3649" rel="#info3649">Fate/Zero</a><br>
+            <a class="hoverinfo_trigger fs14 fw-b" href="https://myanimelist.net/manga/1303/Ashita_no_Joe" id="#area1303" rel="#info1303">Ashita no Joe</a><br>
       <div class="information di-ib mt4">
-        Novel (4 vols)<br>
-        Dec 2006 - Dec 2007<br>
-        12,388 members
+        Manga (20 vols)<br>
+        Jan 1968 - May 1973<br>
+        8,564 members
       </div>
     </div>
   </td>
@@ -1655,19 +1655,19 @@
     <span class="lightLink top-anime-rank-text rank2">44</span>
   </td>
     <td class="title al va-t clearfix word-break">
-    <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/46282/Chikan_Otoko" id="#area46282" rel="#info46282">
-      <img width="50" height="70" alt="Manga: Chikan Otoko" class="lazyload" border="0" data-src="https://myanimelist.cdn-dena.com/r/50x70/images/manga/4/155148.jpg?s=143cf95e809a0a257e17f8625996d509" data-srcset="https://myanimelist.cdn-dena.com/r/50x70/images/manga/4/155148.jpg?s=143cf95e809a0a257e17f8625996d509 1x, https://myanimelist.cdn-dena.com/r/100x140/images/manga/4/155148.jpg?s=0914c1c2f9298db4f9d10db118724464 2x" />
+    <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/3649/Fate_Zero" id="#area3649" rel="#info3649">
+      <img width="50" height="70" alt="Manga: Fate/Zero" class="lazyload" border="0" data-src="https://myanimelist.cdn-dena.com/r/50x70/images/manga/3/186073.jpg?s=5bff4e6932a81c9a27b3bb5848849f53" data-srcset="https://myanimelist.cdn-dena.com/r/50x70/images/manga/3/186073.jpg?s=5bff4e6932a81c9a27b3bb5848849f53 1x, https://myanimelist.cdn-dena.com/r/100x140/images/manga/3/186073.jpg?s=981223993c8c59ce81e0ad13e2508a2a 2x" />
     </a>
 
     <div class="detail">
-              <div id="area46282">
-  <div id="info46282" rel="m46282" class="hoverinfo"></div>
+              <div id="area3649">
+  <div id="info3649" rel="m3649" class="hoverinfo"></div>
 </div>
-            <a class="hoverinfo_trigger fs14 fw-b" href="https://myanimelist.net/manga/46282/Chikan_Otoko" id="#area46282" rel="#info46282">Chikan Otoko</a><br>
+            <a class="hoverinfo_trigger fs14 fw-b" href="https://myanimelist.net/manga/3649/Fate_Zero" id="#area3649" rel="#info3649">Fate/Zero</a><br>
       <div class="information di-ib mt4">
-        Manga (? vols)<br>
-        2004 - 2004<br>
-        22,767 members
+        Novel (4 vols)<br>
+        Dec 2006 - Dec 2007<br>
+        12,511 members
       </div>
     </div>
   </td>
@@ -1689,19 +1689,19 @@
     <span class="lightLink top-anime-rank-text rank2">45</span>
   </td>
     <td class="title al va-t clearfix word-break">
-    <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/81211/Shuumatsu_Nani_Shitemasu_ka_Isogashii_desu_ka_Sukutte_Moratte_Ii_desu_ka" id="#area81211" rel="#info81211">
-      <img width="50" height="70" alt="Manga: Shuumatsu Nani Shitemasu ka? Isogashii desu ka? Sukutte Moratte Ii desu ka?" class="lazyload" border="0" data-src="https://myanimelist.cdn-dena.com/r/50x70/images/manga/3/174609.jpg?s=4439d8f145e369d2152c57a26aba97ae" data-srcset="https://myanimelist.cdn-dena.com/r/50x70/images/manga/3/174609.jpg?s=4439d8f145e369d2152c57a26aba97ae 1x, https://myanimelist.cdn-dena.com/r/100x140/images/manga/3/174609.jpg?s=cd8408856c706e49bcd03c0421fbbb2b 2x" />
+    <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/46282/Chikan_Otoko" id="#area46282" rel="#info46282">
+      <img width="50" height="70" alt="Manga: Chikan Otoko" class="lazyload" border="0" data-src="https://myanimelist.cdn-dena.com/r/50x70/images/manga/4/155148.jpg?s=143cf95e809a0a257e17f8625996d509" data-srcset="https://myanimelist.cdn-dena.com/r/50x70/images/manga/4/155148.jpg?s=143cf95e809a0a257e17f8625996d509 1x, https://myanimelist.cdn-dena.com/r/100x140/images/manga/4/155148.jpg?s=0914c1c2f9298db4f9d10db118724464 2x" />
     </a>
 
     <div class="detail">
-              <div id="area81211">
-  <div id="info81211" rel="m81211" class="hoverinfo"></div>
+              <div id="area46282">
+  <div id="info46282" rel="m46282" class="hoverinfo"></div>
 </div>
-            <a class="hoverinfo_trigger fs14 fw-b" href="https://myanimelist.net/manga/81211/Shuumatsu_Nani_Shitemasu_ka_Isogashii_desu_ka_Sukutte_Moratte_Ii_desu_ka" id="#area81211" rel="#info81211">Shuumatsu Nani Shitemasu ka? Isogashii desu ka? Sukutte Moratte Ii desu ka?</a><br>
+            <a class="hoverinfo_trigger fs14 fw-b" href="https://myanimelist.net/manga/46282/Chikan_Otoko" id="#area46282" rel="#info46282">Chikan Otoko</a><br>
       <div class="information di-ib mt4">
-        Novel (5 vols)<br>
-        Nov 2014 - Apr 2016<br>
-        3,203 members
+        Manga (? vols)<br>
+        2004 - 2004<br>
+        23,001 members
       </div>
     </div>
   </td>
@@ -1735,7 +1735,7 @@
       <div class="information di-ib mt4">
         Manga (? vols)<br>
         Sep 1989 - <br>
-        28,978 members
+        29,228 members
       </div>
     </div>
   </td>
@@ -1769,7 +1769,7 @@
       <div class="information di-ib mt4">
         Manga (? vols)<br>
         Mar 1998 - <br>
-        76,747 members
+        77,864 members
       </div>
     </div>
   </td>
@@ -1791,19 +1791,19 @@
     <span class="lightLink top-anime-rank-text rank2">48</span>
   </td>
     <td class="title al va-t clearfix word-break">
-    <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/1342/Baccano" id="#area1342" rel="#info1342">
-      <img width="50" height="70" alt="Manga: Baccano!" class="lazyload" border="0" data-src="https://myanimelist.cdn-dena.com/r/50x70/images/manga/2/172736.jpg?s=ba2dbabc5611808a3b1e3eb178e65c6c" data-srcset="https://myanimelist.cdn-dena.com/r/50x70/images/manga/2/172736.jpg?s=ba2dbabc5611808a3b1e3eb178e65c6c 1x, https://myanimelist.cdn-dena.com/r/100x140/images/manga/2/172736.jpg?s=ef15f2b7128cad7a194866805cf5b15e 2x" />
+    <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/9726/Zaregoto_Series" id="#area9726" rel="#info9726">
+      <img width="50" height="70" alt="Manga: Zaregoto Series" class="lazyload" border="0" data-src="https://myanimelist.cdn-dena.com/r/50x70/images/manga/1/157901.jpg?s=f2f3ba5c1f95653120704794d57c0567" data-srcset="https://myanimelist.cdn-dena.com/r/50x70/images/manga/1/157901.jpg?s=f2f3ba5c1f95653120704794d57c0567 1x, https://myanimelist.cdn-dena.com/r/100x140/images/manga/1/157901.jpg?s=4b4e5cb764733376cad6df8078759d2b 2x" />
     </a>
 
     <div class="detail">
-              <div id="area1342">
-  <div id="info1342" rel="m1342" class="hoverinfo"></div>
+              <div id="area9726">
+  <div id="info9726" rel="m9726" class="hoverinfo"></div>
 </div>
-            <a class="hoverinfo_trigger fs14 fw-b" href="https://myanimelist.net/manga/1342/Baccano" id="#area1342" rel="#info1342">Baccano!</a><br>
+            <a class="hoverinfo_trigger fs14 fw-b" href="https://myanimelist.net/manga/9726/Zaregoto_Series" id="#area9726" rel="#info9726">Zaregoto Series</a><br>
       <div class="information di-ib mt4">
-        Novel (? vols)<br>
-        Feb 2003 - <br>
-        7,675 members
+        Novel (9 vols)<br>
+        Feb 2002 - Nov 2005<br>
+        6,317 members
       </div>
     </div>
   </td>
@@ -1837,7 +1837,7 @@
       <div class="information di-ib mt4">
         Manga (9 vols)<br>
         Sep 2007 - Jan 2012<br>
-        12,558 members
+        12,676 members
       </div>
     </div>
   </td>
@@ -1859,19 +1859,19 @@
     <span class="lightLink top-anime-rank-text rank2">50</span>
   </td>
     <td class="title al va-t clearfix word-break">
-    <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/34053/Umineko_no_Naku_Koro_ni_Chiru_-_Episode_8__Twilight_of_the_Golden_Witch" id="#area34053" rel="#info34053">
-      <img width="50" height="70" alt="Manga: Umineko no Naku Koro ni Chiru - Episode 8: Twilight of the Golden Witch" class="lazyload" border="0" data-src="https://myanimelist.cdn-dena.com/r/50x70/images/manga/3/156867.jpg?s=91ad443bbb507ff6a289bf6e2967a23b" data-srcset="https://myanimelist.cdn-dena.com/r/50x70/images/manga/3/156867.jpg?s=91ad443bbb507ff6a289bf6e2967a23b 1x, https://myanimelist.cdn-dena.com/r/100x140/images/manga/3/156867.jpg?s=0d5137551def74224d54b9d5d9db91ab 2x" />
+    <a class="hoverinfo_trigger fl-l ml12 mr8" href="https://myanimelist.net/manga/48399/No_Game_No_Life" id="#area48399" rel="#info48399">
+      <img width="50" height="70" alt="Manga: No Game No Life" class="lazyload" border="0" data-src="https://myanimelist.cdn-dena.com/r/50x70/images/manga/2/188186.jpg?s=866cf92a3018c7e842953fc0618bfea3" data-srcset="https://myanimelist.cdn-dena.com/r/50x70/images/manga/2/188186.jpg?s=866cf92a3018c7e842953fc0618bfea3 1x, https://myanimelist.cdn-dena.com/r/100x140/images/manga/2/188186.jpg?s=102be2895ec3cc52d65cd86d3897e1d5 2x" />
     </a>
 
     <div class="detail">
-              <div id="area34053">
-  <div id="info34053" rel="m34053" class="hoverinfo"></div>
+              <div id="area48399">
+  <div id="info48399" rel="m48399" class="hoverinfo"></div>
 </div>
-            <a class="hoverinfo_trigger fs14 fw-b" href="https://myanimelist.net/manga/34053/Umineko_no_Naku_Koro_ni_Chiru_-_Episode_8__Twilight_of_the_Golden_Witch" id="#area34053" rel="#info34053">Umineko no Naku Koro ni Chiru - Episode 8: Twilight of the Golden Witch</a><br>
+            <a class="hoverinfo_trigger fs14 fw-b" href="https://myanimelist.net/manga/48399/No_Game_No_Life" id="#area48399" rel="#info48399">No Game No Life</a><br>
       <div class="information di-ib mt4">
-        Manga (9 vols)<br>
-        Jan 2012 - Jun 2015<br>
-        3,342 members
+        Novel (? vols)<br>
+        Apr 2012 - <br>
+        20,441 members
       </div>
     </div>
   </td>
@@ -1999,11 +1999,11 @@
         <ol>
                       <li>
               <span class="rank">1</span>
-              <a href="https://myanimelist.net/anime/33352/Violet_Evergarden">Violet Evergarden</a>
+              <a href="https://myanimelist.net/anime/33486/Boku_no_Hero_Academia_2nd_Season">Boku no Hero Academia 2nd Season</a>
             </li>
                       <li>
               <span class="rank">2</span>
-              <a href="https://myanimelist.net/anime/33486/Boku_no_Hero_Academia_2nd_Season">Boku no Hero Academia 2nd Season</a>
+              <a href="https://myanimelist.net/anime/33352/Violet_Evergarden">Violet Evergarden</a>
             </li>
                       <li>
               <span class="rank">3</span>
@@ -2025,23 +2025,23 @@
         <ol>
                       <li>
               <span class="rank">1</span>
-              <a href="https://myanimelist.net/anime/34933/Kakegurui">Kakegurui</a>
+              <a href="https://myanimelist.net/anime/34449/The_Reflection">The Reflection</a>
             </li>
                       <li>
               <span class="rank">2</span>
-              <a href="https://myanimelist.net/anime/34662/Fate_Apocrypha">Fate/Apocrypha</a>
+              <a href="https://myanimelist.net/anime/34933/Kakegurui">Kakegurui</a>
             </li>
                       <li>
               <span class="rank">3</span>
-              <a href="https://myanimelist.net/anime/35203/Isekai_wa_Smartphone_to_Tomo_ni">Isekai wa Smartphone to Tomo ni.</a>
+              <a href="https://myanimelist.net/anime/33486/Boku_no_Hero_Academia_2nd_Season">Boku no Hero Academia 2nd Season</a>
             </li>
                       <li>
               <span class="rank">4</span>
-              <a href="https://myanimelist.net/anime/35240/Princess_Principal">Princess Principal</a>
+              <a href="https://myanimelist.net/anime/34403/Hajimete_no_Gal">Hajimete no Gal</a>
             </li>
                       <li>
               <span class="rank">5</span>
-              <a href="https://myanimelist.net/anime/34934/Koi_to_Uso">Koi to Uso</a>
+              <a href="https://myanimelist.net/anime/34662/Fate_Apocrypha">Fate/Apocrypha</a>
             </li>
                   </ol>
       </div>
