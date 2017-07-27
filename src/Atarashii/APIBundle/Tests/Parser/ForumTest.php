@@ -71,7 +71,7 @@ class ForumTest extends \PHPUnit\Framework\TestCase
         $topicReply = $topic->getReply();
         $this->assertInternalType('array', $topicReply);
         $this->assertInternalType('string', $topicReply['username']);
-//        $this->assertInstanceOf('\DateTime', new \DateTime($topicReply['time'])); // TODO: Find a better way to test for partial ISO8601 date and times.
+        //$this->assertInstanceOf('\DateTime', new \DateTime($topicReply['time'])); // TODO: Find a better way to test for partial ISO8601 date and times.
     }
 
     public function testParseTopics()
