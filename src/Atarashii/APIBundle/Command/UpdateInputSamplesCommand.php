@@ -21,10 +21,12 @@ use Symfony\Component\Filesystem\Filesystem;
 class UpdateInputSamplesCommand extends ContainerAwareCommand
 {
     private static $anonPages = [
+        ['Anime List', '/malappinfo.php?u=atarashiiapitest&status=all&type=anime', '/anime-list.xml'],
         ['Anime 47 (Akira)', '/anime/47', '/anime-47.html'],
         ['Anime 10236 (Kagee Grimm Douwa)', '/anime/10236', '/anime-10236.html'],
         ['Anime 10758 (Momotarou)', '/anime/10758', '/anime-10758.html'],
         ['Anime 18617 (Girls und Panzer Movie)', '/anime/18617', '/anime-18617.html'],
+        ['Manga List', '/malappinfo.php?u=atarashiiapitest&status=all&type=manga', '/manga-list.xml'],
         ['Manga 137 (R.O.D: Read or Die)', '/manga/137', '/manga-137.html'],
         ['Manga 44347 (One-Punch Man)', '/manga/44347', '/manga-44347.html'],
         ['Reviews for Anime 1887 (Lucky Star)', '/anime/1887/_/reviews', '/anime-1887-reviews.html'],
