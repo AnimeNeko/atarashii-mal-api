@@ -10,6 +10,7 @@
 
 namespace Atarashii\APIBundle\Controller;
 
+use Atarashii\APIBundle\Parser\ListParser;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +18,6 @@ use GuzzleHttp\Exception;
 use Atarashii\APIBundle\Model\Anime;
 use FOS\RestBundle\Context\Context;
 use DateTime;
-use SimpleXMLElement;
 
 class AnimeListController extends FOSRestController
 {
@@ -44,43 +44,7 @@ class AnimeListController extends FOSRestController
         if (strpos($animelistcontent, '<myanimelist></myanimelist>') !== false) {
             return $this->view(array('error' => 'Empty list received, please check the username.'), 200);
         } else {
-            $animelistxml = new SimpleXMLElement($animelistcontent);
-            $alist = array();
-
-            $i = 0;
-            foreach ($animelistxml->anime as $anime) {
-                $alist[$i] = new Anime();
-                $alist[$i]->setId((int) $anime->series_animedb_id);
-                $alist[$i]->setTitle((string) $anime->series_title);
-                $alist[$i]->setType((int) $anime->series_type);
-                $alist[$i]->setStatus((int) $anime->series_status);
-                $alist[$i]->setEpisodes((int) $anime->series_episodes);
-                $alist[$i]->setImageUrl((string) $anime->series_image);
-                $alist[$i]->setListedAnimeId((int) $anime->my_id);
-                $alist[$i]->setWatchedEpisodes((int) $anime->my_watched_episodes);
-                $alist[$i]->setScore((int) $anime->my_score);
-                $alist[$i]->setWatchedStatus((int) $anime->my_status);
-                $alist[$i]->setLastUpdated((int) $anime->my_last_updated);
-                $alist[$i]->setRewatching(((int) $anime->my_rewatching) === 1);
-
-                // The personal tags are passed by MAL as string.
-                // This will convert it into an array.
-                $myTags = (string) $anime->my_tags;
-                if (strlen($myTags) > 0) {
-                    $tagArray = array();
-                    $personalTags = explode(',', trim($myTags));
-
-                    foreach ($personalTags as $tag) {
-                        $tagArray[] = trim($tag);
-                    }
-
-                    $alist[$i]->setPersonalTags($tagArray);
-                }
-                ++$i;
-            }
-
-            $animelist['statistics']['days'] = (float) $animelistxml->myinfo->user_days_spent_watching;
-            $animelist['anime'] = $alist;
+            $animelist = ListParser::parse($animelistcontent, 'anime');
         }
 
         $response = new Response();

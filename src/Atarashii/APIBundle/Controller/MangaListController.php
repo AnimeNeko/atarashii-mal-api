@@ -10,6 +10,7 @@
 
 namespace Atarashii\APIBundle\Controller;
 
+use Atarashii\APIBundle\Parser\ListParser;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +18,6 @@ use GuzzleHttp\Exception;
 use Atarashii\APIBundle\Model\Manga;
 use FOS\RestBundle\Context\Context;
 use DateTime;
-use SimpleXMLElement;
 
 class MangaListController extends FOSRestController
 {
@@ -44,45 +44,7 @@ class MangaListController extends FOSRestController
         if (strpos($mangalistcontent, '<myanimelist></myanimelist>') !== false) {
             return $this->view(array('error' => 'Empty list received, please check the username.'), 200);
         } else {
-            $mangalistxml = new SimpleXMLElement($mangalistcontent);
-            $mlist = array();
-
-            $i = 0;
-            foreach ($mangalistxml->manga as $manga) {
-                $mlist[$i] = new Manga();
-                $mlist[$i]->setId((int) $manga->series_mangadb_id);
-                $mlist[$i]->setTitle((string) $manga->series_title);
-                $mlist[$i]->setType((int) $manga->series_type);
-                $mlist[$i]->setStatus((int) $manga->series_status);
-                $mlist[$i]->setChapters((int) $manga->series_chapters);
-                $mlist[$i]->setVolumes((int) $manga->series_volumes);
-                $mlist[$i]->setImageUrl((string) $manga->series_image);
-                $mlist[$i]->setListedMangaId((int) $manga->my_id);
-                $mlist[$i]->setVolumesRead((int) $manga->my_read_volumes);
-                $mlist[$i]->setChaptersRead((int) $manga->my_read_chapters);
-                $mlist[$i]->setScore((int) $manga->my_score);
-                $mlist[$i]->setReadStatus($manga->my_status);
-                $mlist[$i]->setLastUpdated((int) $manga->my_last_updated);
-                $mlist[$i]->setRereading(((int) $manga->my_rereadingg) === 1);
-
-                // The personal tags are passed by MAL as string.
-                // This will convert it into an array.
-                $myTags = (string) $manga->my_tags;
-                if (strlen($myTags) > 0) {
-                    $tagArray = array();
-                    $personalTags = explode(',', trim($myTags));
-
-                    foreach ($personalTags as $tag) {
-                        $tagArray[] = trim($tag);
-                    }
-
-                    $mlist[$i]->setPersonalTags($tagArray);
-                }
-                ++$i;
-            }
-
-            $mangalist['statistics']['days'] = (float) $mangalistxml->myinfo->user_days_spent_watching;
-            $mangalist['manga'] = $mlist;
+            $mangalist = ListParser::parse($mangalistcontent, 'manga');
         }
 
         $response = new Response();
