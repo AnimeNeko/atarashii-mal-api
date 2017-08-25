@@ -548,7 +548,10 @@ class TitleParser
         //Score
         $extracted = $statsContent->filterXPath('//div[@data-title="score"]');
         if ($extracted->count() > 0 && strpos($extracted->text(), 'N/A') === false) {
-            $record->setMembersScore((float) trim($extracted->text()));
+            //Only process if the score is "weighted".
+            if (strpos($extracted->extract(array('title'))[0], 'not weighted') === false) {
+                $record->setMembersScore((float) trim($extracted->text()));
+            }
         }
 
         //Ranking
