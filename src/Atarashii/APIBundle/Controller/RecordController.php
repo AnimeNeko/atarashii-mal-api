@@ -211,7 +211,7 @@ class RecordController extends FOSRestController
             $details = $e->getResponse()->getBody();
         }
 
-        if ((strpos($details, 'No characters') !== false) || (strpos($details, 'This page doesn\'t exist') !== false)) {
+        if ((strpos($details, 'No characters') !== false) && (strpos($details, 'No staff') !== false) || (strpos($details, 'This page doesn\'t exist') !== false)) {
             return $this->view(array('error' => 'not-found'), 404);
         } else {
             $cast = CastParser::parse($details);
