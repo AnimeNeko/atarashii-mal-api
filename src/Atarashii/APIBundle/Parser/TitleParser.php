@@ -722,6 +722,8 @@ class TitleParser
 
     private static function parseTitleDate($date)
     {
+        $date = trim($date); //Clear any whitespace on either end.
+
         if (strpos($date, ',') === false) { //Date doesn't contain a comma
             if (strlen($date) === 4) {
                 return array(\DateTime::createFromFormat('Y m d', $date.' 01 01'), 'year'); //Year only - "1963" (ex id 6535)
@@ -730,11 +732,18 @@ class TitleParser
             }
         } else { //Date contains a comma
             $dateComponents = explode(' ', $date);
-            if (count($dateComponents) == 2) { //Month and Year with comma - "Dec, 1981" - Weird MAL formatting (ex id 21275)
+            //Month and Year with comma - "Dec, 1981" - Weird MAL formatting (ex id 21275)
+            //NOTE: May also be a day and year without month (ex id 39589)
+            if (count($dateComponents) === 2) {
                 $month = substr($dateComponents[0], 0, -1); //Remove the comma
                 $year = $dateComponents[1];
 
-                return array(\DateTime::createFromFormat('M Y d', $month.' '.$year.' 01'), 'month');
+                //Catch where there is only day and year with no month, and just return a year.
+                if(is_numeric($month)) {
+                    return array(\DateTime::createFromFormat('Y m d', $year.' 01 01'), 'year');
+                } else {
+                    return array(\DateTime::createFromFormat('M Y d', $month.' '.$year.' 01'), 'month');
+                }
             } elseif (strlen($date) !== 7 && strlen($date) !== 8) { //Full Date. Not sure why we're checking the length here.
                 return array(\DateTime::createFromFormat('M j, Y', $date), 'day');
             }
