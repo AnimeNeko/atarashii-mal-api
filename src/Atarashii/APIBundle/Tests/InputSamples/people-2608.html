@@ -19,10 +19,10 @@ Kano Miyamoto - MyAnimeList.net
 
 <link rel="manifest" href="/manifest.json">
 
-<meta name='csrf_token' content='01f89f079058166ed5aa04f8a1429cfb64778894'><link rel="stylesheet" type="text/css" href="https://myanimelist.cdn-dena.com/static/assets/css/pc/style-256db3456e.css" />
+<meta name='csrf_token' content='6c1921daef3ae06d6459c256e0664623df5f861c'><link rel="stylesheet" type="text/css" href="https://myanimelist.cdn-dena.com/static/assets/css/pc/style-e8524c2a68.css" />
 
-<script type="text/javascript" src="https://myanimelist.cdn-dena.com/static/assets/js/pc/header-c4f7891876.js"></script>
-<script type="text/javascript" src="https://myanimelist.cdn-dena.com/static/assets/js/pc/all-dbd9ac4e66.js"
+<script type="text/javascript" src="https://myanimelist.cdn-dena.com/static/assets/js/pc/header-13c4480594.js"></script>
+<script type="text/javascript" src="https://myanimelist.cdn-dena.com/static/assets/js/pc/all-90879a9204.js"
         id="alljs" data-params='{&quot;origin_url&quot;:&quot;https:\/\/myanimelist.net&quot;,&quot;is_request_bot_filter_log&quot;:true}' defer></script>
 
 
@@ -89,12 +89,13 @@ Kano Miyamoto - MyAnimeList.net
     </div>
   </div>
         <div class="wrapper"><div id="headerSmall"><a href="/" class="link-mal-logo">MyAnimeList.net</a>
-<a href="https://myanimelist.net/account/membership?_location=mal_h_b&amp;_type=2"
+<a href="https://myanimelist.net/manga_translation_battle?_location=mal_h_b&amp;_type=4"
    class="banner-header-anime-straming" target="_self">
-  <img src="https://myanimelist.cdn-dena.com/images/membership/banner-paypal.png?v=1" width="250" height="36"
-       srcset="https://myanimelist.cdn-dena.com/images/membership/banner-paypal.png?v=1 1x, https://myanimelist.cdn-dena.com/images/membership/banner-paypal@2x.png?v=1 2x"
-       alt="MAL Supporter is now accepting Paypal Checkout" title="MAL Supporter is now accepting Paypal Checkout">
-</a><div id="header-menu" ><div class="header-menu-login"><a class="btn-mal-service" href="https://myanimelist.net/membership?_location=mal_h_u">Hide Ads</a><a class="btn-login" href="https://myanimelist.net/login.php?from=%2Fpeople%2F2608" id="malLogin">Login</a><a class="btn-signup" href="https://myanimelist.net/register.php?from=%2Fpeople%2F2608">Sign Up</a></div></div></div>  <div id="menu" class="">
+  <img src="https://myanimelist.cdn-dena.com/images/mtb/banner-mtb6-winners.png?v=1" width="250" height="36"
+       srcset="https://myanimelist.cdn-dena.com/images/mtb/banner-mtb6-winners.png?v=1 1x, https://myanimelist.cdn-dena.com/images/mtb/banner-mtb6-winners@2x.png?v=1 2x"
+       alt="MangaTranslationBattle vol6" title="MangaTranslationBattle vol6">
+</a>
+<div id="header-menu" ><div class="header-menu-login"><a class="btn-mal-service" href="https://myanimelist.net/membership?_location=mal_h_u">Hide Ads</a><a class="btn-login" href="https://myanimelist.net/login.php?from=%2Fpeople%2F2608" id="malLogin">Login</a><a class="btn-signup" href="https://myanimelist.net/register.php?from=%2Fpeople%2F2608">Sign Up</a></div></div></div>  <div id="menu" class="">
     <div id="menu_right"><script type="text/x-template" id="incremental-result-item-anime"><div class="list anime" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info anime"><div class="name">${ item.name } <span class="media-type">(${ item.payload.media_type })</span></div><div class="extra-info">Aired: ${ item.payload.aired }<br>Score: ${ item.payload.score }<br>Status: ${ item.payload.status }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info anime"><div class="name">${ item.name }</div><div class="media-type">(${ mediaTypeWithStartYear })</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-manga"><div class="list manga" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info manga"><div class="name">${ item.name } <span class="media-type">(${ item.payload.media_type })</span></div><div class="extra-info">Published: ${ item.payload.published }<br>Score: ${ item.payload.score }<br>Status: ${ item.payload.status }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info manga"><div class="name">${ item.name }</div><div class="media-type">(${ mediaTypeWithStartYear })</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-character"><div class="list character" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info character"><div class="name">${ item.name }</div><div class="extra-info"><ul class="related-works"><li v-for="work in item.payload.related_works" class="fs-i">- ${ work }</li></ul>Favorites: ${ item.payload.favorites }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info character"><div class="name">${ item.name }</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-person"><div class="list person" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info person"><div class="name">${ item.name }</div><div class="extra-info"><span v-if="item.payload.alternative_name">${ item.payload.alternative_name }<br></span>Birthday: ${ item.payload.birthday }<br>Favorites: ${ item.payload.favorites }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info person"><div class="name">${ item.name }</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-club"><div class="list club" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info club"><div class="name">${ item.name }</div><div class="extra-info">Members: ${ item.payload.members }<br>Category: ${ item.payload.category }<br>Created by: ${ item.payload.created_by }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info club"><div class="name">${ item.name }</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-user"><div class="list user" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info user"><div class="name">${ item.name }</div><div class="extra-info"><span v-if="item.payload.authority">${ item.payload.authority }<br></span>Joined: ${ item.payload.joined }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info user"><div class="name">${ item.name }</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-news"><div class="list news" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info news"><div class="name">${ item.name }</div><div class="extra-info">${ item.payload.date }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info news"><div class="name">${ item.name }</div><div class="media-type">${ item.payload.date }</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-featured"><div class="list featured" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info featured"><div class="name">${ item.name }</div><div class="extra-info">${ item.payload.date }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info featured"><div class="name">${ item.name }</div><div class="media-type">${ item.payload.date }</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-forum"><div class="list forum" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info forum"><div class="name"><span v-show="item.payload.work_title">${ item.payload.work_title}
                       <i class="fa fa-caret-right"></i></span> ${ item.name }</div><div class="extra-info">${ item.payload.date }<br><span>in ${ item.payload.category }</span></div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info forum"><div class="name"><span v-show="item.payload.work_title">${ item.payload.work_title}
                       <i class="fa fa-caret-right"></i></span> ${ item.name }</div><div class="media-type">${ item.payload.date }</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-separator"><div class="list separator"><div class="separator"><span v-show="item.name == 'anime'">Anime</span><span v-show="item.name == 'manga'">Manga</span><span v-show="item.name == 'character'">Characters</span><span v-show="item.name == 'person'">People</span></div></div></script><div id="top-search-bar"><form id="searchBar" method="get" class="searchBar" @submit.prevent="jump()"><div class="form-select-outer fl-l"><select name="type" id="topSearchValue" class="inputtext" v-model="type"><option value="all">All</option><option value="anime">Anime</option><option value="manga">Manga</option><option value="character">Characters</option><option value="person">People</option><option value="news">News</option><option value="featured">Featured Articles</option><option value="forum">Forum</option><option value="club">Clubs</option><option value="user">Users</option></select></div><input v-model="keyword" id="topSearchText" type="text"
@@ -113,7 +114,7 @@ Kano Miyamoto - MyAnimeList.net
                         <li><a href="https://myanimelist.net/watch/episode?_location=mal_h_m_a">Videos</a></li>
             <li><a href="https://myanimelist.net/reviews.php?t=anime&amp;_location=mal_h_m">Reviews</a></li>
             <li><a href="https://myanimelist.net/recommendations.php?s=recentrecs&amp;t=anime&amp;_location=mal_h_m">Recommendations</a></li>
-            <li><a href="https://myanimelist.net/forum?topicid=1582476&amp;_location=mal_h_m">2017 Challenge</a></li>
+            <li><a href="https://myanimelist.net/forum?topicid=1696289&amp;_location=mal_h_m">2018 Challenge</a></li>
           </ul>
         </li>
         <li class="small"><a href="#" class="non-link">Manga</a>
@@ -122,7 +123,7 @@ Kano Miyamoto - MyAnimeList.net
             <li><a href="https://myanimelist.net/topmanga.php?_location=mal_h_m">Top Manga</a></li>
             <li><a href="https://myanimelist.net/reviews.php?t=manga&amp;_location=mal_h_m">Reviews</a></li>
             <li><a href="https://myanimelist.net/recommendations.php?s=recentrecs&amp;t=manga&amp;_location=mal_h_m">Recommendations</a></li>
-            <li><a href="https://myanimelist.net/forum?topicid=1582478&amp;_location=mal_h_m">2017 Challenge</a></li>
+            <li><a href="https://myanimelist.net/forum?topicid=1696290&amp;_location=mal_h_m">2018 Challenge</a></li>
           </ul>
         </li>
         <li><a href="#" class="non-link">Community</a>
@@ -131,7 +132,7 @@ Kano Miyamoto - MyAnimeList.net
             <li><a href="https://myanimelist.net/clubs.php?_location=mal_h_m">Clubs</a></li>
             <li><a href="https://myanimelist.net/blog.php?_location=mal_h_m">Blogs</a></li>
             <li><a href="https://myanimelist.net/users.php?_location=mal_h_m">Users</a></li>
-            <li><a href="https://discord.gg/g443UVv">Discord Chat</a></li>
+            <li><a href="https://discord.gg/E2xC8ZF">Discord Chat</a></li>
           </ul>
         </li>
         <li class="small2"><a href="#" class="non-link">Industry</a>
@@ -159,9 +160,9 @@ Kano Miyamoto - MyAnimeList.net
           </ul>
         </li>
         
-              </ul>
-    </div>  </div>
-<div id="contentWrapper"><div><div class="header-right">
+        
+      </ul>
+    </div>  </div><div id="contentWrapper"><div><div class="header-right">
     <a href="https://myanimelist.net/dbchanges.php?go=voiceactor&amp;do=editva&amp;id=2608" class="">Edit Person Information</a></div><h1 class="h1">Miyamoto, Kano</h1></div><div id="content" >
 <table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td width="225" class="borderClass" style="border-width: 0 1px 0 0;" valign="top"><div style="text-align: center; style="margin-bottom: 3px;"><a href="/people/2608/Kano_Miyamoto/pictures"><img src="https://myanimelist.cdn-dena.com/images/voiceactors/3/3905.jpg" alt="Miyamoto, Kano"></a></div><div id="profileRows" style="text-align: left; margin-top: 4px;"><div id="v-favorite" data-favorite="{&quot;isFavorite&quot;:false,&quot;type&quot;:&quot;person&quot;,&quot;id&quot;:2608}">
   <a href="#" class="js-favorite-button" style="font-weight:normal;" @click.prevent="toggleFavorite()" :disabled="sending">
@@ -179,26 +180,25 @@ Kano Miyamoto - MyAnimeList.net
 </div>
 </div><div class="js-sns-icon-container icon-block "><a data-ga-network="facebook" data-ga-screen="Share Button Location: common" class="js-share-button-popup js-share-button-tracking sprite-icon-social icon-social icon-facebook" target="_blank" href="http://www.facebook.com/share.php?u=https%3A%2F%2Fmyanimelist.net%2Fpeople%2F2608%2FMiyamoto_Kano"></a><a data-ga-network="twitter" data-ga-screen="Share Button Location: common" class="js-share-button-popup js-share-button-tracking sprite-icon-social icon-social icon-twitter" target="_blank" href="http://twitter.com/share?related=MyAnimeList.net&amp;via=myanimelist&amp;url=https%3A%2F%2Fmyanimelist.net%2Fpeople%2F2608%2FMiyamoto_Kano&amp;text=Kano%20Miyamoto&amp;hashtags="></a><a data-ga-network="google+" data-ga-screen="Share Button Location: common" class="js-share-button-popup js-share-button-tracking sprite-icon-social icon-social icon-google" target="_blank" href="https://plus.google.com/share?url=https%3A%2F%2Fmyanimelist.net%2Fpeople%2F2608%2FMiyamoto_Kano"></a><a data-ga-network="reddit" data-ga-screen="Share Button Location: common" class="js-share-button-popup js-share-button-tracking sprite-icon-social icon-social icon-reddit" target="_blank" href="http://reddit.com/submit?url=https%3A%2F%2Fmyanimelist.net%2Fpeople%2F2608%2FMiyamoto_Kano&amp;title=Kano%20Miyamoto"></a><a data-ga-network="tumblr" data-ga-screen="Share Button Location: common" class="js-share-button-popup js-share-button-tracking sprite-icon-social icon-social icon-tumblr" target="_blank" href="http://www.tumblr.com/share/link?url=https%3A%2F%2Fmyanimelist.net%2Fpeople%2F2608%2FMiyamoto_Kano&amp;name=Kano%20Miyamoto"></a></div><br>
              <div class="spaceit_pad"><span class="dark_text">Given name:</span> 佳野</div>
-             <span class="dark_text">Family name:</span> 宮本<div class="spaceit_pad"><span class="dark_text">Birthday:</span> Jun  15, </div><span class="dark_text">Website:</span> <a href="http://curve.rulez.jp/">http://curve.rulez.jp/</a><div class="spaceit_pad"><span class="dark_text">Member Favorites:</span> 314</div><div><span class="dark_text">More:</span></div><div class="people-informantion-more js-people-informantion-more">Female<br />
+             <span class="dark_text">Family name:</span> 宮本<div class="spaceit_pad"><span class="dark_text">Alternate names:</span> Curve</div><div class="spaceit_pad"><span class="dark_text">Birthday:</span> Jun  15, </div><span class="dark_text">Website:</span> <a href="http://curve.rulez.jp/">http://curve.rulez.jp/</a><div class="spaceit_pad"><span class="dark_text">Member Favorites:</span> 313</div><div><span class="dark_text">More:</span></div><div class="people-informantion-more js-people-informantion-more">Female<br />
 Blood type: B<br />
 Zodiac: Gemini<br />
 Birthplace: Osaka, Japan<br />
-<br />
-She runs the doujinshi circle called Curve.</div>
+Doujin circle: Curve</div>
         </td>
         <td valign="top" style="padding-left: 5px;"><div id="horiznav_nav" style="margin: 5px 0 10px 0;">
                 <ul style="margin-right: 0; padding-right: 0;">
-                <li><a href="/people/2608/Kano_Miyamoto" class="horiznav_active">Details</a></li>
-                <li><a  href="/people/2608/Kano_Miyamoto/news">News</a></li> 
-                <li><a  href="/people/2608/Kano_Miyamoto/pictures">Pictures</a></li>
+                <li><a href="https://myanimelist.net/people/2608/Kano_Miyamoto" class="horiznav_active">Details</a></li>
+                <li><a  href="https://myanimelist.net/people/2608/Kano_Miyamoto/news">News</a></li> 
+                <li><a  href="https://myanimelist.net/people/2608/Kano_Miyamoto/pictures">Pictures</a></li>
                 </ul></div>
 
 
                   <div class="breadcrumb " itemscope itemtype="http://schema.org/BreadcrumbList"><div class="di-ib" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="https://myanimelist.net/" itemprop="item"><span itemprop="name">
               Top
-                          </span></a><meta itemprop="position" content="1"></div>&nbsp; &gt; &nbsp;        <div class="di-ib" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="https://myanimelist.net/people.php" itemprop="item"><span itemprop="name">
+                          </span></a><meta itemprop="position" content="1"></div>&nbsp; &gt; &nbsp;<div class="di-ib" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="https://myanimelist.net/people.php" itemprop="item"><span itemprop="name">
               People
-                          </span></a><meta itemprop="position" content="2"></div>&nbsp; &gt; &nbsp;        <div class="di-ib" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="https://myanimelist.net/people/2608/Kano_Miyamoto" itemprop="item"><span itemprop="name">
+                          </span></a><meta itemprop="position" content="2"></div>&nbsp; &gt; &nbsp;<div class="di-ib" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="https://myanimelist.net/people/2608/Kano_Miyamoto" itemprop="item"><span itemprop="name">
               Miyamoto, Kano
                           </span></a><meta itemprop="position" content="3"></div></div>
 
@@ -209,327 +209,327 @@ She runs the doujinshi circle called Curve.</div>
     <br><br>
     <div class="normal_header"><span class="floatRightHeader"><a href="/dbchanges.php?go=voiceactor&do=publishedmanga&id=2608">Add Work</a></span>Published Manga</div><table border="0" cellpadding="0" cellspacing="0" width="100%">
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/5276/Aisanai_Otoko"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/2/81898.jpg?s=4d8b621c3d5839c08a7363b1b0961280" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/5276/Aisanai_Otoko">Aisanai Otoko</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/5276/Aisanai_Otoko"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/2/81898.jpg?s=4d8b621c3d5839c08a7363b1b0961280" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/5276/Aisanai_Otoko">Aisanai Otoko</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/6538/Amayakana_Toge"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/4/8870.jpg?s=1bbdb7fdae11f2dd469d8de6a2d42388" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/6538/Amayakana_Toge">Amayakana Toge</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/6538/Amayakana_Toge"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/4/8870.jpg?s=1bbdb7fdae11f2dd469d8de6a2d42388" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/6538/Amayakana_Toge">Amayakana Toge</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/10570/Angelic_Conversation"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/3/16499.jpg?s=34d64065f824449480a6310f3a725ac8" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/10570/Angelic_Conversation">Angelic Conversation</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/10570/Angelic_Conversation"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/3/16499.jpg?s=34d64065f824449480a6310f3a725ac8" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/10570/Angelic_Conversation">Angelic Conversation</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/5331/Are_You_Enemy"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/1/6716.jpg?s=d0a96e55d1a40004dc2d57324074c97e" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/5331/Are_You_Enemy">Are You Enemy?</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/5331/Are_You_Enemy"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/1/6716.jpg?s=d0a96e55d1a40004dc2d57324074c97e" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/5331/Are_You_Enemy">Are You Enemy?</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/10569/Blue_Film"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/3/18930.jpg?s=91427c5e43546f1f57d3ee6a52a2faa4" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/10569/Blue_Film">Blue Film</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/10569/Blue_Film"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/3/18930.jpg?s=91427c5e43546f1f57d3ee6a52a2faa4" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/10569/Blue_Film">Blue Film</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/18012/Calling_dj_-_Call_My_Name"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/2/27536.jpg?s=3b1996ba03f6a93850bc9f4ab8f0ab09" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/18012/Calling_dj_-_Call_My_Name">Calling dj - Call My Name</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/18012/Calling_dj_-_Call_My_Name"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/2/27536.jpg?s=3b1996ba03f6a93850bc9f4ab8f0ab09" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/18012/Calling_dj_-_Call_My_Name">Calling dj - Call My Name</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/13788/Calling_dj_-_Pipe_Dreams"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/1/19534.jpg?s=0e1f16efe2468b7f3fa1983af216efd5" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/13788/Calling_dj_-_Pipe_Dreams">Calling dj - Pipe Dreams</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/13788/Calling_dj_-_Pipe_Dreams"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/1/19534.jpg?s=0e1f16efe2468b7f3fa1983af216efd5" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/13788/Calling_dj_-_Pipe_Dreams">Calling dj - Pipe Dreams</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/13315/Calling_dj_-_Realize"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/3/18619.jpg?s=46441926ec2455b82a25e87746fb0112" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/13315/Calling_dj_-_Realize">Calling dj - Realize</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/13315/Calling_dj_-_Realize"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/3/18619.jpg?s=46441926ec2455b82a25e87746fb0112" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/13315/Calling_dj_-_Realize">Calling dj - Realize</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/7070/Calling_Series"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/4/18634.jpg?s=ea2dbba81dcc0e4b3eb90acf209f358f" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/7070/Calling_Series">Calling Series</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/7070/Calling_Series"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/4/18634.jpg?s=ea2dbba81dcc0e4b3eb90acf209f358f" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/7070/Calling_Series">Calling Series</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/90943/Dreamers_High"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/2/159636.jpg?s=abbff104ba8fd0579596375a30d5dc6c" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/90943/Dreamers_High">Dreamer's High</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/90943/Dreamers_High"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/2/159636.jpg?s=abbff104ba8fd0579596375a30d5dc6c" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/90943/Dreamers_High">Dreamer&#039;s High</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/3218/Escape"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/1/6255.jpg?s=30f828c09bdcb9ead5c8d332d04700f4" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/3218/Escape">Escape</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/3218/Escape"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/1/6255.jpg?s=30f828c09bdcb9ead5c8d332d04700f4" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/3218/Escape">Escape</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/41067/Fake"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/2/72471.jpg?s=d1ac7994cf6aed134f0fc4bca0973cb0" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/41067/Fake">Fake</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/41067/Fake"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/2/72471.jpg?s=d1ac7994cf6aed134f0fc4bca0973cb0" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/41067/Fake">Fake</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/5334/Flowers"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/2/82160.jpg?s=ceb40c54fe15969d8e60d05083bc7a1c" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/5334/Flowers">Flowers</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/5334/Flowers"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/2/82160.jpg?s=ceb40c54fe15969d8e60d05083bc7a1c" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/5334/Flowers">Flowers</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/10568/Flowers_dj_-_Flower_Children"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/1/14192.jpg?s=d5f7b0035c04a53084fa96b4881f5000" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/10568/Flowers_dj_-_Flower_Children">Flowers dj - Flower Children</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/10568/Flowers_dj_-_Flower_Children"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/1/14192.jpg?s=d5f7b0035c04a53084fa96b4881f5000" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/10568/Flowers_dj_-_Flower_Children">Flowers dj - Flower Children</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/5309/Heat"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/3/30315.jpg?s=3dd237931399169e3ade8ee387d679e1" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/5309/Heat">Heat</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/5309/Heat"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/3/30315.jpg?s=3dd237931399169e3ade8ee387d679e1" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/5309/Heat">Heat</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/12852/Houmonsha"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/1/17880.jpg?s=9d8455a3aec12d8cf7d0dafedc01f03d" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/12852/Houmonsha">Houmonsha</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/12852/Houmonsha"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/1/17880.jpg?s=9d8455a3aec12d8cf7d0dafedc01f03d" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/12852/Houmonsha">Houmonsha</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/902/Hydra"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/5/26130.jpg?s=9a77ce9360366a5852d8c7459b1e59bf" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/902/Hydra">Hydra</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/902/Hydra"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/5/26130.jpg?s=9a77ce9360366a5852d8c7459b1e59bf" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/902/Hydra">Hydra</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/16077/Hydra_dj_-_Sono_Mae_no_Hibi"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/2/23442.jpg?s=8f66e88f8ed870d5f1453abc56e58377" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/16077/Hydra_dj_-_Sono_Mae_no_Hibi">Hydra dj - Sono Mae no Hibi</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/16077/Hydra_dj_-_Sono_Mae_no_Hibi"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/2/23442.jpg?s=8f66e88f8ed870d5f1453abc56e58377" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/16077/Hydra_dj_-_Sono_Mae_no_Hibi">Hydra dj - Sono Mae no Hibi</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/65911/Ichigo_no_Yume__Shimatsuya_Risuke_no_Kaii_Jikenchou"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/2/113795.jpg?s=25b37bab7759174b668c001562e18a8f" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/65911/Ichigo_no_Yume__Shimatsuya_Risuke_no_Kaii_Jikenchou">Ichigo no Yume: Shimatsuya Risuke no Kaii Jikenchou</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/65911/Ichigo_no_Yume__Shimatsuya_Risuke_no_Kaii_Jikenchou"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/2/113795.jpg?s=25b37bab7759174b668c001562e18a8f" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/65911/Ichigo_no_Yume__Shimatsuya_Risuke_no_Kaii_Jikenchou">Ichigo no Yume: Shimatsuya Risuke no Kaii Jikenchou</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/31587/Kare_no_Nemuru_Basho"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/1/82154.jpg?s=56e10b0c54941ef6d81ca06556143799" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/31587/Kare_no_Nemuru_Basho">Kare no Nemuru Basho</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/31587/Kare_no_Nemuru_Basho"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/1/82154.jpg?s=56e10b0c54941ef6d81ca06556143799" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/31587/Kare_no_Nemuru_Basho">Kare no Nemuru Basho</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/5337/Kare_no_Niwa_ni_Saku_Hana"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/2/82728.jpg?s=ee221eb0f02b7f5769e8347e292e3a01" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/5337/Kare_no_Niwa_ni_Saku_Hana">Kare no Niwa ni Saku Hana</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/5337/Kare_no_Niwa_ni_Saku_Hana"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/2/82728.jpg?s=ee221eb0f02b7f5769e8347e292e3a01" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/5337/Kare_no_Niwa_ni_Saku_Hana">Kare no Niwa ni Saku Hana</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/18009/Lizard_Angels_and_Daemons"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/1/27533.jpg?s=f3a4fc5aa39516f246db70ed5744fdc7" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/18009/Lizard_Angels_and_Daemons">Lizard, Angels, and Daemons</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/18009/Lizard_Angels_and_Daemons"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/1/27533.jpg?s=f3a4fc5aa39516f246db70ed5744fdc7" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/18009/Lizard_Angels_and_Daemons">Lizard, Angels, and Daemons</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/903/Lovers_and_Souls"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/2/26132.jpg?s=87a7a90f345ed0e9933ad9c19f195c6b" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/903/Lovers_and_Souls">Lovers and Souls</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/903/Lovers_and_Souls"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/2/26132.jpg?s=87a7a90f345ed0e9933ad9c19f195c6b" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/903/Lovers_and_Souls">Lovers and Souls</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/3930/Make_Me_Happy"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/3/4525.jpg?s=58890a635d6b217eaf4144a5cd1e949d" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/3930/Make_Me_Happy">Make Me Happy</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/3930/Make_Me_Happy"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/3/4525.jpg?s=58890a635d6b217eaf4144a5cd1e949d" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/3930/Make_Me_Happy">Make Me Happy</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/4311/Moony__Ouka_Dormitory_Trilogy"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/3/36519.jpg?s=7f6cbfe8a00fe1f05cc577230361ac6e" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/4311/Moony__Ouka_Dormitory_Trilogy">Moony: Ouka Dormitory Trilogy</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/4311/Moony__Ouka_Dormitory_Trilogy"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/3/36519.jpg?s=7f6cbfe8a00fe1f05cc577230361ac6e" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/4311/Moony__Ouka_Dormitory_Trilogy">Moony: Ouka Dormitory Trilogy</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/4662/Name_of_Love"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/1/5745.jpg?s=7f8fe496b9665bf4bebd5413229e7c84" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/4662/Name_of_Love">Name of Love</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/4662/Name_of_Love"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/1/5745.jpg?s=7f8fe496b9665bf4bebd5413229e7c84" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/4662/Name_of_Love">Name of Love</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/83689/Natsu_no_Aza"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/2/145405.jpg?s=245b10abb10900ddf07224025d4db2d0" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/83689/Natsu_no_Aza">Natsu no Aza</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/83689/Natsu_no_Aza"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/2/145405.jpg?s=245b10abb10900ddf07224025d4db2d0" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/83689/Natsu_no_Aza">Natsu no Aza</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/5518/Nemureru_Tsuki"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/5/121303.jpg?s=5d739b41fdc743c9b224dd76be65862b" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/5518/Nemureru_Tsuki">Nemureru Tsuki</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/5518/Nemureru_Tsuki"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/5/121303.jpg?s=5d739b41fdc743c9b224dd76be65862b" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/5518/Nemureru_Tsuki">Nemureru Tsuki</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/5308/Night_Walk"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/3/6682.jpg?s=bb4ebf26a557bd8f6d536928062d56f6" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/5308/Night_Walk">Night Walk</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/5308/Night_Walk"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/3/201072.jpg?s=30d9df8743a131ae2dc9cc3e37a933c2" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/5308/Night_Walk">Night Walk</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/781/Not_Love"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/2/36812.jpg?s=d7ce89846ee2c908a91a2b75c95b845d" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/781/Not_Love">Not/Love</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/781/Not_Love"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/2/36812.jpg?s=d7ce89846ee2c908a91a2b75c95b845d" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/781/Not_Love">Not/Love</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/5992/Not_Love_dj_-_Brand_New_Lover"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/2/7684.jpg?s=1f892406f71b65a0034cadf91481d550" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/5992/Not_Love_dj_-_Brand_New_Lover">Not/Love dj - Brand New Lover</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/5992/Not_Love_dj_-_Brand_New_Lover"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/2/7684.jpg?s=1f892406f71b65a0034cadf91481d550" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/5992/Not_Love_dj_-_Brand_New_Lover">Not/Love dj - Brand New Lover</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/5993/Not_Love_dj_-_Demonic_Conversations"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/2/7685.jpg?s=94f15bf5f4017f6d0d463ca8554e2b32" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/5993/Not_Love_dj_-_Demonic_Conversations">Not/Love dj - Demonic Conversations</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/5993/Not_Love_dj_-_Demonic_Conversations"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/2/7685.jpg?s=94f15bf5f4017f6d0d463ca8554e2b32" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/5993/Not_Love_dj_-_Demonic_Conversations">Not/Love dj - Demonic Conversations</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/3346/Not_Love_dj_-_Dog_Days"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/3/3702.jpg?s=fe2b96e9136693c8dd1047ceebc3ea5e" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/3346/Not_Love_dj_-_Dog_Days">Not/Love dj - Dog Days</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/3346/Not_Love_dj_-_Dog_Days"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/3/3702.jpg?s=fe2b96e9136693c8dd1047ceebc3ea5e" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/3346/Not_Love_dj_-_Dog_Days">Not/Love dj - Dog Days</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/3347/Not_Love_dj_-_The_reason_why_we_live_together"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/1/3703.jpg?s=9eff0f618de9ad113d721083f5770fdb" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/3347/Not_Love_dj_-_The_reason_why_we_live_together">Not/Love dj - The reason why we live together</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/3347/Not_Love_dj_-_The_reason_why_we_live_together"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/1/3703.jpg?s=9eff0f618de9ad113d721083f5770fdb" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/3347/Not_Love_dj_-_The_reason_why_we_live_together">Not/Love dj - The reason why we live together</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/40741/Onigari_no_Mori_de"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/1/141989.jpg?s=819d658812e90a690b9b29003dab4b27" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/40741/Onigari_no_Mori_de">Onigari no Mori de</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/40741/Onigari_no_Mori_de"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/1/141989.jpg?s=819d658812e90a690b9b29003dab4b27" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/40741/Onigari_no_Mori_de">Onigari no Mori de</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/898/Please"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/4/26100.jpg?s=bd238d815a8b5c7a595e372f7099a56c" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/898/Please">Please</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/898/Please"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/4/26100.jpg?s=bd238d815a8b5c7a595e372f7099a56c" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/898/Please">Please</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/825/Rules"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/2/4737.jpg?s=c345063e5418d5d8587edf3f154ccfa8" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/825/Rules">Rules</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/825/Rules"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/2/4737.jpg?s=c345063e5418d5d8587edf3f154ccfa8" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/825/Rules">Rules</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/94374/Rules_2nd"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/1/178607.jpg?s=5ee524f33cb597a371345d5e8d4883fb" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/94374/Rules_2nd">Rules 2nd</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/94374/Rules_2nd"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/1/178607.jpg?s=5ee524f33cb597a371345d5e8d4883fb" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/94374/Rules_2nd">Rules 2nd</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/5335/Rules_Booklet_-_Another_Day_on_the_Planet"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/1/6712.jpg?s=f91bfce75f50d9343e6cb7268044c92a" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/5335/Rules_Booklet_-_Another_Day_on_the_Planet">Rules Booklet - Another Day on the Planet</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/5335/Rules_Booklet_-_Another_Day_on_the_Planet"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/1/6712.jpg?s=f91bfce75f50d9343e6cb7268044c92a" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/5335/Rules_Booklet_-_Another_Day_on_the_Planet">Rules Booklet - Another Day on the Planet</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/13413/Rules_dj_-_Double_Trouble"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/5/18873.jpg?s=b6148d5e1d6271862ffd0602cdd17484" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/13413/Rules_dj_-_Double_Trouble">Rules dj - Double Trouble</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/13413/Rules_dj_-_Double_Trouble"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/5/18873.jpg?s=b6148d5e1d6271862ffd0602cdd17484" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/13413/Rules_dj_-_Double_Trouble">Rules dj - Double Trouble</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/14885/Rules_dj_-_Hello_Again"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/1/21519.jpg?s=765fe5dcd12f493d2c7b75a0405fb750" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/14885/Rules_dj_-_Hello_Again">Rules dj - Hello Again</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/14885/Rules_dj_-_Hello_Again"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/1/21519.jpg?s=765fe5dcd12f493d2c7b75a0405fb750" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/14885/Rules_dj_-_Hello_Again">Rules dj - Hello Again</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/5336/Rules_dj_-_If_Winter_Comes_Can_Spring_Be_Far_Behind"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/2/6713.jpg?s=60c1557524e06ffe1862e7976f99f749" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/5336/Rules_dj_-_If_Winter_Comes_Can_Spring_Be_Far_Behind">Rules dj - If Winter Comes, Can Spring Be Far Behind?</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/5336/Rules_dj_-_If_Winter_Comes_Can_Spring_Be_Far_Behind"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/2/6713.jpg?s=60c1557524e06ffe1862e7976f99f749" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/5336/Rules_dj_-_If_Winter_Comes_Can_Spring_Be_Far_Behind">Rules dj - If Winter Comes, Can Spring Be Far Behind?</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/5445/Rules_dj_-_Song_Birds"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/1/17262.jpg?s=6e370c9c7c40e1fc0e718de57ae2b6aa" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/5445/Rules_dj_-_Song_Birds">Rules dj - Song Birds</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/5445/Rules_dj_-_Song_Birds"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/1/17262.jpg?s=6e370c9c7c40e1fc0e718de57ae2b6aa" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/5445/Rules_dj_-_Song_Birds">Rules dj - Song Birds</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/901/Rules_Hydra_Short_Stories"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/3/289.jpg?s=045f26a624a5c2b899b39724f1f39e18" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/901/Rules_Hydra_Short_Stories">Rules/Hydra Short Stories</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/901/Rules_Hydra_Short_Stories"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/3/289.jpg?s=045f26a624a5c2b899b39724f1f39e18" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/901/Rules_Hydra_Short_Stories">Rules/Hydra Short Stories</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/14752/Sakura_no_Ki_no_Shita_ni_wa"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/1/21183.jpg?s=78f1ef9389cf2494cf4e43659c8369c1" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/14752/Sakura_no_Ki_no_Shita_ni_wa">Sakura no Ki no Shita ni wa</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/14752/Sakura_no_Ki_no_Shita_ni_wa"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/1/21183.jpg?s=78f1ef9389cf2494cf4e43659c8369c1" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/14752/Sakura_no_Ki_no_Shita_ni_wa">Sakura no Ki no Shita ni wa</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/25795/Sense_of_Love"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/2/41522.jpg?s=3bf1fbf773475c69b62c63893363d150" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/25795/Sense_of_Love">Sense of Love</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/25795/Sense_of_Love"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/2/41522.jpg?s=3bf1fbf773475c69b62c63893363d150" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/25795/Sense_of_Love">Sense of Love</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/22086/Simple_Days"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/3/117645.jpg?s=c45faca4d1e089dfeedfb8bf22248644" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/22086/Simple_Days">Simple Days</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/22086/Simple_Days"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/3/117645.jpg?s=c45faca4d1e089dfeedfb8bf22248644" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/22086/Simple_Days">Simple Days</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/20364/Sweet_Tale"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/2/82076.jpg?s=1212a6f729503e35b92fe73aa8ca42ff" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/20364/Sweet_Tale">Sweet Tale</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/20364/Sweet_Tale"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/2/82076.jpg?s=1212a6f729503e35b92fe73aa8ca42ff" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/20364/Sweet_Tale">Sweet Tale</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/3732/Te_wo_Tsunaide_Sora_wo"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/3/192866.jpg?s=b8a5eca6df5424c9ee56a67dd7082154" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/3732/Te_wo_Tsunaide_Sora_wo">Te wo Tsunaide, Sora wo</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/3732/Te_wo_Tsunaide_Sora_wo"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/3/192866.jpg?s=b8a5eca6df5424c9ee56a67dd7082154" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/3732/Te_wo_Tsunaide_Sora_wo">Te wo Tsunaide, Sora wo</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/96494/Tenshi_wa_Yoru_ni_Tsukurareru"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/3/193959.jpg?s=64abed641be4d43d60fd20e3fdb34f9d" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/96494/Tenshi_wa_Yoru_ni_Tsukurareru">Tenshi wa Yoru ni Tsukurareru</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/96494/Tenshi_wa_Yoru_ni_Tsukurareru"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/3/193959.jpg?s=64abed641be4d43d60fd20e3fdb34f9d" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/96494/Tenshi_wa_Yoru_ni_Tsukurareru">Tenshi wa Yoru ni Tsukurareru</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/8301/The_End_of_Youth"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/4/34969.jpg?s=e128d6a3f78023acf68ec6336c08c39a" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/8301/The_End_of_Youth">The End of Youth</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/8301/The_End_of_Youth"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/4/34969.jpg?s=e128d6a3f78023acf68ec6336c08c39a" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/8301/The_End_of_Youth">The End of Youth</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/3888/Toxic"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/3/4452.jpg?s=046eb48f631315c0cd4dd08a322d75e8" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/3888/Toxic">Toxic</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/3888/Toxic"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/3/4452.jpg?s=046eb48f631315c0cd4dd08a322d75e8" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/3888/Toxic">Toxic</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/10571/Under_the_Skin"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/3/80029.jpg?s=efcc230e661780396cf7a2f069296377" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/10571/Under_the_Skin">Under the Skin</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/10571/Under_the_Skin"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/3/80029.jpg?s=efcc230e661780396cf7a2f069296377" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/10571/Under_the_Skin">Under the Skin</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/manga/10373/Vanilla_Star"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/1/23637.jpg?s=6074495cd59fbd18f630d83ffdae1a3c" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/manga/10373/Vanilla_Star">Vanilla Star</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story & Art</small> </div></td>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/manga/10373/Vanilla_Star"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/manga/1/23637.jpg?s=6074495cd59fbd18f630d83ffdae1a3c" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/manga/10373/Vanilla_Star">Vanilla Star</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F2608" title="Quick add manga to my list" class="button_add">add</a> <small>Story &amp; Art</small> </div></td>
             </tr>
             </table>
             <div class="spaceit_pad"><small>Is there work here that shouldn't be? <a href="/dbchanges.php?go=voiceactor&do=removepublished&id=2608">Request to have it removed</a>.</small></div>
@@ -541,7 +541,7 @@ She runs the doujinshi circle called Curve.</div>
             <tr class="people-comment">
               <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/Nocturnal"><img src="https://myanimelist.cdn-dena.com/images/userimages/thumbs/9852_thumb.jpg" border="0"></a></div></td>
               <td class="borderClass people-comment-text" style="border: 0;" valign="top">
-              <div class="dark_text mb4 fw-b"><a href="/profile/Nocturnal">Nocturnal</a> <small><span class="fw-n"> | Jun 29, 8:14 PM</span></small></div>
+              <div class="dark_text mb4 fw-b"><a href="/profile/Nocturnal">Nocturnal</a> <small><span class="fw-n"> | Jun 29, 2017 8:14 PM</span></small></div>
               <div class="comment word-break">
               &#039;Ao iro Sex Alice&#039; is missing.</div></td>
                 </tr>
@@ -552,7 +552,7 @@ She runs the doujinshi circle called Curve.</div>
             <tr class="people-comment">
               <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/ShanaStrauss"><img src="https://myanimelist.cdn-dena.com/images/userimages/thumbs/4596684_thumb.jpg" border="0"></a></div></td>
               <td class="borderClass people-comment-text" style="border: 0;" valign="top">
-              <div class="dark_text mb4 fw-b"><a href="/profile/ShanaStrauss">ShanaStrauss</a> <small><span class="fw-n"> | Jan 1, 11:53 AM</span></small></div>
+              <div class="dark_text mb4 fw-b"><a href="/profile/ShanaStrauss">ShanaStrauss</a> <small><span class="fw-n"> | Jan 1, 2017 11:53 AM</span></small></div>
               <div class="comment word-break">
               Boy Next Door needs to be added</div></td>
                 </tr>
@@ -742,11 +742,11 @@ Miyamoto Kano-sensei, thank you so much for your work. Kami-sama bless her hands
         <ol>
                       <li>
               <span class="rank">1</span>
-              <a href="https://myanimelist.net/anime/32281/Kimi_no_Na_wa">Kimi no Na wa.</a>
+              <a href="https://myanimelist.net/anime/5114/Fullmetal_Alchemist__Brotherhood">Fullmetal Alchemist: Brotherhood</a>
             </li>
                       <li>
               <span class="rank">2</span>
-              <a href="https://myanimelist.net/anime/5114/Fullmetal_Alchemist__Brotherhood">Fullmetal Alchemist: Brotherhood</a>
+              <a href="https://myanimelist.net/anime/32281/Kimi_no_Na_wa">Kimi no Na wa.</a>
             </li>
                       <li>
               <span class="rank">3</span>
@@ -768,23 +768,23 @@ Miyamoto Kano-sensei, thank you so much for your work. Kami-sama bless her hands
         <ol>
                       <li>
               <span class="rank">1</span>
-              <a href="https://myanimelist.net/anime/33486/Boku_no_Hero_Academia_2nd_Season">Boku no Hero Academia 2nd Season</a>
+              <a href="https://myanimelist.net/anime/36838/Gintama__Shirogane_no_Tamashii-hen">Gintama.: Shirogane no Tamashii-hen</a>
             </li>
                       <li>
               <span class="rank">2</span>
-              <a href="https://myanimelist.net/anime/33352/Violet_Evergarden">Violet Evergarden</a>
+              <a href="https://myanimelist.net/anime/35180/3-gatsu_no_Lion_2nd_Season">3-gatsu no Lion 2nd Season</a>
             </li>
                       <li>
               <span class="rank">3</span>
-              <a href="https://myanimelist.net/anime/21/One_Piece">One Piece</a>
+              <a href="https://myanimelist.net/anime/34612/Saiki_Kusuo_no_Ψ-nan_2">Saiki Kusuo no Ψ-nan 2</a>
             </li>
                       <li>
               <span class="rank">4</span>
-              <a href="https://myanimelist.net/anime/35062/Mahoutsukai_no_Yome">Mahoutsukai no Yome</a>
+              <a href="https://myanimelist.net/anime/21/One_Piece">One Piece</a>
             </li>
                       <li>
               <span class="rank">5</span>
-              <a href="https://myanimelist.net/anime/10937/Mobile_Suit_Gundam__The_Origin">Mobile Suit Gundam: The Origin</a>
+              <a href="https://myanimelist.net/anime/35062/Mahoutsukai_no_Yome">Mahoutsukai no Yome</a>
             </li>
                   </ol>
       </div>
@@ -794,23 +794,23 @@ Miyamoto Kano-sensei, thank you so much for your work. Kami-sama bless her hands
         <ol>
                       <li>
               <span class="rank">1</span>
-              <a href="https://myanimelist.net/anime/34449/The_Reflection">The Reflection</a>
+              <a href="https://myanimelist.net/anime/35849/Darling_in_the_FranXX">Darling in the FranXX</a>
             </li>
                       <li>
               <span class="rank">2</span>
-              <a href="https://myanimelist.net/anime/34933/Kakegurui">Kakegurui</a>
+              <a href="https://myanimelist.net/anime/33352/Violet_Evergarden">Violet Evergarden</a>
             </li>
                       <li>
               <span class="rank">3</span>
-              <a href="https://myanimelist.net/anime/33486/Boku_no_Hero_Academia_2nd_Season">Boku no Hero Academia 2nd Season</a>
+              <a href="https://myanimelist.net/anime/33674/No_Game_No_Life__Zero">No Game No Life: Zero</a>
             </li>
                       <li>
               <span class="rank">4</span>
-              <a href="https://myanimelist.net/anime/34403/Hajimete_no_Gal">Hajimete no Gal</a>
+              <a href="https://myanimelist.net/anime/35073/Overlord_II">Overlord II</a>
             </li>
                       <li>
               <span class="rank">5</span>
-              <a href="https://myanimelist.net/anime/34662/Fate_Apocrypha">Fate/Apocrypha</a>
+              <a href="https://myanimelist.net/anime/35839/Sora_yori_mo_Tooi_Basho">Sora yori mo Tooi Basho</a>
             </li>
                   </ol>
       </div>
@@ -874,7 +874,8 @@ Miyamoto Kano-sensei, thank you so much for your work. Kami-sama bless her hands
       </div>
             <div class="footer-recommended ac">
         <a target="_blank" class="icon-recommended icon-tokyo-otaku-mode" href="http://otakumode.com/fb/5aO">Tokyo Otaku Mode</a>
-        <a target="_blank" class="icon-recommended icon-honeys-anime" href="http://blog.honeyfeed.fm/">Honey's Anime</a>
+        <a target="_blank" class="icon-recommended icon-honeys-anime" href="https://honeysanime.com">Honey's Anime</a>
+        <a target="_blank" class="icon-recommended icon-mtb-vol6" href="https://myanimelist.net/manga_translation_battle">Manga Translation Battle Vol. 6</a>
       </div>
     </div>
 

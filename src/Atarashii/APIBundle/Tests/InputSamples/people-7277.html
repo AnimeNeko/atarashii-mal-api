@@ -19,10 +19,10 @@ Ikimonogakari - MyAnimeList.net
 
 <link rel="manifest" href="/manifest.json">
 
-<meta name='csrf_token' content='01f89f079058166ed5aa04f8a1429cfb64778894'><link rel="stylesheet" type="text/css" href="https://myanimelist.cdn-dena.com/static/assets/css/pc/style-256db3456e.css" />
+<meta name='csrf_token' content='6c1921daef3ae06d6459c256e0664623df5f861c'><link rel="stylesheet" type="text/css" href="https://myanimelist.cdn-dena.com/static/assets/css/pc/style-e8524c2a68.css" />
 
-<script type="text/javascript" src="https://myanimelist.cdn-dena.com/static/assets/js/pc/header-c4f7891876.js"></script>
-<script type="text/javascript" src="https://myanimelist.cdn-dena.com/static/assets/js/pc/all-dbd9ac4e66.js"
+<script type="text/javascript" src="https://myanimelist.cdn-dena.com/static/assets/js/pc/header-13c4480594.js"></script>
+<script type="text/javascript" src="https://myanimelist.cdn-dena.com/static/assets/js/pc/all-90879a9204.js"
         id="alljs" data-params='{&quot;origin_url&quot;:&quot;https:\/\/myanimelist.net&quot;,&quot;is_request_bot_filter_log&quot;:true}' defer></script>
 
 
@@ -89,12 +89,13 @@ Ikimonogakari - MyAnimeList.net
     </div>
   </div>
         <div class="wrapper"><div id="headerSmall"><a href="/" class="link-mal-logo">MyAnimeList.net</a>
-<a href="https://myanimelist.net/account/membership?_location=mal_h_b&amp;_type=2"
+<a href="https://myanimelist.net/account/membership?_location=mal_h_b&amp;_type=3"
    class="banner-header-anime-straming" target="_self">
-  <img src="https://myanimelist.cdn-dena.com/images/membership/banner-paypal.png?v=1" width="250" height="36"
-       srcset="https://myanimelist.cdn-dena.com/images/membership/banner-paypal.png?v=1 1x, https://myanimelist.cdn-dena.com/images/membership/banner-paypal@2x.png?v=1 2x"
-       alt="MAL Supporter is now accepting Paypal Checkout" title="MAL Supporter is now accepting Paypal Checkout">
-</a><div id="header-menu" ><div class="header-menu-login"><a class="btn-mal-service" href="https://myanimelist.net/membership?_location=mal_h_u">Hide Ads</a><a class="btn-login" href="https://myanimelist.net/login.php?from=%2Fpeople%2F7277" id="malLogin">Login</a><a class="btn-signup" href="https://myanimelist.net/register.php?from=%2Fpeople%2F7277">Sign Up</a></div></div></div>  <div id="menu" class="">
+  <img src="https://myanimelist.cdn-dena.com/images/membership/banner2.gif?v=1" width="250" height="36"
+       srcset="https://myanimelist.cdn-dena.com/images/membership/banner2.gif?v=1 1x, https://myanimelist.cdn-dena.com/images/membership/banner2@2x.gif?v=1 2x"
+       alt="Become a MAL Supporter" title="Become a MAL Supporter">
+</a>
+<div id="header-menu" ><div class="header-menu-login"><a class="btn-mal-service" href="https://myanimelist.net/membership?_location=mal_h_u">Hide Ads</a><a class="btn-login" href="https://myanimelist.net/login.php?from=%2Fpeople%2F7277" id="malLogin">Login</a><a class="btn-signup" href="https://myanimelist.net/register.php?from=%2Fpeople%2F7277">Sign Up</a></div></div></div>  <div id="menu" class="">
     <div id="menu_right"><script type="text/x-template" id="incremental-result-item-anime"><div class="list anime" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info anime"><div class="name">${ item.name } <span class="media-type">(${ item.payload.media_type })</span></div><div class="extra-info">Aired: ${ item.payload.aired }<br>Score: ${ item.payload.score }<br>Status: ${ item.payload.status }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info anime"><div class="name">${ item.name }</div><div class="media-type">(${ mediaTypeWithStartYear })</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-manga"><div class="list manga" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info manga"><div class="name">${ item.name } <span class="media-type">(${ item.payload.media_type })</span></div><div class="extra-info">Published: ${ item.payload.published }<br>Score: ${ item.payload.score }<br>Status: ${ item.payload.status }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info manga"><div class="name">${ item.name }</div><div class="media-type">(${ mediaTypeWithStartYear })</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-character"><div class="list character" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info character"><div class="name">${ item.name }</div><div class="extra-info"><ul class="related-works"><li v-for="work in item.payload.related_works" class="fs-i">- ${ work }</li></ul>Favorites: ${ item.payload.favorites }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info character"><div class="name">${ item.name }</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-person"><div class="list person" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info person"><div class="name">${ item.name }</div><div class="extra-info"><span v-if="item.payload.alternative_name">${ item.payload.alternative_name }<br></span>Birthday: ${ item.payload.birthday }<br>Favorites: ${ item.payload.favorites }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info person"><div class="name">${ item.name }</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-club"><div class="list club" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info club"><div class="name">${ item.name }</div><div class="extra-info">Members: ${ item.payload.members }<br>Category: ${ item.payload.category }<br>Created by: ${ item.payload.created_by }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info club"><div class="name">${ item.name }</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-user"><div class="list user" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info user"><div class="name">${ item.name }</div><div class="extra-info"><span v-if="item.payload.authority">${ item.payload.authority }<br></span>Joined: ${ item.payload.joined }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info user"><div class="name">${ item.name }</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-news"><div class="list news" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info news"><div class="name">${ item.name }</div><div class="extra-info">${ item.payload.date }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info news"><div class="name">${ item.name }</div><div class="media-type">${ item.payload.date }</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-featured"><div class="list featured" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info featured"><div class="name">${ item.name }</div><div class="extra-info">${ item.payload.date }</div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info featured"><div class="name">${ item.name }</div><div class="media-type">${ item.payload.date }</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-forum"><div class="list forum" :class="{'focus': focus}"><a :href="url" class="clearfix"><div class="on" v-if="focus"><span class="image" :style="{'background-image': 'url(' + item.image_url + ')'}"></span><div class="info forum"><div class="name"><span v-show="item.payload.work_title">${ item.payload.work_title}
                       <i class="fa fa-caret-right"></i></span> ${ item.name }</div><div class="extra-info">${ item.payload.date }<br><span>in ${ item.payload.category }</span></div></div></div><div class="off" v-if="!focus"><span class="image" :style="{'background-image': 'url(' + item.thumbnail_url + ')'}"></span><div class="info forum"><div class="name"><span v-show="item.payload.work_title">${ item.payload.work_title}
                       <i class="fa fa-caret-right"></i></span> ${ item.name }</div><div class="media-type">${ item.payload.date }</div></div></div></a></div></script><script type="text/x-template" id="incremental-result-item-separator"><div class="list separator"><div class="separator"><span v-show="item.name == 'anime'">Anime</span><span v-show="item.name == 'manga'">Manga</span><span v-show="item.name == 'character'">Characters</span><span v-show="item.name == 'person'">People</span></div></div></script><div id="top-search-bar"><form id="searchBar" method="get" class="searchBar" @submit.prevent="jump()"><div class="form-select-outer fl-l"><select name="type" id="topSearchValue" class="inputtext" v-model="type"><option value="all">All</option><option value="anime">Anime</option><option value="manga">Manga</option><option value="character">Characters</option><option value="person">People</option><option value="news">News</option><option value="featured">Featured Articles</option><option value="forum">Forum</option><option value="club">Clubs</option><option value="user">Users</option></select></div><input v-model="keyword" id="topSearchText" type="text"
@@ -113,7 +114,7 @@ Ikimonogakari - MyAnimeList.net
                         <li><a href="https://myanimelist.net/watch/episode?_location=mal_h_m_a">Videos</a></li>
             <li><a href="https://myanimelist.net/reviews.php?t=anime&amp;_location=mal_h_m">Reviews</a></li>
             <li><a href="https://myanimelist.net/recommendations.php?s=recentrecs&amp;t=anime&amp;_location=mal_h_m">Recommendations</a></li>
-            <li><a href="https://myanimelist.net/forum?topicid=1582476&amp;_location=mal_h_m">2017 Challenge</a></li>
+            <li><a href="https://myanimelist.net/forum?topicid=1696289&amp;_location=mal_h_m">2018 Challenge</a></li>
           </ul>
         </li>
         <li class="small"><a href="#" class="non-link">Manga</a>
@@ -122,7 +123,7 @@ Ikimonogakari - MyAnimeList.net
             <li><a href="https://myanimelist.net/topmanga.php?_location=mal_h_m">Top Manga</a></li>
             <li><a href="https://myanimelist.net/reviews.php?t=manga&amp;_location=mal_h_m">Reviews</a></li>
             <li><a href="https://myanimelist.net/recommendations.php?s=recentrecs&amp;t=manga&amp;_location=mal_h_m">Recommendations</a></li>
-            <li><a href="https://myanimelist.net/forum?topicid=1582478&amp;_location=mal_h_m">2017 Challenge</a></li>
+            <li><a href="https://myanimelist.net/forum?topicid=1696290&amp;_location=mal_h_m">2018 Challenge</a></li>
           </ul>
         </li>
         <li><a href="#" class="non-link">Community</a>
@@ -131,7 +132,7 @@ Ikimonogakari - MyAnimeList.net
             <li><a href="https://myanimelist.net/clubs.php?_location=mal_h_m">Clubs</a></li>
             <li><a href="https://myanimelist.net/blog.php?_location=mal_h_m">Blogs</a></li>
             <li><a href="https://myanimelist.net/users.php?_location=mal_h_m">Users</a></li>
-            <li><a href="https://discord.gg/g443UVv">Discord Chat</a></li>
+            <li><a href="https://discord.gg/E2xC8ZF">Discord Chat</a></li>
           </ul>
         </li>
         <li class="small2"><a href="#" class="non-link">Industry</a>
@@ -159,9 +160,9 @@ Ikimonogakari - MyAnimeList.net
           </ul>
         </li>
         
-              </ul>
-    </div>  </div>
-<div id="contentWrapper"><div><div class="header-right">
+        
+      </ul>
+    </div>  </div><div id="contentWrapper"><div><div class="header-right">
     <a href="https://myanimelist.net/dbchanges.php?go=voiceactor&amp;do=editva&amp;id=7277" class="">Edit Person Information</a></div><h1 class="h1">Ikimonogakari</h1></div><div id="content" >
 <table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td width="225" class="borderClass" style="border-width: 0 1px 0 0;" valign="top"><div style="text-align: center; style="margin-bottom: 3px;"><a href="/people/7277/Ikimonogakari/pictures"><img src="https://myanimelist.cdn-dena.com/images/voiceactors/3/8741.jpg" alt="Ikimonogakari, "></a></div><div id="profileRows" style="text-align: left; margin-top: 4px;"><div id="v-favorite" data-favorite="{&quot;isFavorite&quot;:false,&quot;type&quot;:&quot;person&quot;,&quot;id&quot;:7277}">
   <a href="#" class="js-favorite-button" style="font-weight:normal;" @click.prevent="toggleFavorite()" :disabled="sending">
@@ -179,7 +180,7 @@ Ikimonogakari - MyAnimeList.net
 </div>
 </div><div class="js-sns-icon-container icon-block "><a data-ga-network="facebook" data-ga-screen="Share Button Location: common" class="js-share-button-popup js-share-button-tracking sprite-icon-social icon-social icon-facebook" target="_blank" href="http://www.facebook.com/share.php?u=https%3A%2F%2Fmyanimelist.net%2Fpeople%2F7277%2FIkimonogakari"></a><a data-ga-network="twitter" data-ga-screen="Share Button Location: common" class="js-share-button-popup js-share-button-tracking sprite-icon-social icon-social icon-twitter" target="_blank" href="http://twitter.com/share?related=MyAnimeList.net&amp;via=myanimelist&amp;url=https%3A%2F%2Fmyanimelist.net%2Fpeople%2F7277%2FIkimonogakari&amp;text=%20Ikimonogakari&amp;hashtags="></a><a data-ga-network="google+" data-ga-screen="Share Button Location: common" class="js-share-button-popup js-share-button-tracking sprite-icon-social icon-social icon-google" target="_blank" href="https://plus.google.com/share?url=https%3A%2F%2Fmyanimelist.net%2Fpeople%2F7277%2FIkimonogakari"></a><a data-ga-network="reddit" data-ga-screen="Share Button Location: common" class="js-share-button-popup js-share-button-tracking sprite-icon-social icon-social icon-reddit" target="_blank" href="http://reddit.com/submit?url=https%3A%2F%2Fmyanimelist.net%2Fpeople%2F7277%2FIkimonogakari&amp;title=%20Ikimonogakari"></a><a data-ga-network="tumblr" data-ga-screen="Share Button Location: common" class="js-share-button-popup js-share-button-tracking sprite-icon-social icon-social icon-tumblr" target="_blank" href="http://www.tumblr.com/share/link?url=https%3A%2F%2Fmyanimelist.net%2Fpeople%2F7277%2FIkimonogakari&amp;name=%20Ikimonogakari"></a></div><br>
              <div class="spaceit_pad"><span class="dark_text">Given name:</span> いきものがかり</div>
-             <span class="dark_text">Family name:</span> <div class="spaceit_pad"><span class="dark_text">Birthday:</span> Feb 1999</div><span class="dark_text">Website:</span> <a href="http://www.ikimonogakari.com/">http://www.ikimonogakar...</a><div class="spaceit_pad"><span class="dark_text">Member Favorites:</span> 314</div><div><span class="dark_text">More:</span></div><div class="people-informantion-more js-people-informantion-more">Ikimonogakari (いきものがかり) is a Japanese rock band. They record on Sony Music Japan&#039;s EPIC Records label.<br />
+             <span class="dark_text">Family name:</span> <div class="spaceit_pad"><span class="dark_text">Birthday:</span> Feb 1999</div><span class="dark_text">Website:</span> <a href="http://www.ikimonogakari.com/">http://www.ikimonogakar...</a><div class="spaceit_pad"><span class="dark_text">Member Favorites:</span> 344</div><div><span class="dark_text">More:</span></div><div class="people-informantion-more js-people-informantion-more">Ikimonogakari (いきものがかり) is a Japanese rock band. They record on Sony Music Japan&#039;s EPIC Records label.<br />
 <br />
 The band was formed in Kanagawa Prefecture in February 1999 by Hotaka Yamashita and Yoshiki Mizuno, and was later joined by lead vocalist Kiyoe Yoshioka in December the same year.<br />
 <br />
@@ -187,17 +188,17 @@ The band was formed in Kanagawa Prefecture in February 1999 by Hotaka Yamashita 
         </td>
         <td valign="top" style="padding-left: 5px;"><div id="horiznav_nav" style="margin: 5px 0 10px 0;">
                 <ul style="margin-right: 0; padding-right: 0;">
-                <li><a href="/people/7277/Ikimonogakari" class="horiznav_active">Details</a></li>
-                <li><a  href="/people/7277/Ikimonogakari/news">News</a></li> <li><a  href="/people/7277/Ikimonogakari/featured">Featured</a></li>
-                <li><a  href="/people/7277/Ikimonogakari/pictures">Pictures</a></li>
+                <li><a href="https://myanimelist.net/people/7277/Ikimonogakari" class="horiznav_active">Details</a></li>
+                <li><a  href="https://myanimelist.net/people/7277/Ikimonogakari/news">News</a></li> <li><a  href="https://myanimelist.net/people/7277/Ikimonogakari/featured">Featured</a></li>
+                <li><a  href="https://myanimelist.net/people/7277/Ikimonogakari/pictures">Pictures</a></li>
                 </ul></div>
 
 
                   <div class="breadcrumb " itemscope itemtype="http://schema.org/BreadcrumbList"><div class="di-ib" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="https://myanimelist.net/" itemprop="item"><span itemprop="name">
               Top
-                          </span></a><meta itemprop="position" content="1"></div>&nbsp; &gt; &nbsp;        <div class="di-ib" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="https://myanimelist.net/people.php" itemprop="item"><span itemprop="name">
+                          </span></a><meta itemprop="position" content="1"></div>&nbsp; &gt; &nbsp;<div class="di-ib" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="https://myanimelist.net/people.php" itemprop="item"><span itemprop="name">
               People
-                          </span></a><meta itemprop="position" content="2"></div>&nbsp; &gt; &nbsp;        <div class="di-ib" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="https://myanimelist.net/people/7277/Ikimonogakari" itemprop="item"><span itemprop="name">
+                          </span></a><meta itemprop="position" content="2"></div>&nbsp; &gt; &nbsp;<div class="di-ib" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="https://myanimelist.net/people/7277/Ikimonogakari" itemprop="item"><span itemprop="name">
               Ikimonogakari
                           </span></a><meta itemprop="position" content="3"></div></div>
 
@@ -206,134 +207,134 @@ The band was formed in Kanagawa Prefecture in February 1999 by Hotaka Yamashita 
     <br>
     <div class="normal_header"><span class="floatRightHeader"><a href="/dbchanges.php?go=voiceactor&do=addstaffposition&id=7277">Add Position</a></span>Anime Staff Positions</div><table border="0" cellpadding="0" cellspacing="0" width="100%">
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/269/Bleach"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/3/40451.jpg?s=3e983e707f19db626007ee140c280201" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/anime/269/Bleach">Bleach</a><div class="spaceit_pad">
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/anime/269/Bleach"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/3/40451.jpg?s=3e983e707f19db626007ee140c280201" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/anime/269/Bleach">Bleach</a><div class="spaceit_pad">
     <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F7277" title="Quick add anime to my list" class="button_add">add</a> <small>Theme Song Performance</small>  (ED7) </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/269/Bleach"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/3/40451.jpg?s=3e983e707f19db626007ee140c280201" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/anime/269/Bleach">Bleach</a><div class="spaceit_pad">
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/anime/269/Bleach"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/3/40451.jpg?s=3e983e707f19db626007ee140c280201" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/anime/269/Bleach">Bleach</a><div class="spaceit_pad">
     <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F7277" title="Quick add anime to my list" class="button_add">add</a> <small>Theme Song Lyrics</small>  (ED7) </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/269/Bleach"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/3/40451.jpg?s=3e983e707f19db626007ee140c280201" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/anime/269/Bleach">Bleach</a><div class="spaceit_pad">
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/anime/269/Bleach"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/3/40451.jpg?s=3e983e707f19db626007ee140c280201" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/anime/269/Bleach">Bleach</a><div class="spaceit_pad">
     <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F7277" title="Quick add anime to my list" class="button_add">add</a> <small>Theme Song Composition</small>  (ED7) </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/12117/Detective_Conan_Movie_16__The_Eleventh_Striker"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/8/37511.jpg?s=e414abe86daf95459c2c8892a2eba4d5" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/anime/12117/Detective_Conan_Movie_16__The_Eleventh_Striker">Detective Conan Movie 16: The Eleventh Striker</a><div class="spaceit_pad">
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/anime/12117/Detective_Conan_Movie_16__The_Eleventh_Striker"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/8/37511.jpg?s=e414abe86daf95459c2c8892a2eba4d5" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/anime/12117/Detective_Conan_Movie_16__The_Eleventh_Striker">Detective Conan Movie 16: The Eleventh Striker</a><div class="spaceit_pad">
     <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F7277" title="Quick add anime to my list" class="button_add">add</a> <small>Theme Song Performance</small>  (ED) </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/12117/Detective_Conan_Movie_16__The_Eleventh_Striker"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/8/37511.jpg?s=e414abe86daf95459c2c8892a2eba4d5" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/anime/12117/Detective_Conan_Movie_16__The_Eleventh_Striker">Detective Conan Movie 16: The Eleventh Striker</a><div class="spaceit_pad">
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/anime/12117/Detective_Conan_Movie_16__The_Eleventh_Striker"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/8/37511.jpg?s=e414abe86daf95459c2c8892a2eba4d5" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/anime/12117/Detective_Conan_Movie_16__The_Eleventh_Striker">Detective Conan Movie 16: The Eleventh Striker</a><div class="spaceit_pad">
     <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F7277" title="Quick add anime to my list" class="button_add">add</a> <small>Theme Song Lyrics</small>  (ED) </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/12117/Detective_Conan_Movie_16__The_Eleventh_Striker"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/8/37511.jpg?s=e414abe86daf95459c2c8892a2eba4d5" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/anime/12117/Detective_Conan_Movie_16__The_Eleventh_Striker">Detective Conan Movie 16: The Eleventh Striker</a><div class="spaceit_pad">
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/anime/12117/Detective_Conan_Movie_16__The_Eleventh_Striker"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/8/37511.jpg?s=e414abe86daf95459c2c8892a2eba4d5" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/anime/12117/Detective_Conan_Movie_16__The_Eleventh_Striker">Detective Conan Movie 16: The Eleventh Striker</a><div class="spaceit_pad">
     <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F7277" title="Quick add anime to my list" class="button_add">add</a> <small>Theme Song Composition</small>  (ED) </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/23755/Nanatsu_no_Taizai"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/8/65409.jpg?s=f282f0fc97ba04112d57cfd578524d07" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/anime/23755/Nanatsu_no_Taizai">Nanatsu no Taizai</a><div class="spaceit_pad">
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/anime/23755/Nanatsu_no_Taizai"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/8/65409.jpg?s=f282f0fc97ba04112d57cfd578524d07" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/anime/23755/Nanatsu_no_Taizai">Nanatsu no Taizai</a><div class="spaceit_pad">
     <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F7277" title="Quick add anime to my list" class="button_add">add</a> <small>Theme Song Performance</small>  (OP1, ED1) </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/23755/Nanatsu_no_Taizai"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/8/65409.jpg?s=f282f0fc97ba04112d57cfd578524d07" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/anime/23755/Nanatsu_no_Taizai">Nanatsu no Taizai</a><div class="spaceit_pad">
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/anime/23755/Nanatsu_no_Taizai"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/8/65409.jpg?s=f282f0fc97ba04112d57cfd578524d07" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/anime/23755/Nanatsu_no_Taizai">Nanatsu no Taizai</a><div class="spaceit_pad">
     <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F7277" title="Quick add anime to my list" class="button_add">add</a> <small>Theme Song Lyrics</small>  (OP1, ED1) </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/23755/Nanatsu_no_Taizai"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/8/65409.jpg?s=f282f0fc97ba04112d57cfd578524d07" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/anime/23755/Nanatsu_no_Taizai">Nanatsu no Taizai</a><div class="spaceit_pad">
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/anime/23755/Nanatsu_no_Taizai"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/8/65409.jpg?s=f282f0fc97ba04112d57cfd578524d07" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/anime/23755/Nanatsu_no_Taizai">Nanatsu no Taizai</a><div class="spaceit_pad">
     <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F7277" title="Quick add anime to my list" class="button_add">add</a> <small>Theme Song Composition</small>  (OP1, ED1) </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/1735/Naruto__Shippuuden"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/5/17407.jpg?s=209cc8b150111679384867169fe512fd" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/anime/1735/Naruto__Shippuuden">Naruto: Shippuuden</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F7277" title="Quick add anime to my list" class="button_add">add</a> <small>Theme Song Composition</small>  (OP3, OP5) </div></td>
-            </tr>
-            
-            <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/1735/Naruto__Shippuuden"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/5/17407.jpg?s=209cc8b150111679384867169fe512fd" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/anime/1735/Naruto__Shippuuden">Naruto: Shippuuden</a><div class="spaceit_pad">
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/anime/1735/Naruto__Shippuuden"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/5/17407.jpg?s=209cc8b150111679384867169fe512fd" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/anime/1735/Naruto__Shippuuden">Naruto: Shippuuden</a><div class="spaceit_pad">
     <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F7277" title="Quick add anime to my list" class="button_add">add</a> <small>Theme Song Performance</small>  (OP3, OP5) </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/1735/Naruto__Shippuuden"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/5/17407.jpg?s=209cc8b150111679384867169fe512fd" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/anime/1735/Naruto__Shippuuden">Naruto: Shippuuden</a><div class="spaceit_pad">
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/anime/1735/Naruto__Shippuuden"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/5/17407.jpg?s=209cc8b150111679384867169fe512fd" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/anime/1735/Naruto__Shippuuden">Naruto: Shippuuden</a><div class="spaceit_pad">
     <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F7277" title="Quick add anime to my list" class="button_add">add</a> <small>Theme Song Lyrics</small>  (OP3, OP5) </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/2159/Ookiku_Furikabutte"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/2/20751.jpg?s=3901ca4d238e13201a9187f8f98dc6d1" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/anime/2159/Ookiku_Furikabutte">Ookiku Furikabutte</a><div class="spaceit_pad">
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/anime/1735/Naruto__Shippuuden"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/5/17407.jpg?s=209cc8b150111679384867169fe512fd" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/anime/1735/Naruto__Shippuuden">Naruto: Shippuuden</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F7277" title="Quick add anime to my list" class="button_add">add</a> <small>Theme Song Composition</small>  (OP3, OP5) </div></td>
+            </tr>
+            
+            <tr>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/anime/2159/Ookiku_Furikabutte"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/2/20751.jpg?s=3901ca4d238e13201a9187f8f98dc6d1" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/anime/2159/Ookiku_Furikabutte">Ookiku Furikabutte</a><div class="spaceit_pad">
     <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F7277" title="Quick add anime to my list" class="button_add">add</a> <small>Theme Song Performance</small>  (OP2) </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/2159/Ookiku_Furikabutte"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/2/20751.jpg?s=3901ca4d238e13201a9187f8f98dc6d1" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/anime/2159/Ookiku_Furikabutte">Ookiku Furikabutte</a><div class="spaceit_pad">
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/anime/2159/Ookiku_Furikabutte"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/2/20751.jpg?s=3901ca4d238e13201a9187f8f98dc6d1" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/anime/2159/Ookiku_Furikabutte">Ookiku Furikabutte</a><div class="spaceit_pad">
     <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F7277" title="Quick add anime to my list" class="button_add">add</a> <small>Theme Song Lyrics</small>  (OP2) </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/2159/Ookiku_Furikabutte"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/2/20751.jpg?s=3901ca4d238e13201a9187f8f98dc6d1" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/anime/2159/Ookiku_Furikabutte">Ookiku Furikabutte</a><div class="spaceit_pad">
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/anime/2159/Ookiku_Furikabutte"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/2/20751.jpg?s=3901ca4d238e13201a9187f8f98dc6d1" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/anime/2159/Ookiku_Furikabutte">Ookiku Furikabutte</a><div class="spaceit_pad">
     <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F7277" title="Quick add anime to my list" class="button_add">add</a> <small>Theme Song Composition</small>  (OP2) </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/16680/Pokemon_Best_Wishes_Season_2__Shinsoku_no_Genosect_-_Mewtwo_Kakusei"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/9/47615.jpg?s=3934f8becd402d6674ecf2ed6cccd065" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/anime/16680/Pokemon_Best_Wishes_Season_2__Shinsoku_no_Genosect_-_Mewtwo_Kakusei">Pokemon Best Wishes! Season 2: Shinsoku no Genosect - Mewtwo Kakusei</a><div class="spaceit_pad">
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/anime/16680/Pokemon_Best_Wishes_Season_2__Shinsoku_no_Genosect_-_Mewtwo_Kakusei"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/9/47615.jpg?s=3934f8becd402d6674ecf2ed6cccd065" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/anime/16680/Pokemon_Best_Wishes_Season_2__Shinsoku_no_Genosect_-_Mewtwo_Kakusei">Pokemon Best Wishes! Season 2: Shinsoku no Genosect - Mewtwo Kakusei</a><div class="spaceit_pad">
     <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F7277" title="Quick add anime to my list" class="button_add">add</a> <small>Theme Song Performance</small>  (ED) </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/16680/Pokemon_Best_Wishes_Season_2__Shinsoku_no_Genosect_-_Mewtwo_Kakusei"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/9/47615.jpg?s=3934f8becd402d6674ecf2ed6cccd065" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/anime/16680/Pokemon_Best_Wishes_Season_2__Shinsoku_no_Genosect_-_Mewtwo_Kakusei">Pokemon Best Wishes! Season 2: Shinsoku no Genosect - Mewtwo Kakusei</a><div class="spaceit_pad">
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/anime/16680/Pokemon_Best_Wishes_Season_2__Shinsoku_no_Genosect_-_Mewtwo_Kakusei"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/9/47615.jpg?s=3934f8becd402d6674ecf2ed6cccd065" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/anime/16680/Pokemon_Best_Wishes_Season_2__Shinsoku_no_Genosect_-_Mewtwo_Kakusei">Pokemon Best Wishes! Season 2: Shinsoku no Genosect - Mewtwo Kakusei</a><div class="spaceit_pad">
     <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F7277" title="Quick add anime to my list" class="button_add">add</a> <small>Theme Song Lyrics</small>  (ED) </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/16680/Pokemon_Best_Wishes_Season_2__Shinsoku_no_Genosect_-_Mewtwo_Kakusei"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/9/47615.jpg?s=3934f8becd402d6674ecf2ed6cccd065" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/anime/16680/Pokemon_Best_Wishes_Season_2__Shinsoku_no_Genosect_-_Mewtwo_Kakusei">Pokemon Best Wishes! Season 2: Shinsoku no Genosect - Mewtwo Kakusei</a><div class="spaceit_pad">
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/anime/16680/Pokemon_Best_Wishes_Season_2__Shinsoku_no_Genosect_-_Mewtwo_Kakusei"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/9/47615.jpg?s=3934f8becd402d6674ecf2ed6cccd065" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/anime/16680/Pokemon_Best_Wishes_Season_2__Shinsoku_no_Genosect_-_Mewtwo_Kakusei">Pokemon Best Wishes! Season 2: Shinsoku no Genosect - Mewtwo Kakusei</a><div class="spaceit_pad">
     <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F7277" title="Quick add anime to my list" class="button_add">add</a> <small>Theme Song Composition</small>  (ED) </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/1587/Tenpou_Ibun__Ayakashi_Ayashi"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/11/4452.jpg?s=5eed1ded2bc07d66c81cd085edae90d5" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/anime/1587/Tenpou_Ibun__Ayakashi_Ayashi">Tenpou Ibun: Ayakashi Ayashi</a><div class="spaceit_pad">
-    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F7277" title="Quick add anime to my list" class="button_add">add</a> <small>Theme Song Performance</small>  (OP1) </div></td>
-            </tr>
-            
-            <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/1587/Tenpou_Ibun__Ayakashi_Ayashi"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/11/4452.jpg?s=5eed1ded2bc07d66c81cd085edae90d5" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/anime/1587/Tenpou_Ibun__Ayakashi_Ayashi">Tenpou Ibun: Ayakashi Ayashi</a><div class="spaceit_pad">
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/anime/1587/Tenpou_Ibun__Ayakashi_Ayashi"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/11/4452.jpg?s=5eed1ded2bc07d66c81cd085edae90d5" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/anime/1587/Tenpou_Ibun__Ayakashi_Ayashi">Tenpou Ibun: Ayakashi Ayashi</a><div class="spaceit_pad">
     <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F7277" title="Quick add anime to my list" class="button_add">add</a> <small>Theme Song Lyrics</small>  (OP1) </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/1587/Tenpou_Ibun__Ayakashi_Ayashi"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/11/4452.jpg?s=5eed1ded2bc07d66c81cd085edae90d5" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/anime/1587/Tenpou_Ibun__Ayakashi_Ayashi">Tenpou Ibun: Ayakashi Ayashi</a><div class="spaceit_pad">
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/anime/1587/Tenpou_Ibun__Ayakashi_Ayashi"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/11/4452.jpg?s=5eed1ded2bc07d66c81cd085edae90d5" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/anime/1587/Tenpou_Ibun__Ayakashi_Ayashi">Tenpou Ibun: Ayakashi Ayashi</a><div class="spaceit_pad">
     <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F7277" title="Quick add anime to my list" class="button_add">add</a> <small>Theme Song Composition</small>  (OP1) </div></td>
             </tr>
             
             <tr>
-                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/anime/29970/Yell"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/3/71870.jpg?s=2216d84ce58f2b0b5c3b7e0fa7e09b1d" border="0" width="23" class="lazyload"></a></div></td>
-                <td valign="top" class="borderClass"><a href="/anime/29970/Yell">Yell</a><div class="spaceit_pad">
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/anime/1587/Tenpou_Ibun__Ayakashi_Ayashi"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/11/4452.jpg?s=5eed1ded2bc07d66c81cd085edae90d5" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/anime/1587/Tenpou_Ibun__Ayakashi_Ayashi">Tenpou Ibun: Ayakashi Ayashi</a><div class="spaceit_pad">
+    <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F7277" title="Quick add anime to my list" class="button_add">add</a> <small>Theme Song Performance</small>  (OP1) </div></td>
+            </tr>
+            
+            <tr>
+                <td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="https://myanimelist.net/anime/29970/Yell"><img data-src="https://myanimelist.cdn-dena.com/r/46x64/images/anime/3/71870.jpg?s=2216d84ce58f2b0b5c3b7e0fa7e09b1d" border="0" width="23" class="lazyload"></a></div></td>
+                <td valign="top" class="borderClass"><a href="https://myanimelist.net/anime/29970/Yell">Yell</a><div class="spaceit_pad">
     <a href="https://myanimelist.net/login.php?error=login_required&amp;from=%2Fpeople%2F7277" title="Quick add anime to my list" class="button_add">add</a> <small>Theme Song Performance</small>  </div></td>
             </tr>
             </table>
@@ -342,9 +343,9 @@ The band was formed in Kanagawa Prefecture in February 1999 by Hotaka Yamashita 
     <br><br>
     <div class="normal_header"><span class="floatRightHeader"><a href="/dbchanges.php?go=voiceactor&do=publishedmanga&id=7277">Add Work</a></span>Published Manga</div>No published manga have been added to this person. Help improve our database by adding a published manga <a href="/dbchanges.php?go=voiceactor&do=publishedmanga&id=7277">here</a>.
     <br><br>
-    <h2><div class="floatRightHeader"><a href="/people/7277/Ikimonogakari/news">See More</a></div>Recent News</h2><div class="clearfix"><div class="picSurround fl-l mr8 ml3 mt4"><a href="/news/49213530" class="image-link"><img src="https://myanimelist.cdn-dena.com/images/spacer.gif" data-src="https://myanimelist.cdn-dena.com/r/50x78/s/common/uploaded_files/1483597786-a61fc2b086e2de4e72195a7f6eb45ea0.jpeg?s=b5b937e300fc00f19746f75b153494a5" data-srcset="https://myanimelist.cdn-dena.com/r/50x78/s/common/uploaded_files/1483597786-a61fc2b086e2de4e72195a7f6eb45ea0.jpeg?s=b5b937e300fc00f19746f75b153494a5 1x,https://myanimelist.cdn-dena.com/r/100x156/s/common/uploaded_files/1483597786-a61fc2b086e2de4e72195a7f6eb45ea0.jpeg?s=a197790813f9945a3cd9fa82c1995c81 2x" alt="J-Pop Band Ikimono-gakari Announces Indefinite Hiatus" width="50" height="78" class="lazyload"></a></div><p class="spaceit"><a href="/news/49213530" style=""><strong>J-Pop Band Ikimono-gakari Announces Indefinite Hiatus</strong></a></p>
+    <h2><div class="floatRightHeader"><a href="/people/7277/Ikimonogakari/news">See More</a></div>Recent News</h2><div class="clearfix"><div class="picSurround fl-l mr8 ml3 mt4"><a href="/news/49213530" class="image-link"><img src="https://myanimelist.cdn-dena.com/images/spacer.gif" data-src="https://myanimelist.cdn-dena.com/r/50x78/s/common/uploaded_files/1483597786-a61fc2b086e2de4e72195a7f6eb45ea0.jpeg?s=b5b937e300fc00f19746f75b153494a5" data-srcset="https://myanimelist.cdn-dena.com/r/50x78/s/common/uploaded_files/1483597786-a61fc2b086e2de4e72195a7f6eb45ea0.jpeg?s=b5b937e300fc00f19746f75b153494a5 1x,https://myanimelist.cdn-dena.com/r/100x156/s/common/uploaded_files/1483597786-a61fc2b086e2de4e72195a7f6eb45ea0.jpeg?s=a197790813f9945a3cd9fa82c1995c81 2x" alt="J-Pop Band Ikimono-gakari Announces Indefinite Hiatus" width="50" height="78" class="lazyload"></a></div><p class="spaceit"><a href="/news/49213530"><strong>J-Pop Band Ikimono-gakari Announces Indefinite Hiatus</strong></a></p>
 		<div class="clearfix" style="overflow:hidden;"><p> J-Pop Band Ikimono-gakari has announced via the website that the band will take a break and each member will do the solo activities. Ikimono-gakari consists of Kiyo...<a href="/news/49213530">read more</a></p></div>
-		<p class="lightLink spaceit">Jan 4, 10:29 PM by <a href="/profile/tsubasalover">tsubasalover</a> | <a href="/forum/?topicid=1582263">Discuss (6 comments)</a></p></div>
+		<p class="lightLink spaceit">Jan 4, 2017 10:29 PM by <a href="/profile/tsubasalover">tsubasalover</a> | <a href="/forum/?topicid=1582263">Discuss (6 comments)</a></p></div>
 		<div class="borderClass"></div><br><h2><div class="floatRightHeader"><a href="/people/7277/Ikimonogakari/featured">See More</a></div>Recent Featured Articles</h2><div class="detail-page-featured-article"><div class="news-list">
       
     <div class="news-unit clearfix"><a href="https://myanimelist.net/featured/1429/Top_15_Iconic_Naruto_Openings_and_Endings" class="image-link"><img data-src="https://myanimelist.cdn-dena.com/s/common/uploaded_files/1455718776-df4440a90d6abc2ae5c0bfbd7915b28e.jpeg" width="100" height="100" alt="Top 15 Iconic Naruto Openings and Endings" class="image lazyload"></a><div class="news-unit-right ">
@@ -358,7 +359,7 @@ The band was formed in Kanagawa Prefecture in February 1999 by Hotaka Yamashita 
           <p class="info pr8">
             by <a href="https://myanimelist.net/profile/Ai_Sakura">Ai_Sakura</a>
           </p><p class="di-tc pv pr8">
-              <b>95,698</b> views
+              <b>129,479</b> views
             </p><div class="tags">
               <div class="tags-inner"><a href="https://myanimelist.net/featured/tag/collection" class="tag tag-color-feature-collection" title="Collection">Collection</a><a href="https://myanimelist.net/featured/tag/music" class="tag tag-color-feature-music" title="Music">Music</a><a href="https://myanimelist.net/featured/tag/naruto" class="tag tag-color-feature-naruto" title="Naruto">Naruto</a><a href="https://myanimelist.net/featured/tag/video" class="tag tag-color-feature-video" title="Video">Video</a></div>
             </div></div>
@@ -376,7 +377,7 @@ The band was formed in Kanagawa Prefecture in February 1999 by Hotaka Yamashita 
           <p class="info pr8">
             by <a href="https://myanimelist.net/profile/Aiwin">Aiwin</a>
           </p><p class="di-tc pv pr8">
-              <b>2,028</b> views
+              <b>2,700</b> views
             </p><div class="tags">
               <div class="tags-inner"><a href="https://myanimelist.net/featured/tag/analysis" class="tag tag-color-feature-analysis" title="Analysis">Analysis</a><a href="https://myanimelist.net/featured/tag/music" class="tag tag-color-feature-music" title="Music">Music</a></div>
             </div></div>
@@ -384,12 +385,34 @@ The band was formed in Kanagawa Prefecture in February 1999 by Hotaka Yamashita 
     </div>
   </div>
 </div><div class="normal_header" style="margin-top: 17px;">Comments</div>
+            <a name="com419337"></a>
+            <table border="0" cellpadding="0" cellspacing="0" width="100%"  class="bgColor1">
+            <tr class="people-comment">
+              <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/Eduzumaki_RtD"><img src="https://myanimelist.cdn-dena.com/images/userimages/thumbs/5413620_thumb.jpg" border="0"></a></div></td>
+              <td class="borderClass people-comment-text" style="border: 0;" valign="top">
+              <div class="dark_text mb4 fw-b"><a href="/profile/Eduzumaki_RtD">Eduzumaki_RtD</a> <small><span class="fw-n"> | Jan 15, 6:29 PM</span></small></div>
+              <div class="comment word-break">
+              EDHanabi Bleach/Blue Bird and Hotaru no Hikari Naruto Shippuden/ED,OP 1 Nanatsu &hearts;</div></td>
+                </tr>
+                </table>
+                <br><br>
+            <a name="com408295"></a>
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" >
+            <tr class="people-comment">
+              <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/Ohforfucksake"><img src="https://myanimelist.cdn-dena.com/images/userimages/thumbs/6576107_thumb.jpg" border="0"></a></div></td>
+              <td class="borderClass people-comment-text" style="border: 0;" valign="top">
+              <div class="dark_text mb4 fw-b"><a href="/profile/Ohforfucksake">Ohforfucksake</a> <small><span class="fw-n"> | Sep 26, 2017 11:29 PM</span></small></div>
+              <div class="comment word-break">
+              Their song &quot;last Scence&quot; is really good :D.</div></td>
+                </tr>
+                </table>
+                <br><br>
             <a name="com394908"></a>
             <table border="0" cellpadding="0" cellspacing="0" width="100%"  class="bgColor1">
             <tr class="people-comment">
-              <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/AldiCrowz"><img src="https://myanimelist.cdn-dena.com/images/userimages/thumbs/4288801_thumb.jpg" border="0"></a></div></td>
+              <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/Slyver"><img src="https://myanimelist.cdn-dena.com/images/userimages/thumbs/4288801_thumb.jpg" border="0"></a></div></td>
               <td class="borderClass people-comment-text" style="border: 0;" valign="top">
-              <div class="dark_text mb4 fw-b"><a href="/profile/AldiCrowz">AldiCrowz</a> <small><span class="fw-n"> | May 2, 6:16 PM</span></small></div>
+              <div class="dark_text mb4 fw-b"><a href="/profile/Slyver">Slyver</a> <small><span class="fw-n"> | May 2, 2017 6:16 PM</span></small></div>
               <div class="comment word-break">
               ohh god, they&#039;re legend :D</div></td>
                 </tr>
@@ -400,7 +423,7 @@ The band was formed in Kanagawa Prefecture in February 1999 by Hotaka Yamashita 
             <tr class="people-comment">
               <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/bayan_fa"><img src="https://myanimelist.cdn-dena.com/images/userimages/thumbs/4253877_thumb.jpg" border="0"></a></div></td>
               <td class="borderClass people-comment-text" style="border: 0;" valign="top">
-              <div class="dark_text mb4 fw-b"><a href="/profile/bayan_fa">bayan_fa</a> <small><span class="fw-n"> | Apr 19, 2:22 PM</span></small></div>
+              <div class="dark_text mb4 fw-b"><a href="/profile/bayan_fa">bayan_fa</a> <small><span class="fw-n"> | Apr 19, 2017 2:22 PM</span></small></div>
               <div class="comment word-break">
               من احسن الفرق عندي💕</div></td>
                 </tr>
@@ -411,7 +434,7 @@ The band was formed in Kanagawa Prefecture in February 1999 by Hotaka Yamashita 
             <tr class="people-comment">
               <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/kevster101"><img src="https://myanimelist.cdn-dena.com/images/userimages/thumbs/4532758_thumb.jpg" border="0"></a></div></td>
               <td class="borderClass people-comment-text" style="border: 0;" valign="top">
-              <div class="dark_text mb4 fw-b"><a href="/profile/kevster101">kevster101</a> <small><span class="fw-n"> | Jan 5, 5:47 AM</span></small></div>
+              <div class="dark_text mb4 fw-b"><a href="/profile/kevster101">kevster101</a> <small><span class="fw-n"> | Jan 5, 2017 5:47 AM</span></small></div>
               <div class="comment word-break">
               RIP</div></td>
                 </tr>
@@ -470,30 +493,6 @@ The band was formed in Kanagawa Prefecture in February 1999 by Hotaka Yamashita 
               <div class="dark_text mb4 fw-b"><a href="/profile/fappu">fappu</a> <small><span class="fw-n"> | Apr 3, 2016 12:03 AM</span></small></div>
               <div class="comment word-break">
               kiyo is &lt;3</div></td>
-                </tr>
-                </table>
-                <br><br>
-            <a name="com330622"></a>
-            <table border="0" cellpadding="0" cellspacing="0" width="100%"  class="bgColor1">
-            <tr class="people-comment">
-              <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/Uchiha_Sasuke"><img src="https://myanimelist.cdn-dena.com/images/userimages/thumbs/4573432_thumb.jpg" border="0"></a></div></td>
-              <td class="borderClass people-comment-text" style="border: 0;" valign="top">
-              <div class="dark_text mb4 fw-b"><a href="/profile/Uchiha_Sasuke">Uchiha_Sasuke</a> <small><span class="fw-n"> | May 12, 2015 2:32 AM</span></small></div>
-              <div class="comment word-break">
-              <b>- Hanabi #Bleach<br />
--  Blue Bird #NarutoShipuudenOP3<br />
-- Hotaru no Hikari #NarutoShipuudenOP5</b></div></td>
-                </tr>
-                </table>
-                <br><br>
-            <a name="com311165"></a>
-            <table border="0" cellpadding="0" cellspacing="0" width="100%" >
-            <tr class="people-comment">
-              <td valign="top" width="60" align="center" class="borderClass people-comment-thumb" style="border: 0;"><div class="picSurround"><a href="/profile/TragicRomance"><img src="https://myanimelist.cdn-dena.com/images/userimages/thumbs/326466_thumb.jpg" border="0"></a></div></td>
-              <td class="borderClass people-comment-text" style="border: 0;" valign="top">
-              <div class="dark_text mb4 fw-b"><a href="/profile/TragicRomance">TragicRomance</a> <small><span class="fw-n"> | Nov 12, 2014 2:29 AM</span></small></div>
-              <div class="comment word-break">
-              Wow her voice is totally different from one may imagine after seeing her face (I imagined it to be more cute-pretty hybrid but it's more of mature-beautiful hybrid)</div></td>
                 </tr>
                 </table>
                 <br><br><div style="margin: 12px 0px;">
@@ -585,11 +584,11 @@ The band was formed in Kanagawa Prefecture in February 1999 by Hotaka Yamashita 
         <ol>
                       <li>
               <span class="rank">1</span>
-              <a href="https://myanimelist.net/anime/32281/Kimi_no_Na_wa">Kimi no Na wa.</a>
+              <a href="https://myanimelist.net/anime/5114/Fullmetal_Alchemist__Brotherhood">Fullmetal Alchemist: Brotherhood</a>
             </li>
                       <li>
               <span class="rank">2</span>
-              <a href="https://myanimelist.net/anime/5114/Fullmetal_Alchemist__Brotherhood">Fullmetal Alchemist: Brotherhood</a>
+              <a href="https://myanimelist.net/anime/32281/Kimi_no_Na_wa">Kimi no Na wa.</a>
             </li>
                       <li>
               <span class="rank">3</span>
@@ -611,23 +610,23 @@ The band was formed in Kanagawa Prefecture in February 1999 by Hotaka Yamashita 
         <ol>
                       <li>
               <span class="rank">1</span>
-              <a href="https://myanimelist.net/anime/33486/Boku_no_Hero_Academia_2nd_Season">Boku no Hero Academia 2nd Season</a>
+              <a href="https://myanimelist.net/anime/36838/Gintama__Shirogane_no_Tamashii-hen">Gintama.: Shirogane no Tamashii-hen</a>
             </li>
                       <li>
               <span class="rank">2</span>
-              <a href="https://myanimelist.net/anime/33352/Violet_Evergarden">Violet Evergarden</a>
+              <a href="https://myanimelist.net/anime/35180/3-gatsu_no_Lion_2nd_Season">3-gatsu no Lion 2nd Season</a>
             </li>
                       <li>
               <span class="rank">3</span>
-              <a href="https://myanimelist.net/anime/21/One_Piece">One Piece</a>
+              <a href="https://myanimelist.net/anime/34612/Saiki_Kusuo_no_Ψ-nan_2">Saiki Kusuo no Ψ-nan 2</a>
             </li>
                       <li>
               <span class="rank">4</span>
-              <a href="https://myanimelist.net/anime/35062/Mahoutsukai_no_Yome">Mahoutsukai no Yome</a>
+              <a href="https://myanimelist.net/anime/21/One_Piece">One Piece</a>
             </li>
                       <li>
               <span class="rank">5</span>
-              <a href="https://myanimelist.net/anime/10937/Mobile_Suit_Gundam__The_Origin">Mobile Suit Gundam: The Origin</a>
+              <a href="https://myanimelist.net/anime/35062/Mahoutsukai_no_Yome">Mahoutsukai no Yome</a>
             </li>
                   </ol>
       </div>
@@ -637,23 +636,23 @@ The band was formed in Kanagawa Prefecture in February 1999 by Hotaka Yamashita 
         <ol>
                       <li>
               <span class="rank">1</span>
-              <a href="https://myanimelist.net/anime/34449/The_Reflection">The Reflection</a>
+              <a href="https://myanimelist.net/anime/35849/Darling_in_the_FranXX">Darling in the FranXX</a>
             </li>
                       <li>
               <span class="rank">2</span>
-              <a href="https://myanimelist.net/anime/34933/Kakegurui">Kakegurui</a>
+              <a href="https://myanimelist.net/anime/33352/Violet_Evergarden">Violet Evergarden</a>
             </li>
                       <li>
               <span class="rank">3</span>
-              <a href="https://myanimelist.net/anime/33486/Boku_no_Hero_Academia_2nd_Season">Boku no Hero Academia 2nd Season</a>
+              <a href="https://myanimelist.net/anime/33674/No_Game_No_Life__Zero">No Game No Life: Zero</a>
             </li>
                       <li>
               <span class="rank">4</span>
-              <a href="https://myanimelist.net/anime/34403/Hajimete_no_Gal">Hajimete no Gal</a>
+              <a href="https://myanimelist.net/anime/35073/Overlord_II">Overlord II</a>
             </li>
                       <li>
               <span class="rank">5</span>
-              <a href="https://myanimelist.net/anime/34662/Fate_Apocrypha">Fate/Apocrypha</a>
+              <a href="https://myanimelist.net/anime/35839/Sora_yori_mo_Tooi_Basho">Sora yori mo Tooi Basho</a>
             </li>
                   </ol>
       </div>
@@ -717,7 +716,8 @@ The band was formed in Kanagawa Prefecture in February 1999 by Hotaka Yamashita 
       </div>
             <div class="footer-recommended ac">
         <a target="_blank" class="icon-recommended icon-tokyo-otaku-mode" href="http://otakumode.com/fb/5aO">Tokyo Otaku Mode</a>
-        <a target="_blank" class="icon-recommended icon-honeys-anime" href="http://blog.honeyfeed.fm/">Honey's Anime</a>
+        <a target="_blank" class="icon-recommended icon-honeys-anime" href="https://honeysanime.com">Honey's Anime</a>
+        <a target="_blank" class="icon-recommended icon-mtb-vol6" href="https://myanimelist.net/manga_translation_battle">Manga Translation Battle Vol. 6</a>
       </div>
     </div>
 
