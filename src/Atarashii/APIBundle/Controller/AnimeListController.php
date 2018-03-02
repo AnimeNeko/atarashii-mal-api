@@ -150,6 +150,10 @@ class AnimeListController extends FOSRestController
             //it actually was an error.
             $response = $e->getResponse()->getBody();
 
+            if (stripos($response, 'not been approved yet') >= 0) {
+                return $this->view(array('error' => 'title-not-approved'), 500);
+            }
+
             if (stripos($response, '201 Created') !== false) {
                 return $this->view('ok', 200);
             }
