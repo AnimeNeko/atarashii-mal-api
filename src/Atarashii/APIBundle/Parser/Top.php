@@ -65,6 +65,7 @@ class Top
                 $media->setMembersScore((float) $crawler->filter('td')->eq(2)->text());
                 break;
             case 'manga':
+                $media->setType($subDetails[0]);
                 $media->setVolumes(strstr($subDetails[1], '?') ? null : (int) trim(str_replace('vols', '', $subDetails[1]), '()'));
                 $media->setMembersScore((float) $crawler->filter('td')->eq(2)->text());
                 break;
