@@ -46,8 +46,8 @@ class Top
         }
 
         //Separate all the details
-        $details = explode("\n", trim($crawler->filter('div[class="detail"]')->text()));
-        $subDetails = explode(' ', trim($details[1]));
+        $details = explode("\n", trim($crawler->filterXPath('//div[@class="detail"]/div[contains(@class, "information")]')->text()));
+        $subDetails = explode(' ', trim($details[0]));
 
         //Pull out all the common parts
         $media->setId((int) str_replace('#area', '', $crawler->filter('a')->attr('id')));
@@ -55,7 +55,7 @@ class Top
         //Convert thumbnail to full size image by stripping the "t" in the filename
 
         $media->setImageUrl(preg_replace('/r(.+?)\/(.+?)\?(.+?)$/', '$2', $crawler->filter('img')->attr('data-src')));
-        $media->setMembersCount((int) trim(str_replace(',', '', str_replace('members', '', $details[3]))));
+        $media->setMembersCount((int) trim(str_replace(',', '', str_replace('members', '', $details[2]))));
 
         //Anime and manga have different details, so we grab an array of the list and then process based on the type
         switch ($type) {

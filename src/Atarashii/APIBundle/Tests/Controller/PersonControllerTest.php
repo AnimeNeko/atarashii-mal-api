@@ -47,7 +47,7 @@ class PersonControllerTest extends WebTestCase
         $this->assertContains('Height: 156 cm', $content->more_details);
 
         $this->assertGreaterThan(250, count($content->voice_acting_roles));
-        $this->assertGreaterThanOrEqual(30, count($content->anime_staff_positions));
+        $this->assertGreaterThanOrEqual(29, count($content->anime_staff_positions));
 
         // Test Miyazaki Hayao ("normal" with published manga)
         $client->request('GET', '/2.1/people/1870');

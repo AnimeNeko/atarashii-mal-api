@@ -24,7 +24,7 @@ class PersonTest extends \PHPUnit\Framework\TestCase
         $this->assertContains('Height: 156 cm', $person->getMoreDetails());
 
         $this->assertGreaterThan(250, count($person->getVoiceActingRoles()));
-        $this->assertGreaterThanOrEqual(30, count($person->getAnimeStaffPositions()));
+        $this->assertGreaterThanOrEqual(29, count($person->getAnimeStaffPositions()));
 
         // Test Miyazaki Hayao ("normal" with published manga)
         $personContents = file_get_contents(__DIR__.'/../InputSamples/people-1870.html');

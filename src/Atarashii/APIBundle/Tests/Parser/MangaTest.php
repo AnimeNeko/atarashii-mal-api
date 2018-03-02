@@ -83,10 +83,20 @@ class MangaTest extends \PHPUnit\Framework\TestCase
         $this->assertContains('RoD', $otherTitles['synonyms']);
 
         $animeAdaptations = $manga->getAnimeAdaptations();
-        $this->assertInternalType('array', $animeAdaptations[0]);
-        $this->assertEquals('208', $animeAdaptations[0]['anime_id']);
-        $this->assertStringStartsWith('R.O.D OVA', $animeAdaptations[0]['title']);
-        $this->assertContains('anime/208', $animeAdaptations[0]['url']);
+
+        //Adaptation List Test
+        $adaptationItem = null;
+        foreach ($animeAdaptations as $adaptation) {
+            if ($adaptation['anime_id'] === 208) {
+                $adaptationItem = $adaptation;
+                break;
+            }
+        }
+
+        $this->assertInternalType('array', $adaptationItem);
+        $this->assertEquals('208', $adaptationItem['anime_id']);
+        $this->assertStringStartsWith('R.O.D OVA', $adaptationItem['title']);
+        $this->assertContains('anime/208', $adaptationItem['url']);
 
         $mangaContents = file_get_contents(__DIR__.'/../InputSamples/manga-44347.html');
 

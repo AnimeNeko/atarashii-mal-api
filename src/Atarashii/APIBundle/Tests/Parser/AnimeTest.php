@@ -37,7 +37,7 @@ class AnimeTest extends \PHPUnit\Framework\TestCase
         $this->assertContains('らき☆すた', $oTitles['japanese']);
 
         $this->assertInternalType('integer', $anime->getRank());
-        $this->assertLessThan(800, $anime->getRank());
+        $this->assertLessThan(9000, $anime->getRank());
         $this->assertGreaterThan(0, $anime->getRank());
 
         $this->assertInternalType('integer', $anime->getPopularityRank());
