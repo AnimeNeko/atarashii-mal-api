@@ -70,7 +70,9 @@ class AnimelistControllerTest extends WebTestCase
             $start = '2013-01-02';
             $end = '2014-03-04';
 
-            $client->request('POST', '/2.2/animelist/anime',
+            $client->request(
+                'POST',
+                '/2.2/animelist/anime',
                 array(
                     'anime_id' => $animeID,
                     'status' => $status,
@@ -145,7 +147,9 @@ class AnimelistControllerTest extends WebTestCase
             $isRewatching = 0;
             $rewatchCount = 2;
 
-            $client->request('PUT', '/2/animelist/anime/'.$animeID,
+            $client->request(
+                'PUT',
+                '/2/animelist/anime/'.$animeID,
                 array(
                     'status' => $status, 'episodes' => $episodes, 'score' => $score, 'start' => $start, 'end' => $end,
                     'downloaded_eps' => $downloadedEps, 'storage_type' => $storageType, 'storage_amt' => $storageAmt,
@@ -197,7 +201,9 @@ class AnimelistControllerTest extends WebTestCase
         if ($credentials !== false) {
             $animeID = 5941; //Cross Game
 
-            $client->request('DELETE', '/2/animelist/anime/'.$animeID,
+            $client->request(
+                'DELETE',
+                '/2/animelist/anime/'.$animeID,
                 array(),
                 array(),
                 array(

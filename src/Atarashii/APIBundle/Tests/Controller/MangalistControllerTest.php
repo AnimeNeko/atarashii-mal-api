@@ -71,7 +71,9 @@ class MangalistControllerTest extends WebTestCase
             $start = '2013-02-01';
             $end = '2013-06-05';
 
-            $client->request('POST', '/2.2/mangalist/manga',
+            $client->request(
+                'POST',
+                '/2.2/mangalist/manga',
                 array(
                     'manga_id' => $mangaID,
                     'status' => $status,
@@ -150,7 +152,9 @@ class MangalistControllerTest extends WebTestCase
             $comments = 'romance, drama, comedy';
             $tags = 'None';
 
-            $client->request('PUT', '/2/mangalist/manga/'.$mangaID,
+            $client->request(
+                'PUT',
+                '/2/mangalist/manga/'.$mangaID,
                 array(
                     'manga_id' => $mangaID,
                     'status' => $status,
@@ -233,7 +237,9 @@ class MangalistControllerTest extends WebTestCase
         if ($credentials !== false) {
             $mangaID = 107; //Chobits
 
-            $client->request('DELETE', '/2/mangalist/manga/'.$mangaID,
+            $client->request(
+                'DELETE',
+                '/2/mangalist/manga/'.$mangaID,
                 array(),
                 array(),
                 array(

@@ -739,7 +739,7 @@ class TitleParser
                 $year = $dateComponents[1];
 
                 //Catch where there is only day and year with no month, and just return a year.
-                if(is_numeric($month)) {
+                if (is_numeric($month)) {
                     return array(\DateTime::createFromFormat('Y m d', $year.' 01 01'), 'year');
                 } else {
                     return array(\DateTime::createFromFormat('M Y d', $month.' '.$year.' 01'), 'month');
